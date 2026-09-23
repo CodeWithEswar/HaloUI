@@ -167,3 +167,101 @@ Component source and registry metadata are authoritative. Documentation consumes
 | **Invalid** | Error state remains visible over glass. | Error association announced. |
 | **Open/Expanded** | Overlay/disclosure state visible. | ARIA state synchronized. |
 
+---
+
+## 5. Complete Repository Structure
+
+```text
+haloui/
+├── apps/
+│   └── docs/
+│       ├── app/
+│       │   ├── (marketing)/
+│       │   ├── components/
+│       │   │   ├── page.tsx
+│       │   │   └── [component]/page.tsx
+│       │   ├── blocks/
+│       │   ├── showcase/
+│       │   ├── themes/
+│       │   ├── docs/
+│       │   │   ├── installation/
+│       │   │   ├── theming/
+│       │   │   ├── accessibility/
+│       │   │   ├── registry/
+│       │   │   └── contributing/
+│       │   ├── changelog/
+│       │   └── r/[name].json/
+│       ├── components/
+│       │   ├── site/
+│       │   ├── catalog/
+│       │   ├── docs/
+│       │   ├── preview/
+│       │   ├── props/
+│       │   ├── registry/
+│       │   ├── search/
+│       │   └── theme-lab/
+│       ├── content/
+│       │   ├── components/
+│       │   ├── blocks/
+│       │   ├── guides/
+│       │   └── changelog/
+│       ├── examples/
+│       ├── showcases/
+│       └── lib/
+├── packages/
+│   ├── ui/
+│   │   └── src/
+│   │       ├── foundations/
+│   │       ├── actions/
+│   │       ├── forms/
+│   │       ├── navigation/
+│   │       ├── overlays/
+│   │       ├── data-display/
+│   │       ├── feedback/
+│   │       ├── layout/
+│   │       ├── messaging/
+│   │       ├── media/
+│   │       ├── data-input/
+│   │       ├── ai/
+│   │       ├── workspace/
+│   │       ├── commerce/
+│   │       ├── charts/
+│   │       ├── styles/
+│   │       └── index.ts
+│   ├── registry/
+│   │   ├── foundations/registry.json
+│   │   ├── components/registry.json
+│   │   ├── blocks/registry.json
+│   │   ├── hooks/registry.json
+│   │   ├── themes/registry.json
+│   │   ├── schema/
+│   │   └── registry.json
+│   ├── preview/
+│   ├── props/
+│   ├── tokens/
+│   └── config/
+├── tooling/
+│   ├── registry/
+│   ├── props/
+│   ├── docs/
+│   ├── visual/
+│   ├── release/
+│   └── quality/
+├── tests/
+│   ├── accessibility/
+│   ├── interaction/
+│   ├── visual/
+│   ├── responsive/
+│   ├── registry/
+│   ├── performance/
+│   └── fixtures/
+├── public/brand/
+├── .github/workflows/
+├── registry.json
+├── components.json
+├── package.json
+├── README.md
+├── CONTRIBUTING.md
+└── LICENSE
+```
+
