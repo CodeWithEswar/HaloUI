@@ -2,16 +2,9 @@ import * as React from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import {
-  SparklesIcon,
   ArrowRight01Icon,
-  Layers01Icon,
-  Download01Icon,
-  SecurityCheckIcon,
-  FileCodeIcon,
 } from "@hugeicons/core-free-icons";
 import { HaloIcon } from "@/components/icons/halo-icon";
-import { HaloButton } from "@/components/haloui/button/halo-button";
-import { HaloSurface } from "@/components/haloui/foundations/halo-surface";
 
 export const metadata: Metadata = {
   title: "Documentation — HaloUI Liquid Component Registry",

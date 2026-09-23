@@ -4,15 +4,10 @@ import Link from "next/link";
 import {
   SparklesIcon,
   ArrowRight01Icon,
-  Layers01Icon,
-  InformationCircleIcon,
-  CheckmarkCircle01Icon,
-  CpuIcon,
-  ViewIcon,
 } from "@hugeicons/core-free-icons";
 import { HaloIcon } from "@/components/icons/halo-icon";
+import { Button } from "@/components/ui/button";
 import { HaloButton } from "@/components/haloui/button/halo-button";
-import { HaloSurface } from "@/components/haloui/foundations/halo-surface";
 
 export const metadata: Metadata = {
   title: "Liquid Optical Engine — Documentation | HaloUI",
@@ -106,10 +101,9 @@ export default function LiquidMaterialDocPage() {
 
         <div className="space-y-4">
           {LAYERS.map((layer) => (
-            <HaloSurface
+            <div
               key={layer.num}
-              elevation="raised"
-              className="p-6 rounded-2xl space-y-2"
+              className="p-6 rounded-2xl border border-black/[0.08] dark:border-white/[0.08] bg-black/[0.015] dark:bg-white/[0.02] hover:border-black/[0.14] dark:hover:border-white/[0.14] transition-colors space-y-2"
             >
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
@@ -129,7 +123,7 @@ export default function LiquidMaterialDocPage() {
                 <span className="font-semibold text-stone-700 dark:text-stone-400">Implementation Rule: </span>
                 {layer.rules}
               </p>
-            </HaloSurface>
+            </div>
           ))}
         </div>
       </section>
@@ -160,9 +154,10 @@ export default function LiquidMaterialDocPage() {
           <div className="font-semibold text-sm text-stone-900 dark:text-white">Inspect the Button Vertical Slice</div>
         </div>
         <Link href="/components/button">
-          <HaloButton variant="primary" size="md" rightIcon={ArrowRight01Icon}>
+          <Button variant="default" size="default" className="gap-2">
             Explore Button Spec
-          </HaloButton>
+            <HaloIcon icon={ArrowRight01Icon} size={16} />
+          </Button>
         </Link>
       </section>
     </div>

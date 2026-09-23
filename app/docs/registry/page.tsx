@@ -9,8 +9,6 @@ import {
   SparklesIcon,
 } from "@hugeicons/core-free-icons";
 import { HaloIcon } from "@/components/icons/halo-icon";
-import { HaloButton } from "@/components/haloui/button/halo-button";
-import { HaloSurface } from "@/components/haloui/foundations/halo-surface";
 
 export const metadata: Metadata = {
   title: "Registry Architecture — Documentation | HaloUI",
@@ -40,7 +38,7 @@ export default function RegistryDocPage() {
         </h2>
 
         <div className="space-y-4">
-          <HaloSurface elevation="raised" className="p-6 rounded-2xl space-y-3">
+          <div className="p-6 rounded-2xl border border-black/[0.08] dark:border-white/[0.08] bg-black/[0.015] dark:bg-white/[0.02] space-y-3">
             <div className="flex items-center justify-between">
               <h3 className="text-base font-semibold text-stone-900 dark:text-white">
                 1. Direct URL Installation
@@ -53,9 +51,9 @@ export default function RegistryDocPage() {
             <div className="p-3 rounded-lg bg-black/5 dark:bg-white/10 font-mono text-xs text-stone-800 dark:text-stone-200">
               <code>pnpm dlx shadcn@latest add https://haloui.dev/r/button.json</code>
             </div>
-          </HaloSurface>
+          </div>
 
-          <HaloSurface elevation="raised" className="p-6 rounded-2xl space-y-3">
+          <div className="p-6 rounded-2xl border border-black/[0.08] dark:border-white/[0.08] bg-black/[0.015] dark:bg-white/[0.02] space-y-3">
             <div className="flex items-center justify-between">
               <h3 className="text-base font-semibold text-stone-900 dark:text-white">
                 2. Custom Registry Namespace
@@ -73,7 +71,7 @@ export default function RegistryDocPage() {
             <p className="text-xs text-stone-500">
               Then install with simple namespace commands: <code className="font-mono">pnpm dlx shadcn add @haloui/button</code>.
             </p>
-          </HaloSurface>
+          </div>
         </div>
       </section>
 
