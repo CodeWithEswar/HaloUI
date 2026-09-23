@@ -4,6 +4,7 @@ import * as React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu01Icon } from "@hugeicons/core-free-icons";
+import { AppLogo } from "@/components/brand/app-logo";
 import { HaloIcon } from "@/components/icons/halo-icon";
 import { siteConfig } from "@/lib/site-config";
 import { buttonVariants } from "@/components/ui/button";
@@ -31,16 +32,14 @@ export function MobileNav() {
         <HaloIcon icon={Menu01Icon} size={15} />
         <span className="sr-only">Toggle Menu</span>
       </SheetTrigger>
-      <SheetContent side="left" className="w-72 pr-0">
-        <SheetHeader className="px-6 text-left">
+      <SheetContent side="left" className="w-60 max-w-[calc(100vw-3.5rem)] pr-0 data-[side=left]:w-60">
+        <SheetHeader className="px-5 text-left">
           <SheetTitle className="flex items-center gap-2">
-            <span className="flex h-5 w-5 items-center justify-center rounded bg-foreground text-background text-[11px] font-mono font-bold">
-              H
-            </span>
+            <AppLogo size="sm" />
             <span className="font-semibold text-sm">{siteConfig.name}</span>
           </SheetTitle>
         </SheetHeader>
-        <div className="flex flex-col space-y-3 px-6 py-6 text-sm">
+        <div className="flex flex-col space-y-3 px-5 py-6 text-sm">
           {siteConfig.mainNav.map((item) => {
             const isActive = pathname === item.href || (item.href !== "/" && pathname.startsWith(item.href));
             return (

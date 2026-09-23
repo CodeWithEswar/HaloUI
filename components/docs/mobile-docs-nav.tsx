@@ -25,7 +25,7 @@ export function MobileDocsNav({ iconOnly = false }: { iconOnly?: boolean }) {
         <HaloIcon icon={Menu01Icon} size={15} />
         {iconOnly ? <span className="sr-only">Browse documentation</span> : "Browse docs"}
       </SheetTrigger>
-      <SheetContent side="left" className="w-[min(88vw,20rem)] gap-0 p-0">
+      <SheetContent side="left" className="w-60 max-w-[calc(100vw-3.5rem)] gap-0 p-0 data-[side=left]:w-60">
         <SheetHeader className="border-b text-left">
           <SheetTitle>Documentation</SheetTitle>
         </SheetHeader>
