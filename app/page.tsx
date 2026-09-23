@@ -2,7 +2,6 @@ import * as React from "react";
 import type { Metadata } from "next";
 import { HeroSection } from "@/components/landing/hero-section";
 import { PrinciplesSection } from "@/components/landing/principles-section";
-import { ComponentsSection } from "@/components/landing/components-section";
 import { RegistrySection } from "@/components/landing/registry-section";
 import { ShowcaseSection } from "@/components/landing/showcase-section";
 import { FinalCtaSection } from "@/components/landing/final-cta-section";
@@ -18,7 +17,6 @@ export default function HomePage() {
     <div className="flex flex-col w-full bg-background text-foreground">
       <HeroSection />
       <PrinciplesSection />
-      <ComponentsSection />
       <RegistrySection />
       <ShowcaseSection />
       <FinalCtaSection />
