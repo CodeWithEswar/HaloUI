@@ -12,35 +12,42 @@ import { Button } from "@/components/ui/button";
 export function SiteHeader() {
   return (
     <header className="sticky top-0 z-50 h-[var(--site-header-height)] w-full shrink-0 border-b border-border bg-background">
-      <div className="flex h-full w-full items-center px-4 sm:px-6 lg:px-8">
-        {/* Left: Brand + Desktop Nav */}
-        <div className="flex items-center gap-6 md:gap-8">
+      <div className="flex h-full w-full items-center">
+        {/* Mobile menu trigger: flush left with border-r, matching Docs sub-header */}
+        <div className="flex h-full shrink-0 border-r border-border md:hidden">
           <MobileNav />
-          <Logo />
-          <MainNav />
         </div>
 
-        {/* Right: Search + GitHub + Theme */}
-        <div className="ml-auto flex items-center gap-2">
-          <SiteSearch />
+        {/* Content Area */}
+        <div className="flex h-full min-w-0 flex-1 items-center px-4 sm:px-6 lg:px-8">
+          {/* Left: Brand + Desktop Nav */}
+          <div className="flex items-center gap-6 md:gap-8">
+            <Logo />
+            <MainNav />
+          </div>
 
-          <Button
-            asChild
-            variant="ghost"
-            size="icon"
-            className="hidden h-8 w-8 text-muted-foreground hover:text-foreground sm:inline-flex"
-          >
-            <a
-              href={siteConfig.links.github}
-              target="_blank"
-              rel="noreferrer"
-              aria-label="GitHub Repository"
+          {/* Right: Search + GitHub + Theme */}
+          <div className="ml-auto flex items-center gap-2">
+            <SiteSearch />
+
+            <Button
+              asChild
+              variant="ghost"
+              size="icon"
+              className="hidden h-8 w-8 text-muted-foreground hover:text-foreground sm:inline-flex"
             >
-              <HaloIcon icon={GithubIcon} size={16} />
-            </a>
-          </Button>
+              <a
+                href={siteConfig.links.github}
+                target="_blank"
+                rel="noreferrer"
+                aria-label="GitHub Repository"
+              >
+                <HaloIcon icon={GithubIcon} size={16} />
+              </a>
+            </Button>
 
-          <SiteThemeToggle />
+            <SiteThemeToggle />
+          </div>
         </div>
       </div>
     </header>

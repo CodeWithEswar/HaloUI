@@ -24,11 +24,11 @@ export function MobileNav() {
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger
         className={cn(
-          buttonVariants({ variant: "ghost", size: "icon-sm" }),
-          "text-muted-foreground hover:text-foreground md:hidden cursor-pointer"
+          "inline-flex h-full w-10 items-center justify-center rounded-none border-0 text-muted-foreground hover:text-foreground md:hidden cursor-pointer transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring"
         )}
+        aria-label="Toggle Navigation Menu"
       >
-        <HaloIcon icon={Menu01Icon} size={18} />
+        <HaloIcon icon={Menu01Icon} size={15} />
         <span className="sr-only">Toggle Menu</span>
       </SheetTrigger>
       <SheetContent side="left" className="w-72 pr-0">
