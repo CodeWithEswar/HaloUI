@@ -29,7 +29,7 @@ export function ShowcaseSection() {
         <div className="rounded-lg border border-border bg-card p-6 sm:p-8 flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div className="space-y-2 max-w-lg">
             <div className="flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-emerald-500" />
+              <span className="w-2 h-2 rounded-full bg-foreground" />
               <span className="text-xs font-mono text-muted-foreground font-semibold">
                 ACTIVE SHOWCASE
               </span>

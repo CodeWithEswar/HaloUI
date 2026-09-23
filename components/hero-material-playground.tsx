@@ -58,7 +58,7 @@ export function HeroMaterialPlayground() {
       {/* Editorial Watermark & Optical Status */}
       <div className="flex items-center justify-between text-xs font-mono text-stone-400 dark:text-stone-500 mb-8 border-b border-black/[0.04] dark:border-white/[0.05] pb-4">
         <div className="flex items-center gap-2">
-          <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+          <span className="w-2 h-2 rounded-full bg-stone-900 dark:bg-white animate-pulse" />
           <span>OPTICAL LAB / MATERIAL PLAYGROUND</span>
         </div>
         <div>LIGHT SOURCE: {lightCoords.x}% X, {lightCoords.y}% Y</div>
@@ -128,7 +128,7 @@ export function HeroMaterialPlayground() {
           <HaloSurface elevation="raised" className="p-6 rounded-2xl space-y-5">
             <div className="flex items-center justify-between">
               <span className="text-xs font-mono font-medium text-stone-900 dark:text-white flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                <span className="w-1.5 h-1.5 rounded-full bg-stone-900 dark:bg-white" />
                 NEOSKEUOMORPHIC CONTROLS
               </span>
               <span className="text-[10px] font-mono text-stone-400">INDEX: 1.52</span>

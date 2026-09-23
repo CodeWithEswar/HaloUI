@@ -122,8 +122,8 @@ export default function ButtonPage() {
           <span className="text-stone-300 dark:text-stone-700">/</span>
           <span className="text-xs font-mono text-stone-500">v1.0.0</span>
           <span className="text-stone-300 dark:text-stone-700">/</span>
-          <span className="inline-flex items-center gap-1.5 text-xs text-emerald-600 dark:text-emerald-400 font-mono">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+          <span className="inline-flex items-center gap-1.5 text-xs text-stone-900 dark:text-white font-mono">
+            <span className="w-1.5 h-1.5 rounded-full bg-stone-900 dark:bg-white animate-pulse" />
             Stable
           </span>
           <span className="text-stone-300 dark:text-stone-700">/</span>
@@ -323,7 +323,7 @@ export default function ButtonPage() {
                   Cluster Deployment #842
                 </h3>
               </div>
-              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping" />
+              <span className="w-2 h-2 rounded-full bg-stone-900 dark:bg-white animate-ping" />
             </div>
             <p className="text-xs text-stone-500 leading-relaxed">
               Optical surfaces grouped together maintain consistent virtual lighting vectors, giving natural environmental depth without visual clutter.
@@ -524,7 +524,7 @@ export default function ButtonPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="p-5 rounded-xl border border-black/[0.08] dark:border-white/[0.08] bg-black/[0.015] dark:bg-white/[0.02] space-y-2">
             <div className="flex items-center gap-2 font-semibold text-sm text-stone-900 dark:text-white">
-              <HaloIcon icon={SecurityCheckIcon} size={18} className="text-emerald-500" />
+              <HaloIcon icon={SecurityCheckIcon} size={18} className="text-stone-900 dark:text-white" />
               <span>Keyboard & Focus Management</span>
             </div>
             <ul className="text-xs text-stone-500 space-y-1.5 list-disc list-inside">
@@ -537,7 +537,7 @@ export default function ButtonPage() {
 
           <div className="p-5 rounded-xl border border-black/[0.08] dark:border-white/[0.08] bg-black/[0.015] dark:bg-white/[0.02] space-y-2">
             <div className="flex items-center gap-2 font-semibold text-sm text-stone-900 dark:text-white">
-              <HaloIcon icon={InformationCircleIcon} size={18} className="text-indigo-500" />
+              <HaloIcon icon={InformationCircleIcon} size={18} className="text-stone-900 dark:text-white" />
               <span>Reduced Motion & Performance</span>
             </div>
             <ul className="text-xs text-stone-500 space-y-1.5 list-disc list-inside">

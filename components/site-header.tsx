@@ -75,8 +75,8 @@ export function SiteHeader() {
           </Link>
 
           {/* Registry Badge */}
-          <div className="hidden lg:flex items-center gap-1.5 px-2.5 py-1 rounded-full border border-emerald-500/20 bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 text-[11px] font-mono font-medium">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+          <div className="hidden lg:flex items-center gap-1.5 px-2.5 py-1 rounded-full border border-border bg-muted/40 text-foreground text-[11px] font-mono font-medium">
+            <span className="w-1.5 h-1.5 rounded-full bg-foreground animate-pulse" />
             shadcn v4 compatible
           </div>
 

@@ -63,7 +63,7 @@ export default function ShowcasePage() {
                 </h2>
               </div>
               <div className="flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                <span className="w-2 h-2 rounded-full bg-stone-900 dark:bg-white animate-pulse" />
                 <span className="text-xs font-mono text-stone-500">
                   {running ? "SYSTEM NOMINAL" : "SYSTEM PAUSED"}
                 </span>
@@ -72,7 +72,7 @@ export default function ShowcasePage() {
 
             {/* Simulated Optical Waveform Display */}
             <div className="h-48 w-full rounded-2xl bg-black/[0.03] dark:bg-white/[0.02] border border-black/5 dark:border-white/5 p-4 flex flex-col justify-between relative overflow-hidden">
-              <div className="absolute inset-0 bg-[radial-gradient(#6366f1_1px,transparent_1px)] [background-size:16px_16px] opacity-10 pointer-events-none" />
+              <div className="absolute inset-0 bg-[radial-gradient(#888_1px,transparent_1px)] [background-size:16px_16px] opacity-10 pointer-events-none" />
               
               <div className="flex items-center justify-between text-[11px] font-mono text-stone-400">
                 <span>WAVELENGTH: 540nm</span>
@@ -157,7 +157,7 @@ export default function ShowcasePage() {
 
             <HaloSurface elevation="raised" className="p-6 rounded-2xl space-y-3">
               <span className="text-xs font-mono text-stone-400 uppercase">Security Boundaries</span>
-              <div className="text-2xl font-bold text-emerald-600 dark:text-emerald-400">
+              <div className="text-2xl font-bold text-stone-900 dark:text-white">
                 100% Enforced
               </div>
               <p className="text-xs text-stone-500 leading-relaxed">
@@ -191,7 +191,7 @@ export default function ShowcasePage() {
               </div>
               <div className="flex items-center justify-between pt-2">
                 <span className="text-stone-500">Motion Discipline</span>
-                <span className="font-mono text-emerald-600 dark:text-emerald-400">Strict (No wander)</span>
+                <span className="font-mono text-stone-800 dark:text-stone-200">Strict (No wander)</span>
               </div>
               <div className="flex items-center justify-between pt-2">
                 <span className="text-stone-500">Registry Source</span>

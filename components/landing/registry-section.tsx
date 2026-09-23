@@ -46,7 +46,7 @@ export function RegistrySection() {
               <div className="text-muted-foreground">
                 ✓ Writing component: <span className="text-foreground">components/ui/halo-button.tsx</span>
               </div>
-              <div className="text-emerald-600 dark:text-emerald-400 font-medium pt-2">
+              <div className="text-foreground font-medium pt-2">
                 Component successfully added to your project.
               </div>
             </div>
@@ -60,7 +60,7 @@ export function RegistrySection() {
             <ul className="space-y-3 text-sm">
               {BENEFITS.map((b) => (
                 <li key={b} className="flex items-center gap-2.5 text-foreground">
-                  <span className="text-emerald-600 dark:text-emerald-400">
+                  <span className="text-foreground">
                     <HaloIcon icon={CheckmarkCircle01Icon} size={16} />
                   </span>
                   <span>{b}</span>

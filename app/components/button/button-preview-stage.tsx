@@ -225,7 +225,7 @@ export function ButtonPreviewStage() {
 
               {/* Physical interaction note */}
               <div className="text-[11px] font-mono text-stone-500 dark:text-stone-400 bg-white/40 dark:bg-black/30 backdrop-blur-md px-3 py-1 rounded-full border border-black/5 dark:border-white/10 flex items-center gap-2">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                <span className="w-1.5 h-1.5 rounded-full bg-stone-900 dark:bg-white" />
                 <span>Directional top highlight · Tactile press compression · Subtle magnetic pull</span>
               </div>
             </div>
@@ -299,7 +299,7 @@ export function ButtonPreviewStage() {
             className={cn(
               "w-full text-xs h-8 px-2 rounded-md border transition-colors flex items-center justify-center font-medium",
               magnetic
-                ? "border-emerald-500/40 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400"
+                ? "border-stone-900 bg-stone-900 text-white dark:border-white dark:bg-white dark:text-stone-900"
                 : "border-black/10 dark:border-white/10 bg-white/50 dark:bg-stone-900/50 text-stone-500"
             )}
           >
@@ -318,7 +318,7 @@ export function ButtonPreviewStage() {
             className={cn(
               "w-full text-xs h-8 px-2 rounded-md border transition-colors flex items-center justify-center font-medium",
               loading
-                ? "border-blue-500/40 bg-blue-500/10 text-blue-600 dark:text-blue-400"
+                ? "border-stone-900 bg-stone-900 text-white dark:border-white dark:bg-white dark:text-stone-900"
                 : "border-black/10 dark:border-white/10 bg-white/50 dark:bg-stone-900/50 text-stone-500"
             )}
           >
@@ -337,7 +337,7 @@ export function ButtonPreviewStage() {
             className={cn(
               "w-full text-xs h-8 px-2 rounded-md border transition-colors flex items-center justify-center font-medium",
               withIcons
-                ? "border-indigo-500/40 bg-indigo-500/10 text-indigo-600 dark:text-indigo-400"
+                ? "border-stone-900 bg-stone-900 text-white dark:border-white dark:bg-white dark:text-stone-900"
                 : "border-black/10 dark:border-white/10 bg-white/50 dark:bg-stone-900/50 text-stone-500"
             )}
           >

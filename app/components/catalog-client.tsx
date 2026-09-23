@@ -202,7 +202,7 @@ export function CatalogClient() {
         {/* Registry Quick Info */}
         <div className="p-4 rounded-xl border border-black/[0.06] dark:border-white/[0.06] bg-black/[0.015] dark:bg-white/[0.02] space-y-2 text-xs text-stone-500">
           <div className="font-semibold text-stone-900 dark:text-white flex items-center gap-1.5">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+            <span className="w-1.5 h-1.5 rounded-full bg-stone-900 dark:bg-white" />
             <span>Registry Spec v1</span>
           </div>
           <p className="text-[11px] leading-relaxed">
@@ -302,9 +302,9 @@ export function CatalogClient() {
                       variant="outline"
                       className={cn(
                         "text-[10px] font-mono capitalize",
-                        item.status === "stable" && "border-emerald-500/30 text-emerald-600 dark:text-emerald-400 bg-emerald-500/5",
-                        item.status === "in-progress" && "border-amber-500/30 text-amber-600 dark:text-amber-400 bg-amber-500/5",
-                        item.status === "planned" && "border-stone-400/30 text-stone-500 bg-stone-500/5"
+                        item.status === "stable" && "border-stone-900/30 text-stone-900 dark:border-white/30 dark:text-white bg-black/5 dark:bg-white/5",
+                        item.status === "in-progress" && "border-stone-500/30 text-stone-600 dark:text-stone-400 bg-stone-500/5",
+                        item.status === "planned" && "border-stone-400/20 text-stone-400 bg-transparent"
                       )}
                     >
                       {item.status}
@@ -349,9 +349,9 @@ export function CatalogClient() {
                     variant="outline"
                     className={cn(
                       "text-[10px] font-mono capitalize",
-                      item.status === "stable" && "border-emerald-500/30 text-emerald-600 dark:text-emerald-400",
-                      item.status === "in-progress" && "border-amber-500/30 text-amber-600 dark:text-amber-400",
-                      item.status === "planned" && "border-stone-400/30 text-stone-500"
+                      item.status === "stable" && "border-stone-900/30 text-stone-900 dark:border-white/30 dark:text-white",
+                      item.status === "in-progress" && "border-stone-500/30 text-stone-600 dark:text-stone-400",
+                      item.status === "planned" && "border-stone-400/20 text-stone-400"
                     )}
                   >
                     {item.status}

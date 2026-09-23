@@ -120,7 +120,7 @@ export default function LiquidMaterialDocPage() {
                     {layer.name}
                   </span>
                 </div>
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                <span className="w-1.5 h-1.5 rounded-full bg-stone-900 dark:bg-white" />
               </div>
               <p className="text-xs font-medium text-stone-600 dark:text-stone-300">
                 {layer.purpose}
