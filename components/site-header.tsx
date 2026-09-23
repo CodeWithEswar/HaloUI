@@ -20,7 +20,7 @@ export function SiteHeader() {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-black/[0.06] dark:border-white/[0.08] bg-white/70 dark:bg-[#0c0d0f]/75 backdrop-blur-xl transition-all">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
+      <div className="w-full px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
         {/* Brand Identity */}
         <div className="flex items-center gap-8">
           <Link href="/" className="group flex items-center gap-2.5">
