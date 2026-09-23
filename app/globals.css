@@ -87,11 +87,18 @@
 @media (min-width: 64rem) {
   body:has([data-docs-shell]) {
     height: 100dvh;
+    max-height: 100dvh;
     overflow: hidden;
   }
 
-  body:has([data-docs-shell]) > footer {
-    display: none;
+  body:has([data-docs-shell]) footer {
+    display: none !important;
+  }
+
+  body:has([data-docs-shell]) #main-content {
+    height: calc(100dvh - var(--site-header-height));
+    min-height: 0;
+    overflow: hidden;
   }
 }
 
@@ -141,17 +148,48 @@ body:has([data-docs-shell]) [data-docs-skip] {
 }
 
 .code-block {
+  --code-surface: color-mix(in oklch, var(--background) 96%, var(--foreground) 4%);
+  --code-header: var(--background);
+  --code-gutter: color-mix(in oklch, var(--background) 93%, var(--foreground) 7%);
+  --code-border: color-mix(in oklch, var(--foreground) 13%, transparent);
+  --code-divider: color-mix(in oklch, var(--foreground) 9%, transparent);
+  --code-text: color-mix(in oklch, var(--foreground) 92%, transparent);
+  --code-muted: color-mix(in oklch, var(--foreground) 48%, transparent);
+  --code-faint: color-mix(in oklch, var(--foreground) 29%, transparent);
+  --code-control-hover: color-mix(in oklch, var(--foreground) 6%, transparent);
+  --code-line-hover: color-mix(in oklch, var(--foreground) 3%, transparent);
+  --code-line-active: color-mix(in oklch, var(--foreground) 5%, transparent);
+  --code-focus: color-mix(in oklch, var(--foreground) 72%, transparent);
+  color-scheme: light;
+  border-color: var(--code-border);
+  background: var(--code-header);
+  box-shadow:
+    0 18px 50px -34px rgb(0 0 0 / 22%),
+    inset 0 1px 0 rgb(255 255 255 / 60%);
+}
+
+.dark .code-block {
+  --code-surface: #0a0a0b;
+  --code-header: #050506;
+  --code-gutter: #070708;
+  --code-border: rgb(255 255 255 / 12%);
+  --code-divider: rgb(255 255 255 / 9%);
+  --code-text: rgb(255 255 255 / 92%);
+  --code-muted: rgb(255 255 255 / 58%);
+  --code-faint: rgb(255 255 255 / 34%);
+  --code-control-hover: rgb(255 255 255 / 7%);
+  --code-line-hover: rgb(255 255 255 / 3%);
+  --code-line-active: rgb(255 255 255 / 5%);
+  --code-focus: rgb(255 255 255 / 72%);
   color-scheme: dark;
-  border-color: rgb(255 255 255 / 12%);
-  background: #050506;
   box-shadow:
     0 18px 50px -30px rgb(0 0 0 / 55%),
     inset 0 1px 0 rgb(255 255 255 / 4%);
 }
 
 .code-block-header {
-  border-color: rgb(255 255 255 / 9%);
-  background: #050506;
+  border-color: var(--code-divider);
+  background: var(--code-header);
 }
 
 .code-block-mark {
@@ -161,42 +199,51 @@ body:has([data-docs-shell]) [data-docs-skip] {
   flex: none;
   align-items: center;
   justify-content: center;
-  border: 1px solid rgb(255 255 255 / 10%);
+  border: 1px solid var(--code-border);
   border-radius: 0.5rem 0.5rem 0.5rem 0.18rem;
-  background: rgb(255 255 255 / 5%);
-  color: rgb(255 255 255 / 72%);
-  box-shadow: inset 0 1px 0 rgb(255 255 255 / 5%);
+  background: var(--code-control-hover);
+  color: var(--code-muted);
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 18%);
+}
+
+.code-block-label,
+.code-block-raw {
+  color: var(--code-text);
 }
 
 .code-block-meta {
-  color: rgb(255 255 255 / 34%);
+  color: var(--code-faint);
+}
+
+.code-block-meta-separator {
+  background: var(--code-faint);
 }
 
 .code-block-action {
-  color: rgb(255 255 255 / 58%) !important;
+  color: var(--code-muted) !important;
 }
 
 .code-block-action:hover,
 .code-block-action[aria-pressed="true"] {
-  background: rgb(255 255 255 / 7%) !important;
-  color: rgb(255 255 255 / 92%) !important;
+  background: var(--code-control-hover) !important;
+  color: var(--code-text) !important;
 }
 
 .code-block-scroll {
   position: relative;
   background:
-    radial-gradient(circle at 100% 0%, rgb(255 255 255 / 2.5%), transparent 32%),
-    #0a0a0b;
+    radial-gradient(circle at 100% 0%, color-mix(in oklch, var(--foreground) 2.5%, transparent), transparent 32%),
+    var(--code-surface);
 }
 
 .code-block :is(button, [tabindex="0"]):focus-visible {
-  outline: 2px solid rgb(255 255 255 / 72%);
+  outline: 2px solid var(--code-focus);
   outline-offset: -2px;
 }
 
 .code-block ::selection {
-  background: rgb(255 255 255 / 22%);
-  color: #fff;
+  background: color-mix(in oklch, var(--foreground) 18%, transparent);
+  color: var(--foreground);
 }
 
 .code-highlight .shiki {
@@ -209,8 +256,12 @@ body:has([data-docs-shell]) [data-docs-skip] {
 }
 
 .code-highlight .shiki span {
-  color: var(--shiki-dark) !important;
+  color: var(--shiki-light) !important;
   background-color: transparent !important;
+}
+
+.dark .code-highlight .shiki span {
+  color: var(--shiki-dark) !important;
 }
 
 .code-highlight .shiki code {
@@ -226,12 +277,12 @@ body:has([data-docs-shell]) [data-docs-skip] {
 }
 
 .code-highlight .line:hover {
-  background: rgb(255 255 255 / 3%);
+  background: var(--code-line-hover);
 }
 
 .code-highlight .line[data-highlighted-line="true"] {
-  background: rgb(255 255 255 / 5%);
-  box-shadow: inset 2px 0 0 rgb(255 255 255 / 84%);
+  background: var(--code-line-active);
+  box-shadow: inset 2px 0 0 var(--code-focus);
 }
 
 .code-highlight .line[data-highlighted-line="true"]::after {
@@ -241,8 +292,8 @@ body:has([data-docs-shell]) [data-docs-skip] {
   width: 0.28rem;
   height: 0.28rem;
   border-radius: 999px;
-  background: #fff;
-  box-shadow: 0 0 0 3px rgb(255 255 255 / 8%);
+  background: var(--code-focus);
+  box-shadow: 0 0 0 3px var(--code-control-hover);
   content: "";
   transform: translate(-50%, -50%);
 }
@@ -252,7 +303,7 @@ body:has([data-docs-shell]) [data-docs-skip] {
 }
 
 .code-line-numbers .shiki {
-  background: linear-gradient(90deg, #070708 0 3.75rem, transparent 3.75rem) !important;
+  background: linear-gradient(90deg, var(--code-gutter) 0 3.75rem, transparent 3.75rem) !important;
 }
 
 .code-line-numbers .line::before {
@@ -261,7 +312,7 @@ body:has([data-docs-shell]) [data-docs-skip] {
   display: inline-block;
   width: 2.2rem;
   margin-right: 1.2rem;
-  color: rgb(255 255 255 / 28%);
+  color: var(--code-faint);
   text-align: right;
   user-select: none;
 }
