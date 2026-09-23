@@ -136,3 +136,34 @@ Specification → canonical component → tests → examples → showcase compos
 ### 3.2 Architectural Rule
 Component source and registry metadata are authoritative. Documentation consumes them. The website must not maintain a second hidden implementation of the same public component.
 
+---
+
+## 4. System Design
+
+### 4.1 Optical Material Stack
+
+| Layer | Purpose | Examples |
+| :--- | :--- | :--- |
+| **Base tint** | Provides fallback readability and material body. | neutral, tinted, elevated |
+| **Backdrop diffusion** | Softens content behind the surface. | blur strengths |
+| **Edge** | Separates transparent surface from background. | outer border, inset border |
+| **Specular highlight** | Creates reflected-light impression. | top-left sweep, radial glint |
+| **Contact shadow** | Anchors material to nearby surfaces. | small ambient/contact shadow |
+| **Ambient glow** | Adds selective luminous depth. | focus glow, active glow |
+| **Texture** | Reduces sterile/banded surfaces. | subtle noise/grain |
+| **Motion** | Communicates physical response. | press, lift, settle, reveal |
+
+### 4.2 State Model
+
+| State | Visual Requirement | Behavior Requirement |
+| :--- | :--- | :--- |
+| **Default** | Clear hierarchy without excessive shine. | No unexpected animation. |
+| **Hover** | Small optical/position response. | Pointer only; not required for understanding. |
+| **Focus-visible** | High-contrast focus treatment. | Keyboard discoverable. |
+| **Pressed** | Tactile compression/depth change. | Immediate response. |
+| **Selected** | Persistent state beyond hover. | Semantics exposed. |
+| **Disabled** | Lower prominence while remaining legible. | Non-interactive. |
+| **Loading** | Progress/activity indication. | Prevent accidental duplicate action when appropriate. |
+| **Invalid** | Error state remains visible over glass. | Error association announced. |
+| **Open/Expanded** | Overlay/disclosure state visible. | ARIA state synchronized. |
+
