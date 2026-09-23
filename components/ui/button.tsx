@@ -40,7 +40,7 @@ const buttonVariants = cva(
 )
 
 export interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+  extends ButtonPrimitive.Props,
     VariantProps<typeof buttonVariants> {
   asChild?: boolean
 }
@@ -52,9 +52,8 @@ function Button({
   asChild = false,
   ...props
 }: ButtonProps) {
-  const Comp = asChild ? Slot : "button"
   return (
-    <Comp
+    <ButtonPrimitive
       data-slot="button"
       className={cn(buttonVariants({ variant, size, className }))}
       {...props}
