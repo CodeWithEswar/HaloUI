@@ -139,15 +139,15 @@ export function DocsToc({ compact = false }: { compact?: boolean }) {
     const progressOffset = circumference - (readingProgress / 100) * circumference;
 
     return (
-      <div className="sticky top-[var(--site-header-height)] z-40 flex h-14 shrink-0 border-b border-border bg-background/96 backdrop-blur-xl xl:hidden">
+      <div className="sticky top-[var(--site-header-height)] z-40 flex h-10 shrink-0 border-b border-border bg-background/96 backdrop-blur-xl xl:hidden">
         <div className="border-r border-border lg:hidden">
           <MobileDocsNav iconOnly />
         </div>
 
         <details className="group relative min-w-0 flex-1">
-          <summary className="flex h-full cursor-pointer list-none items-center gap-3 px-4 pr-5 outline-none marker:hidden focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring [&::-webkit-details-marker]:hidden">
-            <span className="relative grid size-6 shrink-0 place-items-center" aria-hidden="true">
-              <svg viewBox="0 0 20 20" className="size-5 -rotate-90" fill="none">
+          <summary className="flex h-full cursor-pointer list-none items-center gap-2.5 px-3.5 pr-4 outline-none marker:hidden focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring [&::-webkit-details-marker]:hidden">
+            <span className="relative grid size-5 shrink-0 place-items-center" aria-hidden="true">
+              <svg viewBox="0 0 20 20" className="size-[18px] -rotate-90" fill="none">
                 <circle cx="10" cy="10" r={radius} className="stroke-border" strokeWidth="1.5" />
                 <circle
                   cx="10"
@@ -163,18 +163,18 @@ export function DocsToc({ compact = false }: { compact?: boolean }) {
               <span className="absolute size-1 rounded-full bg-foreground" />
             </span>
 
-            <span className="min-w-0 flex-1">
-              <span className="block truncate text-sm font-medium text-foreground">
+            <span className="min-w-0 flex-1 leading-tight">
+              <span className="block truncate text-xs font-medium text-foreground">
                 {activeItem?.title ?? "On this page"}
               </span>
-              <span className="block text-[10px] uppercase tracking-[0.12em] text-muted-foreground">
+              <span className="block text-[9.5px] uppercase tracking-[0.12em] text-muted-foreground">
                 {items.length > 0 ? `${activeIndex + 1} of ${items.length} sections` : "Page topics"}
               </span>
             </span>
 
             <HaloIcon
               icon={ArrowDown01Icon}
-              size={15}
+              size={14}
               className="text-muted-foreground transition-transform duration-200 group-open:rotate-180 motion-reduce:transition-none"
             />
           </summary>

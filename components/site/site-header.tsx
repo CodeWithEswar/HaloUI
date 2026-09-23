@@ -12,7 +12,7 @@ import { Button } from "@/components/ui/button";
 export function SiteHeader() {
   return (
     <header className="sticky top-0 z-50 h-[var(--site-header-height)] w-full shrink-0 border-b border-border bg-background">
-      <div className="flex h-14 w-full items-center px-4 sm:px-6 lg:px-8">
+      <div className="flex h-full w-full items-center px-4 sm:px-6 lg:px-8">
         {/* Left: Brand + Desktop Nav */}
         <div className="flex items-center gap-6 md:gap-8">
           <MobileNav />
