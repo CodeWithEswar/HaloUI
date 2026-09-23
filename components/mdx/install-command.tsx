@@ -43,9 +43,12 @@ export function InstallCommand({ registry }: { registry: string }) {
   return (
     <div className="my-6">
       <Tabs value={manager} onValueChange={(value) => setManager(value as keyof typeof managers)}>
-        <TabsList aria-label="Package manager" className="max-w-full overflow-x-auto">
+        <TabsList
+          aria-label="Package manager"
+          className="h-9 max-w-full overflow-x-auto overflow-y-hidden no-scrollbar"
+        >
           {Object.entries(managers).map(([value, item]) => (
-            <TabsTrigger key={value} value={value} className="gap-1.5 px-2.5">
+            <TabsTrigger key={value} value={value} className="gap-1.5 px-2.5 text-xs font-medium">
               <item.Icon size={14} className={cn("shrink-0", item.iconClassName)} aria-hidden="true" />
               {item.label}
             </TabsTrigger>

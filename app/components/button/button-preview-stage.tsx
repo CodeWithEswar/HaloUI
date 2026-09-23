@@ -73,7 +73,7 @@ export function ButtonPreviewStage() {
       {/* Stage Toolbar (Built with shadcn primitives & Hugeicons) */}
       <div className="flex flex-wrap items-center justify-between gap-3 p-3 rounded-xl border border-black/[0.08] dark:border-white/[0.08] bg-black/[0.02] dark:bg-white/[0.03] backdrop-blur-md">
         {/* Background Environment Switcher */}
-        <div className="flex items-center gap-1.5">
+        <div className="flex min-w-0 max-w-full items-center gap-1.5">
           <span className="text-xs font-mono text-stone-500 uppercase tracking-wider mr-1">
             Backdrop:
           </span>
@@ -81,7 +81,7 @@ export function ButtonPreviewStage() {
             value={environment}
             onValueChange={(val) => setEnvironment(val as PreviewEnvironment)}
           >
-            <TabsList className="h-8 bg-black/5 dark:bg-white/10 p-0.5 rounded-lg">
+            <TabsList className="h-8 max-w-full justify-start overflow-x-auto overflow-y-hidden no-scrollbar rounded-lg bg-black/5 p-0.5 dark:bg-white/10">
               <TabsTrigger value="neutral" className="text-xs px-2.5 h-7">
                 Neutral
               </TabsTrigger>
