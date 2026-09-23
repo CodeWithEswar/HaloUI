@@ -115,3 +115,24 @@ HaloUI models glass as an optical material possessing volumetric depth, surface 
 - **Navigation Transitions**: 250ms – 600ms.
 - **Tactile Curve**: `cubic-bezier(0.2, 0.8, 0.3, 1)`.
 - **Reduced Motion**: When `prefers-reduced-motion: reduce` is enabled, magnetic pull is disabled and transitions collapse to instantaneous state changes (`0.01ms`).
+
+---
+
+## 3. System Architecture
+
+| Plane | Subsystems | Responsibilities |
+| :--- | :--- | :--- |
+| **Experience Plane** | Marketing, docs, catalog, search, showcases, theme lab | Human discovery and learning. |
+| **Component Plane** | Foundations, primitives, composites, blocks | Canonical installable UI source. |
+| **Registry Plane** | Manifest, item definitions, dependency graph, build output | Machine distribution. |
+| **Preview Plane** | Sandbox frame, backgrounds, theme, viewport, state controls | Interactive evaluation. |
+| **Reference Plane** | Props extraction, anatomy, dependency/file views | Developer reference. |
+| **Quality Plane** | A11y, interaction, visual, registry, performance tests | Release gates. |
+| **Release Plane** | Validation, changelog, versioning, publishing | Controlled delivery. |
+
+### 3.1 End-to-End Flow
+Specification → canonical component → tests → examples → showcase composition → MDX documentation → props/API extraction → registry item → dependency validation → clean-install test → public docs + registry publication.
+
+### 3.2 Architectural Rule
+Component source and registry metadata are authoritative. Documentation consumes them. The website must not maintain a second hidden implementation of the same public component.
+
