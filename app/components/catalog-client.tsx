@@ -27,7 +27,7 @@ interface CatalogItem {
   slug: string;
   category: "Actions" | "Foundations" | "Forms" | "Navigation" | "Overlays" | "Data Display" | "Layout";
   description: string;
-  status: "stable" | "in-progress" | "planned";
+  status: "stable" | "preview" | "in-progress" | "planned";
   previewType: "button" | "surface" | "switch" | "input" | "dock";
 }
 
@@ -44,10 +44,10 @@ const CATALOG_ITEMS: CatalogItem[] = [
   {
     id: "surface",
     name: "Halo Surface",
-    slug: "/components/button",
+    slug: "/components/halo-surface",
     category: "Foundations",
-    description: "Foundational 10-layer physical liquid material substrate with depth tokens.",
-    status: "stable",
+    description: "The base material container used to construct HaloUI surfaces with 10-layer physical liquid optical physics.",
+    status: "preview" as const,
     previewType: "surface",
   },
   {

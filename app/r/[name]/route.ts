@@ -87,7 +87,7 @@ export async function GET(
       return NextResponse.json(registryItem);
     }
 
-    if (cleanName === "surface") {
+    if (cleanName === "surface" || cleanName === "halo-surface") {
       const surfacePath = path.join(cwd, "components", "haloui", "foundations", "halo-surface.tsx");
       const tokensPath = path.join(cwd, "styles", "halo-tokens.css");
 
@@ -98,10 +98,10 @@ export async function GET(
 
       const registryItem = {
         $schema: "https://ui.shadcn.com/schema/registry-item.json",
-        name: "surface",
+        name: "halo-surface",
         type: "registry:ui",
         title: "Halo Surface",
-        description: "Foundational 10-layer physical liquid material substrate component.",
+        description: "The base material container used to construct HaloUI surfaces with 10-layer physical liquid optical physics.",
         dependencies: ["@radix-ui/react-slot", "clsx", "tailwind-merge"],
         registryDependencies: [],
         files: [
@@ -118,10 +118,32 @@ export async function GET(
             target: "styles/halo-tokens.css",
           },
         ],
+        cssVars: {
+          light: {
+            "--halo-surface": "rgba(255, 255, 255, 0.72)",
+            "--halo-surface-elevated": "rgba(255, 255, 255, 0.88)",
+            "--halo-surface-strong": "rgba(255, 255, 255, 0.95)",
+            "--halo-surface-recessed": "rgba(0, 0, 0, 0.03)",
+            "--halo-edge": "rgba(255, 255, 255, 0.9)",
+            "--halo-edge-soft": "rgba(0, 0, 0, 0.08)",
+            "--halo-blur-md": "16px",
+          },
+          dark: {
+            "--halo-surface": "rgba(22, 23, 26, 0.7)",
+            "--halo-surface-elevated": "rgba(30, 32, 38, 0.85)",
+            "--halo-surface-strong": "rgba(38, 41, 48, 0.95)",
+            "--halo-surface-recessed": "rgba(0, 0, 0, 0.45)",
+            "--halo-edge": "rgba(255, 255, 255, 0.14)",
+            "--halo-edge-soft": "rgba(255, 255, 255, 0.06)",
+            "--halo-blur-md": "16px",
+          },
+        },
         meta: {
-          status: "stable",
+          status: "preview",
           version: "1.0.0",
           category: "foundations",
+          accessibility: "WCAG 2.1 AA",
+          lastUpdated: "2026-09-24",
         },
       };
 

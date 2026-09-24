@@ -6,7 +6,6 @@ import {
   ArrowRight01Icon,
   CheckmarkCircle01Icon,
   Download01Icon,
-  Copy01Icon,
   InformationCircleIcon,
   SecurityCheckIcon,
   AlertCircleIcon,
@@ -21,11 +20,14 @@ import { HaloIcon } from "@/components/icons/halo-icon";
 import { HaloButton } from "@/components/haloui/button/halo-button";
 import { HaloSurface } from "@/components/haloui/foundations/halo-surface";
 import { ButtonPreviewStage } from "./button-preview-stage";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
+import { InstallCommand } from "@/components/mdx/install-command";
+import { Anatomy } from "@/components/mdx/anatomy";
+import { DependencyList } from "@/components/mdx/dependency-list";
+import { KeyboardTable } from "@/components/mdx/keyboard-table";
 
 export const metadata: Metadata = {
-  title: "Halo Button — Liquid-Glass Action Surface | HaloUI",
+  title: "Halo Button — Liquid-Glass Action Surface",
   description:
     "An action surface engineered with physical optical response, neoskeuomorphic depth, tactile compression, and Hugeicons integration. Built for the shadcn registry.",
 };
@@ -112,7 +114,7 @@ const PROPS_DATA = [
 
 export default function ButtonPage() {
   return (
-    <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-16">
+    <div className="w-full space-y-12 sm:space-y-16 py-4 sm:py-6 lg:py-8">
       {/* 1. Component Identity & Editorial Header */}
       <section className="space-y-4">
         <div className="flex flex-wrap items-center gap-3">
@@ -385,31 +387,7 @@ export default function ButtonPage() {
           </p>
         </div>
 
-        {/* CLI Command Tabs */}
-        <div className="rounded-xl border border-black/[0.08] dark:border-white/[0.08] bg-black/[0.02] dark:bg-white/[0.03] overflow-hidden">
-          <Tabs defaultValue="pnpm" className="w-full">
-            <div className="flex items-center justify-between px-4 py-2 border-b border-black/[0.06] dark:border-white/[0.06] bg-black/[0.02] dark:bg-white/[0.02]">
-              <span className="text-xs font-mono text-stone-500">Package Manager</span>
-              <TabsList className="h-7 bg-transparent p-0">
-                <TabsTrigger value="pnpm" className="text-xs font-mono h-6 px-2">pnpm</TabsTrigger>
-                <TabsTrigger value="npx" className="text-xs font-mono h-6 px-2">npx</TabsTrigger>
-                <TabsTrigger value="bunx" className="text-xs font-mono h-6 px-2">bunx</TabsTrigger>
-              </TabsList>
-            </div>
-
-            <TabsContent value="pnpm" className="p-4 m-0 font-mono text-xs flex items-center justify-between text-stone-800 dark:text-stone-200">
-              <code>pnpm dlx shadcn@latest add https://haloui.dev/r/button.json</code>
-            </TabsContent>
-
-            <TabsContent value="npx" className="p-4 m-0 font-mono text-xs flex items-center justify-between text-stone-800 dark:text-stone-200">
-              <code>npx shadcn@latest add https://haloui.dev/r/button.json</code>
-            </TabsContent>
-
-            <TabsContent value="bunx" className="p-4 m-0 font-mono text-xs flex items-center justify-between text-stone-800 dark:text-stone-200">
-              <code>bunx --bun shadcn@latest add https://haloui.dev/r/button.json</code>
-            </TabsContent>
-          </Tabs>
-        </div>
+        <InstallCommand registry="button" />
 
         {/* Registry Architecture Metadata View */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -548,6 +526,70 @@ export default function ButtonPage() {
             </ul>
           </div>
         </div>
+      </section>
+
+      <section id="anatomy" className="space-y-4 border-t border-border pt-8">
+        <div className="space-y-1">
+          <h2 className="text-xl font-bold tracking-tight">Anatomy</h2>
+          <p className="text-sm text-muted-foreground">Stable structural parts of the Button implementation.</p>
+        </div>
+        <Anatomy
+          parts={[
+            { name: "Root", selector: "button / Slot", description: "Owns semantics, focus, pointer input, loading, and disabled behavior." },
+            { name: "Optical surface", selector: "HaloSurface", description: "Composes tint, diffusion, edge, specular, refraction, shadow, glow, and grain." },
+            { name: "Leading icon", selector: "leftIcon", description: "Optional Hugeicons glyph rendered at the size-specific optical scale." },
+            { name: "Content", selector: "children", description: "Isolated foreground label that remains readable across calibrated backdrops." },
+            { name: "Trailing icon", selector: "rightIcon", description: "Optional Hugeicons glyph used for direction or outcome reinforcement." },
+          ]}
+        />
+      </section>
+
+      <section id="keyboard-interactions" className="space-y-4 border-t border-border pt-8">
+        <div className="space-y-1">
+          <h2 className="text-xl font-bold tracking-tight">Keyboard interactions</h2>
+          <p className="text-sm text-muted-foreground">Native button behavior is preserved rather than recreated.</p>
+        </div>
+        <KeyboardTable
+          rows={[
+            { keys: ["Tab"], action: "Moves focus to the button." },
+            { keys: ["Enter"], action: "Activates the focused button." },
+            { keys: ["Space"], action: "Activates the focused button." },
+          ]}
+        />
+      </section>
+
+      <section id="responsive-behavior" className="space-y-3 border-t border-border pt-8">
+        <h2 className="text-xl font-bold tracking-tight">Responsive behavior</h2>
+        <p className="max-w-3xl text-sm leading-6 text-muted-foreground">
+          Button dimensions do not change automatically at breakpoints. Product layouts decide whether actions remain inline, wrap, or become full width. The preview toolbar condenses at tablet widths and keeps the interactive canvas horizontally contained on phones.
+        </p>
+      </section>
+
+      <section id="dependencies" className="space-y-4 border-t border-border pt-8">
+        <div className="space-y-1">
+          <h2 className="text-xl font-bold tracking-tight">Dependencies and installed files</h2>
+          <p className="text-sm text-muted-foreground">Exact registry destinations and runtime requirements.</p>
+        </div>
+        <DependencyList
+          groups={[
+            { title: "HaloUI registry dependencies", items: [] },
+            { title: "Package dependencies", items: ["@hugeicons/react", "@hugeicons/core-free-icons", "@radix-ui/react-slot", "class-variance-authority", "clsx", "tailwind-merge"] },
+            { title: "Installed files", items: ["components/ui/halo-button.tsx", "components/icons/halo-icon.tsx", "styles/halo-tokens.css"] },
+            { title: "Required tokens", items: ["--halo-surface", "--halo-edge", "--halo-shadow-elevated", "--halo-blur-md"] },
+          ]}
+        />
+      </section>
+
+      <section id="related-components" className="space-y-3 border-t border-border pt-8">
+        <h2 className="text-xl font-bold tracking-tight">Related components</h2>
+        <p className="text-sm text-muted-foreground">
+          <Link href="/docs/liquid-material" className="font-medium text-foreground underline underline-offset-4">Halo Surface</Link> provides the shared optical substrate used by Button.
+        </p>
+      </section>
+
+      <section id="component-changelog" className="space-y-3 border-t border-border pt-8">
+        <h2 className="text-xl font-bold tracking-tight">Component changelog</h2>
+        <p className="text-sm text-muted-foreground">No component-specific changes have been published yet.</p>
       </section>
     </div>
   );

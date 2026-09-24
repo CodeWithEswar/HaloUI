@@ -44,10 +44,10 @@
       }
     },
     {
-      "name": "surface",
+      "name": "halo-surface",
       "type": "registry:ui",
       "title": "Halo Surface",
-      "description": "Foundational 10-layer physical liquid material substrate component.",
+      "description": "The base material container used to construct HaloUI surfaces with 10-layer physical liquid optical physics.",
       "dependencies": [
         "@radix-ui/react-slot",
         "clsx",
@@ -56,7 +56,7 @@
       "registryDependencies": [],
       "files": [
         {
-          "path": "components/haloui/foundations/halo-surface.tsx",
+          "path": "components/ui/halo-surface.tsx",
           "type": "registry:ui",
           "target": "components/ui/halo-surface.tsx"
         },
@@ -68,11 +68,43 @@
       ],
       "categories": ["foundations"],
       "meta": {
-        "status": "stable",
+        "status": "preview",
         "version": "1.0.0",
         "category": "foundations",
         "accessibility": "WCAG 2.1 AA",
-        "lastUpdated": "2026-09-23"
+        "lastUpdated": "2026-09-24"
+      }
+    },
+    {
+      "name": "surface",
+      "type": "registry:ui",
+      "title": "Halo Surface (Alias)",
+      "description": "The base material container used to construct HaloUI surfaces with 10-layer physical liquid optical physics.",
+      "dependencies": [
+        "@radix-ui/react-slot",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "components/ui/halo-surface.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/halo-surface.tsx"
+        },
+        {
+          "path": "styles/halo-tokens.css",
+          "type": "registry:ui",
+          "target": "styles/halo-tokens.css"
+        }
+      ],
+      "categories": ["foundations"],
+      "meta": {
+        "status": "preview",
+        "version": "1.0.0",
+        "category": "foundations",
+        "accessibility": "WCAG 2.1 AA",
+        "lastUpdated": "2026-09-24"
       }
     }
   ]

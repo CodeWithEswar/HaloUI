@@ -14,6 +14,7 @@ export type PreviewEnvironment =
 export interface HaloBackgroundProps extends React.HTMLAttributes<HTMLDivElement> {
   environment?: PreviewEnvironment;
   children?: React.ReactNode;
+  contentClassName?: string;
 }
 
 /**
@@ -29,13 +30,17 @@ export interface HaloBackgroundProps extends React.HTMLAttributes<HTMLDivElement
 export function HaloBackground({
   environment = "neutral",
   className,
+  contentClassName,
   children,
   ...props
 }: HaloBackgroundProps) {
+  const hasCustomMinHeight = className && /min-h-/.test(className);
+
   return (
     <div
       className={cn(
-        "relative w-full h-full min-h-[360px] overflow-hidden transition-all duration-300 rounded-[inherit]",
+        "relative w-full overflow-hidden transition-all duration-300 rounded-[inherit]",
+        !hasCustomMinHeight && "min-h-[320px]",
         // 1. Neutral Environment
         environment === "neutral" &&
           "bg-stone-100/60 dark:bg-[#101114] text-foreground",
@@ -120,7 +125,12 @@ export function HaloBackground({
       )}
 
       {/* Foreground Content */}
-      <div className="relative z-10 w-full h-full flex items-center justify-center p-6 md:p-12">
+      <div
+        className={cn(
+          "relative z-10 w-full h-full flex items-center justify-center",
+          contentClassName ?? "p-6 md:p-12"
+        )}
+      >
         {children}
       </div>
     </div>

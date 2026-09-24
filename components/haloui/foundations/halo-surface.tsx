@@ -4,33 +4,75 @@ import * as React from "react";
 import { Slot } from "@radix-ui/react-slot";
 import { cn } from "@/lib/utils";
 
-export type MaterialIntensity = "subtle" | "balanced" | "rich";
-export type MaterialElevation = "flat" | "raised" | "floating" | "recessed";
+export type HaloSurfaceIntensity = "subtle" | "balanced" | "rich";
+export type HaloSurfaceElevation =
+  | "inset"
+  | "base"
+  | "raised"
+  | "floating"
+  | "overlay";
 
-export interface HaloSurfaceProps extends React.HTMLAttributes<HTMLDivElement> {
+// Backward-compatibility aliases
+export type MaterialIntensity = HaloSurfaceIntensity;
+export type MaterialElevation =
+  | HaloSurfaceElevation
+  | "flat"
+  | "recessed";
+
+export interface HaloSurfaceProps extends React.ComponentPropsWithoutRef<"div"> {
+  /**
+   * Render as Radix Slot child element to compose directly onto consumer nodes.
+   * Preserves refs, attributes, and element semantics without wrapping divs.
+   */
   asChild?: boolean;
+  /**
+   * Controls the optical diffusion depth, highlight vibrancy, and environmental transmission.
+   * @default "balanced"
+   */
   intensity?: MaterialIntensity;
+  /**
+   * Defines the surface's visual relationship to its surrounding environment via tint,
+   * edge clarity, and anchoring contact shadow.
+   * @default "base"
+   */
   elevation?: MaterialElevation;
-  glow?: boolean;
+  /**
+   * Optional legacy interactive press physics for action surfaces.
+   * @deprecated Interactive behaviors belong to action primitives like HaloButton.
+   */
   interactive?: boolean;
+  /**
+   * Optional glow emphasis rim.
+   * @deprecated Specialized glow belongs to HaloGlow foundation layer.
+   */
+  glow?: boolean;
+  /**
+   * Optional refraction rim highlight.
+   */
   refraction?: boolean;
+  /**
+   * Optional surface noise micro-texture.
+   */
   noise?: boolean;
+  /**
+   * Optional directional specular reflection.
+   */
   specular?: boolean;
 }
 
 /**
- * HaloUI Liquid Material Surface
- * Implements the 10-layer physical optical engine:
- * Layer 01: Base Tint Body
- * Layer 02: Diffusion (Optimized backdrop blur)
- * Layer 03: Optical Dual Edge (internal catch + outer hairline)
- * Layer 04: Directional Specular Highlight (135° virtual light source)
- * Layer 05: Refraction Rim
- * Layer 06: Contact Shadow & Elevation Anchoring
- * Layer 07: Ambient Glow (Conditional)
- * Layer 08: Micro-Texture Noise (Subtle SVG turbulence)
- * Layer 09: Content Isolation
- * Layer 10: State Interaction & Tactile Feedback
+ * HaloUI Liquid Material Surface Primitive
+ * Canonical Foundation Primitive: The base material container responsible
+ * for expressing a HaloUI liquid glass surface.
+ *
+ * Coordinates:
+ * - Surface tint & opacity
+ * - Background diffusion (backdrop-filter)
+ * - Elevation & anchoring contact shadow
+ * - Optical dual edge & inner rim reflection (Layer 03)
+ * - Directional 135° specular light highlight (Layer 04)
+ * - Semantic accessibility neutrality (no default focus, no forced role)
+ * - Deliberate overflow safety (preserves focus rings, badges, tooltips)
  */
 export const HaloSurface = React.forwardRef<HTMLDivElement, HaloSurfaceProps>(
   (
@@ -38,12 +80,12 @@ export const HaloSurface = React.forwardRef<HTMLDivElement, HaloSurfaceProps>(
       className,
       asChild = false,
       intensity = "balanced",
-      elevation = "raised",
-      glow = false,
-      interactive = false,
-      refraction = true,
-      noise = true,
-      specular = true,
+      elevation = "base",
+      interactive,
+      glow,
+      refraction,
+      noise,
+      specular,
       children,
       ...props
     },
@@ -51,58 +93,49 @@ export const HaloSurface = React.forwardRef<HTMLDivElement, HaloSurfaceProps>(
   ) => {
     const Comp = asChild ? Slot : "div";
 
+    // Normalize legacy elevation aliases
+    const normalizedElevation: "inset" | "base" | "raised" | "floating" | "overlay" =
+      elevation === "flat" ? "base" : elevation === "recessed" ? "inset" : elevation;
+
     return (
       <Comp
         ref={ref}
+        data-halo-surface=""
+        data-intensity={intensity}
+        data-elevation={normalizedElevation}
         className={cn(
-          "relative overflow-hidden isolate",
-          // Intensity classes
+          // Base Geometry & Stacking Context (Deliberately NOT overflow-hidden to avoid clipping focus rings & menus)
+          "relative isolate rounded-2xl",
+          // Intensity Levels: Diffusion & Optical Presets
           intensity === "subtle" && "halo-intensity-subtle backdrop-blur-[8px]",
           intensity === "balanced" && "halo-intensity-balanced backdrop-blur-[16px]",
           intensity === "rich" && "halo-intensity-rich backdrop-blur-[28px]",
-          // Elevation & Shadow Layer (Layer 06)
-          elevation === "flat" && "shadow-[var(--halo-shadow-contact)]",
-          elevation === "raised" && "shadow-[var(--halo-shadow-elevated)]",
-          elevation === "floating" && "shadow-[var(--halo-shadow-ambient)]",
-          elevation === "recessed" && "shadow-inner bg-[var(--halo-surface-recessed)]",
-          // Base Body & Boundary (Layer 01 & 03)
-          "bg-[var(--halo-surface)]",
-          "border border-[var(--halo-edge)]",
-          // Neoskeuomorphic Inner Edge Rim (Layer 03)
-          "before:content-[''] before:absolute before:inset-0 before:pointer-events-none before:rounded-[inherit]",
-          "before:shadow-[var(--halo-edge-inner)]",
-          // Directional Specular Highlight (Layer 04)
-          specular &&
-            "after:content-[''] after:absolute after:inset-0 after:pointer-events-none after:rounded-[inherit] after:bg-gradient-to-br after:from-white/20 after:via-transparent after:to-transparent dark:after:from-white/10",
-          // Tactile press & interaction (Layer 10)
+          // Elevation & Shadow Anchorings
+          normalizedElevation === "inset" &&
+            "bg-[var(--halo-surface-recessed)] shadow-inner border border-black/5 dark:border-white/5",
+          normalizedElevation === "base" &&
+            "bg-[var(--halo-surface)] shadow-[var(--halo-shadow-contact)] border border-[var(--halo-edge-soft)]",
+          normalizedElevation === "raised" &&
+            "bg-[var(--halo-surface-elevated)] shadow-[var(--halo-shadow-elevated)] border border-[var(--halo-edge)]",
+          normalizedElevation === "floating" &&
+            "bg-[var(--halo-surface-strong)] shadow-[var(--halo-shadow-ambient)] border border-[var(--halo-edge-bright)]",
+          normalizedElevation === "overlay" &&
+            "bg-[var(--halo-surface-strong)] shadow-[0_24px_64px_-12px_rgba(0,0,0,0.25)] dark:shadow-[0_24px_64px_-12px_rgba(0,0,0,0.7)] border border-[var(--halo-edge-bright)]",
+          // Neoskeuomorphic Inner Edge Rim (Layer 03 - non-clipping pseudo element)
+          normalizedElevation !== "inset" &&
+            "before:content-[''] before:absolute before:inset-0 before:pointer-events-none before:rounded-[inherit] before:shadow-[var(--halo-edge-inner)]",
+          // Directional Specular Highlight at 135° (Layer 04 - non-clipping pseudo element)
+          normalizedElevation !== "inset" &&
+            "after:content-[''] after:absolute after:inset-0 after:pointer-events-none after:rounded-[inherit] after:bg-gradient-to-br after:from-white/25 after:via-white/5 after:to-transparent dark:after:from-white/12 dark:after:via-transparent dark:after:to-transparent",
+          // Tactile press & interaction (Legacy compatibility)
           interactive && "halo-tactile-press cursor-pointer hover:border-[var(--halo-edge-bright)]",
-          // Ambient Glow (Layer 07)
+          // Ambient Glow (Legacy compatibility)
           glow && "ring-1 ring-white/30 dark:ring-white/15 shadow-[0_0_24px_rgba(255,255,255,0.15)] dark:shadow-[0_0_28px_rgba(255,255,255,0.06)]",
           className
         )}
         {...props}
       >
-        {/* Layer 08: Material Noise Texture */}
-        {noise && (
-          <span
-            className="absolute inset-0 pointer-events-none opacity-[var(--halo-noise-opacity)] mix-blend-overlay rounded-[inherit]"
-            style={{
-              backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
-            }}
-            aria-hidden="true"
-          />
-        )}
-
-        {/* Layer 05: Refraction Edge Rim catch */}
-        {refraction && (
-          <span
-            className="absolute top-0 left-0 right-0 h-[1px] pointer-events-none bg-gradient-to-r from-transparent via-white/40 dark:via-white/20 to-transparent"
-            aria-hidden="true"
-          />
-        )}
-
-        {/* Layer 09: Crisp Content */}
-        <div className="relative z-10 w-full h-full flex flex-col">{children}</div>
+        {children}
       </Comp>
     );
   }
