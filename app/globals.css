@@ -147,6 +147,116 @@ body:has([data-docs-shell]) [data-docs-skip] {
   scroll-margin-top: 5.5rem;
 }
 
+.haloui-mark {
+  display: block;
+  flex: none;
+  overflow: visible;
+  color: inherit;
+}
+
+.haloui-logo-symbol {
+  transform-box: view-box;
+  transform-origin: 50% 50%;
+}
+
+.haloui-logo-layer {
+  transform-box: fill-box;
+  transform-origin: 50% 50%;
+}
+
+.haloui-logo-layer-1 {
+  --haloui-logo-delay: 0ms;
+  --haloui-logo-x: 3px;
+  --haloui-logo-y: 4px;
+  --haloui-logo-rotation: -5deg;
+}
+
+.haloui-logo-layer-2 {
+  --haloui-logo-delay: 55ms;
+  --haloui-logo-x: -3px;
+  --haloui-logo-y: 3px;
+  --haloui-logo-rotation: -7deg;
+}
+
+.haloui-logo-layer-3 {
+  --haloui-logo-delay: 110ms;
+  --haloui-logo-x: -4px;
+  --haloui-logo-y: -2px;
+  --haloui-logo-rotation: 6deg;
+}
+
+.haloui-logo-layer-4 {
+  --haloui-logo-delay: 165ms;
+  --haloui-logo-x: 3px;
+  --haloui-logo-y: -3px;
+  --haloui-logo-rotation: 5deg;
+}
+
+.haloui-mark[data-motion="enter"] .haloui-logo-layer {
+  opacity: 0;
+  animation: haloui-logo-layer-enter 480ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation-delay: var(--haloui-logo-delay);
+}
+
+.haloui-mark[data-motion="enter"] .haloui-logo-symbol {
+  animation: haloui-logo-settle 720ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.haloui-mark[data-motion="loading"] .haloui-logo-layer {
+  animation: haloui-logo-layer-cycle 1900ms cubic-bezier(0.22, 1, 0.36, 1) infinite both;
+  animation-delay: var(--haloui-logo-delay);
+}
+
+.haloui-mark[data-motion="loading"] .haloui-logo-symbol {
+  animation: haloui-logo-hold 1900ms cubic-bezier(0.22, 1, 0.36, 1) infinite;
+}
+
+@keyframes haloui-logo-layer-enter {
+  from {
+    opacity: 0;
+    transform: translate(var(--haloui-logo-x), var(--haloui-logo-y)) rotate(var(--haloui-logo-rotation)) scale(0.86);
+  }
+  to {
+    opacity: 1;
+    transform: translate(0, 0) rotate(0) scale(1);
+  }
+}
+
+@keyframes haloui-logo-layer-cycle {
+  0%, 7% {
+    opacity: 0;
+    transform: translate(var(--haloui-logo-x), var(--haloui-logo-y)) rotate(var(--haloui-logo-rotation)) scale(0.86);
+  }
+  25%, 64% {
+    opacity: 1;
+    transform: translate(0, 0) rotate(0) scale(1);
+  }
+  82%, 100% {
+    opacity: 0;
+    transform: translate(var(--haloui-logo-x), var(--haloui-logo-y)) rotate(var(--haloui-logo-rotation)) scale(0.92);
+  }
+}
+
+@keyframes haloui-logo-settle {
+  0%, 68% { transform: scale(1); }
+  82% { transform: scale(1.015); }
+  100% { transform: scale(1); }
+}
+
+@keyframes haloui-logo-hold {
+  0%, 30%, 64%, 100% { transform: scale(1); }
+  47% { transform: scale(1.012); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .haloui-mark .haloui-logo-symbol,
+  .haloui-mark .haloui-logo-layer {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
 .code-block {
   --code-surface: color-mix(in oklch, var(--background) 96%, var(--foreground) 4%);
   --code-header: var(--background);
@@ -306,6 +416,13 @@ body:has([data-docs-shell]) [data-docs-skip] {
   background: linear-gradient(90deg, var(--code-gutter) 0 3.75rem, transparent 3.75rem) !important;
 }
 
+.code-line-numbers .line {
+  padding-inline-start: 4.65rem;
+  padding-inline-end: 1.25rem;
+  text-indent: -3.4rem;
+  box-sizing: border-box;
+}
+
 .code-line-numbers .line::before {
   counter-increment: code-line;
   content: counter(code-line);
@@ -315,15 +432,18 @@ body:has([data-docs-shell]) [data-docs-skip] {
   color: var(--code-faint);
   text-align: right;
   user-select: none;
+  white-space: nowrap;
 }
 
 [data-code-wrap="true"] .shiki,
 [data-code-wrap="true"] .shiki code,
+[data-code-wrap="true"] .shiki .line,
 [data-code-wrap="true"] pre,
 [data-code-wrap="true"] code {
   min-width: 0;
   white-space: pre-wrap !important;
   overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .code-highlight .shiki,
