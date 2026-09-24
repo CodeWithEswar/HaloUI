@@ -247,9 +247,28 @@ Run your development server to verify the output:
 
 ## What gets installed
 
-HaloUI follows a source-owned distribution model. When you install a component from the registry, the component source code, supporting optical primitives, required tokens, and dependencies are placed directly inside your project structure.
+The registry item declares the component source, required tokens, and dependencies. The shadcn CLI resolves those requirements and writes the resulting files directly into your project structure.
 
-<InstalledSourceDiagram />
+<ProcessSteps
+  steps={[
+    {
+      title: "Select component",
+      description: "Choose the component to add from the HaloUI registry."
+    },
+    {
+      title: "Resolve dependencies",
+      description: "The shadcn CLI resolves HaloUI primitives and package dependencies."
+    },
+    {
+      title: "Install source",
+      description: "Component source, Hugeicons wrapper, and tokens are written to your project."
+    },
+    {
+      title: "Import locally",
+      description: "Import, modify, and compose the generated component source."
+    }
+  ]}
+/>
 
 The generated component files become part of your application. You can inspect, modify, and version them with the rest of your source code. HaloUI does not hide component implementation behind a runtime UI package.
 

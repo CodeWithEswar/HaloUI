@@ -11,6 +11,13 @@ import { KeyboardTable } from "@/components/mdx/keyboard-table";
 import { FileTree } from "@/components/mdx/file-tree";
 import { InstallationButtonResult } from "@/components/mdx/installation-result";
 import { QuickStartButtonPreview, QuickStartVariantPreview } from "@/components/mdx/quick-start-preview";
+import { ProcessSteps } from "@/components/mdx/process-steps";
+import {
+  ProductArchitecture,
+  SourceOwnershipComparison,
+  MaterialAnatomy,
+  LifecycleSteps,
+} from "@/components/mdx/docs-visuals";
 import {
   ProductModelDiagram,
   RegistryFlowDiagram,
@@ -52,6 +59,11 @@ const components: MDXComponents = {
   InstallationButtonResult,
   QuickStartButtonPreview,
   QuickStartVariantPreview,
+  ProcessSteps,
+  ProductArchitecture,
+  SourceOwnershipComparison,
+  MaterialAnatomy,
+  LifecycleSteps,
   ProductModelDiagram,
   RegistryFlowDiagram,
   SourceOwnershipDiagram,

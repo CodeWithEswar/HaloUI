@@ -176,9 +176,28 @@ The same installation pattern applies across all HaloUI components. Browse the f
 
 ## What just happened?
 
-HaloUI uses source distribution rather than hiding component implementation behind a runtime UI package. When you install a component from the registry, its source code, dependencies, and required tokens are copied directly into your project.
+HaloUI uses source distribution rather than hiding component implementation behind a runtime UI package. When you install a component from the registry, its source code, dependencies, and required tokens are copied directly into your project:
 
-<RegistryFlowDiagram />
+<ProcessSteps
+  steps={[
+    {
+      title: "Installed",
+      description: "The CLI retrieved the component registry item."
+    },
+    {
+      title: "Resolved",
+      description: "Required package and token dependencies were added."
+    },
+    {
+      title: "Generated",
+      description: "Component source was written directly to your project."
+    },
+    {
+      title: "Owned",
+      description: "The source is now part of your application codebase."
+    }
+  ]}
+/>
 
 The generated component is now part of your source tree and can be inspected, versioned, and adapted with the rest of your application.
 

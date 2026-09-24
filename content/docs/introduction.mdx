@@ -28,7 +28,7 @@ HaloUI is both a component system and a source registry. It combines reusable Re
 
 HaloUI treats components, registry distribution, documentation, previews, and showcases as parts of the same unified product architecture.
 
-<ProductModelDiagram />
+<ProductArchitecture />
 
 ## Why HaloUI?
 
@@ -50,7 +50,26 @@ HaloUI is designed to connect those concerns. Components share the same material
 
 HaloUI follows a source-distribution workflow. A registry item describes the component source, required tokens, and dependencies needed to install it into an application.
 
-<RegistryFlowDiagram />
+<ProcessSteps
+  steps={[
+    {
+      title: "Registry item",
+      description: "Declares component source, tokens, and dependency manifest."
+    },
+    {
+      title: "Resolve",
+      description: "The shadcn CLI resolves required HaloUI primitives and packages."
+    },
+    {
+      title: "Install",
+      description: "Component source is written directly into your project structure."
+    },
+    {
+      title: "Own",
+      description: "Import, modify, and compose the generated source code."
+    }
+  ]}
+/>
 
 After installation, the generated files become part of your project. They can be inspected, modified, versioned, and composed like the rest of your application code.
 
@@ -64,7 +83,7 @@ HaloUI components are intended to become part of the application that installs t
 
 This model gives teams direct control over styling, behavior, composition, and future customization without requiring every product decision to be exposed through an increasingly large configuration API. In traditional packages, implementations remain hidden inside `node_modules`. With HaloUI, components live in your own source tree.
 
-<SourceOwnershipDiagram />
+<SourceOwnershipComparison />
 
 <Callout type="note">
   Install the source. Understand the component. Change it when your product requires it.
@@ -89,7 +108,7 @@ HaloUI does not treat glass as a single CSS effect. Its components are built fro
 
 Individual components use different combinations and intensities of these optical layers. Not every component requires every effect.
 
-<MaterialLayersDiagram />
+<MaterialAnatomy />
 
 ### Material intensity
 
@@ -159,7 +178,7 @@ Visual styling and motion must not replace semantic structure, keyboard behavior
 
 Installed source remains readable and adaptable inside the consuming application.
 
-<ComponentQualityDiagram />
+
 
 ## Design principles
 
@@ -191,7 +210,7 @@ Not every element should be glass, animated, elevated, or expressive. Neutral su
 
 Every component moves through a consistent product lifecycle: specification, implementation, states and accessibility verification, interactive previews, props and API reference, registry item generation, installation testing, documentation, and application showcase integration.
 
-<ComponentLifecycleDiagram />
+<LifecycleSteps />
 
 The component demonstrated in documentation and showcases is the exact implementation distributed through the registry.
 
