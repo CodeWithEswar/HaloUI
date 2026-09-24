@@ -89,9 +89,12 @@ export function InstallCommand({
     if (action === "create-vite") return selected.createVite();
     if (action === "dev") return selected.dev();
 
-    const target = registry.startsWith("http")
-      ? registry
-      : `https://haloui.dev/r/${registry}.json`;
+    const target =
+      registry.startsWith("http") || registry.startsWith("@")
+        ? registry
+        : registry.endsWith(".json")
+          ? `https://haloui.dev/r/${registry}`
+          : `https://haloui.dev/r/${registry}.json`;
     return selected.add(target);
   };
 
