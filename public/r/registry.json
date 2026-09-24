@@ -298,6 +298,70 @@
         "accessibility": "WCAG 2.1 AA (Decorative)",
         "lastUpdated": "2026-09-24"
       }
+    },
+    {
+      "name": "halo-glow",
+      "type": "registry:ui",
+      "title": "Halo Glow",
+      "description": "Ambient luminous layer used selectively for active state, emphasis, or focus-adjacent depth.",
+      "dependencies": [
+        "@radix-ui/react-slot",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "components/ui/halo-glow.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/halo-glow.tsx"
+        },
+        {
+          "path": "styles/halo-tokens.css",
+          "type": "registry:ui",
+          "target": "styles/halo-tokens.css"
+        }
+      ],
+      "categories": ["foundations"],
+      "meta": {
+        "status": "preview",
+        "version": "1.0.0",
+        "category": "foundations",
+        "accessibility": "WCAG 2.1 AA (Decorative)",
+        "lastUpdated": "2026-09-24"
+      }
+    },
+    {
+      "name": "glow",
+      "type": "registry:ui",
+      "title": "Halo Glow (Alias)",
+      "description": "Ambient luminous layer used selectively for active state, emphasis, or focus-adjacent depth.",
+      "dependencies": [
+        "@radix-ui/react-slot",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "components/ui/halo-glow.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/halo-glow.tsx"
+        },
+        {
+          "path": "styles/halo-tokens.css",
+          "type": "registry:ui",
+          "target": "styles/halo-tokens.css"
+        }
+      ],
+      "categories": ["foundations"],
+      "meta": {
+        "status": "preview",
+        "version": "1.0.0",
+        "category": "foundations",
+        "accessibility": "WCAG 2.1 AA (Decorative)",
+        "lastUpdated": "2026-09-24"
+      }
     }
   ]
 }

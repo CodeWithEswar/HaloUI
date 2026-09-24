@@ -52,6 +52,13 @@ export const docsNavigation: DocsNavSection[] = [
         status: "preview",
         keywords: ["noise", "grain", "texture", "banding", "dither", "tactile"],
       },
+      {
+        title: "Halo Glow",
+        href: "/components/halo-glow",
+        description: "Ambient luminous layer for emphasis, active state, or focus-adjacent depth.",
+        status: "preview",
+        keywords: ["glow", "ambient", "emphasis", "active", "luminous", "aura"],
+      },
       { title: "Accessibility", href: "/docs/accessibility", description: "Keyboard, contrast, semantics, and reduced motion." },
     ],
   },

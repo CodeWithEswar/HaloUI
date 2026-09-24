@@ -320,6 +320,58 @@ export async function GET(
       return NextResponse.json(registryItem);
     }
 
+    if (cleanName === "glow" || cleanName === "halo-glow") {
+      const glowPath = path.join(cwd, "components", "haloui", "foundations", "halo-glow.tsx");
+      const tokensPath = path.join(cwd, "styles", "halo-tokens.css");
+
+      const [glowContent, tokensContent] = await Promise.all([
+        fs.readFile(glowPath, "utf-8"),
+        fs.readFile(tokensPath, "utf-8"),
+      ]);
+
+      const registryItem = {
+        $schema: "https://ui.shadcn.com/schema/registry-item.json",
+        name: "halo-glow",
+        type: "registry:ui",
+        title: "Halo Glow",
+        description:
+          "Ambient luminous layer used selectively for active state, emphasis, or focus-adjacent depth.",
+        dependencies: ["@radix-ui/react-slot", "clsx", "tailwind-merge"],
+        registryDependencies: [],
+        files: [
+          {
+            path: "components/ui/halo-glow.tsx",
+            content: glowContent,
+            type: "registry:ui",
+            target: "components/ui/halo-glow.tsx",
+          },
+          {
+            path: "styles/halo-tokens.css",
+            content: tokensContent,
+            type: "registry:ui",
+            target: "styles/halo-tokens.css",
+          },
+        ],
+        cssVars: {
+          light: {
+            "--halo-glow": "rgba(0, 0, 0, 0.04)",
+          },
+          dark: {
+            "--halo-glow": "rgba(255, 255, 255, 0.04)",
+          },
+        },
+        meta: {
+          status: "preview",
+          version: "1.0.0",
+          category: "foundations",
+          accessibility: "WCAG 2.1 AA (Decorative)",
+          lastUpdated: "2026-09-24",
+        },
+      };
+
+      return NextResponse.json(registryItem);
+    }
+
     // Fallback: check public/r/[cleanName].json
     const staticFilePath = path.join(cwd, "public", "r", `${cleanName}.json`);
     const fileContent = await fs.readFile(staticFilePath, "utf-8");

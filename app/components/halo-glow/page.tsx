@@ -8,18 +8,18 @@ import {
   AlertCircleIcon,
   SecurityCheckIcon,
   ArrowRight01Icon,
-  ViewIcon,
 } from "@hugeicons/core-free-icons";
 import { HaloIcon } from "@/components/icons/halo-icon";
 import {
-  HaloNoise,
-  type HaloNoiseStrength,
-  type HaloNoiseBlendMode,
-} from "@/components/haloui/foundations/halo-noise";
+  HaloGlow,
+  type HaloGlowVariant,
+  type HaloGlowStrength,
+  type HaloGlowColor,
+} from "@/components/haloui/foundations/halo-glow";
 import { HaloSurface } from "@/components/haloui/foundations/halo-surface";
 import { HaloEdge } from "@/components/haloui/foundations/halo-edge";
 import { HaloHighlight } from "@/components/haloui/foundations/halo-highlight";
-import { NoisePreviewStage } from "./noise-preview-stage";
+import { GlowPreviewStage } from "./glow-preview-stage";
 import { Badge } from "@/components/ui/badge";
 import { InstallCommand } from "@/components/mdx/install-command";
 import { Anatomy } from "@/components/mdx/anatomy";
@@ -29,27 +29,35 @@ import { CodeBlock } from "@/components/mdx/code-block";
 import { DependencyList } from "@/components/mdx/dependency-list";
 
 export const metadata: Metadata = {
-  title: "Halo Noise — Micro-Texture & Anti-Banding Grain Layer",
+  title: "Halo Glow — Ambient Luminous Emphasis & Active State Depth",
   description:
-    "Subtle material grain and high-frequency procedural texture used to reduce sterile gradient banding and impart physical tooth to HaloUI liquid glass surfaces.",
+    "Ambient luminous layer used selectively for emphasis, active states, and focus-adjacent depth. Radiates outside the host container perimeter without clipping.",
 };
 
 const PROPS_DATA = [
+  {
+    name: "variant",
+    type: '"ambient" | "emphasis" | "active"',
+    default: '"ambient"',
+    required: false,
+    description:
+      "Diffusion profile and semantic role: soft ambient aura, focused emphasis, or high-energy active state.",
+  },
   {
     name: "strength",
     type: '"subtle" | "balanced" | "strong"',
     default: '"balanced"',
     required: false,
     description:
-      "Controls grain density and opacity (subtle: ~2.5%, balanced: ~4%, strong: ~7%).",
+      "Controls the luminance intensity of the emitted light (subtle: 50%, balanced: 100%, strong: 150%).",
   },
   {
-    name: "blendMode",
-    type: '"overlay" | "soft-light" | "screen" | "multiply"',
-    default: '"overlay"',
+    name: "color",
+    type: '"neutral" | "primary" | "accent"',
+    default: '"neutral"',
     required: false,
     description:
-      "CSS mix-blend-mode applied to dynamically integrate the grain texture with underlying blurs and tints.",
+      "Chromatic palette: monochromatic neutral, calibrated primary indigo/violet, or warm amber accent.",
   },
   {
     name: "asChild",
@@ -65,28 +73,28 @@ const PROPS_DATA = [
     default: "undefined",
     required: false,
     description:
-      "Standard Tailwind or custom CSS class string for opacity overrides or custom positioning adjustments.",
+      "Standard Tailwind or custom CSS class string for fine-grained blur or expansion overrides.",
   },
 ];
 
 const ANATOMY_PARTS = [
   {
-    name: "Fractal Turbulence Tile",
-    selector: "background-image: url('data:image/svg+xml,...')",
+    name: "Luminous Radiation Envelope",
+    selector: "-inset-3 / -inset-4 blur-2xl",
     description:
-      "Lightweight procedural SVG fractal noise tile repeating seamlessly with zero external asset requests or raster bloat.",
+      "Negative inset expansion projecting diffuse photons beyond host geometric bounds without requiring parent overflow clearance.",
   },
   {
-    name: "Optical Composite Blender",
-    selector: "mix-blend-overlay / mix-blend-soft-light",
+    name: "Chromatic Diffusion Gradient",
+    selector: "bg-[radial-gradient(...)]",
     description:
-      "Blends high-frequency luminance noise into translucent glass gradients, dispersing 8-bit color quantization steps.",
+      "Soft-falloff luminance gradient engineered to simulate natural optical scattering through liquid translucent media.",
   },
   {
-    name: "Content Isolation Plane",
-    selector: "pointer-events-none absolute inset-0 select-none",
+    name: "Non-Clipping Substrate Plane",
+    selector: "pointer-events-none absolute select-none rounded-[inherit]",
     description:
-      "Zero-footprint optical overlay sitting below consumer text while remaining above blurred backdrop and base tint.",
+      "Positioned strictly behind the host surface body to ensure zero contrast penalty on interior interactive content.",
   },
 ];
 
@@ -100,7 +108,7 @@ const INSTALLED_FILES = [
         type: "folder" as const,
         children: [
           {
-            name: "halo-noise.tsx",
+            name: "halo-glow.tsx",
             type: "file" as const,
           },
         ],
@@ -130,22 +138,22 @@ const DEPENDENCY_GROUPS = [
   },
 ];
 
-export default function HaloNoiseDocsPage() {
+export default function HaloGlowDocsPage() {
   return (
     <div className="space-y-16 pb-24 max-w-5xl">
-      {/* 1. Header */}
+      {/* 1. Component Identity & Header */}
       <section className="space-y-4">
         <h1 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
-          Halo Noise
+          Halo Glow
         </h1>
 
         <p className="text-lg text-muted-foreground leading-relaxed max-w-3xl">
-          Subtle material grain and high-frequency procedural texture used to eliminate digital
-          gradient banding and bestow authentic physical tooth upon translucent liquid glass bodies.
+          Ambient luminous layer used selectively for active state, emphasis, or focus-adjacent depth.
+          Diffuses outside the host container&apos;s perimeter without clipping or compromising text contrast.
         </p>
       </section>
 
-      {/* 2. Interactive Preview Stage */}
+      {/* 2. Interactive Live Preview Stage */}
       <section className="space-y-4">
         <div className="flex items-center justify-between">
           <h2 className="text-xl font-semibold tracking-tight text-foreground flex items-center gap-2">
@@ -153,10 +161,10 @@ export default function HaloNoiseDocsPage() {
             Live Preview Stage
           </h2>
           <span className="text-xs text-muted-foreground">
-            Interactive backdrop, zoom loupe & strength switcher
+            Interactive backdrop, variant, color, and hover simulation
           </span>
         </div>
-        <NoisePreviewStage />
+        <GlowPreviewStage />
       </section>
 
       {/* 3. Quick Installation */}
@@ -165,10 +173,10 @@ export default function HaloNoiseDocsPage() {
           Installation
         </h2>
         <p className="text-sm text-muted-foreground">
-          Distribute Halo Noise directly into your repository through the shadcn registry specification.
+          Distribute Halo Glow directly into your repository through the shadcn registry specification.
         </p>
 
-        <InstallCommand registry="halo-noise" />
+        <InstallCommand registry="halo-glow" />
       </section>
 
       {/* 4. Anatomy */}
@@ -177,7 +185,7 @@ export default function HaloNoiseDocsPage() {
           Anatomy
         </h2>
         <p className="text-sm text-muted-foreground">
-          Halo Noise consists of a procedural SVG micro-texture tile composite combined through hardware-accelerated mix-blend math.
+          Halo Glow operates outside standard container bounds by projecting negative insets with radial photonic falloff.
         </p>
         <Anatomy parts={ANATOMY_PARTS} />
       </section>
@@ -193,25 +201,25 @@ export default function HaloNoiseDocsPage() {
           <div className="p-6 rounded-2xl border border-emerald-500/20 bg-emerald-500/[0.03] space-y-4">
             <div className="flex items-center gap-2 text-emerald-600 dark:text-emerald-400 font-medium text-sm">
               <HaloIcon icon={CheckmarkCircle01Icon} size={18} />
-              When to use Halo Noise
+              When to use Halo Glow
             </div>
             <ul className="space-y-2.5 text-xs text-muted-foreground leading-relaxed">
               <li className="flex items-start gap-2">
                 <span className="text-emerald-500 font-bold">•</span>
                 <span>
-                  <strong>Broad Translucent Surfaces:</strong> Panels, dialogs, drawers, and modal backdrops spanning more than 300px where 8-bit color banding becomes visually distracting.
+                  <strong>Active State & Selection:</strong> Highlight active navigation items, selected cards, or toggled controls with responsive radiance.
                 </span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-emerald-500 font-bold">•</span>
                 <span>
-                  <strong>Deep Dark-Mode Voids:</strong> High dynamic-range dark mode backgrounds where low-luminance steps create stark concentric rings without micro-dither.
+                  <strong>Featured Focal Points:</strong> Elevated pricing tiers, primary CTA surfaces, or hero modals requiring distinct spatial prominence.
                 </span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-emerald-500 font-bold">•</span>
                 <span>
-                  <strong>Physical Tactility:</strong> Interfaces that emulate frosted glass, optical lenses, or physical studio acrylic materials.
+                  <strong>Deep Ambient Floating:</strong> Elevating floating docks or dialog backdrops over dense content fields.
                 </span>
               </li>
             </ul>
@@ -221,25 +229,25 @@ export default function HaloNoiseDocsPage() {
           <div className="p-6 rounded-2xl border border-rose-500/20 bg-rose-500/[0.03] space-y-4">
             <div className="flex items-center gap-2 text-rose-600 dark:text-rose-400 font-medium text-sm">
               <HaloIcon icon={AlertCircleIcon} size={18} />
-              When NOT to use Halo Noise
+              When NOT to use Halo Glow
             </div>
             <ul className="space-y-2.5 text-xs text-muted-foreground leading-relaxed">
               <li className="flex items-start gap-2">
                 <span className="text-rose-500 font-bold">•</span>
                 <span>
-                  <strong>Dense Numerical Data:</strong> Data tables, financial charts, and code editors where texture interferes with micro-typography scanability.
+                  <strong>Not a Default Layer:</strong> Never apply glow universally to every card or surface; indiscriminate glow causes visual fatigue and flattens hierarchy.
                 </span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-rose-500 font-bold">•</span>
                 <span>
-                  <strong>Tiny Action Elements:</strong> Badges, status pills, or 24px icon chips where grain appears as display dirt rather than material tooth.
+                  <strong>Not a Replacement for Focus Rings:</strong> Keyboard focus MUST use a sharp, high-contrast focus ring. Glow provides secondary ambient depth only.
                 </span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-rose-500 font-bold">•</span>
                 <span>
-                  <strong>High-Opacity Flat Cards:</strong> Surfaces with 100% opaque solid background fills that do not exhibit gradient or refraction banding.
+                  <strong>Not a Substitute for Shadows:</strong> Shadows convey light occlusion; glow conveys light emission. Do not substitute one for the other.
                 </span>
               </li>
             </ul>
@@ -247,97 +255,86 @@ export default function HaloNoiseDocsPage() {
         </div>
       </section>
 
-      {/* 6. Sterile Banding vs Procedural Micro-Dither Comparison */}
+      {/* 6. Glow vs Shadow vs Focus Ring */}
       <section className="space-y-6">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">
-          Banding Mitigation & Optical Science
+          Optical Separation: Glow vs. Shadow vs. Focus
         </h2>
 
-        <p className="text-sm text-muted-foreground leading-relaxed">
-          Digital monitors render gradients across 256 discrete luminance levels (8 bits per channel). On wide glass surfaces, adjacent luminance steps produce visible hard lines known as <em>quantisation banding</em>. Halo Noise introduces high-frequency procedural dither to seamlessly bridge luminance gaps.
-        </p>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* Card A: Without Noise */}
-          <div className="rounded-2xl border border-black/10 dark:border-white/10 p-6 bg-stone-900/60 text-white space-y-4 relative overflow-hidden">
-            <div className="flex items-center justify-between">
-              <span className="text-xs font-mono text-stone-400">Standard Gradient</span>
-              <Badge variant="outline" className="text-[10px] border-rose-500/30 text-rose-400">
-                Without Halo Noise
-              </Badge>
-            </div>
-
-            <div className="h-44 rounded-xl bg-gradient-to-br from-indigo-950/90 via-slate-900 to-black p-4 flex flex-col justify-end border border-white/5 relative">
-              <div className="space-y-1">
-                <p className="text-xs font-semibold text-white/90">Sterile Synthetic Fill</p>
-                <p className="text-[11px] text-white/50 leading-relaxed">
-                  Stepping artifacts and sterile digital sheen across low-contrast gradients.
-                </p>
-              </div>
-            </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="p-5 rounded-2xl border border-black/10 dark:border-white/10 bg-black/[0.01] dark:bg-white/[0.015] space-y-2">
+            <span className="font-semibold text-xs text-foreground uppercase tracking-wider font-mono">
+              1. Ambient Glow
+            </span>
+            <p className="text-xs text-muted-foreground leading-relaxed">
+              <strong>Light Emission:</strong> Radiates positive photons outward. Conveys luminous energy, active status, and primary focal elevation.
+            </p>
           </div>
 
-          {/* Card B: With Halo Noise */}
-          <div className="rounded-2xl border border-black/10 dark:border-white/10 p-6 bg-stone-900/60 text-white space-y-4 relative overflow-hidden">
-            <div className="flex items-center justify-between">
-              <span className="text-xs font-mono text-stone-400">Physical Liquid Material</span>
-              <Badge variant="outline" className="text-[10px] border-emerald-500/30 text-emerald-400">
-                With Halo Noise
-              </Badge>
-            </div>
+          <div className="p-5 rounded-2xl border border-black/10 dark:border-white/10 bg-black/[0.01] dark:bg-white/[0.015] space-y-2">
+            <span className="font-semibold text-xs text-foreground uppercase tracking-wider font-mono">
+              2. Contact Shadow
+            </span>
+            <p className="text-xs text-muted-foreground leading-relaxed">
+              <strong>Light Occlusion:</strong> Casts downward darkness. Conveys physical altitude, grounding the element onto the underlying canvas.
+            </p>
+          </div>
 
-            <div className="h-44 rounded-xl bg-gradient-to-br from-indigo-950/90 via-slate-900 to-black p-4 flex flex-col justify-end border border-white/10 relative overflow-hidden">
-              <HaloNoise strength="balanced" />
-              <div className="relative z-10 space-y-1">
-                <p className="text-xs font-semibold text-white">Continuous Material Grain</p>
-                <p className="text-[11px] text-white/70 leading-relaxed">
-                  Fractal dither breaks quantized luminance borders into organic micro-texture.
-                </p>
-              </div>
-            </div>
+          <div className="p-5 rounded-2xl border border-black/10 dark:border-white/10 bg-black/[0.01] dark:bg-white/[0.015] space-y-2">
+            <span className="font-semibold text-xs text-foreground uppercase tracking-wider font-mono">
+              3. Focus Ring
+            </span>
+            <p className="text-xs text-muted-foreground leading-relaxed">
+              <strong>Accessibility Invariant:</strong> Sharp 2px high-contrast perimeter ring with 3:1 contrast ratio against both component and background.
+            </p>
           </div>
         </div>
       </section>
 
-      {/* 7. Code Example & Composition */}
+      {/* 7. Code Example & Non-Clipping Composition */}
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground">
-          Composition in the 10-Layer Optical Stack
+          Non-Clipping Outer Composition
         </h2>
         <p className="text-sm text-muted-foreground leading-relaxed">
-          Halo Noise is positioned directly between directional specular light and the optical edge boundary to preserve razor-sharp edge contrast.
+          Because liquid surfaces often have <code className="font-mono text-xs">overflow-hidden</code> to clip interior blur layers, <code className="font-mono text-xs">HaloGlow</code> must sit as a sibling directly behind the surface, or within a non-clipping wrapper.
         </p>
 
         <CodeBlock
           language="tsx"
-          filename="material-surface.tsx"
+          filename="active-card.tsx"
           code={`import { HaloSurface } from "@/components/ui/halo-surface";
 import { HaloHighlight } from "@/components/ui/halo-highlight";
-import { HaloNoise } from "@/components/ui/halo-noise";
 import { HaloEdge } from "@/components/ui/halo-edge";
+import { HaloGlow } from "@/components/ui/halo-glow";
 
-export function PremiumFrostedCard() {
+export function ActiveFeaturedCard({ isSelected }: { isSelected: boolean }) {
   return (
-    <HaloSurface
-      elevation="floating"
-      intensity="balanced"
-      className="relative p-6 rounded-2xl overflow-hidden"
-    >
-      {/* 1. Virtual Light Sheen */}
-      <HaloHighlight kind="broad" strength="balanced" />
+    <div className="relative">
+      {/* 1. Luminous Ambient Glow (outside host overflow boundary) */}
+      {isSelected && (
+        <HaloGlow
+          variant="active"
+          strength="balanced"
+          color="primary"
+        />
+      )}
 
-      {/* 2. Micro-Texture Grain (Anti-Banding) */}
-      <HaloNoise strength="balanced" blendMode="overlay" />
+      {/* 2. Primary Material Surface */}
+      <HaloSurface
+        elevation="floating"
+        intensity="balanced"
+        className="relative p-6 rounded-2xl overflow-hidden"
+      >
+        <HaloHighlight kind="broad" strength="balanced" />
+        <HaloEdge strength="balanced" placement="both" />
 
-      {/* 3. Refractive Perimeter Edge */}
-      <HaloEdge strength="balanced" placement="both" />
-
-      {/* 4. Isolated Consumer Content */}
-      <div className="relative z-10">
-        <h3 className="font-semibold text-foreground">Tactile Surface Body</h3>
-        <p className="text-sm text-muted-foreground">Clean typography over dithered liquid material.</p>
-      </div>
-    </HaloSurface>
+        <div className="relative z-10">
+          <h3 className="font-semibold text-foreground">Featured Architecture</h3>
+          <p className="text-sm text-muted-foreground">Active selection radiating chromatic liquid light.</p>
+        </div>
+      </HaloSurface>
+    </div>
   );
 }`}
         />
@@ -347,28 +344,28 @@ export function PremiumFrostedCard() {
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight text-foreground flex items-center gap-2">
           <HaloIcon icon={SecurityCheckIcon} size={20} className="text-emerald-500" />
-          Accessibility & Performance Contract
+          Accessibility & Quality Contract
         </h2>
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <div className="p-4 rounded-xl border border-black/10 dark:border-white/10 bg-black/[0.01] dark:bg-white/[0.015] space-y-1.5">
-            <span className="font-semibold text-xs text-foreground">Zero Contrast Interference</span>
+            <span className="font-semibold text-xs text-foreground">Focus Visibility Guaranteed</span>
             <p className="text-xs text-muted-foreground leading-relaxed">
-              Sub-7% calibrated luminance ensures text contrast meets strict WCAG 2.1 AA 4.5:1 ratios.
+              Halo Glow is positioned beneath focus indicators. Standard WCAG 2.1 AA focus rings remain 100% visible.
             </p>
           </div>
 
           <div className="p-4 rounded-xl border border-black/10 dark:border-white/10 bg-black/[0.01] dark:bg-white/[0.015] space-y-1.5">
-            <span className="font-semibold text-xs text-foreground">Pointer Events Invariant</span>
+            <span className="font-semibold text-xs text-foreground">Reduced Motion Inert</span>
             <p className="text-xs text-muted-foreground leading-relaxed">
-              Hardcoded with <code className="font-mono text-[11px]">pointer-events-none</code>, never blocking cursor clicks or selections.
+              Static optical radiance without frantic strobing, pulsating, or distracting kinetic transitions.
             </p>
           </div>
 
           <div className="p-4 rounded-xl border border-black/10 dark:border-white/10 bg-black/[0.01] dark:bg-white/[0.015] space-y-1.5">
-            <span className="font-semibold text-xs text-foreground">Screen Reader Neutral</span>
+            <span className="font-semibold text-xs text-foreground">Screen Reader Opaque</span>
             <p className="text-xs text-muted-foreground leading-relaxed">
-              Enforced with <code className="font-mono text-[11px]">aria-hidden=&quot;true&quot;</code> to prevent accessibility tree pollution.
+              Enforced with <code className="font-mono text-[11px]">aria-hidden=&quot;true&quot;</code> and <code className="font-mono text-[11px]">pointer-events-none</code>.
             </p>
           </div>
         </div>
@@ -398,25 +395,25 @@ export function PremiumFrostedCard() {
         <FileTree items={INSTALLED_FILES} />
       </section>
 
-      {/* 12. Next Steps / Related Foundations */}
+      {/* 12. Related Foundations */}
       <section className="border-t border-black/10 dark:border-white/10 pt-8 flex items-center justify-between">
         <div>
           <span className="text-xs text-muted-foreground">Previous Foundation</span>
           <Link
-            href="/components/halo-highlight"
+            href="/components/halo-noise"
             className="flex items-center gap-1.5 text-sm font-medium text-foreground hover:underline"
           >
-            ← Halo Highlight
+            ← Halo Noise
           </Link>
         </div>
 
         <div className="text-right">
-          <span className="text-xs text-muted-foreground">Next Foundation</span>
+          <span className="text-xs text-muted-foreground">Next Component</span>
           <Link
-            href="/components/halo-glow"
+            href="/components/button"
             className="flex items-center gap-1.5 text-sm font-medium text-foreground hover:underline"
           >
-            Halo Glow →
+            Halo Button →
           </Link>
         </div>
       </section>

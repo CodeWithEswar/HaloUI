@@ -20,6 +20,7 @@ import { HaloSurface } from "@/components/haloui/foundations/halo-surface";
 import { HaloEdge } from "@/components/haloui/foundations/halo-edge";
 import { HaloHighlight } from "@/components/haloui/foundations/halo-highlight";
 import { HaloNoise } from "@/components/haloui/foundations/halo-noise";
+import { HaloGlow } from "@/components/haloui/foundations/halo-glow";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
@@ -31,7 +32,7 @@ interface CatalogItem {
   category: "Actions" | "Foundations" | "Forms" | "Navigation" | "Overlays" | "Data Display" | "Layout";
   description: string;
   status: "stable" | "preview" | "in-progress" | "planned";
-  previewType: "button" | "surface" | "edge" | "highlight" | "noise" | "switch" | "input" | "dock";
+  previewType: "button" | "surface" | "edge" | "highlight" | "noise" | "glow" | "switch" | "input" | "dock";
 }
 
 const CATALOG_ITEMS: CatalogItem[] = [
@@ -79,6 +80,15 @@ const CATALOG_ITEMS: CatalogItem[] = [
     description: "Subtle material grain and high-frequency procedural texture reducing gradient banding.",
     status: "preview" as const,
     previewType: "noise",
+  },
+  {
+    id: "glow",
+    name: "Halo Glow",
+    slug: "/components/halo-glow",
+    category: "Foundations",
+    description: "Ambient luminous layer for emphasis, active state, or focus-adjacent depth.",
+    status: "preview" as const,
+    previewType: "glow",
   },
   {
     id: "icon-button",
@@ -321,6 +331,15 @@ export function CatalogClient() {
                       <HaloNoise strength="strong" />
                       <span className="text-xs font-mono font-medium">Fractal Micro-Dither</span>
                     </HaloSurface>
+                  )}
+
+                  {item.previewType === "glow" && (
+                    <div className="relative">
+                      <HaloGlow variant="emphasis" strength="strong" color="primary" />
+                      <HaloSurface elevation="raised" className="relative p-4 rounded-xl text-center overflow-hidden">
+                        <span className="text-xs font-mono font-medium">Ambient Radiation</span>
+                      </HaloSurface>
+                    </div>
                   )}
 
                   {item.previewType === "switch" && (

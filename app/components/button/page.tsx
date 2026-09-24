@@ -117,21 +117,6 @@ export default function ButtonPage() {
     <div className="w-full space-y-12 sm:space-y-16 py-4 sm:py-6 lg:py-8">
       {/* 1. Component Identity & Editorial Header */}
       <section className="space-y-4">
-        <div className="flex flex-wrap items-center gap-3">
-          <Badge variant="outline" className="font-mono text-xs border-black/10 dark:border-white/10 uppercase tracking-widest">
-            Actions / Foundation
-          </Badge>
-          <span className="text-stone-300 dark:text-stone-700">/</span>
-          <span className="text-xs font-mono text-stone-500">v1.0.0</span>
-          <span className="text-stone-300 dark:text-stone-700">/</span>
-          <span className="inline-flex items-center gap-1.5 text-xs text-stone-900 dark:text-white font-mono">
-            <span className="w-1.5 h-1.5 rounded-full bg-stone-900 dark:bg-white animate-pulse" />
-            Stable
-          </span>
-          <span className="text-stone-300 dark:text-stone-700">/</span>
-          <span className="text-xs font-mono text-stone-500">WCAG 2.1 AA</span>
-        </div>
-
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
           <div className="space-y-2 max-w-3xl">
             <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-stone-950 dark:text-white">

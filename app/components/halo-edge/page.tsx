@@ -195,24 +195,6 @@ export default function GlassCard() {
     <div className="w-full space-y-12 sm:space-y-16 py-4 sm:py-6 lg:py-8">
       {/* 1. Component Identity & Header */}
       <section className="space-y-4">
-        <div className="flex flex-wrap items-center gap-3">
-          <Badge
-            variant="outline"
-            className="font-mono text-xs border-border uppercase tracking-widest"
-          >
-            Foundations & Material
-          </Badge>
-          <span className="text-muted-foreground/40">/</span>
-          <span className="text-xs font-mono text-muted-foreground">Foundation 02</span>
-          <span className="text-muted-foreground/40">/</span>
-          <span className="inline-flex items-center gap-1.5 text-xs text-foreground font-mono">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-            Preview
-          </span>
-          <span className="text-muted-foreground/40">/</span>
-          <span className="text-xs font-mono text-muted-foreground">WCAG 2.1 AA (Decorative)</span>
-        </div>
-
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
           <div className="space-y-2 max-w-3xl">
             <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-foreground">
