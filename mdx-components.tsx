@@ -30,6 +30,19 @@ import {
 import { Prerequisites } from "@/components/mdx/prerequisites";
 import { PropsTable } from "@/components/mdx/props-table";
 import { Steps } from "@/components/mdx/steps";
+import { MaterialLab } from "@/components/docs/material/material-lab";
+import { MaterialAnatomyVisual } from "@/components/docs/material/material-anatomy-visual";
+import {
+  SurfaceSeparationComparison,
+  EdgeComparison,
+  DiffusionComparison,
+  RefractionComparison,
+  ElevationScaleVisual,
+  VirtualLightPreview,
+  ThemeMaterialComparison,
+  ComponentMaterialShowcase,
+} from "@/components/docs/material/material-demonstrations";
+import { MaterialTokenTable } from "@/components/docs/material/material-token-table";
 
 const components: MDXComponents = {
   h1: (props) => <MdxHeading level={1} {...props} />,
@@ -71,6 +84,17 @@ const components: MDXComponents = {
   ComponentQualityDiagram,
   ComponentLifecycleDiagram,
   InstalledSourceDiagram,
+  MaterialLab,
+  MaterialAnatomyVisual,
+  SurfaceSeparationComparison,
+  EdgeComparison,
+  DiffusionComparison,
+  RefractionComparison,
+  ElevationScaleVisual,
+  VirtualLightPreview,
+  ThemeMaterialComparison,
+  ComponentMaterialShowcase,
+  MaterialTokenTable,
 };
 
 export function useMDXComponents(): MDXComponents {
