@@ -106,6 +106,70 @@
         "accessibility": "WCAG 2.1 AA",
         "lastUpdated": "2026-09-24"
       }
+    },
+    {
+      "name": "halo-edge",
+      "type": "registry:ui",
+      "title": "Halo Edge",
+      "description": "Layered outer and inset optical boundary treatment for translucent HaloUI materials.",
+      "dependencies": [
+        "@radix-ui/react-slot",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "components/ui/halo-edge.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/halo-edge.tsx"
+        },
+        {
+          "path": "styles/halo-tokens.css",
+          "type": "registry:ui",
+          "target": "styles/halo-tokens.css"
+        }
+      ],
+      "categories": ["foundations"],
+      "meta": {
+        "status": "preview",
+        "version": "1.0.0",
+        "category": "foundations",
+        "accessibility": "WCAG 2.1 AA (Decorative)",
+        "lastUpdated": "2026-09-24"
+      }
+    },
+    {
+      "name": "edge",
+      "type": "registry:ui",
+      "title": "Halo Edge (Alias)",
+      "description": "Layered outer and inset optical boundary treatment for translucent HaloUI materials.",
+      "dependencies": [
+        "@radix-ui/react-slot",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "components/ui/halo-edge.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/halo-edge.tsx"
+        },
+        {
+          "path": "styles/halo-tokens.css",
+          "type": "registry:ui",
+          "target": "styles/halo-tokens.css"
+        }
+      ],
+      "categories": ["foundations"],
+      "meta": {
+        "status": "preview",
+        "version": "1.0.0",
+        "category": "foundations",
+        "accessibility": "WCAG 2.1 AA (Decorative)",
+        "lastUpdated": "2026-09-24"
+      }
     }
   ]
 }

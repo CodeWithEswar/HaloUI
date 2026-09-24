@@ -150,6 +150,68 @@ export async function GET(
       return NextResponse.json(registryItem);
     }
 
+    if (cleanName === "edge" || cleanName === "halo-edge") {
+      const edgePath = path.join(cwd, "components", "haloui", "foundations", "halo-edge.tsx");
+      const tokensPath = path.join(cwd, "styles", "halo-tokens.css");
+
+      const [edgeContent, tokensContent] = await Promise.all([
+        fs.readFile(edgePath, "utf-8"),
+        fs.readFile(tokensPath, "utf-8"),
+      ]);
+
+      const registryItem = {
+        $schema: "https://ui.shadcn.com/schema/registry-item.json",
+        name: "halo-edge",
+        type: "registry:ui",
+        title: "Halo Edge",
+        description:
+          "Layered outer and inset optical boundary treatment for translucent HaloUI materials.",
+        dependencies: ["@radix-ui/react-slot", "clsx", "tailwind-merge"],
+        registryDependencies: [],
+        files: [
+          {
+            path: "components/ui/halo-edge.tsx",
+            content: edgeContent,
+            type: "registry:ui",
+            target: "components/ui/halo-edge.tsx",
+          },
+          {
+            path: "styles/halo-tokens.css",
+            content: tokensContent,
+            type: "registry:ui",
+            target: "styles/halo-tokens.css",
+          },
+        ],
+        cssVars: {
+          light: {
+            "--halo-edge": "rgba(255, 255, 255, 0.9)",
+            "--halo-edge-soft": "rgba(0, 0, 0, 0.08)",
+            "--halo-edge-bright": "rgba(255, 255, 255, 1)",
+            "--halo-edge-inner":
+              "inset 0 1px 1px 0 rgba(255, 255, 255, 0.9), inset 0 -1px 1px 0 rgba(0, 0, 0, 0.04)",
+            "--halo-edge-outer": "0 0 0 1px rgba(0, 0, 0, 0.06)",
+          },
+          dark: {
+            "--halo-edge": "rgba(255, 255, 255, 0.14)",
+            "--halo-edge-soft": "rgba(255, 255, 255, 0.06)",
+            "--halo-edge-bright": "rgba(255, 255, 255, 0.28)",
+            "--halo-edge-inner":
+              "inset 0 1px 1px 0 rgba(255, 255, 255, 0.2), inset 0 -1px 1px 0 rgba(0, 0, 0, 0.6)",
+            "--halo-edge-outer": "0 0 0 1px rgba(255, 255, 255, 0.08)",
+          },
+        },
+        meta: {
+          status: "preview",
+          version: "1.0.0",
+          category: "foundations",
+          accessibility: "WCAG 2.1 AA (Decorative)",
+          lastUpdated: "2026-09-24",
+        },
+      };
+
+      return NextResponse.json(registryItem);
+    }
+
     // Fallback: check public/r/[cleanName].json
     const staticFilePath = path.join(cwd, "public", "r", `${cleanName}.json`);
     const fileContent = await fs.readFile(staticFilePath, "utf-8");

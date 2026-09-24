@@ -31,6 +31,13 @@ export const docsNavigation: DocsNavSection[] = [
         status: "preview",
         keywords: ["surface", "material", "substrate", "container", "glass"],
       },
+      {
+        title: "Halo Edge",
+        href: "/components/halo-edge",
+        description: "Layered outer and inset optical boundary treatment for translucent materials.",
+        status: "preview",
+        keywords: ["edge", "boundary", "hairline", "specular", "thickness"],
+      },
       { title: "Accessibility", href: "/docs/accessibility", description: "Keyboard, contrast, semantics, and reduced motion." },
     ],
   },

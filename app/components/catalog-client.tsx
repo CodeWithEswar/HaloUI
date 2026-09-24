@@ -17,6 +17,7 @@ import {
 import { HaloIcon } from "@/components/icons/halo-icon";
 import { HaloButton } from "@/components/haloui/button/halo-button";
 import { HaloSurface } from "@/components/haloui/foundations/halo-surface";
+import { HaloEdge } from "@/components/haloui/foundations/halo-edge";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
@@ -28,7 +29,7 @@ interface CatalogItem {
   category: "Actions" | "Foundations" | "Forms" | "Navigation" | "Overlays" | "Data Display" | "Layout";
   description: string;
   status: "stable" | "preview" | "in-progress" | "planned";
-  previewType: "button" | "surface" | "switch" | "input" | "dock";
+  previewType: "button" | "surface" | "edge" | "switch" | "input" | "dock";
 }
 
 const CATALOG_ITEMS: CatalogItem[] = [
@@ -49,6 +50,15 @@ const CATALOG_ITEMS: CatalogItem[] = [
     description: "The base material container used to construct HaloUI surfaces with 10-layer physical liquid optical physics.",
     status: "preview" as const,
     previewType: "surface",
+  },
+  {
+    id: "edge",
+    name: "Halo Edge",
+    slug: "/components/halo-edge",
+    category: "Foundations",
+    description: "Layered outer and inset optical boundary treatment for translucent HaloUI materials.",
+    status: "preview" as const,
+    previewType: "edge",
   },
   {
     id: "icon-button",
@@ -269,6 +279,13 @@ export function CatalogClient() {
                   {item.previewType === "surface" && (
                     <HaloSurface elevation="floating" className="p-4 rounded-xl text-center">
                       <span className="text-xs font-mono font-medium">10-Layer Liquid Optics</span>
+                    </HaloSurface>
+                  )}
+
+                  {item.previewType === "edge" && (
+                    <HaloSurface elevation="raised" className="relative p-4 rounded-xl text-center">
+                      <HaloEdge strength="strong" placement="both" />
+                      <span className="text-xs font-mono font-medium">Optical Boundary Hairline</span>
                     </HaloSurface>
                   )}
 
