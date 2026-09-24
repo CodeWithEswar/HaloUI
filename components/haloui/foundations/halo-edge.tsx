@@ -67,32 +67,31 @@ export const HaloEdge = React.forwardRef<HTMLDivElement, HaloEdgeProps>(
           // Base Outer Edge Hairline (Separation from environment)
           (placement === "outer" || placement === "both") && [
             strength === "subtle" &&
-              "shadow-[0_0_0_1px_rgba(0,0,0,0.06)] dark:shadow-[0_0_0_1px_rgba(255,255,255,0.07)]",
+              "shadow-[0_0_0_1px_rgba(0,0,0,0.05)] dark:shadow-[0_0_0_1px_rgba(255,255,255,0.08)]",
             strength === "balanced" &&
-              "shadow-[0_0_0_1px_rgba(0,0,0,0.08)] dark:shadow-[0_0_0_1px_rgba(255,255,255,0.12)]",
+              "shadow-[0_0_0_1px_rgba(0,0,0,0.08)] dark:shadow-[0_0_0_1px_rgba(255,255,255,0.13)]",
             strength === "strong" &&
-              "shadow-[0_0_0_1px_rgba(0,0,0,0.14)] dark:shadow-[0_0_0_1px_rgba(255,255,255,0.22)]",
+              "shadow-[0_0_0_1px_rgba(0,0,0,0.12)] dark:shadow-[0_0_0_1px_rgba(255,255,255,0.2)]",
           ],
 
           // Base Inner Edge Inset (Thickness & Directional 135° virtual light catch)
           (placement === "inner" || placement === "both") && [
-            // When combined with outer, layered multiple box-shadows are applied
             placement === "both"
               ? [
                   strength === "subtle" &&
-                    "shadow-[0_0_0_1px_rgba(0,0,0,0.06),inset_0_1px_1px_0_rgba(255,255,255,0.7),inset_0_-1px_1px_0_rgba(0,0,0,0.03)] dark:shadow-[0_0_0_1px_rgba(255,255,255,0.07),inset_0_1px_1px_0_rgba(255,255,255,0.16),inset_0_-1px_1px_0_rgba(0,0,0,0.45)]",
+                    "shadow-[0_0_0_1px_rgba(0,0,0,0.05),inset_0_1px_1px_0_rgba(255,255,255,0.6),inset_0_-1px_1px_0_rgba(0,0,0,0.04)] dark:shadow-[0_0_0_1px_rgba(255,255,255,0.08),inset_0_1px_1px_0_rgba(255,255,255,0.18),inset_0_-1px_1px_0_rgba(0,0,0,0.25)]",
                   strength === "balanced" &&
-                    "shadow-[0_0_0_1px_rgba(0,0,0,0.08),inset_0_1px_1px_0_rgba(255,255,255,0.9),inset_0_-1px_1px_0_rgba(0,0,0,0.05)] dark:shadow-[0_0_0_1px_rgba(255,255,255,0.12),inset_0_1px_1px_0_rgba(255,255,255,0.24),inset_0_-1px_1px_0_rgba(0,0,0,0.6)]",
+                    "shadow-[0_0_0_1px_rgba(0,0,0,0.08),inset_0_1px_1px_0_rgba(255,255,255,0.85),inset_0_-1px_1px_0_rgba(0,0,0,0.05)] dark:shadow-[0_0_0_1px_rgba(255,255,255,0.13),inset_0_1px_1px_0_rgba(255,255,255,0.28),inset_0_-1px_1px_0_rgba(0,0,0,0.3)]",
                   strength === "strong" &&
-                    "shadow-[0_0_0_1px_rgba(0,0,0,0.14),inset_0_1.5px_1.5px_0_rgba(255,255,255,1),inset_0_-1px_1.5px_0_rgba(0,0,0,0.08)] dark:shadow-[0_0_0_1px_rgba(255,255,255,0.22),inset_0_1.5px_1.5px_0_rgba(255,255,255,0.38),inset_0_-1px_1.5px_0_rgba(0,0,0,0.75)]",
+                    "shadow-[0_0_0_1px_rgba(0,0,0,0.12),inset_0_1.5px_1.5px_0_rgba(255,255,255,0.95),inset_0_-1px_1.5px_0_rgba(0,0,0,0.08)] dark:shadow-[0_0_0_1px_rgba(255,255,255,0.2),inset_0_1.5px_1.5px_0_rgba(255,255,255,0.42),inset_0_-1px_1.5px_0_rgba(0,0,0,0.4)]",
                 ]
               : [
                   strength === "subtle" &&
-                    "shadow-[inset_0_1px_1px_0_rgba(255,255,255,0.7),inset_0_-1px_1px_0_rgba(0,0,0,0.03)] dark:shadow-[inset_0_1px_1px_0_rgba(255,255,255,0.16),inset_0_-1px_1px_0_rgba(0,0,0,0.45)]",
+                    "shadow-[inset_0_1px_1px_0_rgba(255,255,255,0.6),inset_0_-1px_1px_0_rgba(0,0,0,0.04)] dark:shadow-[inset_0_1px_1px_0_rgba(255,255,255,0.18),inset_0_-1px_1px_0_rgba(0,0,0,0.25)]",
                   strength === "balanced" &&
-                    "shadow-[inset_0_1px_1px_0_rgba(255,255,255,0.9),inset_0_-1px_1px_0_rgba(0,0,0,0.05)] dark:shadow-[inset_0_1px_1px_0_rgba(255,255,255,0.24),inset_0_-1px_1px_0_rgba(0,0,0,0.6)]",
+                    "shadow-[inset_0_1px_1px_0_rgba(255,255,255,0.85),inset_0_-1px_1px_0_rgba(0,0,0,0.05)] dark:shadow-[inset_0_1px_1px_0_rgba(255,255,255,0.28),inset_0_-1px_1px_0_rgba(0,0,0,0.3)]",
                   strength === "strong" &&
-                    "shadow-[inset_0_1.5px_1.5px_0_rgba(255,255,255,1),inset_0_-1px_1.5px_0_rgba(0,0,0,0.08)] dark:shadow-[inset_0_1.5px_1.5px_0_rgba(255,255,255,0.38),inset_0_-1px_1.5px_0_rgba(0,0,0,0.75)]",
+                    "shadow-[inset_0_1.5px_1.5px_0_rgba(255,255,255,0.95),inset_0_-1px_1.5px_0_rgba(0,0,0,0.08)] dark:shadow-[inset_0_1.5px_1.5px_0_rgba(255,255,255,0.42),inset_0_-1px_1.5px_0_rgba(0,0,0,0.4)]",
                 ],
           ],
 

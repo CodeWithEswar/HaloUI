@@ -2,366 +2,352 @@
 
 import * as React from "react";
 import {
-  Layers01Icon,
-  ComputerIcon,
-  LaptopIcon,
-  SmartPhone01Icon,
-  Tablet01Icon,
+  SparklesIcon,
   Copy01Icon,
   CheckmarkCircle01Icon,
-  ReloadIcon,
-  SparklesIcon,
-  Clock01Icon,
-  InformationCircleIcon,
+  Sun01Icon,
+  Moon02Icon,
+  Tv01Icon,
+  SmartPhone01Icon,
+  Tablet01Icon,
+  Layers01Icon,
 } from "@hugeicons/core-free-icons";
 import { HaloIcon } from "@/components/icons/halo-icon";
+import { HaloSurface } from "@/components/haloui/foundations/halo-surface";
+import { HaloHighlight } from "@/components/haloui/foundations/halo-highlight";
 import {
   HaloEdge,
   type HaloEdgeStrength,
   type HaloEdgePlacement,
 } from "@/components/haloui/foundations/halo-edge";
-import { HaloSurface } from "@/components/haloui/foundations/halo-surface";
-import {
-  HaloBackground,
-  type PreviewEnvironment,
-} from "@/components/haloui/foundations/halo-background";
-import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 
-const ENVIRONMENTS: { id: PreviewEnvironment; label: string }[] = [
-  { id: "neutral", label: "Neutral" },
-  { id: "paper", label: "Warm Paper" },
-  { id: "spectral", label: "Spectral" },
-  { id: "image", label: "Image" },
-  { id: "dense", label: "Dense UI" },
-  { id: "dark", label: "Dark" },
-];
+type BackdropType = "dark-void" | "gradient" | "mesh" | "sunset" | "cards" | "light-minimal";
+type ViewportType = "desktop" | "tablet" | "mobile";
 
 export function EdgePreviewStage() {
-  const [environment, setEnvironment] = React.useState<PreviewEnvironment>("neutral");
-  const [viewport, setViewport] = React.useState<"fluid" | "desktop" | "laptop" | "tablet" | "phone">("fluid");
+  const [activeTab, setActiveTab] = React.useState<"preview" | "code">("preview");
+  const [backdrop, setBackdrop] = React.useState<BackdropType>("dark-void");
+  const [viewport, setViewport] = React.useState<ViewportType>("desktop");
   const [strength, setStrength] = React.useState<HaloEdgeStrength>("balanced");
   const [placement, setPlacement] = React.useState<HaloEdgePlacement>("both");
-  const [reducedMotion, setReducedMotion] = React.useState(false);
-  const [copied, setCopied] = React.useState(false);
+  const [showEdge, setShowEdge] = React.useState<boolean>(true);
+  const [copied, setCopied] = React.useState<boolean>(false);
+  const [mode, setMode] = React.useState<"light" | "dark">("dark");
 
-  const viewportWidths = {
-    fluid: "w-full",
-    desktop: "max-w-[1040px]",
-    laptop: "max-w-[840px]",
-    tablet: "max-w-[620px]",
-    phone: "max-w-[360px]",
-  };
+  const generatedCode = React.useMemo(() => {
+    return `<HaloSurface
+  elevation="raised"
+  intensity="balanced"
+  className="relative p-8 rounded-2xl overflow-hidden"
+>
+  {/* Layer 03: Optical Boundary Edge */}
+  ${showEdge ? `<HaloEdge strength="${strength}" placement="${placement}" />` : "<!-- Edge Disabled (Flat Boundary) -->"}
 
-  const cardWidths = {
-    fluid: "w-full max-w-lg",
-    desktop: "w-full max-w-xl",
-    laptop: "w-full max-w-lg",
-    tablet: "w-full max-w-md",
-    phone: "w-full max-w-[320px]",
-  };
+  {/* Layer 04: Directional Highlight */}
+  <HaloHighlight kind="broad" strength="balanced" />
 
-  const copyInstallCommand = () => {
-    navigator.clipboard.writeText("pnpm dlx shadcn@latest add http://localhost:3000/r/halo-edge.json");
+  {/* Consumer Content Layer */}
+  <div className="relative z-10 space-y-3">
+    <h3 className="text-lg font-semibold tracking-tight text-foreground">
+      Sub-Pixel Optical Edge
+    </h3>
+    <p className="text-sm text-muted-foreground leading-relaxed">
+      Non-uniform hairline boundary and 135° directional specular catches establish physical material thickness.
+    </p>
+  </div>
+</HaloSurface>`;
+  }, [strength, placement, showEdge]);
+
+  const copyCode = () => {
+    navigator.clipboard.writeText(generatedCode);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
 
-  const resetStage = () => {
-    setEnvironment("neutral");
-    setViewport("fluid");
-    setStrength("balanced");
-    setPlacement("both");
-    setReducedMotion(false);
-  };
-
   return (
-    <div className="w-full space-y-4">
-      {/* Neutral documentation toolbar (Strictly zero glass in docs shell, all containers h-9, inner items h-7) */}
-      <div className="flex flex-col xl:flex-row xl:items-center xl:justify-between gap-3 p-2.5 rounded-xl border border-border bg-muted/30">
-        {/* Backdrop Switcher */}
-        <div className="flex items-center gap-2 min-w-0 max-w-full">
-          <span className="text-[11px] font-mono uppercase tracking-wider text-muted-foreground/80 shrink-0 h-9 flex items-center select-none">
-            Backdrop:
-          </span>
-          <div
-            role="tablist"
-            aria-label="Preview background environment"
-            className="h-9 p-1 rounded-lg border border-border bg-background inline-flex items-center gap-1 overflow-x-auto no-scrollbar max-w-full"
-          >
-            {ENVIRONMENTS.map((item) => (
-              <button
-                key={item.id}
-                role="tab"
-                aria-selected={environment === item.id}
-                type="button"
-                onClick={() => setEnvironment(item.id)}
-                className={cn(
-                  "h-7 px-2.5 sm:px-3 rounded-md text-xs font-medium whitespace-nowrap shrink-0 transition-colors cursor-pointer flex items-center justify-center",
-                  environment === item.id
-                    ? "bg-muted text-foreground font-semibold shadow-xs"
-                    : "text-muted-foreground hover:text-foreground"
-                )}
-              >
-                {item.label}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {/* Viewport and Action Controls */}
-        <div className="flex items-center justify-between xl:justify-end gap-2.5 sm:gap-3 shrink-0 w-full xl:w-auto">
-          {/* Viewport Switcher */}
-          <div className="flex items-center gap-2">
-            <span className="text-[11px] font-mono uppercase tracking-wider text-muted-foreground/80 shrink-0 h-9 flex items-center select-none hidden sm:inline-flex">
-              Viewport:
-            </span>
-            <div
-              role="tablist"
-              aria-label="Preview viewport"
-              className="h-9 p-1 rounded-lg border border-border bg-background inline-flex items-center gap-1"
-            >
-              <Tooltip>
-                <TooltipTrigger
-                  onClick={() => setViewport("fluid")}
-                  className={cn(
-                    "h-7 px-2.5 sm:px-3 rounded-md text-xs font-medium flex items-center justify-center transition-colors cursor-pointer",
-                    viewport === "fluid"
-                      ? "bg-muted text-foreground font-semibold shadow-xs"
-                      : "text-muted-foreground hover:text-foreground"
-                  )}
-                  aria-label="Fluid viewport"
-                >
-                  Fluid
-                </TooltipTrigger>
-                <TooltipContent side="top">Fluid Width (100%)</TooltipContent>
-              </Tooltip>
-
-              <Tooltip>
-                <TooltipTrigger
-                  onClick={() => setViewport("desktop")}
-                  className={cn(
-                    "h-7 w-7 rounded-md flex items-center justify-center transition-colors cursor-pointer",
-                    viewport === "desktop"
-                      ? "bg-muted text-foreground font-semibold shadow-xs"
-                      : "text-muted-foreground hover:text-foreground"
-                  )}
-                  aria-label="Desktop viewport"
-                >
-                  <HaloIcon icon={ComputerIcon} size={15} />
-                </TooltipTrigger>
-                <TooltipContent side="top">Desktop (1040px)</TooltipContent>
-              </Tooltip>
-
-              <Tooltip>
-                <TooltipTrigger
-                  onClick={() => setViewport("laptop")}
-                  className={cn(
-                    "h-7 w-7 rounded-md flex items-center justify-center transition-colors cursor-pointer",
-                    viewport === "laptop"
-                      ? "bg-muted text-foreground font-semibold shadow-xs"
-                      : "text-muted-foreground hover:text-foreground"
-                  )}
-                  aria-label="Laptop viewport"
-                >
-                  <HaloIcon icon={LaptopIcon} size={15} />
-                </TooltipTrigger>
-                <TooltipContent side="top">Laptop (840px)</TooltipContent>
-              </Tooltip>
-
-              <Tooltip>
-                <TooltipTrigger
-                  onClick={() => setViewport("tablet")}
-                  className={cn(
-                    "h-7 w-7 rounded-md flex items-center justify-center transition-colors cursor-pointer",
-                    viewport === "tablet"
-                      ? "bg-muted text-foreground font-semibold shadow-xs"
-                      : "text-muted-foreground hover:text-foreground"
-                  )}
-                  aria-label="Tablet viewport"
-                >
-                  <HaloIcon icon={Tablet01Icon} size={15} />
-                </TooltipTrigger>
-                <TooltipContent side="top">Tablet (620px)</TooltipContent>
-              </Tooltip>
-
-              <Tooltip>
-                <TooltipTrigger
-                  onClick={() => setViewport("phone")}
-                  className={cn(
-                    "h-7 w-7 rounded-md flex items-center justify-center transition-colors cursor-pointer",
-                    viewport === "phone"
-                      ? "bg-muted text-foreground font-semibold shadow-xs"
-                      : "text-muted-foreground hover:text-foreground"
-                  )}
-                  aria-label="Phone viewport"
-                >
-                  <HaloIcon icon={SmartPhone01Icon} size={15} />
-                </TooltipTrigger>
-                <TooltipContent side="top">Phone (360px)</TooltipContent>
-              </Tooltip>
-            </div>
-          </div>
-
-          {/* Action Controls */}
-          <div className="flex items-center gap-1.5 shrink-0">
-            <Tooltip>
-              <TooltipTrigger
-                onClick={() => setReducedMotion(!reducedMotion)}
-                className={cn(
-                  "h-9 w-9 rounded-lg border flex items-center justify-center transition-colors cursor-pointer shrink-0",
-                  reducedMotion
-                    ? "bg-primary text-primary-foreground border-primary shadow-xs"
-                    : "border-border bg-background text-muted-foreground hover:text-foreground hover:bg-muted/50"
-                )}
-                aria-label="Toggle reduced motion"
-              >
-                <HaloIcon icon={Clock01Icon} size={16} />
-              </TooltipTrigger>
-              <TooltipContent side="top">
-                {reducedMotion ? "Reduced Motion: Enabled" : "Reduced Motion: System Default"}
-              </TooltipContent>
-            </Tooltip>
-
-            <Tooltip>
-              <TooltipTrigger
-                onClick={resetStage}
-                className="h-9 w-9 rounded-lg border border-border bg-background text-muted-foreground hover:text-foreground hover:bg-muted/50 flex items-center justify-center transition-colors cursor-pointer shrink-0"
-                aria-label="Reset stage parameters"
-              >
-                <HaloIcon icon={ReloadIcon} size={16} />
-              </TooltipTrigger>
-              <TooltipContent side="top">Reset Controls</TooltipContent>
-            </Tooltip>
-
-            <Tooltip>
-              <TooltipTrigger
-                onClick={copyInstallCommand}
-                className="h-9 w-9 rounded-lg border border-border bg-background text-muted-foreground hover:text-foreground hover:bg-muted/50 flex items-center justify-center transition-colors cursor-pointer shrink-0"
-                aria-label="Copy install command"
-              >
-                <HaloIcon
-                  icon={copied ? CheckmarkCircle01Icon : Copy01Icon}
-                  size={16}
-                  className={copied ? "text-emerald-500" : ""}
-                />
-              </TooltipTrigger>
-              <TooltipContent side="top">
-                {copied ? "Copied command to clipboard!" : "Copy Installation Command"}
-              </TooltipContent>
-            </Tooltip>
-          </div>
-        </div>
-      </div>
-
-      {/* Primary Stage Environment Frame */}
-      <div className="w-full flex justify-center items-center overflow-hidden rounded-2xl border border-border bg-background p-2 sm:p-6 lg:p-10 transition-all">
-        <div className={cn("transition-all duration-300 w-full flex justify-center", viewportWidths[viewport])}>
-          <HaloBackground
-            environment={environment}
-            className="flex items-center justify-center min-h-[360px] sm:min-h-[420px] rounded-xl border border-border/40 shadow-inner w-full"
-            contentClassName="p-4 sm:p-8 md:p-12 w-full h-full flex items-center justify-center"
-          >
-            {/* The Canonical Foundation Being Evaluated: HaloSurface + HaloEdge */}
-            <HaloSurface
-              intensity="balanced"
-              elevation="raised"
+    <div className="w-full rounded-2xl border border-black/[0.08] dark:border-white/[0.08] bg-stone-50/50 dark:bg-stone-950/40 backdrop-blur-sm overflow-hidden flex flex-col">
+      {/* Stage Toolbar */}
+      <div className="flex flex-wrap items-center justify-between gap-3 p-3.5 border-b border-black/[0.08] dark:border-white/[0.08] bg-white/60 dark:bg-stone-900/60">
+        <div className="flex items-center gap-2">
+          {/* Tabs */}
+          <div className="flex items-center rounded-lg bg-black/[0.04] dark:bg-white/[0.06] p-0.5 text-xs font-medium">
+            <button
+              onClick={() => setActiveTab("preview")}
               className={cn(
-                "relative w-full p-5 sm:p-7 space-y-4 transition-all duration-300",
-                cardWidths[viewport]
+                "px-3 py-1.5 rounded-md transition-all",
+                activeTab === "preview"
+                  ? "bg-white dark:bg-stone-800 text-stone-900 dark:text-white shadow-sm"
+                  : "text-stone-500 hover:text-stone-900 dark:hover:text-white"
               )}
             >
-              {/* The Halo Edge Primitive Under Test */}
-              <HaloEdge strength={strength} placement={placement} />
+              Interactive Stage
+            </button>
+            <button
+              onClick={() => setActiveTab("code")}
+              className={cn(
+                "px-3 py-1.5 rounded-md transition-all",
+                activeTab === "code"
+                  ? "bg-white dark:bg-stone-800 text-stone-900 dark:text-white shadow-sm"
+                  : "text-stone-500 hover:text-stone-900 dark:hover:text-white"
+              )}
+            >
+              Code
+            </button>
+          </div>
 
-              {/* Real-world Content Plane */}
-              <div className="flex items-center justify-between gap-2 border-b border-black/[0.06] dark:border-white/[0.08] pb-3">
-                <span className="text-xs font-mono uppercase tracking-widest text-muted-foreground flex items-center gap-1.5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-cyan-500" />
-                  Boundary Layer 03
-                </span>
-                <span className="text-[11px] font-mono px-2 py-0.5 rounded-md bg-black/5 dark:bg-white/10 text-foreground/80">
-                  {strength} · {placement}
-                </span>
-              </div>
+          <div className="h-4 w-px bg-black/[0.08] dark:bg-white/[0.08] hidden sm:block" />
 
-              <div className="space-y-1.5">
-                <h3 className="text-lg font-semibold tracking-tight text-foreground">
-                  Sub-Pixel Optical Edge
-                </h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">
-                  Halo Edge establishes material boundary and perceived thickness using outer separation hairlines and inset 135° directional specular catches.
-                </p>
-              </div>
+          {/* Viewport controls */}
+          <div className="hidden sm:flex items-center rounded-lg bg-black/[0.04] dark:bg-white/[0.06] p-0.5 text-xs">
+            <button
+              onClick={() => setViewport("desktop")}
+              aria-label="Desktop viewport"
+              className={cn(
+                "p-1.5 rounded-md transition-all",
+                viewport === "desktop"
+                  ? "bg-white dark:bg-stone-800 text-foreground shadow-sm"
+                  : "text-muted-foreground hover:text-foreground"
+              )}
+            >
+              <HaloIcon icon={Tv01Icon} size={15} />
+            </button>
+            <button
+              onClick={() => setViewport("tablet")}
+              aria-label="Tablet viewport"
+              className={cn(
+                "p-1.5 rounded-md transition-all",
+                viewport === "tablet"
+                  ? "bg-white dark:bg-stone-800 text-foreground shadow-sm"
+                  : "text-muted-foreground hover:text-foreground"
+              )}
+            >
+              <HaloIcon icon={Tablet01Icon} size={15} />
+            </button>
+            <button
+              onClick={() => setViewport("mobile")}
+              aria-label="Mobile viewport"
+              className={cn(
+                "p-1.5 rounded-md transition-all",
+                viewport === "mobile"
+                  ? "bg-white dark:bg-stone-800 text-foreground shadow-sm"
+                  : "text-muted-foreground hover:text-foreground"
+              )}
+            >
+              <HaloIcon icon={SmartPhone01Icon} size={15} />
+            </button>
+          </div>
+        </div>
 
-              <div className="pt-2 flex items-center justify-between text-xs text-muted-foreground border-t border-black/[0.04] dark:border-white/[0.06]">
-                <span className="font-mono text-[11px]">Layer 03 Boundary Substrate</span>
-                <span className="font-mono text-[11px] text-foreground font-medium">Non-Uniform Hairline</span>
-              </div>
-            </HaloSurface>
-          </HaloBackground>
+        <div className="flex items-center gap-2">
+          {/* Backdrop Picker */}
+          <select
+            value={backdrop}
+            onChange={(e) => setBackdrop(e.target.value as BackdropType)}
+            className="text-xs bg-black/[0.04] dark:bg-white/[0.06] border border-black/[0.08] dark:border-white/[0.08] rounded-lg px-2.5 py-1.5 text-stone-700 dark:text-stone-300 focus:outline-none"
+          >
+            <option value="dark-void">Dark Void (Maximum Contrast)</option>
+            <option value="gradient">Deep Gradient</option>
+            <option value="mesh">Liquid Mesh</option>
+            <option value="sunset">Warm Twilight</option>
+            <option value="cards">High-Contrast Cards</option>
+            <option value="light-minimal">Light Minimal</option>
+          </select>
+
+          {/* Theme switcher */}
+          <button
+            onClick={() => setMode(mode === "dark" ? "light" : "dark")}
+            className="p-1.5 rounded-lg border border-black/[0.08] dark:border-white/[0.08] bg-black/[0.04] dark:bg-white/[0.06] text-stone-700 dark:text-stone-300 hover:text-foreground"
+            title="Toggle Preview Theme"
+          >
+            <HaloIcon icon={mode === "dark" ? Sun01Icon : Moon02Icon} size={15} />
+          </button>
         </div>
       </div>
 
-      {/* Interactive Controls Bar for Strength & Placement */}
-      <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 p-2.5 sm:p-3 rounded-xl border border-border bg-muted/20 text-xs">
-        {/* Strength */}
-        <div className="flex items-center justify-between sm:justify-start gap-2 sm:gap-3">
-          <span className="font-mono text-muted-foreground/80 uppercase tracking-wider text-[11px] shrink-0 h-9 flex items-center select-none">
-            Strength:
-          </span>
+      {/* Main Preview Arena (Spacious full-bleed canvas, zero nested miniature border hugging) */}
+      {activeTab === "preview" ? (
+        <div
+          className={cn(
+            "p-8 sm:p-12 md:p-16 flex flex-col items-center justify-center transition-colors min-h-[460px] relative overflow-hidden",
+            mode === "dark" ? "dark bg-stone-950" : "bg-stone-100"
+          )}
+        >
+          {/* Dynamic Background Field */}
+          <div className="absolute inset-0 pointer-events-none overflow-hidden">
+            {backdrop === "dark-void" && <div className="w-full h-full bg-[#0a0b0d]" />}
+            {backdrop === "gradient" && (
+              <div className="w-full h-full bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-indigo-950 via-slate-900 to-black opacity-90" />
+            )}
+            {backdrop === "mesh" && (
+              <div className="w-full h-full bg-gradient-to-tr from-cyan-600/30 via-violet-600/30 to-amber-600/30 blur-2xl" />
+            )}
+            {backdrop === "sunset" && (
+              <div className="w-full h-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-amber-500/20 via-rose-600/20 to-stone-950" />
+            )}
+            {backdrop === "cards" && (
+              <div className="grid grid-cols-4 gap-4 p-8 opacity-25">
+                {Array.from({ length: 12 }).map((_, i) => (
+                  <div key={i} className="h-24 rounded-xl border border-white/20 bg-white/5" />
+                ))}
+              </div>
+            )}
+            {backdrop === "light-minimal" && <div className="w-full h-full bg-stone-100" />}
+          </div>
+
+          {/* Test Stage Container with Dynamic Viewport */}
           <div
-            role="tablist"
-            aria-label="Edge strength"
-            className="h-9 p-1 rounded-lg border border-border bg-background inline-flex items-center gap-1"
+            className={cn(
+              "relative z-10 transition-all duration-300 w-full flex flex-col items-center justify-center gap-6",
+              viewport === "desktop" && "max-w-xl",
+              viewport === "tablet" && "max-w-md",
+              viewport === "mobile" && "max-w-xs"
+            )}
           >
-            {(["subtle", "balanced", "strong"] as const).map((level) => (
+            {/* The Halo Material Assembly with HaloEdge */}
+            <HaloSurface
+              elevation="raised"
+              intensity="balanced"
+              className="relative w-full rounded-3xl p-7 sm:p-9 text-left overflow-hidden transition-all duration-200"
+            >
+              {/* Layer 03: The Halo Edge Primitive Under Test */}
+              {showEdge && (
+                <HaloEdge strength={strength} placement={placement} />
+              )}
+
+              {/* Layer 04: Directional Light Highlight */}
+              <HaloHighlight kind="broad" strength="balanced" />
+
+              {/* Surface Content */}
+              <div className="relative z-10 space-y-4">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <div className="w-8 h-8 rounded-xl bg-white/10 dark:bg-white/10 border border-white/20 flex items-center justify-center text-white">
+                      <HaloIcon icon={SparklesIcon} size={16} />
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-sm sm:text-base text-foreground">
+                        Sub-Pixel Optical Edge
+                      </h4>
+                      <p className="text-xs text-muted-foreground">
+                        HaloUI Physical Layer 03 · Boundary & Thickness
+                      </p>
+                    </div>
+                  </div>
+
+                  <Badge
+                    variant="outline"
+                    className="text-[10px] font-mono border-white/20 bg-white/5"
+                  >
+                    {showEdge ? `${strength} · ${placement}` : "Edge OFF"}
+                  </Badge>
+                </div>
+
+                <p className="text-xs sm:text-sm text-foreground/80 leading-relaxed">
+                  Halo Edge establishes material boundary and perceived physical thickness using outer separation hairlines and inset 135° directional specular catches.
+                </p>
+
+                {/* Substrate Status Bar */}
+                <div className="pt-2 flex items-center justify-between text-xs text-muted-foreground border-t border-black/[0.06] dark:border-white/[0.08]">
+                  <span className="font-mono text-[11px]">Boundary Substrate</span>
+                  <span className="font-mono text-[11px] text-foreground font-medium">
+                    {showEdge ? "Non-Uniform Hairline" : "Flat Uniform Border"}
+                  </span>
+                </div>
+              </div>
+            </HaloSurface>
+
+            {/* Quick Toggle Controls */}
+            <div className="flex items-center gap-2 bg-black/40 dark:bg-black/60 backdrop-blur-md px-4 py-2 rounded-full border border-white/10 text-xs text-white">
+              <label className="flex items-center gap-1.5 cursor-pointer font-medium select-none">
+                <input
+                  type="checkbox"
+                  checked={showEdge}
+                  onChange={(e) => setShowEdge(e.target.checked)}
+                  className="rounded border-white/30 text-indigo-500 focus:ring-0"
+                />
+                <span>Active Optical Edge</span>
+              </label>
+            </div>
+          </div>
+        </div>
+      ) : (
+        <div className="relative p-5 bg-stone-900 text-stone-100 font-mono text-xs overflow-x-auto min-h-[460px]">
+          <button
+            onClick={copyCode}
+            className="absolute top-4 right-4 flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-white text-xs transition-colors"
+          >
+            <HaloIcon icon={copied ? CheckmarkCircle01Icon : Copy01Icon} size={14} />
+            <span>{copied ? "Copied" : "Copy TSX"}</span>
+          </button>
+          <pre className="leading-relaxed">{generatedCode}</pre>
+        </div>
+      )}
+
+      {/* Interactive Control Panel */}
+      <div className="p-4 sm:p-5 border-t border-black/[0.08] dark:border-white/[0.08] bg-white/40 dark:bg-stone-900/40 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 text-xs">
+        {/* Strength Selector */}
+        <div className="space-y-1.5">
+          <label className="font-medium text-stone-700 dark:text-stone-300">
+            Boundary Strength
+          </label>
+          <div className="flex gap-1">
+            {(["subtle", "balanced", "strong"] as const).map((s) => (
               <button
-                key={level}
-                role="tab"
-                aria-selected={strength === level}
-                type="button"
-                onClick={() => setStrength(level)}
+                key={s}
+                onClick={() => setStrength(s)}
                 className={cn(
-                  "h-7 px-3 rounded-md text-xs font-medium capitalize transition-colors cursor-pointer flex items-center justify-center",
-                  strength === level
-                    ? "bg-muted text-foreground font-semibold shadow-xs"
-                    : "text-muted-foreground hover:text-foreground"
+                  "flex-1 py-1.5 px-2 rounded-lg border text-center font-medium capitalize transition-all",
+                  strength === s
+                    ? "border-black dark:border-white bg-black dark:bg-white text-white dark:text-black shadow-sm"
+                    : "border-black/[0.08] dark:border-white/[0.08] bg-white dark:bg-stone-800 text-stone-700 dark:text-stone-300 hover:bg-stone-100 dark:hover:bg-stone-700"
                 )}
               >
-                {level}
+                {s}
               </button>
             ))}
           </div>
         </div>
 
-        {/* Placement */}
-        <div className="flex items-center justify-between sm:justify-end gap-2 sm:gap-3">
-          <span className="font-mono text-muted-foreground/80 uppercase tracking-wider text-[11px] shrink-0 h-9 flex items-center select-none">
-            Placement:
-          </span>
-          <div
-            role="tablist"
-            aria-label="Edge placement"
-            className="h-9 p-1 rounded-lg border border-border bg-background inline-flex items-center gap-1 overflow-x-auto no-scrollbar max-w-full"
-          >
-            {(["outer", "inner", "both"] as const).map((mode) => (
+        {/* Placement Selector */}
+        <div className="space-y-1.5">
+          <label className="font-medium text-stone-700 dark:text-stone-300">
+            Hairline Placement
+          </label>
+          <div className="flex gap-1">
+            {(["outer", "inner", "both"] as const).map((p) => (
               <button
-                key={mode}
-                role="tab"
-                aria-selected={placement === mode}
-                type="button"
-                onClick={() => setPlacement(mode)}
+                key={p}
+                onClick={() => setPlacement(p)}
                 className={cn(
-                  "h-7 px-3 rounded-md text-xs font-medium capitalize whitespace-nowrap transition-colors cursor-pointer flex items-center justify-center",
-                  placement === mode
-                    ? "bg-muted text-foreground font-semibold shadow-xs"
-                    : "text-muted-foreground hover:text-foreground"
+                  "flex-1 py-1.5 px-2 rounded-lg border text-center font-medium capitalize transition-all",
+                  placement === p
+                    ? "border-black dark:border-white bg-black dark:bg-white text-white dark:text-black shadow-sm"
+                    : "border-black/[0.08] dark:border-white/[0.08] bg-white dark:bg-stone-800 text-stone-700 dark:text-stone-300 hover:bg-stone-100 dark:hover:bg-stone-700"
                 )}
               >
-                {mode}
+                {p}
               </button>
             ))}
+          </div>
+        </div>
+
+        {/* Optical Stack Context */}
+        <div className="space-y-1.5 sm:col-span-2 md:col-span-1">
+          <label className="font-medium text-stone-700 dark:text-stone-300">
+            Optical Stack Context
+          </label>
+          <div className="p-2.5 rounded-lg border border-black/[0.08] dark:border-white/[0.08] bg-black/[0.02] dark:bg-white/[0.02] space-y-1">
+            <div className="flex justify-between text-[11px]">
+              <span className="text-muted-foreground">Placement</span>
+              <span className="font-mono text-foreground">Inner Inset + Outer Hairline</span>
+            </div>
+            <div className="flex justify-between text-[11px]">
+              <span className="text-muted-foreground">Accessibility</span>
+              <span className="font-mono text-foreground">aria-hidden=&quot;true&quot;</span>
+            </div>
           </div>
         </div>
       </div>
