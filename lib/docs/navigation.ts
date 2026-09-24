@@ -38,6 +38,13 @@ export const docsNavigation: DocsNavSection[] = [
         status: "preview",
         keywords: ["edge", "boundary", "hairline", "specular", "thickness"],
       },
+      {
+        title: "Halo Highlight",
+        href: "/components/halo-highlight",
+        description: "Directional reflected light and specular highlights along the 135° illumination vector.",
+        status: "preview",
+        keywords: ["highlight", "specular", "reflection", "directional", "lighting"],
+      },
       { title: "Accessibility", href: "/docs/accessibility", description: "Keyboard, contrast, semantics, and reduced motion." },
     ],
   },

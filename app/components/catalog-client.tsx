@@ -18,6 +18,7 @@ import { HaloIcon } from "@/components/icons/halo-icon";
 import { HaloButton } from "@/components/haloui/button/halo-button";
 import { HaloSurface } from "@/components/haloui/foundations/halo-surface";
 import { HaloEdge } from "@/components/haloui/foundations/halo-edge";
+import { HaloHighlight } from "@/components/haloui/foundations/halo-highlight";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
@@ -29,7 +30,7 @@ interface CatalogItem {
   category: "Actions" | "Foundations" | "Forms" | "Navigation" | "Overlays" | "Data Display" | "Layout";
   description: string;
   status: "stable" | "preview" | "in-progress" | "planned";
-  previewType: "button" | "surface" | "edge" | "switch" | "input" | "dock";
+  previewType: "button" | "surface" | "edge" | "highlight" | "switch" | "input" | "dock";
 }
 
 const CATALOG_ITEMS: CatalogItem[] = [
@@ -59,6 +60,15 @@ const CATALOG_ITEMS: CatalogItem[] = [
     description: "Layered outer and inset optical boundary treatment for translucent HaloUI materials.",
     status: "preview" as const,
     previewType: "edge",
+  },
+  {
+    id: "highlight",
+    name: "Halo Highlight",
+    slug: "/components/halo-highlight",
+    category: "Foundations",
+    description: "Directional reflected light and specular highlights along the 135° illumination vector.",
+    status: "preview" as const,
+    previewType: "highlight",
   },
   {
     id: "icon-button",
@@ -286,6 +296,13 @@ export function CatalogClient() {
                     <HaloSurface elevation="raised" className="relative p-4 rounded-xl text-center">
                       <HaloEdge strength="strong" placement="both" />
                       <span className="text-xs font-mono font-medium">Optical Boundary Hairline</span>
+                    </HaloSurface>
+                  )}
+
+                  {item.previewType === "highlight" && (
+                    <HaloSurface elevation="raised" className="relative p-4 rounded-xl text-center overflow-hidden">
+                      <HaloHighlight kind="specular" strength="strong" />
+                      <span className="text-xs font-mono font-medium">135° Specular Reflection</span>
                     </HaloSurface>
                   )}
 

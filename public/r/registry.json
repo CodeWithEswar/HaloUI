@@ -170,6 +170,70 @@
         "accessibility": "WCAG 2.1 AA (Decorative)",
         "lastUpdated": "2026-09-24"
       }
+    },
+    {
+      "name": "halo-highlight",
+      "type": "registry:ui",
+      "title": "Halo Highlight",
+      "description": "Directional reflected-light and restrained specular treatment communicating surface orientation and physical material response against HaloUI's 135° virtual light vector.",
+      "dependencies": [
+        "@radix-ui/react-slot",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "components/ui/halo-highlight.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/halo-highlight.tsx"
+        },
+        {
+          "path": "styles/halo-tokens.css",
+          "type": "registry:ui",
+          "target": "styles/halo-tokens.css"
+        }
+      ],
+      "categories": ["foundations"],
+      "meta": {
+        "status": "preview",
+        "version": "1.0.0",
+        "category": "foundations",
+        "accessibility": "WCAG 2.1 AA (Decorative)",
+        "lastUpdated": "2026-09-24"
+      }
+    },
+    {
+      "name": "highlight",
+      "type": "registry:ui",
+      "title": "Halo Highlight (Alias)",
+      "description": "Directional reflected-light and restrained specular treatment communicating surface orientation and physical material response against HaloUI's 135° virtual light vector.",
+      "dependencies": [
+        "@radix-ui/react-slot",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "components/ui/halo-highlight.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/halo-highlight.tsx"
+        },
+        {
+          "path": "styles/halo-tokens.css",
+          "type": "registry:ui",
+          "target": "styles/halo-tokens.css"
+        }
+      ],
+      "categories": ["foundations"],
+      "meta": {
+        "status": "preview",
+        "version": "1.0.0",
+        "category": "foundations",
+        "accessibility": "WCAG 2.1 AA (Decorative)",
+        "lastUpdated": "2026-09-24"
+      }
     }
   ]
 }

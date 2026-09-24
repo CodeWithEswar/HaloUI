@@ -212,6 +212,62 @@ export async function GET(
       return NextResponse.json(registryItem);
     }
 
+    if (cleanName === "highlight" || cleanName === "halo-highlight") {
+      const highlightPath = path.join(cwd, "components", "haloui", "foundations", "halo-highlight.tsx");
+      const tokensPath = path.join(cwd, "styles", "halo-tokens.css");
+
+      const [highlightContent, tokensContent] = await Promise.all([
+        fs.readFile(highlightPath, "utf-8"),
+        fs.readFile(tokensPath, "utf-8"),
+      ]);
+
+      const registryItem = {
+        $schema: "https://ui.shadcn.com/schema/registry-item.json",
+        name: "halo-highlight",
+        type: "registry:ui",
+        title: "Halo Highlight",
+        description:
+          "Directional reflected-light and restrained specular treatment communicating surface orientation and physical material response against HaloUI's 135° virtual light vector.",
+        dependencies: ["@radix-ui/react-slot", "clsx", "tailwind-merge"],
+        registryDependencies: [],
+        files: [
+          {
+            path: "components/ui/halo-highlight.tsx",
+            content: highlightContent,
+            type: "registry:ui",
+            target: "components/ui/halo-highlight.tsx",
+          },
+          {
+            path: "styles/halo-tokens.css",
+            content: tokensContent,
+            type: "registry:ui",
+            target: "styles/halo-tokens.css",
+          },
+        ],
+        cssVars: {
+          light: {
+            "--halo-highlight":
+              "linear-gradient(135deg, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.15) 35%, rgba(255, 255, 255, 0) 100%)",
+            "--halo-highlight-strength": "0.85",
+          },
+          dark: {
+            "--halo-highlight":
+              "linear-gradient(135deg, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0.04) 38%, rgba(255, 255, 255, 0) 100%)",
+            "--halo-highlight-strength": "0.55",
+          },
+        },
+        meta: {
+          status: "preview",
+          version: "1.0.0",
+          category: "foundations",
+          accessibility: "WCAG 2.1 AA (Decorative)",
+          lastUpdated: "2026-09-24",
+        },
+      };
+
+      return NextResponse.json(registryItem);
+    }
+
     // Fallback: check public/r/[cleanName].json
     const staticFilePath = path.join(cwd, "public", "r", `${cleanName}.json`);
     const fileContent = await fs.readFile(staticFilePath, "utf-8");
