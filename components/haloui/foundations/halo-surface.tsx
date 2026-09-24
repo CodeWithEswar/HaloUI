@@ -14,10 +14,12 @@ export type HaloSurfaceElevation =
 
 // Backward-compatibility aliases
 export type MaterialIntensity = HaloSurfaceIntensity;
+export type SurfaceIntensity = HaloSurfaceIntensity;
 export type MaterialElevation =
   | HaloSurfaceElevation
   | "flat"
   | "recessed";
+export type SurfaceElevation = HaloSurfaceElevation;
 
 export interface HaloSurfaceProps extends React.ComponentPropsWithoutRef<"div"> {
   /**

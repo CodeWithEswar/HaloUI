@@ -13,13 +13,11 @@ export async function GET(
     const cwd = process.cwd();
 
     if (cleanName === "button") {
-      const buttonPath = path.join(cwd, "components", "haloui", "button", "halo-button.tsx");
-      const iconPath = path.join(cwd, "components", "icons", "halo-icon.tsx");
+      const buttonPath = path.join(cwd, "components", "ui", "button.tsx");
       const tokensPath = path.join(cwd, "styles", "halo-tokens.css");
 
-      const [buttonContent, iconContent, tokensContent] = await Promise.all([
+      const [buttonContent, tokensContent] = await Promise.all([
         fs.readFile(buttonPath, "utf-8"),
-        fs.readFile(iconPath, "utf-8"),
         fs.readFile(tokensPath, "utf-8"),
       ]);
 
@@ -27,12 +25,10 @@ export async function GET(
         $schema: "https://ui.shadcn.com/schema/registry-item.json",
         name: "button",
         type: "registry:ui",
-        title: "Halo Button",
+        title: "Button",
         description:
-          "An action surface with physical optical response, neoskeuomorphic depth, tactile compression, and Hugeicons integration.",
+          "A text or icon-supported action control with HaloUI material, semantic variants, accessible interaction states, and consistent keyboard behavior.",
         dependencies: [
-          "@hugeicons/react",
-          "@hugeicons/core-free-icons",
           "@radix-ui/react-slot",
           "class-variance-authority",
           "clsx",
@@ -41,16 +37,10 @@ export async function GET(
         registryDependencies: [],
         files: [
           {
-            path: "components/ui/halo-button.tsx",
+            path: "components/ui/button.tsx",
             content: buttonContent,
             type: "registry:ui",
-            target: "components/ui/halo-button.tsx",
-          },
-          {
-            path: "components/icons/halo-icon.tsx",
-            content: iconContent,
-            type: "registry:ui",
-            target: "components/icons/halo-icon.tsx",
+            target: "components/ui/button.tsx",
           },
           {
             path: "styles/halo-tokens.css",
@@ -65,22 +55,325 @@ export async function GET(
             "--halo-surface-elevated": "rgba(255, 255, 255, 0.88)",
             "--halo-edge": "rgba(255, 255, 255, 0.9)",
             "--halo-edge-soft": "rgba(0, 0, 0, 0.08)",
-            "--halo-blur-md": "16px",
+            "--halo-focus-color": "#0284c7",
           },
           dark: {
             "--halo-surface": "rgba(22, 23, 26, 0.7)",
             "--halo-surface-elevated": "rgba(30, 32, 38, 0.85)",
             "--halo-edge": "rgba(255, 255, 255, 0.14)",
             "--halo-edge-soft": "rgba(255, 255, 255, 0.06)",
-            "--halo-blur-md": "16px",
+            "--halo-focus-color": "#38bdf8",
           },
         },
         meta: {
-          status: "stable",
+          status: "preview",
           version: "1.0.0",
           category: "actions",
           accessibility: "WCAG 2.1 AA",
-          lastUpdated: "2026-09-23",
+          lastUpdated: "2026-09-24",
+        },
+      };
+
+      return NextResponse.json(registryItem);
+    }
+
+    if (cleanName === "icon-button") {
+      const iconButtonPath = path.join(cwd, "components", "ui", "icon-button.tsx");
+      const tokensPath = path.join(cwd, "styles", "halo-tokens.css");
+
+      const [iconButtonContent, tokensContent] = await Promise.all([
+        fs.readFile(iconButtonPath, "utf-8"),
+        fs.readFile(tokensPath, "utf-8"),
+      ]);
+
+      const registryItem = {
+        $schema: "https://ui.shadcn.com/schema/registry-item.json",
+        name: "icon-button",
+        type: "registry:ui",
+        title: "Icon Button",
+        description:
+          "A compact icon-only control for common actions, with mandatory accessible naming, HaloUI material states, and consistent keyboard and touch behavior.",
+        dependencies: [
+          "@radix-ui/react-slot",
+          "class-variance-authority",
+          "clsx",
+          "tailwind-merge",
+        ],
+        registryDependencies: [],
+        files: [
+          {
+            path: "components/ui/icon-button.tsx",
+            content: iconButtonContent,
+            type: "registry:ui",
+            target: "components/ui/icon-button.tsx",
+          },
+          {
+            path: "styles/halo-tokens.css",
+            content: tokensContent,
+            type: "registry:ui",
+            target: "styles/halo-tokens.css",
+          },
+        ],
+        cssVars: {
+          light: {
+            "--halo-surface": "rgba(255, 255, 255, 0.72)",
+            "--halo-surface-elevated": "rgba(255, 255, 255, 0.88)",
+            "--halo-edge": "rgba(255, 255, 255, 0.9)",
+            "--halo-edge-soft": "rgba(0, 0, 0, 0.08)",
+            "--halo-focus-color": "#0284c7",
+          },
+          dark: {
+            "--halo-surface": "rgba(22, 23, 26, 0.7)",
+            "--halo-surface-elevated": "rgba(30, 32, 38, 0.85)",
+            "--halo-edge": "rgba(255, 255, 255, 0.14)",
+            "--halo-edge-soft": "rgba(255, 255, 255, 0.06)",
+            "--halo-focus-color": "#38bdf8",
+          },
+        },
+        meta: {
+          status: "preview",
+          version: "1.0.0",
+          category: "actions",
+          accessibility: "WCAG 2.1 AA",
+          lastUpdated: "2026-09-24",
+        },
+      };
+
+      return NextResponse.json(registryItem);
+    }
+
+    if (cleanName === "button-group") {
+      const buttonGroupPath = path.join(cwd, "components", "ui", "button-group.tsx");
+      const tokensPath = path.join(cwd, "styles", "halo-tokens.css");
+
+      const [buttonGroupContent, tokensContent] = await Promise.all([
+        fs.readFile(buttonGroupPath, "utf-8"),
+        fs.readFile(tokensPath, "utf-8"),
+      ]);
+
+      const registryItem = {
+        $schema: "https://ui.shadcn.com/schema/registry-item.json",
+        name: "button-group",
+        type: "registry:ui",
+        title: "Button Group",
+        description:
+          "Visually connects related independent actions while preserving the semantics, focus behavior, and activation model of each control.",
+        dependencies: [
+          "@radix-ui/react-slot",
+          "class-variance-authority",
+          "clsx",
+          "tailwind-merge",
+        ],
+        registryDependencies: [],
+        files: [
+          {
+            path: "components/ui/button-group.tsx",
+            content: buttonGroupContent,
+            type: "registry:ui",
+            target: "components/ui/button-group.tsx",
+          },
+          {
+            path: "styles/halo-tokens.css",
+            content: tokensContent,
+            type: "registry:ui",
+            target: "styles/halo-tokens.css",
+          },
+        ],
+        meta: {
+          status: "preview",
+          version: "1.0.0",
+          category: "actions",
+          accessibility: "WCAG 2.1 AA",
+          lastUpdated: "2026-09-24",
+        },
+      };
+
+      return NextResponse.json(registryItem);
+    }
+
+    if (cleanName === "split-button") {
+      const splitButtonPath = path.join(cwd, "components", "ui", "split-button.tsx");
+      const iconPath = path.join(cwd, "components", "icons", "halo-icon.tsx");
+      const tokensPath = path.join(cwd, "styles", "halo-tokens.css");
+
+      const [splitButtonContent, iconContent, tokensContent] = await Promise.all([
+        fs.readFile(splitButtonPath, "utf-8"),
+        fs.readFile(iconPath, "utf-8"),
+        fs.readFile(tokensPath, "utf-8"),
+      ]);
+
+      const registryItem = {
+        $schema: "https://ui.shadcn.com/schema/registry-item.json",
+        name: "split-button",
+        type: "registry:ui",
+        title: "Split Button",
+        description:
+          "Combines a primary immediate action with a secondary menu of closely related alternative actions.",
+        dependencies: [
+          "@base-ui/react",
+          "@hugeicons/core-free-icons",
+          "@hugeicons/react",
+          "@radix-ui/react-slot",
+          "class-variance-authority",
+          "clsx",
+          "tailwind-merge",
+        ],
+        registryDependencies: ["button"],
+        files: [
+          {
+            path: "components/ui/split-button.tsx",
+            content: splitButtonContent,
+            type: "registry:ui",
+            target: "components/ui/split-button.tsx",
+          },
+          {
+            path: "components/icons/halo-icon.tsx",
+            content: iconContent,
+            type: "registry:ui",
+            target: "components/icons/halo-icon.tsx",
+          },
+          {
+            path: "styles/halo-tokens.css",
+            content: tokensContent,
+            type: "registry:ui",
+            target: "styles/halo-tokens.css",
+          },
+        ],
+        meta: {
+          status: "preview",
+          version: "1.0.0",
+          category: "actions",
+          accessibility: "WCAG 2.1 AA",
+          lastUpdated: "2026-09-24",
+        },
+      };
+
+      return NextResponse.json(registryItem);
+    }
+
+    if (cleanName === "toggle") {
+      const togglePath = path.join(cwd, "components", "ui", "toggle.tsx");
+      const tokensPath = path.join(cwd, "styles", "halo-tokens.css");
+
+      const [toggleContent, tokensContent] = await Promise.all([
+        fs.readFile(togglePath, "utf-8"),
+        fs.readFile(tokensPath, "utf-8"),
+      ]);
+
+      const registryItem = {
+        $schema: "https://ui.shadcn.com/schema/registry-item.json",
+        name: "toggle",
+        type: "registry:ui",
+        title: "Toggle",
+        description:
+          "A two-state action control that communicates and changes a persistent pressed or unpressed state.",
+        dependencies: [
+          "@base-ui/react",
+          "class-variance-authority",
+          "clsx",
+          "tailwind-merge",
+        ],
+        registryDependencies: [],
+        files: [
+          {
+            path: "components/ui/toggle.tsx",
+            content: toggleContent,
+            type: "registry:ui",
+            target: "components/ui/toggle.tsx",
+          },
+          {
+            path: "styles/halo-tokens.css",
+            content: tokensContent,
+            type: "registry:ui",
+            target: "styles/halo-tokens.css",
+          },
+        ],
+        cssVars: {
+          light: {
+            "--halo-surface": "rgba(255, 255, 255, 0.72)",
+            "--halo-surface-elevated": "rgba(255, 255, 255, 0.88)",
+            "--halo-edge": "rgba(255, 255, 255, 0.9)",
+            "--halo-edge-soft": "rgba(0, 0, 0, 0.08)",
+            "--halo-focus-color": "#0284c7",
+          },
+          dark: {
+            "--halo-surface": "rgba(22, 23, 26, 0.7)",
+            "--halo-surface-elevated": "rgba(30, 32, 38, 0.85)",
+            "--halo-edge": "rgba(255, 255, 255, 0.14)",
+            "--halo-edge-soft": "rgba(255, 255, 255, 0.06)",
+            "--halo-focus-color": "#38bdf8",
+          },
+        },
+        meta: {
+          status: "preview",
+          version: "1.0.0",
+          category: "actions",
+          accessibility: "WCAG 2.1 AA",
+          lastUpdated: "2026-09-24",
+        },
+      };
+
+      return NextResponse.json(registryItem);
+    }
+
+    if (cleanName === "toggle-group") {
+      const toggleGroupPath = path.join(cwd, "components", "ui", "toggle-group.tsx");
+      const tokensPath = path.join(cwd, "styles", "halo-tokens.css");
+
+      const [toggleGroupContent, tokensContent] = await Promise.all([
+        fs.readFile(toggleGroupPath, "utf-8"),
+        fs.readFile(tokensPath, "utf-8"),
+      ]);
+
+      const registryItem = {
+        $schema: "https://ui.shadcn.com/schema/registry-item.json",
+        name: "toggle-group",
+        type: "registry:ui",
+        title: "Toggle Group",
+        description: "Single- or multi-selection set of toggles.",
+        dependencies: [
+          "@base-ui/react",
+          "class-variance-authority",
+          "clsx",
+          "tailwind-merge",
+        ],
+        registryDependencies: ["toggle"],
+        files: [
+          {
+            path: "components/ui/toggle-group.tsx",
+            content: toggleGroupContent,
+            type: "registry:ui",
+            target: "components/ui/toggle-group.tsx",
+          },
+          {
+            path: "styles/halo-tokens.css",
+            content: tokensContent,
+            type: "registry:ui",
+            target: "styles/halo-tokens.css",
+          },
+        ],
+        cssVars: {
+          light: {
+            "--halo-surface": "rgba(255, 255, 255, 0.72)",
+            "--halo-surface-elevated": "rgba(255, 255, 255, 0.88)",
+            "--halo-edge": "rgba(255, 255, 255, 0.9)",
+            "--halo-edge-soft": "rgba(0, 0, 0, 0.08)",
+            "--halo-focus-color": "#0284c7",
+          },
+          dark: {
+            "--halo-surface": "rgba(22, 23, 26, 0.7)",
+            "--halo-surface-elevated": "rgba(30, 32, 38, 0.85)",
+            "--halo-edge": "rgba(255, 255, 255, 0.14)",
+            "--halo-edge-soft": "rgba(255, 255, 255, 0.06)",
+            "--halo-focus-color": "#38bdf8",
+          },
+        },
+        meta: {
+          status: "preview",
+          version: "1.0.0",
+          category: "actions",
+          accessibility: "WCAG 2.1 AA",
+          lastUpdated: "2026-09-24",
         },
       };
 
@@ -365,6 +658,317 @@ export async function GET(
           version: "1.0.0",
           category: "foundations",
           accessibility: "WCAG 2.1 AA (Decorative)",
+          lastUpdated: "2026-09-24",
+        },
+      };
+
+      return NextResponse.json(registryItem);
+    }
+
+    if (cleanName === "refraction" || cleanName === "halo-refraction-layer") {
+      const refractionPath = path.join(cwd, "components", "haloui", "foundations", "halo-refraction-layer.tsx");
+      const tokensPath = path.join(cwd, "styles", "halo-tokens.css");
+
+      const [refractionContent, tokensContent] = await Promise.all([
+        fs.readFile(refractionPath, "utf-8"),
+        fs.readFile(tokensPath, "utf-8"),
+      ]);
+
+      const registryItem = {
+        $schema: "https://ui.shadcn.com/schema/registry-item.json",
+        name: "halo-refraction-layer",
+        type: "registry:ui",
+        title: "Halo Refraction Layer",
+        description:
+          "Optional progressive-enhancement optical layer that introduces restrained environmental distortion to selected HaloUI materials with a guaranteed non-refraction fallback.",
+        dependencies: ["@radix-ui/react-slot", "clsx", "tailwind-merge"],
+        registryDependencies: [],
+        files: [
+          {
+            path: "components/ui/halo-refraction-layer.tsx",
+            content: refractionContent,
+            type: "registry:ui",
+            target: "components/ui/halo-refraction-layer.tsx",
+          },
+          {
+            path: "styles/halo-tokens.css",
+            content: tokensContent,
+            type: "registry:ui",
+            target: "styles/halo-tokens.css",
+          },
+        ],
+        cssVars: {
+          light: {
+            "--halo-refraction-strength": "0.12",
+            "--halo-refraction-offset": "1.5px",
+          },
+          dark: {
+            "--halo-refraction-strength": "0.18",
+          },
+        },
+        meta: {
+          status: "experimental",
+          version: "1.0.0",
+          category: "foundations",
+          accessibility: "WCAG 2.1 AA (Decorative)",
+          lastUpdated: "2026-09-24",
+        },
+      };
+
+      return NextResponse.json(registryItem);
+    }
+
+    if (cleanName === "focus-ring" || cleanName === "halo-focus-ring") {
+      const focusPath = path.join(cwd, "components", "haloui", "foundations", "halo-focus-ring.tsx");
+      const tokensPath = path.join(cwd, "styles", "halo-tokens.css");
+
+      const [focusContent, tokensContent] = await Promise.all([
+        fs.readFile(focusPath, "utf-8"),
+        fs.readFile(tokensPath, "utf-8"),
+      ]);
+
+      const registryItem = {
+        $schema: "https://ui.shadcn.com/schema/registry-item.json",
+        name: "halo-focus-ring",
+        type: "registry:ui",
+        title: "Halo Focus Ring",
+        description:
+          "Shared high-contrast focus-visible treatment for HaloUI interactive components. Operates independently outside the optical material boundary to guarantee unambiguous keyboard accessibility.",
+        dependencies: ["@radix-ui/react-slot", "class-variance-authority", "clsx", "tailwind-merge"],
+        registryDependencies: [],
+        files: [
+          {
+            path: "components/ui/halo-focus-ring.tsx",
+            content: focusContent,
+            type: "registry:ui",
+            target: "components/ui/halo-focus-ring.tsx",
+          },
+          {
+            path: "styles/halo-tokens.css",
+            content: tokensContent,
+            type: "registry:ui",
+            target: "styles/halo-tokens.css",
+          },
+        ],
+        cssVars: {
+          light: {
+            "--halo-focus-color": "#0284c7",
+            "--halo-focus-offset": "2px",
+            "--halo-focus-width": "2px",
+            "--halo-focus-offset-color": "#ffffff",
+            "--halo-focus-outer-color": "rgba(2, 132, 199, 0.25)",
+            "--halo-focus-shadow":
+              "0 0 0 2px #ffffff, 0 0 0 4px #0284c7, 0 0 0 5.5px rgba(2, 132, 199, 0.25)",
+          },
+          dark: {
+            "--halo-focus-color": "#38bdf8",
+            "--halo-focus-offset": "2px",
+            "--halo-focus-width": "2px",
+            "--halo-focus-offset-color": "#0c0d0f",
+            "--halo-focus-outer-color": "rgba(56, 189, 248, 0.35)",
+            "--halo-focus-shadow":
+              "0 0 0 2px #0c0d0f, 0 0 0 4px #38bdf8, 0 0 0 5.5px rgba(56, 189, 248, 0.35)",
+          },
+        },
+        meta: {
+          status: "production",
+          version: "1.0.0",
+          category: "foundations",
+          accessibility: "WCAG 2.1 AA (Criteria 2.4.7 & 2.4.11)",
+          lastUpdated: "2026-09-24",
+        },
+      };
+
+      return NextResponse.json(registryItem);
+    }
+
+    if (cleanName === "motion-presets" || cleanName === "halo-motion-presets") {
+      const motionPath = path.join(cwd, "components", "haloui", "foundations", "halo-motion-presets.tsx");
+      const tokensPath = path.join(cwd, "styles", "halo-tokens.css");
+
+      const [motionContent, tokensContent] = await Promise.all([
+        fs.readFile(motionPath, "utf-8"),
+        fs.readFile(tokensPath, "utf-8"),
+      ]);
+
+      const registryItem = {
+        $schema: "https://ui.shadcn.com/schema/registry-item.json",
+        name: "halo-motion-presets",
+        type: "registry:ui",
+        title: "Halo Motion Presets",
+        description:
+          "Central motion vocabulary standardizing press compression, elevation lift, spring-settle entrance, and graceful reduced-motion fallbacks across HaloUI.",
+        dependencies: ["@radix-ui/react-slot", "class-variance-authority", "clsx", "tailwind-merge"],
+        registryDependencies: [],
+        files: [
+          {
+            path: "components/ui/halo-motion-presets.tsx",
+            content: motionContent,
+            type: "registry:ui",
+            target: "components/ui/halo-motion-presets.tsx",
+          },
+          {
+            path: "styles/halo-tokens.css",
+            content: tokensContent,
+            type: "registry:ui",
+            target: "styles/halo-tokens.css",
+          },
+        ],
+        cssVars: {
+          light: {
+            "--halo-duration-micro": "120ms",
+            "--halo-duration-state": "180ms",
+            "--halo-duration-reveal": "240ms",
+            "--halo-duration-settle": "320ms",
+            "--halo-ease-tactile": "cubic-bezier(0.2, 0.8, 0.3, 1)",
+            "--halo-ease-spring": "cubic-bezier(0.16, 1, 0.3, 1)",
+          },
+          dark: {},
+        },
+        meta: {
+          status: "production",
+          version: "1.0.0",
+          category: "foundations",
+          accessibility: "WCAG 2.1 AA (Criteria 2.3.3 Compliant)",
+          lastUpdated: "2026-09-24",
+        },
+      };
+
+      return NextResponse.json(registryItem);
+    }
+
+    if (cleanName === "theme-provider" || cleanName === "halo-theme-provider") {
+      const themePath = path.join(cwd, "components", "haloui", "foundations", "halo-theme-provider.tsx");
+      const tokensPath = path.join(cwd, "styles", "halo-tokens.css");
+
+      const [themeContent, tokensContent] = await Promise.all([
+        fs.readFile(themePath, "utf-8"),
+        fs.readFile(tokensPath, "utf-8"),
+      ]);
+
+      const registryItem = {
+        $schema: "https://ui.shadcn.com/schema/registry-item.json",
+        name: "halo-theme-provider",
+        type: "registry:ui",
+        title: "Halo Theme Provider",
+        description:
+          "Orchestrates HaloUI light, dark and system visual themes together with shared optical material intensity defaults.",
+        dependencies: ["next-themes"],
+        registryDependencies: [],
+        files: [
+          {
+            path: "components/ui/halo-theme-provider.tsx",
+            content: themeContent,
+            type: "registry:ui",
+            target: "components/ui/halo-theme-provider.tsx",
+          },
+          {
+            path: "styles/halo-tokens.css",
+            content: tokensContent,
+            type: "registry:ui",
+            target: "styles/halo-tokens.css",
+          },
+        ],
+        meta: {
+          status: "production",
+          version: "1.0.0",
+          category: "foundations",
+          lastUpdated: "2026-09-24",
+        },
+      };
+
+      return NextResponse.json(registryItem);
+    }
+
+    if (cleanName === "background" || cleanName === "halo-background") {
+      const bgPath = path.join(cwd, "components", "haloui", "foundations", "halo-background.tsx");
+      const bgContent = await fs.readFile(bgPath, "utf-8");
+
+      const registryItem = {
+        $schema: "https://ui.shadcn.com/schema/registry-item.json",
+        name: "halo-background",
+        type: "registry:ui",
+        title: "Halo Background",
+        description:
+          "Reference background environments for testing and evaluating translucent liquid materials against diverse optical substrates.",
+        dependencies: ["clsx", "tailwind-merge"],
+        registryDependencies: [],
+        files: [
+          {
+            path: "components/ui/halo-background.tsx",
+            content: bgContent,
+            type: "registry:ui",
+            target: "components/ui/halo-background.tsx",
+          },
+        ],
+        meta: {
+          status: "production",
+          version: "1.0.0",
+          category: "foundations",
+          lastUpdated: "2026-09-24",
+        },
+      };
+
+      return NextResponse.json(registryItem);
+    }
+
+    if (cleanName === "portal-surface" || cleanName === "halo-portal-surface") {
+      const portalPath = path.join(cwd, "components", "haloui", "foundations", "halo-portal-surface.tsx");
+      const portalContent = await fs.readFile(portalPath, "utf-8");
+
+      const registryItem = {
+        $schema: "https://ui.shadcn.com/schema/registry-item.json",
+        name: "halo-portal-surface",
+        type: "registry:ui",
+        title: "Halo Portal Surface",
+        description:
+          "Consistent liquid-glass material wrapper for portalled floating overlays, modal dialogs, popovers, and menus.",
+        dependencies: ["@radix-ui/react-slot", "clsx", "tailwind-merge"],
+        registryDependencies: ["halo-surface", "halo-highlight", "halo-edge"],
+        files: [
+          {
+            path: "components/ui/halo-portal-surface.tsx",
+            content: portalContent,
+            type: "registry:ui",
+            target: "components/ui/halo-portal-surface.tsx",
+          },
+        ],
+        meta: {
+          status: "production",
+          version: "1.0.0",
+          category: "foundations",
+          lastUpdated: "2026-09-24",
+        },
+      };
+
+      return NextResponse.json(registryItem);
+    }
+
+    if (cleanName === "scrim" || cleanName === "halo-scrim") {
+      const scrimPath = path.join(cwd, "components", "haloui", "foundations", "halo-scrim.tsx");
+      const scrimContent = await fs.readFile(scrimPath, "utf-8");
+
+      const registryItem = {
+        $schema: "https://ui.shadcn.com/schema/registry-item.json",
+        name: "halo-scrim",
+        type: "registry:ui",
+        title: "Halo Scrim",
+        description:
+          "Backdrop and scrim treatment positioned behind modal dialogs and overlays with calibrated optical diffusion blur and ambient darkness.",
+        dependencies: ["@radix-ui/react-slot", "clsx", "tailwind-merge"],
+        registryDependencies: [],
+        files: [
+          {
+            path: "components/ui/halo-scrim.tsx",
+            content: scrimContent,
+            type: "registry:ui",
+            target: "components/ui/halo-scrim.tsx",
+          },
+        ],
+        meta: {
+          status: "production",
+          version: "1.0.0",
+          category: "foundations",
           lastUpdated: "2026-09-24",
         },
       };

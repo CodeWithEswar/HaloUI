@@ -1,0 +1,43 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "split-button",
+  "type": "registry:ui",
+  "title": "Split Button",
+  "description": "Combines a primary immediate action with a secondary menu of closely related alternative actions.",
+  "dependencies": [
+    "@base-ui/react",
+    "@hugeicons/core-free-icons",
+    "@hugeicons/react",
+    "@radix-ui/react-slot",
+    "class-variance-authority",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [
+    "button"
+  ],
+  "files": [
+    {
+      "path": "components/ui/split-button.tsx",
+      "type": "registry:ui",
+      "target": "components/ui/split-button.tsx"
+    },
+    {
+      "path": "components/icons/halo-icon.tsx",
+      "type": "registry:ui",
+      "target": "components/icons/halo-icon.tsx"
+    },
+    {
+      "path": "styles/halo-tokens.css",
+      "type": "registry:ui",
+      "target": "styles/halo-tokens.css"
+    }
+  ],
+  "meta": {
+    "status": "preview",
+    "version": "1.0.0",
+    "category": "actions",
+    "accessibility": "WCAG 2.1 AA",
+    "lastUpdated": "2026-09-24"
+  }
+}

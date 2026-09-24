@@ -47,9 +47,9 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={cn("antialiased", fontMono.variable, geist.variable, "font-sans")}
+      className={cn("antialiased h-full bg-background", fontMono.variable, geist.variable, "font-sans")}
     >
-      <body className="min-h-screen flex flex-col bg-background text-foreground selection:bg-foreground selection:text-background">
+      <body className="min-h-screen h-full flex flex-col bg-background text-foreground selection:bg-foreground selection:text-background">
         <a href="#main-content" data-global-skip className="skip-link">
           Skip to content
         </a>

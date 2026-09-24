@@ -6,9 +6,11 @@ import { cn } from "@/lib/utils";
 export type PreviewEnvironment =
   | "neutral"
   | "paper"
+  | "warm-paper"
   | "spectral"
   | "image"
   | "dense"
+  | "dense-ui"
   | "dark";
 
 export interface HaloBackgroundProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -21,10 +23,10 @@ export interface HaloBackgroundProps extends React.HTMLAttributes<HTMLDivElement
  * HaloUI Official Preview Background Environments
  * Allows evaluating liquid glass materials against distinct physical contexts:
  * - Neutral: Pure minimal workspace
- * - Paper: Creamy tactile surface with organic warmth
+ * - Warm Paper / Paper: Creamy tactile surface with organic warmth
  * - Spectral: Prismatic chromatic refraction
  * - Image: Architectural optical depth
- * - Dense: Real data/code environment to stress-test legibility
+ * - Dense UI / Dense: Real data/code environment to stress-test legibility
  * - Dark: Deep graphite night canvas
  */
 export function HaloBackground({
@@ -34,6 +36,8 @@ export function HaloBackground({
   children,
   ...props
 }: HaloBackgroundProps) {
+  const isPaper = environment === "paper" || environment === "warm-paper";
+  const isDense = environment === "dense" || environment === "dense-ui";
   const hasCustomMinHeight = className && /min-h-/.test(className);
 
   return (
@@ -45,7 +49,7 @@ export function HaloBackground({
         environment === "neutral" &&
           "bg-stone-100/60 dark:bg-[#101114] text-foreground",
         // 2. Warm Paper Environment
-        environment === "paper" &&
+        isPaper &&
           "bg-[#f6f2ea] text-[#1c1917] border border-[#e8dfd1]",
         // 3. Spectral Environment
         environment === "spectral" &&
@@ -54,7 +58,7 @@ export function HaloBackground({
         environment === "image" &&
           "bg-slate-900 text-white",
         // 5. Dense UI Environment
-        environment === "dense" &&
+        isDense &&
           "bg-[#f3f4f6] dark:bg-[#0b0c0e] text-foreground font-mono text-xs",
         // 6. Deep Dark Environment
         environment === "dark" &&
@@ -64,7 +68,7 @@ export function HaloBackground({
       {...props}
     >
       {/* Background Atmosphere Layers */}
-      {environment === "paper" && (
+      {isPaper && (
         <>
           <div
             className="absolute inset-0 pointer-events-none opacity-40 mix-blend-multiply"

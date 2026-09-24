@@ -209,14 +209,6 @@ export default function GlassCard() {
 
       {/* 2. Preview */}
       <section className="space-y-4">
-        <div className="space-y-1">
-          <h2 className="text-2xl font-semibold tracking-tight text-foreground">
-            Preview
-          </h2>
-          <p className="text-sm text-muted-foreground">
-            Evaluate optical edge hairlines across viewports, environments, strength tiers, and structural placement modes.
-          </p>
-        </div>
         <EdgePreviewStage />
       </section>
 

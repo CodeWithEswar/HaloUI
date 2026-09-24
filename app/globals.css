@@ -3,7 +3,7 @@
 @import "shadcn/tailwind.css";
 @import "../styles/halo-tokens.css";
 
-@custom-variant dark (&:is(.dark *));
+@custom-variant dark (&:is(.dark *):not(:is([data-stage-theme="light"], [data-stage-theme="light"] *)));
 
 @theme inline {
     --font-heading: var(--font-sans);
@@ -85,8 +85,11 @@
 }
 
 @media (min-width: 64rem) {
+  html:has([data-docs-shell]),
   body:has([data-docs-shell]) {
+    height: 100vh;
     height: 100dvh;
+    max-height: 100vh;
     max-height: 100dvh;
     overflow: hidden;
   }
@@ -96,8 +99,12 @@
   }
 
   body:has([data-docs-shell]) #main-content {
-    height: calc(100dvh - var(--site-header-height));
+    flex: 1 1 0%;
     min-height: 0;
+    height: calc(100vh - var(--site-header-height));
+    height: calc(100dvh - var(--site-header-height));
+    max-height: calc(100vh - var(--site-header-height));
+    max-height: calc(100dvh - var(--site-header-height));
     overflow: hidden;
   }
 }
@@ -537,4 +544,188 @@ body:has([data-docs-shell]) [data-docs-skip] {
 .no-scrollbar {
   -ms-overflow-style: none !important;
   scrollbar-width: none !important;
+}
+
+/* =========================================================
+   UpLyn / Halo Docs — Code Surface
+   ========================================================= */
+
+.stage-code-token {
+  color: var(--token-light);
+}
+
+.dark .stage-code-token {
+  color: var(--token-dark);
+}
+
+/*
+ * Shiki should not control the surrounding code-block surface.
+ * StageCodeBlock owns background, spacing and geometry.
+ */
+.stage-shiki .shiki {
+  margin: 0 !important;
+  padding: 0 !important;
+  background: transparent !important;
+  overflow: visible !important;
+
+  font-family: inherit !important;
+  font-size: inherit !important;
+  line-height: 1.375rem !important;
+}
+
+/*
+ * Crucial: code must use display: grid to discard whitespace/newline text
+ * nodes between Shiki lines that otherwise cause empty gap lines in pre.
+ */
+.stage-shiki .shiki code {
+  display: grid !important;
+}
+
+/*
+ * Shiki dual-theme tokens.
+ */
+.stage-shiki .shiki span {
+  color: var(--shiki-light);
+}
+
+.dark .stage-shiki .shiki span {
+  color: var(--shiki-dark);
+}
+
+/*
+ * Each Shiki line becomes a proper row.
+ */
+.stage-shiki .line {
+  position: relative;
+  display: block;
+
+  min-height: 1.375rem;
+  line-height: 1.375rem;
+  padding-inline: 1rem;
+
+  white-space: pre;
+
+  transition: background-color 100ms ease;
+}
+
+.stage-shiki .line:hover {
+  background: rgb(0 0 0 / 0.035);
+}
+
+.dark .stage-shiki .line:hover {
+  background: rgb(255 255 255 / 0.04);
+}
+
+/*
+ * Wrapping mode.
+ */
+.stage-shiki-wrap .line {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  word-break: normal;
+}
+
+/*
+ * Line numbers without putting numbers into copied source.
+ */
+.stage-shiki-with-lines {
+  counter-reset: stage-code-line;
+}
+
+.stage-shiki-with-lines .line {
+  counter-increment: stage-code-line;
+
+  padding-left: 3.5rem;
+}
+
+.stage-shiki-with-lines .line::before {
+  content: counter(stage-code-line);
+
+  position: absolute;
+  left: 0;
+  top: 0;
+
+  width: 2.75rem;
+  height: 1.375rem;
+  line-height: 1.375rem;
+
+  padding-right: 0.75rem;
+
+  border-right: 1px solid #e2e8f0;
+
+  color: #94a3b8;
+  background: #f6f8fa;
+
+  text-align: right;
+
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+
+  user-select: none;
+
+  transition: color 100ms ease;
+}
+
+.dark .stage-shiki-with-lines .line::before {
+  border-right: 1px solid rgb(255 255 255 / 0.06);
+  color: #52525b;
+  background: #000000;
+}
+
+.stage-shiki-with-lines .line:hover::before {
+  color: #475569;
+}
+
+.dark .stage-shiki-with-lines .line:hover::before {
+  color: #a1a1aa;
+}
+
+/*
+ * Selection should feel like an editor rather than normal prose.
+ */
+.stage-shiki ::selection,
+.stage-code-token::selection {
+  background: rgb(186 230 253 / 0.7);
+}
+
+.dark .stage-shiki ::selection,
+.dark .stage-code-token::selection {
+  background: rgb(56 139 253 / 0.28);
+}
+
+/*
+ * Scrollbar is intentionally quiet across light and dark themes.
+ */
+.stage-shiki::-webkit-scrollbar,
+.stage-code-scroll::-webkit-scrollbar {
+  height: 6px;
+}
+
+.stage-shiki::-webkit-scrollbar-track,
+.stage-code-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.stage-shiki::-webkit-scrollbar-thumb,
+.stage-code-scroll::-webkit-scrollbar-thumb {
+  border: 1px solid #e2e8f0;
+  border-radius: 999px;
+  background: #cbd5e1;
+}
+
+.dark .stage-shiki::-webkit-scrollbar-thumb,
+.dark .stage-code-scroll::-webkit-scrollbar-thumb {
+  border: 1px solid #000000;
+  border-radius: 999px;
+  background: #27272a;
+}
+
+/*
+ * Reduced motion.
+ */
+@media (prefers-reduced-motion: reduce) {
+  .stage-shiki .line,
+  .stage-code-token {
+    transition: none !important;
+  }
 }

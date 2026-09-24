@@ -48,6 +48,23 @@
   --halo-radius-xl: 26px;
   --halo-radius-full: 9999px;
 
+  /* Focus Ring Tokens (Shared Accessibility Infrastructure) */
+  --halo-focus-color: #0284c7;
+  --halo-focus-offset: 2px;
+  --halo-focus-width: 2px;
+  --halo-focus-offset-color: #ffffff;
+  --halo-focus-outer-color: rgba(2, 132, 199, 0.25);
+  --halo-focus-shadow: 0 0 0 var(--halo-focus-offset) var(--halo-focus-offset-color), 0 0 0 calc(var(--halo-focus-offset) + var(--halo-focus-width)) var(--halo-focus-color), 0 0 0 calc(var(--halo-focus-offset) + var(--halo-focus-width) + 1.5px) var(--halo-focus-outer-color);
+
+  /* Motion Presets & Timing Architecture */
+  --halo-duration-micro: 120ms;
+  --halo-duration-state: 180ms;
+  --halo-duration-reveal: 240ms;
+  --halo-duration-settle: 320ms;
+  --halo-ease-tactile: cubic-bezier(0.2, 0.8, 0.3, 1);
+  --halo-ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
+  --halo-ease-out: cubic-bezier(0, 0, 0.2, 1);
+
   /* Typography & Canvas (Editorial warm tone) */
   --halo-canvas: #fbfbfd;
   --halo-canvas-card: #f5f5f7;
@@ -86,6 +103,14 @@
   --halo-noise-opacity: 0.035;
   --halo-glow: rgba(255, 255, 255, 0.04);
 
+  /* Focus Ring Tokens (Shared Accessibility Infrastructure) */
+  --halo-focus-color: #38bdf8;
+  --halo-focus-offset: 2px;
+  --halo-focus-width: 2px;
+  --halo-focus-offset-color: #0c0d0f;
+  --halo-focus-outer-color: rgba(56, 189, 248, 0.35);
+  --halo-focus-shadow: 0 0 0 var(--halo-focus-offset) var(--halo-focus-offset-color), 0 0 0 calc(var(--halo-focus-offset) + var(--halo-focus-width)) var(--halo-focus-color), 0 0 0 calc(var(--halo-focus-offset) + var(--halo-focus-width) + 1.5px) var(--halo-focus-outer-color);
+
   /* Typography & Canvas */
   --halo-canvas: #0c0d0f;
   --halo-canvas-card: #141518;
@@ -93,6 +118,99 @@
   --halo-text-primary: #f6f7f9;
   --halo-text-secondary: #9ea3ae;
   --halo-text-tertiary: #656a76;
+}
+
+/* Explicit Stage Scopes for Interactive Previews */
+.light,
+[data-stage-theme="light"] {
+  --halo-surface: rgba(255, 255, 255, 0.72);
+  --halo-surface-elevated: rgba(255, 255, 255, 0.88);
+  --halo-surface-strong: rgba(255, 255, 255, 0.95);
+  --halo-surface-recessed: rgba(0, 0, 0, 0.03);
+  --halo-surface-tint: rgba(245, 245, 247, 0.45);
+
+  --halo-edge: rgba(255, 255, 255, 0.9);
+  --halo-edge-soft: rgba(0, 0, 0, 0.08);
+  --halo-edge-bright: rgba(255, 255, 255, 1);
+  --halo-edge-inner: inset 0 1px 1px 0 rgba(255, 255, 255, 0.9), inset 0 -1px 1px 0 rgba(0, 0, 0, 0.04);
+  --halo-edge-outer: 0 0 0 1px rgba(0, 0, 0, 0.06);
+
+  --halo-highlight: linear-gradient(135deg, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.15) 35%, rgba(255, 255, 255, 0) 100%);
+  --halo-highlight-strength: 0.85;
+
+  --halo-shadow-contact: 0 1px 2px -0.5px rgba(0, 0, 0, 0.08), 0 2px 4px 0 rgba(0, 0, 0, 0.04);
+  --halo-shadow-elevated: 0 6px 16px -4px rgba(0, 0, 0, 0.08), 0 2px 6px -1px rgba(0, 0, 0, 0.04);
+  --halo-shadow-ambient: 0 16px 36px -8px rgba(0, 0, 0, 0.1);
+  --halo-shadow-compressed: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
+
+  --halo-refraction-strength: 0.12;
+  --halo-noise-opacity: 0.025;
+  --halo-glow: rgba(0, 0, 0, 0.04);
+
+  --halo-focus-color: #0284c7;
+  --halo-focus-offset-color: #ffffff;
+  --halo-focus-outer-color: rgba(2, 132, 199, 0.25);
+
+  --halo-canvas: #fbfbfd;
+  --halo-canvas-card: #f5f5f7;
+  --halo-canvas-subtle: #eaecee;
+  --halo-text-primary: #121316;
+  --halo-text-secondary: #585c65;
+  --halo-text-tertiary: #8b909c;
+
+  /* Scoped semantic background / foreground for light stage */
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --border: oklch(0.922 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  color-scheme: light;
+}
+
+[data-stage-theme="dark"] {
+  --halo-surface: rgba(22, 23, 26, 0.7);
+  --halo-surface-elevated: rgba(30, 32, 38, 0.85);
+  --halo-surface-strong: rgba(38, 41, 48, 0.95);
+  --halo-surface-recessed: rgba(0, 0, 0, 0.45);
+  --halo-surface-tint: rgba(18, 19, 22, 0.6);
+
+  --halo-edge: rgba(255, 255, 255, 0.14);
+  --halo-edge-soft: rgba(255, 255, 255, 0.06);
+  --halo-edge-bright: rgba(255, 255, 255, 0.28);
+  --halo-edge-inner: inset 0 1px 1px 0 rgba(255, 255, 255, 0.2), inset 0 -1px 1px 0 rgba(0, 0, 0, 0.6);
+  --halo-edge-outer: 0 0 0 1px rgba(255, 255, 255, 0.08);
+
+  --halo-highlight: linear-gradient(135deg, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0.04) 38%, rgba(255, 255, 255, 0) 100%);
+  --halo-highlight-strength: 0.55;
+
+  --halo-shadow-contact: 0 1px 2px -0.5px rgba(0, 0, 0, 0.4), 0 3px 6px 0 rgba(0, 0, 0, 0.3);
+  --halo-shadow-elevated: 0 8px 24px -4px rgba(0, 0, 0, 0.65), 0 3px 8px -2px rgba(0, 0, 0, 0.4);
+  --halo-shadow-ambient: 0 20px 48px -12px rgba(0, 0, 0, 0.85);
+  --halo-shadow-compressed: 0 1px 2px 0 rgba(0, 0, 0, 0.6);
+
+  --halo-refraction-strength: 0.18;
+  --halo-noise-opacity: 0.035;
+  --halo-glow: rgba(255, 255, 255, 0.04);
+
+  --halo-focus-color: #38bdf8;
+  --halo-focus-offset-color: #0c0d0f;
+  --halo-focus-outer-color: rgba(56, 189, 248, 0.35);
+
+  --halo-canvas: #0c0d0f;
+  --halo-canvas-card: #141518;
+  --halo-canvas-subtle: #1c1e22;
+  --halo-text-primary: #f6f7f9;
+  --halo-text-secondary: #9ea3ae;
+  --halo-text-tertiary: #656a76;
+
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.145 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --border: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  color-scheme: dark;
 }
 
 /* Material Intensity Presets */
@@ -126,12 +244,226 @@
   box-shadow: var(--halo-shadow-compressed), var(--halo-edge-inner), var(--halo-edge-outer) !important;
 }
 
+/* Focus Ring Accessibility Infrastructure */
+.halo-focus-ring {
+  outline: none;
+}
+
+.halo-focus-ring:focus-visible {
+  outline: 2px solid var(--halo-focus-color) !important;
+  outline-offset: var(--halo-focus-offset) !important;
+  box-shadow: var(--halo-focus-shadow) !important;
+  z-index: 10;
+}
+
+/* Forced Colors (High Contrast Mode) */
+@media (forced-colors: active) {
+  .halo-focus-ring:focus-visible {
+    outline: 2px solid Highlight !important;
+    outline-offset: 2px !important;
+    box-shadow: none !important;
+  }
+}
+
+/* Motion Presets Classes */
+.halo-motion-press {
+  transition: transform var(--halo-duration-micro) var(--halo-ease-tactile),
+              box-shadow var(--halo-duration-micro) var(--halo-ease-tactile);
+}
+
+.halo-motion-press:active:not(:disabled) {
+  transform: scale(0.98) translateY(1px);
+}
+
+.halo-motion-lift {
+  transition: transform var(--halo-duration-state) var(--halo-ease-tactile),
+              box-shadow var(--halo-duration-state) var(--halo-ease-tactile);
+}
+
+.halo-motion-lift:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: var(--halo-shadow-elevated);
+}
+
+.halo-motion-reveal {
+  animation: halo-reveal var(--halo-duration-reveal) var(--halo-ease-spring) forwards;
+}
+
+.halo-motion-settle {
+  transition: transform var(--halo-duration-settle) var(--halo-ease-spring),
+              opacity var(--halo-duration-reveal) ease;
+}
+
+.halo-motion-float {
+  animation: halo-float 3.5s ease-in-out infinite alternate;
+}
+
+@keyframes halo-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(4px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes halo-float {
+  0% {
+    transform: translateY(0px);
+  }
+  100% {
+    transform: translateY(-6px);
+  }
+}
+
 /* Reduced Motion Override */
 @media (prefers-reduced-motion: reduce) {
   .halo-tactile-press,
+  .halo-motion-press,
+  .halo-motion-lift,
+  .halo-motion-reveal,
+  .halo-motion-settle,
+  .halo-motion-float,
   .halo-motion-transition {
     transition-duration: 0.01ms !important;
     animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
     transform: none !important;
   }
+}
+
+/* ==========================================================================
+   HALOUI MATERIAL INTENSITY ORCHESTRATION
+   ========================================================================== */
+[data-material-intensity="subtle"],
+.halo-intensity-subtle {
+  --halo-blur-strength: 8px;
+  --halo-highlight-multiplier: 0.40;
+  --halo-glow-spread: 12px;
+}
+
+[data-material-intensity="balanced"],
+.halo-intensity-balanced {
+  --halo-blur-strength: 16px;
+  --halo-highlight-multiplier: 0.85;
+  --halo-glow-spread: 24px;
+}
+
+[data-material-intensity="rich"],
+.halo-intensity-rich {
+  --halo-blur-strength: 28px;
+  --halo-highlight-multiplier: 1.20;
+  --halo-glow-spread: 36px;
+}
+
+/* ==========================================================================
+   HALOUI PHYSICAL LIQUID GLASS BUTTON ENGINE
+   ========================================================================== */
+.halo-liquid-glass {
+  position: relative;
+  isolation: isolate;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(8px) saturate(180%);
+  -webkit-backdrop-filter: blur(8px) saturate(180%);
+  border: 1px double rgba(51, 51, 51, 0.12);
+  box-shadow:
+    inset 2px -2px 1px -1px rgba(255, 255, 255, 0.95),
+    inset -2px 2px 1px -1px rgba(255, 255, 255, 0.95),
+    inset 6px -6px 1px -6px rgba(255, 255, 255, 0.65),
+    inset -6px 6px 1px -6px rgba(255, 255, 255, 0.65),
+    inset 0 0 2px rgba(0, 0, 0, 0.35),
+    0 4px 14px rgba(0, 0, 0, 0.12);
+  transition: transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1),
+              box-shadow 0.2s cubic-bezier(0.2, 0.8, 0.2, 1),
+              background 0.2s ease;
+}
+
+.dark .halo-liquid-glass,
+[data-stage-theme="dark"] .halo-liquid-glass {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px double rgba(255, 255, 255, 0.16);
+  box-shadow:
+    inset 2px -2px 1px -1px rgba(255, 255, 255, 0.5),
+    inset -2px 2px 1px -1px rgba(255, 255, 255, 0.5),
+    inset 6px -6px 1px -6px rgba(255, 255, 255, 0.3),
+    inset -6px 6px 1px -6px rgba(255, 255, 255, 0.3),
+    inset 0 0 2px rgba(0, 0, 0, 0.8),
+    0 6px 20px -2px rgba(0, 0, 0, 0.6);
+}
+
+.halo-liquid-glass::before {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: linear-gradient(
+    45deg,
+    rgba(255, 255, 255, 0.75) 0%,
+    transparent 25%,
+    transparent 75%,
+    rgba(255, 255, 255, 0.75) 100%
+  );
+  filter: blur(1px);
+  opacity: 0.9;
+  transition: opacity 0.2s ease;
+}
+
+.dark .halo-liquid-glass::before,
+[data-stage-theme="dark"] .halo-liquid-glass::before {
+  background: linear-gradient(
+    45deg,
+    rgba(255, 255, 255, 0.4) 0%,
+    transparent 25%,
+    transparent 75%,
+    rgba(255, 255, 255, 0.4) 100%
+  );
+}
+
+.halo-liquid-glass::after {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  inset: 2px;
+  border-radius: inherit;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  filter: blur(3px);
+  pointer-events: none;
+}
+
+.dark .halo-liquid-glass::after,
+[data-stage-theme="dark"] .halo-liquid-glass::after {
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  filter: blur(3px);
+}
+
+.halo-liquid-glass:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow:
+    inset 2px -2px 1px -1px rgba(255, 255, 255, 1),
+    inset -2px 2px 1px -1px rgba(255, 255, 255, 1),
+    inset 6px -6px 1px -6px rgba(255, 255, 255, 0.8),
+    inset -6px 6px 1px -6px rgba(255, 255, 255, 0.8),
+    inset 0 0 2px rgba(0, 0, 0, 0.25),
+    0 8px 24px -2px rgba(0, 0, 0, 0.18);
+}
+
+.dark .halo-liquid-glass:hover,
+[data-stage-theme="dark"] .halo-liquid-glass:hover {
+  background: rgba(255, 255, 255, 0.07);
+  box-shadow:
+    inset 2px -2px 1px -1px rgba(255, 255, 255, 0.7),
+    inset -2px 2px 1px -1px rgba(255, 255, 255, 0.7),
+    inset 6px -6px 1px -6px rgba(255, 255, 255, 0.4),
+    inset -6px 6px 1px -6px rgba(255, 255, 255, 0.4),
+    inset 0 0 2px rgba(0, 0, 0, 0.6),
+    0 10px 28px -2px rgba(0, 0, 0, 0.7);
+}
+
+.halo-liquid-glass:active {
+  transform: scale(0.95);
 }

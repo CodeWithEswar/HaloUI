@@ -247,14 +247,6 @@ export function CustomDialog({ children }: { children: React.ReactNode }) {
 
       {/* 2. Preview (Section 66) */}
       <section className="space-y-4">
-        <div className="space-y-1">
-          <h2 className="text-2xl font-semibold tracking-tight text-foreground">
-            Preview
-          </h2>
-          <p className="text-sm text-muted-foreground">
-            Test the live foundation primitive across viewports, environments, intensity presets, and elevation depths.
-          </p>
-        </div>
         <SurfacePreviewStage />
       </section>
 

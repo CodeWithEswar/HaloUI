@@ -155,15 +155,6 @@ export default function HaloGlowDocsPage() {
 
       {/* 2. Interactive Live Preview Stage */}
       <section className="space-y-4">
-        <div className="flex items-center justify-between">
-          <h2 className="text-xl font-semibold tracking-tight text-foreground flex items-center gap-2">
-            <HaloIcon icon={SparklesIcon} size={18} className="text-foreground" />
-            Live Preview Stage
-          </h2>
-          <span className="text-xs text-muted-foreground">
-            Interactive backdrop, variant, color, and hover simulation
-          </span>
-        </div>
         <GlowPreviewStage />
       </section>
 
@@ -393,29 +384,6 @@ export function ActiveFeaturedCard({ isSelected }: { isSelected: boolean }) {
           Installed Files
         </h2>
         <FileTree items={INSTALLED_FILES} />
-      </section>
-
-      {/* 12. Related Foundations */}
-      <section className="border-t border-black/10 dark:border-white/10 pt-8 flex items-center justify-between">
-        <div>
-          <span className="text-xs text-muted-foreground">Previous Foundation</span>
-          <Link
-            href="/components/halo-noise"
-            className="flex items-center gap-1.5 text-sm font-medium text-foreground hover:underline"
-          >
-            ← Halo Noise
-          </Link>
-        </div>
-
-        <div className="text-right">
-          <span className="text-xs text-muted-foreground">Next Component</span>
-          <Link
-            href="/components/button"
-            className="flex items-center gap-1.5 text-sm font-medium text-foreground hover:underline"
-          >
-            Halo Button →
-          </Link>
-        </div>
       </section>
     </div>
   );

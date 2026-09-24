@@ -1,0 +1,33 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "button-group",
+  "type": "registry:ui",
+  "title": "Button Group",
+  "description": "Visually connects related independent actions while preserving the semantics, focus behavior, and activation model of each control.",
+  "dependencies": [
+    "@radix-ui/react-slot",
+    "class-variance-authority",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "components/ui/button-group.tsx",
+      "type": "registry:ui",
+      "target": "components/ui/button-group.tsx"
+    },
+    {
+      "path": "styles/halo-tokens.css",
+      "type": "registry:ui",
+      "target": "styles/halo-tokens.css"
+    }
+  ],
+  "meta": {
+    "status": "preview",
+    "version": "1.0.0",
+    "category": "actions",
+    "accessibility": "WCAG 2.1 AA",
+    "lastUpdated": "2026-09-24"
+  }
+}

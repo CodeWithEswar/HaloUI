@@ -3,10 +3,47 @@
 import * as React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Search01Icon } from "@hugeicons/core-free-icons";
+import {
+  Search01Icon,
+  CheckmarkCircle01Icon,
+  ViewIcon,
+  FlashIcon,
+  AlertCircleIcon,
+} from "@hugeicons/core-free-icons";
 import { HaloIcon } from "@/components/icons/halo-icon";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { docsNavigation } from "@/lib/docs/navigation";
 import { cn } from "@/lib/utils";
+
+const STATUS_CONFIG: Record<
+  string,
+  { label: string; icon: typeof CheckmarkCircle01Icon; className: string }
+> = {
+  stable: {
+    label: "Stable",
+    icon: CheckmarkCircle01Icon,
+    className: "text-emerald-500 hover:text-emerald-400",
+  },
+  preview: {
+    label: "Preview",
+    icon: ViewIcon,
+    className: "text-sky-400 hover:text-sky-300",
+  },
+  experimental: {
+    label: "Experimental",
+    icon: FlashIcon,
+    className: "text-amber-400 hover:text-amber-300",
+  },
+  deprecated: {
+    label: "Deprecated",
+    icon: AlertCircleIcon,
+    className: "text-rose-400 hover:text-rose-300",
+  },
+};
 
 type DocsSidebarProps = {
   onNavigate?: () => void;
@@ -61,6 +98,8 @@ export function DocsSidebar({ onNavigate, className }: DocsSidebarProps) {
               <ul className="space-y-0.5">
                 {section.items.map((item) => {
                   const active = pathname === item.href || (item.href === "/docs" && pathname === "/docs/introduction");
+                  const statusInfo = item.status ? STATUS_CONFIG[item.status] : null;
+
                   return (
                     <li key={item.href}>
                       <Link
@@ -69,17 +108,30 @@ export function DocsSidebar({ onNavigate, className }: DocsSidebarProps) {
                         onClick={onNavigate}
                         aria-current={active ? "page" : undefined}
                         className={cn(
-                          "flex min-h-8 items-center justify-between rounded-md px-2.5 py-1.5 text-sm transition-colors",
+                          "group flex min-h-8 items-center justify-between rounded-md px-2.5 py-1.5 text-sm transition-colors",
                           active
                             ? "bg-accent font-medium text-accent-foreground"
                             : "text-muted-foreground hover:bg-accent/60 hover:text-foreground",
                         )}
                       >
-                        <span>{item.title}</span>
-                        {item.status && (
-                          <span className="text-[9px] uppercase tracking-wide text-muted-foreground">
-                            {item.status}
-                          </span>
+                        <span className="truncate">{item.title}</span>
+                        {statusInfo && (
+                          <Tooltip>
+                            <TooltipTrigger asChild>
+                              <span
+                                className={cn(
+                                  "inline-flex shrink-0 items-center justify-center p-0.5 transition-colors opacity-75 group-hover:opacity-100",
+                                  statusInfo.className
+                                )}
+                                aria-label={statusInfo.label}
+                              >
+                                <HaloIcon icon={statusInfo.icon} size={14} />
+                              </span>
+                            </TooltipTrigger>
+                            <TooltipContent side="right" className="text-[11px] font-mono capitalize">
+                              {statusInfo.label}
+                            </TooltipContent>
+                          </Tooltip>
                         )}
                       </Link>
                     </li>

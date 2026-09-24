@@ -1,87 +1,95 @@
-import { mergeProps } from "@base-ui/react/merge-props"
-import { useRender } from "@base-ui/react/use-render"
-import { cva, type VariantProps } from "class-variance-authority"
-import { cn } from "cn"
+import * as React from "react";
+import { Slot } from "@radix-ui/react-slot";
+import { cva, type VariantProps } from "class-variance-authority";
+import { cn } from "@/lib/utils";
 
-import { Separator } from "@/components/ui/separator"
-
-const buttonGroupVariants = cva(
-  "flex w-fit items-stretch *:focus-visible:relative *:focus-visible:z-10 has-[>[data-slot=button-group]]:gap-2 has-[select[aria-hidden=true]:last-child]:[&>[data-slot=select-trigger]:last-of-type]:rounded-r-lg [&>[data-slot=select-trigger]:not([class*='w-'])]:w-fit [&>input]:flex-1",
+/**
+ * HaloUI ButtonGroup Variants
+ *
+ * Visually connects related independent actions into one coherent control cluster:
+ * - Coordinates outer border-radius while collapsing adjoining inner geometry.
+ * - Overlaps adjacent 1px borders with `-ms-px` / `-mt-px` to avoid thick 2px seams.
+ * - Establishes relative stacking contexts so hovered, focused, and active controls
+ *   rise above adjacent siblings without clipping focus rings or material edges.
+ */
+export const buttonGroupVariants = cva(
+  [
+    "inline-flex isolate items-stretch",
+    // Child stacking context for borders and Halo Focus Ring layering
+    "[&>*]:hover:z-10",
+    "[&>*]:focus-visible:z-20",
+    "[&>*]:active:z-20",
+  ],
   {
     variants: {
       orientation: {
-        horizontal:
-          "*:data-slot:rounded-r-none [&>[data-slot]:not(:has(~[data-slot]))]:rounded-r-lg! [&>[data-slot]~[data-slot]]:rounded-l-none [&>[data-slot]~[data-slot]]:border-l-0",
-        vertical:
-          "flex-col *:data-slot:rounded-b-none [&>[data-slot]:not(:has(~[data-slot]))]:rounded-b-lg! [&>[data-slot]~[data-slot]]:rounded-t-none [&>[data-slot]~[data-slot]]:border-t-0",
+        horizontal: [
+          "flex-row",
+          "[&>:first-child:not(:last-child)]:rounded-e-none",
+          "[&>:last-child:not(:first-child)]:rounded-s-none",
+          "[&>:not(:first-child):not(:last-child)]:rounded-none",
+          "[&>:not(:first-child)]:-ms-px",
+        ],
+        vertical: [
+          "flex-col",
+          "[&>:first-child:not(:last-child)]:rounded-b-none",
+          "[&>:last-child:not(:first-child)]:rounded-t-none",
+          "[&>:not(:first-child):not(:last-child)]:rounded-none",
+          "[&>:not(:first-child)]:-mt-px",
+        ],
       },
     },
     defaultVariants: {
       orientation: "horizontal",
     },
   }
-)
+);
 
-function ButtonGroup({
-  className,
-  orientation,
-  ...props
-}: React.ComponentProps<"div"> & VariantProps<typeof buttonGroupVariants>) {
-  return (
-    <div
-      role="group"
-      data-slot="button-group"
-      data-orientation={orientation}
-      className={cn(buttonGroupVariants({ orientation }), className)}
-      {...props}
-    />
-  )
+export type ButtonGroupOrientation = NonNullable<VariantProps<typeof buttonGroupVariants>["orientation"]>;
+
+export interface ButtonGroupProps
+  extends React.HTMLAttributes<HTMLDivElement>,
+    VariantProps<typeof buttonGroupVariants> {
+  /**
+   * Render as Radix Slot child component for polymorphic composition.
+   */
+  asChild?: boolean;
 }
 
-function ButtonGroupText({
-  className,
-  render,
-  ...props
-}: useRender.ComponentProps<"div">) {
-  return useRender({
-    defaultTagName: "div",
-    props: mergeProps<"div">(
-      {
-        className: cn(
-          "flex items-center gap-2 rounded-lg border bg-muted px-2.5 text-sm font-medium [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4",
-          className
-        ),
-      },
-      props
-    ),
-    render,
-    state: {
-      slot: "button-group-text",
+/**
+ * ButtonGroup — HaloUI Actions Primitive
+ *
+ * Visually connects related independent actions while preserving the semantics,
+ * focus behavior, and activation model of each control.
+ */
+export const ButtonGroup = React.forwardRef<HTMLDivElement, ButtonGroupProps>(
+  (
+    {
+      className,
+      orientation = "horizontal",
+      asChild = false,
+      role,
+      children,
+      ...props
     },
-  })
-}
+    ref
+  ) => {
+    const Comp = asChild ? Slot : "div";
 
-function ButtonGroupSeparator({
-  className,
-  orientation = "vertical",
-  ...props
-}: React.ComponentProps<typeof Separator>) {
-  return (
-    <Separator
-      data-slot="button-group-separator"
-      orientation={orientation}
-      className={cn(
-        "relative self-stretch bg-input data-horizontal:mx-px data-horizontal:w-auto data-vertical:my-px data-vertical:h-auto",
-        className
-      )}
-      {...props}
-    />
-  )
-}
+    return (
+      <Comp
+        ref={ref}
+        role={role}
+        aria-orientation={orientation === "vertical" && role === "group" ? "vertical" : undefined}
+        data-slot="button-group"
+        data-orientation={orientation}
+        className={cn(buttonGroupVariants({ orientation }), className)}
+        {...props}
+      >
+        {children}
+      </Comp>
+    );
+  }
+);
 
-export {
-  ButtonGroup,
-  ButtonGroupSeparator,
-  ButtonGroupText,
-  buttonGroupVariants,
-}
+ButtonGroup.displayName = "ButtonGroup";

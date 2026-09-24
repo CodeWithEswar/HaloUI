@@ -6,11 +6,9 @@
     {
       "name": "button",
       "type": "registry:ui",
-      "title": "Halo Button",
-      "description": "An action surface with physical optical response, neoskeuomorphic depth, tactile compression, and Hugeicons integration.",
+      "title": "Button",
+      "description": "A text or icon-supported action control with HaloUI material, semantic variants, accessible interaction states, and consistent keyboard behavior.",
       "dependencies": [
-        "@hugeicons/react",
-        "@hugeicons/core-free-icons",
         "@radix-ui/react-slot",
         "class-variance-authority",
         "clsx",
@@ -19,9 +17,111 @@
       "registryDependencies": [],
       "files": [
         {
-          "path": "components/haloui/button/halo-button.tsx",
+          "path": "components/ui/button.tsx",
           "type": "registry:ui",
-          "target": "components/ui/halo-button.tsx"
+          "target": "components/ui/button.tsx"
+        },
+        {
+          "path": "styles/halo-tokens.css",
+          "type": "registry:ui",
+          "target": "styles/halo-tokens.css"
+        }
+      ],
+      "categories": ["actions"],
+      "meta": {
+        "status": "preview",
+        "version": "1.0.0",
+        "category": "actions",
+        "accessibility": "WCAG 2.1 AA",
+        "lastUpdated": "2026-09-24"
+      }
+    },
+    {
+      "name": "icon-button",
+      "type": "registry:ui",
+      "title": "Icon Button",
+      "description": "A compact icon-only control for common actions, with mandatory accessible naming, HaloUI material states, and consistent keyboard and touch behavior.",
+      "dependencies": [
+        "@radix-ui/react-slot",
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "components/ui/icon-button.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/icon-button.tsx"
+        },
+        {
+          "path": "styles/halo-tokens.css",
+          "type": "registry:ui",
+          "target": "styles/halo-tokens.css"
+        }
+      ],
+      "categories": ["actions"],
+      "meta": {
+        "status": "preview",
+        "version": "1.0.0",
+        "category": "actions",
+        "accessibility": "WCAG 2.1 AA",
+        "lastUpdated": "2026-09-24"
+      }
+    },
+    {
+      "name": "button-group",
+      "type": "registry:ui",
+      "title": "Button Group",
+      "description": "Visually connects related independent actions while preserving the semantics, focus behavior, and activation model of each control.",
+      "dependencies": [
+        "@radix-ui/react-slot",
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "components/ui/button-group.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/button-group.tsx"
+        },
+        {
+          "path": "styles/halo-tokens.css",
+          "type": "registry:ui",
+          "target": "styles/halo-tokens.css"
+        }
+      ],
+      "categories": ["actions"],
+      "meta": {
+        "status": "preview",
+        "version": "1.0.0",
+        "category": "actions",
+        "accessibility": "WCAG 2.1 AA",
+        "lastUpdated": "2026-09-24"
+      }
+    },
+    {
+      "name": "split-button",
+      "type": "registry:ui",
+      "title": "Split Button",
+      "description": "Combines a primary immediate action with a secondary menu of closely related alternative actions.",
+      "dependencies": [
+        "@base-ui/react",
+        "@hugeicons/core-free-icons",
+        "@hugeicons/react",
+        "@radix-ui/react-slot",
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": ["button"],
+      "files": [
+        {
+          "path": "components/ui/split-button.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/split-button.tsx"
         },
         {
           "path": "components/icons/halo-icon.tsx",
@@ -34,13 +134,79 @@
           "target": "styles/halo-tokens.css"
         }
       ],
-      "categories": ["actions", "foundations"],
+      "categories": ["actions"],
       "meta": {
-        "status": "stable",
+        "status": "preview",
         "version": "1.0.0",
         "category": "actions",
         "accessibility": "WCAG 2.1 AA",
-        "lastUpdated": "2026-09-23"
+        "lastUpdated": "2026-09-24"
+      }
+    },
+    {
+      "name": "toggle",
+      "type": "registry:ui",
+      "title": "Toggle",
+      "description": "A two-state action control that communicates and changes a persistent pressed or unpressed state.",
+      "dependencies": [
+        "@base-ui/react",
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "components/ui/toggle.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/toggle.tsx"
+        },
+        {
+          "path": "styles/halo-tokens.css",
+          "type": "registry:ui",
+          "target": "styles/halo-tokens.css"
+        }
+      ],
+      "categories": ["actions"],
+      "meta": {
+        "status": "preview",
+        "version": "1.0.0",
+        "category": "actions",
+        "accessibility": "WCAG 2.1 AA",
+        "lastUpdated": "2026-09-24"
+      }
+    },
+    {
+      "name": "toggle-group",
+      "type": "registry:ui",
+      "title": "Toggle Group",
+      "description": "Single- or multi-selection set of toggles.",
+      "dependencies": [
+        "@base-ui/react",
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": ["toggle"],
+      "files": [
+        {
+          "path": "components/ui/toggle-group.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/toggle-group.tsx"
+        },
+        {
+          "path": "styles/halo-tokens.css",
+          "type": "registry:ui",
+          "target": "styles/halo-tokens.css"
+        }
+      ],
+      "categories": ["actions"],
+      "meta": {
+        "status": "preview",
+        "version": "1.0.0",
+        "category": "actions",
+        "accessibility": "WCAG 2.1 AA",
+        "lastUpdated": "2026-09-24"
       }
     },
     {
@@ -360,6 +526,312 @@
         "version": "1.0.0",
         "category": "foundations",
         "accessibility": "WCAG 2.1 AA (Decorative)",
+        "lastUpdated": "2026-09-24"
+      }
+    },
+    {
+      "name": "halo-refraction-layer",
+      "type": "registry:ui",
+      "title": "Halo Refraction Layer",
+      "description": "Optional progressive-enhancement optical layer that introduces restrained environmental distortion to selected HaloUI materials with a guaranteed non-refraction fallback.",
+      "dependencies": [
+        "@radix-ui/react-slot",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "components/ui/halo-refraction-layer.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/halo-refraction-layer.tsx"
+        },
+        {
+          "path": "styles/halo-tokens.css",
+          "type": "registry:ui",
+          "target": "styles/halo-tokens.css"
+        }
+      ],
+      "categories": ["foundations"],
+      "meta": {
+        "status": "experimental",
+        "version": "1.0.0",
+        "category": "foundations",
+        "accessibility": "WCAG 2.1 AA (Decorative)",
+        "lastUpdated": "2026-09-24"
+      }
+    },
+    {
+      "name": "refraction",
+      "type": "registry:ui",
+      "title": "Halo Refraction Layer (Alias)",
+      "description": "Optional progressive-enhancement optical layer that introduces restrained environmental distortion to selected HaloUI materials with a guaranteed non-refraction fallback.",
+      "dependencies": [
+        "@radix-ui/react-slot",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "components/ui/halo-refraction-layer.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/halo-refraction-layer.tsx"
+        },
+        {
+          "path": "styles/halo-tokens.css",
+          "type": "registry:ui",
+          "target": "styles/halo-tokens.css"
+        }
+      ],
+      "categories": ["foundations"],
+      "meta": {
+        "status": "experimental",
+        "version": "1.0.0",
+        "category": "foundations",
+        "accessibility": "WCAG 2.1 AA (Decorative)",
+        "lastUpdated": "2026-09-24"
+      }
+    },
+    {
+      "name": "halo-focus-ring",
+      "type": "registry:ui",
+      "title": "Halo Focus Ring",
+      "description": "Shared high-contrast focus-visible treatment for HaloUI interactive components. Operates independently outside the optical material boundary to guarantee unambiguous keyboard accessibility.",
+      "dependencies": [
+        "@radix-ui/react-slot",
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "components/ui/halo-focus-ring.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/halo-focus-ring.tsx"
+        },
+        {
+          "path": "styles/halo-tokens.css",
+          "type": "registry:ui",
+          "target": "styles/halo-tokens.css"
+        }
+      ],
+      "categories": ["foundations"],
+      "meta": {
+        "status": "production",
+        "version": "1.0.0",
+        "category": "foundations",
+        "accessibility": "WCAG 2.1 AA (Criteria 2.4.7 & 2.4.11)",
+        "lastUpdated": "2026-09-24"
+      }
+    },
+    {
+      "name": "focus-ring",
+      "type": "registry:ui",
+      "title": "Halo Focus Ring (Alias)",
+      "description": "Shared high-contrast focus-visible treatment for HaloUI interactive components. Operates independently outside the optical material boundary to guarantee unambiguous keyboard accessibility.",
+      "dependencies": [
+        "@radix-ui/react-slot",
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "components/ui/halo-focus-ring.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/halo-focus-ring.tsx"
+        },
+        {
+          "path": "styles/halo-tokens.css",
+          "type": "registry:ui",
+          "target": "styles/halo-tokens.css"
+        }
+      ],
+      "categories": ["foundations"],
+      "meta": {
+        "status": "production",
+        "version": "1.0.0",
+        "category": "foundations",
+        "accessibility": "WCAG 2.1 AA (Criteria 2.4.7 & 2.4.11)",
+        "lastUpdated": "2026-09-24"
+      }
+    },
+    {
+      "name": "halo-motion-presets",
+      "type": "registry:ui",
+      "title": "Halo Motion Presets",
+      "description": "Central motion vocabulary standardizing press compression, elevation lift, spring-settle entrance, and graceful reduced-motion fallbacks across HaloUI.",
+      "dependencies": [
+        "@radix-ui/react-slot",
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "components/ui/halo-motion-presets.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/halo-motion-presets.tsx"
+        },
+        {
+          "path": "styles/halo-tokens.css",
+          "type": "registry:ui",
+          "target": "styles/halo-tokens.css"
+        }
+      ],
+      "categories": ["foundations"],
+      "meta": {
+        "status": "production",
+        "version": "1.0.0",
+        "category": "foundations",
+        "accessibility": "WCAG 2.1 AA (Criteria 2.3.3 Compliant)",
+        "lastUpdated": "2026-09-24"
+      }
+    },
+    {
+      "name": "motion-presets",
+      "type": "registry:ui",
+      "title": "Halo Motion Presets (Alias)",
+      "description": "Central motion vocabulary standardizing press compression, elevation lift, spring-settle entrance, and graceful reduced-motion fallbacks across HaloUI.",
+      "dependencies": [
+        "@radix-ui/react-slot",
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "components/ui/halo-motion-presets.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/halo-motion-presets.tsx"
+        },
+        {
+          "path": "styles/halo-tokens.css",
+          "type": "registry:ui",
+          "target": "styles/halo-tokens.css"
+        }
+      ],
+      "categories": ["foundations"],
+      "meta": {
+        "status": "production",
+        "version": "1.0.0",
+        "category": "foundations",
+        "accessibility": "WCAG 2.1 AA (Criteria 2.3.3 Compliant)",
+        "lastUpdated": "2026-09-24"
+      }
+    },
+    {
+      "name": "halo-theme-provider",
+      "type": "registry:ui",
+      "title": "Halo Theme Provider",
+      "description": "Orchestrates HaloUI light, dark and system visual themes together with shared optical material intensity defaults.",
+      "dependencies": [
+        "next-themes"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "components/ui/halo-theme-provider.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/halo-theme-provider.tsx"
+        },
+        {
+          "path": "styles/halo-tokens.css",
+          "type": "registry:ui",
+          "target": "styles/halo-tokens.css"
+        }
+      ],
+      "categories": ["foundations"],
+      "meta": {
+        "status": "production",
+        "version": "1.0.0",
+        "category": "foundations",
+        "lastUpdated": "2026-09-24"
+      }
+    },
+    {
+      "name": "halo-background",
+      "type": "registry:ui",
+      "title": "Halo Background",
+      "description": "Reference background environments for testing and evaluating translucent liquid materials against diverse optical substrates.",
+      "dependencies": [
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "components/ui/halo-background.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/halo-background.tsx"
+        }
+      ],
+      "categories": ["foundations"],
+      "meta": {
+        "status": "production",
+        "version": "1.0.0",
+        "category": "foundations",
+        "lastUpdated": "2026-09-24"
+      }
+    },
+    {
+      "name": "halo-portal-surface",
+      "type": "registry:ui",
+      "title": "Halo Portal Surface",
+      "description": "Consistent liquid-glass material wrapper for portalled floating overlays, modal dialogs, popovers, and menus.",
+      "dependencies": [
+        "@radix-ui/react-slot",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [
+        "halo-surface",
+        "halo-highlight",
+        "halo-edge"
+      ],
+      "files": [
+        {
+          "path": "components/ui/halo-portal-surface.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/halo-portal-surface.tsx"
+        }
+      ],
+      "categories": ["foundations"],
+      "meta": {
+        "status": "production",
+        "version": "1.0.0",
+        "category": "foundations",
+        "lastUpdated": "2026-09-24"
+      }
+    },
+    {
+      "name": "halo-scrim",
+      "type": "registry:ui",
+      "title": "Halo Scrim",
+      "description": "Backdrop and scrim treatment positioned behind modal dialogs and overlays with calibrated optical diffusion blur and ambient darkness.",
+      "dependencies": [
+        "@radix-ui/react-slot",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "components/ui/halo-scrim.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/halo-scrim.tsx"
+        }
+      ],
+      "categories": ["foundations"],
+      "meta": {
+        "status": "production",
+        "version": "1.0.0",
+        "category": "foundations",
         "lastUpdated": "2026-09-24"
       }
     }

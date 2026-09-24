@@ -203,14 +203,6 @@ export default function IlluminatedCard() {
 
       {/* 2. Preview */}
       <section className="space-y-4">
-        <div className="space-y-1">
-          <h2 className="text-2xl font-semibold tracking-tight text-foreground">
-            Preview
-          </h2>
-          <p className="text-sm text-muted-foreground">
-            Evaluate directional lighting forms, strength presets, and ambient environmental transmission across viewports.
-          </p>
-        </div>
         <HighlightPreviewStage />
       </section>
 

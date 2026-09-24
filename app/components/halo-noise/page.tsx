@@ -147,15 +147,6 @@ export default function HaloNoiseDocsPage() {
 
       {/* 2. Interactive Preview Stage */}
       <section className="space-y-4">
-        <div className="flex items-center justify-between">
-          <h2 className="text-xl font-semibold tracking-tight text-foreground flex items-center gap-2">
-            <HaloIcon icon={SparklesIcon} size={18} className="text-foreground" />
-            Live Preview Stage
-          </h2>
-          <span className="text-xs text-muted-foreground">
-            Interactive backdrop, zoom loupe & strength switcher
-          </span>
-        </div>
         <NoisePreviewStage />
       </section>
 
@@ -396,29 +387,6 @@ export function PremiumFrostedCard() {
           Installed Files
         </h2>
         <FileTree items={INSTALLED_FILES} />
-      </section>
-
-      {/* 12. Next Steps / Related Foundations */}
-      <section className="border-t border-black/10 dark:border-white/10 pt-8 flex items-center justify-between">
-        <div>
-          <span className="text-xs text-muted-foreground">Previous Foundation</span>
-          <Link
-            href="/components/halo-highlight"
-            className="flex items-center gap-1.5 text-sm font-medium text-foreground hover:underline"
-          >
-            ← Halo Highlight
-          </Link>
-        </div>
-
-        <div className="text-right">
-          <span className="text-xs text-muted-foreground">Next Foundation</span>
-          <Link
-            href="/components/halo-glow"
-            className="flex items-center gap-1.5 text-sm font-medium text-foreground hover:underline"
-          >
-            Halo Glow →
-          </Link>
-        </div>
       </section>
     </div>
   );
