@@ -268,6 +268,58 @@ export async function GET(
       return NextResponse.json(registryItem);
     }
 
+    if (cleanName === "noise" || cleanName === "halo-noise") {
+      const noisePath = path.join(cwd, "components", "haloui", "foundations", "halo-noise.tsx");
+      const tokensPath = path.join(cwd, "styles", "halo-tokens.css");
+
+      const [noiseContent, tokensContent] = await Promise.all([
+        fs.readFile(noisePath, "utf-8"),
+        fs.readFile(tokensPath, "utf-8"),
+      ]);
+
+      const registryItem = {
+        $schema: "https://ui.shadcn.com/schema/registry-item.json",
+        name: "halo-noise",
+        type: "registry:ui",
+        title: "Halo Noise",
+        description:
+          "Subtle material grain and high-frequency procedural texture used to reduce sterile gradient banding and impart physical tooth to HaloUI liquid glass surfaces.",
+        dependencies: ["@radix-ui/react-slot", "clsx", "tailwind-merge"],
+        registryDependencies: [],
+        files: [
+          {
+            path: "components/ui/halo-noise.tsx",
+            content: noiseContent,
+            type: "registry:ui",
+            target: "components/ui/halo-noise.tsx",
+          },
+          {
+            path: "styles/halo-tokens.css",
+            content: tokensContent,
+            type: "registry:ui",
+            target: "styles/halo-tokens.css",
+          },
+        ],
+        cssVars: {
+          light: {
+            "--halo-noise-opacity": "0.025",
+          },
+          dark: {
+            "--halo-noise-opacity": "0.035",
+          },
+        },
+        meta: {
+          status: "preview",
+          version: "1.0.0",
+          category: "foundations",
+          accessibility: "WCAG 2.1 AA (Decorative)",
+          lastUpdated: "2026-09-24",
+        },
+      };
+
+      return NextResponse.json(registryItem);
+    }
+
     // Fallback: check public/r/[cleanName].json
     const staticFilePath = path.join(cwd, "public", "r", `${cleanName}.json`);
     const fileContent = await fs.readFile(staticFilePath, "utf-8");

@@ -234,6 +234,70 @@
         "accessibility": "WCAG 2.1 AA (Decorative)",
         "lastUpdated": "2026-09-24"
       }
+    },
+    {
+      "name": "halo-noise",
+      "type": "registry:ui",
+      "title": "Halo Noise",
+      "description": "Subtle material grain and high-frequency procedural texture used to reduce sterile gradient banding and impart physical tooth to HaloUI liquid glass surfaces.",
+      "dependencies": [
+        "@radix-ui/react-slot",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "components/ui/halo-noise.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/halo-noise.tsx"
+        },
+        {
+          "path": "styles/halo-tokens.css",
+          "type": "registry:ui",
+          "target": "styles/halo-tokens.css"
+        }
+      ],
+      "categories": ["foundations"],
+      "meta": {
+        "status": "preview",
+        "version": "1.0.0",
+        "category": "foundations",
+        "accessibility": "WCAG 2.1 AA (Decorative)",
+        "lastUpdated": "2026-09-24"
+      }
+    },
+    {
+      "name": "noise",
+      "type": "registry:ui",
+      "title": "Halo Noise (Alias)",
+      "description": "Subtle material grain and high-frequency procedural texture used to reduce sterile gradient banding and impart physical tooth to HaloUI liquid glass surfaces.",
+      "dependencies": [
+        "@radix-ui/react-slot",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "components/ui/halo-noise.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/halo-noise.tsx"
+        },
+        {
+          "path": "styles/halo-tokens.css",
+          "type": "registry:ui",
+          "target": "styles/halo-tokens.css"
+        }
+      ],
+      "categories": ["foundations"],
+      "meta": {
+        "status": "preview",
+        "version": "1.0.0",
+        "category": "foundations",
+        "accessibility": "WCAG 2.1 AA (Decorative)",
+        "lastUpdated": "2026-09-24"
+      }
     }
   ]
 }

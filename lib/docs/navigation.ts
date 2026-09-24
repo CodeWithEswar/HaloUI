@@ -45,6 +45,13 @@ export const docsNavigation: DocsNavSection[] = [
         status: "preview",
         keywords: ["highlight", "specular", "reflection", "directional", "lighting"],
       },
+      {
+        title: "Halo Noise",
+        href: "/components/halo-noise",
+        description: "Subtle material grain and high-frequency procedural texture reducing gradient banding.",
+        status: "preview",
+        keywords: ["noise", "grain", "texture", "banding", "dither", "tactile"],
+      },
       { title: "Accessibility", href: "/docs/accessibility", description: "Keyboard, contrast, semantics, and reduced motion." },
     ],
   },
