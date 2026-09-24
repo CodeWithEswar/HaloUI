@@ -11,6 +11,15 @@ import { KeyboardTable } from "@/components/mdx/keyboard-table";
 import { FileTree } from "@/components/mdx/file-tree";
 import { InstallationButtonResult } from "@/components/mdx/installation-result";
 import { QuickStartButtonPreview, QuickStartVariantPreview } from "@/components/mdx/quick-start-preview";
+import {
+  ProductModelDiagram,
+  RegistryFlowDiagram,
+  SourceOwnershipDiagram,
+  MaterialLayersDiagram,
+  ComponentQualityDiagram,
+  ComponentLifecycleDiagram,
+  InstalledSourceDiagram,
+} from "@/components/mdx/docs-diagram";
 import { Prerequisites } from "@/components/mdx/prerequisites";
 import { PropsTable } from "@/components/mdx/props-table";
 import { Steps } from "@/components/mdx/steps";
@@ -43,6 +52,13 @@ const components: MDXComponents = {
   InstallationButtonResult,
   QuickStartButtonPreview,
   QuickStartVariantPreview,
+  ProductModelDiagram,
+  RegistryFlowDiagram,
+  SourceOwnershipDiagram,
+  MaterialLayersDiagram,
+  ComponentQualityDiagram,
+  ComponentLifecycleDiagram,
+  InstalledSourceDiagram,
 };
 
 export function useMDXComponents(): MDXComponents {
