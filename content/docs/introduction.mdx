@@ -26,24 +26,7 @@ HaloUI is both a component system and a source registry. It combines reusable Re
 - **Previews** — isolated environments for testing themes, backgrounds, viewports, direction, and motion.
 - **Showcases** — realistic interfaces built from the same public HaloUI components available to users.
 
-<CodeBlock
-  language="text"
-  code={`                         HaloUI
-                            │
-          ┌─────────────────┼─────────────────┐
-          │                 │                 │
-          ▼                 ▼                 ▼
-      Components         Registry       Documentation
-          │                 │                 │
-          └────────────┐    │    ┌────────────┘
-                       ▼    ▼    ▼
-                        Previews
-                           │
-                           ▼
-                       Showcases`}
-/>
-
-HaloUI treats components, registry distribution, documentation, previews, and showcases as parts of the same product.
+HaloUI treats components, registry distribution, documentation, previews, and showcases as parts of the same unified product architecture.
 
 ## Why HaloUI?
 
@@ -63,27 +46,7 @@ HaloUI is designed to connect those concerns. Components share the same material
 
 ## How it works
 
-HaloUI follows a source-distribution workflow. A registry item describes the component source and the dependencies required to install it into an application.
-
-<CodeBlock
-  language="text"
-  code={`HaloUI Registry
-      │
-      ▼
-Registry Item
-      │
-      ├── Component source
-      ├── HaloUI dependencies
-      ├── Package dependencies
-      ├── Required tokens
-      └── Supporting files
-      │
-      ▼
-shadcn CLI
-      │
-      ▼
-Your application`}
-/>
+HaloUI follows a source-distribution workflow. A registry item describes the component source, required tokens, and dependencies needed to install it into an application.
 
 After installation, the generated files become part of your project. They can be inspected, modified, versioned, and composed like the rest of your application code.
 
@@ -95,36 +58,7 @@ Installation details, framework requirements, and registry configuration are cov
 
 HaloUI components are intended to become part of the application that installs them. The registry is a distribution mechanism, not a permanent abstraction between the developer and the component implementation.
 
-This model gives teams direct control over styling, behavior, composition, and future customization without requiring every product decision to be exposed through an increasingly large configuration API.
-
-<div className="my-6 grid gap-4 sm:grid-cols-2">
-  <div className="rounded-xl border border-border bg-muted/20 p-4">
-    <div className="mb-2 text-xs font-medium uppercase tracking-wider text-muted-foreground">
-      Traditional package
-    </div>
-    <div className="font-mono text-xs leading-6 text-foreground">
-      Application<br />
-      &nbsp;&nbsp;↓<br />
-      Library API<br />
-      &nbsp;&nbsp;↓<br />
-      Hidden implementation
-    </div>
-  </div>
-  <div className="rounded-xl border border-border bg-muted/20 p-4">
-    <div className="mb-2 text-xs font-medium uppercase tracking-wider text-muted-foreground">
-      HaloUI registry
-    </div>
-    <div className="font-mono text-xs leading-6 text-foreground">
-      Registry<br />
-      &nbsp;&nbsp;↓<br />
-      Installed source<br />
-      &nbsp;&nbsp;↓<br />
-      Your application<br />
-      &nbsp;&nbsp;↓<br />
-      Editable implementation
-    </div>
-  </div>
-</div>
+This model gives teams direct control over styling, behavior, composition, and future customization without requiring every product decision to be exposed through an increasingly large configuration API. In traditional packages, implementations remain hidden inside `node_modules`. With HaloUI, components live in your own source tree.
 
 <Callout type="note">
   Install the source. Understand the component. Change it when your product requires it.
@@ -147,28 +81,7 @@ HaloUI does not treat glass as a single CSS effect. Its components are built fro
 | Elevation | Defines inset, base, raised, floating, and overlay relationships |
 | Motion | Describes how material responds to interaction and state change |
 
-<CodeBlock
-  language="text"
-  code={`                 Virtual light
-                      ↓
-              Specular highlight
-                      ↓
-        ┌────────────────────────┐
-        │      Optical edge      │
-        │                        │
-        │   Surface + diffusion  │
-        │                        │
-        │        Content         │
-        │                        │
-        │   Refraction layer     │
-        │                        │
-        └────────────────────────┘
-               Contact shadow
-                      ↓
-                 Environment`}
-/>
-
-Individual components use different combinations and intensities of these layers. Not every component requires every effect.
+Individual components use different combinations and intensities of these optical layers. Not every component requires every effect.
 
 ### Material intensity
 
@@ -238,20 +151,6 @@ Visual styling and motion must not replace semantic structure, keyboard behavior
 
 Installed source remains readable and adaptable inside the consuming application.
 
-<CodeBlock
-  language="text"
-  code={`                    HaloUI Component
-                           │
-          ┌────────────────┼────────────────┐
-          │                │                │
-          ▼                ▼                ▼
-       Visual          Behavior        Accessibility
-          │                │                │
-          └────────────────┼────────────────┘
-                           ▼
-                     Source ownership`}
-/>
-
 ## Design principles
 
 ### Material, not effect
@@ -280,30 +179,7 @@ Not every element should be glass, animated, elevated, or expressive. Neutral su
 
 ## From source to documentation
 
-Every component moves through a consistent product lifecycle:
-
-<CodeBlock
-  language="text"
-  code={`Component specification
-        ↓
-Implementation
-        ↓
-States + accessibility
-        ↓
-Examples
-        ↓
-Preview
-        ↓
-Props / API
-        ↓
-Registry item
-        ↓
-Installation verification
-        ↓
-Documentation
-        ↓
-Showcase`}
-/>
+Every component moves through a consistent product lifecycle: specification, implementation, states and accessibility verification, interactive previews, props and API reference, registry item generation, installation testing, documentation, and application showcase integration.
 
 The component demonstrated in documentation and showcases is the exact implementation distributed through the registry.
 

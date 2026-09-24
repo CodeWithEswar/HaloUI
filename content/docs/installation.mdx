@@ -247,20 +247,7 @@ Run your development server to verify the output:
 
 ## What gets installed
 
-HaloUI follows the source-owned architecture:
-
-<CodeBlock
-  language="text"
-  code={`Registry Item (e.g. /r/button.json)
-     ↓
-Component Source (components/ui/halo-button.tsx)
-     +
-Supporting Primitives (components/icons/halo-icon.tsx)
-     +
-Package Dependencies (@hugeicons/react, @radix-ui/react-slot, ...)
-     +
-Required Tokens (styles/halo-tokens.css)`}
-/>
+HaloUI follows a source-owned distribution model. When you install a component from the registry, the component source code, supporting optical primitives, required tokens, and dependencies are placed directly inside your project structure.
 
 The generated component files become part of your application. You can inspect, modify, and version them with the rest of your source code. HaloUI does not hide component implementation behind a runtime UI package.
 

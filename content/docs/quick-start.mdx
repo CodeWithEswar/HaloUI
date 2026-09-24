@@ -176,24 +176,7 @@ The same installation pattern applies across all HaloUI components. Browse the f
 
 ## What just happened?
 
-HaloUI uses source distribution rather than hiding component implementation behind a runtime UI package:
-
-<CodeBlock
-  language="text"
-  code={`HaloUI Registry
-      │
-      ▼
-Registry Item
-      │
-      ▼
-Dependencies Resolved
-      │
-      ▼
-Source Installed into Project
-      │
-      ▼
-Your Application`}
-/>
+HaloUI uses source distribution rather than hiding component implementation behind a runtime UI package. When you install a component from the registry, its source code, dependencies, and required tokens are copied directly into your project.
 
 The generated component is now part of your source tree and can be inspected, versioned, and adapted with the rest of your application.
 
