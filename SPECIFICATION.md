@@ -44,21 +44,18 @@ The HaloUI component registry is organized into clearly defined families to supp
 ---
 
 ### 1.2 The Five HaloUI Product Systems
-```text
-                         HALOUI
-                            │
-          ┌─────────────────┼─────────────────┐
-          │                 │                 │
-          ▼                 ▼                 ▼
-     COMPONENTS         REGISTRY        DOCUMENTATION
-          │                 │                 │
-          └────────────┐    │    ┌────────────┘
-                       ▼    ▼    ▼
-                        PREVIEW
-                           │
-                           ▼
-                       SHOWCASES
-```
+
+HaloUI organizes its ecosystem into five unified product systems (rendered in documentation via `<ProductArchitecture />` rather than raw text diagrams):
+
+1. **HaloUI Core** (Top Level)
+2. **Core Pillars**:
+   - **Components**: Reusable interface controls and liquid-material implementations.
+   - **Registry**: Machine-readable shadcn-compatible source distribution.
+   - **Documentation**: Exhaustive API contracts, accessibility requirements, and usage guidelines.
+3. **Validation & Experience**:
+   - **Previews**: Multi-backdrop, multi-theme, viewport-isolated test stages.
+   - **Showcases**: High-fidelity, real-world application compositions proving the system.
+
 
 ---
 
@@ -67,29 +64,21 @@ The HaloUI component registry is organized into clearly defined families to supp
 ### 2.1 The Multi-Layer Optical Model
 HaloUI models glass as an optical material possessing volumetric depth, surface tension, index of refraction, and environmental lighting reactions.
 
-```text
-┌─────────────────────────────────────────────────────────────┐
-│  Layer 10: Interaction & Kinetic Physics                    │  (Hover, press compression, magnetic pull)
-├─────────────────────────────────────────────────────────────┤
-│  Layer 09: Isolated Content Substrate                       │  (WCAG 2.1 AA typography, Hugeicons)
-├─────────────────────────────────────────────────────────────┤
-│  Layer 08: Micro-Grain Turbulence Mask                      │  (0.025 opacity fractal noise)
-├─────────────────────────────────────────────────────────────┤
-│  Layer 07: Ambient Luminous Glow                            │  (Selected / focus / active states)
-├─────────────────────────────────────────────────────────────┤
-│  Layer 06: Contact & Elevated Shadow                        │  (Anchoring multi-stop contact drop)
-├─────────────────────────────────────────────────────────────┤
-│  Layer 05: Refraction Rim Hairline                          │  (1px Fresnel edge displacement)
-├─────────────────────────────────────────────────────────────┤
-│  Layer 04: Directional Specular Reflection                  │  (135° virtual light highlight)
-├─────────────────────────────────────────────────────────────┤
-│  Layer 03: Dual Optical Edge                                │  (Inner highlight + outer hairline)
-├─────────────────────────────────────────────────────────────┤
-│  Layer 02: Background Diffusion                             │  (GPU-bounded 8px–28px blur)
-├─────────────────────────────────────────────────────────────┤
-│  Layer 01: Base Tint Body                                   │  (Warm paper or deep graphite body)
-└─────────────────────────────────────────────────────────────┘
-```
+| Layer | Optical Layer Name | Physical Responsibility |
+| --- | --- | --- |
+| **Layer 10** | Interaction & Kinetic Physics | Hover, tactile press compression, magnetic pull |
+| **Layer 09** | Isolated Content Substrate | WCAG 2.1 AA typography, Hugeicons isolation |
+| **Layer 08** | Micro-Grain Turbulence Mask | 0.025 opacity fractal noise preventing digital banding |
+| **Layer 07** | Ambient Luminous Glow | Selective illumination for active / focused states |
+| **Layer 06** | Contact & Elevated Shadow | Anchoring multi-stop contact drop onto substrate |
+| **Layer 05** | Refraction Rim Hairline | 1px Fresnel edge displacement for physical thickness |
+| **Layer 04** | Directional Specular Reflection | 135° virtual light highlight and specular catch |
+| **Layer 03** | Dual Optical Edge | Inner highlight catch + outer hairline boundary |
+| **Layer 02** | Background Diffusion | GPU-bounded 8px–28px backdrop blur |
+| **Layer 01** | Base Tint Body | Warm paper (light) or deep graphite (dark) body |
+
+*(In documentation, this is presented visually using `<MaterialAnatomy />`)*
+
 
 ### 2.2 Unified Virtual Lighting Model
 - **Azimuth / Vector**: Upper-left / upper-center at `135°`.
@@ -170,6 +159,8 @@ Component source and registry metadata are authoritative. Documentation consumes
 ---
 
 ## 5. Complete Repository Structure
+
+*(Note: In HaloUI production documentation, folder and file hierarchies must strictly be rendered using the interactive `<FileTree />` primitive, never via ASCII/text code blocks).*
 
 ```text
 haloui/
