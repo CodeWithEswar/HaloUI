@@ -1,0 +1,305 @@
+export const frontmatter = {
+  title: "Installation",
+  description: "Set up HaloUI and install components directly into your React project.",
+  category: "Getting started",
+  order: 2,
+  status: "stable",
+  updated: "2026-09-24",
+}
+
+# Installation
+
+Set up HaloUI and install components directly into your React project.
+
+HaloUI follows the shadcn/ui source-distribution model. Components are installed into your application as editable source files rather than consumed through a runtime UI package.
+
+Install only the components your project needs and customize the generated source as part of your own codebase.
+
+## Prerequisites
+
+Before installing HaloUI, make sure your project has:
+
+- React 19 or a compatible React setup
+- Tailwind CSS v4
+- shadcn/ui configured
+- a supported package manager
+
+HaloUI is designed for React applications and integrates naturally with projects already configured for shadcn/ui.
+
+<Prerequisites />
+
+## Quick start
+
+If shadcn/ui is already configured, you can install your first HaloUI component directly from the registry:
+
+<InstallCommand registry="button" />
+
+Then import and render the generated component in your application:
+
+<CodeBlock
+  language="tsx"
+  filename="app/page.tsx"
+  showLineNumbers
+  code={`import { HaloButton } from "@/components/ui/halo-button"
+
+export default function Page() {
+  return <HaloButton variant="primary">Continue</HaloButton>
+}`}
+/>
+
+<InstallationButtonResult />
+
+## Create or open a project
+
+HaloUI can be added to an existing compatible React project. If you are starting from scratch, create your application first, then configure shadcn/ui.
+
+### Next.js
+
+Use TypeScript and Tailwind CSS so the project matches HaloUI's expected setup:
+
+<InstallCommand action="create-next" />
+
+### Vite
+
+For client-side applications using Vite with React and TypeScript:
+
+<InstallCommand action="create-vite" />
+
+## Initialize shadcn/ui
+
+HaloUI uses the shadcn/ui registry model and expects the project aliases, styles, and component configuration to be available.
+
+<InstallCommand action="init" />
+
+The shadcn CLI stores project aliases and component configuration in `components.json`. HaloUI registry items use this configuration when resolving installation destinations.
+
+<CodeBlock
+  language="json"
+  filename="components.json"
+  code={`{
+  "$schema": "https://ui.shadcn.com/schema.json",
+  "style": "default",
+  "rsc": true,
+  "tsx": true,
+  "tailwind": {
+    "config": "",
+    "css": "app/globals.css",
+    "baseColor": "neutral",
+    "cssVariables": true
+  },
+  "aliases": {
+    "components": "@/components",
+    "utils": "@/lib/utils",
+    "ui": "@/components/ui"
+  }
+}`}
+/>
+
+## Configure HaloUI
+
+HaloUI components are distributed through a shadcn-compatible registry. You can install components directly by passing their registry item URL:
+
+<CodeBlock
+  language="bash"
+  code={`pnpm dlx shadcn@latest add https://haloui.dev/r/button.json`}
+/>
+
+During local development, you can install directly from your local development server:
+
+<CodeBlock
+  language="bash"
+  code={`pnpm dlx shadcn@latest add http://localhost:3000/r/button.json`}
+/>
+
+To configure a permanent registry namespace, add HaloUI to the `registries` field in `components.json`:
+
+<CodeBlock
+  language="json"
+  filename="components.json"
+  code={`{
+  "registries": {
+    "@haloui": "https://haloui.dev/r/{name}.json"
+  }
+}`}
+/>
+
+Once configured, components can be added using the namespace alias:
+
+<CodeBlock
+  language="bash"
+  code={`pnpm dlx shadcn@latest add @haloui/button`}
+/>
+
+## Install a component
+
+Install Button as the first HaloUI component:
+
+<InstallCommand registry="button" />
+
+The registry item resolves the component source, package dependencies, and supporting tokens required by the component:
+
+- adds the component source to `components/ui/halo-button.tsx`;
+- adds the Hugeicons theme wrapper to `components/icons/halo-icon.tsx`;
+- adds physical optical tokens to `styles/halo-tokens.css`;
+- installs dependencies: `@hugeicons/react`, `@hugeicons/core-free-icons`, `@radix-ui/react-slot`, `class-variance-authority`, `clsx`, `tailwind-merge`.
+
+### Installed files
+
+The Button registry item adds the following files to your project:
+
+<FileTree
+  items={[
+    {
+      name: "components",
+      type: "folder",
+      children: [
+        {
+          name: "ui",
+          type: "folder",
+          children: [
+            {
+              name: "halo-button.tsx",
+              type: "file",
+              description: "Button component source with optical variants and tactile motion"
+            }
+          ]
+        },
+        {
+          name: "icons",
+          type: "folder",
+          children: [
+            {
+              name: "halo-icon.tsx",
+              type: "file",
+              description: "Hugeicons wrapper with optical scaling and theme inheritance"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      name: "styles",
+      type: "folder",
+      children: [
+        {
+          name: "halo-tokens.css",
+          type: "file",
+          description: "Physical optical tokens (surfaces, edges, shadows, blurs)"
+        }
+      ]
+    }
+  ]}
+/>
+
+<DependencyList
+  groups={[
+    {
+      title: "Installed source",
+      items: [
+        "components/ui/halo-button.tsx",
+        "components/icons/halo-icon.tsx"
+      ]
+    },
+    {
+      title: "Required tokens",
+      items: [
+        "styles/halo-tokens.css"
+      ]
+    },
+    {
+      title: "Package dependencies",
+      items: [
+        "@hugeicons/react",
+        "@hugeicons/core-free-icons",
+        "@radix-ui/react-slot",
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge"
+      ]
+    },
+    {
+      title: "Registry dependencies",
+      items: []
+    }
+  ]}
+/>
+
+## Use the component
+
+Import the installed component from its generated location:
+
+<CodeBlock
+  language="tsx"
+  filename="app/page.tsx"
+  showLineNumbers
+  code={`import { HaloButton } from "@/components/ui/halo-button"
+
+export default function Example() {
+  return <HaloButton variant="primary">Continue</HaloButton>
+}`}
+/>
+
+<InstallationButtonResult />
+
+## Verify installation
+
+The installation is working when:
+
+- the component imports without TypeScript errors;
+- its optical borders, specular highlights, and shadows render correctly;
+- light and dark themes render with appropriate contrast;
+- keyboard focus rings remain visible (`Tab` and `Shift+Tab`).
+
+Run your development server to verify the output:
+
+<InstallCommand action="dev" />
+
+## What gets installed
+
+HaloUI follows the source-owned architecture:
+
+<CodeBlock
+  language="text"
+  code={`Registry Item (e.g. /r/button.json)
+     ↓
+Component Source (components/ui/halo-button.tsx)
+     +
+Supporting Primitives (components/icons/halo-icon.tsx)
+     +
+Package Dependencies (@hugeicons/react, @radix-ui/react-slot, ...)
+     +
+Required Tokens (styles/halo-tokens.css)`}
+/>
+
+The generated component files become part of your application. You can inspect, modify, and version them with the rest of your source code. HaloUI does not hide component implementation behind a runtime UI package.
+
+Learn more about registry architecture and dependency manifests in [Registry](/docs/registry).
+
+HaloUI components use shared optical tokens for surfaces, diffusion, and rim catches. Learn how to customize optical intensity in [Theming](/docs/theming).
+
+HaloUI components preserve the interaction and accessibility semantics of underlying primitives. Learn more in [Accessibility](/docs/accessibility).
+
+## Troubleshooting
+
+### Registry item cannot be resolved
+
+Verify that the configured registry endpoint is accessible and the item name is spelled correctly. If using the direct URL, confirm network access to `https://haloui.dev/r/button.json`. During local testing, ensure your local development server is running.
+
+### Import path does not resolve
+
+Check the generated file location and the aliases configured in `components.json` and `tsconfig.json`. By default, components are written to `components/ui/`. If your project uses custom paths, adjust your import statements to match the destination configured in your repository.
+
+### Styles are missing
+
+Confirm that Tailwind CSS v4 is configured and that global styles include `styles/halo-tokens.css` or that the CSS variables declared in the registry item were written to your global stylesheet.
+
+### Dark mode looks incorrect
+
+HaloUI components rely on standard class-based or attribute-based dark theme selectors (`.dark` or `[data-theme="dark"]`). Ensure your theme provider or HTML class toggles correctly on the root document element.
+
+## Next steps
+
+- [Button](/components/button) — Explore the first HaloUI component, its variants, and interactive preview stage.
+- [Components](/components) — Browse available HaloUI registry components.
+- [Theming](/docs/theming) — Understand the 10-layer physical material system and optical tokens.
+- [Registry](/docs/registry) — Learn how HaloUI source distribution and dependencies work.
