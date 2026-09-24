@@ -13,13 +13,15 @@ import {
   CommandList,
 } from "@/components/ui/command";
 import { Button } from "@/components/ui/button";
+import { docsNavItems } from "@/lib/docs/navigation";
 
 const SEARCH_ITEMS = [
-  { group: "Components", title: "Button", href: "/components/button" },
+  ...docsNavItems.map((item) => ({
+    group: item.href.startsWith("/components") ? "Components" : "Documentation",
+    title: item.title,
+    href: item.href,
+  })),
   { group: "Components", title: "All Components", href: "/components" },
-  { group: "Documentation", title: "Installation", href: "/docs/installation" },
-  { group: "Documentation", title: "Liquid Material Engine", href: "/docs/liquid-material" },
-  { group: "Documentation", title: "Registry Architecture", href: "/docs/registry" },
   { group: "Showcase", title: "Halo Control Room", href: "/showcase" },
   { group: "Registry", title: "Raw Button JSON", href: "/r/button.json" },
 ];
@@ -52,10 +54,12 @@ export function SiteSearch() {
       <Button
         variant="outline"
         onClick={() => setOpen(true)}
-        className="relative h-8 w-full justify-start rounded-md bg-muted/40 text-xs font-normal text-muted-foreground shadow-none sm:pr-12 md:w-48 lg:w-64"
+        aria-label="Search documentation"
+        className="relative h-8 w-8 justify-center rounded-md bg-muted/40 p-0 text-xs font-normal text-muted-foreground shadow-none sm:w-40 sm:justify-start sm:px-3 sm:pr-12 md:w-48 lg:w-64"
       >
+        <HaloIcon icon={Search01Icon} size={15} className="sm:hidden" />
         <span className="hidden lg:inline-flex">Search documentation...</span>
-        <span className="inline-flex lg:hidden">Search...</span>
+        <span className="hidden sm:inline-flex lg:hidden">Search...</span>
         <kbd className="pointer-events-none absolute right-1.5 top-1.5 hidden h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium opacity-100 sm:flex">
           <span className="text-xs">⌘</span>K
         </kbd>

@@ -1,5 +1,6 @@
 import * as React from "react";
 import Link from "next/link";
+import { HaloUIWordmark } from "@/components/brand/haloui-wordmark";
 import { siteConfig } from "@/lib/site-config";
 import { SiteThemeToggle } from "@/components/site/theme-toggle";
 
@@ -12,12 +13,7 @@ export function SiteFooter() {
         <div className="grid grid-cols-2 md:grid-cols-5 gap-8">
           {/* Brand Info */}
           <div className="col-span-2 space-y-3">
-            <div className="flex items-center gap-2">
-              <span className="flex h-5 w-5 items-center justify-center rounded bg-foreground text-background text-[11px] font-mono font-bold">
-                H
-              </span>
-              <span className="font-semibold text-base tracking-tight">{siteConfig.name}</span>
-            </div>
+            <HaloUIWordmark markSize="sm" className="text-base" />
             <p className="text-sm text-muted-foreground max-w-sm leading-relaxed">
               Liquid interfaces. Beautifully engineered. A source-owned component registry for React, built around accessible optical materials and shadcn/ui.
             </p>
