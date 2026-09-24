@@ -17,8 +17,7 @@ import {
 } from "@/components/ui/button-group";
 import {
   PreviewStageShell,
-  StageControlGroup,
-  StageControlButton,
+  StageControlSelect,
   type StageViewport,
 } from "@/components/docs/preview-stage-shell";
 
@@ -124,56 +123,50 @@ export function ButtonGroupDemo() {
         },
       ]}
       controls={
-        <>
-          {/* Orientation Selector */}
-          <StageControlGroup label="Orientation">
-            {(["horizontal", "vertical"] as const).map((o) => (
-              <StageControlButton
-                key={o}
-                active={orientation === o}
-                onClick={() => setOrientation(o)}
-              >
-                {o}
-              </StageControlButton>
-            ))}
-          </StageControlGroup>
+        <div className="w-full grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+          <StageControlSelect
+            label="Orientation"
+            value={orientation}
+            onValueChange={(val) => setOrientation(val as ButtonGroupOrientation)}
+            options={[
+              { label: "Horizontal", value: "horizontal" },
+              { label: "Vertical", value: "vertical" },
+            ]}
+          />
 
-          {/* Variant Selector */}
-          <StageControlGroup label="Variant">
-            {(["default", "secondary", "outline", "ghost"] as const).map((v) => (
-              <StageControlButton
-                key={v}
-                active={variant === v}
-                onClick={() => setVariant(v)}
-              >
-                {v}
-              </StageControlButton>
-            ))}
-          </StageControlGroup>
+          <StageControlSelect
+            label="Variant"
+            value={variant}
+            onValueChange={(val) => setVariant(val as GroupActionVariant)}
+            options={[
+              { label: "Default", value: "default" },
+              { label: "Secondary", value: "secondary" },
+              { label: "Outline", value: "outline" },
+              { label: "Ghost", value: "ghost" },
+            ]}
+          />
 
-          {/* Size Selector */}
-          <StageControlGroup label="Size">
-            {(["sm", "default", "lg"] as const).map((s) => (
-              <StageControlButton
-                key={s}
-                active={size === s}
-                onClick={() => setSize(s)}
-              >
-                {s}
-              </StageControlButton>
-            ))}
-          </StageControlGroup>
+          <StageControlSelect
+            label="Size"
+            value={size}
+            onValueChange={(val) => setSize(val as GroupActionSize)}
+            options={[
+              { label: "SM (32px)", value: "sm" },
+              { label: "Default (40px)", value: "default" },
+              { label: "LG (48px)", value: "lg" },
+            ]}
+          />
 
-          {/* Independent Disabled Child Toggle */}
-          <StageControlGroup label="Child State">
-            <StageControlButton
-              active={disabledFirst}
-              onClick={() => setDisabledFirst(!disabledFirst)}
-            >
-              Disable 1st
-            </StageControlButton>
-          </StageControlGroup>
-        </>
+          <StageControlSelect
+            label="1st Child"
+            value={disabledFirst ? "disabled" : "enabled"}
+            onValueChange={(val) => setDisabledFirst(val === "disabled")}
+            options={[
+              { label: "Interactive", value: "enabled" },
+              { label: "Disabled 1st", value: "disabled" },
+            ]}
+          />
+        </div>
       }
     >
       <div className="w-full flex flex-col items-center justify-center gap-5 sm:gap-6 p-2 sm:p-4">

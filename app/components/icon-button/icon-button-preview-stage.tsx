@@ -16,8 +16,7 @@ import {
 } from "@/components/ui/icon-button";
 import {
   PreviewStageShell,
-  StageControlGroup,
-  StageControlButton,
+  StageControlSelect,
   type StageViewport,
 } from "@/components/docs/preview-stage-shell";
 
@@ -135,43 +134,41 @@ export function ActionToolbarDemo() {
         },
       ]}
       controls={
-        <>
-          {/* Variant Selector */}
-          <StageControlGroup label="Variant">
-            {(["ghost", "default", "secondary", "outline", "destructive"] as const).map((v) => (
-              <StageControlButton
-                key={v}
-                active={variant === v}
-                onClick={() => setVariant(v)}
-              >
-                {v}
-              </StageControlButton>
-            ))}
-          </StageControlGroup>
+        <div className="w-full grid grid-cols-2 sm:grid-cols-3 gap-2.5">
+          <StageControlSelect
+            label="Variant"
+            value={variant}
+            onValueChange={(val) => setVariant(val as IconButtonVariant)}
+            options={[
+              { label: "Ghost", value: "ghost" },
+              { label: "Default", value: "default" },
+              { label: "Secondary", value: "secondary" },
+              { label: "Outline", value: "outline" },
+              { label: "Destructive", value: "destructive" },
+            ]}
+          />
 
-          {/* Size Selector */}
-          <StageControlGroup label="Size">
-            {(["sm", "default", "lg"] as const).map((s) => (
-              <StageControlButton
-                key={s}
-                active={size === s}
-                onClick={() => setSize(s)}
-              >
-                {s}
-              </StageControlButton>
-            ))}
-          </StageControlGroup>
+          <StageControlSelect
+            label="Size"
+            value={size}
+            onValueChange={(val) => setSize(val as IconButtonSize)}
+            options={[
+              { label: "SM (32px)", value: "sm" },
+              { label: "Default (40px)", value: "default" },
+              { label: "LG (48px)", value: "lg" },
+            ]}
+          />
 
-          {/* Toggles */}
-          <StageControlGroup label="Options">
-            <StageControlButton
-              active={disabled}
-              onClick={() => setDisabled(!disabled)}
-            >
-              Disabled
-            </StageControlButton>
-          </StageControlGroup>
-        </>
+          <StageControlSelect
+            label="State"
+            value={disabled ? "disabled" : "interactive"}
+            onValueChange={(val) => setDisabled(val === "disabled")}
+            options={[
+              { label: "Interactive", value: "interactive" },
+              { label: "Disabled", value: "disabled" },
+            ]}
+          />
+        </div>
       }
     >
       <div className="flex flex-col items-center justify-center gap-6 p-6">

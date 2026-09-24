@@ -23,8 +23,7 @@ import {
 } from "@/components/ui/split-button";
 import {
   PreviewStageShell,
-  StageControlGroup,
-  StageControlButton,
+  StageControlSelect,
   type StageViewport,
 } from "@/components/docs/preview-stage-shell";
 
@@ -161,80 +160,63 @@ export function SplitButtonDemo() {
         },
       ]}
       controls={
-        <>
-          {/* Variant Selector */}
-          <StageControlGroup label="Variant">
-            {(["default", "secondary", "outline", "ghost", "destructive"] as const).map((v) => (
-              <StageControlButton
-                key={v}
-                active={variant === v}
-                onClick={() => setVariant(v)}
-              >
-                {v}
-              </StageControlButton>
-            ))}
-          </StageControlGroup>
+        <div className="w-full grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+          <StageControlSelect
+            label="Variant"
+            value={variant}
+            onValueChange={(val) => setVariant(val as SplitButtonVariant)}
+            options={[
+              { label: "Default", value: "default" },
+              { label: "Secondary", value: "secondary" },
+              { label: "Outline", value: "outline" },
+              { label: "Ghost", value: "ghost" },
+              { label: "Destructive", value: "destructive" },
+            ]}
+          />
 
-          {/* Size Selector */}
-          <StageControlGroup label="Size">
-            {(["sm", "default", "lg"] as const).map((s) => (
-              <StageControlButton
-                key={s}
-                active={size === s}
-                onClick={() => setSize(s)}
-              >
-                {s}
-              </StageControlButton>
-            ))}
-          </StageControlGroup>
+          <StageControlSelect
+            label="Size"
+            value={size}
+            onValueChange={(val) => setSize(val as SplitButtonSize)}
+            options={[
+              { label: "SM (32px)", value: "sm" },
+              { label: "Default (40px)", value: "default" },
+              { label: "LG (48px)", value: "lg" },
+            ]}
+          />
 
-          {/* Menu Inspection Toggle */}
-          <StageControlGroup label="Menu">
-            <StageControlButton
-              active={!open}
-              onClick={() => setOpen(false)}
-            >
-              Closed
-            </StageControlButton>
-            <StageControlButton
-              active={open}
-              onClick={() => setOpen(true)}
-            >
-              Open
-            </StageControlButton>
-          </StageControlGroup>
+          <StageControlSelect
+            label="Menu"
+            value={open ? "open" : "closed"}
+            onValueChange={(val) => setOpen(val === "open")}
+            options={[
+              { label: "Closed", value: "closed" },
+              { label: "Open", value: "open" },
+            ]}
+          />
 
-          {/* State Controls */}
-          <StageControlGroup label="State">
-            <StageControlButton
-              active={!disabledPrimary && !disabledAll}
-              onClick={() => {
+          <StageControlSelect
+            label="State"
+            value={disabledAll ? "all-disabled" : disabledPrimary ? "primary-disabled" : "active"}
+            onValueChange={(val) => {
+              if (val === "all-disabled") {
                 setDisabledPrimary(false);
-                setDisabledAll(false);
-              }}
-            >
-              Active
-            </StageControlButton>
-            <StageControlButton
-              active={disabledPrimary && !disabledAll}
-              onClick={() => {
+                setDisabledAll(true);
+              } else if (val === "primary-disabled") {
                 setDisabledPrimary(true);
                 setDisabledAll(false);
-              }}
-            >
-              Disable 1st
-            </StageControlButton>
-            <StageControlButton
-              active={disabledAll}
-              onClick={() => {
-                setDisabledAll(true);
+              } else {
                 setDisabledPrimary(false);
-              }}
-            >
-              Disable All
-            </StageControlButton>
-          </StageControlGroup>
-        </>
+                setDisabledAll(false);
+              }
+            }}
+            options={[
+              { label: "Active", value: "active" },
+              { label: "Disable 1st", value: "primary-disabled" },
+              { label: "Disable All", value: "all-disabled" },
+            ]}
+          />
+        </div>
       }
     >
       <div className="w-full flex flex-col items-center justify-center gap-6 p-4 sm:p-8 min-h-[300px]">

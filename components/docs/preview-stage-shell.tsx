@@ -9,6 +9,9 @@ import {
   Copy01Icon,
   CheckmarkCircle01Icon,
   ReloadIcon,
+  InformationCircleIcon,
+  ArrowUp01Icon,
+  ArrowDown01Icon,
 } from "@hugeicons/core-free-icons";
 import { HaloIcon } from "@/components/icons/halo-icon";
 import {
@@ -168,6 +171,7 @@ export function PreviewStageShell({
   const [mounted, setMounted] = React.useState(false);
   const [internalViewport, setInternalViewport] = React.useState<StageViewport>("desktop");
   const [internalBackdrop, setInternalBackdrop] = React.useState<string>("neutral");
+  const [showDetails, setShowDetails] = React.useState(false);
 
   React.useEffect(() => {
     setMounted(true);
@@ -191,7 +195,7 @@ export function PreviewStageShell({
     <div className={cn("w-full space-y-3", className)}>
       {/* 1. Clean Responsive Header Above Stage */}
       <div className="space-y-1">
-        <h2 id="preview" className="text-base sm:text-lg font-semibold tracking-tight text-foreground">
+        <h2 data-toc-ignore className="text-base sm:text-lg font-semibold tracking-tight text-foreground">
           {title}
         </h2>
         {description && (
@@ -204,16 +208,16 @@ export function PreviewStageShell({
       {/* 2. Main Workbench Shell */}
       <div className="w-full rounded-2xl border border-border bg-card overflow-hidden flex flex-col shadow-xs">
         {/* Stage Toolbar */}
-        <div className="flex flex-wrap items-center justify-between gap-3 p-3 sm:p-3.5 border-b border-border bg-muted/30">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2.5 p-2.5 sm:p-3.5 border-b border-border bg-muted/30">
           {/* Left: Tab Switcher & Viewport Switcher */}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center justify-between sm:justify-start gap-2">
             {/* Interactive / Code Tabs */}
-            <div className="h-9 p-1 rounded-lg border border-border bg-background inline-flex items-center gap-1 shadow-2xs">
+            <div className="h-8 sm:h-9 p-0.5 rounded-lg border border-border bg-background inline-flex items-center gap-0.5 shadow-2xs">
               <button
                 type="button"
                 onClick={() => onTabChange("preview")}
                 className={cn(
-                  "h-7 px-3 rounded-md text-xs font-medium transition-colors cursor-pointer flex items-center justify-center",
+                  "h-7 px-2.5 sm:px-3 rounded-md text-xs font-medium transition-colors cursor-pointer flex items-center justify-center",
                   activeTab === "preview"
                     ? "bg-muted text-foreground font-semibold shadow-2xs"
                     : "text-muted-foreground hover:text-foreground hover:bg-muted/40"
@@ -225,7 +229,7 @@ export function PreviewStageShell({
                 type="button"
                 onClick={() => onTabChange("code")}
                 className={cn(
-                  "h-7 px-3 rounded-md text-xs font-medium transition-colors cursor-pointer flex items-center justify-center",
+                  "h-7 px-2.5 sm:px-3 rounded-md text-xs font-medium transition-colors cursor-pointer flex items-center justify-center",
                   activeTab === "code"
                     ? "bg-muted text-foreground font-semibold shadow-2xs"
                     : "text-muted-foreground hover:text-foreground hover:bg-muted/40"
@@ -235,10 +239,10 @@ export function PreviewStageShell({
               </button>
             </div>
 
-            <div className="h-5 w-px bg-border hidden sm:block" />
+            <div className="h-4 w-px bg-border hidden sm:block" />
 
-            {/* Viewport Switcher */}
-            <div className="hidden sm:inline-flex h-9 p-1 rounded-lg border border-border bg-background items-center gap-1 shadow-2xs">
+            {/* Viewport Switcher - visible across all screen sizes for testing */}
+            <div className="inline-flex h-8 sm:h-9 p-0.5 rounded-lg border border-border bg-background items-center gap-0.5 shadow-2xs">
               <Tooltip>
                 <TooltipTrigger asChild>
                   <button
@@ -252,7 +256,7 @@ export function PreviewStageShell({
                         : "text-muted-foreground hover:text-foreground hover:bg-muted/40"
                     )}
                   >
-                    <HaloIcon icon={Tv01Icon} size={15} />
+                    <HaloIcon icon={Tv01Icon} size={14} />
                   </button>
                 </TooltipTrigger>
                 <TooltipContent side="top">Desktop (100% / Max-w)</TooltipContent>
@@ -271,7 +275,7 @@ export function PreviewStageShell({
                         : "text-muted-foreground hover:text-foreground hover:bg-muted/40"
                     )}
                   >
-                    <HaloIcon icon={Tablet01Icon} size={15} />
+                    <HaloIcon icon={Tablet01Icon} size={14} />
                   </button>
                 </TooltipTrigger>
                 <TooltipContent side="top">Tablet (620px)</TooltipContent>
@@ -290,7 +294,7 @@ export function PreviewStageShell({
                         : "text-muted-foreground hover:text-foreground hover:bg-muted/40"
                     )}
                   >
-                    <HaloIcon icon={SmartPhone01Icon} size={15} />
+                    <HaloIcon icon={SmartPhone01Icon} size={14} />
                   </button>
                 </TooltipTrigger>
                 <TooltipContent side="top">Mobile (360px)</TooltipContent>
@@ -299,27 +303,29 @@ export function PreviewStageShell({
           </div>
 
           {/* Right: Theme Toggle, Backdrop Select, Extra Controls */}
-          <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
+          <div className="flex items-center gap-1.5 sm:gap-2">
             {extraToolbarControls}
 
-            {/* Backdrop Picker */}
-            <Select
-              value={activeBackdrop}
-              onValueChange={(val) => {
-                if (val) setEffectiveBackdrop(val);
-              }}
-            >
-              <SelectTrigger className="h-8 sm:h-9 w-[130px] sm:w-[160px] text-xs bg-background border-border text-foreground font-medium shadow-2xs">
-                <SelectValue placeholder="Select backdrop" />
-              </SelectTrigger>
-              <SelectContent align="end">
-                {backdropOptions.map((opt) => (
-                  <SelectItem key={opt.value} value={opt.value} className="text-xs">
-                    {opt.label}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
+            {/* Backdrop Picker: flex-1 on mobile to fill row cleanly */}
+            <div className="flex-1 sm:flex-initial">
+              <Select
+                value={activeBackdrop}
+                onValueChange={(val) => {
+                  if (val) setEffectiveBackdrop(val);
+                }}
+              >
+                <SelectTrigger className="h-8 sm:h-9 w-full sm:w-[155px] text-xs bg-background border-border text-foreground font-medium shadow-2xs">
+                  <SelectValue placeholder="Select backdrop" />
+                </SelectTrigger>
+                <SelectContent align="end">
+                  {backdropOptions.map((opt) => (
+                    <SelectItem key={opt.value} value={opt.value} className="text-xs">
+                      {opt.label}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
 
             {/* Reset Button (Optional) */}
             {onReset && (
@@ -331,7 +337,7 @@ export function PreviewStageShell({
                     className="h-8 w-8 sm:h-9 sm:w-9 shrink-0 rounded-lg border border-border bg-background text-muted-foreground hover:text-foreground hover:bg-muted flex items-center justify-center transition-colors cursor-pointer shadow-2xs"
                     aria-label="Reset stage parameters"
                   >
-                    <HaloIcon icon={ReloadIcon} size={15} />
+                    <HaloIcon icon={ReloadIcon} size={14} />
                   </button>
                 </TooltipTrigger>
                 <TooltipContent side="top">Reset Controls</TooltipContent>
@@ -350,7 +356,7 @@ export function PreviewStageShell({
                   >
                     <HaloIcon
                       icon={copied ? CheckmarkCircle01Icon : Copy01Icon}
-                      size={15}
+                      size={14}
                       className={copied ? "text-emerald-500" : ""}
                     />
                   </button>
@@ -398,35 +404,64 @@ export function PreviewStageShell({
           <StageCodeBlock code={code} language="tsx" minHeight="460px" />
         )}
 
-        {/* 4. Professional Variant Control Dock */}
-        {controls && (
-          <div className="p-3 sm:p-4 border-t border-border bg-muted/20 flex flex-col lg:flex-row lg:items-center justify-between gap-3 sm:gap-4 text-xs overflow-hidden max-w-full">
-            {/* Left: Interactive Controls */}
-            <div className="flex flex-wrap items-center gap-2 sm:gap-2.5 max-w-full">
-              {controls}
-            </div>
+        {/* 4. Professional Variant Control Dock & Specifications Accordion */}
+        {(controls || (telemetry && telemetry.length > 0)) && (
+          <div className="border-t border-border bg-muted/20 flex flex-col text-xs overflow-hidden max-w-full">
+            {/* Interactive Controls Bar */}
+            {controls && (
+              <div className="p-2.5 sm:p-3.5 flex flex-wrap items-center gap-2 sm:gap-3 max-w-full">
+                {controls}
+              </div>
+            )}
 
-            {/* Right: Optical Telemetry Chips */}
+            {/* Accordion Details / Telemetry */}
             {telemetry && telemetry.length > 0 && (
-              <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 text-xs font-mono pt-2.5 lg:pt-0 border-t lg:border-t-0 border-border/50 max-w-full shrink-0">
-                {telemetry.map((t, idx) => (
-                  <span
-                    key={idx}
-                    className="inline-flex items-center gap-1.5 px-2 sm:px-2.5 py-1 rounded-md border border-border/70 bg-background/80 text-[10px] sm:text-[11px] shadow-2xs whitespace-nowrap"
-                  >
-                    <span className="text-muted-foreground/70 shrink-0">{t.label}:</span>
-                    <strong
-                      className={cn(
-                        "font-medium",
-                        t.variant === "success" && "text-emerald-500",
-                        t.variant === "warning" && "text-amber-500",
-                        !t.variant && "text-foreground"
-                      )}
-                    >
-                      {t.value}
-                    </strong>
+              <div className="border-t border-border/60 bg-muted/10">
+                <button
+                  type="button"
+                  onClick={() => setShowDetails(!showDetails)}
+                  aria-expanded={showDetails}
+                  className="w-full flex items-center justify-between px-3.5 py-2.5 text-xs text-muted-foreground hover:text-foreground transition-colors cursor-pointer select-none"
+                >
+                  <span className="flex items-center gap-2 font-medium">
+                    <HaloIcon icon={InformationCircleIcon} size={14} className="text-muted-foreground/80 shrink-0" />
+                    <span>Component Specifications & Telemetry</span>
+                    <span className="text-[10px] px-1.5 py-0.5 rounded-full border border-border bg-background/80 font-mono text-muted-foreground">
+                      {telemetry.length}
+                    </span>
                   </span>
-                ))}
+                  <span className="inline-flex items-center gap-1.5 text-[11px] font-medium text-muted-foreground hover:text-foreground">
+                    {showDetails ? "Hide details" : "See details"}
+                    <HaloIcon
+                      icon={showDetails ? ArrowUp01Icon : ArrowDown01Icon}
+                      size={13}
+                      className="transition-transform duration-200"
+                    />
+                  </span>
+                </button>
+
+                {showDetails && (
+                  <div className="p-3 pt-1.5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 text-[11px] font-mono border-t border-border/40 bg-muted/5 animate-in fade-in-0 duration-150">
+                    {telemetry.map((t, idx) => (
+                      <div
+                        key={idx}
+                        className="flex items-center justify-between gap-2 p-2.5 rounded-lg border border-border/70 bg-card/70 shadow-2xs"
+                      >
+                        <span className="text-muted-foreground/80 truncate">{t.label}:</span>
+                        <strong
+                          className={cn(
+                            "font-medium truncate ml-1",
+                            t.variant === "success" && "text-emerald-500",
+                            t.variant === "warning" && "text-amber-500",
+                            !t.variant && "text-foreground"
+                          )}
+                        >
+                          {t.value}
+                        </strong>
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
             )}
           </div>
@@ -439,13 +474,15 @@ export function PreviewStageShell({
 export function StageControlGroup({
   label,
   children,
+  className,
 }: {
   label: string;
   children: React.ReactNode;
+  className?: string;
 }) {
   return (
-    <div className="flex items-center gap-1.5 sm:gap-2 max-w-full min-w-0">
-      <span className="font-mono text-muted-foreground uppercase tracking-wider text-[10px] sm:text-[11px] shrink-0 select-none font-medium">
+    <div className={cn("inline-flex items-center gap-1.5 sm:gap-2 max-w-full min-w-0 shrink-0", className)}>
+      <span className="text-[11px] sm:text-xs text-muted-foreground font-medium select-none shrink-0">
         {label}:
       </span>
       <div className="h-7 sm:h-8 p-0.5 rounded-lg border border-border bg-background inline-flex items-center gap-0.5 shadow-2xs max-w-full overflow-x-auto no-scrollbar">
@@ -473,7 +510,7 @@ export function StageControlButton({
       aria-selected={active}
       onClick={onClick}
       className={cn(
-        "h-6 sm:h-6.5 px-2 sm:px-2.5 rounded-md text-[10px] sm:text-[11px] font-medium capitalize transition-colors cursor-pointer flex items-center justify-center shrink-0 whitespace-nowrap",
+        "h-6 sm:h-7 px-2.5 sm:px-3 rounded-md text-[11px] sm:text-xs font-medium capitalize transition-colors cursor-pointer flex items-center justify-center shrink-0 whitespace-nowrap",
         active
           ? "bg-muted text-foreground font-semibold shadow-2xs"
           : "text-muted-foreground hover:text-foreground hover:bg-muted/40",
@@ -482,5 +519,44 @@ export function StageControlButton({
     >
       {children}
     </button>
+  );
+}
+
+export function StageControlSelect<T extends string>({
+  label,
+  value,
+  onValueChange,
+  options,
+  className,
+}: {
+  label: string;
+  value: T;
+  onValueChange: (val: T) => void;
+  options: { label: string; value: T }[];
+  className?: string;
+}) {
+  return (
+    <div className={cn("flex items-center justify-between gap-2 p-1.5 px-2.5 rounded-lg border border-border/70 bg-card/60 shadow-2xs min-w-0", className)}>
+      <span className="text-[11px] sm:text-xs text-muted-foreground font-medium select-none shrink-0">
+        {label}:
+      </span>
+      <Select
+        value={value}
+        onValueChange={(val) => {
+          if (val) onValueChange(val as T);
+        }}
+      >
+        <SelectTrigger className="h-7 text-xs bg-background/80 border-border/80 text-foreground font-medium shadow-2xs min-w-[90px] flex-1 justify-between px-2">
+          <SelectValue />
+        </SelectTrigger>
+        <SelectContent align="end">
+          {options.map((opt) => (
+            <SelectItem key={opt.value} value={opt.value} className="text-xs">
+              {opt.label}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
+    </div>
   );
 }

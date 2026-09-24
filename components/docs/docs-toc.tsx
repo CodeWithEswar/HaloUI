@@ -38,11 +38,11 @@ export function DocsToc({ compact = false }: { compact?: boolean }) {
       const base = heading.id || slugify(heading.textContent ?? "section") || "section";
       const count = used.get(base) ?? 0;
       used.set(base, count + 1);
-      const id = heading.id || (count === 0 ? base : `${base}-${count + 1}`);
-      if (!heading.id) {
-        heading.id = id;
+      const uniqueId = count === 0 ? base : `${base}-${count + 1}`;
+      if (!heading.id || count > 0) {
+        heading.id = uniqueId;
       }
-      return { id, title: heading.textContent?.trim() ?? id, level: Number(heading.tagName.slice(1)) as 2 | 3 };
+      return { id: uniqueId, title: heading.textContent?.trim() ?? uniqueId, level: Number(heading.tagName.slice(1)) as 2 | 3 };
     });
 
     setItems(nextItems);
@@ -123,7 +123,9 @@ export function DocsToc({ compact = false }: { compact?: boolean }) {
       root.scrollTo({ top: targetTop - 16, behavior: reduceMotion ? "auto" : "smooth" });
       window.scrollTo(0, 0);
     } else {
-      target.scrollIntoView({ behavior: reduceMotion ? "auto" : "smooth", block: "start" });
+      const headerOffset = 48 + 40 + 16; // site header (48px) + compact toc (40px) + 16px clearance
+      const targetTop = window.scrollY + target.getBoundingClientRect().top - headerOffset;
+      window.scrollTo({ top: Math.max(0, targetTop), behavior: reduceMotion ? "auto" : "smooth" });
     }
     window.history.pushState(null, "", `#${id}`);
     target.focus({ preventScroll: true });

@@ -138,6 +138,15 @@ body:has([data-preview-route]) > #main-content {
   transform: translateY(0);
 }
 
+/* Accessible scroll margin for anchored headings below sticky site header + compact subnav */
+h1[id],
+h2[id],
+h3[id],
+h4[id],
+[data-heading-anchor] {
+  scroll-margin-top: calc(var(--site-header-height) + 3.5rem);
+}
+
 [data-docs-skip] {
   display: none;
 }

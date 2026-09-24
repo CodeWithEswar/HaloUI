@@ -5,7 +5,7 @@ import os from "node:os";
 
 console.log("=== HaloUI Clean Consumer Installation Test ===\n");
 
-const itemsToTest = ["button", "icon-button", "button-group", "split-button", "toggle", "toggle-group"];
+const itemsToTest = ["button", "icon-button", "button-group", "split-button", "toggle", "toggle-group", "floating-action-button", "copy-button", "favorite-button", "segmented-control", "action-bar"];
 
 for (const slug of itemsToTest) {
   const registryUrl = `http://localhost:3000/r/${slug}.json`;

@@ -210,6 +210,173 @@
       }
     },
     {
+      "name": "floating-action-button",
+      "type": "registry:ui",
+      "title": "Floating Action Button",
+      "description": "A prominent floating control for exposing a high-priority contextual action above the surrounding interface.",
+      "dependencies": [
+        "@radix-ui/react-slot",
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "components/ui/floating-action-button.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/floating-action-button.tsx"
+        },
+        {
+          "path": "styles/halo-tokens.css",
+          "type": "registry:ui",
+          "target": "styles/halo-tokens.css"
+        }
+      ],
+      "categories": ["actions"],
+      "meta": {
+        "status": "preview",
+        "version": "1.0.0",
+        "category": "actions",
+        "accessibility": "WCAG 2.1 AA",
+        "lastUpdated": "2026-09-24"
+      }
+    },
+    {
+      "name": "copy-button",
+      "type": "registry:ui",
+      "title": "Copy Button",
+      "description": "Copies text to the clipboard and provides short-lived accessible feedback when the operation succeeds or fails.",
+      "dependencies": [
+        "@hugeicons/react",
+        "@hugeicons/core-free-icons",
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": ["halo-icon"],
+      "files": [
+        {
+          "path": "components/ui/copy-button.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/copy-button.tsx"
+        },
+        {
+          "path": "styles/halo-tokens.css",
+          "type": "registry:ui",
+          "target": "styles/halo-tokens.css"
+        }
+      ],
+      "categories": ["actions"],
+      "meta": {
+        "status": "preview",
+        "version": "1.0.0",
+        "category": "actions",
+        "accessibility": "WCAG 2.1 AA",
+        "lastUpdated": "2026-09-24"
+      }
+    },
+    {
+      "name": "favorite-button",
+      "type": "registry:ui",
+      "title": "Favorite Button",
+      "description": "A specialized persistent toggle action for saving, bookmarking, or favoriting items across sessions.",
+      "dependencies": [
+        "@base-ui/react",
+        "@hugeicons/react",
+        "@hugeicons/core-free-icons",
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": ["halo-icon"],
+      "files": [
+        {
+          "path": "components/ui/favorite-button.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/favorite-button.tsx"
+        },
+        {
+          "path": "styles/halo-tokens.css",
+          "type": "registry:ui",
+          "target": "styles/halo-tokens.css"
+        }
+      ],
+      "categories": ["actions"],
+      "meta": {
+        "status": "preview",
+        "version": "1.0.0",
+        "category": "actions",
+        "accessibility": "WCAG 2.1 AA",
+        "lastUpdated": "2026-09-24"
+      }
+    },
+    {
+      "name": "segmented-control",
+      "type": "registry:ui",
+      "title": "Segmented Control",
+      "description": "A compact control for switching between a small set of mutually exclusive modes or values.",
+      "dependencies": [
+        "@base-ui/react",
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": ["halo-icon"],
+      "files": [
+        {
+          "path": "components/ui/segmented-control.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/segmented-control.tsx"
+        },
+        {
+          "path": "styles/halo-tokens.css",
+          "type": "registry:ui",
+          "target": "styles/halo-tokens.css"
+        }
+      ],
+      "categories": ["actions"],
+      "meta": {
+        "status": "preview",
+        "version": "1.0.0",
+        "category": "actions",
+        "accessibility": "WCAG 2.1 AA",
+        "lastUpdated": "2026-09-25"
+      }
+    },
+    {
+      "name": "action-bar",
+      "type": "registry:ui",
+      "title": "Action Bar",
+      "description": "A contextual container for organizing actions related to the user's current selection or task.",
+      "dependencies": [
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": ["button", "icon-button", "button-group"],
+      "files": [
+        {
+          "path": "components/ui/action-bar.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/action-bar.tsx"
+        },
+        {
+          "path": "styles/halo-tokens.css",
+          "type": "registry:ui",
+          "target": "styles/halo-tokens.css"
+        }
+      ],
+      "categories": ["actions"],
+      "meta": {
+        "status": "preview",
+        "version": "1.0.0",
+        "category": "actions",
+        "accessibility": "WCAG 2.1 AA",
+        "lastUpdated": "2026-09-25"
+      }
+    },
+    {
       "name": "halo-surface",
       "type": "registry:ui",
       "title": "Halo Surface",

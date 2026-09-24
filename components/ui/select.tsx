@@ -2,8 +2,9 @@
 
 import * as React from "react"
 import { Select as SelectPrimitive } from "@base-ui/react/select"
-import { cn } from "cn"
-import { ChevronDownIcon, CheckIcon, ChevronUpIcon } from "lucide-react"
+import { cn } from "@/lib/utils"
+import { ArrowDown01Icon, ArrowUp01Icon, Tick02Icon } from "@hugeicons/core-free-icons"
+import { HaloIcon } from "@/components/icons/halo-icon"
 
 const Select = SelectPrimitive.Root
 
@@ -48,7 +49,7 @@ function SelectTrigger({
       {children}
       <SelectPrimitive.Icon
         render={
-          <ChevronDownIcon className="pointer-events-none size-4 text-muted-foreground" />
+          <HaloIcon icon={ArrowDown01Icon} size={14} className="pointer-events-none text-muted-foreground" />
         }
       />
     </SelectPrimitive.Trigger>
@@ -129,11 +130,11 @@ function SelectItem({
       </SelectPrimitive.ItemText>
       <SelectPrimitive.ItemIndicator
         render={
-          <span className="pointer-events-none absolute right-2 flex size-4 items-center justify-center" />
+          <span className="pointer-events-none absolute right-2 flex size-4 items-center justify-center">
+            <HaloIcon icon={Tick02Icon} size={14} className="pointer-events-none" />
+          </span>
         }
-      >
-        <CheckIcon className="pointer-events-none" />
-      </SelectPrimitive.ItemIndicator>
+      />
     </SelectPrimitive.Item>
   )
 }
@@ -164,8 +165,7 @@ function SelectScrollUpButton({
       )}
       {...props}
     >
-      <ChevronUpIcon
-      />
+      <HaloIcon icon={ArrowUp01Icon} size={14} />
     </SelectPrimitive.ScrollUpArrow>
   )
 }
@@ -183,8 +183,7 @@ function SelectScrollDownButton({
       )}
       {...props}
     >
-      <ChevronDownIcon
-      />
+      <HaloIcon icon={ArrowDown01Icon} size={14} />
     </SelectPrimitive.ScrollDownArrow>
   )
 }

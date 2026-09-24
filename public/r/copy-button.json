@@ -1,0 +1,50 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "copy-button",
+  "type": "registry:ui",
+  "title": "Copy Button",
+  "description": "Copies text to the clipboard and provides short-lived accessible feedback when the operation succeeds or fails.",
+  "dependencies": [
+    "@hugeicons/react",
+    "@hugeicons/core-free-icons",
+    "class-variance-authority",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": ["halo-icon"],
+  "files": [
+    {
+      "path": "components/ui/copy-button.tsx",
+      "type": "registry:ui",
+      "target": "components/ui/copy-button.tsx"
+    },
+    {
+      "path": "styles/halo-tokens.css",
+      "type": "registry:ui",
+      "target": "styles/halo-tokens.css"
+    }
+  ],
+  "cssVars": {
+    "light": {
+      "--halo-surface": "rgba(255, 255, 255, 0.72)",
+      "--halo-surface-elevated": "rgba(255, 255, 255, 0.88)",
+      "--halo-edge": "rgba(255, 255, 255, 0.9)",
+      "--halo-edge-soft": "rgba(0, 0, 0, 0.08)",
+      "--halo-focus-color": "#0284c7"
+    },
+    "dark": {
+      "--halo-surface": "rgba(22, 23, 26, 0.7)",
+      "--halo-surface-elevated": "rgba(30, 32, 38, 0.85)",
+      "--halo-edge": "rgba(255, 255, 255, 0.14)",
+      "--halo-edge-soft": "rgba(255, 255, 255, 0.06)",
+      "--halo-focus-color": "#38bdf8"
+    }
+  },
+  "meta": {
+    "status": "preview",
+    "version": "1.0.0",
+    "category": "actions",
+    "accessibility": "WCAG 2.1 AA",
+    "lastUpdated": "2026-09-24"
+  }
+}

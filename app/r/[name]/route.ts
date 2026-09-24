@@ -380,6 +380,333 @@ export async function GET(
       return NextResponse.json(registryItem);
     }
 
+    if (cleanName === "floating-action-button") {
+      const fabPath = path.join(cwd, "components", "ui", "floating-action-button.tsx");
+      const tokensPath = path.join(cwd, "styles", "halo-tokens.css");
+
+      const [fabContent, tokensContent] = await Promise.all([
+        fs.readFile(fabPath, "utf-8"),
+        fs.readFile(tokensPath, "utf-8"),
+      ]);
+
+      const registryItem = {
+        $schema: "https://ui.shadcn.com/schema/registry-item.json",
+        name: "floating-action-button",
+        type: "registry:ui",
+        title: "Floating Action Button",
+        description:
+          "A prominent floating control for exposing a high-priority contextual action above the surrounding interface.",
+        dependencies: [
+          "@radix-ui/react-slot",
+          "class-variance-authority",
+          "clsx",
+          "tailwind-merge",
+        ],
+        registryDependencies: [],
+        files: [
+          {
+            path: "components/ui/floating-action-button.tsx",
+            content: fabContent,
+            type: "registry:ui",
+            target: "components/ui/floating-action-button.tsx",
+          },
+          {
+            path: "styles/halo-tokens.css",
+            content: tokensContent,
+            type: "registry:ui",
+            target: "styles/halo-tokens.css",
+          },
+        ],
+        cssVars: {
+          light: {
+            "--halo-surface": "rgba(255, 255, 255, 0.72)",
+            "--halo-surface-elevated": "rgba(255, 255, 255, 0.88)",
+            "--halo-edge": "rgba(255, 255, 255, 0.9)",
+            "--halo-edge-soft": "rgba(0, 0, 0, 0.08)",
+            "--halo-focus-color": "#0284c7",
+          },
+          dark: {
+            "--halo-surface": "rgba(22, 23, 26, 0.7)",
+            "--halo-surface-elevated": "rgba(30, 32, 38, 0.85)",
+            "--halo-edge": "rgba(255, 255, 255, 0.14)",
+            "--halo-edge-soft": "rgba(255, 255, 255, 0.06)",
+            "--halo-focus-color": "#38bdf8",
+          },
+        },
+        meta: {
+          status: "preview",
+          version: "1.0.0",
+          category: "actions",
+          accessibility: "WCAG 2.1 AA",
+          lastUpdated: "2026-09-24",
+        },
+      };
+
+      return NextResponse.json(registryItem);
+    }
+
+    if (cleanName === "copy-button") {
+      const copyButtonPath = path.join(cwd, "components", "ui", "copy-button.tsx");
+      const tokensPath = path.join(cwd, "styles", "halo-tokens.css");
+
+      const [copyButtonContent, tokensContent] = await Promise.all([
+        fs.readFile(copyButtonPath, "utf-8"),
+        fs.readFile(tokensPath, "utf-8"),
+      ]);
+
+      const registryItem = {
+        $schema: "https://ui.shadcn.com/schema/registry-item.json",
+        name: "copy-button",
+        type: "registry:ui",
+        title: "Copy Button",
+        description:
+          "Copies text to the clipboard and provides short-lived accessible feedback when the operation succeeds or fails.",
+        dependencies: [
+          "@hugeicons/react",
+          "@hugeicons/core-free-icons",
+          "class-variance-authority",
+          "clsx",
+          "tailwind-merge",
+        ],
+        registryDependencies: ["halo-icon"],
+        files: [
+          {
+            path: "components/ui/copy-button.tsx",
+            content: copyButtonContent,
+            type: "registry:ui",
+            target: "components/ui/copy-button.tsx",
+          },
+          {
+            path: "styles/halo-tokens.css",
+            content: tokensContent,
+            type: "registry:ui",
+            target: "styles/halo-tokens.css",
+          },
+        ],
+        cssVars: {
+          light: {
+            "--halo-surface": "rgba(255, 255, 255, 0.72)",
+            "--halo-surface-elevated": "rgba(255, 255, 255, 0.88)",
+            "--halo-edge": "rgba(255, 255, 255, 0.9)",
+            "--halo-edge-soft": "rgba(0, 0, 0, 0.08)",
+            "--halo-focus-color": "#0284c7",
+          },
+          dark: {
+            "--halo-surface": "rgba(22, 23, 26, 0.7)",
+            "--halo-surface-elevated": "rgba(30, 32, 38, 0.85)",
+            "--halo-edge": "rgba(255, 255, 255, 0.14)",
+            "--halo-edge-soft": "rgba(255, 255, 255, 0.06)",
+            "--halo-focus-color": "#38bdf8",
+          },
+        },
+        meta: {
+          status: "preview",
+          version: "1.0.0",
+          category: "actions",
+          accessibility: "WCAG 2.1 AA",
+          lastUpdated: "2026-09-24",
+        },
+      };
+
+      return NextResponse.json(registryItem);
+    }
+
+    if (cleanName === "favorite-button") {
+      const favoriteButtonPath = path.join(cwd, "components", "ui", "favorite-button.tsx");
+      const tokensPath = path.join(cwd, "styles", "halo-tokens.css");
+
+      const [favoriteButtonContent, tokensContent] = await Promise.all([
+        fs.readFile(favoriteButtonPath, "utf-8"),
+        fs.readFile(tokensPath, "utf-8"),
+      ]);
+
+      const registryItem = {
+        $schema: "https://ui.shadcn.com/schema/registry-item.json",
+        name: "favorite-button",
+        type: "registry:ui",
+        title: "Favorite Button",
+        description:
+          "A specialized persistent toggle action for saving, bookmarking, or favoriting items across sessions.",
+        dependencies: [
+          "@base-ui/react",
+          "@hugeicons/react",
+          "@hugeicons/core-free-icons",
+          "class-variance-authority",
+          "clsx",
+          "tailwind-merge",
+        ],
+        registryDependencies: ["halo-icon"],
+        files: [
+          {
+            path: "components/ui/favorite-button.tsx",
+            content: favoriteButtonContent,
+            type: "registry:ui",
+            target: "components/ui/favorite-button.tsx",
+          },
+          {
+            path: "styles/halo-tokens.css",
+            content: tokensContent,
+            type: "registry:ui",
+            target: "styles/halo-tokens.css",
+          },
+        ],
+        cssVars: {
+          light: {
+            "--halo-surface": "rgba(255, 255, 255, 0.72)",
+            "--halo-surface-elevated": "rgba(255, 255, 255, 0.88)",
+            "--halo-edge": "rgba(255, 255, 255, 0.9)",
+            "--halo-edge-soft": "rgba(0, 0, 0, 0.08)",
+            "--halo-focus-color": "#0284c7",
+          },
+          dark: {
+            "--halo-surface": "rgba(22, 23, 26, 0.7)",
+            "--halo-surface-elevated": "rgba(30, 32, 38, 0.85)",
+            "--halo-edge": "rgba(255, 255, 255, 0.14)",
+            "--halo-edge-soft": "rgba(255, 255, 255, 0.06)",
+            "--halo-focus-color": "#38bdf8",
+          },
+        },
+        meta: {
+          status: "preview",
+          version: "1.0.0",
+          category: "actions",
+          accessibility: "WCAG 2.1 AA",
+          lastUpdated: "2026-09-24",
+        },
+      };
+
+      return NextResponse.json(registryItem);
+    }
+
+    if (cleanName === "segmented-control") {
+      const segmentedControlPath = path.join(cwd, "components", "ui", "segmented-control.tsx");
+      const tokensPath = path.join(cwd, "styles", "halo-tokens.css");
+
+      const [segmentedControlContent, tokensContent] = await Promise.all([
+        fs.readFile(segmentedControlPath, "utf-8"),
+        fs.readFile(tokensPath, "utf-8"),
+      ]);
+
+      const registryItem = {
+        $schema: "https://ui.shadcn.com/schema/registry-item.json",
+        name: "segmented-control",
+        type: "registry:ui",
+        title: "Segmented Control",
+        description:
+          "A compact control for switching between a small set of mutually exclusive modes or values.",
+        dependencies: [
+          "@base-ui/react",
+          "class-variance-authority",
+          "clsx",
+          "tailwind-merge",
+        ],
+        registryDependencies: ["halo-icon"],
+        files: [
+          {
+            path: "components/ui/segmented-control.tsx",
+            content: segmentedControlContent,
+            type: "registry:ui",
+            target: "components/ui/segmented-control.tsx",
+          },
+          {
+            path: "styles/halo-tokens.css",
+            content: tokensContent,
+            type: "registry:ui",
+            target: "styles/halo-tokens.css",
+          },
+        ],
+        cssVars: {
+          light: {
+            "--halo-surface": "rgba(255, 255, 255, 0.72)",
+            "--halo-surface-elevated": "rgba(255, 255, 255, 0.88)",
+            "--halo-edge": "rgba(255, 255, 255, 0.9)",
+            "--halo-edge-soft": "rgba(0, 0, 0, 0.08)",
+            "--halo-focus-color": "#0284c7",
+          },
+          dark: {
+            "--halo-surface": "rgba(22, 23, 26, 0.7)",
+            "--halo-surface-elevated": "rgba(30, 32, 38, 0.85)",
+            "--halo-edge": "rgba(255, 255, 255, 0.14)",
+            "--halo-edge-soft": "rgba(255, 255, 255, 0.06)",
+            "--halo-focus-color": "#38bdf8",
+          },
+        },
+        meta: {
+          status: "preview",
+          version: "1.0.0",
+          category: "actions",
+          accessibility: "WCAG 2.1 AA",
+          lastUpdated: "2026-09-25",
+        },
+      };
+
+      return NextResponse.json(registryItem);
+    }
+
+    if (cleanName === "action-bar") {
+      const actionBarPath = path.join(cwd, "components", "ui", "action-bar.tsx");
+      const tokensPath = path.join(cwd, "styles", "halo-tokens.css");
+
+      const [actionBarContent, tokensContent] = await Promise.all([
+        fs.readFile(actionBarPath, "utf-8"),
+        fs.readFile(tokensPath, "utf-8"),
+      ]);
+
+      const registryItem = {
+        $schema: "https://ui.shadcn.com/schema/registry-item.json",
+        name: "action-bar",
+        type: "registry:ui",
+        title: "Action Bar",
+        description:
+          "A contextual container for organizing actions related to the user's current selection or task.",
+        dependencies: [
+          "class-variance-authority",
+          "clsx",
+          "tailwind-merge",
+        ],
+        registryDependencies: ["button", "icon-button", "button-group"],
+        files: [
+          {
+            path: "components/ui/action-bar.tsx",
+            content: actionBarContent,
+            type: "registry:ui",
+            target: "components/ui/action-bar.tsx",
+          },
+          {
+            path: "styles/halo-tokens.css",
+            content: tokensContent,
+            type: "registry:ui",
+            target: "styles/halo-tokens.css",
+          },
+        ],
+        cssVars: {
+          light: {
+            "--halo-surface": "rgba(255, 255, 255, 0.72)",
+            "--halo-surface-elevated": "rgba(255, 255, 255, 0.88)",
+            "--halo-edge": "rgba(255, 255, 255, 0.9)",
+            "--halo-edge-soft": "rgba(0, 0, 0, 0.08)",
+            "--halo-focus-color": "#0284c7",
+          },
+          dark: {
+            "--halo-surface": "rgba(22, 23, 26, 0.7)",
+            "--halo-surface-elevated": "rgba(30, 32, 38, 0.85)",
+            "--halo-edge": "rgba(255, 255, 255, 0.14)",
+            "--halo-edge-soft": "rgba(255, 255, 255, 0.06)",
+            "--halo-focus-color": "#38bdf8",
+          },
+        },
+        meta: {
+          status: "preview",
+          version: "1.0.0",
+          category: "actions",
+          accessibility: "WCAG 2.1 AA",
+          lastUpdated: "2026-09-25",
+        },
+      };
+
+      return NextResponse.json(registryItem);
+    }
+
     if (cleanName === "surface" || cleanName === "halo-surface") {
       const surfacePath = path.join(cwd, "components", "haloui", "foundations", "halo-surface.tsx");
       const tokensPath = path.join(cwd, "styles", "halo-tokens.css");

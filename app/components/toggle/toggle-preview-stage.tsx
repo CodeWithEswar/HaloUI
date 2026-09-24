@@ -17,8 +17,7 @@ import {
 } from "@/components/ui/toggle";
 import {
   PreviewStageShell,
-  StageControlGroup,
-  StageControlButton,
+  StageControlSelect,
   type StageViewport,
 } from "@/components/docs/preview-stage-shell";
 
@@ -150,71 +149,60 @@ export function ToggleDemo() {
         },
       ]}
       controls={
-        <>
-          {/* Variant Selector */}
-          <StageControlGroup label="Variant">
-            {(["default", "outline"] as const).map((v) => (
-              <StageControlButton
-                key={v}
-                active={variant === v}
-                onClick={() => setVariant(v)}
-              >
-                {v}
-              </StageControlButton>
-            ))}
-          </StageControlGroup>
+        <div className="w-full grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+          <StageControlSelect
+            label="Variant"
+            value={variant}
+            onValueChange={(val) => setVariant(val as ToggleVariant)}
+            options={[
+              { label: "Default", value: "default" },
+              { label: "Outline", value: "outline" },
+            ]}
+          />
 
-          {/* Size Selector */}
-          <StageControlGroup label="Size">
-            {(["sm", "default", "lg"] as const).map((s) => (
-              <StageControlButton
-                key={s}
-                active={size === s}
-                onClick={() => setSize(s)}
-              >
-                {s}
-              </StageControlButton>
-            ))}
-          </StageControlGroup>
+          <StageControlSelect
+            label="Size"
+            value={size}
+            onValueChange={(val) => setSize(val as ToggleSize)}
+            options={[
+              { label: "SM (32px)", value: "sm" },
+              { label: "Default (40px)", value: "default" },
+              { label: "LG (48px)", value: "lg" },
+            ]}
+          />
 
-          {/* Content Composition Selector */}
-          <StageControlGroup label="Content">
-            <StageControlButton
-              active={contentMode === "icon-text"}
-              onClick={() => setContentMode("icon-text")}
-            >
-              Icon + Text
-            </StageControlButton>
-            <StageControlButton
-              active={contentMode === "icon"}
-              onClick={() => setContentMode("icon")}
-            >
-              Icon Only
-            </StageControlButton>
-            <StageControlButton
-              active={contentMode === "text"}
-              onClick={() => setContentMode("text")}
-            >
-              Text Only
-            </StageControlButton>
-          </StageControlGroup>
+          <StageControlSelect
+            label="Content"
+            value={contentMode}
+            onValueChange={(val) => setContentMode(val as "icon-text" | "icon" | "text")}
+            options={[
+              { label: "Icon + Text", value: "icon-text" },
+              { label: "Icon Only", value: "icon" },
+              { label: "Text Only", value: "text" },
+            ]}
+          />
 
-          {/* State Controls */}
-          <StageControlGroup label="State">
-            <StageControlButton
-              active={pressed}
-              onClick={() => setPressed(!pressed)}
-            >
-              {pressed ? "Pressed" : "Unpressed"}
-            </StageControlButton>
-            <StageControlButton
-              active={disabled}
-              onClick={() => setDisabled(!disabled)}
-            >
-              {disabled ? "Disabled" : "Enabled"}
-            </StageControlButton>
-          </StageControlGroup>
-        </>
+          <StageControlSelect
+            label="State"
+            value={disabled ? "disabled" : pressed ? "pressed" : "unpressed"}
+            onValueChange={(val) => {
+              if (val === "disabled") {
+                setDisabled(true);
+              } else if (val === "pressed") {
+                setDisabled(false);
+                setPressed(true);
+              } else {
+                setDisabled(false);
+                setPressed(false);
+              }
+            }}
+            options={[
+              { label: "Unpressed", value: "unpressed" },
+              { label: "Pressed", value: "pressed" },
+              { label: "Disabled", value: "disabled" },
+            ]}
+          />
+        </div>
       }
     >
       <div className="w-full flex flex-col items-center justify-center gap-6 p-4 sm:p-8 min-h-[300px]">

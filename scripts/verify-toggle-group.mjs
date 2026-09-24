@@ -97,6 +97,8 @@ assert.ok(fs.existsSync(path.resolve("app/components/toggle-group/toggle-group-p
 assert.ok(fs.existsSync(path.resolve("app/components/toggle-group/toggle-group-demonstrations.tsx")), "app/components/toggle-group/toggle-group-demonstrations.tsx must exist");
 
 const demoContent = fs.readFileSync(path.resolve("app/components/toggle-group/toggle-group-demonstrations.tsx"), "utf-8");
+assert.ok(demoContent.includes("ToggleGroupMiddleFocusPreview"), "Must include ToggleGroupMiddleFocusPreview (Middle Item Focus Centerpiece)");
+assert.ok(demoContent.includes("ToggleGroupStateMatrixPreview"), "Must include ToggleGroupStateMatrixPreview");
 assert.ok(demoContent.includes("ToggleGroupSinglePreview"), "Must include ToggleGroupSinglePreview");
 assert.ok(demoContent.includes("ToggleGroupMultiPreview"), "Must include ToggleGroupMultiPreview");
 assert.ok(demoContent.includes("ToggleGroupGeometryPreview"), "Must include ToggleGroupGeometryPreview");
@@ -105,7 +107,7 @@ assert.ok(demoContent.includes("ToggleGroupSizesPreview"), "Must include ToggleG
 assert.ok(demoContent.includes("ToggleGroupOrientationPreview"), "Must include ToggleGroupOrientationPreview");
 assert.ok(demoContent.includes("ToggleGroupControlledPreview"), "Must include ToggleGroupControlledPreview");
 assert.ok(demoContent.includes("ToggleGroupKeyboardPreview"), "Must include ToggleGroupKeyboardPreview");
-console.log("✓ Complete documentation suite verified: Page, Layout, Preview Stage, and 8 Demonstrations");
+console.log("✓ Complete documentation suite verified: Page, Layout, Preview Stage, Middle-Item Focus Centerpiece, State Matrix, and 8 Demonstrations");
 
 console.log("\n===============================================================================");
 console.log(">>> ALL 9 TOGGLE GROUP QUALITY GATE CHECKS PASSED PERFECTLY <<<");
