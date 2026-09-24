@@ -43,6 +43,31 @@ import {
   ComponentMaterialShowcase,
 } from "@/components/docs/material/material-demonstrations";
 import { MaterialTokenTable } from "@/components/docs/material/material-token-table";
+import { MaterialComparisonTable } from "@/components/docs/material/material-comparison-table";
+import {
+  FocusStatePreview,
+  KeyboardDemo,
+  AccessibleFieldExample,
+  MaterialAccessibilityPreview,
+  ReducedMotionComparison,
+} from "@/components/docs/accessibility/accessibility-demonstrations";
+import {
+  RegistryItemInspector,
+  RegistryExplorer,
+  InstallInspector,
+} from "@/components/docs/registry/registry-components";
+import {
+  ThemeTokenTable,
+  ThemeColorPreview,
+  LightDarkThemePreview,
+  MaterialThemePreview,
+  TypographyPreview,
+  RadiusScalePreview,
+  MotionTokenPreview,
+  FocusPreview,
+  ThemeLab,
+  ThemeTestMatrix,
+} from "@/components/docs/theming/theming-components";
 
 const components: MDXComponents = {
   h1: (props) => <MdxHeading level={1} {...props} />,
@@ -53,10 +78,26 @@ const components: MDXComponents = {
   ul: (props) => <ul className="my-4 ml-5 list-disc space-y-2 text-[15px] leading-7 text-muted-foreground" {...props} />,
   ol: (props) => <ol className="my-4 ml-5 list-decimal space-y-2 text-[15px] leading-7 text-muted-foreground" {...props} />,
   blockquote: (props) => <blockquote className="my-5 border-l-2 border-foreground pl-4 text-muted-foreground" {...props} />,
+  pre: (props) => (
+    <pre className="my-5 overflow-x-auto rounded-xl border border-border bg-card p-4 font-mono text-xs leading-relaxed text-foreground shadow-xs" {...props} />
+  ),
   code: (props) => <code className="rounded border border-border bg-muted px-1 py-0.5 font-mono text-[0.86em] text-foreground" {...props} />,
-  table: (props) => <div className="my-6 overflow-x-auto"><table className="w-full min-w-[36rem] border-collapse text-sm" {...props} /></div>,
-  th: (props) => <th className="border-b border-border bg-muted/50 px-3 py-2 text-left font-medium" {...props} />,
-  td: (props) => <td className="border-b border-border px-3 py-2 text-muted-foreground" {...props} />,
+  table: (props) => (
+    <div className="my-6 w-full overflow-hidden rounded-xl border border-border bg-card shadow-xs">
+      <div className="overflow-x-auto">
+        <table className="w-full min-w-[32rem] border-collapse text-left text-xs sm:text-sm" {...props} />
+      </div>
+    </div>
+  ),
+  thead: (props) => <thead className="border-b border-border bg-muted/40 text-foreground" {...props} />,
+  tbody: (props) => <tbody className="divide-y divide-border/60" {...props} />,
+  tr: (props) => <tr className="transition-colors hover:bg-muted/20" {...props} />,
+  th: (props) => (
+    <th className="px-4 py-3 sm:px-5 sm:py-3.5 text-xs font-semibold text-foreground" {...props} />
+  ),
+  td: (props) => (
+    <td className="px-4 py-3 sm:px-5 sm:py-3.5 text-xs sm:text-sm leading-relaxed text-muted-foreground align-top" {...props} />
+  ),
   Callout,
   Steps,
   CodeBlock,
@@ -95,6 +136,25 @@ const components: MDXComponents = {
   ThemeMaterialComparison,
   ComponentMaterialShowcase,
   MaterialTokenTable,
+  FocusStatePreview,
+  KeyboardDemo,
+  AccessibleFieldExample,
+  MaterialAccessibilityPreview,
+  ReducedMotionComparison,
+  MaterialComparisonTable,
+  RegistryItemInspector,
+  RegistryExplorer,
+  InstallInspector,
+  ThemeTokenTable,
+  ThemeColorPreview,
+  LightDarkThemePreview,
+  MaterialThemePreview,
+  TypographyPreview,
+  RadiusScalePreview,
+  MotionTokenPreview,
+  FocusPreview,
+  ThemeLab,
+  ThemeTestMatrix,
 };
 
 export function useMDXComponents(): MDXComponents {

@@ -22,8 +22,8 @@ export function DocsShell({ children }: { children: React.ReactNode }) {
           tabIndex={-1}
           className="no-scrollbar min-w-0 scroll-pt-[5.75rem] overflow-x-hidden px-4 py-5 outline-none sm:px-6 lg:h-full lg:overflow-y-auto lg:px-8 lg:py-8"
         >
-          <div className="mx-auto max-w-5xl">
-            <div className="docs-content">{children}</div>
+          <div className="mx-auto w-full max-w-5xl">
+            <div className="docs-content w-full">{children}</div>
             <DocsPagination />
           </div>
         </main>

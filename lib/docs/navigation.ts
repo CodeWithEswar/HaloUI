@@ -24,6 +24,13 @@ export const docsNavigation: DocsNavSection[] = [
     title: "Foundations",
     items: [
       { title: "Liquid material", href: "/docs/liquid-material", description: "The ten-layer optical material engine." },
+      {
+        title: "Halo Surface",
+        href: "/components/halo-surface",
+        description: "The base material container used to construct HaloUI surfaces.",
+        status: "preview",
+        keywords: ["surface", "material", "substrate", "container", "glass"],
+      },
       { title: "Accessibility", href: "/docs/accessibility", description: "Keyboard, contrast, semantics, and reduced motion." },
     ],
   },
