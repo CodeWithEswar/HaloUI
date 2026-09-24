@@ -225,3 +225,6 @@ export const HaloButton = React.forwardRef<HTMLButtonElement, HaloButtonProps>(
 );
 
 HaloButton.displayName = "HaloButton";
+
+export { HaloButton as Button };
+
