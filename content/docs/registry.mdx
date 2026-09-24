@@ -1,0 +1,635 @@
+export const frontmatter = {
+  title: "Registry",
+  description: "Learn how HaloUI distributes source, resolves dependencies, installs components, and manages registry metadata.",
+  category: "Foundations",
+  order: 4,
+  status: "stable",
+  updated: "2026-09-24",
+}
+
+# Registry
+
+> HaloUI distributes components as source through a shadcn-compatible registry, allowing you to inspect, install, modify, and version the implementation inside your application.
+
+> Registry items describe the files, dependencies, configuration, and metadata required to install a HaloUI resource.
+
+> The registry is the distribution layer. Your application remains the owner of the installed source.
+
+---
+
+## Overview
+
+The HaloUI Registry is a machine-readable source distribution system built around the official shadcn registry model.
+
+Instead of requiring application UI to remain hidden behind a package API inside `node_modules`, HaloUI delivers the exact implementation files needed for a component directly into your consuming project.
+
+The foundational distinction of this model is temporal:
+
+- **Registry-hosted before installation**: The canonical manifest, files, dependencies, and token configurations are hosted on HaloUI's registry infrastructure.
+- **Application-owned after installation**: Once installed, the code lives in your repository. It compiles with your bundler, adapts to your TypeScript settings, and is versioned alongside your application code.
+
+HaloUI distributes more than visual components through the registry. The registry architecture also distributes foundational optical layers, design tokens, icons, and larger compositions.
+
+---
+
+## Why a registry?
+
+Traditional NPM component packages hide their implementation inside pre-bundled JavaScript files. While this works well for utility libraries, design-system primitives often require fine-grained adjustments, strict accessibility audits, and bespoke token integration. HaloUI uses a source registry for seven architectural reasons:
+
+- **Source visibility**: Developers can inspect every line of implementation code that enters their project before and after installation. There are no black-box runtime abstractions.
+- **Source ownership**: Installed files become first-class application source code committed to your Git repository. Your team has complete sovereignty over bug fixes, customizations, and upgrades.
+- **Customization**: When a component's public prop API is insufficient for a complex product requirement, engineers can modify the internal JSX, optical stack, or event listeners directly without waiting for upstream package releases or hacking CSS overrides.
+- **Dependency transparency**: Every registry item explicitly declares its package dependencies (`@hugeicons/react`, `@radix-ui/react-slot`, `clsx`) and registry requirements. You know exactly what packages are added to your `package.json`.
+- **Selective installation**: Applications install only the specific resources they use. There is zero bundle bloat from unused components or unreferenced icons.
+- **Composability**: Higher-level components and blocks depend on shared registry foundations (such as `HaloSurface` or `halo-tokens.css`), ensuring consistent optical physics across your interface without code duplication.
+- **Framework alignment**: The distribution format conforms to the standardized shadcn registry specification, integrating seamlessly into modern Next.js, Vite, and React toolchains.
+
+---
+
+## Registry and package distribution
+
+Both distribution models have distinct engineering trade-offs. HaloUI adopts the registry model because editable source is essential for tailoring physical optical materials and accessibility contracts to production codebases.
+
+| Concern | Source registry (HaloUI) | Traditional package (`npm install`) |
+| :--- | :--- | :--- |
+| **Implementation location** | Copied directly into your application repository | Hidden inside `node_modules/` |
+| **Source visibility** | Directly inspectable in your IDE editor | Bundled, minified, or source-mapped |
+| **Customization** | Edit application-owned source directly | Limited to props, slots, and CSS overrides |
+| **Updates** | Explicit source reconciliation via Git diff | Version bump in `package.json` |
+| **Dependency model** | Declared registry items + package dependencies | Package-level dependencies |
+| **Installation scope** | Resource-level (per component, block, or theme) | All-or-nothing package import |
+| **Local ownership** | High: your repository controls the source | External: maintainers control runtime behavior |
+
+> Both distribution models are useful. HaloUI uses a registry because editable source is central to its component model.
+
+---
+
+## Install a component
+
+The fastest way to install a HaloUI component is through the official shadcn CLI using the component's canonical registry URL.
+
+<InstallCommand registry="button" />
+
+The CLI reads the registry item, resolves its declared requirements, and writes the required source files into the destinations configured by your project. Once installed, those files are part of your application.
+
+### Installation process
+
+The registry pipeline follows a deterministic four-stage lifecycle:
+
+<ProcessSteps
+  steps={[
+    {
+      title: "01 — Resolve",
+      description: "The CLI fetches the requested JSON manifest (e.g. /r/button.json) and reads its declared files and dependencies.",
+    },
+    {
+      title: "02 — Dependencies",
+      description: "External npm packages (@hugeicons/react, Radix UI, CVA) and required peer items are checked and resolved.",
+    },
+    {
+      title: "03 — Install",
+      description: "Component source files, icons, and token stylesheets are written to the paths configured in components.json.",
+    },
+    {
+      title: "04 — Own",
+      description: "The implementation becomes part of your local codebase, ready for immediate import, customization, and versioning.",
+    },
+  ]}
+/>
+
+---
+
+## Registry items
+
+A registry item is the installable unit of the HaloUI registry. It represents a single component, foundation, block, or theme asset packaged into a machine-readable JSON manifest compliant with `https://ui.shadcn.com/schema/registry.json`.
+
+A complete registry item describes:
+- **Identity & metadata**: Canonical `name`, `type`, human-readable `title`, and `description`.
+- **Source files**: Paths, target destinations, and file types for all distributed code.
+- **Registry dependencies**: Other installable HaloUI items required by this resource.
+- **Package dependencies**: External NPM packages required at runtime or compile time.
+- **CSS variables & tokens**: Theme or material properties injected into your global stylesheet.
+
+### Real registry manifest
+
+Below is the verified registry item for `button`, loaded directly from `public/r/registry.json`:
+
+<CodeBlock
+  language="json"
+  filename="r/button.json"
+  showLineNumbers
+  code={`{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "button",
+  "type": "registry:ui",
+  "title": "Halo Button",
+  "description": "An action surface with physical optical response, neoskeuomorphic depth, tactile compression, and Hugeicons integration.",
+  "dependencies": [
+    "@hugeicons/react",
+    "@hugeicons/core-free-icons",
+    "@radix-ui/react-slot",
+    "class-variance-authority",
+    "clsx",
+    "tailwind-merge"
+  ],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "components/haloui/button/halo-button.tsx",
+      "type": "registry:ui",
+      "target": "components/ui/halo-button.tsx"
+    },
+    {
+      "path": "components/icons/halo-icon.tsx",
+      "type": "registry:ui",
+      "target": "components/icons/halo-icon.tsx"
+    },
+    {
+      "path": "styles/halo-tokens.css",
+      "type": "registry:ui",
+      "target": "styles/halo-tokens.css"
+    }
+  ],
+  "categories": ["actions", "foundations"],
+  "meta": {
+    "status": "stable",
+    "version": "1.0.0",
+    "category": "actions",
+    "accessibility": "WCAG 2.1 AA",
+    "lastUpdated": "2026-09-23"
+  }
+}`}
+/>
+
+---
+
+## Item anatomy
+
+To inspect what enters your project without parsing raw JSON files manually, use the interactive **Registry Item Inspector** below. It surfaces identity, target file destinations, external dependencies, CSS variable mappings, and raw manifests for published HaloUI items.
+
+<RegistryItemInspector />
+
+---
+
+## Resource types
+
+HaloUI categorizes installable resources using the standard shadcn registry type taxonomy. Only resource types actively published by the HaloUI build pipeline are documented below:
+
+| Resource type | Schema `type` | Purpose | Canonical example |
+| :--- | :--- | :--- | :--- |
+| **Component** | `registry:ui` | Reusable, accessible UI primitives engineered with liquid optical physics | `button`, `surface` |
+| **Block** | `registry:block` | Multi-component product compositions (auth cards, headers, settings panels) | Planned blocks |
+| **Hook** | `registry:hook` | Reusable behavioral React hooks for optical tracking and keyboard handling | Internal hooks |
+| **Theme** | `registry:theme` | Global CSS variables, specular lighting angles, and material tokens | `styles/halo-tokens.css` |
+| **Foundation** | `registry:ui` | Foundational optical substrate components providing 10-layer physical rendering | `surface` |
+| **Utility / Lib** | `registry:lib` | Shared TypeScript helpers, class merger utilities, or icon wrappers | `halo-icon.tsx` |
+
+---
+
+## Dependencies
+
+HaloUI strictly differentiates between two classes of dependencies: **Registry Dependencies** and **Package Dependencies**.
+
+### Registry dependencies
+
+Registry dependencies refer to other installable registry resources required by the current item. For example, a complex composite component like `command-dialog` might declare a registry dependency on `halo-surface` and `halo-input`.
+
+When an item declares `registryDependencies`, the shadcn CLI recursively resolves and installs each dependency before writing the parent component. HaloUI's core primitives (such as `button` and `surface`) are designed to be self-contained or explicitly bundle their required icon and token files, minimizing nested dependency chains.
+
+### Package dependencies
+
+Package dependencies are third-party NPM packages required by the component implementation. These are added to your application's `package.json` and resolved through your configured package manager (`pnpm`, `npm`, `yarn`, or `bun`).
+
+| Dependency | Kind | Required by | Purpose |
+| :--- | :--- | :--- | :--- |
+| `@hugeicons/react` | NPM Package | All HaloUI components | Core React Hugeicons rendering engine |
+| `@hugeicons/core-free-icons` | NPM Package | All HaloUI components | Tree-shakable free icon glyph set |
+| `@radix-ui/react-slot` | NPM Package | `button`, `surface` | Polymorphic `asChild` composition |
+| `class-variance-authority` | NPM Package | `button` | Type-safe variant and size orchestration |
+| `clsx` & `tailwind-merge` | NPM Package | All HaloUI components | Dynamic class name resolution without specificity conflicts |
+
+### Transitive dependencies and deduplication
+
+- **Transitive resolution**: If an item depends on another registry resource that itself requires packages, the CLI automatically combines the package lists and installs them in a single batch.
+- **Duplicate handling**: If a required package or file already exists in your project, the CLI respects your existing installation and will not duplicate packages in `package.json`. If a local file has the same name, the CLI prompts for confirmation before overwriting.
+
+---
+
+## Installed files
+
+Registry installation writes source code into paths determined by your project's `components.json` configuration and the item's `target` declarations.
+
+### Target file structure
+
+Installing the HaloUI Button introduces the following three files into your project:
+
+<FileTree
+  items={[
+    {
+      name: "components",
+      type: "folder",
+      children: [
+        {
+          name: "ui",
+          type: "folder",
+          children: [
+            {
+              name: "halo-button.tsx",
+              type: "file",
+              description: "Tactile liquid action button component"
+            }
+          ]
+        },
+        {
+          name: "icons",
+          type: "folder",
+          children: [
+            {
+              name: "halo-icon.tsx",
+              type: "file",
+              description: "Unified Hugeicons rendering wrapper"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      name: "styles",
+      type: "folder",
+      children: [
+        {
+          name: "halo-tokens.css",
+          type: "file",
+          description: "Physical optical depth and material token definitions"
+        }
+      ]
+    }
+  ]}
+/>
+
+### File responsibilities
+
+| File | Target path | Role in consumer project |
+| :--- | :--- | :--- |
+| `halo-button.tsx` | `@/components/ui/halo-button.tsx` | Main button component implementing physical refraction, tactile compression, and size variants |
+| `halo-icon.tsx` | `@/components/icons/halo-icon.tsx` | Centralized Hugeicon renderer enforcing consistent stroke, size scaling, and accessibility labels |
+| `halo-tokens.css` | `@/styles/halo-tokens.css` | Physical optical tokens (surface blur, specular highlights, rim shadows, tactile scaling) |
+
+### Destination paths and aliases
+
+The CLI maps destination paths using your project's configured aliases (`@/components`, `@/lib/utils`, etc.) defined in `components.json`. HaloUI registry items use relative targets that dynamically adapt whether your project uses a `src/` directory layout or a root-level structure.
+
+---
+
+## Registry configuration
+
+To enable direct component installation by name or configure multi-registry environments, add HaloUI to your project's `components.json`.
+
+<CodeBlock
+  language="json"
+  filename="components.json"
+  showLineNumbers
+  code={`{
+  "$schema": "https://ui.shadcn.com/schema.json",
+  "style": "new-york",
+  "rsc": true,
+  "tsx": true,
+  "tailwind": {
+    "config": "tailwind.config.ts",
+    "css": "app/globals.css",
+    "baseColor": "neutral",
+    "cssVariables": true
+  },
+  "aliases": {
+    "components": "@/components",
+    "utils": "@/lib/utils",
+    "ui": "@/components/ui"
+  },
+  "registries": {
+    "@haloui": "https://haloui.dev/r/{name}.json"
+  }
+}`}
+/>
+
+### Configuration fields explained
+
+- **`registries.@haloui`**: Declares the remote URL pattern for HaloUI components. When using namespace syntax (`@haloui/button`), the CLI replaces `{name}` with the requested component slug (`button.json`).
+- **`aliases.components`**: Specifies the target folder for general components and shared icons.
+- **`aliases.ui`**: Directs `registry:ui` items directly into your designated UI primitive folder (e.g. `components/ui`).
+
+---
+
+## Namespaces
+
+A registry namespace provides a human-readable, stable identifier for installing resources without pasting full URLs.
+
+### Namespace syntax vs. direct URL
+
+- **Direct registry URL (Active & Verified)**: Works in all CLI versions out of the box with zero configuration:
+  ```bash
+  pnpm dlx shadcn@latest add https://haloui.dev/r/button.json
+  ```
+- **Namespaced syntax (Configured)**: Once `@haloui` is declared in your `components.json` registries map:
+  ```bash
+  pnpm dlx shadcn@latest add @haloui/button
+  ```
+
+Both commands resolve to the exact same validated JSON manifest and produce identical local source files.
+
+---
+
+## Discover registry resources
+
+HaloUI's interactive component catalog provides discovery, live previews, accessibility documentation, and direct installation commands. You can also explore available resources directly within this documentation using the **Registry Explorer**:
+
+<RegistryExplorer />
+
+---
+
+## Inspect before installing
+
+Transparency builds trust. Before running an installation command, engineers should be able to audit the exact changes a registry item will make to their project.
+
+<InstallInspector />
+
+Every component documentation page in HaloUI provides:
+- The exact files being added.
+- The npm packages introduced into `package.json`.
+- The peer registry foundations required.
+- Direct links to the raw, machine-readable JSON manifest at `/r/[name].json`.
+
+---
+
+## Source ownership
+
+Source ownership is the central architectural pillar of HaloUI. When you install a HaloUI component, you are not linking against an external runtime library—you are committing production-ready TypeScript code directly to your codebase.
+
+> Registry installation transfers component implementation into the application's source tree. HaloUI does not retain runtime ownership of that installed source.
+
+### What you own
+
+Once the CLI completes, your engineering team owns:
+- **The JSX and DOM structure**: Adjust semantic tags, container wrapping, or microdata attributes.
+- **The optical layers**: Tweak specular highlights, rim refraction, or tactile compression curves to match your brand's unique design language.
+- **The TypeScript interfaces**: Add custom prop extensions, remove unused variants, or integrate proprietary design tokens.
+- **The version lifecycle**: Component updates happen when your team decides, eliminating unexpected breaking changes caused by third-party package bumps.
+
+### Responsibility after customization
+
+Source ownership also entails maintenance responsibility. When you customize an installed HaloUI component:
+- **Preserve accessibility contracts**: Ensure keyboard navigation (`Enter`, `Space`, `Tab`), ARIA roles, and high-contrast focus rings remain compliant with WCAG 2.1 AA standards.
+- **Retain reduced motion**: Verify that optical animations and tactile compressions respect `prefers-reduced-motion: reduce`.
+- **Test cross-browser rendering**: Test modified CSS `backdrop-filter` and SVG filter effects across Chromium, WebKit (Safari), and Gecko (Firefox).
+
+<SourceOwnershipComparison />
+
+---
+
+## Updating installed components
+
+Because installed components live as source code in your repository, updating them requires deliberate source reconciliation rather than an automated `npm update`.
+
+HaloUI components are updated through three common scenarios:
+
+### 1. Unmodified components
+If your team has not modified the installed file, updating is straightforward: re-run the `shadcn add` command with the `--overwrite` flag. The CLI replaces the local file with the latest canonical registry version.
+
+```bash
+pnpm dlx shadcn@latest add https://haloui.dev/r/button.json --overwrite
+```
+
+### 2. Locally customized components
+If your team has customized the component's internal logic, do not use `--overwrite` blindly. Instead:
+1. Commit your current working tree to Git.
+2. Run the add command or download the latest `/r/button.json` file.
+3. Review the Git diff in your editor to cherry-pick upstream improvements, optical refinements, or security patches while preserving your local changes.
+
+### 3. Foundation updates
+When a shared foundation like `styles/halo-tokens.css` is updated, multiple components may benefit. Upstream token additions are non-breaking and designed to append new CSS variables without invalidating existing ones.
+
+---
+
+## Versioning
+
+HaloUI follows strict semantic versioning for registry releases and labels each published item with explicit maturity metadata.
+
+### Component maturity statuses
+
+| Status | Definition | Production recommendation |
+| :--- | :--- | :--- |
+| **Stable** | The component meets all 22 quality gates, passes WCAG 2.1 AA audits, and provides a frozen public API. | Recommended for all production applications. |
+| **Preview** | Fully functional and visually complete, but undergoing real-world validation and API polish. | Suitable for staging and non-critical product features. |
+| **Experimental** | Active design exploration. Optical physics, props, or dependencies may change significantly. | For testing, feedback, and early adoption. |
+| **Deprecated** | Maintained for migration compatibility. Scheduled for future removal in favor of a newer replacement. | Migrate to the recommended alternative. |
+
+---
+
+## Blocks and themes
+
+Beyond individual primitives, the HaloUI registry is engineered to distribute composite blocks and complete design themes.
+
+### Blocks (`registry:block`)
+Blocks are larger, multi-component layouts—such as authentication cards, dashboard command bars, or notification drawers—built entirely from public HaloUI primitives. Blocks distribute as source, declaring dependencies on existing primitives (`button`, `surface`, `input`) so that the CLI installs both the block layout and any missing child primitives automatically.
+
+### Themes (`registry:theme`)
+Theme registry items distribute shared CSS custom properties governing optical physics:
+- Light and dark background tints (`--halo-surface-tint`).
+- Specular reflection angles (`--halo-specular-angle`).
+- Refraction index simulations and diffusion blurs.
+- Border radius scales and tactile compression factors.
+
+---
+
+## Shared foundations
+
+HaloUI components rely on shared optical and behavioral foundations to ensure visual coherence while eliminating redundant code.
+
+- **`HaloSurface`**: The foundational 10-layer physical liquid material substrate component that renders base tint, diffusion, specular reflection, and rim catches.
+- **`halo-tokens.css`**: Shared CSS custom properties defining physical light coordinates, backdrop blurs, and elevation levels.
+- **`halo-icon.tsx`**: A standardized Hugeicons wrapper component enforcing stroke width consistency, geometric centering, and accessibility labels across all icons.
+
+### Foundation dependency rule
+
+High-level components explicitly declare foundations in their registry manifest. If a project installs `button`, the CLI ensures `halo-tokens.css` and `halo-icon.tsx` are installed concurrently. If the foundation files already exist, the CLI reuses them without duplicating code.
+
+---
+
+## Registry build
+
+For contributors and engineering teams maintaining custom internal registries, HaloUI uses an automated build pipeline that converts authored React components into production-ready registry JSON manifests.
+
+<ProcessSteps
+  steps={[
+    {
+      title: "01 — Author",
+      description: "Components are developed in packages/registry with full TypeScript types, tests, and documentation.",
+    },
+    {
+      title: "02 — Validate",
+      description: "Automated scripts verify registry schema compliance, file existence, and zero forbidden icon imports.",
+    },
+    {
+      title: "03 — Build",
+      description: "Build scripts compile registry JSON manifests into public/r/[name].json with inlined source files.",
+    },
+    {
+      title: "04 — Publish",
+      description: "Static JSON endpoints are deployed to the production CDN, ready for immediate CLI consumption.",
+    },
+  ]}
+/>
+
+### Authoritative source of truth
+
+- **Authored source**: Located in `components/haloui/` and `styles/`. Contributors author code here.
+- **Registry index**: Defined in `public/r/registry.json`.
+- **Public API endpoints**: Served dynamically via `app/r/[name]/route.ts` and cached statically at `public/r/[name].json`.
+
+> Never manually edit generated JSON files in `public/r/`. Always update the authored component source or `public/r/registry.json`.
+
+---
+
+## Validation
+
+Registry validation protects consumers from broken installations, missing peer files, and invalid dependencies. HaloUI enforces strict automated validation gates before any registry item is published:
+
+- **Schema validation**: Every manifest must validate against `https://ui.shadcn.com/schema/registry.json`.
+- **File integrity**: All paths listed in the `files` array must exist and resolve to valid source files.
+- **Dependency verification**: All npm packages declared in `dependencies` must be published and resolvable on the public npm registry.
+- **Zero Lucide rule**: All icons must strictly originate from `@hugeicons/react` or `@hugeicons/core-free-icons`. No third-party icon libraries are permitted.
+- **TypeScript compilation**: Component source files must pass `tsc --noEmit` without type assertions or errors.
+
+---
+
+## Clean installation testing
+
+HaloUI components are never published based solely on whether they compile inside the repository monorepo. Every release candidate undergoes **clean installation testing**:
+
+1. A clean, empty Next.js project is generated using `create-next-app`.
+2. The project is initialized with `pnpm dlx shadcn@latest init`.
+3. The component is installed via the CLI: `pnpm dlx shadcn@latest add https://haloui.dev/r/button.json`.
+4. The test suite verifies that:
+   - All files exist at configured alias destinations.
+   - All dependencies are added to `package.json`.
+   - The project builds cleanly with `next build`.
+   - The component renders without hydration errors or runtime exceptions.
+
+---
+
+## Security
+
+Installing source code directly into your repository requires the same diligence as adding any code dependency. HaloUI adheres to strict security standards:
+
+- **Official endpoints only**: Only install components from `https://haloui.dev/r/[name].json` or the verified `@haloui` namespace. Never execute registry install commands from unverified third-party domains.
+- **Pre-installation audit**: Always inspect the manifest at `/r/[name].json` or use the [Registry Item Inspector](#item-anatomy) to verify file paths and npm packages before running the CLI.
+- **No remote runtime code**: HaloUI registry items contain pure, static source code. There is zero dynamic script injection or runtime remote fetching.
+- **Dependency review**: Third-party packages added by registry items (`@hugeicons/react`, Radix UI) are subject to your team's standard dependency auditing tools (`pnpm audit`, Snyk, Dependabot).
+
+---
+
+## Compatibility
+
+HaloUI components are verified against modern React and Next.js environments:
+
+| Technology | Supported versions | Notes |
+| :--- | :--- | :--- |
+| **React** | `^18.2.0` \|\| `^19.0.0` | Full support for React 19 Actions and React 18 concurrent features |
+| **Next.js** | `>=14.0.0` (App Router) | Compatible with Next.js 14, 15, and 16 with Turbopack |
+| **Tailwind CSS** | `^3.4.0` \|\| `^4.0.0` | Supports both Tailwind CSS v3 and v4 CSS theme configurations |
+| **TypeScript** | `>=5.0.0` | Strict type definitions with full generic support |
+| **Browsers** | Modern evergreen | Requires CSS `backdrop-filter` and color-mix support |
+
+### Server and Client Components
+
+Registry installation does **not** make every component a Client Component. HaloUI applies the `"use client"` directive only to components that require interactive state, event listeners, or browser DOM measurements (such as `halo-button.tsx`). Pure presentation layouts and container wrappers remain React Server Components.
+
+---
+
+## Registry reference
+
+Below is the field-level reference for the official HaloUI registry item schema:
+
+| Field | Type | Required | Description |
+| :--- | :--- | :--- | :--- |
+| `name` | `string` | **Yes** | Unique, kebab-case identifier for the registry item (e.g. `button`) |
+| `type` | `string` | **Yes** | Standard shadcn resource type (`registry:ui`, `registry:block`, `registry:hook`, `registry:theme`) |
+| `title` | `string` | **Yes** | Human-readable title displayed in catalogs and documentation |
+| `description` | `string` | **Yes** | Concise description of the component's functionality and optical behavior |
+| `dependencies` | `string[]` | No | List of external NPM package dependencies added to `package.json` |
+| `registryDependencies` | `string[]` | No | List of other registry item names required by this resource |
+| `files` | `RegistryFile[]` | **Yes** | Array of source files to install, including source path, target destination, and role |
+| `categories` | `string[]` | No | Taxonomy tags used for search indexing (e.g. `["actions", "foundations"]`) |
+| `meta` | `Record<string, any>` | No | HaloUI metadata: `status`, `version`, `category`, `accessibility`, `lastUpdated` |
+
+---
+
+## Adding a registry item
+
+Contributors can create and publish new HaloUI registry resources by following this checklist:
+
+1. **Implement component**: Develop the component in `components/haloui/[name]/` using the 10-layer physical optical engine.
+2. **Audit accessibility**: Ensure full WCAG 2.1 AA compliance, keyboard navigation, and reduced motion support.
+3. **Declare in registry**: Add the item definition to `public/r/registry.json` with all required files, npm packages, and metadata.
+4. **Generate endpoints**: Update `app/r/[name]/route.ts` to export the new machine-readable JSON endpoint.
+5. **Run clean install test**: Verify installation in a fresh Next.js project using `pnpm dlx shadcn@latest add http://localhost:3000/r/[name].json`.
+6. **Submit pull request**: Provide documentation, live preview demos, and test verification logs.
+
+### Registry naming conventions
+
+- **Registry slugs**: Must be lowercase, kebab-case, and describe function rather than appearance (e.g. `date-picker`, not `glass-calendar-v2`).
+- **Component names**: PascalCase in TypeScript source (e.g. `HaloButton`, `HaloSurface`).
+- **Target filenames**: Kebab-case prefixed with `halo-` (e.g. `halo-button.tsx`, `halo-icon.tsx`).
+
+---
+
+## Troubleshooting
+
+### Registry cannot be resolved
+- **Problem**: The CLI outputs `Could not fetch registry item from URL`.
+- **Solution**: Verify your internet connectivity and ensure the registry URL begins with `https://haloui.dev/r/` and ends with `.json`. If running locally, verify your dev server is active at `http://localhost:3000`.
+
+### Dependency resolution fails
+- **Problem**: NPM package installation fails during `pnpm dlx shadcn add`.
+- **Solution**: Check that your package manager has network access to the npm registry. For projects with strict lockfiles or peer dependency conflicts, run `pnpm install --shamefully-hoist` or temporarily install the packages manually:
+  ```bash
+  pnpm add @hugeicons/react @hugeicons/core-free-icons @radix-ui/react-slot class-variance-authority clsx tailwind-merge
+  ```
+
+### Files installed to an unexpected path
+- **Problem**: Component files appear in `components/` instead of `components/ui/`.
+- **Solution**: Inspect your `components.json` file. Ensure the `aliases.ui` field points to your preferred subdirectory:
+  ```json
+  "aliases": {
+    "components": "@/components",
+    "ui": "@/components/ui"
+  }
+  ```
+
+### Import cannot be resolved
+- **Problem**: TypeScript reports `Cannot find module '@/components/ui/halo-button'`.
+- **Solution**: Confirm that your project's `tsconfig.json` contains the matching path alias mapping:
+  ```json
+  "compilerOptions": {
+    "paths": {
+      "@/*": ["./*"]
+    }
+  }
+  ```
+
+### Styling or optical tokens missing
+- **Problem**: Button renders without liquid refraction or optical borders.
+- **Solution**: Ensure `@/styles/halo-tokens.css` is imported in your root `app/globals.css` or layout file:
+  ```css
+  @import "./halo-tokens.css";
+  ```
+
+---
+
+## Next steps
+
+Continue exploring the HaloUI architecture and building your interface:
+
+- [Quick Start](/docs/quick-start): Install and render your first HaloUI button in under two minutes.
+- [Components](/components): Browse the full catalog of installable liquid optical components.
+- [Liquid Material](/docs/liquid-material): Master the 10-layer physical optical engine powering HaloUI surfaces.
+- [Accessibility](/docs/accessibility): Review the strict WCAG 2.1 AA accessibility standards enforced across all registry items.

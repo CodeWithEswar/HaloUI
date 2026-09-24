@@ -1,0 +1,565 @@
+export const frontmatter = {
+  title: "Theming",
+  description: "Configure HaloUI colors, typography, material, geometry, motion, and semantic design tokens.",
+  category: "Foundations",
+  order: 5,
+  status: "stable",
+  updated: "2026-09-24",
+}
+
+# Theming
+
+> Customize HaloUI through semantic design tokens for color, typography, geometry, material, elevation, focus, and motion.
+
+> HaloUI extends the familiar shadcn-style CSS variable model with additional tokens for its material system while preserving clear semantic roles across light and dark themes.
+
+> HaloUI themes describe visual intent through semantic tokens. Components consume those tokens rather than owning isolated color, radius, shadow, or material values. Change the system first. Override individual components only when their semantic role genuinely requires different treatment.
+
+---
+
+## Overview
+
+HaloUI separates component structure from visual configuration. Components define DOM composition, keyboard accessibility, and state management, while semantic tokens define the visual language shared across your entire application.
+
+Theming encompasses seven coordinated visual domains:
+
+- **Color**: Semantic canvas, content, action, boundary, and feedback roles across light and dark environments.
+- **Typography**: Scale, weight, line-height, and font families for editorial headings, body text, and monospace code.
+- **Geometry**: Base corner radii and proportional control curves across buttons, inputs, cards, and modal dialogs.
+- **Material**: Translucent liquid optical parameters including base tint, diffusion blur, optical edge catches, and specular highlights.
+- **Elevation**: Coordinated depth tiers combining contact shadows, ambient occlusion, surface tinting, and edge luminance.
+- **Focus**: High-contrast, accessibility-critical focus rings engineered to remain distinct from decorative optical highlights.
+- **Motion**: Standardized spring curves, duration scales, and tactile compression physics respecting reduced-motion preferences.
+
+---
+
+## Theme architecture
+
+Hard-coding arbitrary hex codes, pixel blur lengths, or inline shadow strings directly inside component markup fractures design coherence and makes brand customization impossible to maintain.
+
+### Avoid: Raw, scattered visual values
+
+<CodeBlock
+  language="tsx"
+  filename="anti-pattern.tsx"
+  showLineNumbers
+  code={`// Anti-pattern: Hard-coded arbitrary values scattered across JSX
+<div className="rounded-[19px] bg-[#f7f7f8] shadow-[0_8px_30px_rgba(0,0,0,0.12)] border border-[#e5e5ea] text-[#1c1c1e]">
+  <button className="rounded-[11px] bg-[#0071e3] px-4 py-2 text-white">
+    Confirm
+  </button>
+</div>`}
+/>
+
+### Prefer: Coordinated semantic tokens
+
+<CodeBlock
+  language="tsx"
+  filename="idiomatic-tokens.tsx"
+  showLineNumbers
+  code={`// Idiomatic HaloUI: Semantic tokens bound to system-level definitions
+<div className="rounded-xl bg-card text-card-foreground border border-border shadow-[var(--halo-shadow-elevated)]">
+  <HaloButton variant="primary">
+    Confirm
+  </HaloButton>
+</div>`}
+/>
+
+### Three token layers
+
+HaloUI organizes its visual configuration into three distinct architectural layers:
+
+1. **Foundation tokens**: Primitive values such as raw color scales, modular spacing units, millisecond durations, and cubic-bezier easing curves.
+2. **Semantic tokens**: Contextual tokens describing visual intent rather than literal values (e.g. `--background`, `--foreground`, `--primary`, `--border`, `--ring`).
+3. **Material tokens**: Physical optical properties governing HaloUI's liquid glass substrate (e.g. `--halo-surface`, `--halo-edge`, `--halo-highlight`, `--halo-blur-md`).
+
+> **Core token principle**: Components depend primarily on semantic meaning, not raw palette values. Prefer `--primary` over a literal blue hex code; prefer `--halo-edge` over a manually repeated translucent white border.
+
+---
+
+## Semantic tokens
+
+Semantic tokens describe how a value is used in your interface rather than the literal color or measurement it contains. When you switch between light and dark modes, the semantic token name remains constant while its resolved value updates dynamically.
+
+### Core CSS variable declarations
+
+Below are the canonical semantic tokens configured in `app/globals.css`:
+
+<CodeBlock
+  language="css"
+  filename="app/globals.css"
+  showLineNumbers
+  code={`:root {
+  /* Canvas & Containers */
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+
+  /* Actions & Interactive Tiers */
+  --primary: oklch(0.205 0 0);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+
+  /* Content & Boundaries */
+  --muted: oklch(0.97 0 0);
+  --muted-foreground: oklch(0.556 0 0);
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: oklch(0.708 0 0);
+
+  /* Base Geometry */
+  --radius: 0.625rem;
+}
+
+.dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.205 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.205 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.922 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.556 0 0);
+}`}
+/>
+
+### Interactive token reference
+
+Use the table below to inspect every canonical token, search by role, view light/dark values, and copy token identifiers directly into your stylesheet:
+
+<ThemeTokenTable />
+
+---
+
+## Color
+
+HaloUI color themes are engineered around semantic relationships rather than isolated color swaps. Changing `--primary` alone does not produce a coherent design system; a theme must coordinate foreground readability, boundary contrast, neutral temperature, and focus indicators.
+
+### Semantic color groups
+
+HaloUI groups color tokens into seven functional roles:
+
+- **Canvas (`--background`, `--card`, `--popover`)**: The foundational surfaces hosting your application layout, elevated cards, and floating dropdowns.
+- **Content (`--foreground`, `--card-foreground`, `--muted-foreground`)**: High-contrast typography and iconography structured in clear visual hierarchy.
+- **Actions (`--primary`, `--secondary`, `--accent`)**: Interactive triggers, buttons, and selected states indicating clickable affordance.
+- **Boundaries (`--border`, `--input`)**: 1px structural separators, dividers, and resting form-field boundaries.
+- **Focus (`--ring`)**: High-contrast outline dedicated exclusively to keyboard focus navigation.
+- **Feedback (`--destructive`)**: Error notifications, critical actions, and validation warnings.
+- **Material (`--halo-surface`, `--halo-edge`)**: Translucent liquid glass tints calibrated to balance environmental awareness with reading plane stability.
+
+<ThemeColorPreview />
+
+### Color customization example
+
+To re-theme HaloUI to match a brand palette (e.g. Sapphire Blue), update the semantic action and focus tokens in your root CSS:
+
+<CodeBlock
+  language="css"
+  filename="styles/theme-sapphire.css"
+  showLineNumbers
+  code={`:root {
+  /* Brand Primary: Sapphire 600 */
+  --primary: oklch(0.488 0.243 264.4);
+  --primary-foreground: oklch(1 0 0);
+  --ring: oklch(0.623 0.214 259.8);
+}
+
+.dark {
+  /* Brand Primary: Sapphire 400 */
+  --primary: oklch(0.623 0.214 259.8);
+  --primary-foreground: oklch(0.12 0.05 264.4);
+  --ring: oklch(0.488 0.243 264.4);
+}`}
+/>
+
+---
+
+## Light and dark
+
+Light and dark themes are separate, calibrated optical environments—not naive mathematical color inversions. A direct inversion of light mode produces harsh, high-glare surfaces that trigger eye fatigue and destroy depth cues.
+
+### Light theme priorities
+- **High foreground contrast**: Deep charcoal typography on warm luminous paper.
+- **Restrained structural borders**: Soft boundaries (`oklch(0.922 0 0)`) providing subtle spatial separation without clutter.
+- **Controlled specular highlights**: Specular rays at 85% opacity reflecting virtual 135° overhead lighting.
+
+### Dark theme priorities
+- **Restrained edge luminance**: 1px perimeter rim catches (`rgba(255, 255, 255, 0.14)`) providing physical definition without neon glowing artifacts.
+- **Deep graphite surfaces**: Multi-tiered dark surfaces (`oklch(0.145)` to `oklch(0.205)`) establishing stable depth without pure `#000000` pitch black.
+- **Softened focus rings**: Controlled focus rings that remain WCAG AA compliant without blinding the user in low-light environments.
+
+<LightDarkThemePreview />
+
+---
+
+## System theme
+
+HaloUI natively supports automatic System theme detection. By integrating with `next-themes` and the standard `prefers-color-scheme` CSS media query, the UI seamlessly follows the user's operating system preferences.
+
+### System theme characteristics
+
+1. **Zero-flash hydration**: An inline script injects the correct `.dark` class onto the `<html>` root before the first paint, preventing white-flash glitches during SSR.
+2. **Dynamic OS synchronization**: When the user's operating system toggles between day and night mode, HaloUI updates instantly without requiring a page reload.
+3. **Explicit preference persistence**: When a user explicitly selects Light or Dark via the global theme switcher in the site header, their choice is saved to `localStorage` and supersedes the OS default.
+
+---
+
+## Material
+
+HaloUI components extend standard shadcn theming with **Liquid Material design tokens**. These tokens govern the physical optical behavior of translucent surfaces, specular lighting, and backdrop diffusion.
+
+For the full optical derivation and physical rendering engine, refer to the [Liquid Material](/docs/liquid-material) specification.
+
+### Material token groups
+
+- **Surface (`--halo-surface`)**: The translucent liquid body tint (72% opacity in light mode, 70% in dark mode).
+- **Edge (`--halo-edge`, `--halo-edge-inner`)**: 1px micro-reflection catching virtual light along the perimeter.
+- **Highlight (`--halo-highlight`)**: 135° directional specular gradient simulating an overhead directional light source.
+- **Diffusion (`--halo-blur-md`)**: Multi-stage backdrop blur softening content beneath the glass.
+- **Shadow (`--halo-shadow-elevated`)**: Dual contact and ambient occlusion anchoring the glass to the canvas.
+
+### Material intensity presets
+
+Material intensity determines how strongly a surface expresses liquid glass optical effects without changing the underlying semantic theme:
+
+| Intensity | Class | Diffusion blur | Specular highlight | Recommended usage |
+| :--- | :--- | :--- | :--- | :--- |
+| **Subtle** | `.halo-intensity-subtle` | `8px` (`--halo-blur-sm`) | `0.4` | Data-dense tables, utility dashboards, compact toolbars |
+| **Balanced** | `.halo-intensity-balanced` | `16px` (`--halo-blur-md`) | `0.85` | **Default**: Action buttons, cards, popovers, navigation bars |
+| **Rich** | `.halo-intensity-rich` | `28px` (`--halo-blur-lg`) | `1.2` | Hero modal dialogs, featured product showcases, landing page banners |
+
+<MaterialThemePreview />
+
+---
+
+## Typography
+
+Typography establishes information hierarchy, scannability, and brand character. HaloUI configures typography through Tailwind CSS theme extensions, mapping semantic text roles to proportional font sizes, weights, and leading.
+
+<TypographyPreview />
+
+### Font loading architecture
+
+HaloUI uses Next.js `next/font` optimization to load fonts locally with zero layout shift (CLS):
+
+- **Primary font (`--font-sans`)**: Clean, geometric sans-serif (Inter / Geist Sans) ensuring legibility across high-density interfaces.
+- **Monospace font (`font-mono`)**: JetBrains Mono / Geist Mono dedicated to developer code blocks, registry manifests, and token inspection tables.
+
+---
+
+## Geometry
+
+Geometry controls how interface elements express shape, corner rounding, and spatial relationships across your application.
+
+### The central radius token
+
+All corner curves derive dynamically from a single root variable: `--radius`. When you adjust `--radius`, all derived control curves scale proportionally:
+
+<CodeBlock
+  language="css"
+  filename="app/globals.css"
+  showLineNumbers
+  code={`:root {
+  --radius: 0.625rem; /* 10px default base radius */
+}
+
+@theme inline {
+  --radius-sm: calc(var(--radius) * 0.6);  /* 6px  - Badges, sub-controls */
+  --radius-md: calc(var(--radius) * 0.8);  /* 8px  - Buttons, form inputs */
+  --radius-lg: var(--radius);              /* 10px - Standard cards */
+  --radius-xl: calc(var(--radius) * 1.4);  /* 14px - Large containers */
+  --radius-2xl: calc(var(--radius) * 1.8); /* 18px - Dialog window frames */
+}`}
+/>
+
+<RadiusScalePreview />
+
+> **Radius principle**: Radius communicates component geometry, not universal decoration. Avoid giving every element maximum rounding simply because HaloUI has a soft material identity. Buttons and inputs should maintain compact geometry, while large modal windows use wider structural radii.
+
+---
+
+## Elevation
+
+Elevation communicates the spatial relationship between a surface and its environment. HaloUI defines elevation not through drop shadows alone, but through coordinated adjustments to **surface tint**, **optical edge luminance**, **diffusion blur**, and **contact occlusion**.
+
+HaloUI standardizes on five canonical elevation tiers:
+
+1. **Inset**: Recessed cavities, active pressed states, and embedded wells.
+2. **Base**: The primary application layout plane and resting background surfaces.
+3. **Raised (Default)**: Interactive action buttons, content cards, and input fields.
+4. **Floating**: Floating action bars, command menus, and persistent dock navigation.
+5. **Overlay**: Modal dialogs, sheets, and full-depth blocking overlays.
+
+<ElevationScaleVisual />
+
+---
+
+## Motion
+
+HaloUI motion uses shared timing curves and tactile spring physics so that state changes feel physically connected across your interface.
+
+- **Micro (120ms)**: Fast tactile button compression and hover feedback using `cubic-bezier(0.2, 0.8, 0.3, 1)`.
+- **State (150ms)**: Smooth color transitions, switch toggles, and checkbox checks.
+- **Reveal (200ms)**: Modal entrances and dropdown popovers using `cubic-bezier(0.16, 1, 0.3, 1)`.
+
+<MotionTokenPreview />
+
+### Reduced motion guarantee
+
+Theme customization must never compromise accessibility. When a user enables `prefers-reduced-motion: reduce`, HaloUI automatically collapses all transition durations and eliminates scale transforms:
+
+<CodeBlock
+  language="css"
+  filename="styles/halo-tokens.css"
+  showLineNumbers
+  code={`@media (prefers-reduced-motion: reduce) {
+  .halo-tactile-press,
+  .halo-motion-transition {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    transform: none !important;
+  }
+}`}
+/>
+
+---
+
+## Focus
+
+Keyboard focus styling is an essential accessibility contract. While a theme may adapt the focus ring color to match its brand palette, it must **never** weaken or remove focus visibility.
+
+<FocusPreview />
+
+### Focus vs. material highlights
+
+> **Critical rule**: Material highlights, optical edge catches, and translucent glow are **not** focus indicators. A theme must maintain an independent, high-contrast focus treatment (`--ring`) with at least 3:1 contrast against adjacent background colors.
+
+---
+
+## State tokens
+
+State tokens communicate transactional status and validation feedback across your application:
+
+- **`--destructive`**: Critical actions, deletion confirmations, and validation errors (`oklch(0.577 0.245 27.325)` in light, `oklch(0.704 0.191 22.216)` in dark).
+- **Semantic identity**: A custom theme should never alter destructive colors to match ordinary primary CTAs. Destructive actions must remain immediately recognizable.
+
+---
+
+## Component overrides
+
+Global tokens solve global visual requirements. Component overrides solve component-specific requirements.
+
+### Preferred customization order
+
+When tailoring a component's appearance, follow this deliberate hierarchy:
+
+1. **Semantic tokens**: Update CSS variables in `:root` or `.dark` to adjust the whole system.
+2. **Material tokens**: Adjust optical parameters in `styles/halo-tokens.css` to refine glass behavior.
+3. **Component variants**: Use CVA variant props (e.g. `<HaloButton variant="secondary" size="lg">`).
+4. **Local classes**: Use `className` for local margin, layout positioning, or grid alignment.
+
+---
+
+## Scoped themes
+
+HaloUI supports localized theme scoping. You can override CSS variables on a specific container to render a dark card inside a light page or apply a brand-specific accent to a dedicated dashboard widget:
+
+<CodeBlock
+  language="tsx"
+  filename="scoped-theme.tsx"
+  showLineNumbers
+  code={`// Scoped Theme Container
+<div
+  className="rounded-2xl p-6"
+  style={{
+    "--primary": "oklch(0.527 0.154 150.0)", // Emerald accent for this card only
+    "--ring": "oklch(0.696 0.170 162.5)",
+  } as React.CSSProperties}
+>
+  <HaloButton variant="primary">Scoped Action</HaloButton>
+</div>`}
+/>
+
+### Portals and overlays
+
+When using scoped themes with portal components (such as `Dialog`, `Popover`, or `Tooltip`), verify that the portal target inherits the scoped CSS variables. Because React portals render into `document.body`, scoped variables defined on a parent `<div>` do not cascade to the portal unless explicitly passed.
+
+---
+
+## Create a theme
+
+Follow this 8-step workflow to build and deploy a production-ready custom theme:
+
+1. **Define visual direction**: Determine canvas warmth, brand accent identity, radius geometry, and default material intensity.
+2. **Configure semantic colors**: Set `--background`, `--foreground`, `--primary`, `--secondary`, `--border`, and `--ring` in `:root`.
+3. **Calibrate dark mode**: Tune the `.dark` selector independently to ensure readable text and non-glare elevated surfaces.
+4. **Configure geometry**: Adjust `--radius` to establish compact (4px), standard (10px), or soft (14px) curves.
+5. **Verify material optical tokens**: Ensure `--halo-surface` and `--halo-edge` provide sufficient contrast across target backdrops.
+6. **Test keyboard focus**: Navigate forms using `Tab` to confirm the `--ring` outline is immediately apparent.
+7. **Verify real components**: Audit Buttons, Inputs, Cards, Switches, and Dialogs side-by-side.
+8. **Audit WCAG contrast**: Run automated contrast checks to guarantee 4.5:1 text contrast and 3:1 graphical object contrast.
+
+---
+
+## Theme Lab
+
+Use the interactive **Theme Lab** below to test color palettes, radius scales, and material intensities in real time. All changes are scoped locally to the sandbox and can be copied as production-ready CSS.
+
+<ThemeLab />
+
+---
+
+## Theme registry
+
+HaloUI distributes themes through the shadcn registry model as installable stylesheets and token manifests.
+
+When you install a theme resource via the CLI, the stylesheet is written directly into your `styles/` directory:
+
+<InstallCommand registry="surface" />
+
+Because themes distribute as source code, your team retains complete ownership to edit, version, and extend token values over time.
+
+---
+
+## Validate a theme
+
+Before deploying a custom theme to production, evaluate it across all eight validation gates in the matrix below:
+
+<ThemeTestMatrix />
+
+---
+
+## Accessibility
+
+Theming must never compromise component accessibility:
+
+- **Color contrast**: Text must meet WCAG 2.1 AA requirements (4.5:1 for body copy, 3:1 for large display text).
+- **Focus visibility**: Focus rings must be clearly visible against both light canvas and dark elevated cards.
+- **State distinction**: Disabled, active, hover, and error states must remain distinct without relying solely on subtle color shifts.
+- **Translucent legibility**: When adjusting `--halo-surface`, ensure underlying text or imagery does not bleed through and reduce legibility.
+
+---
+
+## Performance
+
+HaloUI relies on native CSS custom properties for theming. This delivers three key performance benefits:
+
+1. **Zero runtime overhead**: Theme switching requires no JavaScript computation, React re-renders, or context propagation.
+2. **Minimal bundle size**: Eliminates heavy CSS-in-JS libraries or runtime theme providers.
+3. **Hardware-accelerated rendering**: CSS custom properties integrate directly into the browser's compositor layer.
+
+---
+
+## Best practices
+
+### Do
+- Start by adjusting semantic tokens in `:root` and `.dark`.
+- Design light and dark themes as independent visual environments.
+- Verify focus rings using actual keyboard `Tab` navigation.
+- Test translucent material surfaces over realistic images and dense text.
+- Maintain consistent corner radii across adjacent inputs and buttons.
+
+### Avoid
+- Scattering hard-coded hex codes across component markup.
+- Removing focus outlines (`outline: none`) to make controls look "cleaner".
+- Treating dark mode as a simple mathematical inversion of light mode.
+- Using decorative optical glow as a replacement for accessible focus rings.
+- Making every surface translucent; reserve liquid glass for elevated interactive elements.
+
+---
+
+## Common mistakes
+
+### Changing only the primary color
+A complete theme requires coordinating neutral temperatures, borders, muted foregrounds, and focus indicators alongside the primary CTA.
+
+### Hard-coding component colors
+Using `bg-[#0071e3]` prevents components from adapting to dark mode or system theme toggles.
+
+### Testing only light mode
+Dark mode surfaces require deliberate adjustments to luminous edges and background luminance to avoid harsh glare.
+
+### Over-customizing internal component layers
+Attempting to override internal optical highlights with bespoke CSS hacks usually indicates a missing semantic token or variant.
+
+---
+
+## Troubleshooting
+
+### Theme does not change
+- **Cause**: CSS variable overrides are declared with lower specificity than `app/globals.css`, or the stylesheet is imported after custom styles.
+- **Solution**: Place your custom `:root` overrides at the bottom of `app/globals.css` or ensure your custom theme stylesheet is imported after `@import "../styles/halo-tokens.css";`.
+
+### Dark theme does not apply
+- **Cause**: The `<html>` element is missing the `.dark` class or `next-themes` is configured to use data attributes instead of classes.
+- **Solution**: Confirm that your `ThemeProvider` specifies `attribute="class"`.
+
+<CodeBlock
+  language="tsx"
+  filename="components/theme-provider.tsx"
+  code={'<ThemeProvider attribute="class" defaultTheme="system" enableSystem>\n  {children}\n</ThemeProvider>'}
+/>
+
+### Component ignores token override
+- **Cause**: The component is using a hard-coded Tailwind class (e.g. `bg-white`) rather than a semantic token (e.g. `bg-card`).
+- **Solution**: Replace the hard-coded utility with its semantic counterpart: `<div className="bg-card text-card-foreground">`.
+
+### Portal modal has wrong theme
+- **Cause**: A scoped theme was applied to a parent `<div>`, but the `Dialog` renders through a React portal directly into `<body>`.
+- **Solution**: Apply the theme class to the `DialogContent` container or pass the scoped theme class name directly to the portal root.
+
+### Material looks washed out on an image
+- **Cause**: The surface opacity is too low or diffusion blur is insufficient.
+- **Solution**: Increase surface body opacity from `0.72` to `0.88` using `--halo-surface-elevated` or apply `.halo-intensity-rich`.
+
+### Focus ring became invisible
+- **Cause**: `--ring` was set to a color matching the background, or `outline-none` was applied without an accompanying ring class.
+- **Solution**: Restore `--ring: oklch(0.708 0 0)` and ensure interactive controls include `focus-visible:ring-2 focus-visible:ring-ring`.
+
+---
+
+## Theme reference
+
+Comprehensive quick reference for all canonical HaloUI design tokens:
+
+| Token | Category | Light Value | Dark Value | Purpose |
+| :--- | :--- | :--- | :--- | :--- |
+| `--background` | Canvas | `oklch(1 0 0)` | `oklch(0.145 0 0)` | Page canvas substrate |
+| `--foreground` | Content | `oklch(0.145 0 0)` | `oklch(0.985 0 0)` | Primary typography |
+| `--card` | Canvas | `oklch(1 0 0)` | `oklch(0.205 0 0)` | Card and panel surfaces |
+| `--primary` | Actions | `oklch(0.205 0 0)` | `oklch(0.922 0 0)` | Primary CTA action |
+| `--secondary` | Actions | `oklch(0.97 0 0)` | `oklch(0.269 0 0)` | Secondary action |
+| `--muted` | Content | `oklch(0.97 0 0)` | `oklch(0.269 0 0)` | Muted surface container |
+| `--muted-foreground` | Content | `oklch(0.556 0 0)` | `oklch(0.708 0 0)` | Secondary metadata text |
+| `--border` | Boundaries | `oklch(0.922 0 0)` | `oklch(1 0 0 / 10%)` | Structural border |
+| `--ring` | Focus | `oklch(0.708 0 0)` | `oklch(0.556 0 0)` | Keyboard focus ring |
+| `--radius` | Geometry | `0.625rem` | `0.625rem` | Base corner radius |
+| `--halo-surface` | Material | `rgba(255,255,255,0.72)` | `rgba(22,23,26,0.70)` | Liquid glass body tint |
+| `--halo-edge` | Material | `rgba(255,255,255,0.90)` | `rgba(255,255,255,0.14)` | 1px perimeter rim catch |
+| `--halo-blur-md` | Material | `16px` | `16px` | Standard diffusion blur |
+
+---
+
+## Next steps
+
+- [Liquid Material](/docs/liquid-material): Master the 10-layer physical optical engine powering HaloUI surfaces.
+- [Accessibility](/docs/accessibility): Review the strict WCAG 2.1 AA accessibility contract enforced across all components.
+- [Registry](/docs/registry): Learn how HaloUI distributes source code and token stylesheets directly into your project.
+- [Components](/components): Explore the full catalog of installable liquid optical components.

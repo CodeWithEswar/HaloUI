@@ -104,7 +104,7 @@ export function MaterialAnatomyVisual() {
     <div className="my-8 rounded-2xl border border-border bg-card p-5 sm:p-7 shadow-xs">
       <div className="mb-4 flex items-center justify-between">
         <div>
-          <h3 className="text-sm font-semibold text-foreground">Interactive Layer Anatomy</h3>
+          <div className="text-sm font-semibold text-foreground">Interactive Layer Anatomy</div>
           <p className="text-xs text-muted-foreground mt-0.5">
             Hover or select any optical layer below to isolate its physical manifestation on the surface.
           </p>

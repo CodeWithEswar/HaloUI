@@ -1,0 +1,523 @@
+export const frontmatter = {
+  title: "Accessibility",
+  description: "Learn the accessibility requirements, interaction patterns, visual constraints, and testing standards used across HaloUI components.",
+  category: "Foundations",
+  order: 2,
+  status: "stable",
+  updated: "2026-09-24",
+}
+
+# Accessibility
+
+HaloUI components are designed to preserve semantics, keyboard access, visible focus, readable content, and predictable interaction across different input methods and user preferences.
+
+The material system is progressive. Blur, transparency, refraction, motion, and other optical effects must never become requirements for understanding or operating a component.
+
+## Accessibility model
+
+A HaloUI component is considered complete only when its visual design, interaction model, semantic structure, and accessibility behavior describe the same state.
+
+The system is organized around four core accessibility concerns:
+
+- **Semantics**: The browser and assistive technologies understand what the interface represents through native HTML elements and established accessible patterns.
+- **Interaction**: Users can operate the component through the input methods appropriate to that control—including keyboard, pointer, and touch.
+- **Perception**: Important content, operational state, visible focus, and system feedback remain perceivable regardless of environmental lighting, themes, or visual effects.
+- **Resilience**: The component remains usable when motion, transparency, pointer input, or available viewport space changes.
+
+| Area | HaloUI requirement |
+| --- | --- |
+| Semantics | Prefer native HTML elements and established accessible primitives before applying custom attributes. |
+| Keyboard | Interactive behavior must be operable without a pointer wherever interaction is supported. |
+| Focus | Focus must be visible, predictable, distinct from material lighting, and intentionally managed. |
+| Naming | Every interactive control requires a meaningful, unique accessible name. |
+| State | Selected, expanded, invalid, disabled, busy, and related states must be communicated programmatically. |
+| Contrast | Content and essential component boundaries must maintain verified contrast over all supported backdrops. |
+| Motion | Reduced-motion preferences must be respected by eliminating non-essential displacement while preserving state feedback. |
+| Material | Optical effects—such as blur, highlights, and refraction—must never carry essential semantic meaning. |
+| Touch | Interactive touch targets must provide practical sizing without relying on hover states. |
+| Responsive | Layout reflow and zoom must not clip text or eliminate interactive functionality. |
+| Testing | Automated linting and checks must be paired with manual keyboard, screen-reader, and zoom validation. |
+
+HaloUI is implemented and tested against the accessibility requirements adopted by the project and the semantics expected by the web platform. The baseline engineering target for component accessibility is WCAG 2.2 Level AA conformance.
+
+## Semantic HTML
+
+Native browser semantics form the first accessibility layer of any HaloUI component. Native elements provide built-in keyboard navigation, platform-standard accessibility events, and native state management without requiring custom scripting.
+
+HaloUI uses native elements whenever the platform provides the appropriate behavior:
+
+- `<button>` for triggers and actions.
+- `<a>` for navigational links with valid destinations.
+- `<input>`, `<textarea>`, and `<select>` for form entries.
+- `<label>` for form control labels with programmatic association.
+- Semantic heading tags (`<h1>` through `<h6>`) for document outline and navigation landmarks.
+- `<ul>`, `<ol>`, and `<li>` for list content.
+- `<table>`, `<th>`, and `<td>` for genuinely tabular datasets.
+
+Avoid recreating these behaviors with generic elements such as `<div>` or `<span>`. Recreating native controls with generic elements requires manually simulating focusability, keyboard events, role mapping, and screen reader announcements, which introduces subtle failure modes across different browsers and assistive technologies.
+
+<Callout type="note" title="Native semantics before ARIA">
+  Prefer native semantics before adding ARIA. ARIA should communicate semantics or state that cannot be represented through native HTML. Do not use ARIA as a repair mechanism for an avoidably incorrect HTML element.
+</Callout>
+
+### Semantic button comparison
+
+<CodeBlock
+  language="tsx"
+  filename="components/example-semantic-choice.tsx"
+  showLineNumbers
+  code={`// Avoid: generic container missing keyboard activation, focus, and role
+<div onClick={handleSave}>
+  Save
+</div>
+
+// Prefer: native button provides Enter/Space activation, native focus, and semantic role
+<button type="button" onClick={handleSave}>
+  Save
+</button>`}
+/>
+
+The native button automatically exposes the `button` role to the accessibility tree, participates in standard tab order, triggers on `Enter` and `Space` keypresses, and provides native disabled state handling without additional custom JavaScript.
+
+## Keyboard interaction
+
+Keyboard behavior in HaloUI follows established interaction patterns for the component being implemented rather than inventing proprietary key mappings. Operating a component via the keyboard must yield the same operational outcome as operating it with a pointer.
+
+| Component | Typical keys | Interaction behavior |
+| --- | --- | --- |
+| Button | `Enter`, `Space` | Activates the button action or submits a form. |
+| Link | `Enter` | Navigates to the target URL. |
+| Checkbox | `Space` | Toggles between checked and unchecked states. |
+| Radio Group | `ArrowDown`, `ArrowUp`, `ArrowLeft`, `ArrowRight` | Moves selection and focus between options in the group. |
+| Tabs | `ArrowLeft`, `ArrowRight` | Navigates between tab items using roving tabindex. |
+| Menu | `ArrowDown`, `ArrowUp`, `Enter`, `Space`, `Escape` | Navigates menu items and dismisses the popup container. |
+| Dialog | `Tab`, `Shift+Tab`, `Escape` | Traps focus within the modal and dismisses on Escape. |
+| Combobox | `ArrowDown`, `ArrowUp`, `Enter`, `Escape` | Navigates suggestions, confirms selection, and closes dropdown. |
+
+The exact keyboard contract for each individual component is documented on its respective component reference page.
+
+<KeyboardDemo />
+
+### Tab order
+
+Focus progression through HaloUI layouts follows natural semantic and visual reading order (left-to-right, top-to-bottom) unless a recognized composite widget pattern dictates managed internal navigation.
+
+Avoid using positive `tabIndex` values (`tabIndex={1}`) to create arbitrary focus sequences. Positive values disrupt normal keyboard progression and produce confusing jumps across unrelated regions of the DOM. Similarly, avoid visual CSS flexbox or grid reordering (`order: -1`) that causes the visual focus indicator to jump erratically relative to the underlying DOM order.
+
+### Composite widgets
+
+Complex widgets—such as Tabs, Dropdown Menus, Radio Groups, and Toolbars—use managed or roving focus (`tabindex="-1"` on inactive items, `tabindex="0"` on the active item). The entire composite widget represents a single tab stop in the page flow. Once inside, users navigate between items using arrow keys rather than tabbing through every individual child element.
+
+## Focus
+
+Keyboard focus must remain perceivable, high-contrast, and predictable independently of HaloUI's liquid material treatment. Because HaloUI employs highlights, optical edges, depth shadows, and ambient glow, focus indicators require an independent visual presentation.
+
+<Callout type="warning" title="Focus is not material lighting">
+  A material highlight, surface glow, optical edge, or hover treatment is not a substitute for a focus indicator. Focus must remain distinguishable from hover, active, selected, surface edges, and lighting effects under all conditions.
+</Callout>
+
+<FocusStatePreview />
+
+### Focus-visible
+
+HaloUI components use the `:focus-visible` pseudo-class for focus styling. Pointer clicks do not trigger persistent focus rings, whereas keyboard navigation (<kbd>Tab</kbd>) displays the system focus ring immediately.
+
+Focus rings are styled using HaloUI's global focus tokens rather than ad-hoc colors:
+
+```css
+ring-2 ring-stone-950 dark:ring-stone-100 ring-offset-2 ring-offset-background
+```
+
+This guarantees a minimum 3:1 contrast ratio against the component surface and adjacent background in both light and dark themes.
+
+### Focus management
+
+Programmatic focus manipulation is reserved strictly for moments when user interaction demands context switching. Examples include:
+
+- Moving focus into a newly opened modal Dialog or Alert Dialog.
+- Restoring focus to the trigger control when a modal or popover closes.
+- Moving focus to the first invalid field upon form submission when appropriate.
+- Transferring focus into the active tab panel when navigating complex multi-panel workspaces.
+
+Focus is never programmatically shifted simply to complete an entrance animation or visual transition.
+
+### Focus restoration
+
+Temporary overlays must return focus to a logical DOM node when dismissed. By default, focus restores to the trigger element that opened the overlay. If the trigger has been unmounted or removed from the DOM, focus falls back to a stable ancestor container to prevent the focus position from resetting to the top of the document body.
+
+## Accessible names
+
+Every interactive control must have an accessible name that clearly communicates its purpose to assistive technologies. In most controls, visible text content directly supplies this name.
+
+When a control contains only an icon without visible text, an explicit accessible name must be provided via `aria-label` or an associated `<Label>` element.
+
+<CodeBlock
+  language="tsx"
+  filename="components/icon-button-example.tsx"
+  showLineNumbers
+  code={`import { Copy01Icon } from "@hugeicons/core-free-icons"
+import { HaloIcon } from "@/components/icons/halo-icon"
+import { HaloButton } from "@/components/haloui/button/halo-button"
+
+export function CopyCommandButton() {
+  return (
+    <HaloButton
+      variant="ghost"
+      size="icon"
+      aria-label="Copy installation command"
+    >
+      <HaloIcon icon={Copy01Icon} size={16} aria-hidden="true" />
+    </HaloButton>
+  )
+}`}
+/>
+
+### Decorative icons
+
+When visible text already communicates a control's meaning, companion icons must be marked with `aria-hidden="true"` to prevent screen readers from announcing redundant text (such as "Copy Copy").
+
+### Tooltips and names
+
+A tooltip is a visual enhancement for sighted users; it does not replace an accessible name. Sighted users operating touchscreens or screen-reader users navigating by touch may never trigger hover-based tooltips. Icon-only controls must always retain an `aria-label` attribute even when wrapped in a Tooltip primitive.
+
+## State communication
+
+Visual state changes must have an equivalent programmatic representation in the accessibility tree so screen readers and assistive tools can announce current status.
+
+| State | Typical representation | Usage |
+| --- | --- | --- |
+| Disabled | Native `disabled` attribute | Indicates that a control cannot be focused or activated. |
+| Selected | `aria-selected="true"` or pattern state | Indicates the currently active item in Tabs or Listboxes. |
+| Expanded | `aria-expanded="true"` / `"false"` | Indicates disclosure state for Accordions, Collapsibles, and Menus. |
+| Pressed | `aria-pressed="true"` / `"false"` | Communicates toggle state on persistent toggle buttons. |
+| Checked | Native `checked` or `aria-checked` | Indicates state for Checkboxes and Radio buttons. |
+| Invalid | `aria-invalid="true"` | Communicates that field input violates validation constraints. |
+| Required | Native `required` or `aria-required="true"` | Identifies mandatory fields in form groups. |
+| Busy | `aria-busy="true"` | Signals that an element or container is actively loading dynamic updates. |
+| Current | `aria-current="page"` | Indicates the current page or item within breadcrumbs and navigation rails. |
+
+### Disabled and aria-disabled
+
+Native `disabled` prevents user interaction, removes the element from keyboard tab order, and communicates disabled status natively. Use native `disabled` when an element supports it and complete inactivation is intended.
+
+Use `aria-disabled="true"` when a control should remain focusable so keyboard users can discover why an action is unavailable (for example, in combination with a descriptive tooltip explaining missing prerequisites). When using `aria-disabled`, the component implementation must explicitly suppress click and activation handlers.
+
+## Forms and validation
+
+Accessible form behavior depends on the explicit relationships established between labels, inputs, descriptions, validation states, and error alerts—not merely on the visual styling of a border.
+
+The HaloUI form field contract requires:
+
+- A persistent visible label.
+- A programmatic association between `<label htmlFor={id}>` and `<input id={id}>`.
+- A descriptive subtext linked through `aria-describedby`.
+- Dynamic error messages linked through `aria-describedby` when validation fails.
+- Programmatic `aria-invalid="true"` applied to invalid fields.
+- Clear error notification via `role="alert"` or live regions when submission fails.
+
+<AccessibleFieldExample />
+
+### Labels
+
+Labels must remain visible when practical. Placeholder text is temporary input guidance and disappears once a user begins typing; it must never be used as a replacement for a formal field label.
+
+### Validation
+
+Validation errors must never be communicated through color alone. In addition to a red border, HaloUI fields display an explicit error message, an error icon, and programmatic `aria-invalid` attributes.
+
+### Validation timing
+
+Validation feedback should match user intent. Avoid displaying aggressive inline error messages while the user is still actively typing an initial entry. Validate on `blur` or upon explicit form submission, and re-validate on change only after the field has already been marked invalid.
+
+## Overlays
+
+HaloUI provides both modal and non-modal overlay primitives. Choosing the appropriate overlay primitive is essential to maintaining accessibility.
+
+### Dialog
+
+A modal Dialog represents a separate interaction layer. When opened, it must:
+
+- Assign an accessible name using `<DialogTitle>` or `aria-labelledby`.
+- Provide an optional accessible description using `<DialogDescription>` or `aria-describedby`.
+- Move focus into the dialog container upon mounting.
+- Trap keyboard focus so <kbd>Tab</kbd> cycles exclusively within the dialog content.
+- Close upon pressing the <kbd>Escape</kbd> key.
+- Restore focus to the trigger button when dismissed.
+- Prevent pointer interactions with the background document.
+
+### Alert Dialog
+
+An Alert Dialog is reserved for critical, interruptive decisions requiring explicit user confirmation (such as irreversible resource deletion or unsaved data loss). It uses `role="alertdialog"`, demands immediate user attention, and should not be used for routine notifications or non-critical settings.
+
+### Tooltip
+
+A Tooltip provides supplementary context. It must never contain interactive elements (buttons, links, form inputs), must never be the sole carrier of critical information, and must dismiss automatically when <kbd>Escape</kbd> is pressed.
+
+### Popover
+
+A Popover is a non-modal disclosure container. Unlike a modal dialog, it does not necessarily trap page focus and does not block background interaction unless configured for exclusive contextual workflows.
+
+## Dynamic content
+
+Dynamic content updates must be communicated without overwhelming assistive technology users with constant or repetitive interruptions.
+
+### Live regions
+
+Live regions announce asynchronous updates to screen reader users without requiring focus to move away from their current task:
+
+- `aria-live="polite"`: Announces changes when the screen reader finishes speaking current content. Used for search result counts, status changes, and non-critical updates.
+- `aria-live="assertive"`: Interrupts the screen reader immediately. Reserved exclusively for time-critical alerts and system failures.
+
+Avoid applying live regions to rapidly updating values (such as continuous animation frames or real-time typing counters), as this creates noisy, unreadable speech streams.
+
+### Toast
+
+Toasts provide non-critical confirmation feedback. Toast content should be concise and easily readable. Critical information requiring user action must never be placed exclusively inside an auto-dismissing Toast.
+
+### Loading and progress
+
+When a component is in an active loading state:
+
+- Interactive triggers should show visual loading spinners and set `aria-disabled="true"` to prevent duplicate submissions.
+- Long-running asynchronous operations should expose a progress bar with `role="progressbar"`, `aria-valuenow`, `aria-valuemin`, and `aria-valuemax`.
+- Indeterminate progress must not fabricate artificial percentages; use an indeterminate progress bar without numeric values.
+
+## Color and contrast
+
+HaloUI's visual identity must never compromise the readability of typography, boundaries, or interactive states. Text and interactive elements must satisfy WCAG 2.2 AA contrast requirements:
+
+- **Normal text**: Minimum contrast ratio of 4.5:1 against the underlying rendered surface.
+- **Large text (18pt+ or 14pt+ bold)**: Minimum contrast ratio of 3:1.
+- **User interface components and focus indicators**: Minimum contrast ratio of 3:1 against adjacent colors.
+
+### Translucent surface contrast
+
+Because HaloUI uses translucent materials, contrast cannot be verified solely in an isolated CSS token inspector. A semi-transparent surface placed over a photograph, video, or dense data table receives light and color from the underlying content.
+
+HaloUI components are tested across four representative environments: neutral light/dark surfaces, image backdrops, dense application UI, and deep dark backgrounds. When underlying detail compromises legibility, the component surface must be reinforced with increased base opacity.
+
+### Color must not carry state alone
+
+Never rely exclusively on color to convey meaning or state. Error states combine red hue with error icons and descriptive text. Selected states combine active tints with visible checkmarks, bolder typography, or dedicated focus rings.
+
+## Liquid material and accessibility
+
+Liquid Material is an optical enhancement layer designed to sit over an accessible, fully functional component. A user must never need to perceive blur, refraction, specular highlights, or depth in order to operate the interface.
+
+<Callout type="note" title="Material effects are never accessibility states">
+  Focus, invalid, selected, disabled, and other meaningful states require independent visual and programmatic treatment. Optical edges and specular highlights cannot substitute for verified state communication.
+</Callout>
+
+### Transparency and diffusion
+
+Translucent surfaces must maintain content legibility and clear boundary separation. If high-contrast background clutter bleeds through the material, background diffusion (`backdrop-filter: blur()`) and base surface opacity must be increased to preserve text contrast.
+
+### Refraction
+
+Refraction displacement must never distort text content, obscure interactive targets, or interfere with the perceived position of focus indicators. In HaloUI, refraction is applied strictly to outer decorative perimeter bezels, leaving the interior content container optically planar.
+
+### Highlights
+
+Specular highlights simulate directional illumination. Highlights are structural visual cues, not functional indicators. They must never be used as the sole indicator for hover, focus, or selection.
+
+### Material intensity by role
+
+Accessibility requirements dictate the appropriate material intensity tier:
+
+- **Subtle**: Recommended for information-dense contexts, long-form reading, data tables, and complex form fields.
+- **Balanced**: Standard tier for cards, menus, dialogs, and popovers.
+- **Rich**: Reserved for elevated floating controls (such as docks, showcase buttons, and hero displays) where visual prominence does not conflict with dense data comprehension.
+
+<MaterialAccessibilityPreview />
+
+## Motion
+
+Motion in HaloUI communicates spatial relationships, elevation changes, and tactile feedback. All motion is progressive and respects user accessibility preferences.
+
+```css
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+```
+
+### Reduced motion
+
+When `prefers-reduced-motion: reduce` is enabled:
+
+- Large sliding transforms and spring displacements collapse to immediate state transitions.
+- Pointer-reactive magnetic lighting and continuous floating loops are disabled.
+- Parallax effects and kinetic typography are eliminated.
+- Tactile scale compression is replaced with immediate visual background shifts.
+
+### Reduced motion still requires feedback
+
+Reduced motion simplifies movement without removing operational feedback. When movement is collapsed, state changes (such as focus rings, selection checkmarks, loading indicators, and error banners) remain immediate, distinct, and visible.
+
+<ReducedMotionComparison />
+
+## Touch and pointer
+
+HaloUI does not assume that users have a fine mouse cursor or hover capability. Interfaces must function reliably across touchscreens, styluses, and trackpads.
+
+### Hover
+
+Hover states provide useful interaction enhancement, but must never reveal essential actions or information that cannot be accessed without hover. On touch devices, primary actions must remain persistently visible.
+
+### Pointer-reactive material
+
+Surfaces that respond to pointer coordinates (such as virtual lighting or edge glints) are strictly decorative. Touch users experience the same component functionality without requiring pointer coordinate calculations.
+
+### Touch target sizing
+
+Interactive elements must provide practical touch targets to prevent misclicks. HaloUI recommends a minimum target size of 44×44 CSS pixels for primary touch interactions, or equivalent touch padding surrounding compact controls.
+
+### Drag interactions
+
+Components that support dragging (such as sliders, resizable panels, and sortable lists) must provide accessible keyboard alternatives. For example, a range slider must support <kbd>ArrowLeft</kbd> and <kbd>ArrowRight</kbd> keys, and sortable items must support keyboard-driven reordering controls.
+
+## Responsive behavior
+
+Responsive design must preserve semantic hierarchy, reading order, and access to all controls—not merely compress visual layouts into smaller containers.
+
+When components transform across viewports (such as a desktop Sidebar collapsing into a mobile Sheet, or horizontal Tabs converting into a dropdown Select), the underlying semantic structure and accessible names must remain consistent.
+
+Document source order matches the logical visual reading sequence. Avoid reordering columns or actions using CSS `flex-direction: row-reverse` or `order` properties in ways that disorient keyboard users.
+
+## Zoom and reflow
+
+HaloUI components are engineered to withstand user-initiated browser zoom up to 400% without loss of content or functionality:
+
+- Text containers use flexible layout techniques (`min-height` rather than fixed `height`) to accommodate user text scaling.
+- Code blocks, preformatted text, and wide data tables provide internal horizontal scrolling rather than triggering page-level viewport overflow.
+- Fixed headers and navigation rails do not obscure focused form inputs or active dialog content when viewport height is constrained.
+
+## High contrast
+
+In forced-colors or high-contrast mode (such as Windows High Contrast Mode):
+
+- Translucent surface tints, blur effects, and subtle box shadows may be ignored by the browser.
+- Core boundaries, interactive controls, and focus states must remain visible using platform system colors (`ButtonBorder`, `CanvasText`, `Highlight`).
+- Borders on translucent cards must use CSS declarations that remain visible when background colors are overridden.
+
+```css
+@media (forced-colors: active) {
+  .halo-surface {
+    border: 1px solid ButtonBorder;
+  }
+  .halo-surface:focus-visible {
+    outline: 2px solid Highlight;
+  }
+}
+```
+
+## Screen readers
+
+Screen-reader accessibility requires coordinated alignment across semantic elements, accessible naming, dynamic state updates, and reading order.
+
+### Visually hidden content
+
+HaloUI provides the `.sr-only` utility to supply additional context to assistive technologies without cluttering visual layouts:
+
+```css
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+```
+
+Use visually hidden content judiciously. When possible, visible labels that benefit all users are preferred over hidden text.
+
+### Duplicate announcements audit
+
+Ensure that visible button text and icon descriptions do not produce redundant screen reader output. Verify that nested SVG graphics inside labelled buttons include `aria-hidden="true"`, and avoid adding redundant `aria-label` attributes that repeat visible text identically.
+
+## Content and language
+
+Clear, descriptive writing is an essential facet of accessibility:
+
+- **Descriptive links**: Use link text that communicates destination and purpose out of context (for example, "Read the installation guide" instead of "Click here").
+- **Action-oriented labels**: Use specific verbs for buttons ("Deploy Registry", "Save Changes", "Delete Item") rather than ambiguous terms ("OK", "Submit").
+- **Clear error messages**: State what happened, why it occurred, and how the user can resolve the issue.
+- **Plain language**: Avoid unexplained internal jargon or acronyms without prior definition.
+
+## Component requirements
+
+Every component documentation page in HaloUI must feature a dedicated Accessibility section detailing:
+
+- **Semantics**: The native HTML element or ARIA pattern implemented.
+- **Keyboard**: Full table of supported key combinations and resulting actions.
+- **Focus**: Initial focus placement, focus containment rules, and focus restoration behavior.
+- **Naming**: Guidelines for providing accessible names during icon-only or custom configurations.
+- **State**: Programmatic attributes used to communicate state (`aria-expanded`, `aria-checked`, `aria-invalid`).
+- **Motion**: Behavior when `prefers-reduced-motion` is active.
+- **Touch**: Target sizing considerations and touch interaction notes.
+
+## When you customize HaloUI
+
+Installing HaloUI components gives your project direct ownership of the source code. This architecture gives you complete design freedom, but also means that accessibility can be compromised if component markup or interaction handlers are modified without care.
+
+<Callout type="warning" title="Source ownership includes accessibility ownership">
+  Once you modify component source code in your repository, accessibility verification becomes the responsibility of your application team. Review changes to semantic tags, ARIA attributes, and keyboard listeners carefully.
+</Callout>
+
+| Customization scope | Risk level | Engineering guidance |
+| --- | --- | --- |
+| Color tokens & surface tints | Low | Verify that text and focus rings maintain WCAG AA contrast (4.5:1 text, 3:1 UI boundaries). |
+| Padding & spacing | Low | Ensure interactive controls maintain minimum 44×44px touch targets. |
+| Typography scale | Low | Allow text containers to wrap naturally; avoid hardcoded container pixel heights. |
+| Replacing semantic HTML tags | High | Do not replace native `<button>` or `<a>` with `<div>` or `<span>`. |
+| Modifying keyboard event listeners | High | Preserve standard keys (<kbd>Enter</kbd>, <kbd>Space</kbd>, <kbd>Arrows</kbd>, <kbd>Escape</kbd>) and roving tabindex. |
+| Removing focus-visible rings | Critical | Never remove `:focus-visible` styling without providing an accessible alternative. |
+| Altering overlay focus traps | High | Ensure modal dialogs retain focus containment and focus restoration upon dismissal. |
+
+Keep installed component source code clean. Add explanatory comments only when custom logic works around known browser quirks or implements non-obvious accessibility requirements.
+
+## Testing accessibility
+
+HaloUI components are validated through a multi-tier testing pipeline combining automated linting with rigorous manual validation. Automated tools catch basic syntactic and tree issues, while manual testing verifies real interaction mechanics.
+
+| Testing layer | Tooling & method | Verification scope |
+| --- | --- | --- |
+| Static analysis | `eslint-plugin-jsx-a11y` | Catches missing alt tags, invalid ARIA roles, and misplaced event handlers during development. |
+| Automated auditing | axe-core & Lighthouse | Detects automated contrast failures, missing landmark roles, and duplicate DOM IDs. |
+| Manual keyboard QA | Hardware keyboard (<kbd>Tab</kbd>, <kbd>Arrows</kbd>, <kbd>Esc</kbd>) | Verifies focus order, visible focus rings, complete operability, and absence of keyboard traps. |
+| Screen reader QA | VoiceOver, NVDA, JAWS | Verifies accurate names, role announcements, dynamic state changes, and live region politeness. |
+| Contrast & zoom QA | Browser zoom (up to 400%) & high contrast | Confirms legibility over diverse substrates, absence of clipping, and resilience under forced colors. |
+| Motion QA | System reduced motion toggle | Verifies that animations collapse gracefully while preserving immediate operational feedback. |
+
+### Manual keyboard QA checklist
+
+Before publishing a component or custom modification, perform this manual checklist:
+
+1. Can you reach the component using only <kbd>Tab</kbd> or <kbd>Shift+Tab</kbd>?
+2. Is the focus indicator clearly visible against both light and dark backgrounds?
+3. Can you activate the control using <kbd>Enter</kbd> or <kbd>Space</kbd>?
+4. Does internal navigation (such as menu items or tabs) respond to arrow keys?
+5. Does pressing <kbd>Escape</kbd> dismiss open overlays and restore focus to the trigger?
+6. Is focus prevented from escaping the bounds of an active modal dialog?
+7. Is there any scenario where keyboard focus becomes permanently trapped?
+
+## Known limitations
+
+- **Complex drag-and-drop reordering**: Sortable list components currently require explicit keyboard action buttons (such as "Move Up" / "Move Down") in addition to pointer dragging. Fully autonomous spatial keyboard dragging is under active development.
+- **Extreme refraction on legacy hardware**: Low-end mobile devices running software-emulated backdrop blur may disable real-time refraction shaders, falling back to static surface opacity to maintain 60 FPS scrolling performance.
+
+## Next steps
+
+- [Button Component](/components/button) — Review the semantic button contract, keyboard activation, and icon accessibility.
+- [Liquid Material](/docs/liquid-material) — Explore the 10-layer physical optical engine and its readability constraints.
+- [Theming Guide](/docs/theming) — Configure color tokens while preserving verified contrast ratios.
+- [Installation Guide](/docs/installation) — Add HaloUI components directly into your application repository.
+- [Quick Start](/docs/quick-start) — Build and verify your first accessible HaloUI interface.
