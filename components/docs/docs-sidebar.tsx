@@ -60,7 +60,7 @@ export function DocsSidebar({ onNavigate, className }: DocsSidebarProps) {
               </h2>
               <ul className="space-y-0.5">
                 {section.items.map((item) => {
-                  const active = pathname === item.href;
+                  const active = pathname === item.href || (item.href === "/docs" && pathname === "/docs/introduction");
                   return (
                     <li key={item.href}>
                       <Link

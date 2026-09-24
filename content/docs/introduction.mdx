@@ -1,0 +1,363 @@
+export const frontmatter = {
+  title: "Introduction",
+  description: "Learn what HaloUI is, how its component registry works, and how its material system fits into your React application.",
+  category: "Getting started",
+  order: 1,
+  status: "stable",
+  updated: "2026-09-24",
+}
+
+# Introduction
+
+HaloUI is an open component registry for building expressive React interfaces with a consistent liquid-material system.
+
+HaloUI combines installable component source, accessible interaction patterns, reusable material foundations, documentation, previews, and application-level compositions.
+
+Instead of hiding components behind a runtime UI package, HaloUI follows a source-owned model. Install the components you need, keep their source in your application, and adapt them to the product you are building.
+
+## What is HaloUI?
+
+HaloUI is both a component system and a source registry. It combines reusable React components with a shared visual, behavioral, and installation architecture.
+
+- **Components** — reusable interface controls and application patterns.
+- **Material foundations** — shared surface, edge, highlight, blur, shadow, noise, refraction, and motion primitives.
+- **Registry** — machine-readable component distribution compatible with the shadcn/ui workflow.
+- **Documentation** — usage guidance, API references, accessibility notes, examples, and installation details.
+- **Previews** — isolated environments for testing themes, backgrounds, viewports, direction, and motion.
+- **Showcases** — realistic interfaces built from the same public HaloUI components available to users.
+
+<CodeBlock
+  language="text"
+  code={`                         HaloUI
+                            │
+          ┌─────────────────┼─────────────────┐
+          │                 │                 │
+          ▼                 ▼                 ▼
+      Components         Registry       Documentation
+          │                 │                 │
+          └────────────┐    │    ┌────────────┘
+                       ▼    ▼    ▼
+                        Previews
+                           │
+                           ▼
+                       Showcases`}
+/>
+
+HaloUI treats components, registry distribution, documentation, previews, and showcases as parts of the same product.
+
+## Why HaloUI?
+
+Many component libraries solve behavior well but intentionally leave visual identity to the application. Glass-oriented libraries often take the opposite approach: they emphasize visual effects without providing a complete behavioral, accessibility, documentation, or distribution system.
+
+HaloUI is designed to connect those concerns. Components share the same material vocabulary while remaining understandable as React source, installable through a registry, accessible in interaction, and adaptable after installation.
+
+| Concern | HaloUI approach |
+| --- | --- |
+| Visual language | Shared liquid-material foundations rather than isolated glass effects |
+| Interaction | Predictable component states and accessible behavior |
+| Distribution | Installable source through a shadcn-compatible registry |
+| Ownership | Generated source lives inside the consuming application |
+| Documentation | Usage, states, API, anatomy, accessibility, dependencies, and installed files |
+| Testing | Multiple themes, backgrounds, viewport sizes, direction, and reduced-motion contexts |
+| Composition | Public components are reused in realistic application showcases |
+
+## How it works
+
+HaloUI follows a source-distribution workflow. A registry item describes the component source and the dependencies required to install it into an application.
+
+<CodeBlock
+  language="text"
+  code={`HaloUI Registry
+      │
+      ▼
+Registry Item
+      │
+      ├── Component source
+      ├── HaloUI dependencies
+      ├── Package dependencies
+      ├── Required tokens
+      └── Supporting files
+      │
+      ▼
+shadcn CLI
+      │
+      ▼
+Your application`}
+/>
+
+After installation, the generated files become part of your project. They can be inspected, modified, versioned, and composed like the rest of your application code.
+
+<CodeBlock
+  language="bash"
+  code={`pnpm dlx shadcn@latest add https://haloui.dev/r/button.json`}
+/>
+
+Installation details, framework requirements, and registry configuration are covered in the [Installation](/docs/installation) guide.
+
+## Built for source ownership
+
+HaloUI components are intended to become part of the application that installs them. The registry is a distribution mechanism, not a permanent abstraction between the developer and the component implementation.
+
+This model gives teams direct control over styling, behavior, composition, and future customization without requiring every product decision to be exposed through an increasingly large configuration API.
+
+<div className="my-6 grid gap-4 sm:grid-cols-2">
+  <div className="rounded-xl border border-border bg-muted/20 p-4">
+    <div className="mb-2 text-xs font-medium uppercase tracking-wider text-muted-foreground">
+      Traditional package
+    </div>
+    <div className="font-mono text-xs leading-6 text-foreground">
+      Application<br />
+      &nbsp;&nbsp;↓<br />
+      Library API<br />
+      &nbsp;&nbsp;↓<br />
+      Hidden implementation
+    </div>
+  </div>
+  <div className="rounded-xl border border-border bg-muted/20 p-4">
+    <div className="mb-2 text-xs font-medium uppercase tracking-wider text-muted-foreground">
+      HaloUI registry
+    </div>
+    <div className="font-mono text-xs leading-6 text-foreground">
+      Registry<br />
+      &nbsp;&nbsp;↓<br />
+      Installed source<br />
+      &nbsp;&nbsp;↓<br />
+      Your application<br />
+      &nbsp;&nbsp;↓<br />
+      Editable implementation
+    </div>
+  </div>
+</div>
+
+<Callout type="note">
+  Install the source. Understand the component. Change it when your product requires it.
+</Callout>
+
+## The material system
+
+HaloUI does not treat glass as a single CSS effect. Its components are built from shared material primitives that describe how a surface receives light, separates from its environment, responds to interaction, and behaves across themes.
+
+| Property | Responsibility |
+| --- | --- |
+| Surface | Base translucent material and tint |
+| Edge | Defines the optical boundary of the surface |
+| Highlight | Represents directional light interacting with the material |
+| Diffusion | Controls how background information is softened |
+| Refraction | Adds restrained optical displacement or depth |
+| Shadow | Establishes contact and separation from the environment |
+| Glow | Adds controlled environmental illumination |
+| Noise | Prevents large translucent areas from appearing digitally flat |
+| Elevation | Defines inset, base, raised, floating, and overlay relationships |
+| Motion | Describes how material responds to interaction and state change |
+
+<CodeBlock
+  language="text"
+  code={`                 Virtual light
+                      ↓
+              Specular highlight
+                      ↓
+        ┌────────────────────────┐
+        │      Optical edge      │
+        │                        │
+        │   Surface + diffusion  │
+        │                        │
+        │        Content         │
+        │                        │
+        │   Refraction layer     │
+        │                        │
+        └────────────────────────┘
+               Contact shadow
+                      ↓
+                 Environment`}
+/>
+
+Individual components use different combinations and intensities of these layers. Not every component requires every effect.
+
+### Material intensity
+
+HaloUI uses three broad material intensities:
+
+- **Subtle** — dense interfaces, forms, tables, and supporting surfaces.
+- **Balanced** — standard HaloUI component treatment.
+- **Rich** — selected floating surfaces, showcases, and high-emphasis experiences.
+
+Rich material treatment should remain selective. Applying maximum glass effects to every element removes hierarchy and increases rendering cost.
+
+Material styling is progressive. Component semantics and interaction must remain usable when advanced blur, refraction, animation, or other decorative effects are reduced or unavailable.
+
+## What HaloUI includes
+
+HaloUI is organized around four major areas.
+
+### Foundations
+
+Material surfaces, theme tokens, focus treatment, motion, and shared layout behavior. Learn more in [Liquid material](/docs/liquid-material).
+
+### Components
+
+Actions, forms, navigation, overlays, data display, feedback, layout, messaging, media, charts, workspace, AI, and commerce interfaces. Browse the full catalog in [Components](/components).
+
+### Blocks
+
+Application-level compositions for authentication, settings, dashboards, analytics, messaging, AI workspaces, billing, administration, and app shells.
+
+### Developer tooling
+
+Registry distribution, MDX documentation, isolated previews, API references, accessibility guidance, visual testing, and installation verification.
+
+## HaloUI and shadcn/ui
+
+HaloUI is designed to work with the shadcn/ui ecosystem, but HaloUI and shadcn/ui serve different roles.
+
+| shadcn/ui | HaloUI |
+| --- | --- |
+| Provides a source-oriented component and registry workflow | Uses that workflow to distribute HaloUI components |
+| Provides common UI primitives and application patterns | Adds HaloUI's material language, component implementations, documentation, previews, and compositions |
+| Used throughout the HaloUI documentation interface | HaloUI components are the product demonstrated inside previews and showcases |
+
+HaloUI is not a theme that globally restyles every shadcn/ui component.
+
+The HaloUI documentation website intentionally uses standard shadcn/ui styling for its own interface. Liquid-material styling is reserved for HaloUI components and selected demonstrations so the documentation remains clear and neutral.
+
+HaloUI provides its own installable component source and material foundations while remaining compatible with the surrounding shadcn-oriented development workflow.
+
+## Component philosophy
+
+Every HaloUI component addresses four core concerns:
+
+### Appearance
+
+Components participate in the same material and visual system.
+
+### Behavior
+
+Related components use predictable state and interaction models.
+
+### Accessibility
+
+Visual styling and motion must not replace semantic structure, keyboard behavior, focus management, or assistive-technology support.
+
+### Ownership
+
+Installed source remains readable and adaptable inside the consuming application.
+
+<CodeBlock
+  language="text"
+  code={`                    HaloUI Component
+                           │
+          ┌────────────────┼────────────────┐
+          │                │                │
+          ▼                ▼                ▼
+       Visual          Behavior        Accessibility
+          │                │                │
+          └────────────────┼────────────────┘
+                           ▼
+                     Source ownership`}
+/>
+
+## Design principles
+
+### Material, not effect
+
+Glass should behave as a coherent material system rather than a repeated combination of transparency and backdrop blur.
+
+### Motion communicates
+
+Animation should explain interaction, state, hierarchy, navigation, or material response. Decorative motion should remain secondary.
+
+### Accessibility survives the visual system
+
+A component must remain understandable and operable when animation, transparency, blur, or other visual enhancements are reduced.
+
+### Source should be understandable
+
+Installed components should be readable enough for developers to inspect, maintain, and adapt without treating HaloUI as a black box.
+
+### Composition proves the system
+
+HaloUI showcases must use the same public components available through the registry. A component system should prove itself in real interface compositions, not only isolated demos.
+
+### Restraint creates hierarchy
+
+Not every element should be glass, animated, elevated, or expressive. Neutral surfaces and quiet states give high-emphasis material treatments meaning.
+
+## From source to documentation
+
+Every component moves through a consistent product lifecycle:
+
+<CodeBlock
+  language="text"
+  code={`Component specification
+        ↓
+Implementation
+        ↓
+States + accessibility
+        ↓
+Examples
+        ↓
+Preview
+        ↓
+Props / API
+        ↓
+Registry item
+        ↓
+Installation verification
+        ↓
+Documentation
+        ↓
+Showcase`}
+/>
+
+The component demonstrated in documentation and showcases is the exact implementation distributed through the registry.
+
+## Component maturity
+
+HaloUI communicates component stability explicitly:
+
+- **Experimental** — API and implementation may change substantially.
+- **Preview** — available for evaluation while the API continues to evolve.
+- **Stable** — supported public API intended for production use.
+- **Deprecated** — retained temporarily with migration guidance.
+
+## Accessibility
+
+Accessibility is part of component design rather than a documentation step added after implementation.
+
+HaloUI considers semantic structure, keyboard interaction, visible focus, accessible names, state communication, contrast, touch targets, and reduced-motion behavior.
+
+Individual component pages document requirements specific to each component. Learn more in [Accessibility](/docs/accessibility).
+
+## Performance
+
+HaloUI treats advanced visual effects as progressive enhancements.
+
+Components prefer inexpensive transforms, opacity, static optical layers, and localized effects over continuous full-screen filters or unnecessary pointer tracking.
+
+Dense application interfaces should use restrained material intensity. Rich optical treatments are reserved for places where they improve hierarchy or interaction.
+
+## Theming
+
+HaloUI uses shared semantic material tokens so components can adapt consistently across light, dark, and product-specific themes.
+
+<CodeBlock
+  language="css"
+  filename="styles/halo-tokens.css"
+  code={`:root {
+  --halo-surface: rgba(255, 255, 255, 0.72);
+  --halo-surface-elevated: rgba(255, 255, 255, 0.88);
+  --halo-edge: rgba(255, 255, 255, 0.9);
+  --halo-edge-soft: rgba(0, 0, 0, 0.08);
+  --halo-shadow-contact: 0 1px 3px rgba(0, 0, 0, 0.06);
+  --halo-blur-md: 16px;
+  --halo-radius: 12px;
+}`}
+/>
+
+The [Theming](/docs/theming) guide documents the complete token architecture, material intensity levels, and customization model.
+
+## Next steps
+
+- [Installation](/docs/installation) — Configure HaloUI and install your first component directly from the registry.
+- [Components](/components) — Browse the component catalog and inspect previews, APIs, states, and dependencies.
+- [Theming](/docs/theming) — Learn how HaloUI material tokens control surfaces, edges, lighting, depth, and motion.
+- [Registry](/docs/registry) — Understand how HaloUI component source and dependencies are distributed.
