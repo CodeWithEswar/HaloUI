@@ -471,3 +471,19 @@
 .halo-liquid-glass:active {
   transform: scale(0.95);
 }
+
+@keyframes halo-indeterminate {
+  0% {
+    transform: translateX(-100%);
+  }
+  50% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(300%);
+  }
+}
+
+.animate-indeterminate-slide {
+  animation: halo-indeterminate 1.6s infinite ease-in-out;
+}

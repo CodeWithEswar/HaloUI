@@ -1725,6 +1725,42 @@
       "registryDependencies": [
         "field"
       ]
+    },
+    {
+      "name": "file-upload",
+      "type": "registry:ui",
+      "title": "File Upload",
+      "description": "An accessible client-side file-upload workflow with native file selection, drag-and-drop, validation, queue state management, progress tracking, cancellation, retry, and transport-agnostic application integration.",
+      "categories": [
+        "forms-and-fields"
+      ],
+      "dependencies": [
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge",
+        "@hugeicons/react",
+        "@hugeicons/core-free-icons"
+      ],
+      "registryDependencies": [
+        "field"
+      ]
+    },
+    {
+      "name": "color-picker",
+      "type": "registry:ui",
+      "title": "Color Picker",
+      "description": "An accessible color-selection control combining visual color adjustment (2D Saturation/Brightness canvas and 1D Hue spectrum) with precise textual hexadecimal entry and zero optical material contamination.",
+      "categories": [
+        "forms-and-fields"
+      ],
+      "dependencies": [
+        "@radix-ui/react-popover",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [
+        "field"
+      ]
     }
   ]
 }

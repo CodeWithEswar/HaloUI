@@ -573,6 +573,43 @@ export const docsNavigation: DocsNavSection[] = [
           "file selector"
         ],
       },
+      {
+        title: "File Upload",
+        href: "/components/file-upload",
+        description: "An accessible drag-and-drop file-upload workflow with validation, queue state, progress, and application-owned transfer integration.",
+        status: "preview",
+        keywords: [
+          "file-upload",
+          "file upload",
+          "dropzone",
+          "drag and drop",
+          "queue",
+          "progress",
+          "attachment",
+          "transfer",
+          "retry",
+          "abort"
+        ],
+      },
+      {
+        title: "Color Picker",
+        href: "/components/color-picker",
+        description: "An accessible color-selection control combining visual color adjustment with precise textual color entry.",
+        status: "preview",
+        keywords: [
+          "color-picker",
+          "color picker",
+          "color",
+          "hex",
+          "rgb",
+          "hsv",
+          "palette",
+          "swatch",
+          "alpha",
+          "opacity",
+          "picker"
+        ],
+      },
     ],
   },
 
