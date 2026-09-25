@@ -761,6 +761,21 @@ export const docsNavigation: DocsNavSection[] = [
           "separator"
         ],
       },
+      {
+        title: "Pagination",
+        href: "/components/pagination",
+        description: "An accessible navigation control for moving between discrete pages of a larger collection.",
+        status: "preview",
+        keywords: [
+          "pagination",
+          "pages",
+          "page link",
+          "previous",
+          "next",
+          "ellipsis",
+          "navigation landmark"
+        ],
+      },
     ],
   },
   {
