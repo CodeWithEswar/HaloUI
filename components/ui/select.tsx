@@ -66,7 +66,7 @@ function SelectTrigger({
       <span className="relative z-10 flex flex-1 items-center gap-2 truncate">{children}</span>
       <SelectPrimitive.Icon
         render={
-          <span className="pointer-events-none relative z-10 flex size-4 items-center justify-center text-muted-foreground select-none transition-transform duration-200 group-data-[open]/trigger:rotate-180">
+          <span className="pointer-events-none relative z-10 flex size-4 items-center justify-center text-muted-foreground select-none transition-transform duration-200 group-data-[open]/trigger:rotate-180 group-data-[popup-open]/trigger:rotate-180">
             <HaloIcon icon={ArrowDown01Icon} size={15} />
           </span>
         }
@@ -103,11 +103,18 @@ function SelectContent({
           data-slot="select-content"
           data-align-trigger={alignItemWithTrigger}
           className={cn(
-            // HaloUI Physical Liquid Glass Engine (Button Specification with elevated backdrop opacity)
-            "halo-liquid-glass relative isolate z-50 max-h-(--available-height) min-w-(--anchor-width) w-auto max-w-sm origin-(--transform-origin) overflow-hidden rounded-2xl p-1.5 text-foreground outline-none",
-            "!bg-white/85 dark:!bg-neutral-950/80 !backdrop-blur-2xl !backdrop-saturate-200",
-            // Micro animation
-            "duration-150 data-[side=bottom]:slide-in-from-top-1.5 data-[side=top]:slide-in-from-bottom-1.5 data-open:animate-in data-open:fade-in-0 data-open:zoom-in-98 data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-98",
+            // HaloUI Physical Liquid Glass Floating Surface (10-layer optical engine without button hover/active physics)
+            "relative isolate z-50 max-h-(--available-height) min-w-(--anchor-width) w-auto max-w-sm origin-(--transform-origin) overflow-hidden rounded-2xl p-1.5 text-foreground outline-none",
+            "bg-white/90 dark:bg-neutral-950/85 backdrop-blur-2xl backdrop-saturate-200",
+            "border border-border/80 dark:border-white/10 shadow-[var(--halo-shadow-elevated)]",
+            // Inner optical rim & 135° specular light highlight
+            "before:content-[''] before:absolute before:inset-0 before:pointer-events-none before:rounded-[inherit] before:shadow-[inset_0_1px_1px_0_rgba(255,255,255,0.85),inset_0_-1px_1px_0_rgba(0,0,0,0.04)] dark:before:shadow-[inset_0_1px_1px_0_rgba(255,255,255,0.18),inset_0_-1px_1px_0_rgba(0,0,0,0.6)]",
+            "after:content-[''] after:absolute after:inset-0 after:pointer-events-none after:rounded-[inherit] after:bg-gradient-to-br after:from-white/20 after:via-white/5 after:to-transparent dark:after:from-white/10 dark:after:via-transparent dark:after:to-transparent",
+            // Smooth Base UI Native CSS Transitions (Zero keyframe conflicts, zero snap-back)
+            "transition-[opacity,transform] duration-150 ease-out",
+            "data-[starting-style]:opacity-0 data-[starting-style]:scale-95 data-[starting-style]:data-[side=bottom]:-translate-y-1 data-[starting-style]:data-[side=top]:translate-y-1",
+            "data-[ending-style]:opacity-0 data-[ending-style]:scale-95 data-[ending-style]:data-[side=bottom]:-translate-y-1 data-[ending-style]:data-[side=top]:translate-y-1",
+            "data-[closed]:opacity-0 data-[closed]:scale-95 data-[closed]:pointer-events-none",
             className
           )}
           {...props}

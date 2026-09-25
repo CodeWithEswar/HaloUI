@@ -326,12 +326,15 @@ export function PreviewStageShell({
             <div className="flex-1 sm:flex-initial">
               <Select
                 value={activeBackdrop}
+                items={backdropOptions}
                 onValueChange={(val) => {
-                  if (val) setEffectiveBackdrop(val);
+                  if (val && val !== activeBackdrop) setEffectiveBackdrop(val);
                 }}
               >
                 <SelectTrigger className="h-8 sm:h-9 w-full sm:w-[155px] text-xs bg-background border-border text-foreground font-medium shadow-2xs">
-                  <SelectValue placeholder="Select backdrop" />
+                  <SelectValue placeholder="Select backdrop">
+                    {backdropOptions.find((o) => o.value === activeBackdrop)?.label}
+                  </SelectValue>
                 </SelectTrigger>
                 <SelectContent align="end">
                   {backdropOptions.map((opt) => (
@@ -554,7 +557,7 @@ export function StageControlSelect<T extends string>({
   className?: string;
 }) {
   const handleValueChange = (nextVal: string | null) => {
-    if (nextVal != null) {
+    if (nextVal != null && nextVal !== value) {
       if (typeof onValueChange === "function") {
         onValueChange(nextVal as T);
       }
@@ -563,6 +566,8 @@ export function StageControlSelect<T extends string>({
       }
     }
   };
+
+  const selectedOption = options.find((opt) => opt.value === value);
 
   return (
     <div
@@ -576,6 +581,7 @@ export function StageControlSelect<T extends string>({
       </span>
       <Select
         value={value}
+        items={options}
         onValueChange={handleValueChange}
       >
         <SelectTrigger
@@ -583,7 +589,7 @@ export function StageControlSelect<T extends string>({
           className="h-8.5 sm:h-9 text-xs sm:text-[13px] bg-background/90 hover:bg-background border-border text-foreground font-medium shadow-2xs min-w-0 flex-1 justify-between px-2.5 sm:px-3 gap-1.5 overflow-hidden rounded-lg transition-colors"
         >
           <span className="truncate text-left flex-1 min-w-0 block">
-            <SelectValue />
+            <SelectValue>{selectedOption?.label ?? value}</SelectValue>
           </span>
         </SelectTrigger>
         <SelectContent align="end">
