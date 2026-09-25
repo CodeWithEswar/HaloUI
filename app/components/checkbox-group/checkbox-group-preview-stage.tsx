@@ -110,7 +110,7 @@ export function NotificationPreferences() {
       viewport={viewport}
       onViewportChange={setViewport}
       controls={
-        <>
+        <div className="w-full grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-2.5">
           <StageControlSelect
             label="State Preset"
             value={stateMode}
@@ -133,7 +133,7 @@ export function NotificationPreferences() {
               { value: "horizontal", label: "Horizontal (Inline)" },
             ]}
           />
-        </>
+        </div>
       }
       telemetry={[
         {

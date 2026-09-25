@@ -90,7 +90,7 @@ export function HighlightPreviewStage() {
       onCopy={copyCode}
       copied={copied}
       controls={
-        <>
+        <div className="w-full flex flex-col sm:flex-row sm:items-center flex-wrap gap-2.5 sm:gap-4">
           {/* Kind Selector */}
           <StageControlGroup label="Profile">
             {(["edge", "broad", "specular"] as const).map((k) => (
@@ -133,7 +133,7 @@ export function HighlightPreviewStage() {
               </label>
             </div>
           </div>
-        </>
+        </div>
       }
       telemetry={[
         { label: "Vector", value: "135° Fixed" },

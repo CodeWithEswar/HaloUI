@@ -97,7 +97,7 @@ export function GlowPreviewStage() {
       onCopy={copyCode}
       copied={copied}
       controls={
-        <>
+        <div className="w-full flex flex-col sm:flex-row sm:items-center flex-wrap gap-2.5 sm:gap-4">
           {/* Profile Selector */}
           <StageControlGroup label="Profile">
             {(["ambient", "emphasis", "active"] as const).map((v) => (
@@ -166,7 +166,7 @@ export function GlowPreviewStage() {
               </label>
             </div>
           </div>
-        </>
+        </div>
       }
       telemetry={[
         { label: "Diffusion", value: "-inset-3 / blur-2xl" },

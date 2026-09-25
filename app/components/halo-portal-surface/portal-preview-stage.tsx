@@ -95,7 +95,7 @@ export function PortalledModal() {
       onCopy={copyCode}
       copied={copied}
       controls={
-        <>
+        <div className="w-full flex flex-col sm:flex-row sm:items-center flex-wrap gap-2.5 sm:gap-4">
           {/* Overlay Archetype Selector */}
           <StageControlGroup label="Archetype">
             {(["modal", "popover", "menu"] as const).map((type) => (
@@ -134,7 +134,7 @@ export function PortalledModal() {
               </StageControlButton>
             ))}
           </StageControlGroup>
-        </>
+        </div>
       }
       telemetry={[
         { label: "Target", value: "document.body / Slot" },

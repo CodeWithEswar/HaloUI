@@ -95,7 +95,7 @@ export function KineticExample() {
       onCopy={copyCode}
       copied={copied}
       controls={
-        <>
+        <div className="w-full flex flex-col sm:flex-row sm:items-center flex-wrap gap-2.5 sm:gap-4">
           {/* Preset Selector */}
           <StageControlGroup label="Preset">
             {(["press", "lift", "reveal", "settle"] as const).map((p) => (
@@ -125,7 +125,7 @@ export function KineticExample() {
               </label>
             </div>
           </div>
-        </>
+        </div>
       }
       telemetry={[
         {

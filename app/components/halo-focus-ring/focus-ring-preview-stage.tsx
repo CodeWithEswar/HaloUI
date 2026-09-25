@@ -95,7 +95,7 @@ export function AccessibleFocusForm() {
       onCopy={copyCode}
       copied={copied}
       controls={
-        <>
+        <div className="w-full flex flex-col sm:flex-row sm:items-center flex-wrap gap-2.5 sm:gap-4">
           {/* Validation State Selector */}
           <StageControlGroup label="State">
             <StageControlButton
@@ -143,7 +143,7 @@ export function AccessibleFocusForm() {
               </label>
             </div>
           </div>
-        </>
+        </div>
       }
       telemetry={[
         { label: "Spec", value: "WCAG 2.1 AA", variant: "success" },

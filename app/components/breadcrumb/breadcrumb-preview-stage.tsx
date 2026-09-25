@@ -127,7 +127,7 @@ export function NavigationTrail() {
       copied={copiedCode}
       onCopy={copyCode}
       controls={
-        <div className="flex flex-wrap items-center gap-3">
+        <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-2.5 items-center">
           <StageControlSelect
             label="Separator"
             value={separatorType}
@@ -138,7 +138,7 @@ export function NavigationTrail() {
               { value: "arrow", label: "Arrow (→)" },
             ]}
           />
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2.5 p-1.5 sm:p-2 px-2.5 sm:px-3 rounded-xl border border-border/80 bg-card/75 shadow-2xs h-full min-h-[40px]">
             <Checkbox
               id="breadcrumb-toggle-icons"
               checked={showIcons}
@@ -146,12 +146,12 @@ export function NavigationTrail() {
             />
             <Label
               htmlFor="breadcrumb-toggle-icons"
-              className="text-xs text-muted-foreground cursor-pointer font-normal"
+              className="text-xs sm:text-[13px] text-muted-foreground cursor-pointer font-medium select-none"
             >
               Hugeicons
             </Label>
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2.5 p-1.5 sm:p-2 px-2.5 sm:px-3 rounded-xl border border-border/80 bg-card/75 shadow-2xs h-full min-h-[40px]">
             <Checkbox
               id="breadcrumb-toggle-collapse"
               checked={isCollapsed}
@@ -159,12 +159,12 @@ export function NavigationTrail() {
             />
             <Label
               htmlFor="breadcrumb-toggle-collapse"
-              className="text-xs text-muted-foreground cursor-pointer font-normal"
+              className="text-xs sm:text-[13px] text-muted-foreground cursor-pointer font-medium select-none"
             >
               Collapse Intermediate
             </Label>
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2.5 p-1.5 sm:p-2 px-2.5 sm:px-3 rounded-xl border border-border/80 bg-card/75 shadow-2xs h-full min-h-[40px]">
             <Checkbox
               id="breadcrumb-toggle-long"
               checked={longPageTitle}
@@ -172,7 +172,7 @@ export function NavigationTrail() {
             />
             <Label
               htmlFor="breadcrumb-toggle-long"
-              className="text-xs text-muted-foreground cursor-pointer font-normal"
+              className="text-xs sm:text-[13px] text-muted-foreground cursor-pointer font-medium select-none"
             >
               Long Title Truncation
             </Label>

@@ -90,7 +90,7 @@ export function EdgePreviewStage() {
       onCopy={copyCode}
       copied={copied}
       controls={
-        <>
+        <div className="w-full flex flex-col sm:flex-row sm:items-center flex-wrap gap-2.5 sm:gap-4">
           {/* Strength Selector */}
           <StageControlGroup label="Strength">
             {(["subtle", "balanced", "strong"] as const).map((s) => (
@@ -133,7 +133,7 @@ export function EdgePreviewStage() {
               </label>
             </div>
           </div>
-        </>
+        </div>
       }
       telemetry={[
         { label: "Vector", value: "135° Specular" },

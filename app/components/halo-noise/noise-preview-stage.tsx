@@ -93,7 +93,7 @@ export function NoisePreviewStage() {
       onCopy={copyCode}
       copied={copied}
       controls={
-        <>
+        <div className="w-full flex flex-col sm:flex-row sm:items-center flex-wrap gap-2.5 sm:gap-4">
           {/* Strength Selector */}
           <StageControlGroup label="Density">
             {(["subtle", "balanced", "strong"] as const).map((s) => (
@@ -150,7 +150,7 @@ export function NoisePreviewStage() {
               </label>
             </div>
           </div>
-        </>
+        </div>
       }
       telemetry={[
         { label: "Algorithm", value: "Fractal Turbulence" },

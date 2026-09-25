@@ -99,7 +99,7 @@ export function SettingsWidget() {
       onCopy={copyCode}
       copied={copied}
       controls={
-        <>
+        <div className="w-full flex flex-col sm:flex-row sm:items-center flex-wrap gap-2.5 sm:gap-4">
           {/* Material Intensity Selector */}
           <StageControlGroup label="Intensity">
             {(["subtle", "balanced", "rich"] as const).map((inte) => (
@@ -112,7 +112,7 @@ export function SettingsWidget() {
               </StageControlButton>
             ))}
           </StageControlGroup>
-        </>
+        </div>
       }
       telemetry={[
         { label: "Storage", value: "localStorage / SSR Safe" },

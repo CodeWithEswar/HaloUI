@@ -85,7 +85,7 @@ export function SurfacePreviewStage() {
       onCopy={copyCode}
       copied={copied}
       controls={
-        <>
+        <div className="w-full flex flex-col sm:flex-row sm:items-center flex-wrap gap-2.5 sm:gap-4">
           {/* Elevation Selector */}
           <StageControlGroup label="Elevation">
             {(["base", "raised", "floating", "overlay"] as const).map((elev) => (
@@ -111,7 +111,7 @@ export function SurfacePreviewStage() {
               </StageControlButton>
             ))}
           </StageControlGroup>
-        </>
+        </div>
       }
       telemetry={[
         { label: "Engine", value: "10-Layer Optical Physics" },

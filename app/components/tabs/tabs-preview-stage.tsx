@@ -108,72 +108,76 @@ export function PeerWorkspaceTabs() {
       copied={copiedCode}
       onCopy={copyCode}
       controls={
-        <div className="flex flex-wrap items-center gap-3">
-          <StageControlSelect
-            label="Variant"
-            value={variant}
-            onChange={(val) => setVariant(val as any)}
-            options={[
-              { value: "default", label: "Pills (Liquid Glass)" },
-              { value: "line", label: "Line Indicator" },
-            ]}
-          />
-          <StageControlSelect
-            label="Orientation"
-            value={orientation}
-            onChange={(val) => setOrientation(val as any)}
-            options={[
-              { value: "horizontal", label: "Horizontal" },
-              { value: "vertical", label: "Vertical" },
-            ]}
-          />
-          <StageControlSelect
-            label="Activation"
-            value={activationMode}
-            onChange={(val) => setActivationMode(val as any)}
-            options={[
-              { value: "automatic", label: "Automatic (Focus)" },
-              { value: "manual", label: "Manual (Enter/Space)" },
-            ]}
-          />
-          <div className="flex items-center gap-2">
-            <Checkbox
-              id="tabs-toggle-icons"
-              checked={showIcons}
-              onCheckedChange={(checked) => setShowIcons(Boolean(checked))}
+        <div className="w-full flex flex-col gap-2 sm:gap-2.5">
+          <div className="w-full grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-2.5">
+            <StageControlSelect
+              label="Variant"
+              value={variant}
+              onChange={(val) => setVariant(val as any)}
+              options={[
+                { value: "default", label: "Pills (Liquid Glass)" },
+                { value: "line", label: "Line Indicator" },
+              ]}
             />
-            <Label
-              htmlFor="tabs-toggle-icons"
-              className="text-xs text-muted-foreground cursor-pointer font-normal"
-            >
-              Hugeicons
-            </Label>
+            <StageControlSelect
+              label="Orientation"
+              value={orientation}
+              onChange={(val) => setOrientation(val as any)}
+              options={[
+                { value: "horizontal", label: "Horizontal" },
+                { value: "vertical", label: "Vertical" },
+              ]}
+            />
+            <StageControlSelect
+              label="Activation"
+              value={activationMode}
+              onChange={(val) => setActivationMode(val as any)}
+              options={[
+                { value: "automatic", label: "Automatic (Focus)" },
+                { value: "manual", label: "Manual (Enter/Space)" },
+              ]}
+            />
           </div>
-          <div className="flex items-center gap-2">
-            <Checkbox
-              id="tabs-toggle-badges"
-              checked={showBadges}
-              onCheckedChange={(checked) => setShowBadges(Boolean(checked))}
-            />
-            <Label
-              htmlFor="tabs-toggle-badges"
-              className="text-xs text-muted-foreground cursor-pointer font-normal"
-            >
-              Badges
-            </Label>
-          </div>
-          <div className="flex items-center gap-2">
-            <Checkbox
-              id="tabs-toggle-disabled"
-              checked={disableSettings}
-              onCheckedChange={(checked) => setDisableSettings(Boolean(checked))}
-            />
-            <Label
-              htmlFor="tabs-toggle-disabled"
-              className="text-xs text-muted-foreground cursor-pointer font-normal"
-            >
-              Disable Settings
-            </Label>
+          <div className="w-full grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-2.5">
+            <div className="flex items-center gap-2.5 p-1.5 sm:p-2 px-2.5 sm:px-3 rounded-xl border border-border/80 bg-card/75 shadow-2xs h-full min-h-[40px]">
+              <Checkbox
+                id="tabs-toggle-icons"
+                checked={showIcons}
+                onCheckedChange={(checked) => setShowIcons(Boolean(checked))}
+              />
+              <Label
+                htmlFor="tabs-toggle-icons"
+                className="text-xs sm:text-[13px] text-muted-foreground cursor-pointer font-medium select-none"
+              >
+                Hugeicons
+              </Label>
+            </div>
+            <div className="flex items-center gap-2.5 p-1.5 sm:p-2 px-2.5 sm:px-3 rounded-xl border border-border/80 bg-card/75 shadow-2xs h-full min-h-[40px]">
+              <Checkbox
+                id="tabs-toggle-badges"
+                checked={showBadges}
+                onCheckedChange={(checked) => setShowBadges(Boolean(checked))}
+              />
+              <Label
+                htmlFor="tabs-toggle-badges"
+                className="text-xs sm:text-[13px] text-muted-foreground cursor-pointer font-medium select-none"
+              >
+                Notification Badges
+              </Label>
+            </div>
+            <div className="flex items-center gap-2.5 p-1.5 sm:p-2 px-2.5 sm:px-3 rounded-xl border border-border/80 bg-card/75 shadow-2xs h-full min-h-[40px]">
+              <Checkbox
+                id="tabs-toggle-disabled"
+                checked={disableSettings}
+                onCheckedChange={(checked) => setDisableSettings(Boolean(checked))}
+              />
+              <Label
+                htmlFor="tabs-toggle-disabled"
+                className="text-xs sm:text-[13px] text-muted-foreground cursor-pointer font-medium select-none"
+              >
+                Disable Settings Tab
+              </Label>
+            </div>
           </div>
         </div>
       }

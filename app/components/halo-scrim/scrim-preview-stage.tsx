@@ -99,7 +99,7 @@ export function ModalWithScrim() {
       onCopy={copyCode}
       copied={copied}
       controls={
-        <>
+        <div className="w-full flex flex-col sm:flex-row sm:items-center flex-wrap gap-2.5 sm:gap-4">
           {/* Blur Selector */}
           <StageControlGroup label="Blur">
             {(["none", "subtle", "balanced", "deep"] as const).map((b) => (
@@ -142,7 +142,7 @@ export function ModalWithScrim() {
               </label>
             </div>
           </div>
-        </>
+        </div>
       }
       telemetry={[
         { label: "Blur", value: blur },

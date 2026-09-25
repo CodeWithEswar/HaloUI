@@ -88,7 +88,7 @@ export function RefractionPreviewStage() {
       onCopy={copyCode}
       copied={copied}
       controls={
-        <>
+        <div className="w-full flex flex-col sm:flex-row sm:items-center flex-wrap gap-2.5 sm:gap-4">
           {/* Intensity Selector */}
           <StageControlGroup label="Intensity">
             {(["subtle", "balanced"] as const).map((i) => (
@@ -142,7 +142,7 @@ export function RefractionPreviewStage() {
               </label>
             </div>
           </div>
-        </>
+        </div>
       }
       telemetry={[
         { label: "Pipeline", value: "Progressive SVG Displacement" },
