@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { cn } from "cn"
+import { cn } from "@/lib/utils"
 import {
   DayPicker,
   getDefaultClassNames,
@@ -10,7 +10,8 @@ import {
 } from "react-day-picker"
 
 import { Button, buttonVariants } from "@/components/ui/button"
-import { ChevronLeftIcon, ChevronRightIcon, ChevronDownIcon } from "lucide-react"
+import { ArrowLeft01Icon, ArrowRight01Icon, ArrowDown01Icon } from "@hugeicons/core-free-icons"
+import { HaloIcon } from "@/components/icons/halo-icon"
 
 function Calendar({
   className,
@@ -147,18 +148,18 @@ function Calendar({
         Chevron: ({ className, orientation, ...props }) => {
           if (orientation === "left") {
             return (
-              <ChevronLeftIcon className={cn("size-4", className)} {...props} />
+              <HaloIcon icon={ArrowLeft01Icon} size={16} className={cn("size-4", className)} {...props} />
             )
           }
 
           if (orientation === "right") {
             return (
-              <ChevronRightIcon className={cn("size-4", className)} {...props} />
+              <HaloIcon icon={ArrowRight01Icon} size={16} className={cn("size-4", className)} {...props} />
             )
           }
 
           return (
-            <ChevronDownIcon className={cn("size-4", className)} {...props} />
+            <HaloIcon icon={ArrowDown01Icon} size={16} className={cn("size-4", className)} {...props} />
           )
         },
         DayButton: ({ ...props }) => (

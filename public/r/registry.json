@@ -1761,6 +1761,46 @@
       "registryDependencies": [
         "field"
       ]
+    },
+    {
+      "name": "rating-input",
+      "type": "registry:ui",
+      "title": "Rating Input",
+      "description": "An accessible single-value rating control for choosing a score from an ordered icon-based scale.",
+      "categories": [
+        "forms-and-fields"
+      ],
+      "dependencies": [
+        "@hugeicons/core-free-icons",
+        "@hugeicons/react",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [
+        "field"
+      ]
+    },
+    {
+      "name": "date-picker",
+      "type": "registry:ui",
+      "title": "Date Picker",
+      "description": "An accessible calendar-backed control for selecting a single calendar date.",
+      "categories": [
+        "forms-and-fields"
+      ],
+      "dependencies": [
+        "@radix-ui/react-popover",
+        "react-day-picker",
+        "date-fns",
+        "@hugeicons/core-free-icons",
+        "@hugeicons/react",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [
+        "calendar",
+        "field"
+      ]
     }
   ]
 }

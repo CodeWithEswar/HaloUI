@@ -262,10 +262,15 @@ export function ColorPicker({
   const [isOpen, setIsOpen] = React.useState(false);
   const [hsv, setHsvState] = React.useState<HsvColor>(() => hexToHsv(currentColor));
 
+  const hsvRef = React.useRef<HsvColor>(hsv);
+  hsvRef.current = hsv;
+
   // Sync internal HSV when controlled color changes externally
   React.useEffect(() => {
     if (isControlled && isValidHex(controlledValue)) {
-      setHsvState(hexToHsv(controlledValue));
+      const nextHsv = hexToHsv(controlledValue);
+      hsvRef.current = nextHsv;
+      setHsvState(nextHsv);
     }
   }, [controlledValue, isControlled]);
 
@@ -282,12 +287,12 @@ export function ColorPicker({
 
   const setHsv = React.useCallback(
     (updater: HsvColor | ((prev: HsvColor) => HsvColor)) => {
-      setHsvState((prev) => {
-        const next = typeof updater === "function" ? updater(prev) : updater;
-        const newHex = hsvToHex(next.h, next.s, next.v, showAlpha ? next.a : 1);
-        commitColor(newHex);
-        return next;
-      });
+      const prev = hsvRef.current;
+      const next = typeof updater === "function" ? updater(prev) : updater;
+      hsvRef.current = next;
+      setHsvState(next);
+      const newHex = hsvToHex(next.h, next.s, next.v, showAlpha ? next.a : 1);
+      commitColor(newHex);
     },
     [commitColor, showAlpha]
   );

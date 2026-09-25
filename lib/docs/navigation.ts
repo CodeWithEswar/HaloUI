@@ -610,6 +610,42 @@ export const docsNavigation: DocsNavSection[] = [
           "picker"
         ],
       },
+      {
+        title: "Rating Input",
+        href: "/components/rating-input",
+        description: "An accessible single-value rating control for choosing a score from an ordered icon-based scale.",
+        status: "preview",
+        keywords: [
+          "rating-input",
+          "rating input",
+          "rating",
+          "score",
+          "stars",
+          "single choice",
+          "scale",
+          "radio group",
+          "feedback",
+          "review"
+        ],
+      },
+      {
+        title: "Date Picker",
+        href: "/components/date-picker",
+        description: "An accessible calendar-backed control for selecting a single calendar date.",
+        status: "preview",
+        keywords: [
+          "date-picker",
+          "date picker",
+          "calendar",
+          "date",
+          "day",
+          "month",
+          "year",
+          "popover",
+          "single date",
+          "schedule"
+        ],
+      },
     ],
   },
 
