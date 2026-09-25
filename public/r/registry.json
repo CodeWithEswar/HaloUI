@@ -1842,6 +1842,65 @@
       "registryDependencies": [
         "field"
       ]
+    },
+    {
+      "name": "date-time-picker",
+      "type": "registry:ui",
+      "title": "Date Time Picker",
+      "description": "An accessible control for selecting one calendar date and one local clock time as a combined date-time value.",
+      "categories": [
+        "forms-and-fields"
+      ],
+      "dependencies": [
+        "@radix-ui/react-popover",
+        "react-day-picker",
+        "date-fns",
+        "@hugeicons/core-free-icons",
+        "@hugeicons/react",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [
+        "calendar",
+        "time-picker",
+        "field"
+      ]
+    },
+    {
+      "name": "calendar",
+      "type": "registry:ui",
+      "title": "Calendar",
+      "description": "An accessible standalone calendar surface for navigating and selecting calendar dates.",
+      "categories": [
+        "forms-and-fields"
+      ],
+      "dependencies": [
+        "react-day-picker",
+        "date-fns",
+        "@hugeicons/core-free-icons",
+        "@hugeicons/react",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": []
+    },
+    {
+      "name": "form-message",
+      "type": "registry:ui",
+      "title": "Form Message",
+      "description": "A semantic field-level message for communicating validation errors, success, warnings, or concise supporting feedback.",
+      "categories": [
+        "forms-and-fields"
+      ],
+      "dependencies": [
+        "@hugeicons/core-free-icons",
+        "@hugeicons/react",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [
+        "field"
+      ]
     }
   ]
 }

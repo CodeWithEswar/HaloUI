@@ -680,6 +680,53 @@ export const docsNavigation: DocsNavSection[] = [
           "schedule"
         ],
       },
+      {
+        title: "Date Time Picker",
+        href: "/components/date-time-picker",
+        description: "An accessible control for selecting one calendar date and one local clock time as a combined date-time value.",
+        status: "preview",
+        keywords: [
+          "date-time-picker",
+          "date time picker",
+          "datetime",
+          "calendar",
+          "time",
+          "clock",
+          "schedule",
+          "composite"
+        ],
+      },
+      {
+        title: "Calendar",
+        href: "/components/calendar",
+        description: "An accessible standalone calendar surface for navigating and selecting calendar dates.",
+        status: "preview",
+        keywords: [
+          "calendar",
+          "month",
+          "year",
+          "dates",
+          "grid",
+          "selection",
+          "standalone"
+        ],
+      },
+      {
+        title: "Form Message",
+        href: "/components/form-message",
+        description: "A semantic field-level message for communicating validation errors, success, warnings, or concise supporting feedback.",
+        status: "preview",
+        keywords: [
+          "form-message",
+          "form message",
+          "error",
+          "success",
+          "warning",
+          "info",
+          "validation",
+          "feedback"
+        ],
+      },
     ],
   },
 
