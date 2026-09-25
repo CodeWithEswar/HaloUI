@@ -523,24 +523,26 @@ export const DateRangePickerContent = React.forwardRef<
         }}
         data-slot="date-range-picker-content"
         className={cn(
-          "z-50 p-3 rounded-2xl border border-border/80 bg-popover/95 text-popover-foreground shadow-xl backdrop-blur-xl transition-all outline-none",
-          "animate-in fade-in-0 zoom-in-95 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95",
+          "halo-liquid-glass-surface z-50 p-3 rounded-2xl text-foreground outline-none",
+          "animate-in fade-in-0 zoom-in-95 data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=closed]:zoom-out-95 duration-150 ease-out",
           className
         )}
         {...props}
       >
-        {children || (
-          <Calendar
-            mode="range"
-            defaultMonth={ctx.range.from ?? undefined}
-            selected={selectedForPicker}
-            onSelect={ctx.selectRange}
-            numberOfMonths={numberOfMonths}
-            disabled={disabledMatcher}
-            locale={ctx.locale}
-            className="p-1"
-          />
-        )}
+        <div className="relative z-10">
+          {children || (
+            <Calendar
+              mode="range"
+              defaultMonth={ctx.range.from ?? undefined}
+              selected={selectedForPicker}
+              onSelect={ctx.selectRange}
+              numberOfMonths={numberOfMonths}
+              disabled={disabledMatcher}
+              locale={ctx.locale}
+              className="p-1 bg-transparent"
+            />
+          )}
+        </div>
       </PopoverPrimitive.Content>
     </PopoverPrimitive.Portal>
   );

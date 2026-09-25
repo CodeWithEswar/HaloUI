@@ -397,29 +397,31 @@ export const ColorPickerContent = React.forwardRef<HTMLDivElement, ColorPickerCo
         ref={ref}
         data-slot="color-picker-content"
         className={cn(
-          "w-[270px] flex flex-col gap-3 p-3 rounded-2xl border border-border/80 bg-popover/95 text-popover-foreground shadow-xl backdrop-blur-xl transition-all outline-none",
+          "halo-liquid-glass-surface w-[270px] flex flex-col gap-3 p-3 rounded-2xl text-foreground outline-none",
           className
         )}
         {...props}
       >
-        {children || (
-          <>
-            {/* 2D Color Saturation/Brightness Area */}
-            <ColorArea />
+        <div className="relative z-10 flex flex-col gap-3">
+          {children || (
+            <>
+              {/* 2D Color Saturation/Brightness Area */}
+              <ColorArea />
 
-            {/* Hue Slider */}
-            <ColorHueSlider />
+              {/* Hue Slider */}
+              <ColorHueSlider />
 
-            {/* Optional Alpha Slider */}
-            {ctx.showAlpha && <ColorAlphaSlider />}
+              {/* Optional Alpha Slider */}
+              {ctx.showAlpha && <ColorAlphaSlider />}
 
-            {/* Bottom Row: Swatch + Text Input */}
-            <div className="flex items-center gap-2 pt-1 border-t border-border/60">
-              <ColorSwatch color={ctx.color} size="md" />
-              <ColorValueInput className="flex-1" />
-            </div>
-          </>
-        )}
+              {/* Bottom Row: Swatch + Text Input */}
+              <div className="flex items-center gap-2 pt-1 border-t border-black/[0.08] dark:border-white/[0.08]">
+                <ColorSwatch color={ctx.color} size="md" />
+                <ColorValueInput className="flex-1" />
+              </div>
+            </>
+          )}
+        </div>
       </div>
     );
 
