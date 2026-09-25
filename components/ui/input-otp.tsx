@@ -25,11 +25,11 @@ const InputOTPUIContext = React.createContext<InputOTPUIContextValue>({
 /* Input OTP Components                                                       */
 /* -------------------------------------------------------------------------- */
 
-export interface InputOTPProps extends React.ComponentProps<typeof OTPInput> {
+export type InputOTPProps = Omit<React.ComponentProps<typeof OTPInput>, "size"> & {
   containerClassName?: string;
   invalid?: boolean;
   size?: "sm" | "default" | "lg";
-}
+};
 
 export function InputOTP({
   className,
@@ -69,7 +69,7 @@ export function InputOTP({
         spellCheck={false}
         autoComplete="one-time-code"
         className={cn("disabled:cursor-not-allowed", className)}
-        {...props}
+        {...(props as any)}
       />
     </InputOTPUIContext.Provider>
   );

@@ -418,10 +418,9 @@ export function MaterialLab() {
                   min={0}
                   max={44}
                   step={2}
-                  value={[blurValue]}
+                  value={blurValue}
                   onValueChange={(val) => {
-                    const v = Array.isArray(val) ? val[0] : (val as number);
-                    setCustomBlur(v);
+                    setCustomBlur(val);
                   }}
                   className="w-full"
                 />
@@ -437,10 +436,9 @@ export function MaterialLab() {
                   min={0.1}
                   max={0.98}
                   step={0.02}
-                  value={[opacityValue]}
+                  value={opacityValue}
                   onValueChange={(val) => {
-                    const v = Array.isArray(val) ? val[0] : (val as number);
-                    setCustomOpacity(v);
+                    setCustomOpacity(val);
                   }}
                   className="w-full"
                 />
@@ -456,10 +454,9 @@ export function MaterialLab() {
                   min={0}
                   max={1.5}
                   step={0.05}
-                  value={[highlightValue]}
+                  value={highlightValue}
                   onValueChange={(val) => {
-                    const v = Array.isArray(val) ? val[0] : (val as number);
-                    setCustomHighlight(v);
+                    setCustomHighlight(val);
                   }}
                   className="w-full"
                 />
@@ -475,10 +472,9 @@ export function MaterialLab() {
                   min={0}
                   max={0.08}
                   step={0.005}
-                  value={[noiseValue]}
+                  value={noiseValue}
                   onValueChange={(val) => {
-                    const v = Array.isArray(val) ? val[0] : (val as number);
-                    setCustomNoise(v);
+                    setCustomNoise(val);
                   }}
                   className="w-full"
                 />

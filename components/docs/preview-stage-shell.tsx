@@ -31,6 +31,22 @@ import { cn } from "@/lib/utils";
 
 export type StageViewport = "desktop" | "tablet" | "mobile";
 export type StageTheme = "light" | "dark";
+export type StageBackdrop =
+  | "neutral"
+  | "dark-void"
+  | "void"
+  | "paper"
+  | "warm-paper"
+  | "mesh"
+  | "gradient"
+  | "sunset"
+  | "spectral"
+  | "dense"
+  | "dense-ui"
+  | "cards"
+  | "light-minimal"
+  | "dark"
+  | (string & {});
 
 export interface TelemetryItem {
   label: string;

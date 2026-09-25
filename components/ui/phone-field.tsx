@@ -180,7 +180,7 @@ export const PhoneField = React.forwardRef<HTMLInputElement, PhoneFieldProps>(
 
       return allCodes
         .map((code) => {
-          let name = code;
+          let name: string = code;
           let codeNum = "";
           try {
             name = displayNames ? displayNames.of(code) || code : code;

@@ -2,6 +2,7 @@ export type PropRow = {
   name: string;
   type: string;
   default?: string;
+  defaultValue?: string;
   required?: boolean;
   description: string;
 };
@@ -25,7 +26,7 @@ export function PropsTable({ rows }: { rows: PropRow[] }) {
                 {row.name}{row.required && <span className="text-destructive"> *</span>}
               </td>
               <td className="px-4 py-3 align-top"><code>{row.type}</code></td>
-              <td className="px-4 py-3 align-top"><code>{row.default ?? "—"}</code></td>
+              <td className="px-4 py-3 align-top"><code>{row.default ?? row.defaultValue ?? "—"}</code></td>
               <td className="max-w-sm px-4 py-3 align-top text-muted-foreground">{row.description}</td>
             </tr>
           ))}
