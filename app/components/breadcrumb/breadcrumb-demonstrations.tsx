@@ -85,22 +85,22 @@ export function BreadcrumbDemonstrations() {
             <BreadcrumbList>
               <BreadcrumbItem>
                 <BreadcrumbLink href="#home">
-                  <HaloIcon icon={Home01Icon} size={14} />
-                  Dashboard
+                  <HaloIcon icon={Home01Icon} size={14} className="shrink-0" />
+                  <span>Dashboard</span>
                 </BreadcrumbLink>
               </BreadcrumbItem>
               <BreadcrumbSeparator />
               <BreadcrumbItem>
                 <BreadcrumbLink href="#settings">
-                  <HaloIcon icon={Settings02Icon} size={14} />
-                  Settings
+                  <HaloIcon icon={Settings02Icon} size={14} className="shrink-0" />
+                  <span>Settings</span>
                 </BreadcrumbLink>
               </BreadcrumbItem>
               <BreadcrumbSeparator />
               <BreadcrumbItem>
                 <BreadcrumbPage>
-                  <HaloIcon icon={SecurityCheckIcon} size={14} className="inline mr-1 align-middle" />
-                  Two-Factor Authentication
+                  <HaloIcon icon={SecurityCheckIcon} size={14} className="shrink-0" />
+                  <span>Two-Factor Authentication</span>
                 </BreadcrumbPage>
               </BreadcrumbItem>
             </BreadcrumbList>

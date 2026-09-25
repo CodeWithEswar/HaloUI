@@ -49,7 +49,7 @@ function BreadcrumbLink({
     props: mergeProps<"a">(
       {
         className: cn(
-          "transition-colors hover:text-foreground outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-xs",
+          "inline-flex items-center gap-1.5 transition-colors hover:text-foreground outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background rounded-xs whitespace-nowrap shrink-0",
           className
         ),
       },
@@ -69,7 +69,10 @@ function BreadcrumbPage({ className, ...props }: React.ComponentProps<"span">) {
       role="link"
       aria-disabled="true"
       aria-current="page"
-      className={cn("font-medium text-foreground", className)}
+      className={cn(
+        "inline-flex items-center gap-1.5 font-medium text-foreground whitespace-nowrap shrink-0",
+        className
+      )}
       {...props}
     />
   );
@@ -85,11 +88,11 @@ function BreadcrumbSeparator({
       data-slot="breadcrumb-separator"
       role="presentation"
       aria-hidden="true"
-      className={cn("text-muted-foreground/60 select-none [&>svg]:size-3.5", className)}
+      className={cn("inline-flex items-center text-muted-foreground/60 select-none shrink-0 [&>svg]:size-3.5", className)}
       {...props}
     >
       {children ?? (
-        <HaloIcon icon={ChevronRightIcon} size={14} className="text-muted-foreground/50" />
+        <HaloIcon icon={ChevronRightIcon} size={14} className="text-muted-foreground/50 shrink-0" />
       )}
     </li>
   );
@@ -105,7 +108,7 @@ function BreadcrumbEllipsis({
       role="presentation"
       aria-hidden="true"
       className={cn(
-        "flex size-5 items-center justify-center text-muted-foreground [&>svg]:size-4",
+        "inline-flex size-5 items-center justify-center text-muted-foreground shrink-0 [&>svg]:size-4",
         className
       )}
       {...props}
