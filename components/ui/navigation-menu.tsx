@@ -1,7 +1,9 @@
-import { NavigationMenu as NavigationMenuPrimitive } from "@base-ui/react/navigation-menu"
-import { cva } from "class-variance-authority"
-import { cn } from "cn"
-import { ChevronDownIcon } from "lucide-react"
+import * as React from "react";
+import { NavigationMenu as NavigationMenuPrimitive } from "@base-ui/react/navigation-menu";
+import { cva } from "class-variance-authority";
+import { cn } from "@/lib/utils";
+import { ChevronDownIcon } from "@hugeicons/core-free-icons";
+import { HaloIcon } from "@/components/icons/halo-icon";
 
 function NavigationMenu({
   align = "start",
@@ -14,7 +16,7 @@ function NavigationMenu({
     <NavigationMenuPrimitive.Root
       data-slot="navigation-menu"
       className={cn(
-        "group/navigation-menu relative flex max-w-max flex-1 items-center justify-center",
+        "group/navigation-menu relative flex max-w-max flex-1 items-center justify-center min-w-0",
         className
       )}
       {...props}
@@ -22,7 +24,7 @@ function NavigationMenu({
       {children}
       <NavigationMenuPositioner align={align} />
     </NavigationMenuPrimitive.Root>
-  )
+  );
 }
 
 function NavigationMenuList({
@@ -33,12 +35,12 @@ function NavigationMenuList({
     <NavigationMenuPrimitive.List
       data-slot="navigation-menu-list"
       className={cn(
-        "group flex flex-1 list-none items-center justify-center gap-0",
+        "group flex flex-1 list-none items-center justify-center gap-1",
         className
       )}
       {...props}
     />
-  )
+  );
 }
 
 function NavigationMenuItem({
@@ -51,12 +53,12 @@ function NavigationMenuItem({
       className={cn("relative", className)}
       {...props}
     />
-  )
+  );
 }
 
 const navigationMenuTriggerStyle = cva(
-  "group/navigation-menu-trigger inline-flex h-9 w-max items-center justify-center rounded-lg px-2.5 py-1.5 text-sm font-medium transition-all outline-none hover:bg-muted focus:bg-muted focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-1 disabled:pointer-events-none disabled:opacity-50 data-popup-open:bg-muted/50 data-popup-open:hover:bg-muted data-open:bg-muted/50 data-open:hover:bg-muted data-open:focus:bg-muted"
-)
+  "group/trigger inline-flex h-9 w-max items-center justify-center rounded-lg px-3 py-1.5 text-xs sm:text-sm font-medium transition-colors outline-none text-muted-foreground hover:text-foreground hover:bg-muted/70 focus:bg-muted/70 focus-visible:ring-2 focus-visible:ring-[var(--halo-focus-color)] focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50 data-popup-open:bg-muted/70 data-popup-open:text-foreground data-open:bg-muted/70 data-open:text-foreground cursor-pointer select-none"
+);
 
 function NavigationMenuTrigger({
   className,
@@ -66,13 +68,17 @@ function NavigationMenuTrigger({
   return (
     <NavigationMenuPrimitive.Trigger
       data-slot="navigation-menu-trigger"
-      className={cn(navigationMenuTriggerStyle(), "group", className)}
+      className={cn(navigationMenuTriggerStyle(), className)}
       {...props}
     >
       {children}{" "}
-      <ChevronDownIcon className="relative top-px ml-1 size-3 transition duration-300 group-data-popup-open/navigation-menu-trigger:rotate-180 group-data-open/navigation-menu-trigger:rotate-180" aria-hidden="true" />
+      <HaloIcon
+        icon={ChevronDownIcon}
+        size={12}
+        className="relative top-px ml-1 transition-transform duration-200 group-data-popup-open/trigger:rotate-180 group-data-open/trigger:rotate-180 text-muted-foreground/80 shrink-0"
+      />
     </NavigationMenuPrimitive.Trigger>
-  )
+  );
 }
 
 function NavigationMenuContent({
@@ -83,12 +89,12 @@ function NavigationMenuContent({
     <NavigationMenuPrimitive.Content
       data-slot="navigation-menu-content"
       className={cn(
-        "data-ending-style:data-activation-direction=left:translate-x-[50%] data-ending-style:data-activation-direction=right:translate-x-[-50%] data-starting-style:data-activation-direction=left:translate-x-[-50%] data-starting-style:data-activation-direction=right:translate-x-[50%] h-full w-auto p-1 transition-[opacity,transform,translate] duration-[0.35s] ease-[cubic-bezier(0.22,1,0.36,1)] group-data-[viewport=false]/navigation-menu:rounded-lg group-data-[viewport=false]/navigation-menu:bg-popover group-data-[viewport=false]/navigation-menu:text-popover-foreground group-data-[viewport=false]/navigation-menu:shadow group-data-[viewport=false]/navigation-menu:ring-1 group-data-[viewport=false]/navigation-menu:ring-foreground/10 group-data-[viewport=false]/navigation-menu:duration-300 data-ending-style:opacity-0 data-starting-style:opacity-0 data-[motion=from-end]:slide-in-from-right-52 data-[motion=from-start]:slide-in-from-left-52 data-[motion=to-end]:slide-out-to-right-52 data-[motion=to-start]:slide-out-to-left-52 data-[motion^=from-]:animate-in data-[motion^=from-]:fade-in data-[motion^=to-]:animate-out data-[motion^=to-]:fade-out **:data-[slot=navigation-menu-link]:focus:ring-0 **:data-[slot=navigation-menu-link]:focus:outline-none group-data-[viewport=false]/navigation-menu:data-open:animate-in group-data-[viewport=false]/navigation-menu:data-open:fade-in-0 group-data-[viewport=false]/navigation-menu:data-open:zoom-in-95 group-data-[viewport=false]/navigation-menu:data-closed:animate-out group-data-[viewport=false]/navigation-menu:data-closed:fade-out-0 group-data-[viewport=false]/navigation-menu:data-closed:zoom-out-95",
+        "data-ending-style:data-activation-direction=left:translate-x-[50%] data-ending-style:data-activation-direction=right:translate-x-[-50%] data-starting-style:data-activation-direction=left:translate-x-[-50%] data-starting-style:data-activation-direction=right:translate-x-[50%] h-full w-auto p-1 transition-[opacity,transform,translate] duration-250 ease-out group-data-[viewport=false]/navigation-menu:rounded-2xl group-data-[viewport=false]/navigation-menu:halo-liquid-glass-surface group-data-[viewport=false]/navigation-menu:text-popover-foreground group-data-[viewport=false]/navigation-menu:shadow-2xl data-ending-style:opacity-0 data-starting-style:opacity-0 data-[motion=from-end]:slide-in-from-right-20 data-[motion=from-start]:slide-in-from-left-20 data-[motion=to-end]:slide-out-to-right-20 data-[motion=to-start]:slide-out-to-left-20 data-[motion^=from-]:animate-in data-[motion^=from-]:fade-in data-[motion^=to-]:animate-out data-[motion^=to-]:fade-out **:data-[slot=navigation-menu-link]:focus:ring-0 **:data-[slot=navigation-menu-link]:focus:outline-none group-data-[viewport=false]/navigation-menu:data-open:animate-in group-data-[viewport=false]/navigation-menu:data-open:fade-in-0 group-data-[viewport=false]/navigation-menu:data-open:zoom-in-95 group-data-[viewport=false]/navigation-menu:data-closed:animate-out group-data-[viewport=false]/navigation-menu:data-closed:fade-out-0 group-data-[viewport=false]/navigation-menu:data-closed:zoom-out-95",
         className
       )}
       {...props}
     />
-  )
+  );
 }
 
 function NavigationMenuPositioner({
@@ -107,17 +113,17 @@ function NavigationMenuPositioner({
         align={align}
         alignOffset={alignOffset}
         className={cn(
-          "isolate z-50 h-(--positioner-height) w-(--positioner-width) max-w-(--available-width) transition-[top,left,right,bottom] duration-[0.35s] ease-[cubic-bezier(0.22,1,0.36,1)] data-instant:transition-none data-[side=bottom]:before:top-[-10px] data-[side=bottom]:before:right-0 data-[side=bottom]:before:left-0",
+          "isolate z-50 h-(--positioner-height) w-(--positioner-width) max-w-(--available-width) transition-[top,left,right,bottom] duration-250 ease-out data-instant:transition-none data-[side=bottom]:before:top-[-10px] data-[side=bottom]:before:right-0 data-[side=bottom]:before:left-0",
           className
         )}
         {...props}
       >
-        <NavigationMenuPrimitive.Popup className="data-[ending-style]:easing-[ease] xs:w-(--popup-width) relative h-(--popup-height) w-(--popup-width) origin-(--transform-origin) rounded-lg bg-popover text-popover-foreground shadow ring-1 ring-foreground/10 transition-[opacity,transform,width,height,scale,translate] duration-[0.35s] ease-[cubic-bezier(0.22,1,0.36,1)] outline-none data-ending-style:scale-90 data-ending-style:opacity-0 data-ending-style:duration-150 data-starting-style:scale-90 data-starting-style:opacity-0">
+        <NavigationMenuPrimitive.Popup className="halo-liquid-glass-surface data-[ending-style]:easing-[ease] xs:w-(--popup-width) relative h-(--popup-height) w-(--popup-width) origin-(--transform-origin) rounded-2xl text-popover-foreground shadow-2xl p-1 transition-[opacity,transform,width,height,scale,translate] duration-250 ease-out outline-none data-ending-style:scale-95 data-ending-style:opacity-0 data-ending-style:duration-150 data-starting-style:scale-95 data-starting-style:opacity-0">
           <NavigationMenuPrimitive.Viewport className="relative size-full overflow-hidden" />
         </NavigationMenuPrimitive.Popup>
       </NavigationMenuPrimitive.Positioner>
     </NavigationMenuPrimitive.Portal>
-  )
+  );
 }
 
 function NavigationMenuLink({
@@ -128,12 +134,12 @@ function NavigationMenuLink({
     <NavigationMenuPrimitive.Link
       data-slot="navigation-menu-link"
       className={cn(
-        "flex items-center gap-2 rounded-lg p-2 text-sm transition-all outline-none hover:bg-muted focus:bg-muted focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-1 in-data-[slot=navigation-menu-content]:rounded-md data-active:bg-muted/50 data-active:hover:bg-muted data-active:focus:bg-muted [&_svg:not([class*='size-'])]:size-4",
+        "flex items-center gap-2 rounded-xl p-2.5 text-xs sm:text-sm font-medium transition-colors outline-none hover:bg-muted/70 focus:bg-muted/70 focus-visible:ring-2 focus-visible:ring-[var(--halo-focus-color)] data-active:bg-muted/80 data-active:text-foreground cursor-pointer select-none",
         className
       )}
       {...props}
     />
-  )
+  );
 }
 
 function NavigationMenuIndicator({
@@ -151,8 +157,10 @@ function NavigationMenuIndicator({
     >
       <div className="relative top-[60%] h-2 w-2 rotate-45 rounded-tl-sm bg-border shadow-md" />
     </NavigationMenuPrimitive.Icon>
-  )
+  );
 }
+
+const NavigationMenuViewport = NavigationMenuPrimitive.Viewport;
 
 export {
   NavigationMenu,
@@ -164,4 +172,5 @@ export {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
   NavigationMenuPositioner,
-}
+  NavigationMenuViewport,
+};

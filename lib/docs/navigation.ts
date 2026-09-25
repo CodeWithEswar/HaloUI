@@ -776,6 +776,22 @@ export const docsNavigation: DocsNavSection[] = [
           "navigation landmark"
         ],
       },
+      {
+        title: "Navigation Menu",
+        href: "/components/navigation-menu",
+        description: "An accessible navigation system for organizing primary site or product destinations with links and structured flyout content.",
+        status: "preview",
+        keywords: [
+          "navigation menu",
+          "navigation-menu",
+          "flyout",
+          "mega menu",
+          "primary navigation",
+          "links",
+          "trigger",
+          "viewport"
+        ],
+      },
     ],
   },
   {

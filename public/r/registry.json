@@ -1960,6 +1960,34 @@
       "categories": [
         "navigation"
       ]
+    },
+    {
+      "name": "navigation-menu",
+      "type": "registry:ui",
+      "title": "Navigation Menu",
+      "description": "An accessible navigation system for organizing primary site or product destinations with links and structured flyout content.",
+      "dependencies": [
+        "@base-ui/react",
+        "@hugeicons/core-free-icons",
+        "@hugeicons/react",
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "components/ui/navigation-menu.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "styles/halo-tokens.css",
+          "type": "registry:ui"
+        }
+      ],
+      "categories": [
+        "navigation"
+      ]
     }
   ]
 }
