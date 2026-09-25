@@ -729,10 +729,40 @@ export const docsNavigation: DocsNavSection[] = [
       },
     ],
   },
-
-
-
-
+  {
+    title: "Navigation",
+    items: [
+      {
+        title: "Tabs",
+        href: "/components/tabs",
+        description: "An accessible tabbed interface for switching between peer content views within the same context.",
+        status: "preview",
+        keywords: [
+          "tabs",
+          "tab list",
+          "tab trigger",
+          "tab panel",
+          "peer views",
+          "roving focus",
+          "navigation"
+        ],
+      },
+      {
+        title: "Breadcrumb",
+        href: "/components/breadcrumb",
+        description: "A semantic navigation trail that communicates the current page's position within a hierarchical structure.",
+        status: "preview",
+        keywords: [
+          "breadcrumb",
+          "hierarchy",
+          "navigation trail",
+          "ancestors",
+          "current page",
+          "separator"
+        ],
+      },
+    ],
+  },
   {
     title: "Developers",
     items: [

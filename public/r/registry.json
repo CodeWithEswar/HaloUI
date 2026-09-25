@@ -1901,6 +1901,39 @@
       "registryDependencies": [
         "field"
       ]
+    },
+    {
+      "name": "tabs",
+      "type": "registry:ui",
+      "title": "Tabs",
+      "description": "An accessible tabbed interface for switching between peer content views within the same context.",
+      "categories": [
+        "navigation"
+      ],
+      "dependencies": [
+        "@base-ui/react",
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": []
+    },
+    {
+      "name": "breadcrumb",
+      "type": "registry:ui",
+      "title": "Breadcrumb",
+      "description": "A semantic navigation trail that communicates the current page's position within a hierarchical structure.",
+      "categories": [
+        "navigation"
+      ],
+      "dependencies": [
+        "@base-ui/react",
+        "@hugeicons/core-free-icons",
+        "@hugeicons/react",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": []
     }
   ]
 }
