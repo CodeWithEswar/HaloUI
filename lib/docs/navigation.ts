@@ -646,6 +646,40 @@ export const docsNavigation: DocsNavSection[] = [
           "schedule"
         ],
       },
+      {
+        title: "Date Range Picker",
+        href: "/components/date-range-picker",
+        description: "An accessible calendar-backed control for selecting a start and end date as one ordered date interval.",
+        status: "preview",
+        keywords: [
+          "date-range-picker",
+          "date range picker",
+          "calendar range",
+          "date range",
+          "interval",
+          "start date",
+          "end date",
+          "period",
+          "dates"
+        ],
+      },
+      {
+        title: "Time Picker",
+        href: "/components/time-picker",
+        description: "An accessible time-only control for selecting a local clock time without introducing a calendar date or timezone.",
+        status: "preview",
+        keywords: [
+          "time-picker",
+          "time picker",
+          "time",
+          "clock",
+          "hours",
+          "minutes",
+          "am pm",
+          "24-hour",
+          "schedule"
+        ],
+      },
     ],
   },
 

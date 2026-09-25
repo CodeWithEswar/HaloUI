@@ -1801,6 +1801,47 @@
         "calendar",
         "field"
       ]
+    },
+    {
+      "name": "date-range-picker",
+      "type": "registry:ui",
+      "title": "Date Range Picker",
+      "description": "An accessible calendar-backed control for selecting a start and end date as one ordered date interval.",
+      "categories": [
+        "forms-and-fields"
+      ],
+      "dependencies": [
+        "@radix-ui/react-popover",
+        "react-day-picker",
+        "date-fns",
+        "@hugeicons/core-free-icons",
+        "@hugeicons/react",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [
+        "date-picker",
+        "calendar",
+        "field"
+      ]
+    },
+    {
+      "name": "time-picker",
+      "type": "registry:ui",
+      "title": "Time Picker",
+      "description": "An accessible time-only control for selecting a local clock time without introducing a calendar date or timezone.",
+      "categories": [
+        "forms-and-fields"
+      ],
+      "dependencies": [
+        "@hugeicons/core-free-icons",
+        "@hugeicons/react",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [
+        "field"
+      ]
     }
   ]
 }
