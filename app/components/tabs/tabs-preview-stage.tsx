@@ -22,6 +22,9 @@ import {
 } from "@hugeicons/core-free-icons";
 import { HaloIcon } from "@/components/icons/halo-icon";
 
+import { Checkbox } from "@/components/ui/checkbox";
+import { Label } from "@/components/ui/label";
+
 export function TabsPreviewStage() {
   const [activeTab, setActiveTab] = React.useState<"preview" | "code">("preview");
   const [backdrop, setBackdrop] = React.useState<string>("neutral");
@@ -111,7 +114,7 @@ export function PeerWorkspaceTabs() {
             value={variant}
             onChange={(val) => setVariant(val as any)}
             options={[
-              { value: "default", label: "Pills (Default)" },
+              { value: "default", label: "Pills (Liquid Glass)" },
               { value: "line", label: "Line Indicator" },
             ]}
           />
@@ -133,33 +136,45 @@ export function PeerWorkspaceTabs() {
               { value: "manual", label: "Manual (Enter/Space)" },
             ]}
           />
-          <label className="flex items-center gap-1.5 text-xs text-muted-foreground cursor-pointer select-none">
-            <input
-              type="checkbox"
+          <div className="flex items-center gap-2">
+            <Checkbox
+              id="tabs-toggle-icons"
               checked={showIcons}
-              onChange={(e) => setShowIcons(e.target.checked)}
-              className="rounded border-border text-primary focus:ring-ring"
+              onCheckedChange={(checked) => setShowIcons(Boolean(checked))}
             />
-            Hugeicons
-          </label>
-          <label className="flex items-center gap-1.5 text-xs text-muted-foreground cursor-pointer select-none">
-            <input
-              type="checkbox"
+            <Label
+              htmlFor="tabs-toggle-icons"
+              className="text-xs text-muted-foreground cursor-pointer font-normal"
+            >
+              Hugeicons
+            </Label>
+          </div>
+          <div className="flex items-center gap-2">
+            <Checkbox
+              id="tabs-toggle-badges"
               checked={showBadges}
-              onChange={(e) => setShowBadges(e.target.checked)}
-              className="rounded border-border text-primary focus:ring-ring"
+              onCheckedChange={(checked) => setShowBadges(Boolean(checked))}
             />
-            Badges
-          </label>
-          <label className="flex items-center gap-1.5 text-xs text-muted-foreground cursor-pointer select-none">
-            <input
-              type="checkbox"
+            <Label
+              htmlFor="tabs-toggle-badges"
+              className="text-xs text-muted-foreground cursor-pointer font-normal"
+            >
+              Badges
+            </Label>
+          </div>
+          <div className="flex items-center gap-2">
+            <Checkbox
+              id="tabs-toggle-disabled"
               checked={disableSettings}
-              onChange={(e) => setDisableSettings(e.target.checked)}
-              className="rounded border-border text-primary focus:ring-ring"
+              onCheckedChange={(checked) => setDisableSettings(Boolean(checked))}
             />
-            Disable Settings
-          </label>
+            <Label
+              htmlFor="tabs-toggle-disabled"
+              className="text-xs text-muted-foreground cursor-pointer font-normal"
+            >
+              Disable Settings
+            </Label>
+          </div>
         </div>
       }
     >
@@ -199,7 +214,7 @@ export function PeerWorkspaceTabs() {
 
           <div className="flex-1">
             <TabsContent value="overview">
-              <div className="rounded-xl border border-border/80 bg-card/60 p-5 backdrop-blur-xs space-y-3">
+              <div className="rounded-xl border border-black/[0.08] dark:border-white/[0.12] bg-white/70 dark:bg-white/[0.05] p-5 backdrop-blur-xl shadow-[0_4px_20px_-4px_rgba(0,0,0,0.06),inset_0_1px_1px_0_rgba(255,255,255,0.7)] dark:shadow-[0_4px_20px_-4px_rgba(0,0,0,0.4),inset_0_1px_1px_0_rgba(255,255,255,0.08)] space-y-3">
                 <div className="flex items-center justify-between">
                   <h4 className="text-sm font-semibold text-foreground">Workspace Overview</h4>
                   <span className="text-xs text-emerald-600 dark:text-emerald-400 flex items-center gap-1 font-medium">
@@ -212,7 +227,7 @@ export function PeerWorkspaceTabs() {
                 <div className="grid grid-cols-2 gap-3 pt-2">
                   <div className="p-3 rounded-lg border border-border/60 bg-muted/30">
                     <div className="text-[11px] text-muted-foreground">Active Components</div>
-                    <div className="text-lg font-bold text-foreground">43 Installed</div>
+                    <div className="text-lg font-bold text-foreground">45 Installed</div>
                   </div>
                   <div className="p-3 rounded-lg border border-border/60 bg-muted/30">
                     <div className="text-[11px] text-muted-foreground">Optical Passes</div>
@@ -223,27 +238,27 @@ export function PeerWorkspaceTabs() {
             </TabsContent>
 
             <TabsContent value="activity">
-              <div className="rounded-xl border border-border/80 bg-card/60 p-5 backdrop-blur-xs space-y-3">
+              <div className="rounded-xl border border-black/[0.08] dark:border-white/[0.12] bg-white/70 dark:bg-white/[0.05] p-5 backdrop-blur-xl shadow-[0_4px_20px_-4px_rgba(0,0,0,0.06),inset_0_1px_1px_0_rgba(255,255,255,0.7)] dark:shadow-[0_4px_20px_-4px_rgba(0,0,0,0.4),inset_0_1px_1px_0_rgba(255,255,255,0.08)] space-y-3">
                 <h4 className="text-sm font-semibold text-foreground">Recent Event Log</h4>
                 <ul className="space-y-2 text-xs text-muted-foreground">
+                  <li className="flex items-center justify-between border-b border-border/40 pb-2">
+                    <span>Navigation Tabs physical liquid glass lens calibrated</span>
+                    <span className="text-[11px] font-mono text-muted-foreground">Just now</span>
+                  </li>
                   <li className="flex items-center justify-between border-b border-border/40 pb-2">
                     <span>Registry item `calendar` verified and stabilized</span>
                     <span className="text-[11px] font-mono text-muted-foreground">12m ago</span>
                   </li>
-                  <li className="flex items-center justify-between border-b border-border/40 pb-2">
+                  <li className="flex items-center justify-between">
                     <span>Local ISO 8601 parser verified for `date-time-picker`</span>
                     <span className="text-[11px] font-mono text-muted-foreground">24m ago</span>
-                  </li>
-                  <li className="flex items-center justify-between">
-                    <span>Field message polite live-region integrated</span>
-                    <span className="text-[11px] font-mono text-muted-foreground">41m ago</span>
                   </li>
                 </ul>
               </div>
             </TabsContent>
 
             <TabsContent value="team">
-              <div className="rounded-xl border border-border/80 bg-card/60 p-5 backdrop-blur-xs space-y-3">
+              <div className="rounded-xl border border-black/[0.08] dark:border-white/[0.12] bg-white/70 dark:bg-white/[0.05] p-5 backdrop-blur-xl shadow-[0_4px_20px_-4px_rgba(0,0,0,0.06),inset_0_1px_1px_0_rgba(255,255,255,0.7)] dark:shadow-[0_4px_20px_-4px_rgba(0,0,0,0.4),inset_0_1px_1px_0_rgba(255,255,255,0.08)] space-y-3">
                 <h4 className="text-sm font-semibold text-foreground">Active Collaborators</h4>
                 <p className="text-xs text-muted-foreground">
                   3 engineers currently modifying design system foundations and optical presets.
@@ -263,7 +278,7 @@ export function PeerWorkspaceTabs() {
             </TabsContent>
 
             <TabsContent value="settings">
-              <div className="rounded-xl border border-border/80 bg-card/60 p-5 backdrop-blur-xs space-y-3">
+              <div className="rounded-xl border border-black/[0.08] dark:border-white/[0.12] bg-white/70 dark:bg-white/[0.05] p-5 backdrop-blur-xl shadow-[0_4px_20px_-4px_rgba(0,0,0,0.06),inset_0_1px_1px_0_rgba(255,255,255,0.7)] dark:shadow-[0_4px_20px_-4px_rgba(0,0,0,0.4),inset_0_1px_1px_0_rgba(255,255,255,0.08)] space-y-3">
                 <div className="flex items-center gap-2">
                   <HaloIcon icon={Shield02Icon} size={16} className="text-primary" />
                   <h4 className="text-sm font-semibold text-foreground">Security & Scope</h4>

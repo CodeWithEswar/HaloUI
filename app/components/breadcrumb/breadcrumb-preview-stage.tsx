@@ -22,6 +22,8 @@ import {
   ArrowRight01Icon,
 } from "@hugeicons/core-free-icons";
 import { HaloIcon } from "@/components/icons/halo-icon";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Label } from "@/components/ui/label";
 
 export function BreadcrumbPreviewStage() {
   const [activeTab, setActiveTab] = React.useState<"preview" | "code">("preview");
@@ -136,33 +138,45 @@ export function NavigationTrail() {
               { value: "arrow", label: "Arrow (→)" },
             ]}
           />
-          <label className="flex items-center gap-1.5 text-xs text-muted-foreground cursor-pointer select-none">
-            <input
-              type="checkbox"
+          <div className="flex items-center gap-2">
+            <Checkbox
+              id="breadcrumb-toggle-icons"
               checked={showIcons}
-              onChange={(e) => setShowIcons(e.target.checked)}
-              className="rounded border-border text-primary focus:ring-ring"
+              onCheckedChange={(checked) => setShowIcons(Boolean(checked))}
             />
-            Hugeicons
-          </label>
-          <label className="flex items-center gap-1.5 text-xs text-muted-foreground cursor-pointer select-none">
-            <input
-              type="checkbox"
+            <Label
+              htmlFor="breadcrumb-toggle-icons"
+              className="text-xs text-muted-foreground cursor-pointer font-normal"
+            >
+              Hugeicons
+            </Label>
+          </div>
+          <div className="flex items-center gap-2">
+            <Checkbox
+              id="breadcrumb-toggle-collapse"
               checked={isCollapsed}
-              onChange={(e) => setIsCollapsed(e.target.checked)}
-              className="rounded border-border text-primary focus:ring-ring"
+              onCheckedChange={(checked) => setIsCollapsed(Boolean(checked))}
             />
-            Collapse Intermediate
-          </label>
-          <label className="flex items-center gap-1.5 text-xs text-muted-foreground cursor-pointer select-none">
-            <input
-              type="checkbox"
+            <Label
+              htmlFor="breadcrumb-toggle-collapse"
+              className="text-xs text-muted-foreground cursor-pointer font-normal"
+            >
+              Collapse Intermediate
+            </Label>
+          </div>
+          <div className="flex items-center gap-2">
+            <Checkbox
+              id="breadcrumb-toggle-long"
               checked={longPageTitle}
-              onChange={(e) => setLongPageTitle(e.target.checked)}
-              className="rounded border-border text-primary focus:ring-ring"
+              onCheckedChange={(checked) => setLongPageTitle(Boolean(checked))}
             />
-            Long Title Truncation
-          </label>
+            <Label
+              htmlFor="breadcrumb-toggle-long"
+              className="text-xs text-muted-foreground cursor-pointer font-normal"
+            >
+              Long Title Truncation
+            </Label>
+          </div>
         </div>
       }
     >
