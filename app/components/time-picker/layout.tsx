@@ -1,15 +1,5 @@
-import type { Metadata } from "next";
+import { DocsShell } from "@/components/docs/docs-shell";
 
-export const metadata: Metadata = {
-  title: "Time Picker — HaloUI Forms & Fields",
-  description:
-    "An accessible time-only control for selecting a local clock time without introducing a calendar date or timezone.",
-};
-
-export default function TimePickerLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  return children;
+export default function TimePickerDocsLayout({ children }: { children: React.ReactNode }) {
+  return <DocsShell>{children}</DocsShell>;
 }

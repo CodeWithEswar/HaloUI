@@ -1,15 +1,5 @@
-import type { Metadata } from "next";
+import { DocsShell } from "@/components/docs/docs-shell";
 
-export const metadata: Metadata = {
-  title: "Date Picker — HaloUI Forms & Fields",
-  description:
-    "An accessible calendar-backed control for selecting a single calendar date.",
-};
-
-export default function DatePickerLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  return children;
+export default function DatePickerDocsLayout({ children }: { children: React.ReactNode }) {
+  return <DocsShell>{children}</DocsShell>;
 }
