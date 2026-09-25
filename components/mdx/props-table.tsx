@@ -1,4 +1,4 @@
-type PropRow = {
+export type PropRow = {
   name: string;
   type: string;
   default?: string;

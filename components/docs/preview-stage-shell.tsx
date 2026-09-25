@@ -409,7 +409,7 @@ export function PreviewStageShell({
           <div className="border-t border-border bg-muted/20 flex flex-col text-xs overflow-hidden max-w-full">
             {/* Interactive Controls Bar */}
             {controls && (
-              <div className="p-2.5 sm:p-3.5 flex flex-wrap items-center gap-2 sm:gap-3 max-w-full">
+              <div className="p-2.5 sm:p-3.5 w-full min-w-0 overflow-hidden">
                 {controls}
               </div>
             )}
@@ -526,32 +526,53 @@ export function StageControlSelect<T extends string>({
   label,
   value,
   onValueChange,
+  onChange,
   options,
   className,
 }: {
   label: string;
   value: T;
-  onValueChange: (val: T) => void;
+  onValueChange?: (val: T) => void;
+  onChange?: (val: T) => void;
   options: { label: string; value: T }[];
   className?: string;
 }) {
+  const handleValueChange = (nextVal: string | null) => {
+    if (nextVal != null) {
+      if (typeof onValueChange === "function") {
+        onValueChange(nextVal as T);
+      }
+      if (typeof onChange === "function") {
+        onChange(nextVal as T);
+      }
+    }
+  };
+
   return (
-    <div className={cn("flex items-center justify-between gap-2 p-1.5 px-2.5 rounded-lg border border-border/70 bg-card/60 shadow-2xs min-w-0", className)}>
-      <span className="text-[11px] sm:text-xs text-muted-foreground font-medium select-none shrink-0">
+    <div
+      className={cn(
+        "flex items-center justify-between gap-2 p-1.5 sm:p-2 px-2.5 sm:px-3 rounded-xl border border-border/80 bg-card/75 shadow-2xs w-full min-w-0 overflow-hidden transition-colors",
+        className
+      )}
+    >
+      <span className="text-xs sm:text-[13px] text-muted-foreground font-medium select-none shrink-0 truncate max-w-[48%]">
         {label}:
       </span>
       <Select
         value={value}
-        onValueChange={(val) => {
-          if (val) onValueChange(val as T);
-        }}
+        onValueChange={handleValueChange}
       >
-        <SelectTrigger className="h-7 text-xs bg-background/80 border-border/80 text-foreground font-medium shadow-2xs min-w-[90px] flex-1 justify-between px-2">
-          <SelectValue />
+        <SelectTrigger
+          size="sm"
+          className="h-8.5 sm:h-9 text-xs sm:text-[13px] bg-background/90 hover:bg-background border-border text-foreground font-medium shadow-2xs min-w-0 flex-1 justify-between px-2.5 sm:px-3 gap-1.5 overflow-hidden rounded-lg transition-colors"
+        >
+          <span className="truncate text-left flex-1 min-w-0 block">
+            <SelectValue />
+          </span>
         </SelectTrigger>
         <SelectContent align="end">
           {options.map((opt) => (
-            <SelectItem key={opt.value} value={opt.value} className="text-xs">
+            <SelectItem key={opt.value} value={opt.value} className="text-xs sm:text-[13px] py-1.5">
               {opt.label}
             </SelectItem>
           ))}

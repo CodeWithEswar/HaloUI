@@ -1,12 +1,19 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import { Select as SelectPrimitive } from "@base-ui/react/select"
-import { cn } from "@/lib/utils"
-import { ArrowDown01Icon, ArrowUp01Icon, Tick02Icon } from "@hugeicons/core-free-icons"
-import { HaloIcon } from "@/components/icons/halo-icon"
+import * as React from "react";
+import { Select as SelectPrimitive } from "@base-ui/react/select";
+import { cn } from "@/lib/utils";
+import { ArrowDown01Icon, ArrowUp01Icon, Tick02Icon } from "@hugeicons/core-free-icons";
+import { HaloIcon } from "@/components/icons/halo-icon";
 
-const Select = SelectPrimitive.Root
+/**
+ * Select — Forms & Fields Primitive
+ *
+ * An accessible custom option picker for selecting one value
+ * from a structured list of choices, rendered with HaloUI's
+ * 10-layer physical optical liquid glass engine.
+ */
+const Select = SelectPrimitive.Root;
 
 function SelectGroup({ className, ...props }: SelectPrimitive.Group.Props) {
   return (
@@ -15,17 +22,21 @@ function SelectGroup({ className, ...props }: SelectPrimitive.Group.Props) {
       className={cn("scroll-my-1 p-1", className)}
       {...props}
     />
-  )
+  );
 }
 
 function SelectValue({ className, ...props }: SelectPrimitive.Value.Props) {
   return (
     <SelectPrimitive.Value
       data-slot="select-value"
-      className={cn("flex flex-1 text-left", className)}
+      className={cn("flex flex-1 text-left truncate data-placeholder:text-muted-foreground", className)}
       {...props}
     />
-  )
+  );
+}
+
+export interface SelectTriggerProps extends SelectPrimitive.Trigger.Props {
+  size?: "default" | "sm";
 }
 
 function SelectTrigger({
@@ -33,34 +44,42 @@ function SelectTrigger({
   size = "default",
   children,
   ...props
-}: SelectPrimitive.Trigger.Props & {
-  size?: "sm" | "default"
-}) {
+}: SelectTriggerProps) {
   return (
     <SelectPrimitive.Trigger
       data-slot="select-trigger"
       data-size={size}
       className={cn(
-        "flex w-fit items-center justify-between gap-1.5 rounded-lg border border-input bg-transparent py-2 pr-2 pl-2.5 text-sm whitespace-nowrap transition-colors outline-none select-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 disabled:cursor-not-allowed disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 data-placeholder:text-muted-foreground data-[size=default]:h-8 data-[size=sm]:h-7 data-[size=sm]:rounded-[min(var(--radius-md),10px)] *:data-[slot=select-value]:line-clamp-1 *:data-[slot=select-value]:flex *:data-[slot=select-value]:items-center *:data-[slot=select-value]:gap-1.5 dark:bg-input/30 dark:hover:bg-input/50 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+        // HaloUI Physical Liquid Glass Engine (Inherited directly from Button specification)
+        "halo-liquid-glass group/trigger relative flex w-full min-w-0 items-center justify-between gap-2 text-sm outline-none cursor-pointer text-foreground select-none",
+        size === "sm" ? "h-8 text-xs px-2.5 rounded-lg" : "h-10 text-sm px-3.5 rounded-xl",
+        // Independent Double-Contrast Focus Ring (Halo Focus Ring)
+        "focus-visible:border-[var(--halo-focus-color)] focus-visible:ring-2 focus-visible:ring-[var(--halo-focus-color)] focus-visible:ring-offset-2 focus-visible:ring-offset-background halo-focus-ring",
+        // Invalid state (Dual Indicator Visibility)
+        "aria-invalid:border-destructive/80 aria-invalid:shadow-[inset_0_0_0_1px_rgba(244,63,94,0.3)] dark:aria-invalid:border-destructive/70",
+        // Disabled state
+        "disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-40 disabled:shadow-none",
         className
       )}
       {...props}
     >
-      {children}
+      <span className="relative z-10 flex flex-1 items-center gap-2 truncate">{children}</span>
       <SelectPrimitive.Icon
         render={
-          <HaloIcon icon={ArrowDown01Icon} size={14} className="pointer-events-none text-muted-foreground" />
+          <span className="pointer-events-none relative z-10 flex size-4 items-center justify-center text-muted-foreground select-none transition-transform duration-200 group-data-[open]/trigger:rotate-180">
+            <HaloIcon icon={ArrowDown01Icon} size={15} />
+          </span>
         }
       />
     </SelectPrimitive.Trigger>
-  )
+  );
 }
 
 function SelectContent({
   className,
   children,
   side = "bottom",
-  sideOffset = 4,
+  sideOffset = 6,
   align = "start",
   alignOffset = 0,
   alignItemWithTrigger = false,
@@ -84,18 +103,22 @@ function SelectContent({
           data-slot="select-content"
           data-align-trigger={alignItemWithTrigger}
           className={cn(
-            "relative isolate z-50 max-h-(--available-height) min-w-(--anchor-width) w-auto max-w-sm origin-(--transform-origin) overflow-x-hidden overflow-y-auto rounded-lg bg-popover text-popover-foreground shadow-md ring-1 ring-foreground/10 duration-100 data-[align-trigger=true]:animate-none data-[side=bottom]:slide-in-from-top-2 data-[side=inline-end]:slide-in-from-left-2 data-[side=inline-start]:slide-in-from-right-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95",
+            // HaloUI Physical Liquid Glass Engine (Button Specification with elevated backdrop opacity)
+            "halo-liquid-glass relative isolate z-50 max-h-(--available-height) min-w-(--anchor-width) w-auto max-w-sm origin-(--transform-origin) overflow-hidden rounded-2xl p-1.5 text-foreground outline-none",
+            "!bg-white/85 dark:!bg-neutral-950/80 !backdrop-blur-2xl !backdrop-saturate-200",
+            // Micro animation
+            "duration-150 data-[side=bottom]:slide-in-from-top-1.5 data-[side=top]:slide-in-from-bottom-1.5 data-open:animate-in data-open:fade-in-0 data-open:zoom-in-98 data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-98",
             className
           )}
           {...props}
         >
           <SelectScrollUpButton />
-          <SelectPrimitive.List>{children}</SelectPrimitive.List>
+          <SelectPrimitive.List className="relative z-10 p-0.5 space-y-0.5">{children}</SelectPrimitive.List>
           <SelectScrollDownButton />
         </SelectPrimitive.Popup>
       </SelectPrimitive.Positioner>
     </SelectPrimitive.Portal>
-  )
+  );
 }
 
 function SelectLabel({
@@ -105,10 +128,10 @@ function SelectLabel({
   return (
     <SelectPrimitive.GroupLabel
       data-slot="select-label"
-      className={cn("px-1.5 py-1 text-xs text-muted-foreground", className)}
+      className={cn("px-2.5 py-1.5 text-xs font-semibold uppercase tracking-wider text-muted-foreground select-none", className)}
       {...props}
     />
-  )
+  );
 }
 
 function SelectItem({
@@ -120,23 +143,32 @@ function SelectItem({
     <SelectPrimitive.Item
       data-slot="select-item"
       className={cn(
-        "relative flex w-full cursor-default items-center gap-1.5 rounded-md py-1 pr-8 pl-1.5 text-sm outline-hidden select-none focus:bg-accent focus:text-accent-foreground not-data-[variant=destructive]:focus:**:text-accent-foreground data-disabled:pointer-events-none data-disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4 *:[span]:last:flex *:[span]:last:items-center *:[span]:last:gap-2",
+        "relative flex w-full cursor-pointer items-center justify-between gap-2 rounded-xl py-2 pl-3 pr-8 text-sm outline-none select-none transition-all duration-150",
+        // Active roving focus state: frosted glass highlight
+        "data-highlighted:bg-white/80 dark:data-highlighted:bg-white/[0.14] data-highlighted:backdrop-blur-md",
+        "data-highlighted:shadow-[inset_0_1px_1px_0_rgba(255,255,255,0.95),0_1px_3px_0_rgba(0,0,0,0.06)]",
+        "dark:data-highlighted:shadow-[inset_0_1px_1px_0_rgba(255,255,255,0.22),0_2px_6px_0_rgba(0,0,0,0.4)]",
+        "data-highlighted:text-foreground",
+        // Selected committed state
+        "data-selected:font-medium data-selected:text-foreground",
+        // Disabled item
+        "data-disabled:pointer-events-none data-disabled:cursor-not-allowed data-disabled:opacity-35",
         className
       )}
       {...props}
     >
-      <SelectPrimitive.ItemText className="flex flex-1 shrink-0 gap-2 whitespace-nowrap">
+      <SelectPrimitive.ItemText className="flex flex-1 items-center gap-2 truncate">
         {children}
       </SelectPrimitive.ItemText>
       <SelectPrimitive.ItemIndicator
         render={
-          <span className="pointer-events-none absolute right-2 flex size-4 items-center justify-center">
-            <HaloIcon icon={Tick02Icon} size={14} className="pointer-events-none" />
+          <span className="pointer-events-none absolute right-2.5 flex size-4 items-center justify-center text-primary">
+            <HaloIcon icon={Tick02Icon} size={15} />
           </span>
         }
       />
     </SelectPrimitive.Item>
-  )
+  );
 }
 
 function SelectSeparator({
@@ -146,10 +178,10 @@ function SelectSeparator({
   return (
     <SelectPrimitive.Separator
       data-slot="select-separator"
-      className={cn("pointer-events-none -mx-1 my-1 h-px bg-border", className)}
+      className={cn("pointer-events-none -mx-1 my-1 h-px bg-black/[0.08] dark:bg-white/[0.08]", className)}
       {...props}
     />
-  )
+  );
 }
 
 function SelectScrollUpButton({
@@ -160,14 +192,14 @@ function SelectScrollUpButton({
     <SelectPrimitive.ScrollUpArrow
       data-slot="select-scroll-up-button"
       className={cn(
-        "top-0 z-10 flex w-full cursor-default items-center justify-center bg-popover py-1 [&_svg:not([class*='size-'])]:size-4",
+        "top-0 z-20 flex w-full cursor-default items-center justify-center bg-white/40 dark:bg-black/40 py-1 text-muted-foreground select-none backdrop-blur-md",
         className
       )}
       {...props}
     >
       <HaloIcon icon={ArrowUp01Icon} size={14} />
     </SelectPrimitive.ScrollUpArrow>
-  )
+  );
 }
 
 function SelectScrollDownButton({
@@ -178,14 +210,14 @@ function SelectScrollDownButton({
     <SelectPrimitive.ScrollDownArrow
       data-slot="select-scroll-down-button"
       className={cn(
-        "bottom-0 z-10 flex w-full cursor-default items-center justify-center bg-popover py-1 [&_svg:not([class*='size-'])]:size-4",
+        "bottom-0 z-20 flex w-full cursor-default items-center justify-center bg-white/40 dark:bg-black/40 py-1 text-muted-foreground select-none backdrop-blur-md",
         className
       )}
       {...props}
     >
       <HaloIcon icon={ArrowDown01Icon} size={14} />
     </SelectPrimitive.ScrollDownArrow>
-  )
+  );
 }
 
 export {
@@ -199,4 +231,6 @@ export {
   SelectSeparator,
   SelectTrigger,
   SelectValue,
-}
+};
+
+export default Select;

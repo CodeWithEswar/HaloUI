@@ -136,7 +136,7 @@ export function ToggleGroupWorkbench() {
         { label: "Layering", value: "Pressed z-[5] · Focus z-20", variant: "success" },
       ]}
       controls={
-        <div className="w-full grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+        <div className="w-full grid grid-cols-1 min-[420px]:grid-cols-2 md:grid-cols-4 gap-2 sm:gap-2.5">
           <StageControlSelect
             label="Geometry"
             value={spacing}

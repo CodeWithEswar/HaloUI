@@ -25,6 +25,7 @@ import {
   Share01Icon,
 } from "@hugeicons/core-free-icons";
 import { HaloIcon } from "@/components/icons/halo-icon";
+import { cn } from "@/lib/utils";
 
 export function ActionBarPreviewStage() {
   const [activeTab, setActiveTab] = React.useState<"preview" | "code">("preview");
@@ -40,10 +41,23 @@ export function ActionBarPreviewStage() {
   const [actionCount, setActionCount] = React.useState(0);
   const [copiedCode, setCopiedCode] = React.useState(false);
 
+  const feedbackTimerRef = React.useRef<NodeJS.Timeout | null>(null);
   const triggerAction = (name: string) => {
     setActionLog(name);
     setActionCount((c) => c + 1);
+    if (feedbackTimerRef.current) clearTimeout(feedbackTimerRef.current);
+    feedbackTimerRef.current = setTimeout(() => {
+      setActionLog("None");
+    }, 2500);
   };
+
+  React.useEffect(() => {
+    return () => {
+      if (feedbackTimerRef.current) clearTimeout(feedbackTimerRef.current);
+    };
+  }, []);
+
+  const isMobileView = viewport === "mobile";
 
   const generatedCode = React.useMemo(() => {
     const props = [];
@@ -60,7 +74,9 @@ import { HaloIcon } from "@/components/icons/halo-icon";
 export function SelectionToolbar() {
   return (
     <ActionBar${propsStr} aria-label="Selection toolbar">
-      <ActionBarLabel count={${count}}>items</ActionBarLabel>
+      <ActionBarLabel count={${count}}>
+        <span className="hidden sm:inline">items</span>
+      </ActionBarLabel>
       <ActionBarSeparator />
       <ActionBarGroup>
         <IconButton size="sm" variant="ghost" aria-label="Archive items">
@@ -81,15 +97,25 @@ export function SelectionToolbar() {
     if (composition === "simple") {
       return `import { ActionBar, ActionBarGroup, ActionBarLabel, ActionBarSeparator } from "@/components/ui/action-bar";
 import { Button } from "@/components/ui/button";
+import { Archive02Icon, Delete02Icon } from "@hugeicons/core-free-icons";
+import { HaloIcon } from "@/components/icons/halo-icon";
 
 export function SelectionToolbar() {
   return (
     <ActionBar${propsStr} aria-label="Selection toolbar">
-      <ActionBarLabel count={${count}}>selected</ActionBarLabel>
+      <ActionBarLabel count={${count}}>
+        <span className="hidden sm:inline">selected</span>
+      </ActionBarLabel>
       <ActionBarSeparator />
       <ActionBarGroup>
-        <Button size="sm" variant="outline">Archive</Button>
-        <Button size="sm" variant="destructive">Delete</Button>
+        <Button size="sm" variant="outline" aria-label="Archive items">
+          <HaloIcon icon={Archive02Icon} size={15} />
+          <span className="hidden sm:inline">Archive</span>
+        </Button>
+        <Button size="sm" variant="destructive" aria-label="Delete items">
+          <HaloIcon icon={Delete02Icon} size={15} />
+          <span className="hidden sm:inline">Delete</span>
+        </Button>
       </ActionBarGroup>
     </ActionBar>
   );
@@ -106,25 +132,34 @@ import { HaloIcon } from "@/components/icons/halo-icon";
 export function SelectionToolbar() {
   return (
     <ActionBar${propsStr} aria-label="Selection toolbar">
-      <ActionBarLabel count={${count}}>selected</ActionBarLabel>
+      {/* Contextual selection readout */}
+      <ActionBarLabel count={${count}}>
+        <span className="hidden sm:inline">selected</span>
+      </ActionBarLabel>
+
       <ActionBarSeparator />
+
+      {/* Primary coordinated actions */}
       <ActionBarGroup>
         <ButtonGroup>
-          <Button size="sm" variant="outline">
+          <Button size="sm" variant="outline" aria-label="Archive items">
             <HaloIcon icon={Archive02Icon} size={15} />
-            Archive
+            <span className="hidden sm:inline">Archive</span>
           </Button>
-          <Button size="sm" variant="outline">
+          <Button size="sm" variant="outline" aria-label="Move items">
             <HaloIcon icon={Folder01Icon} size={15} />
-            Move
+            <span className="hidden sm:inline">Move</span>
           </Button>
         </ButtonGroup>
       </ActionBarGroup>
+
       <ActionBarSeparator />
-      <ActionBarGroup>
-        <Button size="sm" variant="destructive">
+
+      {/* Critical & overflow actions */}
+      <ActionBarGroup align="end">
+        <Button size="sm" variant="destructive" aria-label="Delete items">
           <HaloIcon icon={Delete02Icon} size={15} />
-          Delete
+          <span className="hidden sm:inline">Delete</span>
         </Button>
         <IconButton size="sm" variant="ghost" aria-label="More actions">
           <HaloIcon icon={MoreHorizontalIcon} size={16} />
@@ -180,7 +215,7 @@ export function SelectionToolbar() {
         },
       ]}
       controls={
-        <div className="w-full grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+        <div className="w-full grid grid-cols-1 min-[420px]:grid-cols-2 md:grid-cols-4 gap-2 sm:gap-2.5">
           <StageControlSelect
             label="Density"
             value={density}
@@ -226,15 +261,18 @@ export function SelectionToolbar() {
         </div>
       }
     >
-      <div className="flex flex-col items-center justify-center gap-4 py-8 w-full px-4 overflow-visible">
+      <div className="flex flex-col items-center justify-center gap-4 py-8 w-full px-2 sm:px-4 overflow-visible">
         <ActionBar
           density={density}
           fullWidth={fullWidth}
           aria-label="Interactive action bar preview"
+          className="transition-all duration-200"
         >
           {composition === "compact" ? (
             <>
-              <ActionBarLabel count={count}>items</ActionBarLabel>
+              <ActionBarLabel count={count}>
+                <span className={cn(isMobileView ? "hidden" : "hidden min-[480px]:inline")}>items</span>
+              </ActionBarLabel>
               <ActionBarSeparator />
               <ActionBarGroup>
                 <IconButton
@@ -242,6 +280,7 @@ export function SelectionToolbar() {
                   variant="ghost"
                   aria-label="Archive items"
                   onClick={() => triggerAction("Archive")}
+                  className="touch-manipulation"
                 >
                   <HaloIcon icon={Archive02Icon} size={15} />
                 </IconButton>
@@ -250,6 +289,7 @@ export function SelectionToolbar() {
                   variant="ghost"
                   aria-label="Move items"
                   onClick={() => triggerAction("Move")}
+                  className="touch-manipulation"
                 >
                   <HaloIcon icon={Folder01Icon} size={15} />
                 </IconButton>
@@ -258,6 +298,7 @@ export function SelectionToolbar() {
                   variant="destructive"
                   aria-label="Delete items"
                   onClick={() => triggerAction("Delete")}
+                  className="touch-manipulation"
                 >
                   <HaloIcon icon={Delete02Icon} size={15} />
                 </IconButton>
@@ -265,46 +306,60 @@ export function SelectionToolbar() {
             </>
           ) : composition === "simple" ? (
             <>
-              <ActionBarLabel count={count}>selected</ActionBarLabel>
+              <ActionBarLabel count={count}>
+                <span className={cn(isMobileView ? "hidden" : "hidden min-[480px]:inline")}>selected</span>
+              </ActionBarLabel>
               <ActionBarSeparator />
               <ActionBarGroup>
                 <Button
                   size={density === "compact" ? "sm" : "default"}
                   variant="outline"
+                  aria-label="Archive selected items"
                   onClick={() => triggerAction("Archive")}
+                  className="touch-manipulation"
                 >
-                  Archive
+                  <HaloIcon icon={Archive02Icon} size={15} />
+                  <span className={cn(isMobileView ? "hidden" : "hidden min-[480px]:inline")}>Archive</span>
                 </Button>
                 <Button
                   size={density === "compact" ? "sm" : "default"}
                   variant="destructive"
+                  aria-label="Delete selected items"
                   onClick={() => triggerAction("Delete")}
+                  className="touch-manipulation"
                 >
-                  Delete
+                  <HaloIcon icon={Delete02Icon} size={15} />
+                  <span className={cn(isMobileView ? "hidden" : "hidden min-[480px]:inline")}>Delete</span>
                 </Button>
               </ActionBarGroup>
             </>
           ) : (
             <>
-              <ActionBarLabel count={count}>selected</ActionBarLabel>
+              <ActionBarLabel count={count}>
+                <span className={cn(isMobileView ? "hidden" : "hidden min-[540px]:inline")}>selected</span>
+              </ActionBarLabel>
               <ActionBarSeparator />
               <ActionBarGroup>
                 <ButtonGroup>
                   <Button
                     size={density === "compact" ? "sm" : "default"}
                     variant="outline"
+                    aria-label="Archive selected items"
                     onClick={() => triggerAction("Archive")}
+                    className="touch-manipulation"
                   >
                     <HaloIcon icon={Archive02Icon} size={15} />
-                    Archive
+                    <span className={cn(isMobileView ? "hidden" : "hidden min-[540px]:inline")}>Archive</span>
                   </Button>
                   <Button
                     size={density === "compact" ? "sm" : "default"}
                     variant="outline"
+                    aria-label="Move selected items"
                     onClick={() => triggerAction("Move")}
+                    className="touch-manipulation"
                   >
                     <HaloIcon icon={Folder01Icon} size={15} />
-                    Move
+                    <span className={cn(isMobileView ? "hidden" : "hidden min-[540px]:inline")}>Move</span>
                   </Button>
                 </ButtonGroup>
               </ActionBarGroup>
@@ -313,16 +368,19 @@ export function SelectionToolbar() {
                 <Button
                   size={density === "compact" ? "sm" : "default"}
                   variant="destructive"
+                  aria-label="Delete selected items"
                   onClick={() => triggerAction("Delete")}
+                  className="touch-manipulation"
                 >
                   <HaloIcon icon={Delete02Icon} size={15} />
-                  Delete
+                  <span className={cn(isMobileView ? "hidden" : "hidden min-[540px]:inline")}>Delete</span>
                 </Button>
                 <IconButton
                   size={density === "compact" ? "sm" : "default"}
                   variant="ghost"
-                  aria-label="More actions"
+                  aria-label="More contextual actions"
                   onClick={() => triggerAction("Overflow Menu")}
+                  className="touch-manipulation shrink-0"
                 >
                   <HaloIcon icon={MoreHorizontalIcon} size={16} />
                 </IconButton>
@@ -330,6 +388,20 @@ export function SelectionToolbar() {
             </>
           )}
         </ActionBar>
+
+        {/* Live Interaction Feedback HUD */}
+        <div className="h-6 flex items-center justify-center pointer-events-none transition-opacity duration-200">
+          {actionLog !== "None" ? (
+            <span className="inline-flex items-center gap-1.5 text-[11px] font-mono font-medium text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2.5 py-0.5 rounded-full shadow-2xs animate-in fade-in zoom-in-95 duration-150">
+              <span className="size-1.5 rounded-full bg-emerald-500 animate-pulse" />
+              Action triggered: <strong>{actionLog}</strong> ({count} items)
+            </span>
+          ) : (
+            <span className="text-[11px] text-muted-foreground/70 select-none">
+              Interactive preview: click any action or change viewport mode
+            </span>
+          )}
+        </div>
       </div>
     </PreviewStageShell>
   );

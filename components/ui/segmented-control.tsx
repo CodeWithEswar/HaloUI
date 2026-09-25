@@ -16,9 +16,12 @@ import { cn } from "@/lib/utils";
 export const segmentedControlVariants = cva(
   [
     "inline-flex items-center isolate select-none overflow-hidden",
-    "p-1 rounded-xl border border-black/[0.08] dark:border-white/[0.10]",
-    "bg-neutral-200/50 dark:bg-neutral-900/60 backdrop-blur-md",
-    "transition-colors duration-150 ease-out",
+    "p-1 rounded-xl transition-all duration-200 ease-out",
+    // 10-Layer Optical Track Substrate (Recessed Channel)
+    "bg-black/[0.04] dark:bg-white/[0.04] backdrop-blur-xl backdrop-saturate-180",
+    "border border-black/[0.08] dark:border-white/[0.12]",
+    "shadow-[inset_0_1px_2px_0_rgba(0,0,0,0.08),inset_0_0_1px_0_rgba(0,0,0,0.04),0_1px_1px_0_rgba(255,255,255,0.7)]",
+    "dark:shadow-[inset_0_1px_2px_0_rgba(0,0,0,0.5),inset_0_0_1px_0_rgba(0,0,0,0.8),0_1px_1px_0_rgba(255,255,255,0.06)]",
   ],
   {
     variants: {
@@ -42,15 +45,18 @@ export const segmentedControlItemVariants = cva(
   [
     "group/segment relative inline-flex items-center justify-center font-medium select-none cursor-pointer",
     "transition-all duration-150 ease-out outline-none whitespace-nowrap shrink-0",
-    // Base unselected styling
+    // Base unselected styling (translucent lens hover reaction)
     "text-muted-foreground hover:text-foreground bg-transparent border border-transparent",
-    "hover:bg-black/[0.03] dark:hover:bg-white/[0.04]",
-    // Selected state (aria-checked="true" / data-checked)
+    "hover:bg-white/40 dark:hover:bg-white/[0.06]",
+    // Selected state: Authentic HaloUI Physical Liquid Glass Lens
     "data-checked:text-foreground data-checked:font-semibold",
-    "data-checked:bg-white dark:data-checked:bg-neutral-800",
-    "data-checked:border-black/[0.08] dark:data-checked:border-white/[0.12]",
-    "data-checked:shadow-[0_1px_3px_0_rgba(0,0,0,0.08),0_1px_2px_-1px_rgba(0,0,0,0.06)]",
-    "dark:data-checked:shadow-[0_1px_3px_0_rgba(0,0,0,0.4),inset_0_1px_0_0_rgba(255,255,255,0.12)]",
+    "data-checked:bg-white/85 dark:data-checked:bg-white/[0.14] data-checked:backdrop-blur-xl data-checked:backdrop-saturate-180",
+    "data-checked:border-black/[0.08] dark:data-checked:border-white/[0.20]",
+    "data-checked:shadow-[inset_0_1px_1px_0_rgba(255,255,255,1),inset_0_-1px_1px_0_rgba(0,0,0,0.05),0_2px_8px_-1px_rgba(0,0,0,0.12),0_1px_2px_0_rgba(0,0,0,0.06)]",
+    "dark:data-checked:shadow-[inset_0_1px_1px_0_rgba(255,255,255,0.45),inset_0_-1px_1px_0_rgba(0,0,0,0.4),0_4px_14px_-2px_rgba(0,0,0,0.65),0_1px_2px_0_rgba(0,0,0,0.3)]",
+    // 135° Specular light reflection on active segment thumb
+    "before:content-[''] before:absolute before:inset-0 before:rounded-[inherit] before:pointer-events-none before:opacity-0 data-checked:before:opacity-100 before:transition-opacity before:duration-150",
+    "before:bg-gradient-to-br before:from-white/60 before:via-white/10 before:to-transparent dark:before:from-white/25 dark:before:via-transparent",
     // Independent Double-Contrast Focus Ring (Focus is NOT Selected)
     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--halo-focus-color)]",
     "focus-visible:ring-offset-2 focus-visible:ring-offset-background focus-visible:z-20 halo-focus-ring",
@@ -222,6 +228,7 @@ export const SegmentedControlItem = React.forwardRef<HTMLButtonElement, Segmente
       <RadioPrimitive.Root
         ref={ref}
         value={value}
+        nativeButton={true}
         disabled={effectiveDisabled}
         data-slot="segmented-control-item"
         data-size={effectiveSize}
@@ -235,7 +242,9 @@ export const SegmentedControlItem = React.forwardRef<HTMLButtonElement, Segmente
         )}
         {...props}
       >
-        {children}
+        <span className="relative z-10 flex items-center justify-center gap-[inherit] w-full h-full">
+          {children}
+        </span>
       </RadioPrimitive.Root>
     );
   }

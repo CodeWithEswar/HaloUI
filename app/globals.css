@@ -424,31 +424,66 @@ body:has([data-docs-shell]) [data-docs-skip] {
   transform: translate(-50%, -50%);
 }
 
-.code-line-numbers .shiki code {
-  counter-reset: code-line;
+.code-line-numbers .shiki {
+  background: transparent !important;
 }
 
-.code-line-numbers .shiki {
-  background: linear-gradient(90deg, var(--code-gutter) 0 3.75rem, transparent 3.75rem) !important;
+.code-line-numbers .shiki code {
+  counter-reset: code-line;
+  display: grid;
+  min-width: 100%;
+  width: max-content;
 }
 
 .code-line-numbers .line {
-  padding-inline-start: 4.65rem;
-  padding-inline-end: 1.25rem;
-  text-indent: -3.4rem;
+  position: relative;
+  display: flex;
+  align-items: baseline;
+  min-width: 100%;
+  width: max-content;
   box-sizing: border-box;
+  padding-inline-start: 0;
+  padding-inline-end: 1.5rem;
+  text-indent: 0;
 }
 
 .code-line-numbers .line::before {
   counter-increment: code-line;
   content: counter(code-line);
+  position: sticky;
+  left: 0;
+  z-index: 10;
+  flex-shrink: 0;
   display: inline-block;
-  width: 2.2rem;
-  margin-right: 1.2rem;
+  width: 3.5rem;
+  padding-right: 1.25rem;
+  margin-right: 1rem;
   color: var(--code-faint);
   text-align: right;
   user-select: none;
   white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+  background: var(--code-gutter);
+  box-shadow: 1px 0 0 0 var(--code-divider);
+  box-sizing: border-box;
+  transition: color 100ms ease, background-color 100ms ease;
+}
+
+.code-line-numbers .line:hover::before {
+  color: var(--code-muted);
+  background: color-mix(in oklch, var(--code-gutter) 92%, var(--foreground) 8%);
+}
+
+.code-line-numbers .line[data-highlighted-line="true"]::before {
+  color: var(--code-text);
+  background: var(--code-line-active);
+  box-shadow: inset 2px 0 0 var(--code-focus), 1px 0 0 0 var(--code-divider);
+}
+
+[data-code-wrap="true"] .code-line-numbers .shiki code,
+[data-code-wrap="true"] .code-line-numbers .line {
+  width: 100% !important;
+  min-width: 0 !important;
 }
 
 [data-code-wrap="true"] .shiki,
@@ -643,35 +678,35 @@ body:has([data-docs-shell]) [data-docs-skip] {
 
 .stage-shiki-with-lines .line {
   counter-increment: stage-code-line;
-
-  padding-left: 3.5rem;
+  position: relative;
+  display: flex;
+  align-items: baseline;
+  min-width: 100%;
+  width: max-content;
+  padding-left: 0;
 }
 
 .stage-shiki-with-lines .line::before {
   content: counter(stage-code-line);
-
-  position: absolute;
+  position: sticky;
   left: 0;
   top: 0;
-
-  width: 2.75rem;
+  z-index: 10;
+  flex-shrink: 0;
+  display: inline-block;
+  width: 3.25rem;
   height: 1.375rem;
   line-height: 1.375rem;
-
   padding-right: 0.75rem;
-
+  margin-right: 0.75rem;
   border-right: 1px solid #e2e8f0;
-
   color: #94a3b8;
   background: #f6f8fa;
-
   text-align: right;
-
   font-size: 11px;
   font-variant-numeric: tabular-nums;
-
   user-select: none;
-
+  box-sizing: border-box;
   transition: color 100ms ease;
 }
 
@@ -687,6 +722,11 @@ body:has([data-docs-shell]) [data-docs-skip] {
 
 .dark .stage-shiki-with-lines .line:hover::before {
   color: #a1a1aa;
+}
+
+.stage-shiki-wrap .line {
+  width: 100% !important;
+  min-width: 0 !important;
 }
 
 /*
@@ -738,3 +778,20 @@ body:has([data-docs-shell]) [data-docs-skip] {
     transition: none !important;
   }
 }
+
+/*
+ * Caret blink animation for Input OTP
+ */
+@keyframes caret-blink {
+  0%, 70%, 100% {
+    opacity: 1;
+  }
+  20%, 50% {
+    opacity: 0;
+  }
+}
+
+.animate-caret-blink {
+  animation: caret-blink 1.25s ease-out infinite;
+}
+

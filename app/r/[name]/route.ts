@@ -1303,6 +1303,193 @@ export async function GET(
       return NextResponse.json(registryItem);
     }
 
+    if (cleanName === "field-group") {
+      const fieldGroupPath = path.join(cwd, "components", "ui", "field-group.tsx");
+      const tokensPath = path.join(cwd, "styles", "halo-tokens.css");
+
+      const [fieldGroupContent, tokensContent] = await Promise.all([
+        fs.readFile(fieldGroupPath, "utf-8"),
+        fs.readFile(tokensPath, "utf-8"),
+      ]);
+
+      const registryItem = {
+        $schema: "https://ui.shadcn.com/schema/registry-item.json",
+        name: "field-group",
+        type: "registry:ui",
+        title: "Field Group",
+        description:
+          "Organizes multiple related fields into a consistent structural group while preserving each field's individual semantics.",
+        dependencies: ["clsx", "tailwind-merge"],
+        registryDependencies: [],
+        files: [
+          {
+            path: "components/ui/field-group.tsx",
+            content: fieldGroupContent,
+            type: "registry:ui",
+            target: "components/ui/field-group.tsx",
+          },
+          {
+            path: "styles/halo-tokens.css",
+            content: tokensContent,
+            type: "registry:ui",
+            target: "styles/halo-tokens.css",
+          },
+        ],
+        categories: ["forms-and-fields"],
+        meta: {
+          status: "preview",
+          version: "1.0.0",
+          category: "forms-and-fields",
+          accessibility: "WCAG 2.1 AA",
+          lastUpdated: "2026-09-25",
+        },
+      };
+
+      return NextResponse.json(registryItem);
+    }
+
+    if (cleanName === "label") {
+      const labelPath = path.join(cwd, "components", "ui", "label.tsx");
+      const tokensPath = path.join(cwd, "styles", "halo-tokens.css");
+
+      const [labelContent, tokensContent] = await Promise.all([
+        fs.readFile(labelPath, "utf-8"),
+        fs.readFile(tokensPath, "utf-8"),
+      ]);
+
+      const registryItem = {
+        $schema: "https://ui.shadcn.com/schema/registry-item.json",
+        name: "label",
+        type: "registry:ui",
+        title: "Label",
+        description:
+          "An accessible text label for associating a visible name with a form control.",
+        dependencies: ["clsx", "tailwind-merge"],
+        registryDependencies: [],
+        files: [
+          {
+            path: "components/ui/label.tsx",
+            content: labelContent,
+            type: "registry:ui",
+            target: "components/ui/label.tsx",
+          },
+          {
+            path: "styles/halo-tokens.css",
+            content: tokensContent,
+            type: "registry:ui",
+            target: "styles/halo-tokens.css",
+          },
+        ],
+        categories: ["forms-and-fields"],
+        meta: {
+          status: "preview",
+          version: "1.0.0",
+          category: "forms-and-fields",
+          accessibility: "WCAG 2.1 AA",
+          lastUpdated: "2026-09-25",
+        },
+      };
+
+      return NextResponse.json(registryItem);
+    }
+
+    if (cleanName === "input") {
+      const inputPath = path.join(cwd, "components", "ui", "input.tsx");
+      const tokensPath = path.join(cwd, "styles", "halo-tokens.css");
+
+      const [inputContent, tokensContent] = await Promise.all([
+        fs.readFile(inputPath, "utf-8"),
+        fs.readFile(tokensPath, "utf-8"),
+      ]);
+
+      const registryItem = {
+        $schema: "https://ui.shadcn.com/schema/registry-item.json",
+        name: "input",
+        type: "registry:ui",
+        title: "Input",
+        description:
+          "A single-line native text-entry control with HaloUI material states, accessible focus treatment, validation support, and consistent form behavior.",
+        dependencies: ["clsx", "tailwind-merge"],
+        registryDependencies: [],
+        files: [
+          {
+            path: "components/ui/input.tsx",
+            content: inputContent,
+            type: "registry:ui",
+            target: "components/ui/input.tsx",
+          },
+          {
+            path: "styles/halo-tokens.css",
+            content: tokensContent,
+            type: "registry:ui",
+            target: "styles/halo-tokens.css",
+          },
+        ],
+        categories: ["forms-and-fields"],
+        meta: {
+          status: "preview",
+          version: "1.0.0",
+          category: "forms-and-fields",
+          accessibility: "WCAG 2.1 AA",
+          lastUpdated: "2026-09-25",
+        },
+      };
+
+      return NextResponse.json(registryItem);
+    }
+
+    if (cleanName === "input-group") {
+      const inputGroupPath = path.join(cwd, "components", "ui", "input-group.tsx");
+      const tokensPath = path.join(cwd, "styles", "halo-tokens.css");
+
+      const [inputGroupContent, tokensContent] = await Promise.all([
+        fs.readFile(inputGroupPath, "utf-8"),
+        fs.readFile(tokensPath, "utf-8"),
+      ]);
+
+      const registryItem = {
+        $schema: "https://ui.shadcn.com/schema/registry-item.json",
+        name: "input-group",
+        type: "registry:ui",
+        title: "Input Group",
+        description:
+          "Composes an Input with contextual prefixes, suffixes, icons, text, or actions inside a shared control boundary.",
+        dependencies: [
+          "class-variance-authority",
+          "clsx",
+          "tailwind-merge",
+        ],
+        registryDependencies: [
+          "input",
+          "button",
+        ],
+        files: [
+          {
+            path: "components/ui/input-group.tsx",
+            content: inputGroupContent,
+            type: "registry:ui",
+            target: "components/ui/input-group.tsx",
+          },
+          {
+            path: "styles/halo-tokens.css",
+            content: tokensContent,
+            type: "registry:ui",
+            target: "styles/halo-tokens.css",
+          },
+        ],
+        categories: ["forms-and-fields"],
+        meta: {
+          status: "preview",
+          version: "1.0.0",
+          category: "forms-and-fields",
+          accessibility: "WCAG 2.1 AA",
+          lastUpdated: "2026-09-25",
+        },
+      };
+
+      return NextResponse.json(registryItem);
+    }
+
     // Fallback: check public/r/[cleanName].json
     const staticFilePath = path.join(cwd, "public", "r", `${cleanName}.json`);
     const fileContent = await fs.readFile(staticFilePath, "utf-8");

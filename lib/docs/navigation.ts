@@ -194,6 +194,392 @@ export const docsNavigation: DocsNavSection[] = [
     ],
   },
   {
+    title: "Forms & Fields",
+    items: [
+      {
+        title: "Field",
+        href: "/components/field",
+        description: "A semantic composition primitive that connects a form control with its label, description, validation message, and related field context.",
+        status: "preview",
+        keywords: [
+          "field",
+          "form",
+          "label",
+          "description",
+          "error",
+          "validation",
+          "control",
+          "required",
+          "optional",
+          "input wrapper",
+          "fieldset",
+          "legend"
+        ],
+      },
+      {
+        title: "Field Group",
+        href: "/components/field-group",
+        description: "Organizes multiple related fields into a consistent structural group while preserving each field's individual semantics.",
+        status: "preview",
+        keywords: [
+          "field-group",
+          "field group",
+          "form",
+          "layout",
+          "vertical",
+          "horizontal",
+          "spacing",
+          "stack",
+          "rhythm",
+          "fields"
+        ],
+      },
+      {
+        title: "Label",
+        href: "/components/label",
+        description: "An accessible text label for associating a visible name with a form control.",
+        status: "preview",
+        keywords: [
+          "label",
+          "accessible name",
+          "htmlFor",
+          "form label",
+          "text",
+          "checkbox label",
+          "input label"
+        ],
+      },
+      {
+        title: "Input",
+        href: "/components/input",
+        description: "A single-line native text-entry control with HaloUI material states, accessible focus treatment, validation support, and consistent form behavior.",
+        status: "preview",
+        keywords: [
+          "input",
+          "text input",
+          "form input",
+          "text-entry",
+          "email input",
+          "password input",
+          "native input",
+          "search input"
+        ],
+      },
+      {
+        title: "Input Group",
+        href: "/components/input-group",
+        description: "Composes an Input with contextual prefixes, suffixes, icons, text, or actions inside a shared control boundary.",
+        status: "preview",
+        keywords: [
+          "input-group",
+          "input group",
+          "prefix",
+          "suffix",
+          "addons",
+          "icon input",
+          "action input",
+          "search bar"
+        ],
+      },
+      {
+        title: "Textarea",
+        href: "/components/textarea",
+        description: "A native multiline text-entry control with HaloUI form states, accessible focus treatment, and configurable resizing.",
+        status: "preview",
+        keywords: [
+          "textarea",
+          "multiline",
+          "text area",
+          "form textarea",
+          "comment box",
+          "notes",
+          "resize"
+        ],
+      },
+      {
+        title: "Native Select",
+        href: "/components/native-select",
+        description: "A styled native select for simple, reliable single-value choices using the browser and operating system's built-in selection behavior.",
+        status: "preview",
+        keywords: [
+          "native-select",
+          "native select",
+          "select",
+          "dropdown",
+          "picker",
+          "options",
+          "form select",
+          "country picker"
+        ],
+      },
+      {
+        title: "Select",
+        href: "/components/select",
+        description: "An accessible custom option picker for selecting one value from a structured list of choices.",
+        status: "preview",
+        keywords: [
+          "select",
+          "dropdown",
+          "option picker",
+          "custom select",
+          "menu",
+          "choices",
+          "popup"
+        ],
+      },
+      {
+        title: "Combobox",
+        href: "/components/combobox",
+        description: "An accessible searchable option picker for selecting one value from a filterable collection.",
+        status: "preview",
+        keywords: [
+          "combobox",
+          "autocomplete",
+          "searchable select",
+          "typeahead",
+          "filter",
+          "search picker"
+        ],
+      },
+      {
+        title: "Multi Select",
+        href: "/components/multi-select",
+        description: "A searchable multi-value picker for selecting and managing multiple options as removable tokens.",
+        status: "preview",
+        keywords: [
+          "multi-select",
+          "multi select",
+          "tags",
+          "tokens",
+          "chips",
+          "multiple",
+          "picker",
+          "searchable",
+          "filter"
+        ],
+      },
+      {
+        title: "Checkbox",
+        href: "/components/checkbox",
+        description: "An accessible boolean selection control supporting unchecked, checked, and indeterminate states.",
+        status: "preview",
+        keywords: [
+          "checkbox",
+          "check",
+          "boolean",
+          "selection",
+          "indeterminate",
+          "toggle",
+          "form checkbox",
+          "select all"
+        ],
+      },
+      {
+        title: "Checkbox Group",
+        href: "/components/checkbox-group",
+        description: "A related set of independent checkbox options for selecting zero, one, or multiple values.",
+        status: "preview",
+        keywords: [
+          "checkbox-group",
+          "checkbox group",
+          "multiple",
+          "selection",
+          "options",
+          "fieldset",
+          "independent choices",
+          "group"
+        ],
+      },
+      {
+        title: "Radio Group",
+        href: "/components/radio-group",
+        description: "An accessible mutually exclusive option set for selecting one value from a related group.",
+        status: "preview",
+        keywords: [
+          "radio-group",
+          "radio group",
+          "radio",
+          "single selection",
+          "mutually exclusive",
+          "options",
+          "choices"
+        ],
+      },
+      {
+        title: "Switch",
+        href: "/components/switch",
+        description: "An accessible binary control for immediately turning a setting on or off.",
+        status: "preview",
+        keywords: [
+          "switch",
+          "toggle",
+          "binary",
+          "setting",
+          "on off",
+          "immediate setting",
+          "form switch",
+          "boolean"
+        ],
+      },
+      {
+        title: "Slider",
+        href: "/components/slider",
+        description: "An accessible single-value range control for choosing a numeric value within defined minimum and maximum bounds.",
+        status: "preview",
+        keywords: [
+          "slider",
+          "range",
+          "track",
+          "thumb",
+          "numeric value",
+          "volume",
+          "percent"
+        ],
+      },
+      {
+        title: "Range Slider",
+        href: "/components/range-slider",
+        description: "An accessible two-thumb range control for selecting a bounded numeric interval.",
+        status: "preview",
+        keywords: [
+          "range-slider",
+          "range slider",
+          "two thumbs",
+          "interval",
+          "min max",
+          "price range",
+          "bounded range"
+        ],
+      },
+      {
+        title: "Input OTP",
+        href: "/components/input-otp",
+        description: "A segmented one-time-code input optimized for short verification codes, paste, mobile keyboards, and platform OTP autofill.",
+        status: "preview",
+        keywords: [
+          "input-otp",
+          "input otp",
+          "otp",
+          "pin",
+          "one time password",
+          "verification code",
+          "sms code",
+          "2fa"
+        ],
+      },
+      {
+        title: "Number Field",
+        href: "/components/number-field",
+        description: "An accessible numeric-entry control with keyboard editing, decimal precision, range boundaries, and optional increment/decrement actions.",
+        status: "preview",
+        keywords: [
+          "number-field",
+          "number field",
+          "numeric",
+          "counter",
+          "stepper",
+          "spinbutton",
+          "increment",
+          "decrement",
+          "decimal",
+          "quantity"
+        ],
+      },
+      {
+        title: "Currency Field",
+        href: "/components/currency-field",
+        description: "A locale-aware monetary entry control that separates numeric value from currency presentation.",
+        status: "preview",
+        keywords: [
+          "currency-field",
+          "currency field",
+          "currency",
+          "money",
+          "price",
+          "amount",
+          "dollar",
+          "euro",
+          "monetary",
+          "finance"
+        ],
+      },
+      {
+        title: "Phone Field",
+        href: "/components/phone-field",
+        description: "A structured phone-number input for entering international telephone numbers with country context, formatting, and accessible validation support.",
+        status: "preview",
+        keywords: [
+          "phone-field",
+          "phone field",
+          "phone",
+          "telephone",
+          "mobile",
+          "country code",
+          "calling code",
+          "international",
+          "e164",
+          "contact"
+        ],
+      },
+      {
+        title: "URL Field",
+        href: "/components/url-field",
+        description: "A URL-oriented text-entry control with browser-friendly input semantics, optional normalization, and clear validation affordances.",
+        status: "preview",
+        keywords: [
+          "url-field",
+          "url field",
+          "url",
+          "website",
+          "link",
+          "href",
+          "web",
+          "domain",
+          "http",
+          "https"
+        ],
+      },
+      {
+        title: "Tag Input",
+        href: "/components/tag-input",
+        description: "A freeform token-entry control for creating, editing, and removing multiple short text values.",
+        status: "preview",
+        keywords: [
+          "tag-input",
+          "tag input",
+          "tags",
+          "tokens",
+          "chips",
+          "freeform",
+          "labels",
+          "multi text",
+          "keywords",
+          "badges"
+        ],
+      },
+      {
+        title: "File Input",
+        href: "/components/file-input",
+        description: "An accessible native file-selection control with HaloUI form styling and clear selected-file feedback.",
+        status: "preview",
+        keywords: [
+          "file-input",
+          "file input",
+          "file",
+          "upload",
+          "attachment",
+          "picker",
+          "native file",
+          "file selector"
+        ],
+      },
+    ],
+  },
+
+
+
+
+  {
     title: "Developers",
     items: [
       { title: "Registry", href: "/docs/registry", description: "Source-owned distribution through the shadcn registry." },

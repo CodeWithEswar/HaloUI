@@ -200,8 +200,7 @@ export default function ActionBarDocsPage() {
 
         <Callout type="warning" title="Explicit Responsive Composition">
           <strong>No fragile auto-measurement overflow algorithms.</strong> Action Bar does not silently measure
-          DOM widths and shove actions into a menu at runtime. Compose the highest-priority actions explicitly and place
-          secondary actions into an overflow menu when the product requires it.
+          DOM widths and shove actions into a menu at runtime. Compose the highest-priority actions explicitly with progressive disclosure utility classes (e.g. <code className="text-foreground font-mono text-xs">&lt;span className=&quot;hidden sm:inline&quot;&gt;Label&lt;/span&gt;</code>) and place secondary actions into an overflow menu when the product requires it.
         </Callout>
       </div>
 
@@ -347,11 +346,11 @@ export function BatchToolbar() {
         {/* 5. Responsive Strategy */}
         <div className="space-y-3">
           <h3 id="responsive-strategy" className="text-lg font-semibold tracking-tight text-foreground">
-            5. Responsive Composition Strategy
+            5. Progressive Disclosure & Responsive Adaptation
           </h3>
           <p className="text-sm text-muted-foreground">
-            Desktop composition featuring full contextual labels and multiple action groups versus deliberate mobile
-            composition featuring critical actions and an overflow trigger.
+            Test the live simulator below to observe fluid progressive disclosure: text labels automatically collapse to
+            icon-only actions on compact screens while maintaining 44px touch targets and full screen-reader descriptions.
           </p>
           <div className="p-6 rounded-2xl border border-border bg-muted/20">
             <ActionBarResponsivePreview />

@@ -134,7 +134,7 @@ export function ActionToolbarDemo() {
         },
       ]}
       controls={
-        <div className="w-full grid grid-cols-2 sm:grid-cols-3 gap-2.5">
+        <div className="w-full grid grid-cols-1 min-[420px]:grid-cols-2 md:grid-cols-3 gap-2 sm:gap-2.5">
           <StageControlSelect
             label="Variant"
             value={variant}

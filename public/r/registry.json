@@ -27,7 +27,9 @@
           "target": "styles/halo-tokens.css"
         }
       ],
-      "categories": ["actions"],
+      "categories": [
+        "actions"
+      ],
       "meta": {
         "status": "preview",
         "version": "1.0.0",
@@ -60,7 +62,9 @@
           "target": "styles/halo-tokens.css"
         }
       ],
-      "categories": ["actions"],
+      "categories": [
+        "actions"
+      ],
       "meta": {
         "status": "preview",
         "version": "1.0.0",
@@ -93,7 +97,9 @@
           "target": "styles/halo-tokens.css"
         }
       ],
-      "categories": ["actions"],
+      "categories": [
+        "actions"
+      ],
       "meta": {
         "status": "preview",
         "version": "1.0.0",
@@ -116,7 +122,9 @@
         "clsx",
         "tailwind-merge"
       ],
-      "registryDependencies": ["button"],
+      "registryDependencies": [
+        "button"
+      ],
       "files": [
         {
           "path": "components/ui/split-button.tsx",
@@ -134,7 +142,9 @@
           "target": "styles/halo-tokens.css"
         }
       ],
-      "categories": ["actions"],
+      "categories": [
+        "actions"
+      ],
       "meta": {
         "status": "preview",
         "version": "1.0.0",
@@ -167,7 +177,9 @@
           "target": "styles/halo-tokens.css"
         }
       ],
-      "categories": ["actions"],
+      "categories": [
+        "actions"
+      ],
       "meta": {
         "status": "preview",
         "version": "1.0.0",
@@ -187,7 +199,9 @@
         "clsx",
         "tailwind-merge"
       ],
-      "registryDependencies": ["toggle"],
+      "registryDependencies": [
+        "toggle"
+      ],
       "files": [
         {
           "path": "components/ui/toggle-group.tsx",
@@ -200,7 +214,9 @@
           "target": "styles/halo-tokens.css"
         }
       ],
-      "categories": ["actions"],
+      "categories": [
+        "actions"
+      ],
       "meta": {
         "status": "preview",
         "version": "1.0.0",
@@ -233,7 +249,9 @@
           "target": "styles/halo-tokens.css"
         }
       ],
-      "categories": ["actions"],
+      "categories": [
+        "actions"
+      ],
       "meta": {
         "status": "preview",
         "version": "1.0.0",
@@ -254,7 +272,9 @@
         "clsx",
         "tailwind-merge"
       ],
-      "registryDependencies": ["halo-icon"],
+      "registryDependencies": [
+        "halo-icon"
+      ],
       "files": [
         {
           "path": "components/ui/copy-button.tsx",
@@ -267,7 +287,9 @@
           "target": "styles/halo-tokens.css"
         }
       ],
-      "categories": ["actions"],
+      "categories": [
+        "actions"
+      ],
       "meta": {
         "status": "preview",
         "version": "1.0.0",
@@ -289,7 +311,9 @@
         "clsx",
         "tailwind-merge"
       ],
-      "registryDependencies": ["halo-icon"],
+      "registryDependencies": [
+        "halo-icon"
+      ],
       "files": [
         {
           "path": "components/ui/favorite-button.tsx",
@@ -302,7 +326,9 @@
           "target": "styles/halo-tokens.css"
         }
       ],
-      "categories": ["actions"],
+      "categories": [
+        "actions"
+      ],
       "meta": {
         "status": "preview",
         "version": "1.0.0",
@@ -322,7 +348,9 @@
         "clsx",
         "tailwind-merge"
       ],
-      "registryDependencies": ["halo-icon"],
+      "registryDependencies": [
+        "halo-icon"
+      ],
       "files": [
         {
           "path": "components/ui/segmented-control.tsx",
@@ -335,7 +363,9 @@
           "target": "styles/halo-tokens.css"
         }
       ],
-      "categories": ["actions"],
+      "categories": [
+        "actions"
+      ],
       "meta": {
         "status": "preview",
         "version": "1.0.0",
@@ -354,7 +384,11 @@
         "clsx",
         "tailwind-merge"
       ],
-      "registryDependencies": ["button", "icon-button", "button-group"],
+      "registryDependencies": [
+        "button",
+        "icon-button",
+        "button-group"
+      ],
       "files": [
         {
           "path": "components/ui/action-bar.tsx",
@@ -367,7 +401,9 @@
           "target": "styles/halo-tokens.css"
         }
       ],
-      "categories": ["actions"],
+      "categories": [
+        "actions"
+      ],
       "meta": {
         "status": "preview",
         "version": "1.0.0",
@@ -399,7 +435,9 @@
           "target": "styles/halo-tokens.css"
         }
       ],
-      "categories": ["foundations"],
+      "categories": [
+        "foundations"
+      ],
       "meta": {
         "status": "preview",
         "version": "1.0.0",
@@ -431,7 +469,9 @@
           "target": "styles/halo-tokens.css"
         }
       ],
-      "categories": ["foundations"],
+      "categories": [
+        "foundations"
+      ],
       "meta": {
         "status": "preview",
         "version": "1.0.0",
@@ -463,7 +503,9 @@
           "target": "styles/halo-tokens.css"
         }
       ],
-      "categories": ["foundations"],
+      "categories": [
+        "foundations"
+      ],
       "meta": {
         "status": "preview",
         "version": "1.0.0",
@@ -495,7 +537,9 @@
           "target": "styles/halo-tokens.css"
         }
       ],
-      "categories": ["foundations"],
+      "categories": [
+        "foundations"
+      ],
       "meta": {
         "status": "preview",
         "version": "1.0.0",
@@ -527,7 +571,9 @@
           "target": "styles/halo-tokens.css"
         }
       ],
-      "categories": ["foundations"],
+      "categories": [
+        "foundations"
+      ],
       "meta": {
         "status": "preview",
         "version": "1.0.0",
@@ -559,7 +605,9 @@
           "target": "styles/halo-tokens.css"
         }
       ],
-      "categories": ["foundations"],
+      "categories": [
+        "foundations"
+      ],
       "meta": {
         "status": "preview",
         "version": "1.0.0",
@@ -591,7 +639,9 @@
           "target": "styles/halo-tokens.css"
         }
       ],
-      "categories": ["foundations"],
+      "categories": [
+        "foundations"
+      ],
       "meta": {
         "status": "preview",
         "version": "1.0.0",
@@ -623,7 +673,9 @@
           "target": "styles/halo-tokens.css"
         }
       ],
-      "categories": ["foundations"],
+      "categories": [
+        "foundations"
+      ],
       "meta": {
         "status": "preview",
         "version": "1.0.0",
@@ -655,7 +707,9 @@
           "target": "styles/halo-tokens.css"
         }
       ],
-      "categories": ["foundations"],
+      "categories": [
+        "foundations"
+      ],
       "meta": {
         "status": "preview",
         "version": "1.0.0",
@@ -687,7 +741,9 @@
           "target": "styles/halo-tokens.css"
         }
       ],
-      "categories": ["foundations"],
+      "categories": [
+        "foundations"
+      ],
       "meta": {
         "status": "preview",
         "version": "1.0.0",
@@ -719,7 +775,9 @@
           "target": "styles/halo-tokens.css"
         }
       ],
-      "categories": ["foundations"],
+      "categories": [
+        "foundations"
+      ],
       "meta": {
         "status": "experimental",
         "version": "1.0.0",
@@ -751,7 +809,9 @@
           "target": "styles/halo-tokens.css"
         }
       ],
-      "categories": ["foundations"],
+      "categories": [
+        "foundations"
+      ],
       "meta": {
         "status": "experimental",
         "version": "1.0.0",
@@ -784,7 +844,9 @@
           "target": "styles/halo-tokens.css"
         }
       ],
-      "categories": ["foundations"],
+      "categories": [
+        "foundations"
+      ],
       "meta": {
         "status": "production",
         "version": "1.0.0",
@@ -817,7 +879,9 @@
           "target": "styles/halo-tokens.css"
         }
       ],
-      "categories": ["foundations"],
+      "categories": [
+        "foundations"
+      ],
       "meta": {
         "status": "production",
         "version": "1.0.0",
@@ -850,7 +914,9 @@
           "target": "styles/halo-tokens.css"
         }
       ],
-      "categories": ["foundations"],
+      "categories": [
+        "foundations"
+      ],
       "meta": {
         "status": "production",
         "version": "1.0.0",
@@ -883,7 +949,9 @@
           "target": "styles/halo-tokens.css"
         }
       ],
-      "categories": ["foundations"],
+      "categories": [
+        "foundations"
+      ],
       "meta": {
         "status": "production",
         "version": "1.0.0",
@@ -913,7 +981,9 @@
           "target": "styles/halo-tokens.css"
         }
       ],
-      "categories": ["foundations"],
+      "categories": [
+        "foundations"
+      ],
       "meta": {
         "status": "production",
         "version": "1.0.0",
@@ -938,7 +1008,9 @@
           "target": "components/ui/halo-background.tsx"
         }
       ],
-      "categories": ["foundations"],
+      "categories": [
+        "foundations"
+      ],
       "meta": {
         "status": "production",
         "version": "1.0.0",
@@ -968,7 +1040,9 @@
           "target": "components/ui/halo-portal-surface.tsx"
         }
       ],
-      "categories": ["foundations"],
+      "categories": [
+        "foundations"
+      ],
       "meta": {
         "status": "production",
         "version": "1.0.0",
@@ -994,13 +1068,663 @@
           "target": "components/ui/halo-scrim.tsx"
         }
       ],
-      "categories": ["foundations"],
+      "categories": [
+        "foundations"
+      ],
       "meta": {
         "status": "production",
         "version": "1.0.0",
         "category": "foundations",
         "lastUpdated": "2026-09-24"
       }
+    },
+    {
+      "name": "field",
+      "type": "registry:ui",
+      "title": "Field",
+      "description": "A semantic composition primitive that connects a form control with its label, description, validation message, and related field context.",
+      "dependencies": [
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "components/ui/field.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/field.tsx"
+        },
+        {
+          "path": "components/ui/label.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/label.tsx"
+        },
+        {
+          "path": "styles/halo-tokens.css",
+          "type": "registry:ui",
+          "target": "styles/halo-tokens.css"
+        }
+      ],
+      "categories": [
+        "forms-and-fields"
+      ],
+      "meta": {
+        "status": "preview",
+        "version": "1.0.0",
+        "category": "forms-and-fields",
+        "accessibility": "WCAG 2.1 AA",
+        "lastUpdated": "2026-09-25"
+      }
+    },
+    {
+      "name": "field-group",
+      "type": "registry:ui",
+      "title": "Field Group",
+      "description": "Organizes multiple related fields into a consistent structural group while preserving each field's individual semantics.",
+      "dependencies": [
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "components/ui/field-group.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/field-group.tsx"
+        },
+        {
+          "path": "styles/halo-tokens.css",
+          "type": "registry:ui",
+          "target": "styles/halo-tokens.css"
+        }
+      ],
+      "categories": [
+        "forms-and-fields"
+      ],
+      "meta": {
+        "status": "preview",
+        "version": "1.0.0",
+        "category": "forms-and-fields",
+        "accessibility": "WCAG 2.1 AA",
+        "lastUpdated": "2026-09-25"
+      }
+    },
+    {
+      "name": "label",
+      "type": "registry:ui",
+      "title": "Label",
+      "description": "An accessible text label for associating a visible name with a form control.",
+      "dependencies": [
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "components/ui/label.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/label.tsx"
+        },
+        {
+          "path": "styles/halo-tokens.css",
+          "type": "registry:ui",
+          "target": "styles/halo-tokens.css"
+        }
+      ],
+      "categories": [
+        "forms-and-fields"
+      ],
+      "meta": {
+        "status": "preview",
+        "version": "1.0.0",
+        "category": "forms-and-fields",
+        "accessibility": "WCAG 2.1 AA",
+        "lastUpdated": "2026-09-25"
+      }
+    },
+    {
+      "name": "input",
+      "type": "registry:ui",
+      "title": "Input",
+      "description": "A single-line native text-entry control with HaloUI material states, accessible focus treatment, validation support, and consistent form behavior.",
+      "dependencies": [
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "components/ui/input.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/input.tsx"
+        },
+        {
+          "path": "styles/halo-tokens.css",
+          "type": "registry:ui",
+          "target": "styles/halo-tokens.css"
+        }
+      ],
+      "categories": [
+        "forms-and-fields"
+      ],
+      "meta": {
+        "status": "preview",
+        "version": "1.0.0",
+        "category": "forms-and-fields",
+        "accessibility": "WCAG 2.1 AA",
+        "lastUpdated": "2026-09-25"
+      }
+    },
+    {
+      "name": "input-group",
+      "type": "registry:ui",
+      "title": "Input Group",
+      "description": "Composes an Input with contextual prefixes, suffixes, icons, text, or actions inside a shared control boundary.",
+      "dependencies": [
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [
+        "input",
+        "button"
+      ],
+      "files": [
+        {
+          "path": "components/ui/input-group.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/input-group.tsx"
+        },
+        {
+          "path": "styles/halo-tokens.css",
+          "type": "registry:ui",
+          "target": "styles/halo-tokens.css"
+        }
+      ],
+      "categories": [
+        "forms-and-fields"
+      ],
+      "meta": {
+        "status": "preview",
+        "version": "1.0.0",
+        "category": "forms-and-fields",
+        "accessibility": "WCAG 2.1 AA",
+        "lastUpdated": "2026-09-25"
+      }
+    },
+    {
+      "name": "textarea",
+      "type": "registry:ui",
+      "title": "Textarea",
+      "description": "A native multiline text-entry control with HaloUI form states, accessible focus treatment, and configurable resizing.",
+      "dependencies": [
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "components/ui/textarea.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/textarea.tsx"
+        },
+        {
+          "path": "styles/halo-tokens.css",
+          "type": "registry:ui",
+          "target": "styles/halo-tokens.css"
+        }
+      ],
+      "categories": [
+        "forms-and-fields"
+      ],
+      "meta": {
+        "status": "preview",
+        "version": "1.0.0",
+        "category": "forms-and-fields",
+        "accessibility": "WCAG 2.1 AA",
+        "lastUpdated": "2026-09-25"
+      }
+    },
+    {
+      "name": "native-select",
+      "type": "registry:ui",
+      "title": "Native Select",
+      "description": "A styled native select for simple, reliable single-value choices using the browser and operating system's built-in selection behavior.",
+      "dependencies": [
+        "clsx",
+        "tailwind-merge",
+        "@hugeicons/react",
+        "@hugeicons/core-free-icons"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "components/ui/native-select.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/native-select.tsx"
+        },
+        {
+          "path": "components/icons/halo-icon.tsx",
+          "type": "registry:ui",
+          "target": "components/icons/halo-icon.tsx"
+        },
+        {
+          "path": "styles/halo-tokens.css",
+          "type": "registry:ui",
+          "target": "styles/halo-tokens.css"
+        }
+      ],
+      "categories": [
+        "forms-and-fields"
+      ],
+      "meta": {
+        "status": "preview",
+        "version": "1.0.0",
+        "category": "forms-and-fields",
+        "accessibility": "WCAG 2.1 AA",
+        "lastUpdated": "2026-09-25"
+      }
+    },
+    {
+      "name": "select",
+      "type": "registry:ui",
+      "title": "Select",
+      "description": "An accessible custom option picker for selecting one value from a structured list of choices.",
+      "categories": [
+        "forms-and-fields"
+      ]
+    },
+    {
+      "name": "combobox",
+      "type": "registry:ui",
+      "title": "Combobox",
+      "description": "An accessible searchable option picker for selecting one value from a filterable collection.",
+      "categories": [
+        "forms-and-fields"
+      ]
+    },
+    {
+      "name": "multi-select",
+      "type": "registry:ui",
+      "title": "Multi Select",
+      "description": "A searchable multi-value picker for selecting and managing multiple options as removable tokens.",
+      "dependencies": [
+        "@base-ui/react",
+        "@hugeicons/core-free-icons",
+        "@hugeicons/react",
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [
+        "field"
+      ],
+      "files": [
+        {
+          "path": "components/ui/multi-select.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/multi-select.tsx"
+        },
+        {
+          "path": "components/icons/halo-icon.tsx",
+          "type": "registry:ui",
+          "target": "components/icons/halo-icon.tsx"
+        },
+        {
+          "path": "styles/halo-tokens.css",
+          "type": "registry:ui",
+          "target": "styles/halo-tokens.css"
+        }
+      ],
+      "categories": [
+        "forms-and-fields"
+      ],
+      "meta": {
+        "status": "preview",
+        "version": "1.0.0",
+        "category": "forms-and-fields",
+        "accessibility": "WCAG 2.1 AA",
+        "lastUpdated": "2026-09-25"
+      }
+    },
+    {
+      "name": "checkbox",
+      "type": "registry:ui",
+      "title": "Checkbox",
+      "description": "An accessible boolean selection control supporting unchecked, checked, and indeterminate states.",
+      "dependencies": [
+        "@base-ui/react",
+        "@hugeicons/core-free-icons",
+        "@hugeicons/react",
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [
+        "field"
+      ]
+    },
+    {
+      "name": "checkbox-group",
+      "type": "registry:ui",
+      "title": "Checkbox Group",
+      "description": "A related set of independent checkbox options for selecting zero, one, or multiple values.",
+      "dependencies": [
+        "@base-ui/react",
+        "@hugeicons/core-free-icons",
+        "@hugeicons/react",
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [
+        "checkbox"
+      ]
+    },
+    {
+      "name": "radio-group",
+      "type": "registry:ui",
+      "title": "Radio Group",
+      "description": "An accessible mutually exclusive option set for selecting one value from a related group.",
+      "dependencies": [
+        "@base-ui/react",
+        "@hugeicons/core-free-icons",
+        "@hugeicons/react",
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [
+        "field"
+      ]
+    },
+    {
+      "name": "switch",
+      "type": "registry:ui",
+      "title": "Switch",
+      "description": "An accessible binary control for immediately turning a setting on or off.",
+      "dependencies": [
+        "@base-ui/react",
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [
+        "field"
+      ],
+      "files": [
+        {
+          "path": "components/ui/switch.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/switch.tsx"
+        },
+        {
+          "path": "styles/halo-tokens.css",
+          "type": "registry:ui",
+          "target": "styles/halo-tokens.css"
+        }
+      ],
+      "categories": [
+        "forms-and-fields"
+      ],
+      "meta": {
+        "status": "preview",
+        "version": "1.0.0",
+        "category": "forms-and-fields",
+        "accessibility": "WCAG 2.1 AA",
+        "lastUpdated": "2026-09-25"
+      }
+    },
+    {
+      "name": "slider",
+      "type": "registry:ui",
+      "title": "Slider",
+      "description": "An accessible single-value range control for choosing a numeric value within defined minimum and maximum bounds.",
+      "dependencies": [
+        "@base-ui/react",
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [
+        "field"
+      ],
+      "files": [
+        {
+          "path": "components/ui/slider.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/slider.tsx"
+        },
+        {
+          "path": "styles/halo-tokens.css",
+          "type": "registry:ui",
+          "target": "styles/halo-tokens.css"
+        }
+      ],
+      "categories": [
+        "forms-and-fields"
+      ],
+      "meta": {
+        "status": "preview",
+        "version": "1.0.0",
+        "category": "forms-and-fields",
+        "accessibility": "WCAG 2.1 AA",
+        "lastUpdated": "2026-09-25"
+      }
+    },
+    {
+      "name": "range-slider",
+      "type": "registry:ui",
+      "title": "Range Slider",
+      "description": "An accessible two-thumb range control for selecting a bounded numeric interval.",
+      "dependencies": [
+        "@base-ui/react",
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [
+        "field"
+      ],
+      "files": [
+        {
+          "path": "components/ui/range-slider.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/range-slider.tsx"
+        },
+        {
+          "path": "styles/halo-tokens.css",
+          "type": "registry:ui",
+          "target": "styles/halo-tokens.css"
+        }
+      ],
+      "categories": [
+        "forms-and-fields"
+      ],
+      "meta": {
+        "status": "preview",
+        "version": "1.0.0",
+        "category": "forms-and-fields",
+        "accessibility": "WCAG 2.1 AA",
+        "lastUpdated": "2026-09-25"
+      }
+    },
+    {
+      "name": "input-otp",
+      "type": "registry:ui",
+      "title": "Input OTP",
+      "description": "A segmented one-time-code input optimized for short verification codes, paste, mobile keyboards, and platform OTP autofill.",
+      "dependencies": [
+        "input-otp",
+        "@hugeicons/core-free-icons",
+        "@hugeicons/react",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [
+        "field",
+        "halo-icon"
+      ],
+      "files": [
+        {
+          "path": "components/ui/input-otp.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/input-otp.tsx"
+        },
+        {
+          "path": "styles/halo-tokens.css",
+          "type": "registry:ui",
+          "target": "styles/halo-tokens.css"
+        }
+      ],
+      "categories": [
+        "forms-and-fields"
+      ],
+      "meta": {
+        "status": "preview",
+        "version": "1.0.0",
+        "category": "forms-and-fields",
+        "accessibility": "WCAG 2.1 AA",
+        "lastUpdated": "2026-09-25"
+      }
+    },
+    {
+      "name": "number-field",
+      "type": "registry:ui",
+      "title": "Number Field",
+      "description": "An accessible numeric-entry control with keyboard editing, decimal precision, range boundaries, and optional increment/decrement actions.",
+      "categories": [
+        "forms-and-fields"
+      ],
+      "dependencies": [
+        "@base-ui/react",
+        "@hugeicons/core-free-icons",
+        "@hugeicons/react",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [
+        "field",
+        "halo-icon"
+      ]
+    },
+    {
+      "name": "currency-field",
+      "type": "registry:ui",
+      "title": "Currency Field",
+      "description": "A locale-aware monetary entry control that separates numeric value from currency presentation.",
+      "categories": [
+        "forms-and-fields"
+      ],
+      "dependencies": [
+        "@base-ui/react",
+        "@hugeicons/core-free-icons",
+        "@hugeicons/react",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [
+        "number-field",
+        "field",
+        "halo-icon"
+      ]
+    },
+    {
+      "name": "phone-field",
+      "type": "registry:ui",
+      "title": "Phone Field",
+      "description": "A structured phone-number input for entering international telephone numbers with country context, formatting, and accessible validation support.",
+      "categories": [
+        "forms-and-fields"
+      ],
+      "dependencies": [
+        "libphonenumber-js",
+        "@hugeicons/core-free-icons",
+        "@hugeicons/react",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [
+        "field",
+        "halo-icon"
+      ]
+    },
+    {
+      "name": "url-field",
+      "type": "registry:ui",
+      "title": "URL Field",
+      "description": "A URL-oriented text-entry control with browser-friendly input semantics, optional normalization, and clear validation affordances.",
+      "categories": [
+        "forms-and-fields"
+      ],
+      "dependencies": [
+        "@hugeicons/core-free-icons",
+        "@hugeicons/react",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [
+        "field",
+        "halo-icon"
+      ]
+    },
+    {
+      "name": "tag-input",
+      "type": "registry:ui",
+      "title": "Tag Input",
+      "description": "An accessible multi-token tag editor with two-stage deletion, delimiter and paste tokenization, duplicate prevention, and keyboard navigation.",
+      "dependencies": [
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge",
+        "@hugeicons/core-free-icons",
+        "@hugeicons/react"
+      ],
+      "registryDependencies": [
+        "field",
+        "halo-icon"
+      ],
+      "files": [
+        {
+          "path": "components/ui/tag-input.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/tag-input.tsx"
+        },
+        {
+          "path": "styles/halo-tokens.css",
+          "type": "registry:ui",
+          "target": "styles/halo-tokens.css"
+        }
+      ],
+      "categories": [
+        "forms-and-fields"
+      ],
+      "meta": {
+        "status": "preview",
+        "version": "1.0.0",
+        "category": "forms-and-fields",
+        "accessibility": "WCAG 2.1 AA",
+        "lastUpdated": "2026-09-25"
+      }
+    },
+    {
+      "name": "file-input",
+      "type": "registry:ui",
+      "title": "File Input",
+      "description": "An accessible native file-selection control with HaloUI form styling and clear selected-file feedback.",
+      "categories": [
+        "forms-and-fields"
+      ],
+      "dependencies": [
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [
+        "field"
+      ]
     }
   ]
 }

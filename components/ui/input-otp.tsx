@@ -1,60 +1,144 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import { cn } from "cn"
-import { OTPInput, OTPInputContext } from "input-otp"
-import { MinusIcon } from "lucide-react"
+import * as React from "react";
+import { OTPInput, OTPInputContext } from "input-otp";
+import { cn } from "@/lib/utils";
+import { MinusSignIcon } from "@hugeicons/core-free-icons";
+import { HaloIcon } from "@/components/icons/halo-icon";
+import { useFieldControlProps } from "@/components/ui/field";
 
-function InputOTP({
-  className,
-  containerClassName,
-  ...props
-}: React.ComponentProps<typeof OTPInput> & {
-  containerClassName?: string
-}) {
-  return (
-    <OTPInput
-      data-slot="input-otp"
-      containerClassName={cn(
-        "cn-input-otp flex items-center has-disabled:opacity-50",
-        containerClassName
-      )}
-      spellCheck={false}
-      className={cn("disabled:cursor-not-allowed", className)}
-      {...props}
-    />
-  )
+/* -------------------------------------------------------------------------- */
+/* Input OTP Context                                                          */
+/* -------------------------------------------------------------------------- */
+
+interface InputOTPUIContextValue {
+  isInvalid?: boolean;
+  size?: "sm" | "default" | "lg";
 }
 
-function InputOTPGroup({ className, ...props }: React.ComponentProps<"div">) {
+const InputOTPUIContext = React.createContext<InputOTPUIContextValue>({
+  isInvalid: false,
+  size: "default",
+});
+
+/* -------------------------------------------------------------------------- */
+/* Input OTP Components                                                       */
+/* -------------------------------------------------------------------------- */
+
+export interface InputOTPProps extends React.ComponentProps<typeof OTPInput> {
+  containerClassName?: string;
+  invalid?: boolean;
+  size?: "sm" | "default" | "lg";
+}
+
+export function InputOTP({
+  className,
+  containerClassName,
+  disabled: propDisabled,
+  required: propRequired,
+  invalid: propInvalid,
+  id: propId,
+  size = "default",
+  ...props
+}: InputOTPProps) {
+  const fieldProps = useFieldControlProps({
+    id: propId,
+    disabled: propDisabled,
+    required: propRequired,
+    "aria-invalid": propInvalid,
+  });
+
+  const isInvalid = Boolean(propInvalid || fieldProps["aria-invalid"]);
+  const isDisabled = Boolean(propDisabled || fieldProps.disabled);
+  const isRequired = Boolean(propRequired || fieldProps.required);
+
+  return (
+    <InputOTPUIContext.Provider value={{ isInvalid, size }}>
+      <OTPInput
+        data-slot="input-otp"
+        data-invalid={isInvalid ? "true" : undefined}
+        id={fieldProps.id}
+        aria-describedby={fieldProps["aria-describedby"]}
+        aria-invalid={isInvalid ? "true" : undefined}
+        disabled={isDisabled}
+        required={isRequired}
+        containerClassName={cn(
+          "flex items-center gap-1.5 sm:gap-2 has-disabled:opacity-40 has-disabled:cursor-not-allowed select-none",
+          containerClassName
+        )}
+        spellCheck={false}
+        autoComplete="one-time-code"
+        className={cn("disabled:cursor-not-allowed", className)}
+        {...props}
+      />
+    </InputOTPUIContext.Provider>
+  );
+}
+
+export function InputOTPGroup({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="input-otp-group"
       className={cn(
-        "flex items-center rounded-lg has-aria-invalid:border-destructive has-aria-invalid:ring-3 has-aria-invalid:ring-destructive/20 dark:has-aria-invalid:ring-destructive/40",
+        "flex items-center shadow-2xs isolate",
         className
       )}
       {...props}
     />
-  )
+  );
 }
 
-function InputOTPSlot({
+export interface InputOTPSlotProps extends React.ComponentProps<"div"> {
+  index: number;
+}
+
+export function InputOTPSlot({
   index,
   className,
   ...props
-}: React.ComponentProps<"div"> & {
-  index: number
-}) {
-  const inputOTPContext = React.useContext(OTPInputContext)
-  const { char, hasFakeCaret, isActive } = inputOTPContext?.slots[index] ?? {}
+}: InputOTPSlotProps) {
+  const inputOTPContext = React.useContext(OTPInputContext);
+  const uiContext = React.useContext(InputOTPUIContext);
+
+  const slot = inputOTPContext?.slots[index];
+  const char = slot?.char ?? null;
+  const hasFakeCaret = slot?.hasFakeCaret ?? false;
+  const isActive = slot?.isActive ?? false;
+  const isInvalid = Boolean(props["aria-invalid"] || uiContext.isInvalid);
+  const size = uiContext.size || "default";
+
+  const sizeClasses = {
+    sm: "size-8 sm:size-9 text-xs sm:text-sm",
+    default: "size-9 sm:size-10.5 text-sm sm:text-base",
+    lg: "size-11 sm:size-12 text-base sm:text-lg",
+  }[size];
 
   return (
     <div
       data-slot="input-otp-slot"
-      data-active={isActive}
+      data-active={isActive ? "true" : undefined}
+      data-invalid={isInvalid ? "true" : undefined}
       className={cn(
-        "relative flex size-8 items-center justify-center border-y border-r border-input text-sm transition-all outline-none first:rounded-l-lg first:border-l last:rounded-r-lg aria-invalid:border-destructive data-[active=true]:z-10 data-[active=true]:border-ring data-[active=true]:ring-3 data-[active=true]:ring-ring/50 data-[active=true]:aria-invalid:border-destructive data-[active=true]:aria-invalid:ring-destructive/20 dark:bg-input/30 dark:data-[active=true]:aria-invalid:ring-destructive/40",
+        // Physical optical slot channel
+        "relative flex items-center justify-center font-semibold text-foreground transition-all duration-150 outline-none select-none",
+        sizeClasses,
+        "bg-black/[0.04] dark:bg-white/[0.06] backdrop-blur-md",
+        "border-y border-r border-black/15 dark:border-white/18",
+        "shadow-[inset_0_1px_1.5px_0_rgba(0,0,0,0.08),0_1px_1px_0_rgba(255,255,255,0.7)]",
+        "dark:shadow-[inset_0_1px_1.5px_0_rgba(0,0,0,0.5),0_1px_1px_0_rgba(255,255,255,0.05)]",
+        "first:rounded-l-xl first:border-l last:rounded-r-xl",
+        // Active Focused Slot (Normal)
+        isActive && !isInvalid && [
+          "z-20 border-[var(--halo-focus-color)] ring-2 ring-[var(--halo-focus-color)] ring-offset-2 ring-offset-background halo-focus-ring",
+          "bg-white/95 dark:bg-neutral-900/95",
+        ],
+        // Error / Invalid state
+        isInvalid && [
+          "border-destructive/70 text-destructive",
+          "shadow-[inset_0_0_0_1px_rgba(239,68,68,0.25)]",
+          // Active slot within Invalid state: distinct dual focus ring
+          isActive && "z-20 border-destructive ring-2 ring-destructive/40 ring-offset-2 ring-offset-background bg-white/95 dark:bg-neutral-900/95",
+        ],
         className
       )}
       {...props}
@@ -62,25 +146,26 @@ function InputOTPSlot({
       {char}
       {hasFakeCaret && (
         <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
-          <div className="h-4 w-px animate-caret-blink bg-foreground duration-1000" />
+          <div className="h-5 w-0.5 animate-caret-blink bg-primary duration-1000 motion-reduce:animate-none" />
         </div>
       )}
     </div>
-  )
+  );
 }
 
-function InputOTPSeparator({ ...props }: React.ComponentProps<"div">) {
+export function InputOTPSeparator({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="input-otp-separator"
-      className="flex items-center [&_svg:not([class*='size-'])]:size-4"
       role="separator"
+      aria-hidden="true"
+      className={cn("flex items-center justify-center px-0.5 sm:px-1 text-muted-foreground select-none", className)}
       {...props}
     >
-      <MinusIcon
-      />
+      <HaloIcon icon={MinusSignIcon} size={14} strokeWidth={2} />
     </div>
-  )
+  );
 }
 
-export { InputOTP, InputOTPGroup, InputOTPSlot, InputOTPSeparator }
+export default InputOTP;
+
