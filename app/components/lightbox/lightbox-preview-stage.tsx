@@ -68,6 +68,7 @@ export function LightboxPreviewStage() {
   // Lightbox configuration
   const [mode, setMode] = React.useState<"gallery" | "single">("gallery");
   const [scrimIntensity, setScrimIntensity] = React.useState<"deep" | "balanced">("deep");
+  const [theme, setTheme] = React.useState<"adaptive" | "dark" | "light">("adaptive");
   const [loop, setLoop] = React.useState(true);
   const [isOpen, setIsOpen] = React.useState(false);
   const [currentIndex, setCurrentIndex] = React.useState(0);
@@ -77,6 +78,7 @@ export function LightboxPreviewStage() {
   const handleReset = () => {
     setMode("gallery");
     setScrimIntensity("deep");
+    setTheme("adaptive");
     setLoop(true);
     setCurrentIndex(0);
     setIsOpen(false);
@@ -85,6 +87,7 @@ export function LightboxPreviewStage() {
   };
 
   const generatedCode = React.useMemo(() => {
+    const themeProp = theme !== "adaptive" ? ` theme="${theme}"` : "";
     if (mode === "single") {
       return `import {
   Lightbox,
@@ -102,7 +105,7 @@ export function SingleLightboxExample() {
       alt="${DEMO_GALLERY[0].alt}"
       title="${DEMO_GALLERY[0].title}"
       description="${DEMO_GALLERY[0].description}"
-      credit="${DEMO_GALLERY[0].credit}"
+      credit="${DEMO_GALLERY[0].credit}"${themeProp}
     >
       <LightboxTrigger className="group relative overflow-hidden rounded-2xl border border-border/50">
         <img
@@ -151,7 +154,7 @@ const GALLERY_ITEMS = [
 
 export function GalleryLightboxExample() {
   return (
-    <Lightbox items={GALLERY_ITEMS} loop={${loop}}>
+    <Lightbox items={GALLERY_ITEMS} loop={${loop}}${themeProp}>
       <LightboxTrigger className="rounded-xl border border-border/50 p-2">
         Open Image Gallery
       </LightboxTrigger>
@@ -164,19 +167,19 @@ export function GalleryLightboxExample() {
     </Lightbox>
   );
 }`;
-  }, [mode, scrimIntensity, loop]);
+  }, [mode, scrimIntensity, loop, theme]);
 
   const telemetry = [
     { label: "Component Role", value: "Focused Media Viewer Overlay" },
     { label: "Presentation Mode", value: mode === "gallery" ? `Gallery (${activeItems.length} Images)` : "Single Image" },
-    { label: "Halo Scrim", value: scrimIntensity === "deep" ? "Deep Occlusion (90% Black, 8px Blur)" : "Balanced (75% Black)" },
-    { label: "Looping", value: loop ? "Enabled (Wraparound)" : "Disabled (Bounded)" },
-    { label: "Media Fidelity", value: "100% Unaltered (Zero Glass Distortion)" },
+    { label: "Glass HUD Optics", value: theme === "adaptive" ? "Adaptive Light/Dark (10-Layer Liquid)" : theme === "light" ? "Frosted Crystal Glass" : "Obsidian Smoked Glass" },
+    { label: "Halo Scrim", value: scrimIntensity === "deep" ? "Deep Occlusion (92% Black, 8px Blur)" : "Balanced (78% Black)" },
+    { label: "Mobile Gestures", value: "Native Touch Swipe (Horizontal Delta)" },
     { label: "Active View", value: `${currentIndex + 1} of ${activeItems.length}` },
   ];
 
   const controls = (
-    <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+    <div className="grid grid-cols-2 sm:grid-cols-5 gap-3">
       <StageControlSelect
         label="Viewing Mode"
         value={mode}
@@ -190,12 +193,22 @@ export function GalleryLightboxExample() {
         ]}
       />
       <StageControlSelect
+        label="Glass HUD Theme"
+        value={theme}
+        onValueChange={(v) => setTheme(v as "adaptive" | "dark" | "light")}
+        options={[
+          { label: "Adaptive (Theme-Aware)", value: "adaptive" },
+          { label: "Obsidian Smoked (Dark)", value: "dark" },
+          { label: "Frosted Crystal (Light)", value: "light" },
+        ]}
+      />
+      <StageControlSelect
         label="Scrim Attenuation"
         value={scrimIntensity}
         onValueChange={(v) => setScrimIntensity(v as "deep" | "balanced")}
         options={[
-          { label: "Deep Dark (90% Black)", value: "deep" },
-          { label: "Balanced (75% Black)", value: "balanced" },
+          { label: "Deep Dark (92% Black)", value: "deep" },
+          { label: "Balanced (78% Black)", value: "balanced" },
         ]}
       />
       <StageControlSelect
@@ -207,10 +220,10 @@ export function GalleryLightboxExample() {
           { label: "Bounded (Stop at Ends)", value: "no" },
         ]}
       />
-      <div className="flex flex-col justify-end">
+      <div className="flex flex-col justify-end col-span-2 sm:col-span-1">
         <Button
           onClick={() => setIsOpen(true)}
-          className="h-9 w-full gap-2 rounded-xl text-xs font-semibold"
+          className="h-9 w-full gap-2 rounded-xl text-xs font-semibold shadow-xs"
         >
           <HaloIcon icon={ViewIcon} size={15} />
           <span>Launch Viewer</span>
@@ -285,6 +298,7 @@ export function GalleryLightboxExample() {
           index={currentIndex}
           onIndexChange={setCurrentIndex}
           loop={loop}
+          theme={theme}
         >
           <LightboxContent scrimIntensity={scrimIntensity}>
             <LightboxControls showCounter={mode === "gallery"} />
