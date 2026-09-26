@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { cn } from "@/lib/utils";
+import { HaloGlassContainerContext } from "./halo-glass-container";
 
 export type HaloOpticalMaterial = "regular" | "clear" | "prominent";
 export type HaloOpticalShape = "rounded" | "capsule" | "circle";
@@ -48,6 +49,14 @@ export const HaloOpticalGlass = React.forwardRef<
   forwardedRef
 ) {
   const localRef = React.useRef<HTMLDivElement | null>(null);
+  const glassContainer = React.useContext(HaloGlassContainerContext);
+  const glassId = React.useId();
+
+  React.useLayoutEffect(() => {
+    const node = localRef.current;
+    if (!node || !glassContainer) return;
+    return glassContainer.register({ id: glassId, node });
+  }, [glassContainer, glassId]);
 
   const setRef = React.useCallback(
     (node: HTMLDivElement | null) => {
@@ -112,6 +121,7 @@ export const HaloOpticalGlass = React.forwardRef<
       }}
       {...props}
     >
+      <span className="halo-optical-glass__bridge" aria-hidden="true" />
       <span className="halo-optical-glass__lens" aria-hidden="true" />
       <span className="halo-optical-glass__meniscus" aria-hidden="true" />
       <span className="halo-optical-glass__caustic" aria-hidden="true" />
