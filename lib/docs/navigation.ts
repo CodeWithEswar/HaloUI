@@ -1207,6 +1207,28 @@ export const docsNavigation: DocsNavSection[] = [
     ],
   },
   {
+    title: "Data Display",
+    items: [
+      {
+        title: "Card",
+        href: "/components/card",
+        description: "Foundational content surface grouping related information, metrics, and actions with restrained liquid optical material.",
+        status: "stable",
+        keywords: [
+          "card",
+          "surface",
+          "content",
+          "container",
+          "panel",
+          "group",
+          "data display",
+          "dashboard",
+          "summary"
+        ],
+      },
+    ],
+  },
+  {
     title: "Developers",
     items: [
       { title: "Registry", href: "/docs/registry", description: "Source-owned distribution through the shadcn registry." },

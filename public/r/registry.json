@@ -4,6 +4,94 @@
   "homepage": "https://haloui.dev",
   "items": [
     {
+      "name": "action-bar",
+      "type": "registry:ui",
+      "title": "Action Bar",
+      "description": "A contextual container for organizing actions related to the user's current selection or task.",
+      "dependencies": [
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [
+        "button",
+        "icon-button",
+        "button-group"
+      ],
+      "files": [
+        {
+          "path": "components/ui/action-bar.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/action-bar.tsx"
+        },
+        {
+          "path": "styles/halo-tokens.css",
+          "type": "registry:ui",
+          "target": "styles/halo-tokens.css"
+        }
+      ],
+      "categories": [
+        "actions"
+      ],
+      "meta": {
+        "status": "preview",
+        "version": "1.0.0",
+        "category": "actions",
+        "accessibility": "WCAG 2.1 AA",
+        "lastUpdated": "2026-09-25"
+      }
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "alert-dialog",
+      "type": "registry:ui",
+      "title": "Alert Dialog",
+      "description": "A high-consequence modal confirmation surface engineered with HaloUI liquid glass physical optics, deep optical scrim isolation, and explicit consequence verification.",
+      "dependencies": [
+        "@base-ui/react",
+        "@hugeicons/core-free-icons",
+        "@hugeicons/react",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [
+        "button"
+      ],
+      "meta": {
+        "status": "production",
+        "version": "2.0.0",
+        "category": "overlays-and-menus",
+        "lastUpdated": "2026-09-26"
+      }
+    },
+    {
+      "name": "bottom-navigation",
+      "type": "registry:ui",
+      "title": "Bottom Navigation",
+      "description": "A mobile-first persistent navigation surface for a small set of primary application destinations.",
+      "categories": [
+        "navigation"
+      ],
+      "registryDependencies": []
+    },
+    {
+      "name": "breadcrumb",
+      "type": "registry:ui",
+      "title": "Breadcrumb",
+      "description": "A semantic navigation trail that communicates the current page's position within a hierarchical structure.",
+      "categories": [
+        "navigation"
+      ],
+      "dependencies": [
+        "@base-ui/react",
+        "@hugeicons/core-free-icons",
+        "@hugeicons/react",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": []
+    },
+    {
       "name": "button",
       "type": "registry:ui",
       "title": "Button",
@@ -20,41 +108,6 @@
           "path": "components/ui/button.tsx",
           "type": "registry:ui",
           "target": "components/ui/button.tsx"
-        },
-        {
-          "path": "styles/halo-tokens.css",
-          "type": "registry:ui",
-          "target": "styles/halo-tokens.css"
-        }
-      ],
-      "categories": [
-        "actions"
-      ],
-      "meta": {
-        "status": "preview",
-        "version": "1.0.0",
-        "category": "actions",
-        "accessibility": "WCAG 2.1 AA",
-        "lastUpdated": "2026-09-24"
-      }
-    },
-    {
-      "name": "icon-button",
-      "type": "registry:ui",
-      "title": "Icon Button",
-      "description": "A compact icon-only control for common actions, with mandatory accessible naming, HaloUI material states, and consistent keyboard and touch behavior.",
-      "dependencies": [
-        "@radix-ui/react-slot",
-        "class-variance-authority",
-        "clsx",
-        "tailwind-merge"
-      ],
-      "registryDependencies": [],
-      "files": [
-        {
-          "path": "components/ui/icon-button.tsx",
-          "type": "registry:ui",
-          "target": "components/ui/icon-button.tsx"
         },
         {
           "path": "styles/halo-tokens.css",
@@ -109,155 +162,150 @@
       }
     },
     {
-      "name": "split-button",
+      "name": "calendar",
       "type": "registry:ui",
-      "title": "Split Button",
-      "description": "Combines a primary immediate action with a secondary menu of closely related alternative actions.",
+      "title": "Calendar",
+      "description": "An accessible standalone calendar surface for navigating and selecting calendar dates.",
+      "categories": [
+        "forms-and-fields"
+      ],
+      "dependencies": [
+        "react-day-picker",
+        "date-fns",
+        "@hugeicons/core-free-icons",
+        "@hugeicons/react",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": []
+    },
+    {
+      "name": "card",
+      "type": "registry:ui",
+      "title": "Card",
+      "description": "Foundational content surface grouping related information, metrics, and actions with restrained liquid optical material.",
+      "dependencies": [
+        "@radix-ui/react-slot",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "components/ui/card.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/card.tsx"
+        },
+        {
+          "path": "styles/halo-tokens.css",
+          "type": "registry:ui",
+          "target": "styles/halo-tokens.css"
+        },
+        {
+          "path": "styles/halo-material.css",
+          "type": "registry:ui",
+          "target": "styles/halo-material.css"
+        }
+      ]
+    },
+    {
+      "name": "checkbox",
+      "type": "registry:ui",
+      "title": "Checkbox",
+      "description": "An accessible boolean selection control supporting unchecked, checked, and indeterminate states.",
       "dependencies": [
         "@base-ui/react",
         "@hugeicons/core-free-icons",
         "@hugeicons/react",
-        "@radix-ui/react-slot",
         "class-variance-authority",
         "clsx",
         "tailwind-merge"
       ],
       "registryDependencies": [
-        "button"
-      ],
-      "files": [
-        {
-          "path": "components/ui/split-button.tsx",
-          "type": "registry:ui",
-          "target": "components/ui/split-button.tsx"
-        },
-        {
-          "path": "components/icons/halo-icon.tsx",
-          "type": "registry:ui",
-          "target": "components/icons/halo-icon.tsx"
-        },
-        {
-          "path": "styles/halo-tokens.css",
-          "type": "registry:ui",
-          "target": "styles/halo-tokens.css"
-        }
-      ],
-      "categories": [
-        "actions"
-      ],
-      "meta": {
-        "status": "preview",
-        "version": "1.0.0",
-        "category": "actions",
-        "accessibility": "WCAG 2.1 AA",
-        "lastUpdated": "2026-09-24"
-      }
+        "field"
+      ]
     },
     {
-      "name": "toggle",
+      "name": "checkbox-group",
       "type": "registry:ui",
-      "title": "Toggle",
-      "description": "A two-state action control that communicates and changes a persistent pressed or unpressed state.",
+      "title": "Checkbox Group",
+      "description": "A related set of independent checkbox options for selecting zero, one, or multiple values.",
       "dependencies": [
         "@base-ui/react",
-        "class-variance-authority",
-        "clsx",
-        "tailwind-merge"
-      ],
-      "registryDependencies": [],
-      "files": [
-        {
-          "path": "components/ui/toggle.tsx",
-          "type": "registry:ui",
-          "target": "components/ui/toggle.tsx"
-        },
-        {
-          "path": "styles/halo-tokens.css",
-          "type": "registry:ui",
-          "target": "styles/halo-tokens.css"
-        }
-      ],
-      "categories": [
-        "actions"
-      ],
-      "meta": {
-        "status": "preview",
-        "version": "1.0.0",
-        "category": "actions",
-        "accessibility": "WCAG 2.1 AA",
-        "lastUpdated": "2026-09-24"
-      }
-    },
-    {
-      "name": "toggle-group",
-      "type": "registry:ui",
-      "title": "Toggle Group",
-      "description": "Single- or multi-selection set of toggles.",
-      "dependencies": [
-        "@base-ui/react",
+        "@hugeicons/core-free-icons",
+        "@hugeicons/react",
         "class-variance-authority",
         "clsx",
         "tailwind-merge"
       ],
       "registryDependencies": [
-        "toggle"
-      ],
-      "files": [
-        {
-          "path": "components/ui/toggle-group.tsx",
-          "type": "registry:ui",
-          "target": "components/ui/toggle-group.tsx"
-        },
-        {
-          "path": "styles/halo-tokens.css",
-          "type": "registry:ui",
-          "target": "styles/halo-tokens.css"
-        }
-      ],
-      "categories": [
-        "actions"
-      ],
-      "meta": {
-        "status": "preview",
-        "version": "1.0.0",
-        "category": "actions",
-        "accessibility": "WCAG 2.1 AA",
-        "lastUpdated": "2026-09-24"
-      }
+        "checkbox"
+      ]
     },
     {
-      "name": "floating-action-button",
+      "name": "color-picker",
       "type": "registry:ui",
-      "title": "Floating Action Button",
-      "description": "A prominent floating control for exposing a high-priority contextual action above the surrounding interface.",
+      "title": "Color Picker",
+      "description": "An accessible color-selection control combining visual color adjustment (2D Saturation/Brightness canvas and 1D Hue spectrum) with precise textual hexadecimal entry and zero optical material contamination.",
+      "categories": [
+        "forms-and-fields"
+      ],
       "dependencies": [
-        "@radix-ui/react-slot",
-        "class-variance-authority",
+        "@radix-ui/react-popover",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [
+        "field"
+      ]
+    },
+    {
+      "name": "combobox",
+      "type": "registry:ui",
+      "title": "Combobox",
+      "description": "An accessible searchable option picker for selecting one value from a filterable collection.",
+      "categories": [
+        "forms-and-fields"
+      ]
+    },
+    {
+      "name": "command-menu",
+      "type": "registry:ui",
+      "title": "Command Menu",
+      "description": "Search-driven command collection surface engineered with cmdk filtering, roving keyboard navigation, and HaloUI Liquid Glass optics.",
+      "categories": [
+        "overlays"
+      ],
+      "registryDependencies": [
+        "dialog"
+      ]
+    },
+    {
+      "name": "command-palette",
+      "type": "registry:ui",
+      "title": "Command Palette",
+      "description": "A keyboard-first searchable interface for quickly finding and activating application commands and destinations.",
+      "categories": [
+        "navigation"
+      ],
+      "registryDependencies": []
+    },
+    {
+      "name": "context-menu",
+      "type": "registry:ui",
+      "title": "Context Menu",
+      "description": "Pointer and context-triggered floating action surface engineered with HaloUI Balanced Liquid Glass optics, zero backdrop dimming, boundary collision handling, and WAI-ARIA roving keyboard navigation.",
+      "dependencies": [
+        "@base-ui/react",
         "clsx",
         "tailwind-merge"
       ],
       "registryDependencies": [],
-      "files": [
-        {
-          "path": "components/ui/floating-action-button.tsx",
-          "type": "registry:ui",
-          "target": "components/ui/floating-action-button.tsx"
-        },
-        {
-          "path": "styles/halo-tokens.css",
-          "type": "registry:ui",
-          "target": "styles/halo-tokens.css"
-        }
-      ],
-      "categories": [
-        "actions"
-      ],
       "meta": {
-        "status": "preview",
-        "version": "1.0.0",
-        "category": "actions",
-        "accessibility": "WCAG 2.1 AA",
-        "lastUpdated": "2026-09-24"
+        "status": "production",
+        "version": "2.0.0",
+        "category": "overlays-and-menus",
+        "lastUpdated": "2026-09-26"
       }
     },
     {
@@ -299,220 +347,169 @@
       }
     },
     {
-      "name": "favorite-button",
+      "name": "currency-field",
       "type": "registry:ui",
-      "title": "Favorite Button",
-      "description": "A specialized persistent toggle action for saving, bookmarking, or favoriting items across sessions.",
+      "title": "Currency Field",
+      "description": "A locale-aware monetary entry control that separates numeric value from currency presentation.",
+      "categories": [
+        "forms-and-fields"
+      ],
       "dependencies": [
         "@base-ui/react",
-        "@hugeicons/react",
         "@hugeicons/core-free-icons",
-        "class-variance-authority",
+        "@hugeicons/react",
         "clsx",
         "tailwind-merge"
       ],
       "registryDependencies": [
+        "number-field",
+        "field",
         "halo-icon"
-      ],
-      "files": [
-        {
-          "path": "components/ui/favorite-button.tsx",
-          "type": "registry:ui",
-          "target": "components/ui/favorite-button.tsx"
-        },
-        {
-          "path": "styles/halo-tokens.css",
-          "type": "registry:ui",
-          "target": "styles/halo-tokens.css"
-        }
-      ],
-      "categories": [
-        "actions"
-      ],
-      "meta": {
-        "status": "preview",
-        "version": "1.0.0",
-        "category": "actions",
-        "accessibility": "WCAG 2.1 AA",
-        "lastUpdated": "2026-09-24"
-      }
+      ]
     },
     {
-      "name": "segmented-control",
+      "name": "date-picker",
       "type": "registry:ui",
-      "title": "Segmented Control",
-      "description": "A compact control for switching between a small set of mutually exclusive modes or values.",
+      "title": "Date Picker",
+      "description": "An accessible calendar-backed control for selecting a single calendar date.",
+      "categories": [
+        "forms-and-fields"
+      ],
+      "dependencies": [
+        "@radix-ui/react-popover",
+        "react-day-picker",
+        "date-fns",
+        "@hugeicons/core-free-icons",
+        "@hugeicons/react",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [
+        "calendar",
+        "field"
+      ]
+    },
+    {
+      "name": "date-range-picker",
+      "type": "registry:ui",
+      "title": "Date Range Picker",
+      "description": "An accessible calendar-backed control for selecting a start and end date as one ordered date interval.",
+      "categories": [
+        "forms-and-fields"
+      ],
+      "dependencies": [
+        "@radix-ui/react-popover",
+        "react-day-picker",
+        "date-fns",
+        "@hugeicons/core-free-icons",
+        "@hugeicons/react",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [
+        "date-picker",
+        "calendar",
+        "field"
+      ]
+    },
+    {
+      "name": "date-time-picker",
+      "type": "registry:ui",
+      "title": "Date Time Picker",
+      "description": "An accessible control for selecting one calendar date and one local clock time as a combined date-time value.",
+      "categories": [
+        "forms-and-fields"
+      ],
+      "dependencies": [
+        "@radix-ui/react-popover",
+        "react-day-picker",
+        "date-fns",
+        "@hugeicons/core-free-icons",
+        "@hugeicons/react",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [
+        "calendar",
+        "time-picker",
+        "field"
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "dialog",
+      "type": "registry:ui",
+      "title": "Dialog",
+      "description": "An accessible modal task surface engineered with HaloUI liquid glass physical optics, calibrated optical scrim diffusion, and strict focus trapping.",
       "dependencies": [
         "@base-ui/react",
-        "class-variance-authority",
+        "@hugeicons/core-free-icons",
+        "@hugeicons/react",
         "clsx",
         "tailwind-merge"
       ],
       "registryDependencies": [
-        "halo-icon"
-      ],
-      "files": [
-        {
-          "path": "components/ui/segmented-control.tsx",
-          "type": "registry:ui",
-          "target": "components/ui/segmented-control.tsx"
-        },
-        {
-          "path": "styles/halo-tokens.css",
-          "type": "registry:ui",
-          "target": "styles/halo-tokens.css"
-        }
-      ],
-      "categories": [
-        "actions"
+        "button"
       ],
       "meta": {
-        "status": "preview",
-        "version": "1.0.0",
-        "category": "actions",
-        "accessibility": "WCAG 2.1 AA",
-        "lastUpdated": "2026-09-25"
+        "status": "production",
+        "version": "2.0.0",
+        "category": "overlays-and-menus",
+        "lastUpdated": "2026-09-26"
       }
     },
     {
-      "name": "action-bar",
+      "name": "dock",
       "type": "registry:ui",
-      "title": "Action Bar",
-      "description": "A contextual container for organizing actions related to the user's current selection or task.",
+      "title": "Dock",
+      "description": "A floating surface for a small set of high-value destinations and actions that should remain quickly accessible.",
+      "categories": [
+        "navigation"
+      ],
+      "registryDependencies": [
+        "tooltip"
+      ]
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "drawer",
+      "type": "registry:ui",
+      "title": "Drawer",
+      "description": "A touch-friendly contextual surface powered by Base UI Drawer, engineered with velocity swipe dismissal, multi-step snap points, mobile safe area padding, and 10-layer Liquid Glass optical physics.",
       "dependencies": [
-        "class-variance-authority",
+        "@base-ui/react",
+        "@hugeicons/core-free-icons",
+        "@hugeicons/react",
         "clsx",
         "tailwind-merge"
       ],
       "registryDependencies": [
-        "button",
-        "icon-button",
-        "button-group"
-      ],
-      "files": [
-        {
-          "path": "components/ui/action-bar.tsx",
-          "type": "registry:ui",
-          "target": "components/ui/action-bar.tsx"
-        },
-        {
-          "path": "styles/halo-tokens.css",
-          "type": "registry:ui",
-          "target": "styles/halo-tokens.css"
-        }
-      ],
-      "categories": [
-        "actions"
+        "button"
       ],
       "meta": {
-        "status": "preview",
-        "version": "1.0.0",
-        "category": "actions",
-        "accessibility": "WCAG 2.1 AA",
-        "lastUpdated": "2026-09-25"
+        "status": "production",
+        "version": "2.0.0",
+        "category": "overlays-and-menus",
+        "lastUpdated": "2026-09-26"
       }
     },
     {
-      "name": "halo-surface",
+      "name": "dropdown-menu",
       "type": "registry:ui",
-      "title": "Halo Surface",
-      "description": "Source-owned HaloUI optical foundation.",
+      "title": "Dropdown Menu",
+      "description": "Button-triggered temporary action menu engineered with HaloUI Balanced Liquid Glass optics, roving keyboard navigation, submenus, and composite menu semantics.",
       "dependencies": [
-        "@radix-ui/react-slot",
+        "@base-ui/react",
         "clsx",
         "tailwind-merge"
       ],
       "registryDependencies": [],
-      "files": [
-        {
-          "path": "components/ui/halo-surface.tsx",
-          "type": "registry:ui",
-          "target": "components/ui/halo-surface.tsx"
-        },
-        {
-          "path": "styles/halo-tokens.css",
-          "type": "registry:ui",
-          "target": "styles/halo-tokens.css"
-        }
-      ],
-      "categories": [
-        "foundations"
-      ],
       "meta": {
-        "status": "preview",
+        "status": "production",
         "version": "2.0.0",
-        "category": "foundations",
+        "category": "overlays-and-menus",
         "lastUpdated": "2026-09-26"
-      },
-      "$schema": "https://ui.shadcn.com/schema/registry-item.json"
-    },
-    {
-      "name": "surface",
-      "type": "registry:ui",
-      "title": "Halo Surface (Alias)",
-      "description": "The base material container used to construct HaloUI surfaces with 10-layer physical liquid optical physics.",
-      "dependencies": [
-        "@radix-ui/react-slot",
-        "clsx",
-        "tailwind-merge"
-      ],
-      "registryDependencies": [],
-      "files": [
-        {
-          "path": "components/ui/halo-surface.tsx",
-          "type": "registry:ui",
-          "target": "components/ui/halo-surface.tsx"
-        },
-        {
-          "path": "styles/halo-tokens.css",
-          "type": "registry:ui",
-          "target": "styles/halo-tokens.css"
-        }
-      ],
-      "categories": [
-        "foundations"
-      ],
-      "meta": {
-        "status": "preview",
-        "version": "1.0.0",
-        "category": "foundations",
-        "accessibility": "WCAG 2.1 AA",
-        "lastUpdated": "2026-09-24"
       }
-    },
-    {
-      "name": "halo-edge",
-      "type": "registry:ui",
-      "title": "Halo Edge",
-      "description": "Source-owned HaloUI optical foundation.",
-      "dependencies": [
-        "@radix-ui/react-slot",
-        "clsx",
-        "tailwind-merge"
-      ],
-      "registryDependencies": [],
-      "files": [
-        {
-          "path": "components/ui/halo-edge.tsx",
-          "type": "registry:ui",
-          "target": "components/ui/halo-edge.tsx"
-        },
-        {
-          "path": "styles/halo-tokens.css",
-          "type": "registry:ui",
-          "target": "styles/halo-tokens.css"
-        }
-      ],
-      "categories": [
-        "foundations"
-      ],
-      "meta": {
-        "status": "preview",
-        "version": "2.0.0",
-        "category": "foundations",
-        "lastUpdated": "2026-09-26"
-      },
-      "$schema": "https://ui.shadcn.com/schema/registry-item.json"
     },
     {
       "name": "edge",
@@ -549,532 +546,41 @@
       }
     },
     {
-      "name": "halo-highlight",
+      "name": "favorite-button",
       "type": "registry:ui",
-      "title": "Halo Highlight",
-      "description": "Source-owned HaloUI optical foundation.",
+      "title": "Favorite Button",
+      "description": "A specialized persistent toggle action for saving, bookmarking, or favoriting items across sessions.",
       "dependencies": [
-        "@radix-ui/react-slot",
-        "clsx",
-        "tailwind-merge"
-      ],
-      "registryDependencies": [],
-      "files": [
-        {
-          "path": "components/ui/halo-highlight.tsx",
-          "type": "registry:ui",
-          "target": "components/ui/halo-highlight.tsx"
-        },
-        {
-          "path": "styles/halo-tokens.css",
-          "type": "registry:ui",
-          "target": "styles/halo-tokens.css"
-        }
-      ],
-      "categories": [
-        "foundations"
-      ],
-      "meta": {
-        "status": "preview",
-        "version": "2.0.0",
-        "category": "foundations",
-        "lastUpdated": "2026-09-26"
-      },
-      "$schema": "https://ui.shadcn.com/schema/registry-item.json"
-    },
-    {
-      "name": "highlight",
-      "type": "registry:ui",
-      "title": "Halo Highlight (Alias)",
-      "description": "Directional reflected-light and restrained specular treatment communicating surface orientation and physical material response against HaloUI's 135° virtual light vector.",
-      "dependencies": [
-        "@radix-ui/react-slot",
-        "clsx",
-        "tailwind-merge"
-      ],
-      "registryDependencies": [],
-      "files": [
-        {
-          "path": "components/ui/halo-highlight.tsx",
-          "type": "registry:ui",
-          "target": "components/ui/halo-highlight.tsx"
-        },
-        {
-          "path": "styles/halo-tokens.css",
-          "type": "registry:ui",
-          "target": "styles/halo-tokens.css"
-        }
-      ],
-      "categories": [
-        "foundations"
-      ],
-      "meta": {
-        "status": "preview",
-        "version": "1.0.0",
-        "category": "foundations",
-        "accessibility": "WCAG 2.1 AA (Decorative)",
-        "lastUpdated": "2026-09-24"
-      }
-    },
-    {
-      "name": "halo-noise",
-      "type": "registry:ui",
-      "title": "Halo Noise",
-      "description": "Source-owned HaloUI optical foundation.",
-      "dependencies": [
-        "@radix-ui/react-slot",
-        "clsx",
-        "tailwind-merge"
-      ],
-      "registryDependencies": [],
-      "files": [
-        {
-          "path": "components/ui/halo-noise.tsx",
-          "type": "registry:ui",
-          "target": "components/ui/halo-noise.tsx"
-        },
-        {
-          "path": "styles/halo-tokens.css",
-          "type": "registry:ui",
-          "target": "styles/halo-tokens.css"
-        }
-      ],
-      "categories": [
-        "foundations"
-      ],
-      "meta": {
-        "status": "preview",
-        "version": "2.0.0",
-        "category": "foundations",
-        "lastUpdated": "2026-09-26"
-      },
-      "$schema": "https://ui.shadcn.com/schema/registry-item.json"
-    },
-    {
-      "name": "noise",
-      "type": "registry:ui",
-      "title": "Halo Noise (Alias)",
-      "description": "Subtle material grain and high-frequency procedural texture used to reduce sterile gradient banding and impart physical tooth to HaloUI liquid glass surfaces.",
-      "dependencies": [
-        "@radix-ui/react-slot",
-        "clsx",
-        "tailwind-merge"
-      ],
-      "registryDependencies": [],
-      "files": [
-        {
-          "path": "components/ui/halo-noise.tsx",
-          "type": "registry:ui",
-          "target": "components/ui/halo-noise.tsx"
-        },
-        {
-          "path": "styles/halo-tokens.css",
-          "type": "registry:ui",
-          "target": "styles/halo-tokens.css"
-        }
-      ],
-      "categories": [
-        "foundations"
-      ],
-      "meta": {
-        "status": "preview",
-        "version": "1.0.0",
-        "category": "foundations",
-        "accessibility": "WCAG 2.1 AA (Decorative)",
-        "lastUpdated": "2026-09-24"
-      }
-    },
-    {
-      "name": "halo-glow",
-      "type": "registry:ui",
-      "title": "Halo Glow",
-      "description": "Source-owned HaloUI optical foundation.",
-      "dependencies": [
-        "@radix-ui/react-slot",
-        "clsx",
-        "tailwind-merge"
-      ],
-      "registryDependencies": [],
-      "files": [
-        {
-          "path": "components/ui/halo-glow.tsx",
-          "type": "registry:ui",
-          "target": "components/ui/halo-glow.tsx"
-        },
-        {
-          "path": "styles/halo-tokens.css",
-          "type": "registry:ui",
-          "target": "styles/halo-tokens.css"
-        }
-      ],
-      "categories": [
-        "foundations"
-      ],
-      "meta": {
-        "status": "preview",
-        "version": "2.0.0",
-        "category": "foundations",
-        "lastUpdated": "2026-09-26"
-      },
-      "$schema": "https://ui.shadcn.com/schema/registry-item.json"
-    },
-    {
-      "name": "glow",
-      "type": "registry:ui",
-      "title": "Halo Glow (Alias)",
-      "description": "Ambient luminous layer used selectively for active state, emphasis, or focus-adjacent depth.",
-      "dependencies": [
-        "@radix-ui/react-slot",
-        "clsx",
-        "tailwind-merge"
-      ],
-      "registryDependencies": [],
-      "files": [
-        {
-          "path": "components/ui/halo-glow.tsx",
-          "type": "registry:ui",
-          "target": "components/ui/halo-glow.tsx"
-        },
-        {
-          "path": "styles/halo-tokens.css",
-          "type": "registry:ui",
-          "target": "styles/halo-tokens.css"
-        }
-      ],
-      "categories": [
-        "foundations"
-      ],
-      "meta": {
-        "status": "preview",
-        "version": "1.0.0",
-        "category": "foundations",
-        "accessibility": "WCAG 2.1 AA (Decorative)",
-        "lastUpdated": "2026-09-24"
-      }
-    },
-    {
-      "name": "halo-refraction-layer",
-      "type": "registry:ui",
-      "title": "Halo Refraction Layer",
-      "description": "Source-owned HaloUI optical foundation.",
-      "dependencies": [
-        "@radix-ui/react-slot",
-        "clsx",
-        "tailwind-merge"
-      ],
-      "registryDependencies": [],
-      "files": [
-        {
-          "path": "components/ui/halo-refraction-layer.tsx",
-          "type": "registry:ui",
-          "target": "components/ui/halo-refraction-layer.tsx"
-        },
-        {
-          "path": "styles/halo-tokens.css",
-          "type": "registry:ui",
-          "target": "styles/halo-tokens.css"
-        }
-      ],
-      "categories": [
-        "foundations"
-      ],
-      "meta": {
-        "status": "preview",
-        "version": "2.0.0",
-        "category": "foundations",
-        "lastUpdated": "2026-09-26"
-      },
-      "$schema": "https://ui.shadcn.com/schema/registry-item.json"
-    },
-    {
-      "name": "refraction",
-      "type": "registry:ui",
-      "title": "Halo Refraction Layer (Alias)",
-      "description": "Optional progressive-enhancement optical layer that introduces restrained environmental distortion to selected HaloUI materials with a guaranteed non-refraction fallback.",
-      "dependencies": [
-        "@radix-ui/react-slot",
-        "clsx",
-        "tailwind-merge"
-      ],
-      "registryDependencies": [],
-      "files": [
-        {
-          "path": "components/ui/halo-refraction-layer.tsx",
-          "type": "registry:ui",
-          "target": "components/ui/halo-refraction-layer.tsx"
-        },
-        {
-          "path": "styles/halo-tokens.css",
-          "type": "registry:ui",
-          "target": "styles/halo-tokens.css"
-        }
-      ],
-      "categories": [
-        "foundations"
-      ],
-      "meta": {
-        "status": "experimental",
-        "version": "1.0.0",
-        "category": "foundations",
-        "accessibility": "WCAG 2.1 AA (Decorative)",
-        "lastUpdated": "2026-09-24"
-      }
-    },
-    {
-      "name": "halo-focus-ring",
-      "type": "registry:ui",
-      "title": "Halo Focus Ring",
-      "description": "Shared high-contrast focus-visible treatment for HaloUI interactive components. Operates independently outside the optical material boundary to guarantee unambiguous keyboard accessibility.",
-      "dependencies": [
-        "@radix-ui/react-slot",
+        "@base-ui/react",
+        "@hugeicons/react",
+        "@hugeicons/core-free-icons",
         "class-variance-authority",
-        "clsx",
-        "tailwind-merge"
-      ],
-      "registryDependencies": [],
-      "files": [
-        {
-          "path": "components/ui/halo-focus-ring.tsx",
-          "type": "registry:ui",
-          "target": "components/ui/halo-focus-ring.tsx"
-        },
-        {
-          "path": "styles/halo-tokens.css",
-          "type": "registry:ui",
-          "target": "styles/halo-tokens.css"
-        }
-      ],
-      "categories": [
-        "foundations"
-      ],
-      "meta": {
-        "status": "production",
-        "version": "1.0.0",
-        "category": "foundations",
-        "accessibility": "WCAG 2.1 AA (Criteria 2.4.7 & 2.4.11)",
-        "lastUpdated": "2026-09-24"
-      }
-    },
-    {
-      "name": "focus-ring",
-      "type": "registry:ui",
-      "title": "Halo Focus Ring (Alias)",
-      "description": "Shared high-contrast focus-visible treatment for HaloUI interactive components. Operates independently outside the optical material boundary to guarantee unambiguous keyboard accessibility.",
-      "dependencies": [
-        "@radix-ui/react-slot",
-        "class-variance-authority",
-        "clsx",
-        "tailwind-merge"
-      ],
-      "registryDependencies": [],
-      "files": [
-        {
-          "path": "components/ui/halo-focus-ring.tsx",
-          "type": "registry:ui",
-          "target": "components/ui/halo-focus-ring.tsx"
-        },
-        {
-          "path": "styles/halo-tokens.css",
-          "type": "registry:ui",
-          "target": "styles/halo-tokens.css"
-        }
-      ],
-      "categories": [
-        "foundations"
-      ],
-      "meta": {
-        "status": "production",
-        "version": "1.0.0",
-        "category": "foundations",
-        "accessibility": "WCAG 2.1 AA (Criteria 2.4.7 & 2.4.11)",
-        "lastUpdated": "2026-09-24"
-      }
-    },
-    {
-      "name": "halo-motion-presets",
-      "type": "registry:ui",
-      "title": "Halo Motion Presets",
-      "description": "Central motion vocabulary standardizing press compression, elevation lift, spring-settle entrance, and graceful reduced-motion fallbacks across HaloUI.",
-      "dependencies": [
-        "@radix-ui/react-slot",
-        "class-variance-authority",
-        "clsx",
-        "tailwind-merge"
-      ],
-      "registryDependencies": [],
-      "files": [
-        {
-          "path": "components/ui/halo-motion-presets.tsx",
-          "type": "registry:ui",
-          "target": "components/ui/halo-motion-presets.tsx"
-        },
-        {
-          "path": "styles/halo-tokens.css",
-          "type": "registry:ui",
-          "target": "styles/halo-tokens.css"
-        }
-      ],
-      "categories": [
-        "foundations"
-      ],
-      "meta": {
-        "status": "production",
-        "version": "1.0.0",
-        "category": "foundations",
-        "accessibility": "WCAG 2.1 AA (Criteria 2.3.3 Compliant)",
-        "lastUpdated": "2026-09-24"
-      }
-    },
-    {
-      "name": "motion-presets",
-      "type": "registry:ui",
-      "title": "Halo Motion Presets (Alias)",
-      "description": "Central motion vocabulary standardizing press compression, elevation lift, spring-settle entrance, and graceful reduced-motion fallbacks across HaloUI.",
-      "dependencies": [
-        "@radix-ui/react-slot",
-        "class-variance-authority",
-        "clsx",
-        "tailwind-merge"
-      ],
-      "registryDependencies": [],
-      "files": [
-        {
-          "path": "components/ui/halo-motion-presets.tsx",
-          "type": "registry:ui",
-          "target": "components/ui/halo-motion-presets.tsx"
-        },
-        {
-          "path": "styles/halo-tokens.css",
-          "type": "registry:ui",
-          "target": "styles/halo-tokens.css"
-        }
-      ],
-      "categories": [
-        "foundations"
-      ],
-      "meta": {
-        "status": "production",
-        "version": "1.0.0",
-        "category": "foundations",
-        "accessibility": "WCAG 2.1 AA (Criteria 2.3.3 Compliant)",
-        "lastUpdated": "2026-09-24"
-      }
-    },
-    {
-      "name": "halo-theme-provider",
-      "type": "registry:ui",
-      "title": "Halo Theme Provider",
-      "description": "Orchestrates HaloUI light, dark and system visual themes together with shared optical material intensity defaults.",
-      "dependencies": [
-        "next-themes"
-      ],
-      "registryDependencies": [],
-      "files": [
-        {
-          "path": "components/ui/halo-theme-provider.tsx",
-          "type": "registry:ui",
-          "target": "components/ui/halo-theme-provider.tsx"
-        },
-        {
-          "path": "styles/halo-tokens.css",
-          "type": "registry:ui",
-          "target": "styles/halo-tokens.css"
-        }
-      ],
-      "categories": [
-        "foundations"
-      ],
-      "meta": {
-        "status": "production",
-        "version": "1.0.0",
-        "category": "foundations",
-        "lastUpdated": "2026-09-24"
-      }
-    },
-    {
-      "name": "halo-background",
-      "type": "registry:ui",
-      "title": "Halo Background",
-      "description": "Reference background environments for testing and evaluating translucent liquid materials against diverse optical substrates.",
-      "dependencies": [
-        "clsx",
-        "tailwind-merge"
-      ],
-      "registryDependencies": [],
-      "files": [
-        {
-          "path": "components/ui/halo-background.tsx",
-          "type": "registry:ui",
-          "target": "components/ui/halo-background.tsx"
-        }
-      ],
-      "categories": [
-        "foundations"
-      ],
-      "meta": {
-        "status": "production",
-        "version": "1.0.0",
-        "category": "foundations",
-        "lastUpdated": "2026-09-24"
-      }
-    },
-    {
-      "name": "halo-portal-surface",
-      "type": "registry:ui",
-      "title": "Halo Portal Surface",
-      "description": "Consistent liquid-glass material wrapper for portalled floating overlays, modal dialogs, popovers, and menus.",
-      "dependencies": [
-        "@radix-ui/react-slot",
         "clsx",
         "tailwind-merge"
       ],
       "registryDependencies": [
-        "halo-surface",
-        "halo-glow"
+        "halo-icon"
       ],
       "files": [
         {
-          "path": "components/ui/halo-portal-surface.tsx",
+          "path": "components/ui/favorite-button.tsx",
           "type": "registry:ui",
-          "target": "components/ui/halo-portal-surface.tsx"
+          "target": "components/ui/favorite-button.tsx"
+        },
+        {
+          "path": "styles/halo-tokens.css",
+          "type": "registry:ui",
+          "target": "styles/halo-tokens.css"
         }
       ],
       "categories": [
-        "foundations"
+        "actions"
       ],
       "meta": {
         "status": "preview",
-        "version": "2.0.0",
-        "category": "foundations",
-        "lastUpdated": "2026-09-26"
-      },
-      "$schema": "https://ui.shadcn.com/schema/registry-item.json"
-    },
-    {
-      "name": "halo-scrim",
-      "type": "registry:ui",
-      "title": "Halo Scrim",
-      "description": "Backdrop and scrim treatment positioned behind modal dialogs and overlays with calibrated optical diffusion blur and ambient darkness.",
-      "dependencies": [
-        "@radix-ui/react-slot",
-        "clsx",
-        "tailwind-merge"
-      ],
-      "registryDependencies": [],
-      "files": [
-        {
-          "path": "components/ui/halo-scrim.tsx",
-          "type": "registry:ui",
-          "target": "components/ui/halo-scrim.tsx"
-        }
-      ],
-      "categories": [
-        "foundations"
-      ],
-      "meta": {
-        "status": "production",
         "version": "1.0.0",
-        "category": "foundations",
+        "category": "actions",
+        "accessibility": "WCAG 2.1 AA",
         "lastUpdated": "2026-09-24"
       }
     },
@@ -1151,20 +657,58 @@
       }
     },
     {
-      "name": "label",
+      "name": "file-input",
       "type": "registry:ui",
-      "title": "Label",
-      "description": "An accessible text label for associating a visible name with a form control.",
+      "title": "File Input",
+      "description": "An accessible native file-selection control with HaloUI form styling and clear selected-file feedback.",
+      "categories": [
+        "forms-and-fields"
+      ],
       "dependencies": [
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [
+        "field"
+      ]
+    },
+    {
+      "name": "file-upload",
+      "type": "registry:ui",
+      "title": "File Upload",
+      "description": "An accessible client-side file-upload workflow with native file selection, drag-and-drop, validation, queue state management, progress tracking, cancellation, retry, and transport-agnostic application integration.",
+      "categories": [
+        "forms-and-fields"
+      ],
+      "dependencies": [
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge",
+        "@hugeicons/react",
+        "@hugeicons/core-free-icons"
+      ],
+      "registryDependencies": [
+        "field"
+      ]
+    },
+    {
+      "name": "floating-action-button",
+      "type": "registry:ui",
+      "title": "Floating Action Button",
+      "description": "A prominent floating control for exposing a high-priority contextual action above the surrounding interface.",
+      "dependencies": [
+        "@radix-ui/react-slot",
+        "class-variance-authority",
         "clsx",
         "tailwind-merge"
       ],
       "registryDependencies": [],
       "files": [
         {
-          "path": "components/ui/label.tsx",
+          "path": "components/ui/floating-action-button.tsx",
           "type": "registry:ui",
-          "target": "components/ui/label.tsx"
+          "target": "components/ui/floating-action-button.tsx"
         },
         {
           "path": "styles/halo-tokens.css",
@@ -1173,14 +717,580 @@
         }
       ],
       "categories": [
-        "forms-and-fields"
+        "actions"
       ],
       "meta": {
         "status": "preview",
         "version": "1.0.0",
-        "category": "forms-and-fields",
+        "category": "actions",
         "accessibility": "WCAG 2.1 AA",
-        "lastUpdated": "2026-09-25"
+        "lastUpdated": "2026-09-24"
+      }
+    },
+    {
+      "name": "focus-ring",
+      "type": "registry:ui",
+      "title": "Halo Focus Ring (Alias)",
+      "description": "Shared high-contrast focus-visible treatment for HaloUI interactive components. Operates independently outside the optical material boundary to guarantee unambiguous keyboard accessibility.",
+      "dependencies": [
+        "@radix-ui/react-slot",
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "components/ui/halo-focus-ring.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/halo-focus-ring.tsx"
+        },
+        {
+          "path": "styles/halo-tokens.css",
+          "type": "registry:ui",
+          "target": "styles/halo-tokens.css"
+        }
+      ],
+      "categories": [
+        "foundations"
+      ],
+      "meta": {
+        "status": "production",
+        "version": "1.0.0",
+        "category": "foundations",
+        "accessibility": "WCAG 2.1 AA (Criteria 2.4.7 & 2.4.11)",
+        "lastUpdated": "2026-09-24"
+      }
+    },
+    {
+      "name": "form-message",
+      "type": "registry:ui",
+      "title": "Form Message",
+      "description": "A semantic field-level message for communicating validation errors, success, warnings, or concise supporting feedback.",
+      "categories": [
+        "forms-and-fields"
+      ],
+      "dependencies": [
+        "@hugeicons/core-free-icons",
+        "@hugeicons/react",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [
+        "field"
+      ]
+    },
+    {
+      "name": "glow",
+      "type": "registry:ui",
+      "title": "Halo Glow (Alias)",
+      "description": "Ambient luminous layer used selectively for active state, emphasis, or focus-adjacent depth.",
+      "dependencies": [
+        "@radix-ui/react-slot",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "components/ui/halo-glow.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/halo-glow.tsx"
+        },
+        {
+          "path": "styles/halo-tokens.css",
+          "type": "registry:ui",
+          "target": "styles/halo-tokens.css"
+        }
+      ],
+      "categories": [
+        "foundations"
+      ],
+      "meta": {
+        "status": "preview",
+        "version": "1.0.0",
+        "category": "foundations",
+        "accessibility": "WCAG 2.1 AA (Decorative)",
+        "lastUpdated": "2026-09-24"
+      }
+    },
+    {
+      "name": "halo-background",
+      "type": "registry:ui",
+      "title": "Halo Background",
+      "description": "Reference background environments for testing and evaluating translucent liquid materials against diverse optical substrates.",
+      "dependencies": [
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "components/ui/halo-background.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/halo-background.tsx"
+        }
+      ],
+      "categories": [
+        "foundations"
+      ],
+      "meta": {
+        "status": "production",
+        "version": "1.0.0",
+        "category": "foundations",
+        "lastUpdated": "2026-09-24"
+      }
+    },
+    {
+      "name": "halo-edge",
+      "type": "registry:ui",
+      "title": "Halo Edge",
+      "description": "Source-owned HaloUI optical foundation.",
+      "dependencies": [
+        "@radix-ui/react-slot",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "components/ui/halo-edge.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/halo-edge.tsx"
+        },
+        {
+          "path": "styles/halo-tokens.css",
+          "type": "registry:ui",
+          "target": "styles/halo-tokens.css"
+        }
+      ],
+      "categories": [
+        "foundations"
+      ],
+      "meta": {
+        "status": "preview",
+        "version": "2.0.0",
+        "category": "foundations",
+        "lastUpdated": "2026-09-26"
+      },
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json"
+    },
+    {
+      "name": "halo-focus-ring",
+      "type": "registry:ui",
+      "title": "Halo Focus Ring",
+      "description": "Shared high-contrast focus-visible treatment for HaloUI interactive components. Operates independently outside the optical material boundary to guarantee unambiguous keyboard accessibility.",
+      "dependencies": [
+        "@radix-ui/react-slot",
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "components/ui/halo-focus-ring.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/halo-focus-ring.tsx"
+        },
+        {
+          "path": "styles/halo-tokens.css",
+          "type": "registry:ui",
+          "target": "styles/halo-tokens.css"
+        }
+      ],
+      "categories": [
+        "foundations"
+      ],
+      "meta": {
+        "status": "production",
+        "version": "1.0.0",
+        "category": "foundations",
+        "accessibility": "WCAG 2.1 AA (Criteria 2.4.7 & 2.4.11)",
+        "lastUpdated": "2026-09-24"
+      }
+    },
+    {
+      "name": "halo-glow",
+      "type": "registry:ui",
+      "title": "Halo Glow",
+      "description": "Source-owned HaloUI optical foundation.",
+      "dependencies": [
+        "@radix-ui/react-slot",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "components/ui/halo-glow.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/halo-glow.tsx"
+        },
+        {
+          "path": "styles/halo-tokens.css",
+          "type": "registry:ui",
+          "target": "styles/halo-tokens.css"
+        }
+      ],
+      "categories": [
+        "foundations"
+      ],
+      "meta": {
+        "status": "preview",
+        "version": "2.0.0",
+        "category": "foundations",
+        "lastUpdated": "2026-09-26"
+      },
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json"
+    },
+    {
+      "name": "halo-highlight",
+      "type": "registry:ui",
+      "title": "Halo Highlight",
+      "description": "Source-owned HaloUI optical foundation.",
+      "dependencies": [
+        "@radix-ui/react-slot",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "components/ui/halo-highlight.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/halo-highlight.tsx"
+        },
+        {
+          "path": "styles/halo-tokens.css",
+          "type": "registry:ui",
+          "target": "styles/halo-tokens.css"
+        }
+      ],
+      "categories": [
+        "foundations"
+      ],
+      "meta": {
+        "status": "preview",
+        "version": "2.0.0",
+        "category": "foundations",
+        "lastUpdated": "2026-09-26"
+      },
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json"
+    },
+    {
+      "name": "halo-motion-presets",
+      "type": "registry:ui",
+      "title": "Halo Motion Presets",
+      "description": "Central motion vocabulary standardizing press compression, elevation lift, spring-settle entrance, and graceful reduced-motion fallbacks across HaloUI.",
+      "dependencies": [
+        "@radix-ui/react-slot",
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "components/ui/halo-motion-presets.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/halo-motion-presets.tsx"
+        },
+        {
+          "path": "styles/halo-tokens.css",
+          "type": "registry:ui",
+          "target": "styles/halo-tokens.css"
+        }
+      ],
+      "categories": [
+        "foundations"
+      ],
+      "meta": {
+        "status": "production",
+        "version": "1.0.0",
+        "category": "foundations",
+        "accessibility": "WCAG 2.1 AA (Criteria 2.3.3 Compliant)",
+        "lastUpdated": "2026-09-24"
+      }
+    },
+    {
+      "name": "halo-noise",
+      "type": "registry:ui",
+      "title": "Halo Noise",
+      "description": "Source-owned HaloUI optical foundation.",
+      "dependencies": [
+        "@radix-ui/react-slot",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "components/ui/halo-noise.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/halo-noise.tsx"
+        },
+        {
+          "path": "styles/halo-tokens.css",
+          "type": "registry:ui",
+          "target": "styles/halo-tokens.css"
+        }
+      ],
+      "categories": [
+        "foundations"
+      ],
+      "meta": {
+        "status": "preview",
+        "version": "2.0.0",
+        "category": "foundations",
+        "lastUpdated": "2026-09-26"
+      },
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json"
+    },
+    {
+      "name": "halo-portal-surface",
+      "type": "registry:ui",
+      "title": "Halo Portal Surface",
+      "description": "Consistent liquid-glass material wrapper for portalled floating overlays, modal dialogs, popovers, and menus.",
+      "dependencies": [
+        "@radix-ui/react-slot",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [
+        "halo-surface",
+        "halo-glow"
+      ],
+      "files": [
+        {
+          "path": "components/ui/halo-portal-surface.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/halo-portal-surface.tsx"
+        }
+      ],
+      "categories": [
+        "foundations"
+      ],
+      "meta": {
+        "status": "preview",
+        "version": "2.0.0",
+        "category": "foundations",
+        "lastUpdated": "2026-09-26"
+      },
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json"
+    },
+    {
+      "name": "halo-refraction-layer",
+      "type": "registry:ui",
+      "title": "Halo Refraction Layer",
+      "description": "Source-owned HaloUI optical foundation.",
+      "dependencies": [
+        "@radix-ui/react-slot",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "components/ui/halo-refraction-layer.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/halo-refraction-layer.tsx"
+        },
+        {
+          "path": "styles/halo-tokens.css",
+          "type": "registry:ui",
+          "target": "styles/halo-tokens.css"
+        }
+      ],
+      "categories": [
+        "foundations"
+      ],
+      "meta": {
+        "status": "preview",
+        "version": "2.0.0",
+        "category": "foundations",
+        "lastUpdated": "2026-09-26"
+      },
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json"
+    },
+    {
+      "name": "halo-scrim",
+      "type": "registry:ui",
+      "title": "Halo Scrim",
+      "description": "Backdrop and scrim treatment positioned behind modal dialogs and overlays with calibrated optical diffusion blur and ambient darkness.",
+      "dependencies": [
+        "@radix-ui/react-slot",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "components/ui/halo-scrim.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/halo-scrim.tsx"
+        }
+      ],
+      "categories": [
+        "foundations"
+      ],
+      "meta": {
+        "status": "production",
+        "version": "1.0.0",
+        "category": "foundations",
+        "lastUpdated": "2026-09-24"
+      }
+    },
+    {
+      "name": "halo-surface",
+      "type": "registry:ui",
+      "title": "Halo Surface",
+      "description": "Source-owned HaloUI optical foundation.",
+      "dependencies": [
+        "@radix-ui/react-slot",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "components/ui/halo-surface.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/halo-surface.tsx"
+        },
+        {
+          "path": "styles/halo-tokens.css",
+          "type": "registry:ui",
+          "target": "styles/halo-tokens.css"
+        }
+      ],
+      "categories": [
+        "foundations"
+      ],
+      "meta": {
+        "status": "preview",
+        "version": "2.0.0",
+        "category": "foundations",
+        "lastUpdated": "2026-09-26"
+      },
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json"
+    },
+    {
+      "name": "halo-theme-provider",
+      "type": "registry:ui",
+      "title": "Halo Theme Provider",
+      "description": "Orchestrates HaloUI light, dark and system visual themes together with shared optical material intensity defaults.",
+      "dependencies": [
+        "next-themes"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "components/ui/halo-theme-provider.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/halo-theme-provider.tsx"
+        },
+        {
+          "path": "styles/halo-tokens.css",
+          "type": "registry:ui",
+          "target": "styles/halo-tokens.css"
+        }
+      ],
+      "categories": [
+        "foundations"
+      ],
+      "meta": {
+        "status": "production",
+        "version": "1.0.0",
+        "category": "foundations",
+        "lastUpdated": "2026-09-24"
+      }
+    },
+    {
+      "name": "highlight",
+      "type": "registry:ui",
+      "title": "Halo Highlight (Alias)",
+      "description": "Directional reflected-light and restrained specular treatment communicating surface orientation and physical material response against HaloUI's 135° virtual light vector.",
+      "dependencies": [
+        "@radix-ui/react-slot",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "components/ui/halo-highlight.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/halo-highlight.tsx"
+        },
+        {
+          "path": "styles/halo-tokens.css",
+          "type": "registry:ui",
+          "target": "styles/halo-tokens.css"
+        }
+      ],
+      "categories": [
+        "foundations"
+      ],
+      "meta": {
+        "status": "preview",
+        "version": "1.0.0",
+        "category": "foundations",
+        "accessibility": "WCAG 2.1 AA (Decorative)",
+        "lastUpdated": "2026-09-24"
+      }
+    },
+    {
+      "name": "hover-card",
+      "type": "registry:ui",
+      "title": "Hover Card",
+      "description": "Supplemental destination or entity preview opened through accessible hover and focus behavior, engineered with HaloUI liquid glass physical optics and uncompromised link navigation semantics.",
+      "dependencies": [
+        "@base-ui/react",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [],
+      "meta": {
+        "status": "production",
+        "version": "2.0.0",
+        "category": "overlays-and-menus",
+        "lastUpdated": "2026-09-26"
+      }
+    },
+    {
+      "name": "icon-button",
+      "type": "registry:ui",
+      "title": "Icon Button",
+      "description": "A compact icon-only control for common actions, with mandatory accessible naming, HaloUI material states, and consistent keyboard and touch behavior.",
+      "dependencies": [
+        "@radix-ui/react-slot",
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "components/ui/icon-button.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/icon-button.tsx"
+        },
+        {
+          "path": "styles/halo-tokens.css",
+          "type": "registry:ui",
+          "target": "styles/halo-tokens.css"
+        }
+      ],
+      "categories": [
+        "actions"
+      ],
+      "meta": {
+        "status": "preview",
+        "version": "1.0.0",
+        "category": "actions",
+        "accessibility": "WCAG 2.1 AA",
+        "lastUpdated": "2026-09-24"
       }
     },
     {
@@ -1254,11 +1364,135 @@
       }
     },
     {
-      "name": "textarea",
+      "name": "input-otp",
       "type": "registry:ui",
-      "title": "Textarea",
-      "description": "A native multiline text-entry control with HaloUI form states, accessible focus treatment, and configurable resizing.",
+      "title": "Input OTP",
+      "description": "A segmented one-time-code input optimized for short verification codes, paste, mobile keyboards, and platform OTP autofill.",
       "dependencies": [
+        "input-otp",
+        "@hugeicons/core-free-icons",
+        "@hugeicons/react",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [
+        "field",
+        "halo-icon"
+      ],
+      "files": [
+        {
+          "path": "components/ui/input-otp.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/input-otp.tsx"
+        },
+        {
+          "path": "styles/halo-tokens.css",
+          "type": "registry:ui",
+          "target": "styles/halo-tokens.css"
+        }
+      ],
+      "categories": [
+        "forms-and-fields"
+      ],
+      "meta": {
+        "status": "preview",
+        "version": "1.0.0",
+        "category": "forms-and-fields",
+        "accessibility": "WCAG 2.1 AA",
+        "lastUpdated": "2026-09-25"
+      }
+    },
+    {
+      "name": "kbd",
+      "type": "registry:ui",
+      "title": "Kbd",
+      "description": "A semantic visual representation of keyboard keys and shortcut combinations used in instructions, menus, commands, and interface hints.",
+      "categories": [
+        "navigation"
+      ],
+      "registryDependencies": []
+    },
+    {
+      "name": "label",
+      "type": "registry:ui",
+      "title": "Label",
+      "description": "An accessible text label for associating a visible name with a form control.",
+      "dependencies": [
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "components/ui/label.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/label.tsx"
+        },
+        {
+          "path": "styles/halo-tokens.css",
+          "type": "registry:ui",
+          "target": "styles/halo-tokens.css"
+        }
+      ],
+      "categories": [
+        "forms-and-fields"
+      ],
+      "meta": {
+        "status": "preview",
+        "version": "1.0.0",
+        "category": "forms-and-fields",
+        "accessibility": "WCAG 2.1 AA",
+        "lastUpdated": "2026-09-25"
+      }
+    },
+    {
+      "name": "lightbox",
+      "type": "registry:ui",
+      "title": "Lightbox",
+      "description": "Focused media viewer overlay engineered for high-fidelity image inspection and galleries with deep optical Halo Scrim and Liquid Glass floating controls.",
+      "categories": [
+        "overlays"
+      ],
+      "registryDependencies": [
+        "dialog"
+      ]
+    },
+    {
+      "name": "link-preview",
+      "type": "registry:ui",
+      "title": "Link Preview",
+      "description": "A navigation link that reveals concise supplemental destination context without replacing the link's native navigation behavior.",
+      "categories": [
+        "navigation"
+      ],
+      "registryDependencies": []
+    },
+    {
+      "name": "menubar",
+      "type": "registry:ui",
+      "title": "Menubar",
+      "description": "An accessible persistent command bar for organizing related application actions into keyboard-operable menus.",
+      "categories": [
+        "navigation"
+      ],
+      "dependencies": [
+        "@base-ui/react",
+        "@hugeicons/core-free-icons",
+        "@hugeicons/react",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [
+        "dropdown-menu"
+      ]
+    },
+    {
+      "name": "motion-presets",
+      "type": "registry:ui",
+      "title": "Halo Motion Presets (Alias)",
+      "description": "Central motion vocabulary standardizing press compression, elevation lift, spring-settle entrance, and graceful reduced-motion fallbacks across HaloUI.",
+      "dependencies": [
+        "@radix-ui/react-slot",
         "class-variance-authority",
         "clsx",
         "tailwind-merge"
@@ -1266,9 +1500,53 @@
       "registryDependencies": [],
       "files": [
         {
-          "path": "components/ui/textarea.tsx",
+          "path": "components/ui/halo-motion-presets.tsx",
           "type": "registry:ui",
-          "target": "components/ui/textarea.tsx"
+          "target": "components/ui/halo-motion-presets.tsx"
+        },
+        {
+          "path": "styles/halo-tokens.css",
+          "type": "registry:ui",
+          "target": "styles/halo-tokens.css"
+        }
+      ],
+      "categories": [
+        "foundations"
+      ],
+      "meta": {
+        "status": "production",
+        "version": "1.0.0",
+        "category": "foundations",
+        "accessibility": "WCAG 2.1 AA (Criteria 2.3.3 Compliant)",
+        "lastUpdated": "2026-09-24"
+      }
+    },
+    {
+      "name": "multi-select",
+      "type": "registry:ui",
+      "title": "Multi Select",
+      "description": "A searchable multi-value picker for selecting and managing multiple options as removable tokens.",
+      "dependencies": [
+        "@base-ui/react",
+        "@hugeicons/core-free-icons",
+        "@hugeicons/react",
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [
+        "field"
+      ],
+      "files": [
+        {
+          "path": "components/ui/multi-select.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/multi-select.tsx"
+        },
+        {
+          "path": "components/icons/halo-icon.tsx",
+          "type": "registry:ui",
+          "target": "components/icons/halo-icon.tsx"
         },
         {
           "path": "styles/halo-tokens.css",
@@ -1328,28 +1606,10 @@
       }
     },
     {
-      "name": "select",
+      "name": "navigation-menu",
       "type": "registry:ui",
-      "title": "Select",
-      "description": "An accessible custom option picker for selecting one value from a structured list of choices.",
-      "categories": [
-        "forms-and-fields"
-      ]
-    },
-    {
-      "name": "combobox",
-      "type": "registry:ui",
-      "title": "Combobox",
-      "description": "An accessible searchable option picker for selecting one value from a filterable collection.",
-      "categories": [
-        "forms-and-fields"
-      ]
-    },
-    {
-      "name": "multi-select",
-      "type": "registry:ui",
-      "title": "Multi Select",
-      "description": "A searchable multi-value picker for selecting and managing multiple options as removable tokens.",
+      "title": "Navigation Menu",
+      "description": "An accessible navigation system for organizing primary site or product destinations with links and structured flyout content.",
       "dependencies": [
         "@base-ui/react",
         "@hugeicons/core-free-icons",
@@ -1358,19 +1618,37 @@
         "clsx",
         "tailwind-merge"
       ],
-      "registryDependencies": [
-        "field"
-      ],
+      "registryDependencies": [],
       "files": [
         {
-          "path": "components/ui/multi-select.tsx",
-          "type": "registry:ui",
-          "target": "components/ui/multi-select.tsx"
+          "path": "components/ui/navigation-menu.tsx",
+          "type": "registry:ui"
         },
         {
-          "path": "components/icons/halo-icon.tsx",
+          "path": "styles/halo-tokens.css",
+          "type": "registry:ui"
+        }
+      ],
+      "categories": [
+        "navigation"
+      ]
+    },
+    {
+      "name": "noise",
+      "type": "registry:ui",
+      "title": "Halo Noise (Alias)",
+      "description": "Subtle material grain and high-frequency procedural texture used to reduce sterile gradient banding and impart physical tooth to HaloUI liquid glass surfaces.",
+      "dependencies": [
+        "@radix-ui/react-slot",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "components/ui/halo-noise.tsx",
           "type": "registry:ui",
-          "target": "components/icons/halo-icon.tsx"
+          "target": "components/ui/halo-noise.tsx"
         },
         {
           "path": "styles/halo-tokens.css",
@@ -1379,49 +1657,103 @@
         }
       ],
       "categories": [
-        "forms-and-fields"
+        "foundations"
       ],
       "meta": {
         "status": "preview",
         "version": "1.0.0",
-        "category": "forms-and-fields",
-        "accessibility": "WCAG 2.1 AA",
-        "lastUpdated": "2026-09-25"
+        "category": "foundations",
+        "accessibility": "WCAG 2.1 AA (Decorative)",
+        "lastUpdated": "2026-09-24"
       }
     },
     {
-      "name": "checkbox",
+      "name": "number-field",
       "type": "registry:ui",
-      "title": "Checkbox",
-      "description": "An accessible boolean selection control supporting unchecked, checked, and indeterminate states.",
+      "title": "Number Field",
+      "description": "An accessible numeric-entry control with keyboard editing, decimal precision, range boundaries, and optional increment/decrement actions.",
+      "categories": [
+        "forms-and-fields"
+      ],
       "dependencies": [
         "@base-ui/react",
         "@hugeicons/core-free-icons",
         "@hugeicons/react",
-        "class-variance-authority",
         "clsx",
         "tailwind-merge"
       ],
       "registryDependencies": [
-        "field"
+        "field",
+        "halo-icon"
       ]
     },
     {
-      "name": "checkbox-group",
+      "name": "pagination",
       "type": "registry:ui",
-      "title": "Checkbox Group",
-      "description": "A related set of independent checkbox options for selecting zero, one, or multiple values.",
+      "title": "Pagination",
+      "description": "An accessible navigation control for moving between discrete pages of a larger collection.",
       "dependencies": [
-        "@base-ui/react",
         "@hugeicons/core-free-icons",
         "@hugeicons/react",
-        "class-variance-authority",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "components/ui/pagination.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "styles/halo-tokens.css",
+          "type": "registry:ui"
+        }
+      ],
+      "categories": [
+        "navigation"
+      ]
+    },
+    {
+      "name": "phone-field",
+      "type": "registry:ui",
+      "title": "Phone Field",
+      "description": "A structured phone-number input for entering international telephone numbers with country context, formatting, and accessible validation support.",
+      "categories": [
+        "forms-and-fields"
+      ],
+      "dependencies": [
+        "libphonenumber-js",
+        "@hugeicons/core-free-icons",
+        "@hugeicons/react",
         "clsx",
         "tailwind-merge"
       ],
       "registryDependencies": [
-        "checkbox"
+        "field",
+        "halo-icon"
       ]
+    },
+    {
+      "name": "popover",
+      "type": "registry:ui",
+      "title": "Popover",
+      "description": "An anchored transient floating surface engineered with HaloUI liquid glass physical optics, collision-aware boundary positioning, origin-anchored reveal kinematics, and zero backdrop dimming.",
+      "dependencies": [
+        "@base-ui/react",
+        "@hugeicons/core-free-icons",
+        "@hugeicons/react",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [
+        "button"
+      ],
+      "meta": {
+        "status": "production",
+        "version": "2.0.0",
+        "category": "overlays-and-menus",
+        "lastUpdated": "2026-09-26"
+      }
     },
     {
       "name": "radio-group",
@@ -1439,80 +1771,6 @@
       "registryDependencies": [
         "field"
       ]
-    },
-    {
-      "name": "switch",
-      "type": "registry:ui",
-      "title": "Switch",
-      "description": "An accessible binary control for immediately turning a setting on or off.",
-      "dependencies": [
-        "@base-ui/react",
-        "class-variance-authority",
-        "clsx",
-        "tailwind-merge"
-      ],
-      "registryDependencies": [
-        "field"
-      ],
-      "files": [
-        {
-          "path": "components/ui/switch.tsx",
-          "type": "registry:ui",
-          "target": "components/ui/switch.tsx"
-        },
-        {
-          "path": "styles/halo-tokens.css",
-          "type": "registry:ui",
-          "target": "styles/halo-tokens.css"
-        }
-      ],
-      "categories": [
-        "forms-and-fields"
-      ],
-      "meta": {
-        "status": "preview",
-        "version": "1.0.0",
-        "category": "forms-and-fields",
-        "accessibility": "WCAG 2.1 AA",
-        "lastUpdated": "2026-09-25"
-      }
-    },
-    {
-      "name": "slider",
-      "type": "registry:ui",
-      "title": "Slider",
-      "description": "An accessible single-value range control for choosing a numeric value within defined minimum and maximum bounds.",
-      "dependencies": [
-        "@base-ui/react",
-        "class-variance-authority",
-        "clsx",
-        "tailwind-merge"
-      ],
-      "registryDependencies": [
-        "field"
-      ],
-      "files": [
-        {
-          "path": "components/ui/slider.tsx",
-          "type": "registry:ui",
-          "target": "components/ui/slider.tsx"
-        },
-        {
-          "path": "styles/halo-tokens.css",
-          "type": "registry:ui",
-          "target": "styles/halo-tokens.css"
-        }
-      ],
-      "categories": [
-        "forms-and-fields"
-      ],
-      "meta": {
-        "status": "preview",
-        "version": "1.0.0",
-        "category": "forms-and-fields",
-        "accessibility": "WCAG 2.1 AA",
-        "lastUpdated": "2026-09-25"
-      }
     },
     {
       "name": "range-slider",
@@ -1552,217 +1810,6 @@
       }
     },
     {
-      "name": "input-otp",
-      "type": "registry:ui",
-      "title": "Input OTP",
-      "description": "A segmented one-time-code input optimized for short verification codes, paste, mobile keyboards, and platform OTP autofill.",
-      "dependencies": [
-        "input-otp",
-        "@hugeicons/core-free-icons",
-        "@hugeicons/react",
-        "clsx",
-        "tailwind-merge"
-      ],
-      "registryDependencies": [
-        "field",
-        "halo-icon"
-      ],
-      "files": [
-        {
-          "path": "components/ui/input-otp.tsx",
-          "type": "registry:ui",
-          "target": "components/ui/input-otp.tsx"
-        },
-        {
-          "path": "styles/halo-tokens.css",
-          "type": "registry:ui",
-          "target": "styles/halo-tokens.css"
-        }
-      ],
-      "categories": [
-        "forms-and-fields"
-      ],
-      "meta": {
-        "status": "preview",
-        "version": "1.0.0",
-        "category": "forms-and-fields",
-        "accessibility": "WCAG 2.1 AA",
-        "lastUpdated": "2026-09-25"
-      }
-    },
-    {
-      "name": "number-field",
-      "type": "registry:ui",
-      "title": "Number Field",
-      "description": "An accessible numeric-entry control with keyboard editing, decimal precision, range boundaries, and optional increment/decrement actions.",
-      "categories": [
-        "forms-and-fields"
-      ],
-      "dependencies": [
-        "@base-ui/react",
-        "@hugeicons/core-free-icons",
-        "@hugeicons/react",
-        "clsx",
-        "tailwind-merge"
-      ],
-      "registryDependencies": [
-        "field",
-        "halo-icon"
-      ]
-    },
-    {
-      "name": "currency-field",
-      "type": "registry:ui",
-      "title": "Currency Field",
-      "description": "A locale-aware monetary entry control that separates numeric value from currency presentation.",
-      "categories": [
-        "forms-and-fields"
-      ],
-      "dependencies": [
-        "@base-ui/react",
-        "@hugeicons/core-free-icons",
-        "@hugeicons/react",
-        "clsx",
-        "tailwind-merge"
-      ],
-      "registryDependencies": [
-        "number-field",
-        "field",
-        "halo-icon"
-      ]
-    },
-    {
-      "name": "phone-field",
-      "type": "registry:ui",
-      "title": "Phone Field",
-      "description": "A structured phone-number input for entering international telephone numbers with country context, formatting, and accessible validation support.",
-      "categories": [
-        "forms-and-fields"
-      ],
-      "dependencies": [
-        "libphonenumber-js",
-        "@hugeicons/core-free-icons",
-        "@hugeicons/react",
-        "clsx",
-        "tailwind-merge"
-      ],
-      "registryDependencies": [
-        "field",
-        "halo-icon"
-      ]
-    },
-    {
-      "name": "url-field",
-      "type": "registry:ui",
-      "title": "URL Field",
-      "description": "A URL-oriented text-entry control with browser-friendly input semantics, optional normalization, and clear validation affordances.",
-      "categories": [
-        "forms-and-fields"
-      ],
-      "dependencies": [
-        "@hugeicons/core-free-icons",
-        "@hugeicons/react",
-        "clsx",
-        "tailwind-merge"
-      ],
-      "registryDependencies": [
-        "field",
-        "halo-icon"
-      ]
-    },
-    {
-      "name": "tag-input",
-      "type": "registry:ui",
-      "title": "Tag Input",
-      "description": "An accessible multi-token tag editor with two-stage deletion, delimiter and paste tokenization, duplicate prevention, and keyboard navigation.",
-      "dependencies": [
-        "class-variance-authority",
-        "clsx",
-        "tailwind-merge",
-        "@hugeicons/core-free-icons",
-        "@hugeicons/react"
-      ],
-      "registryDependencies": [
-        "field",
-        "halo-icon"
-      ],
-      "files": [
-        {
-          "path": "components/ui/tag-input.tsx",
-          "type": "registry:ui",
-          "target": "components/ui/tag-input.tsx"
-        },
-        {
-          "path": "styles/halo-tokens.css",
-          "type": "registry:ui",
-          "target": "styles/halo-tokens.css"
-        }
-      ],
-      "categories": [
-        "forms-and-fields"
-      ],
-      "meta": {
-        "status": "preview",
-        "version": "1.0.0",
-        "category": "forms-and-fields",
-        "accessibility": "WCAG 2.1 AA",
-        "lastUpdated": "2026-09-25"
-      }
-    },
-    {
-      "name": "file-input",
-      "type": "registry:ui",
-      "title": "File Input",
-      "description": "An accessible native file-selection control with HaloUI form styling and clear selected-file feedback.",
-      "categories": [
-        "forms-and-fields"
-      ],
-      "dependencies": [
-        "class-variance-authority",
-        "clsx",
-        "tailwind-merge"
-      ],
-      "registryDependencies": [
-        "field"
-      ]
-    },
-    {
-      "name": "file-upload",
-      "type": "registry:ui",
-      "title": "File Upload",
-      "description": "An accessible client-side file-upload workflow with native file selection, drag-and-drop, validation, queue state management, progress tracking, cancellation, retry, and transport-agnostic application integration.",
-      "categories": [
-        "forms-and-fields"
-      ],
-      "dependencies": [
-        "class-variance-authority",
-        "clsx",
-        "tailwind-merge",
-        "@hugeicons/react",
-        "@hugeicons/core-free-icons"
-      ],
-      "registryDependencies": [
-        "field"
-      ]
-    },
-    {
-      "name": "color-picker",
-      "type": "registry:ui",
-      "title": "Color Picker",
-      "description": "An accessible color-selection control combining visual color adjustment (2D Saturation/Brightness canvas and 1D Hue spectrum) with precise textual hexadecimal entry and zero optical material contamination.",
-      "categories": [
-        "forms-and-fields"
-      ],
-      "dependencies": [
-        "@radix-ui/react-popover",
-        "clsx",
-        "tailwind-merge"
-      ],
-      "registryDependencies": [
-        "field"
-      ]
-    },
-    {
       "name": "rating-input",
       "type": "registry:ui",
       "title": "Rating Input",
@@ -1781,222 +1828,91 @@
       ]
     },
     {
-      "name": "date-picker",
+      "name": "refraction",
       "type": "registry:ui",
-      "title": "Date Picker",
-      "description": "An accessible calendar-backed control for selecting a single calendar date.",
-      "categories": [
-        "forms-and-fields"
-      ],
+      "title": "Halo Refraction Layer (Alias)",
+      "description": "Optional progressive-enhancement optical layer that introduces restrained environmental distortion to selected HaloUI materials with a guaranteed non-refraction fallback.",
       "dependencies": [
-        "@radix-ui/react-popover",
-        "react-day-picker",
-        "date-fns",
-        "@hugeicons/core-free-icons",
-        "@hugeicons/react",
-        "clsx",
-        "tailwind-merge"
-      ],
-      "registryDependencies": [
-        "calendar",
-        "field"
-      ]
-    },
-    {
-      "name": "date-range-picker",
-      "type": "registry:ui",
-      "title": "Date Range Picker",
-      "description": "An accessible calendar-backed control for selecting a start and end date as one ordered date interval.",
-      "categories": [
-        "forms-and-fields"
-      ],
-      "dependencies": [
-        "@radix-ui/react-popover",
-        "react-day-picker",
-        "date-fns",
-        "@hugeicons/core-free-icons",
-        "@hugeicons/react",
-        "clsx",
-        "tailwind-merge"
-      ],
-      "registryDependencies": [
-        "date-picker",
-        "calendar",
-        "field"
-      ]
-    },
-    {
-      "name": "time-picker",
-      "type": "registry:ui",
-      "title": "Time Picker",
-      "description": "An accessible time-only control for selecting a local clock time without introducing a calendar date or timezone.",
-      "categories": [
-        "forms-and-fields"
-      ],
-      "dependencies": [
-        "@hugeicons/core-free-icons",
-        "@hugeicons/react",
-        "clsx",
-        "tailwind-merge"
-      ],
-      "registryDependencies": [
-        "field"
-      ]
-    },
-    {
-      "name": "date-time-picker",
-      "type": "registry:ui",
-      "title": "Date Time Picker",
-      "description": "An accessible control for selecting one calendar date and one local clock time as a combined date-time value.",
-      "categories": [
-        "forms-and-fields"
-      ],
-      "dependencies": [
-        "@radix-ui/react-popover",
-        "react-day-picker",
-        "date-fns",
-        "@hugeicons/core-free-icons",
-        "@hugeicons/react",
-        "clsx",
-        "tailwind-merge"
-      ],
-      "registryDependencies": [
-        "calendar",
-        "time-picker",
-        "field"
-      ]
-    },
-    {
-      "name": "calendar",
-      "type": "registry:ui",
-      "title": "Calendar",
-      "description": "An accessible standalone calendar surface for navigating and selecting calendar dates.",
-      "categories": [
-        "forms-and-fields"
-      ],
-      "dependencies": [
-        "react-day-picker",
-        "date-fns",
-        "@hugeicons/core-free-icons",
-        "@hugeicons/react",
-        "clsx",
-        "tailwind-merge"
-      ],
-      "registryDependencies": []
-    },
-    {
-      "name": "form-message",
-      "type": "registry:ui",
-      "title": "Form Message",
-      "description": "A semantic field-level message for communicating validation errors, success, warnings, or concise supporting feedback.",
-      "categories": [
-        "forms-and-fields"
-      ],
-      "dependencies": [
-        "@hugeicons/core-free-icons",
-        "@hugeicons/react",
-        "clsx",
-        "tailwind-merge"
-      ],
-      "registryDependencies": [
-        "field"
-      ]
-    },
-    {
-      "name": "tabs",
-      "type": "registry:ui",
-      "title": "Tabs",
-      "description": "An accessible tabbed interface for switching between peer content views within the same context.",
-      "categories": [
-        "navigation"
-      ],
-      "dependencies": [
-        "@base-ui/react",
-        "class-variance-authority",
-        "clsx",
-        "tailwind-merge"
-      ],
-      "registryDependencies": []
-    },
-    {
-      "name": "breadcrumb",
-      "type": "registry:ui",
-      "title": "Breadcrumb",
-      "description": "A semantic navigation trail that communicates the current page's position within a hierarchical structure.",
-      "categories": [
-        "navigation"
-      ],
-      "dependencies": [
-        "@base-ui/react",
-        "@hugeicons/core-free-icons",
-        "@hugeicons/react",
-        "clsx",
-        "tailwind-merge"
-      ],
-      "registryDependencies": []
-    },
-    {
-      "name": "pagination",
-      "type": "registry:ui",
-      "title": "Pagination",
-      "description": "An accessible navigation control for moving between discrete pages of a larger collection.",
-      "dependencies": [
-        "@hugeicons/core-free-icons",
-        "@hugeicons/react",
+        "@radix-ui/react-slot",
         "clsx",
         "tailwind-merge"
       ],
       "registryDependencies": [],
       "files": [
         {
-          "path": "components/ui/pagination.tsx",
-          "type": "registry:ui"
+          "path": "components/ui/halo-refraction-layer.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/halo-refraction-layer.tsx"
         },
         {
           "path": "styles/halo-tokens.css",
-          "type": "registry:ui"
+          "type": "registry:ui",
+          "target": "styles/halo-tokens.css"
         }
       ],
       "categories": [
-        "navigation"
-      ]
+        "foundations"
+      ],
+      "meta": {
+        "status": "experimental",
+        "version": "1.0.0",
+        "category": "foundations",
+        "accessibility": "WCAG 2.1 AA (Decorative)",
+        "lastUpdated": "2026-09-24"
+      }
     },
     {
-      "name": "navigation-menu",
+      "name": "segmented-control",
       "type": "registry:ui",
-      "title": "Navigation Menu",
-      "description": "An accessible navigation system for organizing primary site or product destinations with links and structured flyout content.",
+      "title": "Segmented Control",
+      "description": "A compact control for switching between a small set of mutually exclusive modes or values.",
       "dependencies": [
         "@base-ui/react",
-        "@hugeicons/core-free-icons",
-        "@hugeicons/react",
         "class-variance-authority",
         "clsx",
         "tailwind-merge"
       ],
-      "registryDependencies": [],
+      "registryDependencies": [
+        "halo-icon"
+      ],
       "files": [
         {
-          "path": "components/ui/navigation-menu.tsx",
-          "type": "registry:ui"
+          "path": "components/ui/segmented-control.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/segmented-control.tsx"
         },
         {
           "path": "styles/halo-tokens.css",
-          "type": "registry:ui"
+          "type": "registry:ui",
+          "target": "styles/halo-tokens.css"
         }
       ],
       "categories": [
-        "navigation"
+        "actions"
+      ],
+      "meta": {
+        "status": "preview",
+        "version": "1.0.0",
+        "category": "actions",
+        "accessibility": "WCAG 2.1 AA",
+        "lastUpdated": "2026-09-25"
+      }
+    },
+    {
+      "name": "select",
+      "type": "registry:ui",
+      "title": "Select",
+      "description": "An accessible custom option picker for selecting one value from a structured list of choices.",
+      "categories": [
+        "forms-and-fields"
       ]
     },
     {
-      "name": "menubar",
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "sheet",
       "type": "registry:ui",
-      "title": "Menubar",
-      "description": "An accessible persistent command bar for organizing related application actions into keyboard-operable menus.",
-      "categories": [
-        "navigation"
-      ],
+      "title": "Sheet",
+      "description": "An edge-anchored overlay panel engineered with HaloUI liquid glass physical optics, directional slide kinematics, concentric meniscus border curvature, and calibrated optical scrim diffusion.",
       "dependencies": [
         "@base-ui/react",
         "@hugeicons/core-free-icons",
@@ -2005,8 +1921,14 @@
         "tailwind-merge"
       ],
       "registryDependencies": [
-        "dropdown-menu"
-      ]
+        "button"
+      ],
+      "meta": {
+        "status": "production",
+        "version": "2.0.0",
+        "category": "overlays-and-menus",
+        "lastUpdated": "2026-09-26"
+      }
     },
     {
       "name": "sidebar",
@@ -2048,26 +1970,98 @@
       ]
     },
     {
-      "name": "dock",
+      "name": "slider",
       "type": "registry:ui",
-      "title": "Dock",
-      "description": "A floating surface for a small set of high-value destinations and actions that should remain quickly accessible.",
-      "categories": [
-        "navigation"
+      "title": "Slider",
+      "description": "An accessible single-value range control for choosing a numeric value within defined minimum and maximum bounds.",
+      "dependencies": [
+        "@base-ui/react",
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge"
       ],
       "registryDependencies": [
-        "tooltip"
-      ]
+        "field"
+      ],
+      "files": [
+        {
+          "path": "components/ui/slider.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/slider.tsx"
+        },
+        {
+          "path": "styles/halo-tokens.css",
+          "type": "registry:ui",
+          "target": "styles/halo-tokens.css"
+        }
+      ],
+      "categories": [
+        "forms-and-fields"
+      ],
+      "meta": {
+        "status": "preview",
+        "version": "1.0.0",
+        "category": "forms-and-fields",
+        "accessibility": "WCAG 2.1 AA",
+        "lastUpdated": "2026-09-25"
+      }
     },
     {
-      "name": "bottom-navigation",
+      "name": "split-button",
       "type": "registry:ui",
-      "title": "Bottom Navigation",
-      "description": "A mobile-first persistent navigation surface for a small set of primary application destinations.",
-      "categories": [
-        "navigation"
+      "title": "Split Button",
+      "description": "Combines a primary immediate action with a secondary menu of closely related alternative actions.",
+      "dependencies": [
+        "@base-ui/react",
+        "@hugeicons/core-free-icons",
+        "@hugeicons/react",
+        "@radix-ui/react-slot",
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge"
       ],
-      "registryDependencies": []
+      "registryDependencies": [
+        "button"
+      ],
+      "files": [
+        {
+          "path": "components/ui/split-button.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/split-button.tsx"
+        },
+        {
+          "path": "components/icons/halo-icon.tsx",
+          "type": "registry:ui",
+          "target": "components/icons/halo-icon.tsx"
+        },
+        {
+          "path": "styles/halo-tokens.css",
+          "type": "registry:ui",
+          "target": "styles/halo-tokens.css"
+        }
+      ],
+      "categories": [
+        "actions"
+      ],
+      "meta": {
+        "status": "preview",
+        "version": "1.0.0",
+        "category": "actions",
+        "accessibility": "WCAG 2.1 AA",
+        "lastUpdated": "2026-09-24"
+      }
+    },
+    {
+      "name": "spotlight",
+      "type": "registry:ui",
+      "title": "Spotlight",
+      "description": "Large global discovery surface engineered for application-wide search across heterogeneous entities, files, people, and commands with HaloUI Liquid Glass optics.",
+      "categories": [
+        "overlays"
+      ],
+      "registryDependencies": [
+        "dialog"
+      ]
     },
     {
       "name": "stepper",
@@ -2078,232 +2072,6 @@
         "navigation"
       ],
       "registryDependencies": []
-    },
-    {
-      "name": "command-palette",
-      "type": "registry:ui",
-      "title": "Command Palette",
-      "description": "A keyboard-first searchable interface for quickly finding and activating application commands and destinations.",
-      "categories": [
-        "navigation"
-      ],
-      "registryDependencies": []
-    },
-    {
-      "name": "tree-navigation",
-      "type": "registry:ui",
-      "title": "Tree Navigation",
-      "description": "A hierarchical expandable navigation component for navigating deeply nested destinations while preserving parent-child structure.",
-      "categories": [
-        "navigation"
-      ],
-      "registryDependencies": []
-    },
-    {
-      "name": "link-preview",
-      "type": "registry:ui",
-      "title": "Link Preview",
-      "description": "A navigation link that reveals concise supplemental destination context without replacing the link's native navigation behavior.",
-      "categories": [
-        "navigation"
-      ],
-      "registryDependencies": []
-    },
-    {
-      "name": "kbd",
-      "type": "registry:ui",
-      "title": "Kbd",
-      "description": "A semantic visual representation of keyboard keys and shortcut combinations used in instructions, menus, commands, and interface hints.",
-      "categories": [
-        "navigation"
-      ],
-      "registryDependencies": []
-    },
-    {
-      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
-      "name": "dialog",
-      "type": "registry:ui",
-      "title": "Dialog",
-      "description": "An accessible modal task surface engineered with HaloUI liquid glass physical optics, calibrated optical scrim diffusion, and strict focus trapping.",
-      "dependencies": [
-        "@base-ui/react",
-        "@hugeicons/core-free-icons",
-        "@hugeicons/react",
-        "clsx",
-        "tailwind-merge"
-      ],
-      "registryDependencies": [
-        "button"
-      ],
-      "meta": {
-        "status": "production",
-        "version": "2.0.0",
-        "category": "overlays-and-menus",
-        "lastUpdated": "2026-09-26"
-      }
-    },
-    {
-      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
-      "name": "alert-dialog",
-      "type": "registry:ui",
-      "title": "Alert Dialog",
-      "description": "A high-consequence modal confirmation surface engineered with HaloUI liquid glass physical optics, deep optical scrim isolation, and explicit consequence verification.",
-      "dependencies": [
-        "@base-ui/react",
-        "@hugeicons/core-free-icons",
-        "@hugeicons/react",
-        "clsx",
-        "tailwind-merge"
-      ],
-      "registryDependencies": [
-        "button"
-      ],
-      "meta": {
-        "status": "production",
-        "version": "2.0.0",
-        "category": "overlays-and-menus",
-        "lastUpdated": "2026-09-26"
-      }
-    },
-    {
-      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
-      "name": "sheet",
-      "type": "registry:ui",
-      "title": "Sheet",
-      "description": "An edge-anchored overlay panel engineered with HaloUI liquid glass physical optics, directional slide kinematics, concentric meniscus border curvature, and calibrated optical scrim diffusion.",
-      "dependencies": [
-        "@base-ui/react",
-        "@hugeicons/core-free-icons",
-        "@hugeicons/react",
-        "clsx",
-        "tailwind-merge"
-      ],
-      "registryDependencies": [
-        "button"
-      ],
-      "meta": {
-        "status": "production",
-        "version": "2.0.0",
-        "category": "overlays-and-menus",
-        "lastUpdated": "2026-09-26"
-      }
-    },
-    {
-      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
-      "name": "drawer",
-      "type": "registry:ui",
-      "title": "Drawer",
-      "description": "A touch-friendly contextual surface powered by Base UI Drawer, engineered with velocity swipe dismissal, multi-step snap points, mobile safe area padding, and 10-layer Liquid Glass optical physics.",
-      "dependencies": [
-        "@base-ui/react",
-        "@hugeicons/core-free-icons",
-        "@hugeicons/react",
-        "clsx",
-        "tailwind-merge"
-      ],
-      "registryDependencies": [
-        "button"
-      ],
-      "meta": {
-        "status": "production",
-        "version": "2.0.0",
-        "category": "overlays-and-menus",
-        "lastUpdated": "2026-09-26"
-      }
-    },
-    {
-      "name": "popover",
-      "type": "registry:ui",
-      "title": "Popover",
-      "description": "An anchored transient floating surface engineered with HaloUI liquid glass physical optics, collision-aware boundary positioning, origin-anchored reveal kinematics, and zero backdrop dimming.",
-      "dependencies": [
-        "@base-ui/react",
-        "@hugeicons/core-free-icons",
-        "@hugeicons/react",
-        "clsx",
-        "tailwind-merge"
-      ],
-      "registryDependencies": [
-        "button"
-      ],
-      "meta": {
-        "status": "production",
-        "version": "2.0.0",
-        "category": "overlays-and-menus",
-        "lastUpdated": "2026-09-26"
-      }
-    },
-    {
-      "name": "hover-card",
-      "type": "registry:ui",
-      "title": "Hover Card",
-      "description": "Supplemental destination or entity preview opened through accessible hover and focus behavior, engineered with HaloUI liquid glass physical optics and uncompromised link navigation semantics.",
-      "dependencies": [
-        "@base-ui/react",
-        "clsx",
-        "tailwind-merge"
-      ],
-      "registryDependencies": [],
-      "meta": {
-        "status": "production",
-        "version": "2.0.0",
-        "category": "overlays-and-menus",
-        "lastUpdated": "2026-09-26"
-      }
-    },
-    {
-      "name": "tooltip",
-      "type": "registry:ui",
-      "title": "Tooltip",
-      "description": "Brief contextual label and supplemental help associated with an interface element, engineered with HaloUI Liquid Glass optics, skip-delay provider orchestration, and non-modal focus isolation.",
-      "dependencies": [
-        "@base-ui/react",
-        "clsx",
-        "tailwind-merge"
-      ],
-      "registryDependencies": [],
-      "meta": {
-        "status": "production",
-        "version": "2.0.0",
-        "category": "overlays-and-menus",
-        "lastUpdated": "2026-09-26"
-      }
-    },
-    {
-      "name": "dropdown-menu",
-      "type": "registry:ui",
-      "title": "Dropdown Menu",
-      "description": "Button-triggered temporary action menu engineered with HaloUI Balanced Liquid Glass optics, roving keyboard navigation, submenus, and composite menu semantics.",
-      "dependencies": [
-        "@base-ui/react",
-        "clsx",
-        "tailwind-merge"
-      ],
-      "registryDependencies": [],
-      "meta": {
-        "status": "production",
-        "version": "2.0.0",
-        "category": "overlays-and-menus",
-        "lastUpdated": "2026-09-26"
-      }
-    },
-    {
-      "name": "context-menu",
-      "type": "registry:ui",
-      "title": "Context Menu",
-      "description": "Pointer and context-triggered floating action surface engineered with HaloUI Balanced Liquid Glass optics, zero backdrop dimming, boundary collision handling, and WAI-ARIA roving keyboard navigation.",
-      "dependencies": [
-        "@base-ui/react",
-        "clsx",
-        "tailwind-merge"
-      ],
-      "registryDependencies": [],
-      "meta": {
-        "status": "production",
-        "version": "2.0.0",
-        "category": "overlays-and-menus",
-        "lastUpdated": "2026-09-26"
-      }
     },
     {
       "name": "submenu",
@@ -2327,40 +2095,272 @@
       }
     },
     {
-      "name": "command-menu",
+      "name": "surface",
       "type": "registry:ui",
-      "title": "Command Menu",
-      "description": "Search-driven command collection surface engineered with cmdk filtering, roving keyboard navigation, and HaloUI Liquid Glass optics.",
+      "title": "Halo Surface (Alias)",
+      "description": "The base material container used to construct HaloUI surfaces with 10-layer physical liquid optical physics.",
+      "dependencies": [
+        "@radix-ui/react-slot",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "components/ui/halo-surface.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/halo-surface.tsx"
+        },
+        {
+          "path": "styles/halo-tokens.css",
+          "type": "registry:ui",
+          "target": "styles/halo-tokens.css"
+        }
+      ],
       "categories": [
-        "overlays"
+        "foundations"
+      ],
+      "meta": {
+        "status": "preview",
+        "version": "1.0.0",
+        "category": "foundations",
+        "accessibility": "WCAG 2.1 AA",
+        "lastUpdated": "2026-09-24"
+      }
+    },
+    {
+      "name": "switch",
+      "type": "registry:ui",
+      "title": "Switch",
+      "description": "An accessible binary control for immediately turning a setting on or off.",
+      "dependencies": [
+        "@base-ui/react",
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge"
       ],
       "registryDependencies": [
-        "dialog"
+        "field"
+      ],
+      "files": [
+        {
+          "path": "components/ui/switch.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/switch.tsx"
+        },
+        {
+          "path": "styles/halo-tokens.css",
+          "type": "registry:ui",
+          "target": "styles/halo-tokens.css"
+        }
+      ],
+      "categories": [
+        "forms-and-fields"
+      ],
+      "meta": {
+        "status": "preview",
+        "version": "1.0.0",
+        "category": "forms-and-fields",
+        "accessibility": "WCAG 2.1 AA",
+        "lastUpdated": "2026-09-25"
+      }
+    },
+    {
+      "name": "tabs",
+      "type": "registry:ui",
+      "title": "Tabs",
+      "description": "An accessible tabbed interface for switching between peer content views within the same context.",
+      "categories": [
+        "navigation"
+      ],
+      "dependencies": [
+        "@base-ui/react",
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": []
+    },
+    {
+      "name": "tag-input",
+      "type": "registry:ui",
+      "title": "Tag Input",
+      "description": "An accessible multi-token tag editor with two-stage deletion, delimiter and paste tokenization, duplicate prevention, and keyboard navigation.",
+      "dependencies": [
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge",
+        "@hugeicons/core-free-icons",
+        "@hugeicons/react"
+      ],
+      "registryDependencies": [
+        "field",
+        "halo-icon"
+      ],
+      "files": [
+        {
+          "path": "components/ui/tag-input.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/tag-input.tsx"
+        },
+        {
+          "path": "styles/halo-tokens.css",
+          "type": "registry:ui",
+          "target": "styles/halo-tokens.css"
+        }
+      ],
+      "categories": [
+        "forms-and-fields"
+      ],
+      "meta": {
+        "status": "preview",
+        "version": "1.0.0",
+        "category": "forms-and-fields",
+        "accessibility": "WCAG 2.1 AA",
+        "lastUpdated": "2026-09-25"
+      }
+    },
+    {
+      "name": "textarea",
+      "type": "registry:ui",
+      "title": "Textarea",
+      "description": "A native multiline text-entry control with HaloUI form states, accessible focus treatment, and configurable resizing.",
+      "dependencies": [
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "components/ui/textarea.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/textarea.tsx"
+        },
+        {
+          "path": "styles/halo-tokens.css",
+          "type": "registry:ui",
+          "target": "styles/halo-tokens.css"
+        }
+      ],
+      "categories": [
+        "forms-and-fields"
+      ],
+      "meta": {
+        "status": "preview",
+        "version": "1.0.0",
+        "category": "forms-and-fields",
+        "accessibility": "WCAG 2.1 AA",
+        "lastUpdated": "2026-09-25"
+      }
+    },
+    {
+      "name": "time-picker",
+      "type": "registry:ui",
+      "title": "Time Picker",
+      "description": "An accessible time-only control for selecting a local clock time without introducing a calendar date or timezone.",
+      "categories": [
+        "forms-and-fields"
+      ],
+      "dependencies": [
+        "@hugeicons/core-free-icons",
+        "@hugeicons/react",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [
+        "field"
       ]
     },
     {
-      "name": "spotlight",
+      "name": "toggle",
       "type": "registry:ui",
-      "title": "Spotlight",
-      "description": "Large global discovery surface engineered for application-wide search across heterogeneous entities, files, people, and commands with HaloUI Liquid Glass optics.",
-      "categories": [
-        "overlays"
+      "title": "Toggle",
+      "description": "A two-state action control that communicates and changes a persistent pressed or unpressed state.",
+      "dependencies": [
+        "@base-ui/react",
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge"
       ],
-      "registryDependencies": [
-        "dialog"
-      ]
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "components/ui/toggle.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/toggle.tsx"
+        },
+        {
+          "path": "styles/halo-tokens.css",
+          "type": "registry:ui",
+          "target": "styles/halo-tokens.css"
+        }
+      ],
+      "categories": [
+        "actions"
+      ],
+      "meta": {
+        "status": "preview",
+        "version": "1.0.0",
+        "category": "actions",
+        "accessibility": "WCAG 2.1 AA",
+        "lastUpdated": "2026-09-24"
+      }
     },
     {
-      "name": "lightbox",
+      "name": "toggle-group",
       "type": "registry:ui",
-      "title": "Lightbox",
-      "description": "Focused media viewer overlay engineered for high-fidelity image inspection and galleries with deep optical Halo Scrim and Liquid Glass floating controls.",
-      "categories": [
-        "overlays"
+      "title": "Toggle Group",
+      "description": "Single- or multi-selection set of toggles.",
+      "dependencies": [
+        "@base-ui/react",
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge"
       ],
       "registryDependencies": [
-        "dialog"
-      ]
+        "toggle"
+      ],
+      "files": [
+        {
+          "path": "components/ui/toggle-group.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/toggle-group.tsx"
+        },
+        {
+          "path": "styles/halo-tokens.css",
+          "type": "registry:ui",
+          "target": "styles/halo-tokens.css"
+        }
+      ],
+      "categories": [
+        "actions"
+      ],
+      "meta": {
+        "status": "preview",
+        "version": "1.0.0",
+        "category": "actions",
+        "accessibility": "WCAG 2.1 AA",
+        "lastUpdated": "2026-09-24"
+      }
+    },
+    {
+      "name": "tooltip",
+      "type": "registry:ui",
+      "title": "Tooltip",
+      "description": "Brief contextual label and supplemental help associated with an interface element, engineered with HaloUI Liquid Glass optics, skip-delay provider orchestration, and non-modal focus isolation.",
+      "dependencies": [
+        "@base-ui/react",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [],
+      "meta": {
+        "status": "production",
+        "version": "2.0.0",
+        "category": "overlays-and-menus",
+        "lastUpdated": "2026-09-26"
+      }
     },
     {
       "name": "tour-popover",
@@ -2384,6 +2384,35 @@
         "category": "overlays-and-menus",
         "lastUpdated": "2026-09-26"
       }
+    },
+    {
+      "name": "tree-navigation",
+      "type": "registry:ui",
+      "title": "Tree Navigation",
+      "description": "A hierarchical expandable navigation component for navigating deeply nested destinations while preserving parent-child structure.",
+      "categories": [
+        "navigation"
+      ],
+      "registryDependencies": []
+    },
+    {
+      "name": "url-field",
+      "type": "registry:ui",
+      "title": "URL Field",
+      "description": "A URL-oriented text-entry control with browser-friendly input semantics, optional normalization, and clear validation affordances.",
+      "categories": [
+        "forms-and-fields"
+      ],
+      "dependencies": [
+        "@hugeicons/core-free-icons",
+        "@hugeicons/react",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [
+        "field",
+        "halo-icon"
+      ]
     }
   ]
 }
