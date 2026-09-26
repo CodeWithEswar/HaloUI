@@ -22,6 +22,8 @@ import {
 } from "@/components/ui/kpi-card";
 import { type CardIntensity, type CardSize, type CardVariant } from "@/components/ui/card";
 import { HaloIcon } from "@/components/icons/halo-icon";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Label } from "@/components/ui/label";
 import {
   PreviewStageShell,
   StageControlSelect,
@@ -278,36 +280,48 @@ ${showChart ? `
             />
           </div>
 
-          <div className="flex flex-wrap items-center gap-4 pt-1 border-t border-border/40 text-xs">
-            <label className="flex items-center gap-1.5 cursor-pointer text-muted-foreground hover:text-foreground">
-              <input
-                type="checkbox"
+          <div className="flex flex-wrap items-center gap-6 pt-2 border-t border-border/40">
+            <div className="flex items-center gap-2">
+              <Checkbox
+                id="kpi-toggle-target"
                 checked={showTarget}
-                onChange={(e) => setShowTarget(e.target.checked)}
-                className="rounded border-border text-primary focus:ring-primary/20"
+                onCheckedChange={(checked) => setShowTarget(Boolean(checked))}
               />
-              Target Row
-            </label>
+              <Label
+                htmlFor="kpi-toggle-target"
+                className="text-xs text-muted-foreground hover:text-foreground cursor-pointer font-medium select-none"
+              >
+                Target Row
+              </Label>
+            </div>
 
-            <label className="flex items-center gap-1.5 cursor-pointer text-muted-foreground hover:text-foreground">
-              <input
-                type="checkbox"
+            <div className="flex items-center gap-2">
+              <Checkbox
+                id="kpi-toggle-progress"
                 checked={showProgress}
-                onChange={(e) => setShowProgress(e.target.checked)}
-                className="rounded border-border text-primary focus:ring-primary/20"
+                onCheckedChange={(checked) => setShowProgress(Boolean(checked))}
               />
-              Target Progress
-            </label>
+              <Label
+                htmlFor="kpi-toggle-progress"
+                className="text-xs text-muted-foreground hover:text-foreground cursor-pointer font-medium select-none"
+              >
+                Target Progress
+              </Label>
+            </div>
 
-            <label className="flex items-center gap-1.5 cursor-pointer text-muted-foreground hover:text-foreground">
-              <input
-                type="checkbox"
+            <div className="flex items-center gap-2">
+              <Checkbox
+                id="kpi-toggle-chart"
                 checked={showChart}
-                onChange={(e) => setShowChart(e.target.checked)}
-                className="rounded border-border text-primary focus:ring-primary/20"
+                onCheckedChange={(checked) => setShowChart(Boolean(checked))}
               />
-              Sparkline
-            </label>
+              <Label
+                htmlFor="kpi-toggle-chart"
+                className="text-xs text-muted-foreground hover:text-foreground cursor-pointer font-medium select-none"
+              >
+                Sparkline
+              </Label>
+            </div>
           </div>
         </div>
       }
