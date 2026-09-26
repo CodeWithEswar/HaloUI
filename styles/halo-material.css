@@ -869,3 +869,203 @@ html[data-theme="dark"],
     min-width: 0;
   }
 }
+/* =========================================================
+   21. DEEP OPTICAL LIQUID GLASS
+   Progressive lensing layer. Content remains isolated above optics.
+   ========================================================= */
+
+.halo-optical-glass {
+  --halo-optical-x: 50%;
+  --halo-optical-y: 35%;
+  --halo-optical-nx: 0;
+  --halo-optical-ny: 0;
+  --halo-optical-scale: 1;
+  --halo-optical-depth: 12px;
+  --halo-optical-blur: 9px;
+  --halo-optical-saturation: 185%;
+  --halo-optical-tint: rgba(255, 255, 255, 0.12);
+  --halo-optical-edge: rgba(255, 255, 255, 0.72);
+  --halo-optical-shadow: rgba(8, 18, 32, 0.22);
+
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--halo-optical-edge) 55%, transparent);
+  border-radius: var(--halo-radius-floating);
+  background:
+    radial-gradient(
+      120% 160% at var(--halo-optical-x) var(--halo-optical-y),
+      rgba(255,255,255,.20) 0%,
+      rgba(255,255,255,.07) 28%,
+      transparent 56%
+    ),
+    var(--halo-optical-tint);
+  backdrop-filter:
+    blur(var(--halo-optical-blur))
+    saturate(var(--halo-optical-saturation))
+    brightness(1.04);
+  -webkit-backdrop-filter:
+    blur(var(--halo-optical-blur))
+    saturate(var(--halo-optical-saturation))
+    brightness(1.04);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.62),
+    inset 0 -1px 0 rgba(0,0,0,.10),
+    0 10px 28px -14px var(--halo-optical-shadow);
+  transform:
+    perspective(700px)
+    rotateX(calc(var(--halo-optical-ny) * -1.1deg))
+    rotateY(calc(var(--halo-optical-nx) * 1.1deg))
+    scale(var(--halo-optical-scale));
+  transform-style: preserve-3d;
+  transition:
+    transform 420ms cubic-bezier(.2,.85,.2,1.35),
+    box-shadow 220ms ease,
+    background 220ms ease;
+  will-change: transform;
+}
+
+.halo-optical-glass[data-shape="capsule"] { border-radius: 9999px; }
+.halo-optical-glass[data-shape="circle"] { border-radius: 50%; aspect-ratio: 1; }
+
+.halo-optical-glass[data-material="clear"] {
+  --halo-optical-blur: 3px;
+  --halo-optical-tint: rgba(255,255,255,.055);
+  --halo-optical-saturation: 205%;
+}
+
+.halo-optical-glass[data-material="prominent"] {
+  --halo-optical-blur: 13px;
+  --halo-optical-tint: rgba(255,255,255,.20);
+  --halo-optical-saturation: 195%;
+}
+
+.halo-optical-glass[data-lens="subtle"] { --halo-optical-depth: 7px; }
+.halo-optical-glass[data-lens="rich"] { --halo-optical-depth: 19px; }
+
+.halo-optical-glass__lens,
+.halo-optical-glass__meniscus,
+.halo-optical-glass__caustic,
+.halo-optical-glass__specular {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.halo-optical-glass__lens {
+  inset: 3px;
+  background:
+    radial-gradient(
+      90% 130% at var(--halo-optical-x) var(--halo-optical-y),
+      rgba(255,255,255,.16),
+      transparent 45%
+    ),
+    radial-gradient(
+      130% 100% at calc(50% + var(--halo-optical-nx) * 8%) calc(50% + var(--halo-optical-ny) * 8%),
+      transparent 48%,
+      rgba(255,255,255,.10) 68%,
+      rgba(0,0,0,.07) 100%
+    );
+  box-shadow:
+    inset calc(var(--halo-optical-nx) * -3px)
+      calc(var(--halo-optical-ny) * -3px)
+      var(--halo-optical-depth) rgba(255,255,255,.12);
+  filter: saturate(1.15);
+}
+
+.halo-optical-glass__meniscus {
+  inset: 1px;
+  border: 1px solid rgba(255,255,255,.38);
+  box-shadow:
+    inset 1px 1px 1px rgba(255,255,255,.56),
+    inset -1px -1px 1px rgba(0,0,0,.16),
+    inset 0 0 var(--halo-optical-depth) rgba(255,255,255,.09);
+  mask-image: linear-gradient(135deg,#000 0 42%,rgba(0,0,0,.22) 61%,#000 100%);
+}
+
+.halo-optical-glass__caustic {
+  inset: -28%;
+  background:
+    conic-gradient(
+      from 205deg at var(--halo-optical-x) var(--halo-optical-y),
+      transparent 0deg,
+      rgba(128,220,255,.13) 35deg,
+      rgba(255,255,255,.32) 62deg,
+      transparent 105deg,
+      transparent 270deg,
+      rgba(255,190,230,.10) 315deg,
+      transparent 360deg
+    );
+  filter: blur(14px);
+  opacity: .75;
+  transform:
+    translate(
+      calc(var(--halo-optical-nx) * 5px),
+      calc(var(--halo-optical-ny) * 5px)
+    );
+  transition: transform 90ms linear;
+}
+
+.halo-optical-glass__specular {
+  background:
+    radial-gradient(
+      34% 62% at var(--halo-optical-x) var(--halo-optical-y),
+      rgba(255,255,255,.58) 0%,
+      rgba(255,255,255,.18) 32%,
+      transparent 72%
+    );
+  mix-blend-mode: screen;
+  opacity: .78;
+}
+
+.halo-optical-glass__content {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  width: 100%;
+}
+
+.halo-optical-glass[data-interactive]:hover {
+  --halo-optical-scale: 1.018;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.72),
+    inset 0 -1px 0 rgba(0,0,0,.12),
+    0 16px 36px -16px var(--halo-optical-shadow);
+}
+
+.halo-optical-glass[data-pressed] {
+  --halo-optical-scale: .965;
+  transition-duration: 90ms;
+}
+
+:is(.dark, html[data-theme="dark"], [data-stage-theme="dark"]) .halo-optical-glass {
+  --halo-optical-tint: rgba(255,255,255,.065);
+  --halo-optical-edge: rgba(255,255,255,.34);
+  --halo-optical-shadow: rgba(0,0,0,.55);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.28),
+    inset 0 -1px 0 rgba(0,0,0,.48),
+    0 14px 34px -15px var(--halo-optical-shadow);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .halo-optical-glass,
+  .halo-optical-glass__caustic {
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .halo-optical-glass {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background: var(--halo-material-solid) !important;
+  }
+  .halo-optical-glass__lens,
+  .halo-optical-glass__caustic {
+    display: none;
+  }
+}
