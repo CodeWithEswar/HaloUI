@@ -623,12 +623,12 @@ export function StageControlSelect<T extends string>({
   return (
     <div
       className={cn(
-        "flex items-center justify-between gap-2 p-1.5 sm:p-2 px-2.5 sm:px-3 rounded-xl border border-border/80 bg-card/75 shadow-2xs w-full min-w-0 transition-colors",
+        "flex flex-col justify-between gap-1.5 p-2 sm:p-2.5 rounded-xl border border-border/80 bg-card/75 shadow-2xs w-full min-w-0 transition-colors",
         className
       )}
     >
-      <span className="text-xs sm:text-[13px] text-muted-foreground font-medium select-none shrink-0 whitespace-nowrap">
-        {label}:
+      <span className="text-[11px] sm:text-xs text-muted-foreground font-medium select-none truncate block">
+        {label}
       </span>
       <Select
         value={value}
@@ -638,13 +638,13 @@ export function StageControlSelect<T extends string>({
         <SelectTrigger
           variant="default"
           size="sm"
-          className="halo-docs-control h-8.5 sm:h-9 text-xs sm:text-[13px] bg-background border-border text-foreground font-medium shadow-2xs min-w-0 flex-1 justify-between px-2.5 sm:px-3 gap-1.5 overflow-hidden rounded-lg transition-colors"
+          className="halo-docs-control h-8 sm:h-8.5 text-xs sm:text-[13px] bg-background border-border text-foreground font-medium shadow-2xs w-full min-w-0 justify-between px-2.5 sm:px-3 gap-1.5 overflow-hidden rounded-lg transition-colors"
         >
           <span className="truncate text-left flex-1 min-w-0 block">
             <SelectValue>{selectedOption?.label ?? value}</SelectValue>
           </span>
         </SelectTrigger>
-        <SelectContent variant="default" align="end" className="halo-docs-control">
+        <SelectContent variant="default" align="start" className="halo-docs-control min-w-[180px] max-w-[calc(100vw-2rem)]">
           {options.map((opt) => (
             <SelectItem key={opt.value} value={opt.value} className="text-xs sm:text-[13px] py-1.5">
               {opt.label}

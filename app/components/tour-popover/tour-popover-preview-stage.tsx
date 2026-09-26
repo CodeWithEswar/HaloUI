@@ -259,7 +259,7 @@ export function ProductOnboardingTour() {
       telemetry={telemetry}
       code={generatedCode}
       controls={
-        <>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-3 w-full">
           <StageControlSelect
             label="Material Intensity"
             value={intensity}
@@ -292,20 +292,20 @@ export function ProductOnboardingTour() {
             ]}
           />
 
-          <div className="flex flex-col gap-1.5 pt-1">
-            <label className="text-[11px] font-medium text-muted-foreground uppercase tracking-wider">
+          <div className="flex flex-col justify-between gap-1.5 p-2 sm:p-2.5 rounded-xl border border-border/80 bg-card/75 shadow-2xs w-full min-w-0 transition-colors">
+            <span className="text-[11px] sm:text-xs text-muted-foreground font-medium select-none truncate">
               Missing Target Simulation
-            </label>
+            </span>
             <Button
               variant={simulateMissingTarget ? "destructive" : "outline"}
               size="sm"
-              className="h-8 justify-start text-xs font-normal"
+              className="h-8 sm:h-8.5 w-full text-xs font-normal justify-center rounded-lg"
               onClick={() => setSimulateMissingTarget(!simulateMissingTarget)}
             >
               {simulateMissingTarget ? "Simulating Target 4 Missing" : "All Targets Available"}
             </Button>
           </div>
-        </>
+        </div>
       }
     >
       <div className="flex w-full flex-col items-center justify-center p-4">
@@ -315,6 +315,7 @@ export function ProductOnboardingTour() {
           open={isOpen}
           onOpenChange={setIsOpen}
           currentStep={currentStepIndex}
+          scrollToTarget={false}
           onStepChange={(idx) => {
             setCurrentStepIndex(idx);
             setLastEvent(`Advanced to Step ${idx + 1}`);

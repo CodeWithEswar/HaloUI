@@ -179,7 +179,7 @@ export function GalleryLightboxExample() {
   ];
 
   const controls = (
-    <div className="grid grid-cols-2 sm:grid-cols-5 gap-3">
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2.5 sm:gap-3 w-full">
       <StageControlSelect
         label="Viewing Mode"
         value={mode}
@@ -220,10 +220,13 @@ export function GalleryLightboxExample() {
           { label: "Bounded (Stop at Ends)", value: "no" },
         ]}
       />
-      <div className="flex flex-col justify-end col-span-2 sm:col-span-1">
+      <div className="flex flex-col justify-between gap-1.5 p-2 sm:p-2.5 rounded-xl border border-border/80 bg-card/75 shadow-2xs w-full min-w-0 transition-colors col-span-1 sm:col-span-2 md:col-span-1">
+        <span className="text-[11px] sm:text-xs text-muted-foreground font-medium select-none truncate">
+          Interactive Overlay
+        </span>
         <Button
           onClick={() => setIsOpen(true)}
-          className="h-9 w-full gap-2 rounded-xl text-xs font-semibold shadow-xs"
+          className="h-8 sm:h-8.5 w-full gap-2 rounded-lg text-xs font-semibold shadow-xs justify-center"
         >
           <HaloIcon icon={ViewIcon} size={15} />
           <span>Launch Viewer</span>

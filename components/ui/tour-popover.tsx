@@ -550,13 +550,28 @@ export function TourTargetHighlight() {
 
     updateRect();
 
+    // Track active transition frames during container resize
+    let frameId: number;
+    const startTime = performance.now();
+    const tick = (now: number) => {
+      updateRect();
+      if (now - startTime < 450) {
+        frameId = requestAnimationFrame(tick);
+      }
+    };
+    frameId = requestAnimationFrame(tick);
+
     window.addEventListener("resize", updateRect, { passive: true });
     window.addEventListener("scroll", updateRect, { passive: true, capture: true });
 
     const resizeObserver = new ResizeObserver(updateRect);
     resizeObserver.observe(targetElement);
+    if (targetElement.parentElement) {
+      resizeObserver.observe(targetElement.parentElement);
+    }
 
     return () => {
+      cancelAnimationFrame(frameId);
       window.removeEventListener("resize", updateRect);
       window.removeEventListener("scroll", updateRect, true);
       resizeObserver.disconnect();
