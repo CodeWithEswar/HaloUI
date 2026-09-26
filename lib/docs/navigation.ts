@@ -1263,6 +1263,24 @@ export const docsNavigation: DocsNavSection[] = [
           "dashboard"
         ],
       },
+      {
+        title: "Profile Card",
+        href: "/components/profile-card",
+        description: "Compact identity summary surface presenting an entity's avatar, display name, professional role, presence status, metadata, and optional actions.",
+        status: "stable",
+        keywords: [
+          "profile card",
+          "profile-card",
+          "profile",
+          "identity",
+          "avatar",
+          "member",
+          "user",
+          "author",
+          "team",
+          "data display"
+        ],
+      },
     ],
   },
   {
