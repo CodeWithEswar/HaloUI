@@ -232,23 +232,32 @@ export function PreviewStageShell({
   const backdropClasses = activeTheme === "dark" ? currentPreset.dark : currentPreset.light;
 
   return (
-    <div className={cn("w-full space-y-3", className)}>
-      {/* 1. Clean Responsive Header Above Stage (rendered only when explicitly provided) */}
-      {title ? (
-        <div className="space-y-1">
-          <h2 data-toc-ignore className="text-base sm:text-lg font-semibold tracking-tight text-foreground">
-            {title}
-          </h2>
-          {description && (
-            <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
-              {description}
-            </p>
-          )}
-        </div>
-      ) : null}
-
-      {/* 2. Main Workbench Shell */}
+    <div className={cn("w-full", className)}>
+      {/* Main Workbench Shell */}
       <div className="w-full rounded-2xl border border-border bg-card overflow-hidden flex flex-col shadow-xs">
+        {/* 1. Clean Responsive Header (Housed cleanly inside the docs shell) */}
+        {title ? (
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 px-3.5 py-3 sm:px-4 sm:py-3 border-b border-border bg-muted/20">
+            <div className="space-y-0.5">
+              <div className="flex items-center gap-2">
+                <h2 data-toc-ignore className="text-sm sm:text-base font-semibold tracking-tight text-foreground">
+                  {title}
+                </h2>
+                {badge && (
+                  <span className="inline-flex items-center rounded-md border border-border/70 bg-background/80 px-2 py-0.5 text-[10px] font-mono text-muted-foreground">
+                    {badge}
+                  </span>
+                )}
+              </div>
+              {description && (
+                <p className="text-xs text-muted-foreground leading-relaxed">
+                  {description}
+                </p>
+              )}
+            </div>
+          </div>
+        ) : null}
+
         {/* Stage Toolbar */}
         <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2.5 p-2.5 sm:p-3.5 border-b border-border bg-muted/30">
           {/* Left: Tab Switcher & Viewport Switcher */}

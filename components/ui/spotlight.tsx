@@ -296,7 +296,7 @@ export function SpotlightDialog({
 /* -------------------------------------------------------------------------- */
 
 export interface SpotlightInputProps
-  extends React.ComponentPropsWithoutRef<typeof CommandPrimitive.Input> {
+  extends Omit<React.ComponentPropsWithoutRef<typeof CommandPrimitive.Input>, "defaultValue"> {
   /**
    * Accessible input label for screen readers.
    * @default "Search across files, projects, people, and commands"
@@ -307,6 +307,10 @@ export interface SpotlightInputProps
    * @default "Search files, documents, team members, or actions..."
    */
   placeholder?: string;
+  /**
+   * Initial search query when input is uncontrolled.
+   */
+  defaultValue?: string;
 }
 
 export const SpotlightInput = React.forwardRef<
@@ -324,16 +328,38 @@ export const SpotlightInput = React.forwardRef<
   ref
 ) {
   const context = useSpotlight();
+  const [uncontrolledQuery, setUncontrolledQuery] = React.useState(
+    defaultValue !== undefined ? String(defaultValue) : ""
+  );
 
-  // Sync defaultValue to context query once if provided and context is empty
+  // Sync defaultValue to context query on mount if provided and context query is empty
   React.useEffect(() => {
     if (defaultValue !== undefined && context && !context.query) {
       context.setQuery(String(defaultValue));
     }
   }, [defaultValue, context]);
 
-  const isUncontrolled = defaultValue !== undefined && value === undefined;
-  const currentValue = value !== undefined ? value : (context?.query ?? "");
+  // Determine current active query value
+  const currentValue =
+    value !== undefined
+      ? value
+      : context
+      ? (context.query || uncontrolledQuery)
+      : uncontrolledQuery;
+
+  const handleValueChange = (newVal: string) => {
+    if (value === undefined) {
+      setUncontrolledQuery(newVal);
+    }
+    context?.setQuery(newVal);
+  };
+
+  const handleClear = () => {
+    if (value === undefined) {
+      setUncontrolledQuery("");
+    }
+    context?.onClearQuery();
+  };
 
   return (
     <div
@@ -348,39 +374,23 @@ export const SpotlightInput = React.forwardRef<
         size={20}
         className="mr-3 shrink-0 text-muted-foreground/75"
       />
-      {isUncontrolled ? (
-        <CommandPrimitive.Input
-          ref={ref}
-          id="spotlight-search-field"
-          data-slot="spotlight-input"
-          placeholder={placeholder}
-          defaultValue={defaultValue}
-          onValueChange={context?.setQuery}
-          className={cn(
-            "flex h-9 sm:h-10 w-full rounded-md bg-transparent text-sm sm:text-base font-medium text-foreground placeholder:text-muted-foreground/50 outline-hidden select-text disabled:cursor-not-allowed disabled:opacity-50",
-            className
-          )}
-          {...props}
-        />
-      ) : (
-        <CommandPrimitive.Input
-          ref={ref}
-          id="spotlight-search-field"
-          data-slot="spotlight-input"
-          placeholder={placeholder}
-          value={currentValue}
-          onValueChange={context?.setQuery}
-          className={cn(
-            "flex h-9 sm:h-10 w-full rounded-md bg-transparent text-sm sm:text-base font-medium text-foreground placeholder:text-muted-foreground/50 outline-hidden select-text disabled:cursor-not-allowed disabled:opacity-50",
-            className
-          )}
-          {...props}
-        />
-      )}
-      {Boolean(currentValue || defaultValue) && context?.onClearQuery && (
+      <CommandPrimitive.Input
+        ref={ref}
+        id="spotlight-search-field"
+        data-slot="spotlight-input"
+        placeholder={placeholder}
+        value={currentValue}
+        onValueChange={handleValueChange}
+        className={cn(
+          "flex h-9 sm:h-10 w-full rounded-md bg-transparent text-sm sm:text-base font-medium text-foreground placeholder:text-muted-foreground/50 outline-hidden select-text disabled:cursor-not-allowed disabled:opacity-50",
+          className
+        )}
+        {...props}
+      />
+      {Boolean(currentValue) && (context?.onClearQuery || value === undefined) && (
         <button
           type="button"
-          onClick={context.onClearQuery}
+          onClick={handleClear}
           className="ml-2 flex size-7 shrink-0 items-center justify-center rounded-lg text-muted-foreground hover:bg-black/[0.06] dark:hover:bg-white/[0.10] hover:text-foreground transition-all cursor-pointer"
           aria-label="Clear query"
         >
