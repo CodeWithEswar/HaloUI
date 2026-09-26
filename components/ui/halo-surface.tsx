@@ -1,5 +1,7 @@
 export {
   HaloSurface,
+  type HaloMaterialRecipe,
+  type HaloMaterialDensity,
   type HaloSurfaceProps,
   type HaloSurfaceIntensity,
   type HaloSurfaceElevation,

@@ -21,7 +21,7 @@ export function ButtonPreviewStage() {
   const [variant, setVariant] = React.useState<ButtonVariant>("default");
   const [size, setSize] = React.useState<ButtonSize>("default");
   const [disabled, setDisabled] = React.useState(false);
-  const [withIcon, setWithIcon] = React.useState(true);
+  const [withIcon, setWithIcon] = React.useState(false);
   const [copied, setCopied] = React.useState(false);
 
   const generatedCode = React.useMemo(() => {
@@ -41,7 +41,7 @@ export function ButtonPreviewStage() {
 export function ButtonDemo() {
   return (
     <Button${propsStr}>
-      Continue
+      Create application
       <HaloIcon icon={ArrowRight01Icon} size={16} />
     </Button>
   );
@@ -53,7 +53,7 @@ export function ButtonDemo() {
 export function ButtonDemo() {
   return (
     <Button${propsStr}>
-      Save changes
+      Create application
     </Button>
   );
 }`;
@@ -71,7 +71,7 @@ export function ButtonDemo() {
     setVariant("default");
     setSize("default");
     setDisabled(false);
-    setWithIcon(true);
+    setWithIcon(false);
   };
 
   return (
@@ -159,25 +159,23 @@ export function ButtonDemo() {
             Save changes
           </Button>
 
-          <Button variant={variant} size={size} disabled={disabled} className="gap-3">
+          <Button variant={variant} size={size} disabled={disabled} className="gap-2">
             {withIcon && size !== "icon" && (
               <HaloIcon icon={SparklesIcon} size={size === "sm" ? 14 : 16} />
             )}
             {size === "icon" ? (
               <HaloIcon icon={ArrowRight01Icon} size={16} />
             ) : (
-              "Get started"
+              variant === "default" ? "Create application" : "Continue"
             )}
             {withIcon && size !== "icon" && (
-              <span className="flex size-6 items-center justify-center rounded-full bg-neutral-900 text-white dark:bg-white dark:text-neutral-900 shadow-sm transition-transform group-hover/button:scale-110">
-                <HaloIcon icon={ArrowRight01Icon} size={13} />
-              </span>
+              <HaloIcon icon={ArrowRight01Icon} size={size === "sm" ? 13 : 15} />
             )}
           </Button>
         </div>
 
         {/* State metadata label */}
-        <div className="flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-[11px] font-mono text-muted-foreground/80 text-center max-w-full px-2">
+        <div className="inline-flex items-center justify-center gap-x-2 px-3 py-1 rounded-full border border-border/80 bg-background/80 backdrop-blur-md shadow-2xs text-[11px] font-mono text-muted-foreground text-center">
           <span>variant="{variant}"</span>
           <span>·</span>
           <span>size="{size}"</span>

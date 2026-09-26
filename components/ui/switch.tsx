@@ -94,10 +94,7 @@ export const Switch = React.forwardRef<HTMLElement, SwitchProps>(
           data-slot="switch-thumb"
           className={cn(
             "pointer-events-none block rounded-full transition-transform duration-150 ease-out motion-reduce:transition-none",
-            // Physical optical glass bead thumb with specular highlight
-            "bg-white shadow-[0_2px_5px_0_rgba(0,0,0,0.25),inset_0_1.5px_1px_0_rgba(255,255,255,1),inset_0_-1px_1px_0_rgba(0,0,0,0.12)] border border-black/10 dark:border-white/20",
-            "dark:bg-neutral-50 dark:shadow-[0_2px_8px_0_rgba(0,0,0,0.7),inset_0_1.5px_1px_0_rgba(255,255,255,1)]",
-
+            "halo-liquid-glass halo-material-thumb",
             // Sizes
             "group-data-[size=default]/switch:size-5",
             "group-data-[size=sm]/switch:size-3.5",

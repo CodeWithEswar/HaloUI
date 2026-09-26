@@ -2,11 +2,7 @@
 
 import * as React from "react";
 import { createPortal } from "react-dom";
-import { Slot } from "@radix-ui/react-slot";
 import { HaloSurface, type SurfaceElevation, type SurfaceIntensity } from "./halo-surface";
-import { HaloHighlight } from "./halo-highlight";
-import { HaloEdge } from "./halo-edge";
-import { HaloNoise } from "./halo-noise";
 import { HaloGlow } from "./halo-glow";
 import { cn } from "@/lib/utils";
 
@@ -94,11 +90,11 @@ export const HaloPortalSurface = React.forwardRef<HTMLDivElement, HaloPortalSurf
         asChild={asChild}
         elevation={elevation}
         intensity={intensity}
+        edge={hasEdge}
+        specular={hasHighlight}
+        noise={hasNoise}
         className={cn(
-          "relative overflow-hidden transition-all duration-200 outline-none select-text",
-          // Elevated portalled shadow reinforcement
-          elevation === "overlay" && "shadow-[0_24px_64px_-12px_rgba(0,0,0,0.35)]",
-          elevation === "floating" && "shadow-[0_16px_40px_-8px_rgba(0,0,0,0.25)]",
+          "relative select-text",
           className
         )}
         {...props}
@@ -107,19 +103,6 @@ export const HaloPortalSurface = React.forwardRef<HTMLDivElement, HaloPortalSurf
           children
         ) : (
           <>
-            {hasHighlight && (
-              <HaloHighlight
-                kind="broad"
-                strength={intensity === "rich" ? "strong" : intensity === "subtle" ? "subtle" : "balanced"}
-              />
-            )}
-            {hasEdge && (
-              <HaloEdge
-                placement="both"
-                strength={intensity === "rich" ? "strong" : "balanced"}
-              />
-            )}
-            {hasNoise && <HaloNoise strength="subtle" />}
             {glowColor !== "none" && (
               <HaloGlow
                 variant="ambient"

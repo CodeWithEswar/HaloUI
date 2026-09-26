@@ -8,9 +8,21 @@ export async function GET(
 ) {
   const { name } = await params;
   const cleanName = name.replace(/\.json$/, "");
+  if (!/^[a-z0-9-]+$/.test(cleanName)) {
+    return NextResponse.json({ error: "Invalid registry item" }, { status: 400 });
+  }
 
   try {
     const cwd = process.cwd();
+
+    // Generated registry payloads are the canonical source for both URL forms.
+    // This also keeps CSS imports and consumer dependencies synchronized.
+    try {
+      const payload = await fs.readFile(path.join(cwd, "public", "r", `${cleanName}.json`), "utf-8");
+      return NextResponse.json(JSON.parse(payload));
+    } catch (error) {
+      if ((error as NodeJS.ErrnoException).code !== "ENOENT") throw error;
+    }
 
     if (cleanName === "button") {
       const buttonPath = path.join(cwd, "components", "ui", "button.tsx");

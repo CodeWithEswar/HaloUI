@@ -59,32 +59,7 @@ export const HaloHighlight = React.forwardRef<HTMLDivElement, HaloHighlightProps
         data-kind={kind}
         data-strength={strength}
         aria-hidden="true"
-        className={cn(
-          // Absolute positioning conforming to host geometry
-          "pointer-events-none absolute inset-0 select-none rounded-[inherit] transition-all duration-200",
-
-          // 1. Edge Highlight: Localized 135° boundary sheen
-          kind === "edge" && [
-            "bg-[linear-gradient(135deg,rgba(255,255,255,0.45)_0%,rgba(255,255,255,0.08)_25%,transparent_50%)] dark:bg-[linear-gradient(135deg,rgba(255,255,255,0.18)_0%,rgba(255,255,255,0.03)_25%,transparent_50%)]",
-          ],
-
-          // 2. Broad Highlight: Low-frequency quadrant diffusion
-          kind === "broad" && [
-            "bg-[linear-gradient(135deg,rgba(255,255,255,0.25)_0%,rgba(255,255,255,0.06)_40%,transparent_80%)] dark:bg-[linear-gradient(135deg,rgba(255,255,255,0.12)_0%,rgba(255,255,255,0.02)_40%,transparent_80%)]",
-          ],
-
-          // 3. Specular Highlight: Focused circular/elliptical light reflection
-          kind === "specular" && [
-            "bg-[radial-gradient(ellipse_at_16%_16%,rgba(255,255,255,0.6)_0%,rgba(255,255,255,0.12)_28%,transparent_60%)] dark:bg-[radial-gradient(ellipse_at_16%_16%,rgba(255,255,255,0.26)_0%,rgba(255,255,255,0.04)_28%,transparent_60%)]",
-          ],
-
-          // Strength Modulation
-          strength === "subtle" && "opacity-60",
-          strength === "balanced" && "opacity-100",
-          strength === "strong" && "opacity-125 saturate-125",
-
-          className
-        )}
+        className={cn("halo-optical-highlight pointer-events-none absolute inset-0 select-none rounded-[inherit]", className)}
         {...props}
       />
     );

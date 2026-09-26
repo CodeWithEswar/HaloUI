@@ -2,8 +2,37 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 @import "../styles/halo-tokens.css";
+@import "../styles/halo-material.css";
+/* Cache-bust: updated reduced transparency rules */
 
 @custom-variant dark (&:is(.dark *):not(:is([data-stage-theme="light"], [data-stage-theme="light"] *)));
+
+/* Documentation UI Controls: Neutral, filter-free standard interface (AGENTS.md mandate) */
+.halo-docs-control {
+  background: var(--background) !important;
+  color: var(--foreground) !important;
+  border-color: var(--border) !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+.halo-docs-control::before,
+.halo-docs-control::after,
+.halo-docs-control [data-slot="select-item"]::before,
+.halo-docs-control [data-slot="select-item"]::after,
+.halo-docs-control[data-slot="select-trigger"]::before,
+.halo-docs-control[data-slot="select-trigger"]::after {
+  display: none !important;
+}
+.halo-docs-control [data-slot="select-item"] {
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+.halo-docs-control [data-slot="select-item"][data-highlighted] {
+  background: var(--muted);
+  color: var(--foreground);
+}
 
 @theme inline {
     --font-heading: var(--font-sans);
@@ -794,4 +823,3 @@ body:has([data-docs-shell]) [data-docs-skip] {
 .animate-caret-blink {
   animation: caret-blink 1.25s ease-out infinite;
 }
-

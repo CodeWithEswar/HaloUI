@@ -37,11 +37,13 @@ function SelectValue({ className, ...props }: SelectPrimitive.Value.Props) {
 
 export interface SelectTriggerProps extends SelectPrimitive.Trigger.Props {
   size?: "default" | "sm";
+  variant?: "glass" | "default";
 }
 
 function SelectTrigger({
   className,
   size = "default",
+  variant = "glass",
   children,
   ...props
 }: SelectTriggerProps) {
@@ -49,30 +51,46 @@ function SelectTrigger({
     <SelectPrimitive.Trigger
       data-slot="select-trigger"
       data-size={size}
+      data-variant={variant}
       className={cn(
-        // HaloUI Physical Liquid Glass Engine (Inherited directly from Button specification)
-        "halo-liquid-glass group/trigger relative flex w-full min-w-0 items-center justify-between gap-2 text-sm outline-none cursor-pointer text-foreground select-none",
-        size === "sm" ? "h-8 text-xs px-2.5 rounded-lg" : "h-10 text-sm px-3.5 rounded-xl",
+        "group/trigger relative flex w-full min-w-0 items-center justify-between gap-2 text-sm outline-none cursor-pointer select-none transition-all duration-150",
+        variant === "glass" ? [
+          "halo-liquid-glass text-[var(--halo-glass-text)]",
+          "hover:translate-y-[-1px]",
+          "active:scale-[0.98]",
+        ] : [
+          "border border-border bg-background text-foreground shadow-2xs hover:bg-muted/70 hover:text-foreground",
+        ],
+        size === "sm" ? "h-8 text-xs px-2.5 rounded-[9px]" : "h-10 text-sm px-3.5 rounded-xl",
         // Independent Double-Contrast Focus Ring (Halo Focus Ring)
         "focus-visible:border-[var(--halo-focus-color)] focus-visible:ring-2 focus-visible:ring-[var(--halo-focus-color)] focus-visible:ring-offset-2 focus-visible:ring-offset-background halo-focus-ring",
         // Invalid state (Dual Indicator Visibility)
-        "aria-invalid:border-destructive/80 aria-invalid:shadow-[inset_0_0_0_1px_rgba(244,63,94,0.3)] dark:aria-invalid:border-destructive/70",
+        "aria-invalid:border-destructive/80 aria-invalid:shadow-[inset_0_1px_2px_rgba(244,63,94,0.15)] dark:aria-invalid:border-destructive/70",
         // Disabled state
         "disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-40 disabled:shadow-none",
         className
       )}
       {...props}
     >
-      <span className="relative z-10 flex flex-1 items-center gap-2 truncate">{children}</span>
+      <span className="relative z-10 flex flex-1 items-center gap-2 truncate font-medium">{children}</span>
       <SelectPrimitive.Icon
         render={
-          <span className="pointer-events-none relative z-10 flex size-4 items-center justify-center text-muted-foreground select-none transition-transform duration-200 group-data-[open]/trigger:rotate-180 group-data-[popup-open]/trigger:rotate-180">
-            <HaloIcon icon={ArrowDown01Icon} size={15} />
+          <span className="pointer-events-none relative z-10 flex size-5 items-center justify-center rounded-md bg-black/[0.05] dark:bg-white/[0.08] text-muted-foreground select-none transition-transform duration-200 group-data-[open]/trigger:rotate-180 group-data-[popup-open]/trigger:rotate-180 border border-black/5 dark:border-white/10 shadow-2xs">
+            <HaloIcon icon={ArrowDown01Icon} size={14} />
           </span>
         }
       />
     </SelectPrimitive.Trigger>
   );
+}
+
+export interface SelectContentProps
+  extends SelectPrimitive.Popup.Props,
+    Pick<
+      SelectPrimitive.Positioner.Props,
+      "align" | "alignOffset" | "side" | "sideOffset" | "alignItemWithTrigger"
+    > {
+  variant?: "glass" | "default";
 }
 
 function SelectContent({
@@ -83,12 +101,9 @@ function SelectContent({
   align = "start",
   alignOffset = 0,
   alignItemWithTrigger = false,
+  variant = "glass",
   ...props
-}: SelectPrimitive.Popup.Props &
-  Pick<
-    SelectPrimitive.Positioner.Props,
-    "align" | "alignOffset" | "side" | "sideOffset" | "alignItemWithTrigger"
-  >) {
+}: SelectContentProps) {
   return (
     <SelectPrimitive.Portal>
       <SelectPrimitive.Positioner
@@ -102,15 +117,12 @@ function SelectContent({
         <SelectPrimitive.Popup
           data-slot="select-content"
           data-align-trigger={alignItemWithTrigger}
+          data-variant={variant}
           className={cn(
-            // HaloUI Physical Liquid Glass Floating Surface (10-layer optical engine without button hover/active physics)
             "relative isolate z-50 max-h-(--available-height) min-w-(--anchor-width) w-auto max-w-sm origin-(--transform-origin) overflow-hidden rounded-2xl p-1.5 text-foreground outline-none",
-            "bg-white/90 dark:bg-neutral-950/85 backdrop-blur-2xl backdrop-saturate-200",
-            "border border-border/80 dark:border-white/10 shadow-[var(--halo-shadow-elevated)]",
-            // Inner optical rim & 135° specular light highlight
-            "before:content-[''] before:absolute before:inset-0 before:pointer-events-none before:rounded-[inherit] before:shadow-[inset_0_1px_1px_0_rgba(255,255,255,0.85),inset_0_-1px_1px_0_rgba(0,0,0,0.04)] dark:before:shadow-[inset_0_1px_1px_0_rgba(255,255,255,0.18),inset_0_-1px_1px_0_rgba(0,0,0,0.6)]",
-            "after:content-[''] after:absolute after:inset-0 after:pointer-events-none after:rounded-[inherit] after:bg-gradient-to-br after:from-white/20 after:via-white/5 after:to-transparent dark:after:from-white/10 dark:after:via-transparent dark:after:to-transparent",
-            // Smooth Base UI Native CSS Transitions (Zero keyframe conflicts, zero snap-back)
+            // Floating Frosted Liquid Glass Surface (Apple iOS / macOS style, not too transparent)
+            "halo-liquid-glass-surface",
+            // Smooth Base UI Native CSS Transitions
             "transition-[opacity,transform] duration-150 ease-out",
             "data-[starting-style]:opacity-0 data-[starting-style]:scale-95 data-[starting-style]:data-[side=bottom]:-translate-y-1 data-[starting-style]:data-[side=top]:translate-y-1",
             "data-[ending-style]:opacity-0 data-[ending-style]:scale-95 data-[ending-style]:data-[side=bottom]:-translate-y-1 data-[ending-style]:data-[side=top]:translate-y-1",
@@ -120,7 +132,7 @@ function SelectContent({
           {...props}
         >
           <SelectScrollUpButton />
-          <SelectPrimitive.List className="relative z-10 p-0.5 space-y-0.5">{children}</SelectPrimitive.List>
+          <SelectPrimitive.List className="relative z-10 p-0.5 space-y-1">{children}</SelectPrimitive.List>
           <SelectScrollDownButton />
         </SelectPrimitive.Popup>
       </SelectPrimitive.Positioner>
@@ -150,14 +162,12 @@ function SelectItem({
     <SelectPrimitive.Item
       data-slot="select-item"
       className={cn(
-        "relative flex w-full cursor-pointer items-center justify-between gap-2 rounded-xl py-2 pl-3 pr-8 text-sm outline-none select-none transition-all duration-150",
-        // Active roving focus state: frosted glass highlight
-        "data-highlighted:bg-white/80 dark:data-highlighted:bg-white/[0.14] data-highlighted:backdrop-blur-md",
-        "data-highlighted:shadow-[inset_0_1px_1px_0_rgba(255,255,255,0.95),0_1px_3px_0_rgba(0,0,0,0.06)]",
-        "dark:data-highlighted:shadow-[inset_0_1px_1px_0_rgba(255,255,255,0.22),0_2px_6px_0_rgba(0,0,0,0.4)]",
-        "data-highlighted:text-foreground",
+        "relative flex w-full cursor-pointer items-center justify-between gap-2 rounded-xl py-2 pl-3 pr-8 text-sm outline-none select-none transition-colors duration-100",
+        // Active roving focus state
+        "hover:bg-black/[0.05] dark:hover:bg-white/[0.08]",
+        "data-highlighted:bg-black/[0.06] dark:data-highlighted:bg-white/[0.1] data-highlighted:text-foreground",
         // Selected committed state
-        "data-selected:font-medium data-selected:text-foreground",
+        "data-selected:font-semibold data-selected:text-foreground",
         // Disabled item
         "data-disabled:pointer-events-none data-disabled:cursor-not-allowed data-disabled:opacity-35",
         className

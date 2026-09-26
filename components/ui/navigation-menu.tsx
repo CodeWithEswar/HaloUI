@@ -7,11 +7,14 @@ import { HaloIcon } from "@/components/icons/halo-icon";
 
 function NavigationMenu({
   align = "start",
+  container,
   className,
   children,
   ...props
 }: NavigationMenuPrimitive.Root.Props &
-  Pick<NavigationMenuPrimitive.Positioner.Props, "align">) {
+  Pick<NavigationMenuPrimitive.Positioner.Props, "align"> & {
+    container?: HTMLElement | null | React.RefObject<HTMLElement | null>;
+  }) {
   return (
     <NavigationMenuPrimitive.Root
       data-slot="navigation-menu"
@@ -22,7 +25,7 @@ function NavigationMenu({
       {...props}
     >
       {children}
-      <NavigationMenuPositioner align={align} />
+      <NavigationMenuPositioner align={align} container={container} />
     </NavigationMenuPrimitive.Root>
   );
 }
@@ -57,7 +60,7 @@ function NavigationMenuItem({
 }
 
 const navigationMenuTriggerStyle = cva(
-  "group/trigger inline-flex h-9 w-max items-center justify-center rounded-lg px-3 py-1.5 text-xs sm:text-sm font-medium transition-colors outline-none text-muted-foreground hover:text-foreground hover:bg-muted/70 focus:bg-muted/70 focus-visible:ring-2 focus-visible:ring-[var(--halo-focus-color)] focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50 data-popup-open:bg-muted/70 data-popup-open:text-foreground data-open:bg-muted/70 data-open:text-foreground cursor-pointer select-none"
+  "group/trigger inline-flex h-9 w-max items-center justify-center rounded-xl px-3 py-1.5 text-xs sm:text-sm font-medium transition-colors outline-none text-muted-foreground hover:text-foreground hover:bg-black/[0.04] dark:hover:bg-white/[0.06] focus:bg-black/[0.04] dark:focus:bg-white/[0.06] focus-visible:ring-2 focus-visible:ring-[var(--halo-focus-color)] focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50 data-popup-open:bg-black/[0.06] dark:data-popup-open:bg-white/[0.10] data-popup-open:text-foreground data-open:bg-black/[0.06] dark:data-open:bg-white/[0.10] data-open:text-foreground cursor-pointer select-none"
 );
 
 function NavigationMenuTrigger({
@@ -89,7 +92,7 @@ function NavigationMenuContent({
     <NavigationMenuPrimitive.Content
       data-slot="navigation-menu-content"
       className={cn(
-        "data-ending-style:data-activation-direction=left:translate-x-[50%] data-ending-style:data-activation-direction=right:translate-x-[-50%] data-starting-style:data-activation-direction=left:translate-x-[-50%] data-starting-style:data-activation-direction=right:translate-x-[50%] h-full w-auto p-1 transition-[opacity,transform,translate] duration-250 ease-out group-data-[viewport=false]/navigation-menu:rounded-2xl group-data-[viewport=false]/navigation-menu:halo-liquid-glass-surface group-data-[viewport=false]/navigation-menu:text-popover-foreground group-data-[viewport=false]/navigation-menu:shadow-2xl data-ending-style:opacity-0 data-starting-style:opacity-0 data-[motion=from-end]:slide-in-from-right-20 data-[motion=from-start]:slide-in-from-left-20 data-[motion=to-end]:slide-out-to-right-20 data-[motion=to-start]:slide-out-to-left-20 data-[motion^=from-]:animate-in data-[motion^=from-]:fade-in data-[motion^=to-]:animate-out data-[motion^=to-]:fade-out **:data-[slot=navigation-menu-link]:focus:ring-0 **:data-[slot=navigation-menu-link]:focus:outline-none group-data-[viewport=false]/navigation-menu:data-open:animate-in group-data-[viewport=false]/navigation-menu:data-open:fade-in-0 group-data-[viewport=false]/navigation-menu:data-open:zoom-in-95 group-data-[viewport=false]/navigation-menu:data-closed:animate-out group-data-[viewport=false]/navigation-menu:data-closed:fade-out-0 group-data-[viewport=false]/navigation-menu:data-closed:zoom-out-95",
+        "data-ending-style:data-activation-direction=left:translate-x-[50%] data-ending-style:data-activation-direction=right:translate-x-[-50%] data-starting-style:data-activation-direction=left:translate-x-[-50%] data-starting-style:data-activation-direction=right:translate-x-[50%] h-full w-auto p-1 transition-[opacity,transform,translate] duration-250 ease-out group-data-[viewport=false]/navigation-menu:rounded-2xl group-data-[viewport=false]/navigation-menu:halo-liquid-glass-surface group-data-[viewport=false]/navigation-menu:text-popover-foreground data-ending-style:opacity-0 data-starting-style:opacity-0 data-[motion=from-end]:slide-in-from-right-20 data-[motion=from-start]:slide-in-from-left-20 data-[motion=to-end]:slide-out-to-right-20 data-[motion=to-start]:slide-out-to-left-20 data-[motion^=from-]:animate-in data-[motion^=from-]:fade-in data-[motion^=to-]:animate-out data-[motion^=to-]:fade-out **:data-[slot=navigation-menu-link]:focus:ring-0 **:data-[slot=navigation-menu-link]:focus:outline-none group-data-[viewport=false]/navigation-menu:data-open:animate-in group-data-[viewport=false]/navigation-menu:data-open:fade-in-0 group-data-[viewport=false]/navigation-menu:data-open:zoom-in-95 group-data-[viewport=false]/navigation-menu:data-closed:animate-out group-data-[viewport=false]/navigation-menu:data-closed:fade-out-0 group-data-[viewport=false]/navigation-menu:data-closed:zoom-out-95",
         className
       )}
       {...props}
@@ -103,10 +106,13 @@ function NavigationMenuPositioner({
   sideOffset = 8,
   align = "start",
   alignOffset = 0,
+  container,
   ...props
-}: NavigationMenuPrimitive.Positioner.Props) {
+}: NavigationMenuPrimitive.Positioner.Props & {
+  container?: HTMLElement | null | React.RefObject<HTMLElement | null>;
+}) {
   return (
-    <NavigationMenuPrimitive.Portal>
+    <NavigationMenuPrimitive.Portal container={container}>
       <NavigationMenuPrimitive.Positioner
         side={side}
         sideOffset={sideOffset}
@@ -118,7 +124,7 @@ function NavigationMenuPositioner({
         )}
         {...props}
       >
-        <NavigationMenuPrimitive.Popup className="halo-liquid-glass-surface data-[ending-style]:easing-[ease] xs:w-(--popup-width) relative h-(--popup-height) w-(--popup-width) origin-(--transform-origin) rounded-2xl text-popover-foreground shadow-2xl p-1 transition-[opacity,transform,width,height,scale,translate] duration-250 ease-out outline-none data-ending-style:scale-95 data-ending-style:opacity-0 data-ending-style:duration-150 data-starting-style:scale-95 data-starting-style:opacity-0">
+        <NavigationMenuPrimitive.Popup className="halo-liquid-glass-surface data-[ending-style]:easing-[ease] xs:w-(--popup-width) relative h-(--popup-height) w-(--popup-width) origin-(--transform-origin) rounded-2xl text-popover-foreground p-1 transition-[opacity,transform,width,height,scale,translate] duration-250 ease-out outline-none data-ending-style:scale-95 data-ending-style:opacity-0 data-ending-style:duration-150 data-starting-style:scale-95 data-starting-style:opacity-0">
           <NavigationMenuPrimitive.Viewport className="relative size-full overflow-hidden" />
         </NavigationMenuPrimitive.Popup>
       </NavigationMenuPrimitive.Positioner>
@@ -134,7 +140,7 @@ function NavigationMenuLink({
     <NavigationMenuPrimitive.Link
       data-slot="navigation-menu-link"
       className={cn(
-        "flex items-center gap-2 rounded-xl p-2.5 text-xs sm:text-sm font-medium transition-colors outline-none hover:bg-muted/70 focus:bg-muted/70 focus-visible:ring-2 focus-visible:ring-[var(--halo-focus-color)] data-active:bg-muted/80 data-active:text-foreground cursor-pointer select-none",
+        "flex items-center gap-2 rounded-xl p-2.5 text-xs sm:text-sm font-medium transition-colors outline-none hover:bg-black/[0.05] dark:hover:bg-white/[0.08] focus:bg-black/[0.05] dark:focus:bg-white/[0.08] focus-visible:ring-2 focus-visible:ring-[var(--halo-focus-color)] data-active:bg-black/[0.08] dark:data-active:bg-white/[0.12] data-active:text-foreground cursor-pointer select-none",
         className
       )}
       {...props}

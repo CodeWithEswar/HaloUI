@@ -60,43 +60,7 @@ export const HaloEdge = React.forwardRef<HTMLDivElement, HaloEdgeProps>(
         data-strength={strength}
         data-placement={placement}
         aria-hidden="true"
-        className={cn(
-          // Absolute positioning inheriting host boundary & geometry
-          "pointer-events-none absolute inset-0 select-none rounded-[inherit] transition-all duration-200",
-
-          // Base Outer Edge Hairline (Separation from environment)
-          (placement === "outer" || placement === "both") && [
-            strength === "subtle" &&
-              "shadow-[0_0_0_1px_rgba(0,0,0,0.05)] dark:shadow-[0_0_0_1px_rgba(255,255,255,0.08)]",
-            strength === "balanced" &&
-              "shadow-[0_0_0_1px_rgba(0,0,0,0.08)] dark:shadow-[0_0_0_1px_rgba(255,255,255,0.13)]",
-            strength === "strong" &&
-              "shadow-[0_0_0_1px_rgba(0,0,0,0.12)] dark:shadow-[0_0_0_1px_rgba(255,255,255,0.2)]",
-          ],
-
-          // Base Inner Edge Inset (Thickness & Directional 135° virtual light catch)
-          (placement === "inner" || placement === "both") && [
-            placement === "both"
-              ? [
-                  strength === "subtle" &&
-                    "shadow-[0_0_0_1px_rgba(0,0,0,0.05),inset_0_1px_1px_0_rgba(255,255,255,0.6),inset_0_-1px_1px_0_rgba(0,0,0,0.04)] dark:shadow-[0_0_0_1px_rgba(255,255,255,0.08),inset_0_1px_1px_0_rgba(255,255,255,0.18),inset_0_-1px_1px_0_rgba(0,0,0,0.25)]",
-                  strength === "balanced" &&
-                    "shadow-[0_0_0_1px_rgba(0,0,0,0.08),inset_0_1px_1px_0_rgba(255,255,255,0.85),inset_0_-1px_1px_0_rgba(0,0,0,0.05)] dark:shadow-[0_0_0_1px_rgba(255,255,255,0.13),inset_0_1px_1px_0_rgba(255,255,255,0.28),inset_0_-1px_1px_0_rgba(0,0,0,0.3)]",
-                  strength === "strong" &&
-                    "shadow-[0_0_0_1px_rgba(0,0,0,0.12),inset_0_1.5px_1.5px_0_rgba(255,255,255,0.95),inset_0_-1px_1.5px_0_rgba(0,0,0,0.08)] dark:shadow-[0_0_0_1px_rgba(255,255,255,0.2),inset_0_1.5px_1.5px_0_rgba(255,255,255,0.42),inset_0_-1px_1.5px_0_rgba(0,0,0,0.4)]",
-                ]
-              : [
-                  strength === "subtle" &&
-                    "shadow-[inset_0_1px_1px_0_rgba(255,255,255,0.6),inset_0_-1px_1px_0_rgba(0,0,0,0.04)] dark:shadow-[inset_0_1px_1px_0_rgba(255,255,255,0.18),inset_0_-1px_1px_0_rgba(0,0,0,0.25)]",
-                  strength === "balanced" &&
-                    "shadow-[inset_0_1px_1px_0_rgba(255,255,255,0.85),inset_0_-1px_1px_0_rgba(0,0,0,0.05)] dark:shadow-[inset_0_1px_1px_0_rgba(255,255,255,0.28),inset_0_-1px_1px_0_rgba(0,0,0,0.3)]",
-                  strength === "strong" &&
-                    "shadow-[inset_0_1.5px_1.5px_0_rgba(255,255,255,0.95),inset_0_-1px_1.5px_0_rgba(0,0,0,0.08)] dark:shadow-[inset_0_1.5px_1.5px_0_rgba(255,255,255,0.42),inset_0_-1px_1.5px_0_rgba(0,0,0,0.4)]",
-                ],
-          ],
-
-          className
-        )}
+        className={cn("halo-optical-edge pointer-events-none absolute inset-0 select-none rounded-[inherit]", className)}
         {...props}
       />
     );

@@ -416,7 +416,7 @@
       "name": "halo-surface",
       "type": "registry:ui",
       "title": "Halo Surface",
-      "description": "The base material container used to construct HaloUI surfaces with 10-layer physical liquid optical physics.",
+      "description": "Source-owned HaloUI optical foundation.",
       "dependencies": [
         "@radix-ui/react-slot",
         "clsx",
@@ -440,11 +440,11 @@
       ],
       "meta": {
         "status": "preview",
-        "version": "1.0.0",
+        "version": "2.0.0",
         "category": "foundations",
-        "accessibility": "WCAG 2.1 AA",
-        "lastUpdated": "2026-09-24"
-      }
+        "lastUpdated": "2026-09-26"
+      },
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json"
     },
     {
       "name": "surface",
@@ -484,7 +484,7 @@
       "name": "halo-edge",
       "type": "registry:ui",
       "title": "Halo Edge",
-      "description": "Layered outer and inset optical boundary treatment for translucent HaloUI materials.",
+      "description": "Source-owned HaloUI optical foundation.",
       "dependencies": [
         "@radix-ui/react-slot",
         "clsx",
@@ -508,11 +508,11 @@
       ],
       "meta": {
         "status": "preview",
-        "version": "1.0.0",
+        "version": "2.0.0",
         "category": "foundations",
-        "accessibility": "WCAG 2.1 AA (Decorative)",
-        "lastUpdated": "2026-09-24"
-      }
+        "lastUpdated": "2026-09-26"
+      },
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json"
     },
     {
       "name": "edge",
@@ -552,7 +552,7 @@
       "name": "halo-highlight",
       "type": "registry:ui",
       "title": "Halo Highlight",
-      "description": "Directional reflected-light and restrained specular treatment communicating surface orientation and physical material response against HaloUI's 135° virtual light vector.",
+      "description": "Source-owned HaloUI optical foundation.",
       "dependencies": [
         "@radix-ui/react-slot",
         "clsx",
@@ -576,11 +576,11 @@
       ],
       "meta": {
         "status": "preview",
-        "version": "1.0.0",
+        "version": "2.0.0",
         "category": "foundations",
-        "accessibility": "WCAG 2.1 AA (Decorative)",
-        "lastUpdated": "2026-09-24"
-      }
+        "lastUpdated": "2026-09-26"
+      },
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json"
     },
     {
       "name": "highlight",
@@ -620,7 +620,7 @@
       "name": "halo-noise",
       "type": "registry:ui",
       "title": "Halo Noise",
-      "description": "Subtle material grain and high-frequency procedural texture used to reduce sterile gradient banding and impart physical tooth to HaloUI liquid glass surfaces.",
+      "description": "Source-owned HaloUI optical foundation.",
       "dependencies": [
         "@radix-ui/react-slot",
         "clsx",
@@ -644,11 +644,11 @@
       ],
       "meta": {
         "status": "preview",
-        "version": "1.0.0",
+        "version": "2.0.0",
         "category": "foundations",
-        "accessibility": "WCAG 2.1 AA (Decorative)",
-        "lastUpdated": "2026-09-24"
-      }
+        "lastUpdated": "2026-09-26"
+      },
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json"
     },
     {
       "name": "noise",
@@ -688,7 +688,7 @@
       "name": "halo-glow",
       "type": "registry:ui",
       "title": "Halo Glow",
-      "description": "Ambient luminous layer used selectively for active state, emphasis, or focus-adjacent depth.",
+      "description": "Source-owned HaloUI optical foundation.",
       "dependencies": [
         "@radix-ui/react-slot",
         "clsx",
@@ -712,11 +712,11 @@
       ],
       "meta": {
         "status": "preview",
-        "version": "1.0.0",
+        "version": "2.0.0",
         "category": "foundations",
-        "accessibility": "WCAG 2.1 AA (Decorative)",
-        "lastUpdated": "2026-09-24"
-      }
+        "lastUpdated": "2026-09-26"
+      },
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json"
     },
     {
       "name": "glow",
@@ -756,7 +756,7 @@
       "name": "halo-refraction-layer",
       "type": "registry:ui",
       "title": "Halo Refraction Layer",
-      "description": "Optional progressive-enhancement optical layer that introduces restrained environmental distortion to selected HaloUI materials with a guaranteed non-refraction fallback.",
+      "description": "Source-owned HaloUI optical foundation.",
       "dependencies": [
         "@radix-ui/react-slot",
         "clsx",
@@ -779,12 +779,12 @@
         "foundations"
       ],
       "meta": {
-        "status": "experimental",
-        "version": "1.0.0",
+        "status": "preview",
+        "version": "2.0.0",
         "category": "foundations",
-        "accessibility": "WCAG 2.1 AA (Decorative)",
-        "lastUpdated": "2026-09-24"
-      }
+        "lastUpdated": "2026-09-26"
+      },
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json"
     },
     {
       "name": "refraction",
@@ -1030,8 +1030,7 @@
       ],
       "registryDependencies": [
         "halo-surface",
-        "halo-highlight",
-        "halo-edge"
+        "halo-glow"
       ],
       "files": [
         {
@@ -1044,11 +1043,12 @@
         "foundations"
       ],
       "meta": {
-        "status": "production",
-        "version": "1.0.0",
+        "status": "preview",
+        "version": "2.0.0",
         "category": "foundations",
-        "lastUpdated": "2026-09-24"
-      }
+        "lastUpdated": "2026-09-26"
+      },
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json"
     },
     {
       "name": "halo-scrim",
@@ -1987,6 +1987,379 @@
       ],
       "categories": [
         "navigation"
+      ]
+    },
+    {
+      "name": "menubar",
+      "type": "registry:ui",
+      "title": "Menubar",
+      "description": "An accessible persistent command bar for organizing related application actions into keyboard-operable menus.",
+      "categories": [
+        "navigation"
+      ],
+      "dependencies": [
+        "@base-ui/react",
+        "@hugeicons/core-free-icons",
+        "@hugeicons/react",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [
+        "dropdown-menu"
+      ]
+    },
+    {
+      "name": "sidebar",
+      "type": "registry:ui",
+      "title": "Sidebar",
+      "description": "A responsive application navigation container for organizing primary destinations, grouped navigation, supporting actions, and optional collapsed states.",
+      "categories": [
+        "navigation"
+      ],
+      "dependencies": [
+        "@base-ui/react",
+        "@hugeicons/core-free-icons",
+        "@hugeicons/react",
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [
+        "button",
+        "input",
+        "separator",
+        "sheet",
+        "skeleton",
+        "tooltip"
+      ]
+    },
+    {
+      "name": "sidebar-rail",
+      "type": "registry:ui",
+      "title": "Sidebar Rail",
+      "description": "A compact navigation rail for preserving essential application navigation when the primary Sidebar is collapsed.",
+      "categories": [
+        "navigation"
+      ],
+      "registryDependencies": [
+        "sidebar",
+        "tooltip",
+        "button"
+      ]
+    },
+    {
+      "name": "dock",
+      "type": "registry:ui",
+      "title": "Dock",
+      "description": "A floating surface for a small set of high-value destinations and actions that should remain quickly accessible.",
+      "categories": [
+        "navigation"
+      ],
+      "registryDependencies": [
+        "tooltip"
+      ]
+    },
+    {
+      "name": "bottom-navigation",
+      "type": "registry:ui",
+      "title": "Bottom Navigation",
+      "description": "A mobile-first persistent navigation surface for a small set of primary application destinations.",
+      "categories": [
+        "navigation"
+      ],
+      "registryDependencies": []
+    },
+    {
+      "name": "stepper",
+      "type": "registry:ui",
+      "title": "Stepper",
+      "description": "A structured progress and navigation component for communicating a user's position within a bounded multi-step process.",
+      "categories": [
+        "navigation"
+      ],
+      "registryDependencies": []
+    },
+    {
+      "name": "command-palette",
+      "type": "registry:ui",
+      "title": "Command Palette",
+      "description": "A keyboard-first searchable interface for quickly finding and activating application commands and destinations.",
+      "categories": [
+        "navigation"
+      ],
+      "registryDependencies": []
+    },
+    {
+      "name": "tree-navigation",
+      "type": "registry:ui",
+      "title": "Tree Navigation",
+      "description": "A hierarchical expandable navigation component for navigating deeply nested destinations while preserving parent-child structure.",
+      "categories": [
+        "navigation"
+      ],
+      "registryDependencies": []
+    },
+    {
+      "name": "link-preview",
+      "type": "registry:ui",
+      "title": "Link Preview",
+      "description": "A navigation link that reveals concise supplemental destination context without replacing the link's native navigation behavior.",
+      "categories": [
+        "navigation"
+      ],
+      "registryDependencies": []
+    },
+    {
+      "name": "kbd",
+      "type": "registry:ui",
+      "title": "Kbd",
+      "description": "A semantic visual representation of keyboard keys and shortcut combinations used in instructions, menus, commands, and interface hints.",
+      "categories": [
+        "navigation"
+      ],
+      "registryDependencies": []
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "dialog",
+      "type": "registry:ui",
+      "title": "Dialog",
+      "description": "An accessible modal task surface engineered with HaloUI liquid glass physical optics, calibrated optical scrim diffusion, and strict focus trapping.",
+      "dependencies": [
+        "@base-ui/react",
+        "@hugeicons/core-free-icons",
+        "@hugeicons/react",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [
+        "button"
+      ],
+      "meta": {
+        "status": "production",
+        "version": "2.0.0",
+        "category": "overlays-and-menus",
+        "lastUpdated": "2026-09-26"
+      }
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "alert-dialog",
+      "type": "registry:ui",
+      "title": "Alert Dialog",
+      "description": "A high-consequence modal confirmation surface engineered with HaloUI liquid glass physical optics, deep optical scrim isolation, and explicit consequence verification.",
+      "dependencies": [
+        "@base-ui/react",
+        "@hugeicons/core-free-icons",
+        "@hugeicons/react",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [
+        "button"
+      ],
+      "meta": {
+        "status": "production",
+        "version": "2.0.0",
+        "category": "overlays-and-menus",
+        "lastUpdated": "2026-09-26"
+      }
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "sheet",
+      "type": "registry:ui",
+      "title": "Sheet",
+      "description": "An edge-anchored overlay panel engineered with HaloUI liquid glass physical optics, directional slide kinematics, concentric meniscus border curvature, and calibrated optical scrim diffusion.",
+      "dependencies": [
+        "@base-ui/react",
+        "@hugeicons/core-free-icons",
+        "@hugeicons/react",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [
+        "button"
+      ],
+      "meta": {
+        "status": "production",
+        "version": "2.0.0",
+        "category": "overlays-and-menus",
+        "lastUpdated": "2026-09-26"
+      }
+    },
+    {
+      "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+      "name": "drawer",
+      "type": "registry:ui",
+      "title": "Drawer",
+      "description": "A touch-friendly contextual surface powered by Base UI Drawer, engineered with velocity swipe dismissal, multi-step snap points, mobile safe area padding, and 10-layer Liquid Glass optical physics.",
+      "dependencies": [
+        "@base-ui/react",
+        "@hugeicons/core-free-icons",
+        "@hugeicons/react",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [
+        "button"
+      ],
+      "meta": {
+        "status": "production",
+        "version": "2.0.0",
+        "category": "overlays-and-menus",
+        "lastUpdated": "2026-09-26"
+      }
+    },
+    {
+      "name": "popover",
+      "type": "registry:ui",
+      "title": "Popover",
+      "description": "An anchored transient floating surface engineered with HaloUI liquid glass physical optics, collision-aware boundary positioning, origin-anchored reveal kinematics, and zero backdrop dimming.",
+      "dependencies": [
+        "@base-ui/react",
+        "@hugeicons/core-free-icons",
+        "@hugeicons/react",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [
+        "button"
+      ],
+      "meta": {
+        "status": "production",
+        "version": "2.0.0",
+        "category": "overlays-and-menus",
+        "lastUpdated": "2026-09-26"
+      }
+    },
+    {
+      "name": "hover-card",
+      "type": "registry:ui",
+      "title": "Hover Card",
+      "description": "Supplemental destination or entity preview opened through accessible hover and focus behavior, engineered with HaloUI liquid glass physical optics and uncompromised link navigation semantics.",
+      "dependencies": [
+        "@base-ui/react",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [],
+      "meta": {
+        "status": "production",
+        "version": "2.0.0",
+        "category": "overlays-and-menus",
+        "lastUpdated": "2026-09-26"
+      }
+    },
+    {
+      "name": "tooltip",
+      "type": "registry:ui",
+      "title": "Tooltip",
+      "description": "Brief contextual label and supplemental help associated with an interface element, engineered with HaloUI Liquid Glass optics, skip-delay provider orchestration, and non-modal focus isolation.",
+      "dependencies": [
+        "@base-ui/react",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [],
+      "meta": {
+        "status": "production",
+        "version": "2.0.0",
+        "category": "overlays-and-menus",
+        "lastUpdated": "2026-09-26"
+      }
+    },
+    {
+      "name": "dropdown-menu",
+      "type": "registry:ui",
+      "title": "Dropdown Menu",
+      "description": "Button-triggered temporary action menu engineered with HaloUI Balanced Liquid Glass optics, roving keyboard navigation, submenus, and composite menu semantics.",
+      "dependencies": [
+        "@base-ui/react",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [],
+      "meta": {
+        "status": "production",
+        "version": "2.0.0",
+        "category": "overlays-and-menus",
+        "lastUpdated": "2026-09-26"
+      }
+    },
+    {
+      "name": "context-menu",
+      "type": "registry:ui",
+      "title": "Context Menu",
+      "description": "Pointer and context-triggered floating action surface engineered with HaloUI Balanced Liquid Glass optics, zero backdrop dimming, boundary collision handling, and WAI-ARIA roving keyboard navigation.",
+      "dependencies": [
+        "@base-ui/react",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [],
+      "meta": {
+        "status": "production",
+        "version": "2.0.0",
+        "category": "overlays-and-menus",
+        "lastUpdated": "2026-09-26"
+      }
+    },
+    {
+      "name": "submenu",
+      "type": "registry:ui",
+      "title": "Submenu",
+      "description": "Shared nested menu branch infrastructure engineered with HaloUI Balanced Liquid Glass optics, triangular hover grace corridors, boundary collision flipping, and WAI-ARIA arrow navigation.",
+      "dependencies": [
+        "@base-ui/react",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [
+        "dropdown-menu",
+        "context-menu"
+      ],
+      "meta": {
+        "status": "production",
+        "version": "2.0.0",
+        "category": "overlays-and-menus",
+        "lastUpdated": "2026-09-26"
+      }
+    },
+    {
+      "name": "command-menu",
+      "type": "registry:ui",
+      "title": "Command Menu",
+      "description": "Search-driven command collection surface engineered with cmdk filtering, roving keyboard navigation, and HaloUI Liquid Glass optics.",
+      "categories": [
+        "overlays"
+      ],
+      "registryDependencies": [
+        "dialog"
+      ]
+    },
+    {
+      "name": "spotlight",
+      "type": "registry:ui",
+      "title": "Spotlight",
+      "description": "Large global discovery surface engineered for application-wide search across heterogeneous entities, files, people, and commands with HaloUI Liquid Glass optics.",
+      "categories": [
+        "overlays"
+      ],
+      "registryDependencies": [
+        "dialog"
+      ]
+    },
+    {
+      "name": "lightbox",
+      "type": "registry:ui",
+      "title": "Lightbox",
+      "description": "Focused media viewer overlay engineered for high-fidelity image inspection and galleries with deep optical Halo Scrim and Liquid Glass floating controls.",
+      "categories": [
+        "overlays"
+      ],
+      "registryDependencies": [
+        "dialog"
       ]
     }
   ]

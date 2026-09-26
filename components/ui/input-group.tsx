@@ -19,7 +19,12 @@ export function InputGroup({ className, ...props }: InputGroupProps) {
       data-slot="input-group"
       role="group"
       className={cn(
-        "halo-liquid-glass group/input-group relative flex h-10 w-full min-w-0 items-center rounded-xl px-2 transition-all duration-150 outline-none isolate",
+        "group/input-group relative flex h-10 w-full min-w-0 items-center rounded-xl px-2 transition-all duration-150 outline-none isolate",
+        "bg-black/[0.02] dark:bg-white/[0.035]",
+        "backdrop-blur-xs",
+        "border border-[var(--halo-glass-border)]",
+        "shadow-[inset_0_1.5px_3px_rgba(0,0,0,0.06),0_1px_0_rgba(255,255,255,0.85)]",
+        "dark:shadow-[inset_0_1.5px_3px_rgba(0,0,0,0.5),0_1px_0_rgba(255,255,255,0.08)]",
         // Focus-Within when the input control is active:
         "has-[[data-slot=input-group-control]:focus-visible]:border-[var(--halo-focus-color)]",
         "has-[[data-slot=input-group-control]:focus-visible]:ring-2",

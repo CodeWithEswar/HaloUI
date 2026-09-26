@@ -1,0 +1,871 @@
+/* =========================================================
+   HALOUI LIQUID GLASS — CANONICAL MATERIAL REFERENCE
+   Based on the approved HaloUI glass prototype.
+   ========================================================= */
+
+/* ---------------------------------------------------------
+   01. GLOBAL THEME (Light)
+   --------------------------------------------------------- */
+
+:root,
+.light,
+html[data-theme="light"],
+[data-stage-theme="light"] {
+  color-scheme: light;
+
+  --halo-page-background:
+    radial-gradient(circle at center, #f5f5f7, #e2e2e8);
+
+  --halo-glass-border:
+    rgba(255, 255, 255, 0.70);
+
+  --halo-glass-background:
+    rgba(255, 255, 255, 0.52);
+
+  --halo-glass-inner-highlight-strong:
+    rgba(255, 255, 255, 0.95);
+
+  --halo-glass-inner-highlight:
+    rgba(255, 255, 255, 0.60);
+
+  --halo-glass-inner-dark:
+    rgba(0, 0, 0, 0.05);
+
+  --halo-glass-shadow:
+    rgba(0, 0, 0, 0.08);
+
+  --halo-glass-refraction-edge:
+    rgba(0, 0, 0, 0.12);
+
+  --halo-glass-optical-highlight:
+    rgba(255, 255, 255, 0.75);
+
+  --halo-glass-overlay-border:
+    rgba(255, 255, 255, 0.40);
+
+  --halo-glass-icon-shadow:
+    rgba(0, 0, 0, 0.06);
+
+  --halo-glass-text-shadow:
+    rgba(255, 255, 255, 0.5);
+
+  --halo-glass-text:
+    #1d1d1f;
+
+  --halo-glass-text-active:
+    #000000;
+
+  --halo-glass-action:
+    #1d1d1f;
+
+  --halo-glass-action-foreground:
+    #ffffff;
+
+  /* Overlays & Pop Cards (Apple iOS / macOS frosted liquid glass with high legibility - not too transparent) */
+  --halo-glass-pop-background:
+    rgba(255, 255, 255, 0.92);
+  --halo-glass-pop-border:
+    rgba(255, 255, 255, 0.85);
+  --halo-glass-pop-blur:
+    20px;
+  --halo-glass-pop-shadow:
+    inset 0 1px 1px 0 rgba(255, 255, 255, 0.95),
+    inset 0 -1px 1px 0 rgba(0, 0, 0, 0.04),
+    0 16px 40px -4px rgba(0, 0, 0, 0.10),
+    0 4px 12px rgba(0, 0, 0, 0.04);
+
+  --halo-glass-brightness: 1;
+  --halo-glass-blur: 10px;
+  --halo-glass-transition: 25%;
+
+  /* Semantic concentric geometry tokens */
+  --halo-radius-control-sm: 8px;
+  --halo-radius-control: 12px;
+  --halo-radius-control-lg: 16px;
+  --halo-radius-floating: 20px;
+  --halo-radius-overlay: 24px;
+
+  /* Backward compatibility bridges */
+  --halo-material-solid: #ffffff;
+  --halo-focus-color: #0284c7;
+  --halo-focus-offset: 2px;
+  --halo-focus-width: 2px;
+  --halo-focus-offset-color: #ffffff;
+}
+
+/* ---------------------------------------------------------
+   02. DARK THEME
+   --------------------------------------------------------- */
+
+.dark,
+html[data-theme="dark"],
+[data-stage-theme="dark"] {
+  color-scheme: dark;
+
+  --halo-page-background:
+    radial-gradient(circle at center, #25262b, #090a0d);
+
+  --halo-glass-border:
+    rgba(255, 255, 255, 0.16);
+
+  --halo-glass-background:
+    rgba(255, 255, 255, 0.07);
+
+  --halo-glass-inner-highlight-strong:
+    rgba(255, 255, 255, 0.35);
+
+  --halo-glass-inner-highlight:
+    rgba(255, 255, 255, 0.20);
+
+  --halo-glass-inner-dark:
+    rgba(0, 0, 0, 0.50);
+
+  --halo-glass-shadow:
+    rgba(0, 0, 0, 0.45);
+
+  --halo-glass-refraction-edge:
+    rgba(0, 0, 0, 0.40);
+
+  --halo-glass-optical-highlight:
+    rgba(255, 255, 255, 0.45);
+
+  --halo-glass-overlay-border:
+    rgba(255, 255, 255, 0.20);
+
+  --halo-glass-icon-shadow:
+    rgba(0, 0, 0, 0.35);
+
+  --halo-glass-text-shadow:
+    rgba(0, 0, 0, 0.25);
+
+  --halo-glass-text:
+    #f5f5f7;
+
+  --halo-glass-text-active:
+    #ffffff;
+
+  --halo-glass-action:
+    #f5f5f7;
+
+  --halo-glass-action-foreground:
+    #17181c;
+
+  /* Overlays & Pop Cards (Apple iOS / macOS frosted liquid glass with high legibility - not too transparent) */
+  --halo-glass-pop-background:
+    rgba(22, 24, 30, 0.92);
+  --halo-glass-pop-border:
+    rgba(255, 255, 255, 0.15);
+  --halo-glass-pop-blur:
+    20px;
+  --halo-glass-pop-shadow:
+    inset 0 1px 1px 0 rgba(255, 255, 255, 0.22),
+    inset 0 -1px 1px 0 rgba(0, 0, 0, 0.70),
+    0 20px 48px -6px rgba(0, 0, 0, 0.65),
+    0 6px 16px rgba(0, 0, 0, 0.50);
+
+  --halo-glass-brightness: 1;
+  --halo-glass-blur: 10px;
+  --halo-glass-transition: 25%;
+
+  --halo-material-solid: #1c1c1e;
+  --halo-focus-color: #38bdf8;
+  --halo-focus-offset-color: #0c0d0f;
+}
+
+/* ---------------------------------------------------------
+   03. SYSTEM THEME
+   --------------------------------------------------------- */
+
+@media (prefers-color-scheme: dark) {
+  html[data-theme="system"] {
+    color-scheme: dark;
+
+    --halo-page-background:
+      radial-gradient(circle at center, #25262b, #090a0d);
+
+    --halo-glass-border:
+      rgba(255, 255, 255, 0.1);
+
+    --halo-glass-background:
+      rgba(255, 255, 255, 0.035);
+
+    --halo-glass-inner-highlight-strong:
+      rgba(255, 255, 255, 0.32);
+
+    --halo-glass-inner-highlight:
+      rgba(255, 255, 255, 0.22);
+
+    --halo-glass-inner-dark:
+      rgba(0, 0, 0, 0.95);
+
+    --halo-glass-shadow:
+      rgba(0, 0, 0, 0.55);
+
+    --halo-glass-refraction-edge:
+      rgba(0, 0, 0, 0.95);
+
+    --halo-glass-optical-highlight:
+      rgba(255, 255, 255, 0.42);
+
+    --halo-glass-overlay-border:
+      rgba(255, 255, 255, 0.16);
+
+    --halo-glass-text:
+      #f5f5f7;
+
+    --halo-glass-text-active:
+      #fff;
+
+    --halo-glass-action:
+      #f5f5f7;
+
+    --halo-glass-action-foreground:
+      #17181c;
+
+    --halo-glass-pop-background:
+      rgba(22, 24, 30, 0.90);
+    --halo-glass-pop-border:
+      rgba(255, 255, 255, 0.14);
+    --halo-glass-pop-blur:
+      16px;
+    --halo-glass-pop-shadow:
+      inset 1px -1px 1px -1px rgba(255, 255, 255, 0.2),
+      inset -1px 1px 1px -1px rgba(255, 255, 255, 0.2),
+      0 16px 40px -4px rgba(0, 0, 0, 0.65),
+      0 4px 14px rgba(0, 0, 0, 0.5);
+
+    --halo-glass-brightness: 1;
+    --halo-glass-blur: 2px;
+    --halo-glass-transition: 25%;
+
+    --halo-material-solid: #1c1c1e;
+    --halo-focus-color: #38bdf8;
+    --halo-focus-offset-color: #0c0d0f;
+  }
+}
+
+/* ---------------------------------------------------------
+   04. DEMO ENVIRONMENT
+   --------------------------------------------------------- */
+
+.halo-liquid-environment {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  background: var(--halo-page-background);
+}
+
+/* ---------------------------------------------------------
+   05. ORIGINAL FX LAYER
+   --------------------------------------------------------- */
+
+.halo-fx-layer {
+  filter: contrast(3);
+}
+
+/* =========================================================
+   06. CORE LIQUID GLASS SURFACE
+   ========================================================= */
+
+.halo-liquid-glass,
+.halo-material {
+  --halo-glass-width: 100px;
+  --halo-glass-height: 100px;
+  --halo-glass-radius: 9999px;
+  --halo-glass-transition: 25%;
+
+  position: relative;
+  z-index: 1;
+
+  border-radius: var(--halo-glass-radius);
+
+  border:
+    1px double
+    var(--halo-glass-border);
+
+  background:
+    var(--halo-glass-background);
+
+  backdrop-filter:
+    blur(var(--halo-glass-blur, 10px)) saturate(180%);
+
+  -webkit-backdrop-filter:
+    blur(var(--halo-glass-blur, 10px)) saturate(180%);
+
+  box-shadow:
+    inset 0 1px 1.5px 0
+      var(--halo-glass-inner-highlight-strong),
+
+    inset 0 0 0 1px
+      var(--halo-glass-inner-highlight),
+
+    inset 0 -1px 1px 0
+      var(--halo-glass-inner-dark),
+
+    0 4px 14px -2px
+      var(--halo-glass-shadow);
+
+  cursor: pointer;
+
+  filter: none;
+
+  user-select: none;
+
+  isolation: isolate;
+
+  transition:
+    transform 250ms ease,
+    background-color 250ms ease,
+    box-shadow 250ms ease,
+    filter 200ms ease;
+}
+
+:is(.dark, html[data-theme="dark"], [data-stage-theme="dark"]) :is(.halo-liquid-glass, .halo-material) {
+  filter: none;
+}
+
+/* =========================================================
+   08. INTERNAL REFRACTION / OPTICAL MENISCUS EDGE
+   Equivalent to the approved .box::before for circular showcase
+   and geometry-adapted for controls.
+   ========================================================= */
+
+.halo-liquid-glass::before,
+.halo-material::before {
+  content: "";
+
+  position: absolute;
+
+  z-index: 1;
+
+  top: 35%;
+  left: 50%;
+
+  transform:
+    translateX(-50%);
+
+  width:
+    calc(100% - 16px);
+
+  height:
+    calc(100% - 16px);
+
+  border-radius:
+    inherit;
+
+  border:
+    1px solid
+    var(--halo-glass-refraction-edge);
+
+  filter:
+    blur(6px);
+
+  pointer-events:
+    none;
+}
+
+/* Hide blurred circle refraction edge on rectangular controls to prevent dark haze or patches */
+:where(.halo-liquid-glass, .halo-material):is([data-size="sm"], [data-size="default"], [data-size="lg"], button, [role="button"], input, .h-8, .h-9, .h-10, .h-11, .h-12):not([data-size="showcase"]):not(.size-\[100px\])::before {
+  display: none;
+}
+
+/* =========================================================
+   09. OPTICAL HIGHLIGHT / NATURAL GLASS SPECULAR REFLECTION
+   Natural top-down physical light reflection (overhead light).
+   Zero diagonal corner blobs, pure liquid crystal sheen.
+   ========================================================= */
+
+.halo-liquid-glass::after,
+.halo-material::after {
+  content: "";
+
+  position: absolute;
+
+  z-index: 2;
+
+  inset: 0;
+
+  border-radius:
+    inherit;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.28) 0%,
+      rgba(255, 255, 255, 0.04) 40%,
+      transparent 65%
+    );
+
+  pointer-events:
+    none;
+}
+
+:is(.dark, html[data-theme="dark"], [data-stage-theme="dark"]) :is(.halo-liquid-glass, .halo-material)::after {
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.14) 0%,
+      rgba(255, 255, 255, 0.02) 35%,
+      transparent 60%
+    );
+}
+
+/* For 100x100 showcase circular lens only: preserve diagonal optical reflection */
+.halo-liquid-glass:is([data-size="showcase"], .size-\[100px\])::after,
+.halo-material:is([data-size="showcase"], .size-\[100px\])::after {
+  background:
+    linear-gradient(
+      45deg,
+      var(--halo-glass-optical-highlight) 0%,
+      transparent var(--halo-glass-transition, 25%),
+      transparent calc(100% - var(--halo-glass-transition, 25%)),
+      var(--halo-glass-optical-highlight) 100%
+    );
+  filter: blur(7px);
+}
+
+/* =========================================================
+   10. INNER OVERLAY / OPTICAL BORDER
+   Equivalent to .circle-overlay
+   ========================================================= */
+
+.halo-liquid-overlay,
+.circle-overlay {
+  position: absolute;
+
+  z-index: 2;
+
+  inset: 4.5px;
+
+  border:
+    1px solid
+    var(--halo-glass-overlay-border);
+
+  border-radius:
+    inherit;
+
+  filter:
+    blur(1px);
+
+  pointer-events:
+    none;
+}
+
+/* =========================================================
+   11. CONTENT LAYER
+   Critical: content must remain above decorative optics.
+   ========================================================= */
+
+.halo-liquid-content,
+.halo-liquid-glass > :not(.halo-liquid-overlay):not(.circle-overlay),
+.halo-material > :not(.halo-liquid-overlay):not(.circle-overlay) {
+  position: relative;
+  z-index: 3;
+}
+
+.halo-liquid-icon {
+  position: relative;
+  z-index: 3;
+  width: 28px;
+  color: var(--halo-glass-text);
+  fill: currentColor;
+  filter: drop-shadow(0 25px 3px var(--halo-glass-icon-shadow));
+}
+
+.halo-liquid-text {
+  position: relative;
+  z-index: 3;
+  color: var(--halo-glass-text);
+  filter: drop-shadow(0 25px 3px var(--halo-glass-text-shadow));
+}
+
+/* =========================================================
+   12. CANONICAL REFERENCE .box & .circle-overlay
+   Fluid liquid glass reference
+   ========================================================= */
+
+.box {
+  --w: 100px;
+  --h: 100px;
+  --r: 9999px;
+  --tr: 25%;
+
+  border: 1px double rgba(51, 51, 51, 0.08);
+
+  box-shadow:
+    inset 2px -2px 1px -1px rgba(255, 255, 255, 0.9),
+    inset -2px 2px 1px -1px rgba(255, 255, 255, 0.9),
+    inset 6px -6px 1px -6px rgba(255, 255, 255, 0.55),
+    inset -6px 6px 1px -6px rgba(255, 255, 255, 0.55),
+    inset 0 0 2px rgba(0, 0, 0, 0.8),
+    0 4px 8px rgba(0, 0, 0, 0.2);
+
+  background: rgba(0, 0, 0, 0.02);
+
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+
+  filter: brightness(0.9);
+
+  width: var(--w);
+  height: var(--h);
+  border-radius: var(--r);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  isolation: isolate;
+  user-select: none;
+  cursor: pointer;
+  transition: transform 200ms ease, box-shadow 200ms ease;
+}
+
+:is(.dark, html[data-theme="dark"], [data-stage-theme="dark"]) .box {
+  border-color: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.035);
+  filter: brightness(1);
+  box-shadow:
+    inset 2px -2px 1px -1px rgba(255, 255, 255, 0.32),
+    inset -2px 2px 1px -1px rgba(255, 255, 255, 0.32),
+    inset 6px -6px 1px -6px rgba(255, 255, 255, 0.22),
+    inset -6px 6px 1px -6px rgba(255, 255, 255, 0.22),
+    inset 0 0 2px rgba(0, 0, 0, 0.95),
+    0 4px 8px rgba(0, 0, 0, 0.55);
+}
+
+.box::before {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  top: 35%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(var(--w) - 16px);
+  height: calc(var(--h) - 16px);
+  border-radius: inherit;
+  border: 1px solid rgba(0, 0, 0, 0.9);
+  filter: blur(8px);
+  pointer-events: none;
+}
+
+:is(.dark, html[data-theme="dark"], [data-stage-theme="dark"]) .box::before {
+  border-color: rgba(0, 0, 0, 0.95);
+}
+
+.box::after {
+  content: "";
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  border-radius: inherit;
+  filter: blur(7px);
+  background: linear-gradient(
+    45deg,
+    rgba(255, 255, 255, 0.8) 0%,
+    transparent var(--tr),
+    transparent calc(100% - var(--tr)),
+    rgba(255, 255, 255, 0.8) 100%
+  );
+  pointer-events: none;
+}
+
+:is(.dark, html[data-theme="dark"], [data-stage-theme="dark"]) .box::after {
+  background: linear-gradient(
+    45deg,
+    rgba(255, 255, 255, 0.42) 0%,
+    transparent var(--tr),
+    transparent calc(100% - var(--tr)),
+    rgba(255, 255, 255, 0.42) 100%
+  );
+}
+
+/* =========================================================
+   13. LIQUID GLASS BUTTON
+   ========================================================= */
+
+.halo-liquid-button {
+  padding: 0 0.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  transition: transform 250ms ease, background-color 250ms ease;
+}
+
+.halo-liquid-button .halo-liquid-text {
+  font-size: 25px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: var(--halo-glass-text);
+}
+
+.halo-liquid-button-icon {
+  position: relative;
+  z-index: 3;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  background: var(--halo-glass-action);
+  border-radius: 50%;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
+  transition: transform 250ms ease;
+}
+
+.halo-liquid-button-icon .halo-liquid-icon {
+  width: 16px;
+  color: var(--halo-glass-action-foreground);
+  fill: currentColor;
+}
+
+/* Hover & Active Press */
+.halo-liquid-button:hover,
+.halo-liquid-glass:where(button, a, [role="button"]):hover {
+  transform: translateY(-2px);
+  filter: brightness(1.06);
+  box-shadow:
+    inset 0 1px 2px 0 var(--halo-glass-inner-highlight-strong),
+    inset 0 0 0 1px var(--halo-glass-inner-highlight),
+    inset 0 -1px 1px 0 var(--halo-glass-inner-dark),
+    0 8px 24px -4px var(--halo-glass-shadow);
+}
+
+.halo-liquid-button:hover .halo-liquid-button-icon {
+  transform: scale(1.1);
+}
+
+.halo-liquid-button:active,
+.halo-liquid-glass:where(button, a, [role="button"]):active {
+  transform: scale(0.94);
+}
+
+.halo-liquid-button:active .halo-liquid-text {
+  color: var(--halo-glass-text-active);
+}
+
+.halo-liquid-button:active .halo-liquid-button-icon {
+  transform: scale(0.94);
+}
+
+/* =========================================================
+   14. FLOATING OVERLAYS & POP CARDS (Not too transparent)
+   ========================================================= */
+
+.halo-liquid-glass-surface,
+.halo-elevated-surface,
+.halo-pop-surface {
+  z-index: 50;
+  isolation: isolate;
+  border: 1px solid var(--halo-glass-pop-border);
+  background: var(--halo-glass-pop-background);
+  backdrop-filter: blur(var(--halo-glass-pop-blur, 20px)) saturate(190%);
+  -webkit-backdrop-filter: blur(var(--halo-glass-pop-blur, 20px)) saturate(190%);
+  box-shadow: var(--halo-glass-pop-shadow);
+}
+
+:where(.halo-liquid-glass-surface, .halo-elevated-surface, .halo-pop-surface) {
+  position: relative;
+  border-radius: var(--halo-radius-control, 14px);
+  transition: opacity 150ms ease, transform 150ms ease;
+}
+
+.halo-liquid-glass-surface::before,
+.halo-elevated-surface::before,
+.halo-pop-surface::before {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  inset: 1px;
+  border-radius: inherit;
+  border: 1px solid rgba(255, 255, 255, 0.40);
+  pointer-events: none;
+}
+
+:is(.dark, html[data-theme="dark"], [data-stage-theme="dark"]) :is(.halo-liquid-glass-surface, .halo-elevated-surface, .halo-pop-surface)::before {
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.halo-liquid-glass-surface::after,
+.halo-elevated-surface::after,
+.halo-pop-surface::after {
+  content: "";
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.24) 0%,
+    rgba(255, 255, 255, 0.04) 30%,
+    transparent 60%
+  );
+  pointer-events: none;
+}
+
+:is(.dark, html[data-theme="dark"], [data-stage-theme="dark"]) :is(.halo-liquid-glass-surface, .halo-elevated-surface, .halo-pop-surface)::after {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.12) 0%,
+    rgba(255, 255, 255, 0.02) 25%,
+    transparent 50%
+  );
+}
+
+.halo-liquid-glass-surface > *,
+.halo-elevated-surface > *,
+.halo-pop-surface > * {
+  position: relative;
+  z-index: 3;
+}
+
+/* =========================================================
+   15. ACCESSIBLE FOCUS
+   ========================================================= */
+
+.halo-liquid-glass:focus-visible,
+.halo-focus-ring:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--halo-glass-text) 72%, transparent) !important;
+  outline-offset: 4px !important;
+  z-index: 10;
+}
+
+/* =========================================================
+   16. DISABLED
+   ========================================================= */
+
+.halo-liquid-glass:disabled,
+.halo-liquid-glass[aria-disabled="true"] {
+  cursor: not-allowed;
+  opacity: 0.58;
+  transform: none !important;
+}
+
+/* =========================================================
+   17. SIZE & GEOMETRY RECIPES
+   ========================================================= */
+
+.halo-liquid-glass[data-size="sm"] {
+  --halo-glass-width: 72px;
+  --halo-glass-height: 72px;
+}
+
+.halo-liquid-glass[data-size="md"] {
+  --halo-glass-width: 100px;
+  --halo-glass-height: 100px;
+}
+
+.halo-liquid-glass[data-size="lg"] {
+  --halo-glass-width: 124px;
+  --halo-glass-height: 124px;
+}
+
+.halo-liquid-glass[data-shape="pill"] {
+  --halo-glass-radius: 9999px;
+  width: auto;
+  min-width: var(--halo-glass-width, 72px);
+}
+
+.halo-liquid-glass[data-shape="rounded"] {
+  --halo-glass-radius: 24px;
+}
+
+.halo-liquid-glass[data-shape="circle"] {
+  --halo-glass-radius: 9999px;
+}
+
+/* =========================================================
+   18. REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .halo-liquid-button,
+  .halo-liquid-button-icon,
+  .halo-liquid-glass,
+  .halo-material,
+  .box {
+    transition: none !important;
+    animation: none !important;
+    transform: none !important;
+  }
+
+  .halo-liquid-button:hover,
+  .halo-liquid-button:active,
+  .halo-liquid-glass:hover,
+  .halo-liquid-glass:active,
+  .box:hover,
+  .box:active {
+    transform: none !important;
+  }
+
+  .halo-liquid-button:hover .halo-liquid-button-icon,
+  .halo-liquid-button:active .halo-liquid-button-icon {
+    transform: none !important;
+  }
+}
+
+/* =========================================================
+   19. REDUCED TRANSPARENCY
+   ========================================================= */
+
+@media (prefers-reduced-transparency: reduce) {
+  .halo-liquid-glass,
+  .halo-material,
+  .halo-liquid-glass-surface,
+  .halo-elevated-surface,
+  .box {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background: rgba(245, 245, 247, 0.94) !important;
+  }
+
+  .dark .halo-liquid-glass,
+  .dark .halo-material,
+  .dark .halo-liquid-glass-surface,
+  .dark .halo-elevated-surface,
+  .dark .box,
+  [data-stage-theme="dark"] .halo-liquid-glass,
+  [data-stage-theme="dark"] .halo-material,
+  [data-stage-theme="dark"] .halo-liquid-glass-surface,
+  [data-stage-theme="dark"] .halo-elevated-surface,
+  [data-stage-theme="dark"] .box {
+    background: rgba(32, 33, 38, 0.96) !important;
+  }
+}
+
+[data-transparency="reduced"] .halo-liquid-glass,
+[data-transparency="reduced"] .halo-material,
+[data-transparency="reduced"] .halo-liquid-glass-surface,
+[data-transparency="reduced"] .halo-elevated-surface,
+[data-transparency="reduced"] .box {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  background: rgba(245, 245, 247, 0.94) !important;
+}
+
+.dark [data-transparency="reduced"] .halo-liquid-glass,
+.dark [data-transparency="reduced"] .halo-material,
+.dark [data-transparency="reduced"] .halo-liquid-glass-surface,
+.dark [data-transparency="reduced"] .halo-elevated-surface,
+.dark [data-transparency="reduced"] .box,
+[data-stage-theme="dark"] [data-transparency="reduced"] .halo-liquid-glass,
+[data-stage-theme="dark"] [data-transparency="reduced"] .halo-material,
+[data-stage-theme="dark"] [data-transparency="reduced"] .halo-liquid-glass-surface,
+[data-stage-theme="dark"] [data-transparency="reduced"] .halo-elevated-surface,
+[data-stage-theme="dark"] [data-transparency="reduced"] .box {
+  background: rgba(32, 33, 38, 0.96) !important;
+}
+
+/* =========================================================
+   20. RESPONSIVE SAFETY
+   ========================================================= */
+
+@media (max-width: 640px) {
+  .halo-liquid-button {
+    max-width: calc(100vw - 32px);
+  }
+
+  .halo-liquid-text {
+    min-width: 0;
+  }
+}

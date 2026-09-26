@@ -5,6 +5,8 @@ import { Slot } from "@radix-ui/react-slot";
 import { cn } from "@/lib/utils";
 
 export type HaloSurfaceIntensity = "subtle" | "balanced" | "rich";
+export type HaloMaterialRecipe = "regular" | "clear" | "prominent";
+export type HaloMaterialDensity = "compact" | "regular" | "floating" | "overlay";
 export type HaloSurfaceElevation =
   | "inset"
   | "base"
@@ -27,6 +29,12 @@ export interface HaloSurfaceProps extends React.ComponentPropsWithoutRef<"div"> 
    * Preserves refs, attributes, and element semantics without wrapping divs.
    */
   asChild?: boolean;
+  /** Optical recipe character: regular (balanced), clear (high transmission), prominent (high hierarchy). */
+  material?: HaloMaterialRecipe;
+  /** Diffusion scale appropriate to the surface's functional size. */
+  density?: HaloMaterialDensity;
+  /** Whether to render the directional 135° meniscus optical edge. @default true */
+  edge?: boolean;
   /**
    * Controls the optical diffusion depth, highlight vibrancy, and environmental transmission.
    * @default "balanced"
@@ -38,6 +46,11 @@ export interface HaloSurfaceProps extends React.ComponentPropsWithoutRef<"div"> 
    * @default "base"
    */
   elevation?: MaterialElevation;
+  /**
+   * Optional local pointer-tracking for dynamic specular reflection response.
+   * Updates CSS variables --halo-pointer-x and --halo-pointer-y directly without React state rerenders.
+   */
+  pointerResponsive?: boolean;
   /**
    * Optional legacy interactive press physics for action surfaces.
    * @deprecated Interactive behaviors belong to action primitives like HaloButton.
@@ -68,11 +81,11 @@ export interface HaloSurfaceProps extends React.ComponentPropsWithoutRef<"div"> 
  * for expressing a HaloUI liquid glass surface.
  *
  * Coordinates:
- * - Surface tint & opacity
+ * - Surface tint & transmission
  * - Background diffusion (backdrop-filter)
  * - Elevation & anchoring contact shadow
- * - Optical dual edge & inner rim reflection (Layer 03)
- * - Directional 135° specular light highlight (Layer 04)
+ * - Optical dual edge & inner rim reflection (Layer 01)
+ * - Directional 135° specular light highlight (Layer 02)
  * - Semantic accessibility neutrality (no default focus, no forced role)
  * - Deliberate overflow safety (preserves focus rings, badges, tooltips)
  */
@@ -81,14 +94,20 @@ export const HaloSurface = React.forwardRef<HTMLDivElement, HaloSurfaceProps>(
     {
       className,
       asChild = false,
+      material = "regular",
+      density,
+      edge = true,
       intensity = "balanced",
       elevation = "base",
+      pointerResponsive,
       interactive,
       glow,
       refraction,
       noise,
       specular,
       children,
+      onPointerMove,
+      onPointerLeave,
       ...props
     },
     ref
@@ -99,40 +118,55 @@ export const HaloSurface = React.forwardRef<HTMLDivElement, HaloSurfaceProps>(
     const normalizedElevation: "inset" | "base" | "raised" | "floating" | "overlay" =
       elevation === "flat" ? "base" : elevation === "recessed" ? "inset" : elevation;
 
+    // Enable pointer responsiveness explicitly or when intensity is rich
+    const isPointerActive = pointerResponsive ?? (intensity === "rich");
+
+    const handlePointerMove = React.useCallback(
+      (e: React.PointerEvent<HTMLDivElement>) => {
+        onPointerMove?.(e);
+        if (!isPointerActive || !e.currentTarget) return;
+        const rect = e.currentTarget.getBoundingClientRect();
+        if (rect.width === 0 || rect.height === 0) return;
+        const x = ((e.clientX - rect.left) / rect.width) * 100;
+        const y = ((e.clientY - rect.top) / rect.height) * 100;
+        e.currentTarget.style.setProperty("--halo-pointer-x", `${x.toFixed(1)}%`);
+        e.currentTarget.style.setProperty("--halo-pointer-y", `${y.toFixed(1)}%`);
+      },
+      [isPointerActive, onPointerMove]
+    );
+
+    const handlePointerLeave = React.useCallback(
+      (e: React.PointerEvent<HTMLDivElement>) => {
+        onPointerLeave?.(e);
+        if (!isPointerActive || !e.currentTarget) return;
+        e.currentTarget.style.removeProperty("--halo-pointer-x");
+        e.currentTarget.style.removeProperty("--halo-pointer-y");
+      },
+      [isPointerActive, onPointerLeave]
+    );
+
     return (
       <Comp
         ref={ref}
         data-halo-surface=""
+        data-material={material}
+        data-density={density ?? (normalizedElevation === "overlay" ? "overlay" : normalizedElevation === "floating" ? "floating" : "regular")}
+        data-edge={edge}
+        data-specular={specular !== false}
+        data-refraction={refraction || undefined}
+        data-noise={noise || undefined}
         data-intensity={intensity}
         data-elevation={normalizedElevation}
+        onPointerMove={isPointerActive ? handlePointerMove : onPointerMove}
+        onPointerLeave={isPointerActive ? handlePointerLeave : onPointerLeave}
         className={cn(
-          // Base Geometry & Stacking Context (Deliberately NOT overflow-hidden to avoid clipping focus rings & menus)
-          "relative isolate rounded-2xl",
-          // Intensity Levels: Diffusion & Optical Presets
-          intensity === "subtle" && "halo-intensity-subtle backdrop-blur-[8px]",
-          intensity === "balanced" && "halo-intensity-balanced backdrop-blur-[16px]",
-          intensity === "rich" && "halo-intensity-rich backdrop-blur-[28px]",
-          // Elevation & Shadow Anchorings
-          normalizedElevation === "inset" &&
-            "bg-[var(--halo-surface-recessed)] shadow-inner border border-black/5 dark:border-white/5",
-          normalizedElevation === "base" &&
-            "bg-[var(--halo-surface)] shadow-[var(--halo-shadow-contact)] border border-[var(--halo-edge-soft)]",
-          normalizedElevation === "raised" &&
-            "bg-[var(--halo-surface-elevated)] shadow-[var(--halo-shadow-elevated)] border border-[var(--halo-edge)]",
-          normalizedElevation === "floating" &&
-            "bg-[var(--halo-surface-strong)] shadow-[var(--halo-shadow-ambient)] border border-[var(--halo-edge-bright)]",
-          normalizedElevation === "overlay" &&
-            "bg-[var(--halo-surface-strong)] shadow-[0_24px_64px_-12px_rgba(0,0,0,0.25)] dark:shadow-[0_24px_64px_-12px_rgba(0,0,0,0.7)] border border-[var(--halo-edge-bright)]",
-          // Neoskeuomorphic Inner Edge Rim (Layer 03 - non-clipping pseudo element)
-          normalizedElevation !== "inset" &&
-            "before:content-[''] before:absolute before:inset-0 before:pointer-events-none before:rounded-[inherit] before:shadow-[var(--halo-edge-inner)]",
-          // Directional Specular Highlight at 135° (Layer 04 - non-clipping pseudo element)
-          normalizedElevation !== "inset" &&
-            "after:content-[''] after:absolute after:inset-0 after:pointer-events-none after:rounded-[inherit] after:bg-gradient-to-br after:from-white/25 after:via-white/5 after:to-transparent dark:after:from-white/12 dark:after:via-transparent dark:after:to-transparent",
-          // Tactile press & interaction (Legacy compatibility)
-          interactive && "halo-tactile-press cursor-pointer hover:border-[var(--halo-edge-bright)]",
-          // Ambient Glow (Legacy compatibility)
-          glow && "ring-1 ring-white/30 dark:ring-white/15 shadow-[0_0_24px_rgba(255,255,255,0.15)] dark:shadow-[0_0_28px_rgba(255,255,255,0.06)]",
+          (normalizedElevation === "overlay" || normalizedElevation === "floating")
+            ? "halo-liquid-glass-surface"
+            : "halo-material",
+          "relative isolate rounded-[var(--halo-radius-floating)]",
+          `halo-intensity-${intensity}`,
+          interactive && "halo-tactile-press cursor-pointer",
+          glow && "halo-material-glow",
           className
         )}
         {...props}

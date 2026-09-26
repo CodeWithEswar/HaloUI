@@ -30,6 +30,7 @@ import {
 import { cn } from "@/lib/utils";
 
 export function NavigationMenuPreviewStage() {
+  const stageContainerRef = React.useRef<HTMLDivElement>(null);
   const [activeTab, setActiveTab] = React.useState<"preview" | "code">("preview");
   const [backdrop, setBackdrop] = React.useState<string>("neutral");
   const [viewport, setViewport] = React.useState<StageViewport>("desktop");
@@ -241,13 +242,13 @@ export function SiteHeaderNavigation() {
         </div>
       }
     >
-      <div className="w-full flex flex-col items-center justify-center p-3 sm:p-6 min-h-[360px]">
+      <div ref={stageContainerRef} className="w-full flex flex-col items-center justify-center p-3 sm:p-6 min-h-[360px]">
         {/* Synthetic App Header Frame */}
         <div
           className={cn(
             "w-full max-w-4xl transition-all duration-200",
             headerStyle === "glass-bar" &&
-              "rounded-2xl border border-border/80 bg-card/90 shadow-sm p-2 sm:p-2.5",
+              "rounded-2xl border border-white/60 dark:border-white/[0.12] bg-white/40 dark:bg-neutral-950/45 backdrop-blur-xl shadow-lg p-2 sm:p-2.5",
             headerStyle === "transparent" &&
               "rounded-2xl border border-border/40 bg-background/25 backdrop-blur-md p-2 sm:p-2.5 shadow-2xs",
             headerStyle === "floating" &&
@@ -267,7 +268,7 @@ export function SiteHeaderNavigation() {
 
             {/* Desktop Navigation Menu (hidden on mobile viewport) */}
             <div className={cn("hidden md:flex items-center justify-center flex-1", viewport === "mobile" && "!hidden")}>
-              <NavigationMenu align={align}>
+              <NavigationMenu align={align} container={stageContainerRef}>
                 <NavigationMenuList>
                   {/* Products Flyout */}
                   <NavigationMenuItem>

@@ -30,8 +30,9 @@ export function ButtonVariantsPreview() {
 
   return (
     <div className="relative overflow-hidden rounded-xl border border-border bg-gradient-to-b from-muted/30 via-background to-background p-6">
-      {/* Background ambient optical depth cue */}
-      <div className="pointer-events-none absolute -top-12 left-1/2 h-32 w-72 -translate-x-1/2 rounded-full bg-sky-500/10 blur-3xl dark:bg-sky-400/5" />
+      {/* Background ambient optical depth cues */}
+      <div className="pointer-events-none absolute -top-12 left-1/4 h-36 w-80 rounded-full bg-sky-500/20 blur-3xl dark:bg-sky-400/15" />
+      <div className="pointer-events-none absolute -bottom-10 right-1/4 h-36 w-80 rounded-full bg-purple-500/15 blur-3xl dark:bg-purple-400/10" />
 
       <div className="relative z-10 flex flex-wrap items-center justify-center gap-5 py-4">
         {variants.map((v) => (
@@ -52,7 +53,8 @@ export function ButtonVariantsPreview() {
 export function ButtonSizesPreview() {
   return (
     <div className="relative overflow-hidden rounded-xl border border-border bg-gradient-to-b from-muted/30 via-background to-background p-6">
-      <div className="pointer-events-none absolute -bottom-10 right-10 h-32 w-64 rounded-full bg-sky-500/10 blur-3xl dark:bg-sky-400/5" />
+      <div className="pointer-events-none absolute -top-10 left-10 h-36 w-72 rounded-full bg-cyan-500/15 blur-3xl dark:bg-cyan-400/10" />
+      <div className="pointer-events-none absolute -bottom-10 right-10 h-36 w-72 rounded-full bg-sky-500/20 blur-3xl dark:bg-sky-400/15" />
 
       <div className="relative z-10 flex flex-wrap items-center justify-center gap-6 py-4">
         <div className="flex flex-col items-center gap-2">
@@ -89,6 +91,9 @@ export function ButtonSizesPreview() {
 export function ButtonIconsPreview() {
   return (
     <div className="relative overflow-hidden rounded-xl border border-border bg-gradient-to-b from-muted/30 via-background to-background p-6">
+      <div className="pointer-events-none absolute -top-10 right-1/3 h-36 w-80 rounded-full bg-violet-500/15 blur-3xl dark:bg-violet-400/10" />
+      <div className="pointer-events-none absolute -bottom-10 left-1/4 h-36 w-80 rounded-full bg-sky-500/20 blur-3xl dark:bg-sky-400/15" />
+
       <div className="relative z-10 flex flex-wrap items-center justify-center gap-4 py-4">
         {/* Leading icon */}
         <Button>
@@ -283,8 +288,11 @@ export function ButtonKeyboardPreview() {
   };
 
   return (
-    <div className="rounded-xl border border-border bg-gradient-to-b from-muted/20 via-background to-background p-6 space-y-5">
-      <div className="space-y-1">
+    <div className="relative overflow-hidden rounded-xl border border-border bg-gradient-to-b from-muted/20 via-background to-background p-6 space-y-5">
+      <div className="pointer-events-none absolute -top-12 -left-12 h-40 w-80 rounded-full bg-sky-500/15 blur-3xl dark:bg-sky-400/10" />
+      <div className="pointer-events-none absolute -bottom-10 -right-10 h-40 w-80 rounded-full bg-indigo-500/15 blur-3xl dark:bg-indigo-400/10" />
+
+      <div className="relative z-10 space-y-1">
         <h4 className="text-sm font-semibold text-foreground">Interactive Keyboard Verification</h4>
         <p className="text-xs text-muted-foreground">
           Press <kbd className="rounded border border-border bg-muted px-1.5 py-0.5 font-mono text-[11px]">Tab</kbd> to focus between controls. Press <kbd className="rounded border border-border bg-muted px-1.5 py-0.5 font-mono text-[11px]">Enter</kbd> or <kbd className="rounded border border-border bg-muted px-1.5 py-0.5 font-mono text-[11px]">Space</kbd> to activate.

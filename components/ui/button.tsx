@@ -6,26 +6,27 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 /**
- * HaloUI Button Variants
+ * HaloUI Button Variants — Tactile Solid Design System
  *
- * Physical 10-layer liquid optical material engine applied to interactive action controls:
- * - default: Authentic physical liquid glass lens with multi-layered specular reflections and refraction edge
- * - secondary: Subtle translucent crystal body
- * - outline: Recessed optical boundary with hairline perimeter
- * - ghost: Pure clarity at rest, resolving frosted glass on hover
- * - destructive: Refractive liquid ruby glass
+ * Crisp, solid, tactile UI architecture:
+ * - default: Canonical "Create application" primary reference: solid blue, subtle vertical gradient,
+ *   crisp 1px blue border, 11px radius, 1px top highlight, 2px darker bottom extrusion
+ * - secondary: Solid light/dark neutral control with crisp border and subtle bottom extrusion
+ * - outline: Crisp structural border on solid background with shallow 1px depth
+ * - ghost: Pure flat control with subtle hover feedback
+ * - destructive: Solid crimson action with high contrast and 2px extrusion
  * - link: High-contrast textual action with accessible underline-offset
  */
 export const buttonVariants = cva(
   [
-    "group/button relative inline-flex items-center justify-center font-medium select-none isolate overflow-hidden cursor-pointer",
-    "whitespace-nowrap transition-all duration-200 ease-out outline-none",
+    "group/button relative inline-flex items-center justify-center font-semibold select-none isolate cursor-pointer",
+    "whitespace-nowrap transition-all duration-100 ease-out outline-none",
     // Focus Ring: double-contrast perimeter operating independently outside material boundary
     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--halo-focus-color)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--halo-focus-offset-color)] focus-visible:z-10 halo-focus-ring",
     // Tactile press response
     "halo-tactile-press",
-    // Disabled State: muted optical transmission without destroying label legibility
-    "disabled:pointer-events-none disabled:opacity-40 disabled:shadow-none disabled:transform-none",
+    // Disabled State: muted without destroying label legibility, no press transform
+    "disabled:pointer-events-none disabled:opacity-45 disabled:shadow-none disabled:transform-none disabled:cursor-not-allowed",
     // SVG / Hugeicons Alignment
     "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
   ],
@@ -33,46 +34,59 @@ export const buttonVariants = cva(
     variants: {
       variant: {
         default: [
-          "halo-liquid-glass text-neutral-900 dark:text-white",
+          "halo-liquid-glass",
+          "text-[var(--halo-glass-text)]",
+          "hover:translate-y-[-2px] hover:brightness-105",
+          "active:scale-[0.94] active:text-[var(--halo-glass-text-active)]",
+        ],
+        primary: [
+          "bg-[#18191d] text-white dark:bg-white dark:text-neutral-900",
+          "border border-[#23252a] dark:border-[#e2e4e9]",
+          "shadow-md hover:brightness-105 active:scale-[0.95]",
         ],
         secondary: [
-          "halo-liquid-glass text-neutral-800 dark:text-neutral-200 opacity-90 hover:opacity-100",
+          "halo-liquid-glass",
+          "bg-white/10 dark:bg-white/5",
+          "text-foreground",
+          "hover:bg-white/15 dark:hover:bg-white/10 hover:translate-y-[-2px]",
+          "active:scale-[0.95]",
         ],
         outline: [
-          "bg-white/[0.03] dark:bg-white/[0.02] text-neutral-800 dark:text-neutral-200",
-          "border border-black/[0.18] dark:border-white/[0.22] hover:border-black/[0.32] dark:hover:border-white/[0.38]",
-          "backdrop-blur-[8px]",
-          "shadow-[inset_0_1px_1px_0_rgba(255,255,255,0.7),inset_0_-1px_1px_0_rgba(0,0,0,0.15)]",
-          "hover:-translate-y-0.5 active:scale-[0.96]",
+          "bg-background text-foreground",
+          "border border-border",
+          "hover:bg-muted hover:text-foreground",
+          "active:scale-[0.96]",
         ],
         ghost: [
-          "bg-transparent text-neutral-600 dark:text-neutral-400 border border-transparent",
-          "hover:bg-white/[0.08] dark:hover:bg-white/[0.08] hover:text-neutral-900 dark:hover:text-white hover:border-black/[0.08] dark:hover:border-white/[0.12]",
-          "hover:shadow-[0_2px_8px_-2px_rgba(0,0,0,0.1),inset_0_1px_1px_0_rgba(255,255,255,0.4)]",
-          "backdrop-blur-[8px] hover:-translate-y-0.5 active:scale-[0.96]",
+          "bg-transparent text-muted-foreground",
+          "border border-transparent",
+          "hover:bg-black/5 dark:hover:bg-white/10 hover:text-foreground",
+          "active:scale-[0.96]",
         ],
         destructive: [
-          "halo-liquid-glass text-rose-700 dark:text-rose-200 bg-rose-500/[0.08] dark:bg-rose-500/[0.12] border-rose-500/30 dark:border-rose-500/40",
-          "shadow-[0_4px_16px_-4px_rgba(244,63,94,0.35),inset_2px_-2px_1px_-1px_rgba(255,255,255,0.7),inset_-2px_2px_1px_-1px_rgba(255,255,255,0.7)]",
-          "focus-visible:ring-rose-500",
+          "halo-liquid-glass",
+          "border-[#b71c1c]/40 dark:border-[#991b1b]/50",
+          "text-destructive",
+          "hover:translate-y-[-2px]",
+          "active:scale-[0.94]",
         ],
         link: [
           "text-primary underline-offset-4 hover:underline",
-          "border-0 bg-transparent shadow-none p-0 h-auto font-normal rounded-none backdrop-blur-none",
+          "border-0 bg-transparent shadow-none p-0 h-auto font-normal rounded-none",
           "active:scale-100 active:translate-y-0 hover:translate-y-0",
           "before:hidden after:hidden",
         ],
       },
       size: {
-        default: "h-10 px-5 text-sm gap-2 rounded-full",
-        sm: "h-8 px-3.5 text-xs gap-1.5 rounded-full",
-        lg: "h-12 px-6 text-base gap-2.5 rounded-full",
-        icon: "size-10 p-0 rounded-full justify-center shrink-0",
+        default: "h-10 px-4.5 py-2.5 text-sm gap-2 rounded-[11px]",
+        sm: "h-8 px-3 text-xs gap-1.5 rounded-[9px]",
+        lg: "h-11 px-5 text-base gap-2.5 rounded-[12px]",
+        icon: "size-10 p-0 rounded-[11px] justify-center shrink-0",
         // Extended compatibility sizes for internal composite UI controls
-        xs: "h-6 px-2 text-xs gap-1 rounded-md",
-        "icon-xs": "size-6 p-0 rounded-md justify-center shrink-0",
-        "icon-sm": "size-8 p-0 rounded-full justify-center shrink-0",
-        "icon-lg": "size-12 p-0 rounded-full justify-center shrink-0",
+        xs: "h-6 px-2 text-xs gap-1 rounded-[6px]",
+        "icon-xs": "size-6 p-0 rounded-[6px] justify-center shrink-0",
+        "icon-sm": "size-8 p-0 rounded-[9px] justify-center shrink-0",
+        "icon-lg": "size-11 p-0 rounded-[12px] justify-center shrink-0",
       },
     },
     defaultVariants: {

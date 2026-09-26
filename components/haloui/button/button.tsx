@@ -36,24 +36,23 @@ export const buttonVariants = cva(
           "halo-liquid-glass text-neutral-900 dark:text-white",
         ],
         secondary: [
-          "halo-liquid-glass text-neutral-800 dark:text-neutral-200 opacity-90 hover:opacity-100",
+          "halo-liquid-glass text-neutral-800 dark:text-neutral-200 ",
         ],
         outline: [
           "bg-white/[0.03] dark:bg-white/[0.02] text-neutral-800 dark:text-neutral-200",
           "border border-black/[0.18] dark:border-white/[0.22] hover:border-black/[0.32] dark:hover:border-white/[0.38]",
-          "backdrop-blur-[8px]",
+          "",
           "shadow-[inset_0_1px_1px_0_rgba(255,255,255,0.7),inset_0_-1px_1px_0_rgba(0,0,0,0.15)]",
-          "hover:-translate-y-0.5 active:scale-[0.96]",
+          "halo-tactile-press",
         ],
         ghost: [
           "bg-transparent text-neutral-600 dark:text-neutral-400 border border-transparent",
           "hover:bg-white/[0.08] dark:hover:bg-white/[0.08] hover:text-neutral-900 dark:hover:text-white hover:border-black/[0.08] dark:hover:border-white/[0.12]",
           "hover:shadow-[0_2px_8px_-2px_rgba(0,0,0,0.1),inset_0_1px_1px_0_rgba(255,255,255,0.4)]",
-          "backdrop-blur-[8px] hover:-translate-y-0.5 active:scale-[0.96]",
+          " halo-tactile-press",
         ],
         destructive: [
-          "halo-liquid-glass text-rose-700 dark:text-rose-200 bg-rose-500/[0.08] dark:bg-rose-500/[0.12] border-rose-500/30 dark:border-rose-500/40",
-          "shadow-[0_4px_16px_-4px_rgba(244,63,94,0.35),inset_2px_-2px_1px_-1px_rgba(255,255,255,0.7),inset_-2px_2px_1px_-1px_rgba(255,255,255,0.7)]",
+          "halo-liquid-glass text-rose-800 dark:text-rose-100 bg-rose-50/95 dark:bg-rose-950/95 border-rose-500/30 dark:border-rose-500/40",
           "focus-visible:ring-rose-500",
         ],
         link: [

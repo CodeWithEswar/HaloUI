@@ -6,6 +6,7 @@ import {
   GroupedOptionsSelectDemo,
   SelectStatesDemo,
   ControlledSelectDemo,
+  AvatarSelectDemo,
 } from "./select-demonstrations";
 import { InstallCommand } from "@/components/mdx/install-command";
 import { Anatomy, type AnatomyPart } from "@/components/mdx/anatomy";
@@ -268,6 +269,17 @@ export function FrameworkField() {
           <code className="text-foreground">&lt;SelectSeparator&gt;</code> dividers:
         </p>
         <GroupedOptionsSelectDemo />
+      </section>
+
+      {/* Rich Items with Avatars & Images */}
+      <section className="space-y-4">
+        <h2 className="text-2xl font-bold tracking-tight text-foreground font-heading">
+          Rich Options with Avatars &amp; Metadata
+        </h2>
+        <p className="text-sm text-muted-foreground leading-relaxed">
+          Select items seamlessly support rich compound layouts including user avatars, badges, and secondary titles while maintaining full keyboard accessibility and active-descendant routing:
+        </p>
+        <AvatarSelectDemo />
       </section>
 
       {/* Interaction States Grid */}

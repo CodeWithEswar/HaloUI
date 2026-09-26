@@ -16,12 +16,12 @@ import { cn } from "@/lib/utils";
 export const segmentedControlVariants = cva(
   [
     "inline-flex items-center isolate select-none overflow-hidden",
-    "p-1 rounded-xl transition-all duration-200 ease-out",
-    // 10-Layer Optical Track Substrate (Recessed Channel)
-    "bg-black/[0.04] dark:bg-white/[0.04] backdrop-blur-xl backdrop-saturate-180",
-    "border border-black/[0.08] dark:border-white/[0.12]",
-    "shadow-[inset_0_1px_2px_0_rgba(0,0,0,0.08),inset_0_0_1px_0_rgba(0,0,0,0.04),0_1px_1px_0_rgba(255,255,255,0.7)]",
-    "dark:shadow-[inset_0_1px_2px_0_rgba(0,0,0,0.5),inset_0_0_1px_0_rgba(0,0,0,0.8),0_1px_1px_0_rgba(255,255,255,0.06)]",
+    "p-1 rounded-xl transition-all duration-150 ease-out",
+    // Shared Liquid Glass track
+    "bg-black/[0.04] dark:bg-white/[0.05]",
+    "border border-[var(--halo-glass-border)]",
+    "backdrop-blur-xs",
+    "shadow-[inset_0_1px_2px_rgba(0,0,0,0.06)] dark:shadow-[inset_0_1px_2px_rgba(0,0,0,0.4)]",
   ],
   {
     variants: {
@@ -44,24 +44,19 @@ export const segmentedControlVariants = cva(
 export const segmentedControlItemVariants = cva(
   [
     "group/segment relative inline-flex items-center justify-center font-medium select-none cursor-pointer",
-    "transition-all duration-150 ease-out outline-none whitespace-nowrap shrink-0",
-    // Base unselected styling (translucent lens hover reaction)
+    "transition-all duration-100 ease-out outline-none whitespace-nowrap shrink-0",
+    // Base unselected styling (quiet, flat)
     "text-muted-foreground hover:text-foreground bg-transparent border border-transparent",
-    "hover:bg-white/40 dark:hover:bg-white/[0.06]",
-    // Selected state: Authentic HaloUI Physical Liquid Glass Lens
+    "hover:bg-black/[0.04] dark:hover:bg-white/[0.06]",
+    // Selected state: Apple-style frosted liquid segment
     "data-checked:text-foreground data-checked:font-semibold",
-    "data-checked:bg-white/85 dark:data-checked:bg-white/[0.14] data-checked:backdrop-blur-xl data-checked:backdrop-saturate-180",
-    "data-checked:border-black/[0.08] dark:data-checked:border-white/[0.20]",
-    "data-checked:shadow-[inset_0_1px_1px_0_rgba(255,255,255,1),inset_0_-1px_1px_0_rgba(0,0,0,0.05),0_2px_8px_-1px_rgba(0,0,0,0.12),0_1px_2px_0_rgba(0,0,0,0.06)]",
-    "dark:data-checked:shadow-[inset_0_1px_1px_0_rgba(255,255,255,0.45),inset_0_-1px_1px_0_rgba(0,0,0,0.4),0_4px_14px_-2px_rgba(0,0,0,0.65),0_1px_2px_0_rgba(0,0,0,0.3)]",
-    // 135° Specular light reflection on active segment thumb
-    "before:content-[''] before:absolute before:inset-0 before:rounded-[inherit] before:pointer-events-none before:opacity-0 data-checked:before:opacity-100 before:transition-opacity before:duration-150",
-    "before:bg-gradient-to-br before:from-white/60 before:via-white/10 before:to-transparent dark:before:from-white/25 dark:before:via-transparent",
+    "data-checked:bg-white dark:data-checked:bg-white/15",
+    "data-checked:shadow-sm data-checked:border-black/5 dark:data-checked:border-white/10 rounded-lg",
     // Independent Double-Contrast Focus Ring (Focus is NOT Selected)
     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--halo-focus-color)]",
     "focus-visible:ring-offset-2 focus-visible:ring-offset-background focus-visible:z-20 halo-focus-ring",
     // Tactile press response
-    "active:scale-[0.98] motion-reduce:active:scale-100",
+    "active:translate-y-[1px] motion-reduce:active:translate-y-0",
     // Disabled state
     "disabled:pointer-events-none disabled:opacity-40 disabled:shadow-none",
     // SVG child alignment

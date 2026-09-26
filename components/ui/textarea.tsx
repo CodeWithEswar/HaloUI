@@ -8,13 +8,19 @@ export const textareaVariants = cva(
     variants: {
       variant: {
         default: [
-          "halo-liquid-glass min-h-[80px] rounded-xl px-3.5 py-2.5",
+          // Restrained Liquid Glass Multiline Field
+          "min-h-[80px] rounded-xl px-3.5 py-2.5",
+          "bg-black/[0.02] dark:bg-white/[0.035]",
+          "backdrop-blur-xs",
+          "border border-[var(--halo-glass-border)]",
+          "shadow-[inset_0_1.5px_3px_rgba(0,0,0,0.06),0_1px_0_rgba(255,255,255,0.85)]",
+          "dark:shadow-[inset_0_1.5px_3px_rgba(0,0,0,0.5),0_1px_0_rgba(255,255,255,0.08)]",
           // Independent Double-Contrast Focus Ring (Halo Focus Ring)
           "focus-visible:border-[var(--halo-focus-color)] focus-visible:ring-2 focus-visible:ring-[var(--halo-focus-color)] focus-visible:ring-offset-2 focus-visible:ring-offset-background halo-focus-ring",
           // Invalid state (Dual Indicator Visibility)
-          "aria-invalid:border-destructive/80 aria-invalid:shadow-[inset_0_0_0_1px_rgba(244,63,94,0.3)] dark:aria-invalid:border-destructive/70",
-          // Read-only state (remains focusable, selectable, and readable)
-          "read-only:bg-black/[0.02] dark:read-only:bg-white/[0.02] read-only:cursor-default",
+          "aria-invalid:border-destructive/80 aria-invalid:shadow-[inset_0_1px_3px_rgba(244,63,94,0.2)] dark:aria-invalid:border-destructive/70",
+          // Read-only state
+          "read-only:opacity-75 read-only:cursor-default",
         ],
         unstyled: [
           "h-full flex-1 rounded-none border-0 bg-transparent px-1.5 py-2 shadow-none ring-0",

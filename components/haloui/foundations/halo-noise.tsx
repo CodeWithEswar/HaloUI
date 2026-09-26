@@ -10,9 +10,9 @@ export type HaloNoiseBlendMode = "overlay" | "soft-light" | "screen" | "multiply
 export interface HaloNoiseProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * Density and opacity of the physical material tooth/grain.
-   * - `subtle`: Ultra-fine micro-grain (~2.5% opacity) to eliminate gradient banding without visible grit.
-   * - `balanced`: Standard tactile material grain (~4% opacity) for cards, sheets, and dialogs.
-   * - `strong`: Evident tactile grit (~7% opacity) for rich skeuomorphic or tactile hero surfaces.
+   * - `subtle`: Ultra-fine micro-grain (~1.2% opacity) to eliminate gradient banding without visible grit.
+   * - `balanced`: Standard tactile material grain (~2% opacity) for cards, sheets, and dialogs.
+   * - `strong`: Restrained micro-texture (~3% opacity) for exceptional rich surfaces.
    * @default "balanced"
    */
   strength?: HaloNoiseStrength;
@@ -73,9 +73,9 @@ export const HaloNoise = React.forwardRef<HTMLDivElement, HaloNoiseProps>(
           blendMode === "multiply" && "mix-blend-multiply",
 
           // Calibrated opacity presets
-          strength === "subtle" && "opacity-[0.025] dark:opacity-[0.035]",
-          strength === "balanced" && "opacity-[0.045] dark:opacity-[0.06]",
-          strength === "strong" && "opacity-[0.08] dark:opacity-[0.11]",
+          strength === "subtle" && "opacity-[0.012]",
+          strength === "balanced" && "opacity-[0.02]",
+          strength === "strong" && "opacity-[0.03]",
 
           className
         )}

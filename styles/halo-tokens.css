@@ -1,3 +1,5 @@
+@import "./halo-material.css";
+
 /**
  * HaloUI Liquid Material Design System Tokens
  * Physical optical material engine: refraction, specular highlight, optical edges,
@@ -5,47 +7,73 @@
  */
 
 :root {
-  /* Surface Tints (Light Mode: Luminous warm translucent body) */
-  --halo-surface: rgba(255, 255, 255, 0.72);
-  --halo-surface-elevated: rgba(255, 255, 255, 0.88);
-  --halo-surface-strong: rgba(255, 255, 255, 0.95);
-  --halo-surface-recessed: rgba(0, 0, 0, 0.03);
-  --halo-surface-tint: rgba(245, 245, 247, 0.45);
+  /* Surfaces (Flat & Structural) */
+  --halo-surface: #ffffff;
+  --halo-surface-muted: #f4f5f7;
+  --halo-surface-elevated: #ffffff;
+  --halo-surface-inset: #f8f9fb;
+  --halo-surface-recessed: #f1f2f5;
 
-  /* Optical Edges (Light Mode: Fine micro-reflections) */
-  --halo-edge: rgba(255, 255, 255, 0.9);
-  --halo-edge-soft: rgba(0, 0, 0, 0.08);
-  --halo-edge-bright: rgba(255, 255, 255, 1);
-  --halo-edge-inner: inset 0 1px 1px 0 rgba(255, 255, 255, 0.9), inset 0 -1px 1px 0 rgba(0, 0, 0, 0.04);
-  --halo-edge-outer: 0 0 0 1px rgba(0, 0, 0, 0.06);
+  /* Borders */
+  --halo-border: #d2d6dc;
+  --halo-border-subtle: #e5e7eb;
+  --halo-border-strong: #9ca3af;
 
-  /* Specular Highlights (Directional: Virtual light at 135deg / top-left) */
-  --halo-highlight: linear-gradient(135deg, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.15) 35%, rgba(255, 255, 255, 0) 100%);
-  --halo-highlight-strength: 0.85;
+  /* Tactile Controls: Neutral / Default */
+  --halo-control-top: #ffffff;
+  --halo-control-bottom: #f3f4f6;
+  --halo-control-border: #d1d5db;
+  --halo-control-depth: #cbd1d8;
+  --halo-control-highlight: rgba(255, 255, 255, 0.9);
+  --halo-control-text: #111827;
 
-  /* Optical Blur (Backdrop Diffusion) */
-  --halo-blur-sm: 8px;
-  --halo-blur-md: 16px;
-  --halo-blur-lg: 28px;
-  --halo-blur-xl: 44px;
+  /* Primary Action (Neutral Monochrome Tactile) */
+  --halo-primary-top: #18191d;
+  --halo-primary-bottom: #0f1013;
+  --halo-primary-border: #23252a;
+  --halo-primary-depth: #050507;
+  --halo-primary-highlight: rgba(255, 255, 255, 0.22);
+  --halo-primary-foreground: #ffffff;
+  --halo-primary-hover-top: #24262c;
+  --halo-primary-hover-bottom: #14161a;
 
-  /* Shadows (Contact & Ambient anchoring) */
-  --halo-shadow-contact: 0 1px 2px -0.5px rgba(0, 0, 0, 0.08), 0 2px 4px 0 rgba(0, 0, 0, 0.04);
-  --halo-shadow-elevated: 0 6px 16px -4px rgba(0, 0, 0, 0.08), 0 2px 6px -1px rgba(0, 0, 0, 0.04);
-  --halo-shadow-ambient: 0 16px 36px -8px rgba(0, 0, 0, 0.1);
-  --halo-shadow-compressed: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
+  /* Secondary Action */
+  --halo-secondary-top: #ffffff;
+  --halo-secondary-bottom: #f4f5f7;
+  --halo-secondary-border: #d1d5db;
+  --halo-secondary-depth: #cbd1d8;
+  --halo-secondary-highlight: rgba(255, 255, 255, 0.85);
+  --halo-secondary-foreground: #1f2937;
 
-  /* Refraction Parameters */
-  --halo-refraction-strength: 0.12;
-  --halo-refraction-offset: 1.5px;
-  --halo-noise-opacity: 0.025;
-  --halo-glow: rgba(0, 0, 0, 0.04);
+  /* Destructive Action */
+  --halo-destructive-top: #e53935;
+  --halo-destructive-bottom: #d32f2f;
+  --halo-destructive-border: #b71c1c;
+  --halo-destructive-depth: #8b0000;
+  --halo-destructive-highlight: rgba(255, 255, 255, 0.28);
+  --halo-destructive-foreground: #ffffff;
+
+  /* Inset Inputs & Wells */
+  --halo-input-background: #ffffff;
+  --halo-input-border: #d1d5db;
+  --halo-input-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.08);
+
+  /* Elevated Overlays & Pop Cards (Apple iOS / macOS frosted liquid glass with high legibility - not too transparent) */
+  --halo-elevated-background: rgba(255, 255, 255, 0.92);
+  --halo-elevated-border: rgba(255, 255, 255, 0.85);
+  --halo-elevated-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.95), inset 0 -1px 1px 0 rgba(0, 0, 0, 0.04), 0 16px 40px -4px rgba(0, 0, 0, 0.10), 0 4px 12px rgba(0, 0, 0, 0.04);
+  --halo-glass-pop-background: rgba(255, 255, 255, 0.92);
+  --halo-glass-pop-border: rgba(255, 255, 255, 0.85);
+  --halo-glass-pop-blur: 20px;
+  --halo-glass-pop-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.95), inset 0 -1px 1px 0 rgba(0, 0, 0, 0.04), 0 16px 40px -4px rgba(0, 0, 0, 0.10), 0 4px 12px rgba(0, 0, 0, 0.04);
 
   /* Corner Radii */
+  --halo-radius-xs: 6px;
   --halo-radius-sm: 8px;
+  --halo-radius-control: 11px;
   --halo-radius-md: 12px;
-  --halo-radius-lg: 18px;
-  --halo-radius-xl: 26px;
+  --halo-radius-lg: 16px;
+  --halo-radius-xl: 20px;
   --halo-radius-full: 9999px;
 
   /* Focus Ring Tokens (Shared Accessibility Infrastructure) */
@@ -54,62 +82,120 @@
   --halo-focus-width: 2px;
   --halo-focus-offset-color: #ffffff;
   --halo-focus-outer-color: rgba(2, 132, 199, 0.25);
-  --halo-focus-shadow: 0 0 0 var(--halo-focus-offset) var(--halo-focus-offset-color), 0 0 0 calc(var(--halo-focus-offset) + var(--halo-focus-width)) var(--halo-focus-color), 0 0 0 calc(var(--halo-focus-offset) + var(--halo-focus-width) + 1.5px) var(--halo-focus-outer-color);
+  --halo-focus-shadow: 0 0 0 var(--halo-focus-offset) var(--halo-focus-offset-color),
+                       0 0 0 calc(var(--halo-focus-offset) + var(--halo-focus-width)) var(--halo-focus-color),
+                       0 0 0 calc(var(--halo-focus-offset) + var(--halo-focus-width) + 1.5px) var(--halo-focus-outer-color);
 
   /* Motion Presets & Timing Architecture */
-  --halo-duration-micro: 120ms;
-  --halo-duration-state: 180ms;
-  --halo-duration-reveal: 240ms;
-  --halo-duration-settle: 320ms;
+  --halo-duration-micro: 80ms;
+  --halo-duration-press: 80ms;
+  --halo-duration-state: 140ms;
+  --halo-duration-reveal: 180ms;
+  --halo-duration-settle: 240ms;
   --halo-ease-tactile: cubic-bezier(0.2, 0.8, 0.3, 1);
   --halo-ease-spring: cubic-bezier(0.16, 1, 0.3, 1);
   --halo-ease-out: cubic-bezier(0, 0, 0.2, 1);
 
-  /* Typography & Canvas (Editorial warm tone) */
+  /* Typography & Canvas */
   --halo-canvas: #fbfbfd;
   --halo-canvas-card: #f5f5f7;
   --halo-canvas-subtle: #eaecee;
   --halo-text-primary: #121316;
   --halo-text-secondary: #585c65;
   --halo-text-tertiary: #8b909c;
+
+  /* Backward Compatibility Bridges */
+  --halo-edge: rgba(0, 0, 0, 0.1);
+  --halo-edge-soft: rgba(0, 0, 0, 0.05);
+  --halo-edge-bright: rgba(255, 255, 255, 0.9);
+  --halo-edge-inner: inset 0 1px 0 rgba(255, 255, 255, 0.85);
+  --halo-edge-outer: 0 0 0 1px rgba(0, 0, 0, 0.08);
+  --halo-highlight: linear-gradient(180deg, rgba(255, 255, 255, 0.35) 0%, rgba(255, 255, 255, 0) 100%);
+  --halo-highlight-strength: 0.85;
+  --halo-shadow-contact: 0 1px 2px rgba(0, 0, 0, 0.06);
+  --halo-shadow-elevated: 0 1px 2px rgba(0, 0, 0, 0.06), 0 8px 24px rgba(0, 0, 0, 0.08);
+  --halo-shadow-ambient: 0 12px 28px rgba(0, 0, 0, 0.08);
+  --halo-shadow-compressed: inset 0 1px 2px rgba(0, 0, 0, 0.12);
+  --halo-blur-sm: 0px;
+  --halo-blur-md: 0px;
+  --halo-blur-lg: 0px;
+  --halo-blur-xl: 0px;
+  --halo-refraction-strength: 0;
+  --halo-refraction-offset: 0;
+  --halo-noise-opacity: 0;
+  --halo-glow: transparent;
 }
 
 .dark {
-  /* Surface Tints (Dark Mode: Deep graphite optical body) */
-  --halo-surface: rgba(22, 23, 26, 0.7);
-  --halo-surface-elevated: rgba(30, 32, 38, 0.85);
-  --halo-surface-strong: rgba(38, 41, 48, 0.95);
-  --halo-surface-recessed: rgba(0, 0, 0, 0.45);
-  --halo-surface-tint: rgba(18, 19, 22, 0.6);
+  /* Surfaces (Dark Mode: Solid graphite/slate) */
+  --halo-surface: #14161a;
+  --halo-surface-muted: #1c1e24;
+  --halo-surface-elevated: #1e2027;
+  --halo-surface-inset: #0e0f13;
+  --halo-surface-recessed: #181920;
 
-  /* Optical Edges (Dark Mode: Luminous rim catch & dark contact) */
-  --halo-edge: rgba(255, 255, 255, 0.14);
-  --halo-edge-soft: rgba(255, 255, 255, 0.06);
-  --halo-edge-bright: rgba(255, 255, 255, 0.28);
-  --halo-edge-inner: inset 0 1px 1px 0 rgba(255, 255, 255, 0.2), inset 0 -1px 1px 0 rgba(0, 0, 0, 0.6);
-  --halo-edge-outer: 0 0 0 1px rgba(255, 255, 255, 0.08);
+  /* Borders */
+  --halo-border: #30343f;
+  --halo-border-subtle: #252831;
+  --halo-border-strong: #4a5061;
 
-  /* Specular Highlights (Directional top-left luminescence) */
-  --halo-highlight: linear-gradient(135deg, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0.04) 38%, rgba(255, 255, 255, 0) 100%);
-  --halo-highlight-strength: 0.55;
+  /* Tactile Controls: Neutral / Default */
+  --halo-control-top: #262930;
+  --halo-control-bottom: #1c1e24;
+  --halo-control-border: #383c46;
+  --halo-control-depth: #111317;
+  --halo-control-highlight: rgba(255, 255, 255, 0.14);
+  --halo-control-text: #f3f4f6;
 
-  /* Shadows (Deep graphite depth) */
-  --halo-shadow-contact: 0 1px 2px -0.5px rgba(0, 0, 0, 0.4), 0 3px 6px 0 rgba(0, 0, 0, 0.3);
-  --halo-shadow-elevated: 0 8px 24px -4px rgba(0, 0, 0, 0.65), 0 3px 8px -2px rgba(0, 0, 0, 0.4);
-  --halo-shadow-ambient: 0 20px 48px -12px rgba(0, 0, 0, 0.85);
-  --halo-shadow-compressed: 0 1px 2px 0 rgba(0, 0, 0, 0.6);
+  /* Primary Action (High-Contrast White in Dark Mode) */
+  --halo-primary-top: #ffffff;
+  --halo-primary-bottom: #f1f2f4;
+  --halo-primary-border: #e2e4e9;
+  --halo-primary-depth: #c4c8d0;
+  --halo-primary-highlight: rgba(255, 255, 255, 1);
+  --halo-primary-foreground: #0f1013;
+  --halo-primary-hover-top: #ffffff;
+  --halo-primary-hover-bottom: #e5e7eb;
 
-  --halo-refraction-strength: 0.18;
-  --halo-noise-opacity: 0.035;
-  --halo-glow: rgba(255, 255, 255, 0.04);
+  /* Secondary Action */
+  --halo-secondary-top: #262930;
+  --halo-secondary-bottom: #1c1e24;
+  --halo-secondary-border: #383c46;
+  --halo-secondary-depth: #111317;
+  --halo-secondary-highlight: rgba(255, 255, 255, 0.14);
+  --halo-secondary-foreground: #f3f4f6;
 
-  /* Focus Ring Tokens (Shared Accessibility Infrastructure) */
+  /* Destructive Action */
+  --halo-destructive-top: #dc2626;
+  --halo-destructive-bottom: #b91c1c;
+  --halo-destructive-border: #991b1b;
+  --halo-destructive-depth: #450a0a;
+  --halo-destructive-highlight: rgba(255, 255, 255, 0.22);
+  --halo-destructive-foreground: #ffffff;
+
+  /* Inset Inputs & Wells */
+  --halo-input-background: #0e0f13;
+  --halo-input-border: #30343f;
+  --halo-input-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.4);
+
+  /* Elevated Overlays & Pop Cards (Apple iOS / macOS frosted liquid glass with high legibility - not too transparent) */
+  --halo-elevated-background: rgba(22, 24, 30, 0.92);
+  --halo-elevated-border: rgba(255, 255, 255, 0.15);
+  --halo-elevated-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.22), inset 0 -1px 1px 0 rgba(0, 0, 0, 0.70), 0 20px 48px -6px rgba(0, 0, 0, 0.65), 0 6px 16px rgba(0, 0, 0, 0.50);
+  --halo-glass-pop-background: rgba(22, 24, 30, 0.92);
+  --halo-glass-pop-border: rgba(255, 255, 255, 0.15);
+  --halo-glass-pop-blur: 20px;
+  --halo-glass-pop-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.22), inset 0 -1px 1px 0 rgba(0, 0, 0, 0.70), 0 20px 48px -6px rgba(0, 0, 0, 0.65), 0 6px 16px rgba(0, 0, 0, 0.50);
+
+  /* Focus Ring Tokens */
   --halo-focus-color: #38bdf8;
   --halo-focus-offset: 2px;
   --halo-focus-width: 2px;
   --halo-focus-offset-color: #0c0d0f;
   --halo-focus-outer-color: rgba(56, 189, 248, 0.35);
-  --halo-focus-shadow: 0 0 0 var(--halo-focus-offset) var(--halo-focus-offset-color), 0 0 0 calc(var(--halo-focus-offset) + var(--halo-focus-width)) var(--halo-focus-color), 0 0 0 calc(var(--halo-focus-offset) + var(--halo-focus-width) + 1.5px) var(--halo-focus-outer-color);
+  --halo-focus-shadow: 0 0 0 var(--halo-focus-offset) var(--halo-focus-offset-color),
+                       0 0 0 calc(var(--halo-focus-offset) + var(--halo-focus-width)) var(--halo-focus-color),
+                       0 0 0 calc(var(--halo-focus-offset) + var(--halo-focus-width) + 1.5px) var(--halo-focus-outer-color);
 
   /* Typography & Canvas */
   --halo-canvas: #0c0d0f;
@@ -118,34 +204,85 @@
   --halo-text-primary: #f6f7f9;
   --halo-text-secondary: #9ea3ae;
   --halo-text-tertiary: #656a76;
+
+  /* Backward Compatibility Bridges */
+  --halo-edge: rgba(255, 255, 255, 0.12);
+  --halo-edge-soft: rgba(255, 255, 255, 0.05);
+  --halo-edge-bright: rgba(255, 255, 255, 0.22);
+  --halo-edge-inner: inset 0 1px 0 rgba(255, 255, 255, 0.14);
+  --halo-edge-outer: 0 0 0 1px rgba(255, 255, 255, 0.08);
+  --halo-highlight: linear-gradient(180deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0) 100%);
+  --halo-highlight-strength: 0.55;
+  --halo-shadow-contact: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --halo-shadow-elevated: 0 1px 2px rgba(0, 0, 0, 0.4), 0 8px 24px rgba(0, 0, 0, 0.55);
+  --halo-shadow-ambient: 0 16px 36px rgba(0, 0, 0, 0.6);
+  --halo-shadow-compressed: inset 0 1px 2px rgba(0, 0, 0, 0.5);
+  --halo-blur-sm: 0px;
+  --halo-blur-md: 0px;
+  --halo-blur-lg: 0px;
+  --halo-blur-xl: 0px;
+  --halo-refraction-strength: 0;
+  --halo-refraction-offset: 0;
+  --halo-noise-opacity: 0;
+  --halo-glow: transparent;
 }
 
 /* Explicit Stage Scopes for Interactive Previews */
 .light,
 [data-stage-theme="light"] {
-  --halo-surface: rgba(255, 255, 255, 0.72);
-  --halo-surface-elevated: rgba(255, 255, 255, 0.88);
-  --halo-surface-strong: rgba(255, 255, 255, 0.95);
-  --halo-surface-recessed: rgba(0, 0, 0, 0.03);
-  --halo-surface-tint: rgba(245, 245, 247, 0.45);
+  --halo-surface: #ffffff;
+  --halo-surface-muted: #f4f5f7;
+  --halo-surface-elevated: #ffffff;
+  --halo-surface-inset: #f8f9fb;
+  --halo-surface-recessed: #f1f2f5;
 
-  --halo-edge: rgba(255, 255, 255, 0.9);
-  --halo-edge-soft: rgba(0, 0, 0, 0.08);
-  --halo-edge-bright: rgba(255, 255, 255, 1);
-  --halo-edge-inner: inset 0 1px 1px 0 rgba(255, 255, 255, 0.9), inset 0 -1px 1px 0 rgba(0, 0, 0, 0.04);
-  --halo-edge-outer: 0 0 0 1px rgba(0, 0, 0, 0.06);
+  --halo-border: #d2d6dc;
+  --halo-border-subtle: #e5e7eb;
+  --halo-border-strong: #9ca3af;
 
-  --halo-highlight: linear-gradient(135deg, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.15) 35%, rgba(255, 255, 255, 0) 100%);
-  --halo-highlight-strength: 0.85;
+  --halo-control-top: #ffffff;
+  --halo-control-bottom: #f3f4f6;
+  --halo-control-border: #d1d5db;
+  --halo-control-depth: #cbd1d8;
+  --halo-control-highlight: rgba(255, 255, 255, 0.9);
+  --halo-control-text: #111827;
 
-  --halo-shadow-contact: 0 1px 2px -0.5px rgba(0, 0, 0, 0.08), 0 2px 4px 0 rgba(0, 0, 0, 0.04);
-  --halo-shadow-elevated: 0 6px 16px -4px rgba(0, 0, 0, 0.08), 0 2px 6px -1px rgba(0, 0, 0, 0.04);
-  --halo-shadow-ambient: 0 16px 36px -8px rgba(0, 0, 0, 0.1);
-  --halo-shadow-compressed: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
+  --halo-primary-top: #18191d;
+  --halo-primary-bottom: #0f1013;
+  --halo-primary-border: #23252a;
+  --halo-primary-depth: #050507;
+  --halo-primary-highlight: rgba(255, 255, 255, 0.22);
+  --halo-primary-foreground: #ffffff;
+  --halo-primary-hover-top: #24262c;
+  --halo-primary-hover-bottom: #14161a;
 
-  --halo-refraction-strength: 0.12;
-  --halo-noise-opacity: 0.025;
-  --halo-glow: rgba(0, 0, 0, 0.04);
+  --halo-secondary-top: #ffffff;
+  --halo-secondary-bottom: #f4f5f7;
+  --halo-secondary-border: #d1d5db;
+  --halo-secondary-depth: #cbd1d8;
+  --halo-secondary-highlight: rgba(255, 255, 255, 0.85);
+  --halo-secondary-foreground: #1f2937;
+
+  --halo-destructive-top: #e53935;
+  --halo-destructive-bottom: #d32f2f;
+  --halo-destructive-border: #b71c1c;
+  --halo-destructive-depth: #8b0000;
+  --halo-destructive-highlight: rgba(255, 255, 255, 0.28);
+  --halo-destructive-foreground: #ffffff;
+
+  --halo-input-background: #ffffff;
+  --halo-input-border: #d1d5db;
+  --halo-input-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.08);
+
+  --halo-elevated-background: rgba(255, 255, 255, 0.92);
+  --halo-elevated-border: rgba(255, 255, 255, 0.85);
+  --halo-elevated-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.95), inset 0 -1px 1px 0 rgba(0, 0, 0, 0.04), 0 16px 40px -4px rgba(0, 0, 0, 0.10), 0 4px 12px rgba(0, 0, 0, 0.04);
+  --halo-glass-pop-background: rgba(255, 255, 255, 0.92);
+  --halo-glass-pop-border: rgba(255, 255, 255, 0.85);
+  --halo-glass-pop-blur: 20px;
+  --halo-glass-pop-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.95), inset 0 -1px 1px 0 rgba(0, 0, 0, 0.04), 0 16px 40px -4px rgba(0, 0, 0, 0.10), 0 4px 12px rgba(0, 0, 0, 0.04);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
 
   --halo-focus-color: #0284c7;
   --halo-focus-offset-color: #ffffff;
@@ -171,29 +308,59 @@
 }
 
 [data-stage-theme="dark"] {
-  --halo-surface: rgba(22, 23, 26, 0.7);
-  --halo-surface-elevated: rgba(30, 32, 38, 0.85);
-  --halo-surface-strong: rgba(38, 41, 48, 0.95);
-  --halo-surface-recessed: rgba(0, 0, 0, 0.45);
-  --halo-surface-tint: rgba(18, 19, 22, 0.6);
+  --halo-surface: #14161a;
+  --halo-surface-muted: #1c1e24;
+  --halo-surface-elevated: #1e2027;
+  --halo-surface-inset: #0e0f13;
+  --halo-surface-recessed: #181920;
 
-  --halo-edge: rgba(255, 255, 255, 0.14);
-  --halo-edge-soft: rgba(255, 255, 255, 0.06);
-  --halo-edge-bright: rgba(255, 255, 255, 0.28);
-  --halo-edge-inner: inset 0 1px 1px 0 rgba(255, 255, 255, 0.2), inset 0 -1px 1px 0 rgba(0, 0, 0, 0.6);
-  --halo-edge-outer: 0 0 0 1px rgba(255, 255, 255, 0.08);
+  --halo-border: #30343f;
+  --halo-border-subtle: #252831;
+  --halo-border-strong: #4a5061;
 
-  --halo-highlight: linear-gradient(135deg, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0.04) 38%, rgba(255, 255, 255, 0) 100%);
-  --halo-highlight-strength: 0.55;
+  --halo-control-top: #262930;
+  --halo-control-bottom: #1c1e24;
+  --halo-control-border: #383c46;
+  --halo-control-depth: #111317;
+  --halo-control-highlight: rgba(255, 255, 255, 0.14);
+  --halo-control-text: #f3f4f6;
 
-  --halo-shadow-contact: 0 1px 2px -0.5px rgba(0, 0, 0, 0.4), 0 3px 6px 0 rgba(0, 0, 0, 0.3);
-  --halo-shadow-elevated: 0 8px 24px -4px rgba(0, 0, 0, 0.65), 0 3px 8px -2px rgba(0, 0, 0, 0.4);
-  --halo-shadow-ambient: 0 20px 48px -12px rgba(0, 0, 0, 0.85);
-  --halo-shadow-compressed: 0 1px 2px 0 rgba(0, 0, 0, 0.6);
+  --halo-primary-top: #ffffff;
+  --halo-primary-bottom: #f1f2f4;
+  --halo-primary-border: #e2e4e9;
+  --halo-primary-depth: #c4c8d0;
+  --halo-primary-highlight: rgba(255, 255, 255, 1);
+  --halo-primary-foreground: #0f1013;
+  --halo-primary-hover-top: #ffffff;
+  --halo-primary-hover-bottom: #e5e7eb;
 
-  --halo-refraction-strength: 0.18;
-  --halo-noise-opacity: 0.035;
-  --halo-glow: rgba(255, 255, 255, 0.04);
+  --halo-secondary-top: #262930;
+  --halo-secondary-bottom: #1c1e24;
+  --halo-secondary-border: #383c46;
+  --halo-secondary-depth: #111317;
+  --halo-secondary-highlight: rgba(255, 255, 255, 0.14);
+  --halo-secondary-foreground: #f3f4f6;
+
+  --halo-destructive-top: #dc2626;
+  --halo-destructive-bottom: #b91c1c;
+  --halo-destructive-border: #991b1b;
+  --halo-destructive-depth: #450a0a;
+  --halo-destructive-highlight: rgba(255, 255, 255, 0.22);
+  --halo-destructive-foreground: #ffffff;
+
+  --halo-input-background: #0e0f13;
+  --halo-input-border: #30343f;
+  --halo-input-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.4);
+
+  --halo-elevated-background: rgba(22, 24, 30, 0.92);
+  --halo-elevated-border: rgba(255, 255, 255, 0.15);
+  --halo-elevated-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.22), inset 0 -1px 1px 0 rgba(0, 0, 0, 0.70), 0 20px 48px -6px rgba(0, 0, 0, 0.65), 0 6px 16px rgba(0, 0, 0, 0.50);
+  --halo-glass-pop-background: rgba(22, 24, 30, 0.92);
+  --halo-glass-pop-border: rgba(255, 255, 255, 0.15);
+  --halo-glass-pop-blur: 20px;
+  --halo-glass-pop-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.22), inset 0 -1px 1px 0 rgba(0, 0, 0, 0.70), 0 20px 48px -6px rgba(0, 0, 0, 0.65), 0 6px 16px rgba(0, 0, 0, 0.50);
+  --popover: oklch(0.145 0 0);
+  --popover-foreground: oklch(0.985 0 0);
 
   --halo-focus-color: #38bdf8;
   --halo-focus-offset-color: #0c0d0f;
@@ -219,33 +386,26 @@
 
 /* Material Intensity Presets */
 .halo-intensity-subtle {
-  --halo-active-blur: var(--halo-blur-sm);
   --halo-active-highlight: 0.4;
-  --halo-active-edge: 0.7;
 }
 
 .halo-intensity-balanced {
-  --halo-active-blur: var(--halo-blur-md);
   --halo-active-highlight: 0.85;
-  --halo-active-edge: 1;
 }
 
 .halo-intensity-rich {
-  --halo-active-blur: var(--halo-blur-lg);
   --halo-active-highlight: 1.2;
-  --halo-active-edge: 1.35;
 }
 
 /* Tactile Physics Classes */
 .halo-tactile-press {
-  transition: transform 120ms cubic-bezier(0.2, 0.8, 0.3, 1),
-              box-shadow 120ms cubic-bezier(0.2, 0.8, 0.3, 1),
-              background-color 150ms ease;
+  transition: transform 80ms cubic-bezier(0.2, 0.8, 0.3, 1),
+              box-shadow 80ms cubic-bezier(0.2, 0.8, 0.3, 1);
 }
 
 .halo-tactile-press:active:not(:disabled) {
-  transform: scale(0.98) translateY(1px);
-  box-shadow: var(--halo-shadow-compressed), var(--halo-edge-inner), var(--halo-edge-outer) !important;
+  transform: translateY(2px) !important;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.12), 0 0 0 transparent !important;
 }
 
 /* Focus Ring Accessibility Infrastructure */
@@ -361,198 +521,6 @@
   --halo-highlight-multiplier: 1.20;
   --halo-glow-spread: 36px;
 }
-
-/* ==========================================================================
-   HALOUI PHYSICAL LIQUID GLASS BUTTON ENGINE
-   ========================================================================== */
-.halo-liquid-glass {
-  position: relative;
-  isolation: isolate;
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(8px) saturate(180%);
-  -webkit-backdrop-filter: blur(8px) saturate(180%);
-  border: 1px double rgba(51, 51, 51, 0.12);
-  box-shadow:
-    inset 2px -2px 1px -1px rgba(255, 255, 255, 0.95),
-    inset -2px 2px 1px -1px rgba(255, 255, 255, 0.95),
-    inset 6px -6px 1px -6px rgba(255, 255, 255, 0.65),
-    inset -6px 6px 1px -6px rgba(255, 255, 255, 0.65),
-    inset 0 0 2px rgba(0, 0, 0, 0.35),
-    0 4px 14px rgba(0, 0, 0, 0.12);
-  transition: transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1),
-              box-shadow 0.2s cubic-bezier(0.2, 0.8, 0.2, 1),
-              background 0.2s ease;
-}
-
-.dark .halo-liquid-glass,
-[data-stage-theme="dark"] .halo-liquid-glass {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px double rgba(255, 255, 255, 0.16);
-  box-shadow:
-    inset 2px -2px 1px -1px rgba(255, 255, 255, 0.5),
-    inset -2px 2px 1px -1px rgba(255, 255, 255, 0.5),
-    inset 6px -6px 1px -6px rgba(255, 255, 255, 0.3),
-    inset -6px 6px 1px -6px rgba(255, 255, 255, 0.3),
-    inset 0 0 2px rgba(0, 0, 0, 0.8),
-    0 6px 20px -2px rgba(0, 0, 0, 0.6);
-}
-
-.halo-liquid-glass::before {
-  content: "";
-  position: absolute;
-  z-index: 1;
-  inset: 0;
-  border-radius: inherit;
-  pointer-events: none;
-  background: linear-gradient(
-    45deg,
-    rgba(255, 255, 255, 0.75) 0%,
-    transparent 25%,
-    transparent 75%,
-    rgba(255, 255, 255, 0.75) 100%
-  );
-  filter: blur(1px);
-  opacity: 0.9;
-  transition: opacity 0.2s ease;
-}
-
-.dark .halo-liquid-glass::before,
-[data-stage-theme="dark"] .halo-liquid-glass::before {
-  background: linear-gradient(
-    45deg,
-    rgba(255, 255, 255, 0.4) 0%,
-    transparent 25%,
-    transparent 75%,
-    rgba(255, 255, 255, 0.4) 100%
-  );
-}
-
-.halo-liquid-glass::after {
-  content: "";
-  position: absolute;
-  z-index: 0;
-  inset: 2px;
-  border-radius: inherit;
-  border: 1px solid rgba(0, 0, 0, 0.15);
-  filter: blur(3px);
-  pointer-events: none;
-}
-
-.dark .halo-liquid-glass::after,
-[data-stage-theme="dark"] .halo-liquid-glass::after {
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  filter: blur(3px);
-}
-
-.halo-liquid-glass:hover {
-  transform: translateY(-2px);
-  background: rgba(255, 255, 255, 0.1);
-  box-shadow:
-    inset 2px -2px 1px -1px rgba(255, 255, 255, 1),
-    inset -2px 2px 1px -1px rgba(255, 255, 255, 1),
-    inset 6px -6px 1px -6px rgba(255, 255, 255, 0.8),
-    inset -6px 6px 1px -6px rgba(255, 255, 255, 0.8),
-    inset 0 0 2px rgba(0, 0, 0, 0.25),
-    0 8px 24px -2px rgba(0, 0, 0, 0.18);
-}
-
-.dark .halo-liquid-glass:hover,
-[data-stage-theme="dark"] .halo-liquid-glass:hover {
-  background: rgba(255, 255, 255, 0.07);
-  box-shadow:
-    inset 2px -2px 1px -1px rgba(255, 255, 255, 0.7),
-    inset -2px 2px 1px -1px rgba(255, 255, 255, 0.7),
-    inset 6px -6px 1px -6px rgba(255, 255, 255, 0.4),
-    inset -6px 6px 1px -6px rgba(255, 255, 255, 0.4),
-    inset 0 0 2px rgba(0, 0, 0, 0.6),
-    0 10px 28px -2px rgba(0, 0, 0, 0.7);
-}
-
-.halo-liquid-glass:active {
-  transform: scale(0.95);
-}
-
-/* ==========================================================================
-   HALOUI PHYSICAL LIQUID GLASS FLOATING SURFACE ENGINE
-   (Stationary 10-layer physical optical engine for popups, overlays, modals & menus)
-   ========================================================================== */
-.halo-liquid-glass-surface {
-  position: relative;
-  isolation: isolate;
-  background: rgba(255, 255, 255, 0.88);
-  backdrop-filter: blur(24px) saturate(190%);
-  -webkit-backdrop-filter: blur(24px) saturate(190%);
-  border: 1px double rgba(51, 51, 51, 0.12);
-  box-shadow:
-    inset 2px -2px 1px -1px rgba(255, 255, 255, 0.95),
-    inset -2px 2px 1px -1px rgba(255, 255, 255, 0.95),
-    inset 6px -6px 1px -6px rgba(255, 255, 255, 0.65),
-    inset -6px 6px 1px -6px rgba(255, 255, 255, 0.65),
-    inset 0 0 2px rgba(0, 0, 0, 0.15),
-    0 16px 40px -8px rgba(0, 0, 0, 0.18),
-    0 4px 14px rgba(0, 0, 0, 0.08);
-}
-
-.dark .halo-liquid-glass-surface,
-[data-stage-theme="dark"] .halo-liquid-glass-surface {
-  background: rgba(18, 20, 24, 0.82);
-  border: 1px double rgba(255, 255, 255, 0.16);
-  box-shadow:
-    inset 2px -2px 1px -1px rgba(255, 255, 255, 0.45),
-    inset -2px 2px 1px -1px rgba(255, 255, 255, 0.45),
-    inset 6px -6px 1px -6px rgba(255, 255, 255, 0.25),
-    inset -6px 6px 1px -6px rgba(255, 255, 255, 0.25),
-    inset 0 0 2px rgba(0, 0, 0, 0.8),
-    0 24px 50px -12px rgba(0, 0, 0, 0.75),
-    0 8px 24px -4px rgba(0, 0, 0, 0.5);
-}
-
-.halo-liquid-glass-surface::before {
-  content: "";
-  position: absolute;
-  z-index: 1;
-  inset: 0;
-  border-radius: inherit;
-  pointer-events: none;
-  background: linear-gradient(
-    45deg,
-    rgba(255, 255, 255, 0.65) 0%,
-    transparent 28%,
-    transparent 72%,
-    rgba(255, 255, 255, 0.65) 100%
-  );
-  filter: blur(1px);
-  opacity: 0.9;
-}
-
-.dark .halo-liquid-glass-surface::before,
-[data-stage-theme="dark"] .halo-liquid-glass-surface::before {
-  background: linear-gradient(
-    45deg,
-    rgba(255, 255, 255, 0.35) 0%,
-    transparent 28%,
-    transparent 72%,
-    rgba(255, 255, 255, 0.35) 100%
-  );
-}
-
-.halo-liquid-glass-surface::after {
-  content: "";
-  position: absolute;
-  z-index: 0;
-  inset: 2px;
-  border-radius: inherit;
-  border: 1px solid rgba(0, 0, 0, 0.12);
-  filter: blur(3px);
-  pointer-events: none;
-}
-
-.dark .halo-liquid-glass-surface::after,
-[data-stage-theme="dark"] .halo-liquid-glass-surface::after {
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  filter: blur(3px);
-}
-
 
 @keyframes halo-indeterminate {
   0% {

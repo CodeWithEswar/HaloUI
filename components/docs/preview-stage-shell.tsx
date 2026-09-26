@@ -55,9 +55,21 @@ export interface TelemetryItem {
 }
 
 const BACKDROP_PRESETS: Record<string, { light: string; dark: string; overlay?: React.ReactNode }> = {
+  image: {
+    light: "bg-[url('/backdrops/architecture-light.jpg')] bg-cover bg-center",
+    dark: "bg-[url('/backdrops/architecture-dark.jpg')] bg-cover bg-center",
+  },
+  "photo-light": {
+    light: "bg-[url('/backdrops/architecture-light.jpg')] bg-cover bg-center",
+    dark: "bg-[url('/backdrops/architecture-light.jpg')] bg-cover bg-center",
+  },
+  "photo-dark": {
+    light: "bg-[url('/backdrops/architecture-dark.jpg')] bg-cover bg-center",
+    dark: "bg-[url('/backdrops/architecture-dark.jpg')] bg-cover bg-center",
+  },
   neutral: {
-    light: "bg-[#f8f9fb] bg-[radial-gradient(#0000000a_1px,transparent_1px)] [background-size:16px_16px]",
-    dark: "bg-[#0b0d10] bg-[radial-gradient(#ffffff0a_1px,transparent_1px)] [background-size:16px_16px]",
+    light: "bg-[#f8f9fb] bg-[radial-gradient(ellipse_80%_60%_at_50%_-10%,rgba(56,189,248,0.18),transparent_70%),radial-gradient(ellipse_60%_50%_at_80%_80%,rgba(168,85,247,0.14),transparent_70%),radial-gradient(#0000000a_1px,transparent_1px)] [background-size:100%_100%,100%_100%,16px_16px]",
+    dark: "bg-[#0b0d10] bg-[radial-gradient(ellipse_80%_60%_at_50%_-10%,rgba(56,189,248,0.22),transparent_70%),radial-gradient(ellipse_60%_50%_at_80%_80%,rgba(168,85,247,0.18),transparent_70%),radial-gradient(#ffffff0a_1px,transparent_1px)] [background-size:100%_100%,100%_100%,16px_16px]",
   },
   "dark-void": {
     light: "bg-[#f4f5f7] bg-[radial-gradient(#0000000a_1px,transparent_1px)] [background-size:16px_16px]",
@@ -76,20 +88,20 @@ const BACKDROP_PRESETS: Record<string, { light: string; dark: string; overlay?: 
     dark: "bg-[#141210] border border-[#2a241e]",
   },
   mesh: {
-    light: "bg-gradient-to-tr from-sky-100/90 via-purple-100/70 to-rose-100/90",
-    dark: "bg-gradient-to-tr from-cyan-600/25 via-violet-600/25 to-amber-600/25 blur-2xl bg-black",
+    light: "bg-[#f8f9fb] bg-[radial-gradient(ellipse_90%_70%_at_25%_15%,rgba(56,189,248,0.32),transparent_65%),radial-gradient(ellipse_85%_65%_at_85%_75%,rgba(168,85,247,0.28),transparent_65%),radial-gradient(ellipse_75%_55%_at_45%_95%,rgba(244,63,94,0.20),transparent_65%)]",
+    dark: "bg-[#07080a] bg-[radial-gradient(ellipse_90%_70%_at_25%_15%,rgba(56,189,248,0.38),transparent_65%),radial-gradient(ellipse_85%_65%_at_85%_75%,rgba(168,85,247,0.32),transparent_65%),radial-gradient(ellipse_75%_55%_at_45%_95%,rgba(244,63,94,0.24),transparent_65%)]",
   },
   gradient: {
-    light: "bg-gradient-to-br from-indigo-100/70 via-purple-100/60 to-slate-100",
+    light: "bg-gradient-to-br from-indigo-100/90 via-purple-100/70 to-slate-100",
     dark: "bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-indigo-950 via-slate-900 to-black",
   },
   sunset: {
-    light: "bg-gradient-to-tr from-amber-100/70 via-rose-100/60 to-purple-100/50",
-    dark: "bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-amber-500/20 via-rose-600/20 to-stone-950",
+    light: "bg-gradient-to-tr from-amber-100/90 via-rose-100/75 to-purple-100/60",
+    dark: "bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-amber-500/25 via-rose-600/25 to-stone-950",
   },
   spectral: {
-    light: "bg-gradient-to-br from-sky-100/80 via-rose-50/70 to-indigo-100/80",
-    dark: "bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-sky-900/40 via-purple-900/20 to-[#0c0d0f]",
+    light: "bg-gradient-to-br from-sky-200/70 via-rose-100/70 to-indigo-200/70",
+    dark: "bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-sky-900/50 via-purple-900/30 to-[#0c0d0f]",
   },
   dense: {
     light: "bg-[#f4f5f7] bg-[linear-gradient(to_right,#0000000a_1px,transparent_1px),linear-gradient(to_bottom,#0000000a_1px,transparent_1px)] [background-size:16px_16px]",
@@ -103,26 +115,36 @@ const BACKDROP_PRESETS: Record<string, { light: string; dark: string; overlay?: 
     light: "bg-stone-100/80",
     dark: "bg-[#0c0d10]",
   },
+  wallpaper: {
+    light: "bg-[url('/backdrops/architecture-light.jpg')] bg-cover bg-center",
+    dark: "bg-[url('/backdrops/architecture-dark.jpg')] bg-cover bg-center",
+  },
   "light-minimal": {
     light: "bg-[#f8f9fb]",
     dark: "bg-[#121418]",
   },
   dark: {
-    light: "bg-stone-200/90",
+    light: "bg-[#07080a]",
     dark: "bg-[#07080a] border border-white/5",
   },
 };
 
 const DEFAULT_BACKDROP_OPTIONS = [
+  { value: "image", label: "Architecture Scene (Real Photo)" },
+  { value: "photo-light", label: "Sunlit Architecture (Light Photo)" },
+  { value: "photo-dark", label: "Night Penthouse (Dark Photo)" },
   { value: "neutral", label: "Neutral Studio" },
-  { value: "paper", label: "Warm Paper" },
-  { value: "mesh", label: "Liquid Mesh" },
+  { value: "mesh", label: "Liquid Mesh (Signature)" },
   { value: "spectral", label: "Spectral Aurora" },
+  { value: "gradient", label: "Indigo Crystal" },
+  { value: "sunset", label: "Sunset Glow" },
   { value: "dense", label: "Dense UI Grid" },
   { value: "void", label: "Deep Void" },
 ];
 
 export interface PreviewStageShellProps {
+  motion?: "system" | "reduced";
+  transparency?: "system" | "reduced";
   title?: string;
   description?: string;
   badge?: string;
@@ -154,6 +176,8 @@ export interface PreviewStageShellProps {
 }
 
 export function PreviewStageShell({
+  motion = "system",
+  transparency = "system",
   title = "Live Preview Stage",
   description = "Evaluate optical physics, responsive viewports, environments, and material parameters.",
   badge = "Interactive Workbench",
@@ -168,7 +192,7 @@ export function PreviewStageShell({
   stageTheme,
   onStageThemeChange,
 
-  backdrop = "neutral",
+  backdrop = "mesh",
   onBackdropChange,
   backdropOptions = DEFAULT_BACKDROP_OPTIONS,
 
@@ -186,7 +210,7 @@ export function PreviewStageShell({
   const { resolvedTheme } = useTheme();
   const [mounted, setMounted] = React.useState(false);
   const [internalViewport, setInternalViewport] = React.useState<StageViewport>("desktop");
-  const [internalBackdrop, setInternalBackdrop] = React.useState<string>("neutral");
+  const [internalBackdrop, setInternalBackdrop] = React.useState<string>("mesh");
   const [showDetails, setShowDetails] = React.useState(false);
 
   React.useEffect(() => {
@@ -331,12 +355,12 @@ export function PreviewStageShell({
                   if (val && val !== activeBackdrop) setEffectiveBackdrop(val);
                 }}
               >
-                <SelectTrigger className="h-8 sm:h-9 w-full sm:w-[155px] text-xs bg-background border-border text-foreground font-medium shadow-2xs">
+                <SelectTrigger variant="default" aria-label="Preview background" className="halo-docs-control h-8 sm:h-9 w-full sm:w-[155px] text-xs bg-background border-border text-foreground font-medium shadow-2xs">
                   <SelectValue placeholder="Select backdrop">
                     {backdropOptions.find((o) => o.value === activeBackdrop)?.label}
                   </SelectValue>
                 </SelectTrigger>
-                <SelectContent align="end">
+                <SelectContent variant="default" align="end" className="halo-docs-control">
                   {backdropOptions.map((opt) => (
                     <SelectItem key={opt.value} value={opt.value} className="text-xs">
                       {opt.label}
@@ -393,6 +417,8 @@ export function PreviewStageShell({
           <div
             suppressHydrationWarning
             data-stage-theme={activeTheme}
+            data-motion={motion}
+            data-transparency={transparency}
             style={{ colorScheme: activeTheme }}
             className={cn(
               "p-4 sm:p-8 md:p-10 flex flex-col items-center justify-center transition-all duration-300 min-h-[380px] sm:min-h-[440px] relative overflow-hidden",
@@ -405,7 +431,32 @@ export function PreviewStageShell({
             <div
               suppressHydrationWarning
               className={cn("absolute inset-0 pointer-events-none overflow-hidden transition-all duration-300", backdropClasses)}
-            />
+            >
+              {(activeBackdrop === "dense" || activeBackdrop === "dense-ui") && (
+                <div aria-hidden="true" className="grid grid-cols-2 gap-x-8 gap-y-4 p-6 text-xs text-muted-foreground opacity-60 select-none">
+                  {Array.from({ length: 24 }, (_, index) => (
+                    <div key={index} className="border-b border-border pb-3">
+                      <span className="font-medium">Workspace document {index + 1}</span>
+                      <p className="mt-1">Design review · Shared with the team</p>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* Luminous Ambient Liquid Orbs behind canvas (only for abstract gradient/mesh backdrops) */}
+            {!["image", "photo-light", "photo-dark", "wallpaper"].includes(activeBackdrop) && (
+              <>
+                <div
+                  aria-hidden="true"
+                  className="absolute -top-16 -left-16 size-80 rounded-full bg-sky-400/20 dark:bg-cyan-400/20 blur-3xl pointer-events-none transition-opacity duration-300"
+                />
+                <div
+                  aria-hidden="true"
+                  className="absolute -bottom-16 -right-16 size-80 rounded-full bg-purple-400/20 dark:bg-violet-400/20 blur-3xl pointer-events-none transition-opacity duration-300"
+                />
+              </>
+            )}
 
             {/* Viewport-Sized Frame */}
             <div
@@ -572,11 +623,11 @@ export function StageControlSelect<T extends string>({
   return (
     <div
       className={cn(
-        "flex items-center justify-between gap-2 p-1.5 sm:p-2 px-2.5 sm:px-3 rounded-xl border border-border/80 bg-card/75 shadow-2xs w-full min-w-0 overflow-hidden transition-colors",
+        "flex items-center justify-between gap-2 p-1.5 sm:p-2 px-2.5 sm:px-3 rounded-xl border border-border/80 bg-card/75 shadow-2xs w-full min-w-0 transition-colors",
         className
       )}
     >
-      <span className="text-xs sm:text-[13px] text-muted-foreground font-medium select-none shrink-0 truncate max-w-[48%]">
+      <span className="text-xs sm:text-[13px] text-muted-foreground font-medium select-none shrink-0 whitespace-nowrap">
         {label}:
       </span>
       <Select
@@ -585,14 +636,15 @@ export function StageControlSelect<T extends string>({
         onValueChange={handleValueChange}
       >
         <SelectTrigger
+          variant="default"
           size="sm"
-          className="h-8.5 sm:h-9 text-xs sm:text-[13px] bg-background/90 hover:bg-background border-border text-foreground font-medium shadow-2xs min-w-0 flex-1 justify-between px-2.5 sm:px-3 gap-1.5 overflow-hidden rounded-lg transition-colors"
+          className="halo-docs-control h-8.5 sm:h-9 text-xs sm:text-[13px] bg-background border-border text-foreground font-medium shadow-2xs min-w-0 flex-1 justify-between px-2.5 sm:px-3 gap-1.5 overflow-hidden rounded-lg transition-colors"
         >
           <span className="truncate text-left flex-1 min-w-0 block">
             <SelectValue>{selectedOption?.label ?? value}</SelectValue>
           </span>
         </SelectTrigger>
-        <SelectContent align="end">
+        <SelectContent variant="default" align="end" className="halo-docs-control">
           {options.map((opt) => (
             <SelectItem key={opt.value} value={opt.value} className="text-xs sm:text-[13px] py-1.5">
               {opt.label}

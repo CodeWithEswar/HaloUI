@@ -1,325 +1,129 @@
 export const frontmatter = {
   title: "Liquid Material",
-  description: "Understand the optical surface, lighting, depth, interaction, and performance model behind HaloUI components.",
+  description: "Recipes, optical foundations and accessibility fallbacks for HaloUI controls.",
   category: "Foundations",
   order: 1,
-  status: "stable",
-  updated: "2026-09-24",
+  status: "preview",
+  updated: "2026-09-26",
 }
 
 # Liquid Material
 
-> HaloUI's material system defines how translucent surfaces receive light, separate from their environment, express depth, and respond to interaction.
+HaloUI uses a shared CSS material for controls, navigation and floating context above the content layer. Articles, tables, documentation and large static containers should remain neutral and opaque.
 
-Liquid Material is not a single glass effect. It is a coordinated system of surface tint, optical edges, directional highlights, background diffusion, restrained refraction, contact shadows, texture, elevation, and motion.
-
-Components use different combinations of these properties according to their role. A dense form control should not have the same optical intensity as a floating showcase surface.
-
-## Material model
-
-HaloUI treats a component surface as a layered optical material rather than a transparent container with blur applied behind it.
-
-The material model separates responsibilities that are often combined into one CSS declaration. Surface color establishes the material body. Edges define thickness and separation. Highlights communicate incoming light. Diffusion controls background clarity. Refraction introduces restrained optical displacement. Shadows communicate contact and elevation.
-
-No individual layer defines HaloUI. The identity comes from how the layers cooperate.
-
-<MaterialComparisonTable />
+The design takes inspiration from the functional hierarchy and concentric geometry described in Apple's [Meet Liquid Glass](https://developer.apple.com/videos/play/wwdc2025/219/) and [Materials guidance](https://developer.apple.com/design/human-interface-guidelines/materials). This is an original web approximation, not Apple's native compositor. It does not sample background pixels or automatically select a contrasting foreground.
 
 ## Material lab
 
-The Material Lab provides an interactive inspection environment for evaluating HaloUI surface behavior across themes, elevation tiers, optical intensities, and realistic application substrates.
+Compare the actual production recipes across six environments. Use the stage viewport controls and keyboard to inspect focus, disabled, invalid and pressed states. Clear requires a controlled background: it is intentionally not the default for forms or menus.
 
 <MaterialLab />
 
-## Material anatomy
-
-HaloUI models glass as a 10-layer physical optical stack. Rather than applying uncontrolled decoration, each layer fulfills an explicit optical responsibility.
-
-<MaterialAnatomyVisual />
-
-## Surface
-
-The surface is the material body of a HaloUI component. It establishes tint and transparency before diffusion, highlights, shadows, or interaction effects are applied.
-
-A surface should never become so transparent that the component loses visual ownership of its content. Surface treatment depends on theme, environment, elevation, component role, and material intensity.
-
-Surface tint prevents translucent components from behaving like unbounded windows into the background. It gives the material a stable body while allowing environmental information to remain visible.
-
-Light theme uses a restrained luminous neutral tint (`rgba(255, 255, 255, 0.72)`). Dark theme uses a deep graphite tint (`rgba(22, 23, 26, 0.7)`).
-
-<SurfaceSeparationComparison />
-
-## Optical edge
-
-The optical edge describes where the material ends and the surrounding environment begins.
-
-Unlike a conventional uniform border, a HaloUI edge responds subtly to the virtual light direction. Portions facing the light appear slightly brighter while opposing edges remain quieter, grounding the surface against its substrate.
-
-Directional edge treatment must remain subtle enough that the component still reads correctly when the effect is unavailable.
-
-<EdgeComparison />
-
-## Highlights
-
-Highlights communicate the relationship between a surface and the virtual light source. HaloUI uses three distinct highlight tiers:
-
-### Broad highlight
-
-A low-frequency light region that helps establish the overall orientation of a surface. Reserved for larger cards, dialogs, and modal backdrops.
-
-### Directional edge highlight
-
-A restrained highlight concentrated near the material boundary facing the virtual light source. Standard treatment for buttons, inputs, and floating panels.
-
-### Specular highlight
-
-A smaller, brighter response reserved for material that needs stronger depth or tactile interaction feedback.
-
-<Callout type="note" title="Core optical principle">
-  Highlights should reveal geometry, not decorate it.
-</Callout>
-
-## Diffusion
-
-Diffusion controls how much background detail remains legible through a translucent surface. In CSS implementation, diffusion is achieved through GPU-accelerated backdrop blur.
-
-Blur is an implementation technique. Diffusion is the design property.
-
-<DiffusionComparison />
-
-- **Low diffusion (8px)** — Preserves more environmental information. Ideal for dense tables and forms where high-frequency blur wastes GPU cycles.
-- **Balanced diffusion (16px)** — Retains context while providing a stable, high-contrast reading surface. Default across standard components.
-- **High diffusion (28px)** — Strongly suppresses background information. Reserved for high-elevation floating docks, modals, and showcase panels.
-
-## Refraction
-
-Diffusion softens information behind the material. Refraction changes where that information appears to be perceived.
-
-HaloUI uses refraction as a restrained enhancement, not as a requirement for basic component readability. It is implemented as a 1px hairline displacement near top surface boundaries, expressing physical material thickness without distorting interior text.
-
-<RefractionComparison />
-
-### Refraction rules
-
-Use refraction only when:
-- environmental information exists behind the surface;
-- displacement remains subtle (1px to 1.5px hairline);
-- content readability is completely unaffected;
-- pointer interaction does not become distracting;
-- rendering performance remains high.
-
-Never use refraction on dense tables, long forms, repeated list cells, or low-power contexts.
-
-## Shadows
-
-HaloUI distinguishes three shadow types:
-
-- **Contact shadow** — Describes the immediate relationship between the material and the surface beneath it (`--halo-shadow-contact`).
-- **Ambient shadow** — Establishes broader vertical elevation and atmospheric separation (`--halo-shadow-ambient`).
-- **Inset shadow** — Communicates recessed controls or input cavities (`--halo-surface-recessed`).
-
-<Callout type="note" title="Placement principle">
-  Shadows should communicate position, not create a floating aesthetic by default.
-</Callout>
-
-## Texture
-
-Large translucent surfaces can appear unnaturally flat when composed only from smooth gradients and blur. HaloUI may apply an ultra-subtle SVG fractal turbulence mask (0.025 to 0.035 opacity) to reduce digital banding and introduce tactile organic density.
-
-Texture must never reduce text clarity or become visually identifiable as a repeating pattern. Texture is optional, non-semantic, and automatically disabled in low-contrast environments.
-
-## Elevation
-
-Elevation in HaloUI affects more than drop shadow. Surface tint, edge clarity, highlight intensity, diffusion, and environmental separation can change together as a component ascends through the application hierarchy.
-
-<ElevationScaleVisual />
-
-- **Inset** — Recessed cavities such as text inputs and toggle tracks.
-- **Base** — Standard surfaces participating in normal layout flow.
-- **Raised** — Standard interactive controls (buttons, cards) requiring clear tactile separation.
-- **Floating** — Menus, action docks, and floating toolbars.
-- **Overlay** — Dialogs and modals requiring total hierarchical dominance.
-
-## Material intensity
-
-HaloUI organizes material into three primary intensity levels.
-
-### Subtle
-
-Designed for forms, tables, toolbars, dense application UI, and supporting controls. Characterized by restrained transparency, minimal optical movement, quiet edge treatment, and low GPU complexity.
-
-### Balanced
-
-The default HaloUI material treatment for standard cards, buttons, dialogs, and product panels. Characterized by clear material identity, controlled highlights, readable environmental response, and moderate depth.
-
-### Rich
-
-Reserved for hero demonstrations, floating docks, selected overlays, and high-emphasis showcases. Characterized by stronger environmental response, luminous edge highlights, and expressive tactile interaction.
-
-<Callout type="important" title="Hierarchy rule">
-  Rich is not the "better" version of Balanced. It serves a different hierarchy level. Material complexity should decrease as interface density increases.
-</Callout>
-
-## Virtual lighting
-
-HaloUI surfaces appear to exist within the same unified lighting environment. A shared virtual light direction keeps highlights, edges, and shadows coherent across unrelated components on the screen.
-
-The canonical HaloUI virtual light vector is positioned at **135° (upper-left / upper-center)**.
-
-<VirtualLightPreview />
-
-Virtual lighting coordinates edge brightness, directional specular highlights, and shadow projection uniformly without requiring costly per-frame canvas shader rendering.
-
-## Environmental response
-
-A translucent material cannot be evaluated independently of what sits behind it. HaloUI evaluates material surfaces across six canonical environments:
-
-- **Neutral** — Verifies silhouette, edge boundaries, and baseline contrast.
-- **Warm Paper** — Tests material against subtle texture, warm neutral variation, and low-frequency editorial detail.
-- **Spectral** — Tests color transmission, highlight visibility, and tint stability over saturated gradients.
-- **Image** — Verifies diffusion strength and text legibility over complex photographic backgrounds.
-- **Dense UI** — Places surfaces over realistic rows, labels, and small text to confirm complete content isolation.
-- **Dark** — Verifies luminous rim discipline, shadow absorption, and absence of harsh neon borders.
-
-## Interaction
-
-HaloUI material responds to interaction, but motion must communicate state and physical response rather than exist as continuous decoration.
-
-- **Rest** — Communicates material identity and hierarchy statically without requiring animation.
-- **Hover** — Minimal elevation lift, subtle edge clarification, and restrained highlight alignment.
-- **Focus** — Focus is an accessibility state, not a material decoration. Uses HaloUI's high-contrast focus ring, remaining distinct from highlight and edge catches.
-- **Pressed** — Tactile compression (`scale(0.98)`, `translateY(1px)`) with tightening contact shadows.
-- **Disabled** — Reduced optical emphasis while maintaining sufficient boundary and label contrast.
-
-### Pointer-reactive material
-
-Pointer-relative specular tracking is an enhancement reserved exclusively for selected showcase cards, floating action surfaces, and material demonstrations. It is intentionally omitted from data tables, form fields, and repeated list items.
-
-## Material motion
-
-HaloUI material motion is calibrated using the proprietary tactile easing curve:
-
-<CodeBlock
-  language="css"
-  filename="styles/halo-tokens.css"
-  code={`transition-timing-function: cubic-bezier(0.2, 0.8, 0.3, 1);`}
-/>
-
-Motion feels responsive, quiet, physical, and controlled. HaloUI rejects cartoon fluid simulation, jelly wobble, and endless floating animations.
-
-### Reduced motion
-
-When `prefers-reduced-motion: reduce` is detected, magnetic displacement and non-essential transitions are disabled immediately (`0.01ms`), preserving immediate and accessible state feedback.
-
-## Themes
-
-HaloUI material is designed natively for both light and dark environments. Dark mode is never derived through naive filter inversion.
-
-<ThemeMaterialComparison />
-
-- **Light theme** prioritizes physical material boundaries, subtle contact shadows, and controlled white highlights over a luminous body.
-- **Dark theme** prioritizes restrained luminous edges, controlled specular reflections, and deep graphite translucent bodies, avoiding garish neon glow.
-
-## Material tokens
-
-HaloUI material properties are expressed through semantic CSS variables declared in `styles/halo-tokens.css`:
-
-<MaterialTokenTable />
-
-### Customizing tokens
-
-Customize material globally by updating root CSS variables in your theme stylesheet:
-
-<CodeBlock
-  language="css"
-  filename="styles/theme.css"
-  code={`:root {
-  --halo-surface: rgba(255, 255, 255, 0.72);
-  --halo-edge: rgba(255, 255, 255, 0.9);
-  --halo-blur-md: 16px;
-  --halo-shadow-elevated: 0 6px 16px -4px rgba(0, 0, 0, 0.08);
+## Recipes and intensity
+
+| Recipe | Purpose | Behavior |
+| --- | --- | --- |
+| Regular | Controls, navigation, floating context | Balanced transmission and readable tint |
+| Clear | Controlled imagery with independently verified contrast | Increased environmental transmission |
+| Prominent | An important action or elevated control group | Stronger tint and hierarchy |
+
+Intensity controls reflection strength, independently of recipe and elevation. Subtle suits dense controls; Balanced is the default; Rich is exceptional. Rich is not better. Density selects diffusion: compact 12px, regular 14px, floating 16px, overlay 22px.
+
+```tsx
+import { HaloSurface } from "@/components/ui/halo-surface"
+
+export function FloatingControls() {
+  return (
+    <HaloSurface material="regular" intensity="balanced" elevation="floating">
+      <nav aria-label="Workspace">Workspace controls</nav>
+    </HaloSurface>
+  )
 }
+```
 
-.dark {
-  --halo-surface: rgba(22, 23, 26, 0.7);
-  --halo-edge: rgba(255, 255, 255, 0.14);
-  --halo-shadow-elevated: 0 8px 24px -4px rgba(0, 0, 0, 0.65);
-}`}
-/>
+## Optical foundations
 
-<Callout type="tip">
-  Prefer changing semantic material tokens before editing equivalent values independently across components.
-</Callout>
+| Foundation | Responsibility |
+| --- | --- |
+| Surface | Transmission, tint, diffusion, saturation and brightness |
+| Edge | Masked directional perimeter, strongest toward a shared 135-degree light source |
+| Highlight | Restrained reflection near the upper-left light position |
+| Refraction | Optional static perimeter approximation; no pixel displacement |
+| Noise | Optional microscopic static texture, not visible grain |
+| Glow | Explicit exceptional emphasis; never focus, selection or default elevation |
+| Focus Ring | Independent keyboard indication |
+| Motion | Shared press, lift, reveal and settle vocabulary |
+| Background | Deterministic reference environments |
+| Scrim | Modal background attenuation, not glass |
+| Portal Surface | Floating material; existing optional portal creation remains supported |
 
-## Material in components
+The shared renderer composes the body, edge and reflection with a root and two pseudo-elements. Isolated negative stacking keeps optics behind bare text as well as wrapped content. Refraction does not introduce a second backdrop filter or distort content. Static CSS rendering does not need a pointer listener or animation loop.
 
-HaloUI components apply the optical engine according to their specific interaction role:
+## Elevation and geometry
 
-<ComponentMaterialShowcase />
+Inset uses an inner contact shadow. Base uses a tight contact shadow. Raised, Floating and Overlay add increasing ambient separation. Elevation does not make a surface arbitrarily opaque; choose Prominent when stronger tint is necessary.
+
+Semantic radii are control-sm (10px), control (14px), control-lg (18px), floating (22px), and overlay (26px). Derive a nested control radius from its parent's radius minus the inset. Avoid layering another blurred surface inside a floating material.
+
+## Virtual lighting and interaction
+
+Edge and reflection use a shared 135-degree direction with light positioned at 35% horizontally and 12% vertically. Compact actions lift on hover and compress slightly on press. Text-entry fields do not lift. Focus uses a dedicated ring, never the optical edge. The canonical renderer supports directional virtual lighting with pointer-responsive specular tracking via `--halo-pointer-x` and `--halo-pointer-y`.
+
+## Theme adaptation
+
+The existing next-themes architecture remains the theme authority. Light and dark environments have separate body, reflection, edge, brightness and shadow values. Scoped preview themes reset these tokens locally. A theme determines tint; it does not guarantee contrast over arbitrary photography.
+
+## Transparency and motion preferences
+
+Place the explicit preference on the application root when portals should share it, or on a subtree for local previews. A portal mounted outside a locally scoped preference needs that preference on its container too.
+
+```tsx
+<div data-transparency="reduced" data-motion="reduced">
+  <HaloSurface>Solid material with reduced motion</HaloSurface>
+</div>
+```
+
+The material also responds to prefers-reduced-transparency where supported and prefers-reduced-motion. Reduced transparency replaces the body with an opaque theme color and removes backdrop filtering. Increased contrast uses solid surfaces and visible boundaries. Forced colors uses system colors. Browser support for the transparency media query varies, so the explicit attribute is always available.
 
 ## Accessibility
 
-Liquid material must never compromise usability.
+Retain semantic labels, native or primitive keyboard behavior, visible focus and validation states. Test selected with focus, invalid with focus, and open with focus. Material is not evidence of WCAG compliance. Measure text and icon contrast against the actual rendered background; use Prominent, an opaque surface, or a controlled background when needed. Disabled content must remain understandable even when muted.
 
-- **Contrast** — Text and interactive icons maintain WCAG 2.1 AA contrast ratios (&ge; 4.5:1) against the effective rendered translucent body.
-- **Background interference** — High-frequency background noise is diffused sufficiently so underlying patterns never intersect text baselines.
-- **Focus visibility** — Optical highlights are never reused as focus indicators. Focus rings use high-visibility solid rings independent of material effects.
-- **Reduced motion** — All tactile compressions and transitions collapse under `prefers-reduced-motion: reduce`.
+## Tokens and source ownership
 
-## Performance
+Import styles/halo-tokens.css once from the application's global stylesheet. It imports styles/halo-material.css. Registry items include both files. Existing material class names remain compatibility entry points to the same renderer.
 
-HaloUI prioritizes visual hierarchy over effect density:
-
-| Recommended practice | Avoid |
+| Token group | Examples |
 | --- | --- |
-| Use hardware-accelerated transforms and opacity | Dozens of simultaneously animated backdrop filters |
-| Use static CSS gradients for specular highlights | Continuously recalculating blur radii in JavaScript |
-| Localize pointer tracking to selected cards | Full-page window pointer tracking |
-| Decrease material intensity as density increases | Heavy refraction on repeated data rows |
+| Body | --halo-material-body, --halo-material-alpha, --halo-material-solid |
+| Lighting | --halo-material-light, --halo-material-soft, --halo-material-opposite, --halo-material-reflection |
+| Diffusion | --halo-material-brightness; semantic density selects blur and saturation |
+| Elevation | --halo-material-contact, --halo-material-ambient |
+| Geometry | --halo-radius-control, --halo-radius-floating, --halo-radius-overlay |
+| Shared light | --halo-light-angle, --halo-light-x, --halo-light-y |
 
-## Progressive enhancement
+Private variables prefixed with --_halo are recipe implementation details. Components should consume recipes rather than exposing raw blur, edge opacity or refraction strength as public props.
 
-HaloUI components remain fully operable on browsers where advanced optical features are unsupported or reduced:
+## Performance and browser fallback
 
-| Baseline (Fallback) | Enhanced (HaloUI Optical) |
-| --- | --- |
-| Solid translucent color | 10-layer physical optical body |
-| 1px solid border | Direction-aware dual optical edge |
-| Static CSS box-shadow | Multi-stop contact and ambient shadows |
-| Instantaneous state change | Tactile compression curve |
+Use one backdrop filter per material root. Avoid nested filters, per-item filters in menus and tables, full-screen moving blur, global pointer listeners and per-frame React updates. The refraction approximation adds no shader, SVG displacement filter or rendering dependency. Noise uses a static texture only when explicitly requested.
+
+Without backdrop-filter support the body is solid. Without mask-composite support the perimeter uses a simple border. This fallback is intentional; no claim of identical rendering across browsers is made.
 
 ## Usage guidelines
 
-### Do
-- Use material intensity to establish visual hierarchy.
-- Match optical treatment to component role (Subtle for tables, Rich for docks).
-- Test translucent surfaces against realistic product backdrops.
-- Keep typography on stable, isolated reading planes.
-- Preserve dedicated, high-contrast keyboard focus indicators.
+| Use | Avoid |
+| --- | --- |
+| Glass on functional controls and navigation | Glass articles, tables or every card |
+| Regular for ordinary floating surfaces | Clear everywhere |
+| Independent focus and selected indicators | Glow or highlights as the only state |
+| One material surface around a control group | Glass inside glass with nested filters |
+| Controlled backgrounds with measured contrast | Transparent forms over arbitrary photography |
+| Restrained static perimeter approximation | Refraction over text or distorted labels |
+| Shared recipes and geometry | Component-specific blur and competing inset shadows |
 
-### Avoid
-- Making every element translucent.
-- Using Rich material as the default.
-- Treating blur as the entire material system.
-- Using glow as a substitute for contrast and hierarchy.
-- Using refraction behind long-form text or dense tables.
+## Migration
 
-### Context decision guide
+HaloSurface adds material and density without removing existing intensity/elevation props or elevation aliases. Existing .halo-liquid-glass and .halo-liquid-glass-surface consumers receive the shared engine. Surface's noise, refraction and specular options now affect rendering. Portal Surface no longer duplicates Edge and Highlight layers. Component-specific visual styles require a separate audit; changing the common engine alone does not certify every component.
 
-| Context | Recommended Material | Motion | Refraction |
-| --- | --- | --- | --- |
-| Dense form | Subtle | Minimal | No |
-| Data table | Subtle | Minimal | No |
-| Standard card | Balanced | State-based | No |
-| Dialog / Modal | Balanced | Open / close | No |
-| Popover | Balanced | State-based | No |
-| Floating dock | Rich | Controlled | Optional (1px) |
-| Hero showcase | Rich | Expressive | Optional (1.5px) |
-| Long-form reading | Subtle / Opaque | Minimal | No |
-
-## Next steps
-
-- [Theming](/docs/theming) — Configure the semantic tokens used by HaloUI material.
-- [Button](/components/button) — Inspect the complete material implementation of Button.
-- [Accessibility](/docs/accessibility) — Review accessibility requirements and keyboard interaction models.
-- [Registry](/docs/registry) — Learn how HaloUI component source and tokens are distributed.
+See [Theming](/docs/theming), [Accessibility](/docs/accessibility), and [Registry](/docs/registry) for integration guidance.

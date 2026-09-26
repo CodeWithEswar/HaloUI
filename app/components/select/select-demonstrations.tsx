@@ -19,8 +19,8 @@ import {
 } from "@/components/ui/field";
 import { cn } from "@/lib/utils";
 
-const DEMO_CONTAINER_GLASS =
-  "border border-white/60 dark:border-white/15 bg-white/50 dark:bg-neutral-950/50 backdrop-blur-2xl backdrop-saturate-180 shadow-[0_12px_36px_-4px_rgba(0,0,0,0.10),inset_0_1px_1px_0_rgba(255,255,255,0.75)] dark:shadow-[0_16px_48px_-8px_rgba(0,0,0,0.6),inset_0_1px_1px_0_rgba(255,255,255,0.12)] relative isolate before:content-[''] before:absolute before:inset-0 before:pointer-events-none before:rounded-[inherit] before:bg-gradient-to-br before:from-white/25 before:via-white/5 before:to-transparent dark:before:from-white/10 dark:before:via-transparent transition-all";
+const DEMO_CONTAINER =
+  "border border-border/80 bg-card/60 rounded-2xl transition-colors";
 
 /* -------------------------------------------------------------------------- */
 /* 1. Primary Framework Selection Demo                                        */
@@ -30,7 +30,7 @@ export function PrimaryFrameworkSelectDemo() {
   const [framework, setFramework] = React.useState<string | null>("react");
 
   return (
-    <div className={cn("w-full max-w-md mx-auto p-5 sm:p-7 rounded-2xl", DEMO_CONTAINER_GLASS)}>
+    <div className={cn("w-full max-w-md mx-auto p-5 sm:p-7 rounded-2xl", DEMO_CONTAINER)}>
       <Field id="demo-framework">
         <FieldLabel htmlFor="demo-framework">Application framework</FieldLabel>
         <Select value={framework} onValueChange={(val) => setFramework(val)}>
@@ -61,7 +61,7 @@ export function GroupedOptionsSelectDemo() {
   const [tech, setTech] = React.useState<string | null>("rust");
 
   return (
-    <div className={cn("w-full max-w-md mx-auto p-5 sm:p-7 rounded-2xl", DEMO_CONTAINER_GLASS)}>
+    <div className={cn("w-full max-w-md mx-auto p-5 sm:p-7 rounded-2xl", DEMO_CONTAINER)}>
       <Field id="demo-grouped-select">
         <FieldLabel htmlFor="demo-grouped-select">Infrastructure runtime</FieldLabel>
         <Select value={tech} onValueChange={(val) => setTech(val)}>
@@ -103,7 +103,7 @@ export function SelectStatesDemo() {
   return (
     <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-4">
       {/* 1. Empty / Placeholder State */}
-      <div className={cn("p-5 rounded-2xl", DEMO_CONTAINER_GLASS)}>
+      <div className={cn("p-5 rounded-2xl", DEMO_CONTAINER)}>
         <Field id="state-placeholder">
           <FieldLabel htmlFor="state-placeholder">Default Placeholder</FieldLabel>
           <Select>
@@ -121,7 +121,7 @@ export function SelectStatesDemo() {
       </div>
 
       {/* 2. Pre-selected Value */}
-      <div className={cn("p-5 rounded-2xl", DEMO_CONTAINER_GLASS)}>
+      <div className={cn("p-5 rounded-2xl", DEMO_CONTAINER)}>
         <Field id="state-selected">
           <FieldLabel htmlFor="state-selected">Pre-selected</FieldLabel>
           <Select defaultValue="edge">
@@ -139,7 +139,7 @@ export function SelectStatesDemo() {
       </div>
 
       {/* 3. Invalid + Focused (Dual Indicator) */}
-      <div className={cn("p-5 rounded-2xl", DEMO_CONTAINER_GLASS)}>
+      <div className={cn("p-5 rounded-2xl", DEMO_CONTAINER)}>
         <Field id="state-invalid" invalid>
           <FieldLabel htmlFor="state-invalid" required>
             Security protocol (Invalid)
@@ -165,7 +165,7 @@ export function SelectStatesDemo() {
       </div>
 
       {/* 4. Disabled State */}
-      <div className={cn("p-5 rounded-2xl", DEMO_CONTAINER_GLASS)}>
+      <div className={cn("p-5 rounded-2xl", DEMO_CONTAINER)}>
         <Field id="state-disabled" disabled>
           <FieldLabel htmlFor="state-disabled">Organization tier (Disabled)</FieldLabel>
           <Select disabled defaultValue="enterprise">
@@ -193,7 +193,7 @@ export function ControlledSelectDemo() {
   const [role, setRole] = React.useState<string | null>("maintainer");
 
   return (
-    <div className={cn("w-full max-w-md mx-auto p-5 sm:p-7 rounded-2xl space-y-3", DEMO_CONTAINER_GLASS)}>
+    <div className={cn("w-full max-w-md mx-auto p-5 sm:p-7 rounded-2xl space-y-3", DEMO_CONTAINER)}>
       <Field id="demo-controlled-select">
         <FieldLabel htmlFor="demo-controlled-select">Assigned workspace role</FieldLabel>
         <Select value={role} onValueChange={(val) => setRole(val)}>
@@ -216,3 +216,57 @@ export function ControlledSelectDemo() {
     </div>
   );
 }
+
+/* -------------------------------------------------------------------------- */
+/* 5. With Images / Avatars Demo                                              */
+/* -------------------------------------------------------------------------- */
+
+export function AvatarSelectDemo() {
+  const [assignee, setAssignee] = React.useState<string | null>("sarah");
+
+  return (
+    <div className={cn("w-full max-w-md mx-auto p-5 sm:p-7 rounded-2xl", DEMO_CONTAINER)}>
+      <Field id="demo-avatar-select">
+        <FieldLabel htmlFor="demo-avatar-select">Project Lead / Assignee</FieldLabel>
+        <Select value={assignee} onValueChange={(val) => setAssignee(val)}>
+          <SelectTrigger id="demo-avatar-select" aria-describedby="demo-avatar-desc">
+            <SelectValue placeholder="Assign a team member..." />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="sarah">
+              <span className="flex items-center gap-2.5">
+                <span className="size-6 rounded-full bg-gradient-to-tr from-sky-400 to-indigo-500 flex items-center justify-center text-[10px] font-semibold text-white shadow-2xs">SJ</span>
+                <span className="flex flex-col text-left">
+                  <span className="text-sm font-medium leading-none">Sarah Jenkins</span>
+                  <span className="text-xs text-muted-foreground mt-0.5">Design Lead</span>
+                </span>
+              </span>
+            </SelectItem>
+            <SelectItem value="alex">
+              <span className="flex items-center gap-2.5">
+                <span className="size-6 rounded-full bg-gradient-to-tr from-violet-400 to-purple-600 flex items-center justify-center text-[10px] font-semibold text-white shadow-2xs">AR</span>
+                <span className="flex flex-col text-left">
+                  <span className="text-sm font-medium leading-none">Alex Rivera</span>
+                  <span className="text-xs text-muted-foreground mt-0.5">Systems Architect</span>
+                </span>
+              </span>
+            </SelectItem>
+            <SelectItem value="elena">
+              <span className="flex items-center gap-2.5">
+                <span className="size-6 rounded-full bg-gradient-to-tr from-rose-400 to-amber-500 flex items-center justify-center text-[10px] font-semibold text-white shadow-2xs">ER</span>
+                <span className="flex flex-col text-left">
+                  <span className="text-sm font-medium leading-none">Elena Rostova</span>
+                  <span className="text-xs text-muted-foreground mt-0.5">Engineering Lead</span>
+                </span>
+              </span>
+            </SelectItem>
+          </SelectContent>
+        </Select>
+        <FieldDescription id="demo-avatar-desc">
+          Custom options with embedded avatars, icons, and secondary role descriptions.
+        </FieldDescription>
+      </Field>
+    </div>
+  );
+}
+

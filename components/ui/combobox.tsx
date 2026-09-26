@@ -119,13 +119,8 @@ function ComboboxContent({
         <ComboboxPrimitive.Popup
           data-slot="combobox-content"
           className={cn(
-            // HaloUI Physical Liquid Glass Floating Surface (10-layer optical engine without button hover/active physics)
             "relative isolate z-50 max-h-(--available-height) min-w-(--anchor-width) w-auto max-w-sm origin-(--transform-origin) overflow-hidden rounded-2xl p-1.5 text-foreground outline-none",
-            "bg-white/90 dark:bg-neutral-950/85 backdrop-blur-2xl backdrop-saturate-200",
-            "border border-border/80 dark:border-white/10 shadow-[var(--halo-shadow-elevated)]",
-            // Inner optical rim & 135° specular light highlight
-            "before:content-[''] before:absolute before:inset-0 before:pointer-events-none before:rounded-[inherit] before:shadow-[inset_0_1px_1px_0_rgba(255,255,255,0.85),inset_0_-1px_1px_0_rgba(0,0,0,0.04)] dark:before:shadow-[inset_0_1px_1px_0_rgba(255,255,255,0.18),inset_0_-1px_1px_0_rgba(0,0,0,0.6)]",
-            "after:content-[''] after:absolute after:inset-0 after:pointer-events-none after:rounded-[inherit] after:bg-gradient-to-br after:from-white/20 after:via-white/5 after:to-transparent dark:after:from-white/10 dark:after:via-transparent dark:after:to-transparent",
+            "halo-liquid-glass-surface",
             // Smooth Base UI Native CSS Transitions
             "transition-[opacity,transform] duration-150 ease-out",
             "data-[starting-style]:opacity-0 data-[starting-style]:scale-95 data-[starting-style]:data-[side=bottom]:-translate-y-1 data-[starting-style]:data-[side=top]:translate-y-1",

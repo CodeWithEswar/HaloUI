@@ -30,7 +30,7 @@ export function SelectPreviewStage() {
 
   // Stage controls
   const [stateMode, setStateMode] = React.useState<"idle" | "placeholder" | "invalid" | "disabled">("idle");
-  const [structure, setStructure] = React.useState<"standard" | "grouped">("standard");
+  const [structure, setStructure] = React.useState<"standard" | "grouped" | "with-image">("standard");
   const [size, setSize] = React.useState<"default" | "sm">("default");
   const [selectedValue, setSelectedValue] = React.useState<string | null>("react");
   const [copiedCode, setCopiedCode] = React.useState(false);
@@ -44,6 +44,51 @@ export function SelectPreviewStage() {
   const generatedCode = React.useMemo(() => {
     const invalidAttr = isInvalid ? ' aria-invalid="true"' : "";
     const sizeAttr = size === "sm" ? ' size="sm"' : "";
+
+    if (structure === "with-image") {
+      return `import { Field, FieldLabel, FieldDescription } from "@/components/ui/field";
+import {
+  Select,
+  SelectTrigger,
+  SelectValue,
+  SelectContent,
+  SelectItem,
+} from "@/components/ui/select";
+
+export function AvatarSelectDemo() {
+  return (
+    <Field id="assignee-field"${isInvalid ? " invalid" : ""}>
+      <FieldLabel htmlFor="assignee-select"${isInvalid ? " required" : ""}>Assignee</FieldLabel>
+      <Select defaultValue="sarah"${isDisabled ? " disabled" : ""}>
+        <SelectTrigger id="assignee-select"${sizeAttr}${invalidAttr}>
+          <SelectValue placeholder="Assign a team member..." />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectItem value="sarah">
+            <span className="flex items-center gap-2.5">
+              <span className="size-5 rounded-full bg-gradient-to-tr from-sky-400 to-indigo-500 flex items-center justify-center text-[10px] font-semibold text-white shadow-2xs">SJ</span>
+              <span>Sarah Jenkins (Design Lead)</span>
+            </span>
+          </SelectItem>
+          <SelectItem value="alex">
+            <span className="flex items-center gap-2.5">
+              <span className="size-5 rounded-full bg-gradient-to-tr from-violet-400 to-purple-600 flex items-center justify-center text-[10px] font-semibold text-white shadow-2xs">AR</span>
+              <span>Alex Rivera (Systems)</span>
+            </span>
+          </SelectItem>
+          <SelectItem value="elena">
+            <span className="flex items-center gap-2.5">
+              <span className="size-5 rounded-full bg-gradient-to-tr from-rose-400 to-amber-500 flex items-center justify-center text-[10px] font-semibold text-white shadow-2xs">ER</span>
+              <span>Elena Rostova (Engineering)</span>
+            </span>
+          </SelectItem>
+        </SelectContent>
+      </Select>
+      <FieldDescription>Items with rich images and avatar metadata.</FieldDescription>
+    </Field>
+  );
+}`;
+    }
 
     if (structure === "grouped") {
       return `import { Field, FieldLabel, FieldDescription } from "@/components/ui/field";
@@ -163,10 +208,19 @@ export function FrameworkSelector() {
           <StageControlSelect
             label="Structure"
             value={structure}
-            onValueChange={(val) => setStructure(val as typeof structure)}
+            onValueChange={(val) => {
+              const next = val as typeof structure;
+              setStructure(next);
+              if (next === "with-image") {
+                setSelectedValue("sarah");
+              } else if (selectedValue === "sarah" || selectedValue === "alex" || selectedValue === "elena") {
+                setSelectedValue("react");
+              }
+            }}
             options={[
               { value: "standard", label: "Standard List" },
               { value: "grouped", label: "Grouped" },
+              { value: "with-image", label: "With Avatar / Image" },
             ]}
           />
 
@@ -208,7 +262,7 @@ export function FrameworkSelector() {
       <div className="w-full max-w-sm mx-auto py-6">
         <Field id="stage-select-field" invalid={isInvalid} disabled={isDisabled}>
           <FieldLabel htmlFor="stage-select-trigger" required={isInvalid}>
-            Framework selection
+            {structure === "with-image" ? "Project Lead / Assignee" : "Framework selection"}
           </FieldLabel>
 
           <Select
@@ -227,7 +281,7 @@ export function FrameworkSelector() {
               aria-invalid={isInvalid ? "true" : undefined}
               aria-describedby={isInvalid ? "stage-select-err" : "stage-select-desc"}
             >
-              <SelectValue placeholder="Select a framework..." />
+              <SelectValue placeholder={structure === "with-image" ? "Assign a team member..." : "Select a framework..."} />
             </SelectTrigger>
 
             <SelectContent>
@@ -239,7 +293,7 @@ export function FrameworkSelector() {
                   <SelectItem value="angular">Angular 18</SelectItem>
                   <SelectItem value="nextjs">Next.js 16</SelectItem>
                 </>
-              ) : (
+              ) : structure === "grouped" ? (
                 <>
                   <SelectGroup>
                     <SelectLabel>Frontend Engine</SelectLabel>
@@ -255,13 +309,45 @@ export function FrameworkSelector() {
                     <SelectItem value="node">Node.js</SelectItem>
                   </SelectGroup>
                 </>
+              ) : (
+                <>
+                  <SelectItem value="sarah">
+                    <span className="flex items-center gap-2.5">
+                      <span className="size-6 rounded-full bg-gradient-to-tr from-sky-400 to-indigo-500 flex items-center justify-center text-[10px] font-semibold text-white shadow-2xs">SJ</span>
+                      <span className="flex flex-col text-left">
+                        <span className="text-sm font-medium leading-none">Sarah Jenkins</span>
+                        <span className="text-xs text-muted-foreground mt-0.5">Design Lead</span>
+                      </span>
+                    </span>
+                  </SelectItem>
+                  <SelectItem value="alex">
+                    <span className="flex items-center gap-2.5">
+                      <span className="size-6 rounded-full bg-gradient-to-tr from-violet-400 to-purple-600 flex items-center justify-center text-[10px] font-semibold text-white shadow-2xs">AR</span>
+                      <span className="flex flex-col text-left">
+                        <span className="text-sm font-medium leading-none">Alex Rivera</span>
+                        <span className="text-xs text-muted-foreground mt-0.5">Systems Architect</span>
+                      </span>
+                    </span>
+                  </SelectItem>
+                  <SelectItem value="elena">
+                    <span className="flex items-center gap-2.5">
+                      <span className="size-6 rounded-full bg-gradient-to-tr from-rose-400 to-amber-500 flex items-center justify-center text-[10px] font-semibold text-white shadow-2xs">ER</span>
+                      <span className="flex flex-col text-left">
+                        <span className="text-sm font-medium leading-none">Elena Rostova</span>
+                        <span className="text-xs text-muted-foreground mt-0.5">Engineering Lead</span>
+                      </span>
+                    </span>
+                  </SelectItem>
+                </>
               )}
             </SelectContent>
           </Select>
 
           {isInvalid ? (
             <FieldError id="stage-select-err">
-              You must choose a valid framework before proceeding.
+              {structure === "with-image"
+                ? "You must assign an owner before deploying."
+                : "You must choose a valid framework before proceeding."}
             </FieldError>
           ) : (
             <FieldDescription id="stage-select-desc">

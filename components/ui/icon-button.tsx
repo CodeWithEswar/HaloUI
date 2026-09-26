@@ -17,14 +17,14 @@ import { cn } from "@/lib/utils";
  */
 export const iconButtonVariants = cva(
   [
-    "group/icon-button relative inline-flex items-center justify-center select-none isolate overflow-hidden cursor-pointer",
-    "transition-all duration-200 ease-out outline-none shrink-0",
+    "group/icon-button relative inline-flex items-center justify-center select-none isolate cursor-pointer",
+    "transition-all duration-100 ease-out outline-none shrink-0",
     // Focus Ring: double-contrast perimeter operating independently outside material boundary
     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--halo-focus-color)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--halo-focus-offset-color)] focus-visible:z-10 halo-focus-ring",
     // Tactile press response
     "halo-tactile-press",
-    // Disabled State: muted optical transmission without destroying icon legibility
-    "disabled:pointer-events-none disabled:opacity-40 disabled:shadow-none disabled:transform-none",
+    // Disabled State: muted without destroying icon legibility
+    "disabled:pointer-events-none disabled:opacity-45 disabled:shadow-none disabled:transform-none disabled:cursor-not-allowed",
     // SVG / Hugeicons Alignment: prevents SVG from intercepting events or breaking square geometry
     "[&_svg]:pointer-events-none [&_svg]:shrink-0",
   ],
@@ -32,34 +32,48 @@ export const iconButtonVariants = cva(
     variants: {
       variant: {
         default: [
-          "halo-liquid-glass text-neutral-900 dark:text-white",
+          "halo-liquid-glass",
+          "text-[var(--halo-glass-text)]",
+          "hover:translate-y-[-2px] hover:brightness-105",
+          "active:scale-[0.94] active:text-[var(--halo-glass-text-active)]",
+        ],
+        primary: [
+          "bg-[#18191d] text-white dark:bg-white dark:text-neutral-900",
+          "border border-[#23252a] dark:border-[#e2e4e9]",
+          "shadow-md hover:brightness-105 active:scale-[0.95]",
         ],
         secondary: [
-          "halo-liquid-glass text-neutral-800 dark:text-neutral-200 opacity-90 hover:opacity-100",
+          "halo-liquid-glass",
+          "bg-white/10 dark:bg-white/5",
+          "text-foreground",
+          "hover:bg-white/15 dark:hover:bg-white/10 hover:translate-y-[-2px]",
+          "active:scale-[0.95]",
         ],
         outline: [
-          "bg-white/[0.03] dark:bg-white/[0.02] text-neutral-800 dark:text-neutral-200",
-          "border border-black/[0.18] dark:border-white/[0.22] hover:border-black/[0.32] dark:hover:border-white/[0.38]",
-          "backdrop-blur-[8px]",
-          "shadow-[inset_0_1px_1px_0_rgba(255,255,255,0.7),inset_0_-1px_1px_0_rgba(0,0,0,0.15)]",
-          "hover:-translate-y-0.5 active:scale-[0.96]",
+          "bg-background text-foreground",
+          "border border-border",
+          "hover:bg-muted hover:text-foreground",
+          "active:scale-[0.96]",
         ],
         ghost: [
-          "bg-transparent text-neutral-600 dark:text-neutral-400 border border-transparent",
-          "hover:bg-white/[0.08] dark:hover:bg-white/[0.08] hover:text-neutral-900 dark:hover:text-white hover:border-black/[0.08] dark:hover:border-white/[0.12]",
-          "hover:shadow-[0_2px_8px_-2px_rgba(0,0,0,0.1),inset_0_1px_1px_0_rgba(255,255,255,0.4)]",
-          "backdrop-blur-[8px] hover:-translate-y-0.5 active:scale-[0.96]",
+          "bg-transparent text-muted-foreground",
+          "border border-transparent",
+          "hover:bg-black/5 dark:hover:bg-white/10 hover:text-foreground",
+          "active:scale-[0.96]",
         ],
         destructive: [
-          "halo-liquid-glass text-rose-700 dark:text-rose-200 bg-rose-500/[0.08] dark:bg-rose-500/[0.12] border-rose-500/30 dark:border-rose-500/40",
-          "shadow-[0_4px_16px_-4px_rgba(244,63,94,0.35),inset_2px_-2px_1px_-1px_rgba(255,255,255,0.7),inset_-2px_2px_1px_-1px_rgba(255,255,255,0.7)]",
-          "focus-visible:ring-rose-500",
+          "halo-liquid-glass",
+          "border-[#b71c1c]/40 dark:border-[#991b1b]/50",
+          "text-destructive",
+          "hover:translate-y-[-2px]",
+          "active:scale-[0.94]",
         ],
       },
       size: {
-        sm: "size-8 rounded-full [&_svg:not([class*='size-'])]:size-3.5",
-        default: "size-10 rounded-full [&_svg:not([class*='size-'])]:size-4.5",
-        lg: "size-12 rounded-full [&_svg:not([class*='size-'])]:size-5",
+        sm: "size-8 rounded-[9px] [&_svg:not([class*='size-'])]:size-3.5",
+        default: "size-10 rounded-[11px] [&_svg:not([class*='size-'])]:size-4.5",
+        lg: "size-12 rounded-[13px] [&_svg:not([class*='size-'])]:size-5",
+        showcase: "size-[100px] rounded-[24px] [&_svg:not([class*='size-'])]:size-8",
       },
     },
     defaultVariants: {
@@ -156,7 +170,10 @@ export const IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>(
         className={cn(iconButtonVariants({ variant, size }), className)}
         {...props}
       >
-        {children}
+        {variant === "default" && !asChild && (
+          <span className="halo-liquid-overlay pointer-events-none" aria-hidden="true" />
+        )}
+        <span className="relative z-10 flex items-center justify-center shrink-0">{children}</span>
       </Comp>
     );
   }

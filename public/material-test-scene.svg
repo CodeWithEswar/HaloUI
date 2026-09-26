@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000">
+  <title>Architectural material contrast test image</title>
+  <defs><linearGradient id="sky" x2="0" y2="1"><stop stop-color="#91b7d0"/><stop offset="1" stop-color="#f2dbc0"/></linearGradient><linearGradient id="wall"><stop stop-color="#e9dcc7"/><stop offset="1" stop-color="#b7a78b"/></linearGradient></defs>
+  <path fill="url(#sky)" d="M0 0h1600v1000H0z"/>
+  <path fill="#32444d" d="M0 600l380-310 230 185 330-230 660 355v400H0z"/>
+  <path fill="url(#wall)" d="M130 210h620v670H130z"/>
+  <path fill="#f7f1e5" d="M130 210l120-90h620L750 210z"/>
+  <path fill="#786a56" d="M750 210l120-90v670L750 880z"/>
+  <path fill="#213744" d="M210 310h180v420H210zm260 0h190v420H470z"/>
+  <path fill="#b4d5dc" d="M225 325h150v170H225zm260 0h160v170H485z"/>
+  <path fill="#a36042" d="M970 390h510v490H970z"/>
+  <path fill="#e5b58c" d="M970 390l70-70h440v70z"/>
+  <path fill="#233039" d="M1040 480h110v275h-110zm210 0h155v275h-155z"/>
+  <path fill="#d4c6b0" d="M0 880h1600v120H0z"/>
+  <path fill="#778d78" d="M30 620h45v260H30zm1490-140h60v400h-60z"/>
+  <path fill="#e9dcc7" d="M180 550h510v12H180zm820 20h440v12h-440z"/>
+</svg>

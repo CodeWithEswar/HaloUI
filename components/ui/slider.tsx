@@ -152,10 +152,7 @@ export const Slider = React.forwardRef<HTMLDivElement, SliderProps>(
             }
             className={cn(
               "block size-5 shrink-0 rounded-full select-none cursor-grab active:cursor-grabbing outline-none transition-none",
-              // Physical optical glass bead
-              "bg-white shadow-[0_1px_3px_0_rgba(0,0,0,0.25),inset_0_1px_1px_0_rgba(255,255,255,0.95),inset_0_-1px_1px_0_rgba(0,0,0,0.1)]",
-              "dark:bg-white dark:shadow-[0_2px_6px_0_rgba(0,0,0,0.6),inset_0_1px_1px_0_rgba(255,255,255,0.95)]",
-              "border border-black/15 dark:border-white/20",
+              "halo-liquid-glass halo-material-thumb",
               // Double-Contrast Halo Focus Ring on focused thumb
               "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--halo-focus-color)] focus-visible:ring-offset-2 focus-visible:ring-offset-background halo-focus-ring",
               // Active drag feedback
