@@ -528,6 +528,7 @@ export function TourPopoverTrigger({
 export function TourTargetHighlight() {
   const { targetElement, open, isTargetAvailable, highlightTarget, currentStep } = useTourPopover();
   const [rect, setRect] = React.useState<DOMRect | null>(null);
+  const [borderRadius, setBorderRadius] = React.useState<string>("16px");
 
   const shouldHighlight =
     open &&
@@ -545,6 +546,23 @@ export function TourTargetHighlight() {
     const updateRect = () => {
       if (targetElement.isConnected) {
         setRect(targetElement.getBoundingClientRect());
+
+        // Extract computed border-radius from target element to ensure concentric curvature
+        try {
+          const style = window.getComputedStyle(targetElement);
+          const offset = 4;
+          const parseRadius = (val: string) => {
+            const num = parseFloat(val);
+            return isNaN(num) || num <= 0 ? 0 : num + offset;
+          };
+          const tl = parseRadius(style.borderTopLeftRadius);
+          const tr = parseRadius(style.borderTopRightRadius);
+          const br = parseRadius(style.borderBottomRightRadius);
+          const bl = parseRadius(style.borderBottomLeftRadius);
+          setBorderRadius(`${tl}px ${tr}px ${br}px ${bl}px`);
+        } catch {
+          setBorderRadius("16px");
+        }
       }
     };
 
@@ -588,16 +606,17 @@ export function TourTargetHighlight() {
       data-slot="tour-target-highlight"
       className={cn(
         "pointer-events-none fixed z-40 transition-all duration-200 ease-out",
-        "rounded-[inherit]",
-        // 10-layer physical liquid highlight halo (NOT keyboard focus)
-        "border-2 border-primary/60 dark:border-primary/50",
-        "shadow-[0_0_0_4px_rgba(59,130,246,0.15),0_0_24px_rgba(59,130,246,0.20)]"
+        // 10-layer physical liquid highlight halo with concentric optical geometry
+        "border-2 border-[var(--halo-focus-color,#38bdf8)]",
+        "shadow-[0_0_0_3px_var(--halo-focus-outer-color,rgba(56,189,248,0.25)),0_0_20px_var(--halo-focus-outer-color,rgba(56,189,248,0.20)),inset_0_0_0_1px_rgba(255,255,255,0.25)]",
+        "animate-in fade-in-0 duration-150"
       )}
       style={{
         top: `${rect.top - 4}px`,
         left: `${rect.left - 4}px`,
         width: `${rect.width + 8}px`,
         height: `${rect.height + 8}px`,
+        borderRadius,
       }}
     />
   );
