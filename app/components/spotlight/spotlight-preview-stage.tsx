@@ -13,6 +13,7 @@ import {
   SpotlightSeparator,
   SpotlightFooter,
   type SpotlightIntensity,
+  type SpotlightTheme,
 } from "@/components/ui/spotlight";
 import { Button } from "@/components/ui/button";
 import { HaloIcon } from "@/components/icons/halo-icon";
@@ -48,6 +49,7 @@ export function SpotlightPreviewStage() {
   const [presentation, setPresentation] = React.useState<PresentationMode>("embedded");
   const [scope, setScope] = React.useState<ScopeCategory>("all");
   const [intensity, setIntensity] = React.useState<SpotlightIntensity>("balanced");
+  const [theme, setTheme] = React.useState<SpotlightTheme>("adaptive");
   const [density, setDensity] = React.useState<"standard" | "extended">("standard");
   const [modalOpen, setModalOpen] = React.useState(false);
   const [lastAction, setLastAction] = React.useState<string | null>(null);
@@ -56,6 +58,7 @@ export function SpotlightPreviewStage() {
     setPresentation("embedded");
     setScope("all");
     setIntensity("balanced");
+    setTheme("adaptive");
     setDensity("standard");
     setModalOpen(false);
     setBackdrop("mesh");
@@ -186,13 +189,13 @@ export function EmbeddedSpotlightExample() {
     { label: "Component Role", value: "Global Discovery Surface (cmdk)" },
     { label: "Presentation", value: presentation === "modal" ? "Modal Dialog Overlay" : "Embedded Card" },
     { label: "Active Scope", value: scope.toUpperCase() },
-    { label: "Backdrop Scrim", value: presentation === "modal" ? "Halo Scrim (Balanced Blur)" : "None (Non-Modal)" },
+    { label: "Optical Theme", value: theme === "adaptive" ? "System / Stage Adaptive" : `${theme.toUpperCase()} Explicit Glass` },
     { label: "Material Engine", value: `${intensity} Liquid Glass` },
     { label: "Last Action", value: lastAction ?? "Awaiting user selection..." },
   ];
 
   const controls = (
-    <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+    <div className="grid grid-cols-2 sm:grid-cols-5 gap-3">
       <StageControlSelect
         label="Presentation Mode"
         value={presentation}
@@ -227,6 +230,16 @@ export function EmbeddedSpotlightExample() {
           { label: "Balanced (Default)", value: "balanced" },
           { label: "Subtle (Restrained)", value: "subtle" },
           { label: "Rich (Deep Specular)", value: "rich" },
+        ]}
+      />
+      <StageControlSelect
+        label="Theme Mode"
+        value={theme}
+        onValueChange={(v) => setTheme(v as SpotlightTheme)}
+        options={[
+          { label: "Adaptive (Auto)", value: "adaptive" },
+          { label: "Light (Frosted Crystal)", value: "light" },
+          { label: "Dark (Obsidian Glass)", value: "dark" },
         ]}
       />
       <StageControlSelect
@@ -410,7 +423,7 @@ export function EmbeddedSpotlightExample() {
       <div className="flex w-full items-center justify-center p-3 sm:p-6">
         {presentation === "embedded" ? (
           <div className="w-full max-w-3xl">
-            <Spotlight intensity={intensity} className="w-full">
+            <Spotlight intensity={intensity} theme={theme} className="w-full">
               {renderSpotlightContent(false)}
             </Spotlight>
           </div>
@@ -435,6 +448,7 @@ export function EmbeddedSpotlightExample() {
               open={modalOpen}
               onOpenChange={setModalOpen}
               intensity={intensity}
+              theme={theme}
               title="Global Spotlight Search"
               description="Search across files, projects, people, navigation destinations, and application commands."
             >
