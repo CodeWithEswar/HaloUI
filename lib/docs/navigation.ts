@@ -1243,6 +1243,26 @@ export const docsNavigation: DocsNavSection[] = [
           "dashboard"
         ],
       },
+      {
+        title: "KPI Card",
+        href: "/components/kpi-card",
+        description: "Performance-oriented metric surface communicating a primary quantitative value, delta, decoupled trend sentiment, target/SLA baselines, and optional bounded progress.",
+        status: "stable",
+        keywords: [
+          "kpi card",
+          "kpi-card",
+          "kpi",
+          "metric",
+          "target",
+          "sla",
+          "progress",
+          "trend",
+          "delta",
+          "performance",
+          "data display",
+          "dashboard"
+        ],
+      },
     ],
   },
   {

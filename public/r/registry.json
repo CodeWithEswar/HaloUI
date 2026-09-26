@@ -2445,6 +2445,38 @@
         "field",
         "halo-icon"
       ]
+    },
+    {
+      "name": "kpi-card",
+      "type": "registry:ui",
+      "title": "KPI Card",
+      "description": "Performance-oriented metric surface communicating a primary quantitative value, delta, decoupled trend sentiment, target/SLA baselines, and optional bounded progress.",
+      "dependencies": [
+        "@hugeicons/core-free-icons",
+        "@hugeicons/react",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [
+        "card"
+      ],
+      "files": [
+        {
+          "path": "components/ui/kpi-card.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/kpi-card.tsx"
+        },
+        {
+          "path": "styles/halo-tokens.css",
+          "type": "registry:ui",
+          "target": "styles/halo-tokens.css"
+        },
+        {
+          "path": "styles/halo-material.css",
+          "type": "registry:ui",
+          "target": "styles/halo-material.css"
+        }
+      ]
     }
   ]
 }
