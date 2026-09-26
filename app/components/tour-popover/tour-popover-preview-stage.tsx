@@ -247,8 +247,6 @@ export function ProductOnboardingTour() {
 
   return (
     <PreviewStageShell
-      title="Tour Popover"
-      description="Contextual instructional steps anchored to interface targets with a controlled state machine, missing-target recovery, and liquid glass optics."
       activeTab={activeTab}
       onTabChange={setActiveTab}
       viewport={viewport}
@@ -308,7 +306,7 @@ export function ProductOnboardingTour() {
         </div>
       }
     >
-      <div className="flex w-full flex-col items-center justify-center p-4">
+      <div className="flex w-full flex-col items-center justify-center p-1 sm:p-2">
         {/* Guided Tour Context */}
         <TourPopover
           steps={steps}
@@ -334,9 +332,9 @@ export function ProductOnboardingTour() {
           missingTargetPolicy={missingTargetPolicy}
         >
           {/* Mock Application Dashboard Interface */}
-          <div className="w-full max-w-2xl rounded-2xl border border-border/60 bg-background/80 p-5 shadow-xl backdrop-blur-md">
+          <div className="w-full max-w-2xl rounded-2xl border border-border/60 bg-background/80 p-3.5 sm:p-4.5 shadow-xl backdrop-blur-md">
             {/* Top Bar Header */}
-            <div className="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-border/50">
+            <div className="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-border/50">
               <div className="flex items-center gap-3">
                 {/* Step 1 Target: Workspace Switcher */}
                 <TourTarget id="workspace-nav">
@@ -408,18 +406,18 @@ export function ProductOnboardingTour() {
             </div>
 
             {/* Dashboard Content Mock */}
-            <div className="mt-4 grid grid-cols-1 sm:grid-cols-3 gap-3">
-              <div className="rounded-xl border border-border/40 bg-muted/20 p-3">
+            <div className="mt-3.5 grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+              <div className="rounded-xl border border-border/40 bg-muted/20 p-2.5 sm:p-3">
                 <div className="text-[11px] font-medium text-muted-foreground">Active Nodes</div>
                 <div className="mt-1 text-lg font-bold text-foreground">1,248</div>
                 <div className="mt-0.5 text-[10px] text-emerald-500 font-medium">99.99% availability</div>
               </div>
-              <div className="rounded-xl border border-border/40 bg-muted/20 p-3">
+              <div className="rounded-xl border border-border/40 bg-muted/20 p-2.5 sm:p-3">
                 <div className="text-[11px] font-medium text-muted-foreground">Requests / sec</div>
                 <div className="mt-1 text-lg font-bold text-foreground">48.2k</div>
                 <div className="mt-0.5 text-[10px] text-sky-500 font-medium">Global CDN cached</div>
               </div>
-              <div className="rounded-xl border border-border/40 bg-muted/20 p-3">
+              <div className="rounded-xl border border-border/40 bg-muted/20 p-2.5 sm:p-3">
                 <div className="text-[11px] font-medium text-muted-foreground">Latency p95</div>
                 <div className="mt-1 text-lg font-bold text-foreground">12ms</div>
                 <div className="mt-0.5 text-[10px] text-muted-foreground">Tokyo, Frankfurt, SFO</div>
@@ -427,7 +425,7 @@ export function ProductOnboardingTour() {
             </div>
 
             {/* Launch Tour Bar */}
-            <div className="mt-5 flex flex-wrap items-center justify-between gap-3 pt-4 border-t border-border/40">
+            <div className="mt-4 flex flex-wrap items-center justify-between gap-3 pt-3.5 border-t border-border/40">
               <div className="flex items-center gap-2">
                 <Button
                   variant="default"

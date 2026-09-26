@@ -233,17 +233,19 @@ export function PreviewStageShell({
 
   return (
     <div className={cn("w-full space-y-3", className)}>
-      {/* 1. Clean Responsive Header Above Stage */}
-      <div className="space-y-1">
-        <h2 data-toc-ignore className="text-base sm:text-lg font-semibold tracking-tight text-foreground">
-          {title}
-        </h2>
-        {description && (
-          <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
-            {description}
-          </p>
-        )}
-      </div>
+      {/* 1. Clean Responsive Header Above Stage (rendered only when explicitly provided) */}
+      {title ? (
+        <div className="space-y-1">
+          <h2 data-toc-ignore className="text-base sm:text-lg font-semibold tracking-tight text-foreground">
+            {title}
+          </h2>
+          {description && (
+            <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
+              {description}
+            </p>
+          )}
+        </div>
+      ) : null}
 
       {/* 2. Main Workbench Shell */}
       <div className="w-full rounded-2xl border border-border bg-card overflow-hidden flex flex-col shadow-xs">
