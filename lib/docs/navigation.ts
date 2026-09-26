@@ -1226,6 +1226,23 @@ export const docsNavigation: DocsNavSection[] = [
           "summary"
         ],
       },
+      {
+        title: "Stat Card",
+        href: "/components/stat-card",
+        description: "Opinionated single-metric summary surface communicating a primary quantitative value, category context, and decoupled trend sentiment.",
+        status: "stable",
+        keywords: [
+          "stat card",
+          "stat-card",
+          "metric",
+          "kpi",
+          "trend",
+          "delta",
+          "single metric",
+          "data display",
+          "dashboard"
+        ],
+      },
     ],
   },
   {

@@ -2064,6 +2064,38 @@
       ]
     },
     {
+      "name": "stat-card",
+      "type": "registry:ui",
+      "title": "Stat Card",
+      "description": "Opinionated single-metric summary surface communicating a primary quantitative value, category context, and decoupled trend sentiment.",
+      "dependencies": [
+        "@hugeicons/core-free-icons",
+        "@hugeicons/react",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [
+        "card"
+      ],
+      "files": [
+        {
+          "path": "components/ui/stat-card.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/stat-card.tsx"
+        },
+        {
+          "path": "styles/halo-tokens.css",
+          "type": "registry:ui",
+          "target": "styles/halo-tokens.css"
+        },
+        {
+          "path": "styles/halo-material.css",
+          "type": "registry:ui",
+          "target": "styles/halo-material.css"
+        }
+      ]
+    },
+    {
       "name": "stepper",
       "type": "registry:ui",
       "title": "Stepper",
