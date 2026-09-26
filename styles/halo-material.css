@@ -1069,3 +1069,140 @@ html[data-theme="dark"],
     display: none;
   }
 }
+
+
+/* =========================================================
+   22. ADAPTIVE APPEARANCE + COORDINATED GLASS
+   Mirrors the public Liquid Glass principles: adaptive light/dark
+   appearance, shared sampling intent, proximity blending and interaction.
+   ========================================================= */
+:root,
+.light,
+html[data-theme="light"],
+[data-stage-theme="light"] {
+  --halo-optical-surface: rgba(255,255,255,.13);
+  --halo-optical-clear: rgba(255,255,255,.045);
+  --halo-optical-prominent: rgba(255,255,255,.23);
+  --halo-optical-edge-hi: rgba(255,255,255,.88);
+  --halo-optical-edge-lo: rgba(14,20,31,.15);
+  --halo-optical-specular-color: rgba(255,255,255,.72);
+  --halo-optical-contact: rgba(15,23,42,.20);
+  --halo-optical-foreground: rgba(18,18,22,.94);
+}
+
+.dark,
+html[data-theme="dark"],
+[data-stage-theme="dark"] {
+  --halo-optical-surface: rgba(20,22,29,.22);
+  --halo-optical-clear: rgba(255,255,255,.028);
+  --halo-optical-prominent: rgba(45,48,60,.34);
+  --halo-optical-edge-hi: rgba(255,255,255,.40);
+  --halo-optical-edge-lo: rgba(0,0,0,.68);
+  --halo-optical-specular-color: rgba(255,255,255,.46);
+  --halo-optical-contact: rgba(0,0,0,.64);
+  --halo-optical-foreground: rgba(248,249,252,.96);
+}
+
+.halo-glass-container {
+  --halo-shared-light-x: 50%;
+  --halo-shared-light-y: 30%;
+  position: relative;
+  isolation: isolate;
+}
+
+.halo-glass-container .halo-optical-glass {
+  --halo-optical-x: var(--halo-shared-light-x);
+  --halo-optical-y: var(--halo-shared-light-y);
+}
+
+.halo-optical-glass {
+  --halo-glass-proximity: 0;
+  --halo-optical-tint: var(--halo-optical-surface);
+  --halo-optical-edge: var(--halo-optical-edge-hi);
+  color: var(--halo-optical-foreground);
+  border-color: color-mix(in srgb, var(--halo-optical-edge-hi) 52%, transparent);
+  background:
+    radial-gradient(
+      115% 150% at var(--halo-optical-x) var(--halo-optical-y),
+      color-mix(in srgb, var(--halo-optical-edge-hi) 24%, transparent),
+      transparent 54%
+    ),
+    var(--halo-optical-tint);
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, var(--halo-optical-edge-hi) 58%, transparent),
+    inset 0 -1px 0 var(--halo-optical-edge-lo),
+    0 12px 32px -16px var(--halo-optical-contact);
+}
+
+.halo-optical-glass[data-material="clear"] {
+  --halo-optical-tint: var(--halo-optical-clear);
+}
+.halo-optical-glass[data-material="prominent"] {
+  --halo-optical-tint: var(--halo-optical-prominent);
+}
+
+.halo-optical-glass__bridge {
+  position: absolute;
+  z-index: 0;
+  pointer-events: none;
+  inset: calc(var(--halo-glass-proximity) * -10px);
+  border-radius: inherit;
+  opacity: var(--halo-glass-proximity);
+  background: color-mix(
+    in srgb,
+    var(--halo-optical-tint) calc(68% + var(--halo-glass-proximity) * 20%),
+    transparent
+  );
+  filter: blur(calc(6px + var(--halo-glass-proximity) * 8px));
+  transform: scale(calc(1 + var(--halo-glass-proximity) * .045));
+  transition:
+    opacity 240ms ease,
+    inset 360ms cubic-bezier(.2,.8,.2,1),
+    transform 360ms cubic-bezier(.2,.9,.2,1.25);
+}
+
+.halo-optical-glass__meniscus {
+  border-color: color-mix(in srgb, var(--halo-optical-edge-hi) 48%, transparent);
+  box-shadow:
+    inset 1px 1px 1px color-mix(in srgb, var(--halo-optical-edge-hi) 64%, transparent),
+    inset -1px -1px 1px var(--halo-optical-edge-lo),
+    inset 0 0 var(--halo-optical-depth)
+      color-mix(in srgb, var(--halo-optical-edge-hi) 12%, transparent);
+}
+
+.halo-optical-glass__specular {
+  background:
+    radial-gradient(
+      34% 62% at var(--halo-optical-x) var(--halo-optical-y),
+      var(--halo-optical-specular-color) 0%,
+      color-mix(in srgb, var(--halo-optical-specular-color) 30%, transparent) 32%,
+      transparent 72%
+    );
+}
+
+@media (prefers-color-scheme: dark) {
+  html[data-theme="system"] {
+    --halo-optical-surface: rgba(20,22,29,.22);
+    --halo-optical-clear: rgba(255,255,255,.028);
+    --halo-optical-prominent: rgba(45,48,60,.34);
+    --halo-optical-edge-hi: rgba(255,255,255,.40);
+    --halo-optical-edge-lo: rgba(0,0,0,.68);
+    --halo-optical-specular-color: rgba(255,255,255,.46);
+    --halo-optical-contact: rgba(0,0,0,.64);
+    --halo-optical-foreground: rgba(248,249,252,.96);
+  }
+}
+
+@media (prefers-contrast: more) {
+  .halo-optical-glass {
+    border-width: 2px;
+    --halo-optical-blur: 12px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .halo-optical-glass__bridge {
+    transition: none !important;
+    transform: none !important;
+  }
+}

@@ -22,3 +22,6 @@ export { HaloNoise } from "./halo-noise";
 export { HaloFocusRing } from "./halo-focus-ring";
 export { HaloPortalSurface } from "./halo-portal-surface";
 export { HaloThemeProvider } from "./halo-theme-provider";
+
+export { HaloGlassContainer } from "./halo-glass-container";
+export type { HaloGlassContainerProps } from "./halo-glass-container";
