@@ -404,11 +404,20 @@ export const CommandPaletteInput = React.forwardRef<
     placeholder = "Search commands or destinations...",
     className,
     value,
+    defaultValue,
     ...props
   },
   ref
 ) {
   const { query, setQuery, onClearQuery } = useCommandPalette();
+
+  React.useEffect(() => {
+    if (defaultValue !== undefined && !query) {
+      setQuery(String(defaultValue));
+    }
+  }, [defaultValue, query, setQuery]);
+
+  const isUncontrolled = defaultValue !== undefined && value === undefined;
   const currentValue = value !== undefined ? value : query;
 
   return (
@@ -424,20 +433,36 @@ export const CommandPaletteInput = React.forwardRef<
         size={18}
         className="mr-3 shrink-0 text-muted-foreground/70"
       />
-      <CommandPrimitive.Input
-        ref={ref}
-        id="command-palette-search-input"
-        data-slot="command-palette-input"
-        placeholder={placeholder}
-        value={currentValue}
-        onValueChange={setQuery}
-        className={cn(
-          "flex h-8 w-full rounded-md bg-transparent text-sm font-medium text-foreground placeholder:text-muted-foreground/70 outline-hidden disabled:cursor-not-allowed disabled:opacity-50",
-          className
-        )}
-        {...props}
-      />
-      {Boolean(currentValue) && (
+      {isUncontrolled ? (
+        <CommandPrimitive.Input
+          ref={ref}
+          id="command-palette-search-input"
+          data-slot="command-palette-input"
+          placeholder={placeholder}
+          defaultValue={defaultValue}
+          onValueChange={setQuery}
+          className={cn(
+            "flex h-8 w-full rounded-md bg-transparent text-sm font-medium text-foreground placeholder:text-muted-foreground/70 outline-hidden disabled:cursor-not-allowed disabled:opacity-50",
+            className
+          )}
+          {...props}
+        />
+      ) : (
+        <CommandPrimitive.Input
+          ref={ref}
+          id="command-palette-search-input"
+          data-slot="command-palette-input"
+          placeholder={placeholder}
+          value={currentValue}
+          onValueChange={setQuery}
+          className={cn(
+            "flex h-8 w-full rounded-md bg-transparent text-sm font-medium text-foreground placeholder:text-muted-foreground/70 outline-hidden disabled:cursor-not-allowed disabled:opacity-50",
+            className
+          )}
+          {...props}
+        />
+      )}
+      {Boolean(currentValue || defaultValue) && (
         <button
           type="button"
           onClick={onClearQuery}

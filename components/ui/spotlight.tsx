@@ -318,11 +318,21 @@ export const SpotlightInput = React.forwardRef<
     placeholder = "Search files, documents, team members, or actions...",
     className,
     value,
+    defaultValue,
     ...props
   },
   ref
 ) {
   const context = useSpotlight();
+
+  // Sync defaultValue to context query once if provided and context is empty
+  React.useEffect(() => {
+    if (defaultValue !== undefined && context && !context.query) {
+      context.setQuery(String(defaultValue));
+    }
+  }, [defaultValue, context]);
+
+  const isUncontrolled = defaultValue !== undefined && value === undefined;
   const currentValue = value !== undefined ? value : (context?.query ?? "");
 
   return (
@@ -338,20 +348,36 @@ export const SpotlightInput = React.forwardRef<
         size={20}
         className="mr-3 shrink-0 text-muted-foreground/75"
       />
-      <CommandPrimitive.Input
-        ref={ref}
-        id="spotlight-search-field"
-        data-slot="spotlight-input"
-        placeholder={placeholder}
-        value={currentValue}
-        onValueChange={context?.setQuery}
-        className={cn(
-          "flex h-9 sm:h-10 w-full rounded-md bg-transparent text-sm sm:text-base font-medium text-foreground placeholder:text-muted-foreground/50 outline-hidden select-text disabled:cursor-not-allowed disabled:opacity-50",
-          className
-        )}
-        {...props}
-      />
-      {Boolean(currentValue) && context?.onClearQuery && (
+      {isUncontrolled ? (
+        <CommandPrimitive.Input
+          ref={ref}
+          id="spotlight-search-field"
+          data-slot="spotlight-input"
+          placeholder={placeholder}
+          defaultValue={defaultValue}
+          onValueChange={context?.setQuery}
+          className={cn(
+            "flex h-9 sm:h-10 w-full rounded-md bg-transparent text-sm sm:text-base font-medium text-foreground placeholder:text-muted-foreground/50 outline-hidden select-text disabled:cursor-not-allowed disabled:opacity-50",
+            className
+          )}
+          {...props}
+        />
+      ) : (
+        <CommandPrimitive.Input
+          ref={ref}
+          id="spotlight-search-field"
+          data-slot="spotlight-input"
+          placeholder={placeholder}
+          value={currentValue}
+          onValueChange={context?.setQuery}
+          className={cn(
+            "flex h-9 sm:h-10 w-full rounded-md bg-transparent text-sm sm:text-base font-medium text-foreground placeholder:text-muted-foreground/50 outline-hidden select-text disabled:cursor-not-allowed disabled:opacity-50",
+            className
+          )}
+          {...props}
+        />
+      )}
+      {Boolean(currentValue || defaultValue) && context?.onClearQuery && (
         <button
           type="button"
           onClick={context.onClearQuery}
