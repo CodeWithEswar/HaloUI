@@ -1044,6 +1044,27 @@ export const docsNavigation: DocsNavSection[] = [
         ],
       },
       {
+        title: "Tour Popover",
+        href: "/components/tour-popover",
+        description: "An anchored instructional onboarding surface engineered with a controlled tour state machine, dynamic target resolution, collision-aware positioning, missing-target recovery, and HaloUI liquid glass physical optics.",
+        status: "preview",
+        keywords: [
+          "tour popover",
+          "tour",
+          "tour-popover",
+          "onboarding",
+          "walkthrough",
+          "guide",
+          "coachmark",
+          "target",
+          "steps",
+          "progression",
+          "overlay",
+          "floating",
+          "liquid glass"
+        ],
+      },
+      {
         title: "Hover Card",
         href: "/components/hover-card",
         description: "Supplemental destination or entity preview opened through accessible hover and focus behavior, engineered with HaloUI liquid glass physical optics and uncompromised link navigation semantics.",

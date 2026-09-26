@@ -17,6 +17,7 @@ const overlayRoutes = [
   { name: "Spotlight", path: "http://localhost:3000/components/spotlight" },
   { name: "Lightbox", path: "http://localhost:3000/components/lightbox" },
   { name: "Link Preview", path: "http://localhost:3000/components/link-preview" },
+  { name: "Tour Popover", path: "http://localhost:3000/components/tour-popover" },
 ];
 
 for (const { name, path: routeUrl } of overlayRoutes) {

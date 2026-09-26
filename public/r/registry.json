@@ -2361,6 +2361,29 @@
       "registryDependencies": [
         "dialog"
       ]
+    },
+    {
+      "name": "tour-popover",
+      "type": "registry:ui",
+      "title": "Tour Popover",
+      "description": "An anchored instructional onboarding surface engineered with a controlled tour state machine, dynamic target resolution, collision-aware positioning, missing-target recovery, and HaloUI liquid glass physical optics.",
+      "dependencies": [
+        "@base-ui/react",
+        "@hugeicons/core-free-icons",
+        "@hugeicons/react",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [
+        "button",
+        "icon-button"
+      ],
+      "meta": {
+        "status": "production",
+        "version": "2.0.0",
+        "category": "overlays-and-menus",
+        "lastUpdated": "2026-09-26"
+      }
     }
   ]
 }
