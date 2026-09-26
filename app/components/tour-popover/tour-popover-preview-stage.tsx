@@ -247,9 +247,6 @@ export function ProductOnboardingTour() {
 
   return (
     <PreviewStageShell
-      title="Tour Popover Live Stage"
-      description="Evaluate optical physics, responsive viewports, and controlled multi-step onboarding lifecycle."
-      badge="Interactive Workbench"
       activeTab={activeTab}
       onTabChange={setActiveTab}
       viewport={viewport}

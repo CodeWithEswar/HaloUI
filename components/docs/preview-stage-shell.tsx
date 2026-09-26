@@ -178,9 +178,9 @@ export interface PreviewStageShellProps {
 export function PreviewStageShell({
   motion = "system",
   transparency = "system",
-  title = "Live Preview Stage",
-  description = "Evaluate optical physics, responsive viewports, environments, and material parameters.",
-  badge = "Interactive Workbench",
+  title,
+  description,
+  badge,
 
   activeTab,
   onTabChange,

@@ -1,5 +1,5 @@
-import React from "react";
+import { DocsShell } from "@/components/docs/docs-shell";
 
 export default function TourPopoverDocsLayout({ children }: { children: React.ReactNode }) {
-  return <div className="w-full">{children}</div>;
+  return <DocsShell>{children}</DocsShell>;
 }
