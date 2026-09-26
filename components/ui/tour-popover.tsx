@@ -549,16 +549,39 @@ export function TourTargetHighlight() {
 
         // Extract computed border-radius from target element to ensure concentric curvature
         try {
-          const style = window.getComputedStyle(targetElement);
           const offset = 4;
-          const parseRadius = (val: string) => {
-            const num = parseFloat(val);
-            return isNaN(num) || num <= 0 ? 0 : num + offset;
+          const getRadii = (el: Element) => {
+            const style = window.getComputedStyle(el);
+            return {
+              tl: parseFloat(style.borderTopLeftRadius) || 0,
+              tr: parseFloat(style.borderTopRightRadius) || 0,
+              br: parseFloat(style.borderBottomRightRadius) || 0,
+              bl: parseFloat(style.borderBottomLeftRadius) || 0,
+            };
           };
-          const tl = parseRadius(style.borderTopLeftRadius);
-          const tr = parseRadius(style.borderTopRightRadius);
-          const br = parseRadius(style.borderBottomRightRadius);
-          const bl = parseRadius(style.borderBottomLeftRadius);
+
+          let radii = getRadii(targetElement);
+
+          // If target is a wrapper element (like a div around an input/button) with 0 radius,
+          // look for visual controls inside that define the shape
+          if (radii.tl === 0 && radii.tr === 0 && radii.br === 0 && radii.bl === 0) {
+            const candidates = targetElement.querySelectorAll('input, button, [class*="rounded"], [data-slot]');
+            for (let i = 0; i < candidates.length; i++) {
+              const childRadii = getRadii(candidates[i]);
+              if (childRadii.tl > 0 || childRadii.tr > 0 || childRadii.br > 0 || childRadii.bl > 0) {
+                radii = childRadii;
+                break;
+              }
+            }
+          }
+
+          const parseRadius = (num: number) => {
+            return num <= 0 ? 0 : num + offset;
+          };
+          const tl = parseRadius(radii.tl);
+          const tr = parseRadius(radii.tr);
+          const br = parseRadius(radii.br);
+          const bl = parseRadius(radii.bl);
           setBorderRadius(`${tl}px ${tr}px ${br}px ${bl}px`);
         } catch {
           setBorderRadius("16px");
@@ -594,7 +617,7 @@ export function TourTargetHighlight() {
       window.removeEventListener("scroll", updateRect, true);
       resizeObserver.disconnect();
     };
-  }, [shouldHighlight, targetElement]);
+  }, [shouldHighlight, targetElement, currentStep]);
 
   if (!shouldHighlight || !rect || rect.width === 0 || rect.height === 0) {
     return null;

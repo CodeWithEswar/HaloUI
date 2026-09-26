@@ -356,7 +356,7 @@ export function ProductOnboardingTour() {
               {/* Step 2 Target: Search Input */}
               <div className="flex flex-1 items-center justify-center max-w-xs mx-auto">
                 <TourTarget id="global-search">
-                  <div className="relative w-full">
+                  <div className="relative w-full rounded-xl">
                     <HaloIcon
                       icon={Search01Icon}
                       size={14}
