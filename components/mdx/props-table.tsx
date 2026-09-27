@@ -7,7 +7,15 @@ export type PropRow = {
   description: string;
 };
 
-export function PropsTable({ rows }: { rows: PropRow[] }) {
+export function PropsTable({
+  rows,
+  props,
+}: {
+  rows?: PropRow[];
+  props?: PropRow[];
+}) {
+  const data = rows ?? props ?? [];
+
   return (
     <div className="my-6 overflow-x-auto rounded-lg border border-border">
       <table className="w-full min-w-[44rem] text-left text-sm">
@@ -20,7 +28,7 @@ export function PropsTable({ rows }: { rows: PropRow[] }) {
           </tr>
         </thead>
         <tbody className="divide-y divide-border">
-          {rows.map((row) => (
+          {data.map((row) => (
             <tr key={row.name}>
               <td className="px-4 py-3 align-top font-mono text-xs font-medium">
                 {row.name}{row.required && <span className="text-destructive"> *</span>}

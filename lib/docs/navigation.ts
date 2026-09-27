@@ -1282,6 +1282,23 @@ export const docsNavigation: DocsNavSection[] = [
           "data display"
         ],
       },
+      {
+        title: "Feature Card",
+        href: "/components/feature-card",
+        description: "Opinionated feature and capability communication surface presenting a visual identifier, title, concise description, supporting highlights, and optional actions.",
+        status: "stable",
+        keywords: [
+          "feature card",
+          "feature-card",
+          "feature",
+          "capability",
+          "benefit",
+          "showcase",
+          "highlight",
+          "grid",
+          "data display"
+        ],
+      },
     ],
   },
   {

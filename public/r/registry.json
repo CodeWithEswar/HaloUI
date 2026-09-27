@@ -585,6 +585,37 @@
       }
     },
     {
+      "name": "feature-card",
+      "type": "registry:ui",
+      "title": "Feature Card",
+      "description": "Opinionated feature and capability communication surface presenting a visual identifier, title, concise description, supporting highlights, and optional actions.",
+      "dependencies": [
+        "@radix-ui/react-slot",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [
+        "card"
+      ],
+      "files": [
+        {
+          "path": "components/ui/feature-card.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/feature-card.tsx"
+        },
+        {
+          "path": "styles/halo-tokens.css",
+          "type": "registry:ui",
+          "target": "styles/halo-tokens.css"
+        },
+        {
+          "path": "styles/halo-material.css",
+          "type": "registry:ui",
+          "target": "styles/halo-material.css"
+        }
+      ]
+    },
+    {
       "name": "field",
       "type": "registry:ui",
       "title": "Field",
@@ -1413,6 +1444,38 @@
       "registryDependencies": []
     },
     {
+      "name": "kpi-card",
+      "type": "registry:ui",
+      "title": "KPI Card",
+      "description": "Performance-oriented metric surface communicating a primary quantitative value, delta, decoupled trend sentiment, target/SLA baselines, and optional bounded progress.",
+      "dependencies": [
+        "@hugeicons/core-free-icons",
+        "@hugeicons/react",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [
+        "card"
+      ],
+      "files": [
+        {
+          "path": "components/ui/kpi-card.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/kpi-card.tsx"
+        },
+        {
+          "path": "styles/halo-tokens.css",
+          "type": "registry:ui",
+          "target": "styles/halo-tokens.css"
+        },
+        {
+          "path": "styles/halo-material.css",
+          "type": "registry:ui",
+          "target": "styles/halo-material.css"
+        }
+      ]
+    },
+    {
       "name": "label",
       "type": "registry:ui",
       "title": "Label",
@@ -1754,6 +1817,39 @@
         "category": "overlays-and-menus",
         "lastUpdated": "2026-09-26"
       }
+    },
+    {
+      "name": "profile-card",
+      "type": "registry:ui",
+      "title": "Profile Card",
+      "description": "Compact identity summary surface presenting an entity's avatar, display name, professional role, presence status, metadata, and optional actions.",
+      "dependencies": [
+        "@hugeicons/core-free-icons",
+        "@hugeicons/react",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [
+        "card",
+        "avatar"
+      ],
+      "files": [
+        {
+          "path": "components/ui/profile-card.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/profile-card.tsx"
+        },
+        {
+          "path": "styles/halo-tokens.css",
+          "type": "registry:ui",
+          "target": "styles/halo-tokens.css"
+        },
+        {
+          "path": "styles/halo-material.css",
+          "type": "registry:ui",
+          "target": "styles/halo-material.css"
+        }
+      ]
     },
     {
       "name": "radio-group",
@@ -2444,71 +2540,6 @@
       "registryDependencies": [
         "field",
         "halo-icon"
-      ]
-    },
-    {
-      "name": "kpi-card",
-      "type": "registry:ui",
-      "title": "KPI Card",
-      "description": "Performance-oriented metric surface communicating a primary quantitative value, delta, decoupled trend sentiment, target/SLA baselines, and optional bounded progress.",
-      "dependencies": [
-        "@hugeicons/core-free-icons",
-        "@hugeicons/react",
-        "clsx",
-        "tailwind-merge"
-      ],
-      "registryDependencies": [
-        "card"
-      ],
-      "files": [
-        {
-          "path": "components/ui/kpi-card.tsx",
-          "type": "registry:ui",
-          "target": "components/ui/kpi-card.tsx"
-        },
-        {
-          "path": "styles/halo-tokens.css",
-          "type": "registry:ui",
-          "target": "styles/halo-tokens.css"
-        },
-        {
-          "path": "styles/halo-material.css",
-          "type": "registry:ui",
-          "target": "styles/halo-material.css"
-        }
-      ]
-    },
-    {
-      "name": "profile-card",
-      "type": "registry:ui",
-      "title": "Profile Card",
-      "description": "Compact identity summary surface presenting an entity's avatar, display name, professional role, presence status, metadata, and optional actions.",
-      "dependencies": [
-        "@hugeicons/core-free-icons",
-        "@hugeicons/react",
-        "clsx",
-        "tailwind-merge"
-      ],
-      "registryDependencies": [
-        "card",
-        "avatar"
-      ],
-      "files": [
-        {
-          "path": "components/ui/profile-card.tsx",
-          "type": "registry:ui",
-          "target": "components/ui/profile-card.tsx"
-        },
-        {
-          "path": "styles/halo-tokens.css",
-          "type": "registry:ui",
-          "target": "styles/halo-tokens.css"
-        },
-        {
-          "path": "styles/halo-material.css",
-          "type": "registry:ui",
-          "target": "styles/halo-material.css"
-        }
       ]
     }
   ]

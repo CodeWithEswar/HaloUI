@@ -11,7 +11,9 @@ export type FileNode = {
   children?: FileNode[];
 };
 
-export function FileTree({ items }: { items: FileNode[] }) {
+export function FileTree({ items, data }: { items?: FileNode[]; data?: FileNode[] }) {
+  const nodes = items ?? data ?? [];
+
   return (
     <div className="my-5 overflow-hidden rounded-xl border border-border bg-muted/15 font-mono text-xs">
       <div className="border-b border-border bg-muted/40 px-3.5 py-2 text-[11px] font-medium uppercase tracking-wider text-muted-foreground">
@@ -19,7 +21,7 @@ export function FileTree({ items }: { items: FileNode[] }) {
       </div>
       <div className="p-3">
         <ul className="space-y-1">
-          {items.map((node) => (
+          {nodes.map((node) => (
             <TreeItem key={node.name} node={node} level={0} />
           ))}
         </ul>
