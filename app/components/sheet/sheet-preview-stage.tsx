@@ -17,6 +17,7 @@ import {
   type SheetScrimTint,
 } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
 import { HaloIcon } from "@/components/icons/halo-icon";
 import {
   Settings02Icon,
@@ -361,7 +362,7 @@ export function WorkspaceSettingsSheet() {
                         <div className="space-y-1.5">
                           {["Critical Errors (5xx)", "Client Errors (4xx)", "Cache Misses"].map((item) => (
                             <label key={item} className="flex items-center gap-2 text-muted-foreground hover:text-foreground cursor-pointer">
-                              <input type="checkbox" defaultChecked className="rounded accent-primary" />
+                              <Checkbox defaultChecked />
                               <span>{item}</span>
                             </label>
                           ))}

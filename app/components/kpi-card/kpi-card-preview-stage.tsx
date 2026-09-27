@@ -280,8 +280,8 @@ ${showChart ? `
             />
           </div>
 
-          <div className="flex flex-wrap items-center gap-6 pt-2 border-t border-border/40">
-            <div className="flex items-center gap-2">
+          <div className="w-full grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-2.5">
+            <div className="flex items-center gap-2.5 p-1.5 sm:p-2 px-2.5 sm:px-3 rounded-xl border border-border/80 bg-card/75 shadow-2xs h-full min-h-[42px]">
               <Checkbox
                 id="kpi-toggle-target"
                 checked={showTarget}
@@ -289,13 +289,13 @@ ${showChart ? `
               />
               <Label
                 htmlFor="kpi-toggle-target"
-                className="text-xs text-muted-foreground hover:text-foreground cursor-pointer font-medium select-none"
+                className="text-xs sm:text-[13px] text-muted-foreground hover:text-foreground cursor-pointer font-medium select-none"
               >
                 Target Row
               </Label>
             </div>
 
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2.5 p-1.5 sm:p-2 px-2.5 sm:px-3 rounded-xl border border-border/80 bg-card/75 shadow-2xs h-full min-h-[42px]">
               <Checkbox
                 id="kpi-toggle-progress"
                 checked={showProgress}
@@ -303,13 +303,13 @@ ${showChart ? `
               />
               <Label
                 htmlFor="kpi-toggle-progress"
-                className="text-xs text-muted-foreground hover:text-foreground cursor-pointer font-medium select-none"
+                className="text-xs sm:text-[13px] text-muted-foreground hover:text-foreground cursor-pointer font-medium select-none"
               >
                 Target Progress
               </Label>
             </div>
 
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2.5 p-1.5 sm:p-2 px-2.5 sm:px-3 rounded-xl border border-border/80 bg-card/75 shadow-2xs h-full min-h-[42px]">
               <Checkbox
                 id="kpi-toggle-chart"
                 checked={showChart}
@@ -317,7 +317,7 @@ ${showChart ? `
               />
               <Label
                 htmlFor="kpi-toggle-chart"
-                className="text-xs text-muted-foreground hover:text-foreground cursor-pointer font-medium select-none"
+                className="text-xs sm:text-[13px] text-muted-foreground hover:text-foreground cursor-pointer font-medium select-none"
               >
                 Sparkline
               </Label>

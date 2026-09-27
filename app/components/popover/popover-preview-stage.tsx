@@ -13,6 +13,7 @@ import {
   type PopoverIntensity,
 } from "@/components/ui/popover";
 import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { HaloIcon } from "@/components/icons/halo-icon";
@@ -482,11 +483,7 @@ export function SettingsPopover() {
                           className="flex items-center justify-between p-2 rounded-lg border border-border/50 hover:bg-muted/30 cursor-pointer transition-colors"
                         >
                           <span className="font-medium text-foreground">{tier}</span>
-                          <input
-                            type="checkbox"
-                            defaultChecked={idx < 2}
-                            className="rounded border-border accent-primary focus:ring-1 focus:ring-primary"
-                          />
+                          <Checkbox defaultChecked={idx < 2} />
                         </label>
                       ))}
                     </div>
@@ -573,23 +570,13 @@ export function SettingsPopover() {
                         <Label htmlFor="perf-toggle" className="text-xs font-medium text-foreground cursor-pointer">
                           GPU Rasterization
                         </Label>
-                        <input
-                          id="perf-toggle"
-                          type="checkbox"
-                          defaultChecked
-                          className="h-4 w-4 rounded border-border accent-primary"
-                        />
+                        <Checkbox id="perf-toggle" defaultChecked />
                       </div>
                       <div className="flex items-center justify-between">
                         <Label htmlFor="blur-toggle" className="text-xs font-medium text-foreground cursor-pointer">
                           Dynamic Refraction
                         </Label>
-                        <input
-                          id="blur-toggle"
-                          type="checkbox"
-                          defaultChecked
-                          className="h-4 w-4 rounded border-border accent-primary"
-                        />
+                        <Checkbox id="blur-toggle" defaultChecked />
                       </div>
                     </div>
 

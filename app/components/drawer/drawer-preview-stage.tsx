@@ -14,6 +14,7 @@ import {
   type DrawerScrimBlur,
 } from "@/components/ui/drawer";
 import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
 import { HaloIcon } from "@/components/icons/halo-icon";
 import {
   PlayIcon,
@@ -530,7 +531,7 @@ export function MediaDrawer() {
                     <div className="px-4 sm:px-6 py-3 space-y-3 text-left text-xs">
                       {["US-East (N. Virginia)", "EU-Central (Frankfurt)", "AP-Southeast (Singapore)"].map((region) => (
                         <label key={region} className="flex items-center gap-2 text-muted-foreground hover:text-foreground cursor-pointer">
-                          <input type="checkbox" defaultChecked className="rounded accent-primary" />
+                          <Checkbox defaultChecked />
                           <span>{region}</span>
                         </label>
                       ))}
