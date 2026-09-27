@@ -20,7 +20,7 @@ import {
 } from "./icon-button-demonstrations";
 import { InstallCommand } from "@/components/mdx/install-command";
 import { Anatomy, type AnatomyPart } from "@/components/mdx/anatomy";
-import { PropsTable } from "@/components/mdx/props-table";
+import { PropsExplorer, type SubcomponentApi } from "@/components/docs/props-explorer";
 import { FileTree, type FileNode } from "@/components/mdx/file-tree";
 import { Callout } from "@/components/mdx/callout";
 import { CodeBlock } from "@/components/mdx/code-block";
@@ -32,55 +32,74 @@ export const metadata: Metadata = {
     "A compact icon-only action control with mandatory accessible naming, HaloUI material states, and consistent keyboard and touch behavior.",
 };
 
-const PROPS_DATA = [
+const ICON_BUTTON_SUBCOMPONENTS: SubcomponentApi[] = [
   {
-    name: "aria-label",
-    type: "string",
-    default: "undefined",
-    required: true,
-    description: "Mandatory accessible name announcing the programmatic purpose of the action to screen readers and assistive devices.",
-  },
-  {
-    name: "variant",
-    type: '"ghost" | "default" | "secondary" | "outline" | "destructive"',
-    default: '"default"',
-    required: false,
-    description: "Defines the semantic hierarchy and optical material intensity of the action control.",
-  },
-  {
-    name: "size",
-    type: '"sm" | "default" | "lg"',
-    default: '"default"',
-    required: false,
-    description: "Controls the calibrated square geometry (sm: 32px, default: 40px, lg: 48px) and internal icon scaling.",
-  },
-  {
-    name: "asChild",
-    type: "boolean",
-    default: "false",
-    required: false,
-    description: "Transfers icon button styling and interaction behavior directly onto a composed child (such as Next.js Link) using Radix Slot.",
-  },
-  {
-    name: "type",
-    type: '"button" | "submit" | "reset"',
-    default: '"button"',
-    required: false,
-    description: "Native HTML button type. Defaults to 'button' to avoid unintended form submissions in toolbars.",
-  },
-  {
-    name: "disabled",
-    type: "boolean",
-    default: "false",
-    required: false,
-    description: "Prevents pointer and keyboard interaction, removes control from tab index, and mutes optical transmission.",
-  },
-  {
-    name: "className",
-    type: "string",
-    default: "undefined",
-    required: false,
-    description: "Additional Tailwind CSS classes merged via cn() utility.",
+    name: "IconButton",
+    kind: "Component",
+    maturity: "stable",
+    description:
+      "A compact icon-only action control with mandatory accessible naming, HaloUI liquid material, semantic variants, and consistent keyboard and touch behavior.",
+    inheritedProps: {
+      element: "React.ButtonHTMLAttributes<HTMLButtonElement>",
+      description:
+        "Inherits all native HTML <button> attributes, ARIA attributes, event handlers (onClick, onFocus), and ref forwarding.",
+    },
+    props: [
+      {
+        name: "aria-label",
+        type: "string",
+        required: true,
+        description:
+          "Mandatory accessible name announcing the programmatic purpose of the action to screen readers and assistive devices.",
+      },
+      {
+        name: "variant",
+        type: "'default' | 'primary' | 'secondary' | 'outline' | 'ghost' | 'destructive'",
+        default: "'default'",
+        required: false,
+        description:
+          "Defines the semantic hierarchy and optical material intensity: 'default' (signature liquid glass with specular catch), 'primary' (monochrome solid), 'secondary' (translucent tinted crystal), 'outline' (hairline border), 'ghost' (flat at rest, glass on hover), or 'destructive' (crimson glass).",
+      },
+      {
+        name: "size",
+        type: "'default' | 'sm' | 'lg' | 'showcase'",
+        default: "'default'",
+        required: false,
+        description:
+          "Controls the calibrated square geometry: 'default' (40x40px, ≥40px touch compliance), 'sm' (32x32px compact), 'lg' (48x48px), or 'showcase' (100x100px optical reference).",
+      },
+      {
+        name: "asChild",
+        type: "boolean",
+        default: "false",
+        required: false,
+        description:
+          "Transfers icon button styling and interaction behavior directly onto a composed child (such as Next.js Link) using Radix Slot.",
+      },
+      {
+        name: "disabled",
+        type: "boolean",
+        default: "false",
+        required: false,
+        description:
+          "Prevents pointer and keyboard interaction, removes control from tab index, and mutes optical transmission.",
+      },
+      {
+        name: "type",
+        type: "'button' | 'submit' | 'reset'",
+        default: "'button'",
+        required: false,
+        description:
+          "Native HTML button type. Defaults to 'button' to avoid unintended form submissions in toolbars.",
+      },
+      {
+        name: "className",
+        type: "string",
+        required: false,
+        description:
+          "Additional Tailwind CSS classes merged with the icon button's base and variant styles.",
+      },
+    ],
   },
 ];
 
@@ -471,7 +490,7 @@ export function SettingsLinkAction() {
           </p>
         </div>
 
-        <PropsTable rows={PROPS_DATA} />
+        <PropsExplorer subcomponents={ICON_BUTTON_SUBCOMPONENTS} />
       </section>
 
       {/* 13. Anatomy */}
@@ -522,16 +541,52 @@ export function SettingsLinkAction() {
       <section className="space-y-4">
         <div className="space-y-1">
           <h2 className="text-xl font-semibold tracking-tight text-foreground">
-            Responsive behavior
+            Automatic Container-Aware Responsiveness
           </h2>
           <p className="text-sm text-muted-foreground">
-            Icon buttons feature a fixed 1:1 aspect ratio with <code className="text-foreground font-mono text-xs">shrink-0</code> to guarantee geometry preservation within flex toolbars, table action rows, and dense headers.
+            Icon buttons maintain rigorous 1:1 square geometry across diverse layout compositions without JavaScript viewport measurement.
           </p>
         </div>
 
-        <div className="space-y-2 text-sm text-muted-foreground">
+        <div className="space-y-3 text-sm text-muted-foreground">
           <p>
-            In dense mobile toolbars, prefer <code className="text-foreground font-mono text-xs">variant="ghost"</code> with adequate spacing (minimum <code className="text-foreground font-mono text-xs">gap-2</code>) to ensure touch targets do not conflict with adjacent controls.
+            <strong>Shrink Resistance:</strong> Icon buttons enforce <code>shrink-0</code> in base classes, ensuring that adjacent flex content, long headers, or wrapping text nodes never compress the icon button's calibrated width or aspect ratio.
+          </p>
+          <p>
+            <strong>Narrow Container Adaptability (240px QA):</strong> In tightly constrained viewports or sidebars (such as 240px and 280px containers), toolbar compositions using icon buttons utilize <code>flex-wrap gap-1.5</code> or horizontal touch scroll. Because each button maintains an immutable square footprint, the group gracefully reflows into multi-row or segmented patterns without clipping.
+          </p>
+          <p>
+            <strong>Touch Target Ergonomics:</strong> The <code>default</code> (40px) and <code>lg</code> (48px) sizes provide instant compliance with WCAG 2.5.5 / 2.5.8 target size criteria. The <code>sm</code> (32px) size is specifically designed for dense desktop tables and compact code rails where spatial density is paramount.
+          </p>
+          <p>
+            <strong>200% Zoom Compatibility:</strong> Scales gracefully under high text-scaling modes, maintaining square boundary aspect ratio and optical contrast without horizontal page blowout.
+          </p>
+        </div>
+      </section>
+
+      {/* 16. Liquid Glass */}
+      <section className="space-y-4">
+        <div className="space-y-1">
+          <h2 className="text-xl font-semibold tracking-tight text-foreground">
+            Liquid Glass Optical Material
+          </h2>
+          <p className="text-sm text-muted-foreground">
+            IconButton utilizes HaloUI's <code>Subtle</code> material recipe to provide crisp edge definition without visual fatigue in repeated layouts.
+          </p>
+        </div>
+
+        <div className="space-y-3 text-sm text-muted-foreground">
+          <p>
+            <strong>Shared Optical Foundations:</strong> Built on <code>halo-liquid-glass</code>, <code>halo-tactile-press</code>, and <code>halo-focus-ring</code>. Directional 135° overhead lighting casts a delicate specular reflection on the upper-left boundary while maintaining clean contact depth on the bottom edge.
+          </p>
+          <p>
+            <strong>Content Fidelity:</strong> SVG icons and glyphs render in an isolated content layer (<code>relative z-10 [&_svg]:shrink-0</code>) above the optical substrate. Refraction layers, chromatic aberration, and noise are strictly excluded from glyph interiors to preserve absolute clarity.
+          </p>
+          <p>
+            <strong>Light & Dark Material Tuning:</strong> In Light mode, subtle transmission with a dual-contrast hairline prevents washed-out edges against light backdrops. In Dark mode, transmission attenuation drops to 7% with an interior specular highlight, preventing dark haze.
+          </p>
+          <p>
+            <strong>Reduced Transparency Fallback:</strong> In environments with forced colors or reduced transparency preferences, IconButton automatically resolves to an opaque high-contrast surface with solid borders.
           </p>
         </div>
       </section>
