@@ -14,7 +14,7 @@ import { cn } from "@/lib/utils";
  */
 export const buttonGroupVariants = cva(
   [
-    "inline-flex isolate items-stretch",
+    "inline-flex isolate items-stretch min-w-0 max-w-full",
     // Child stacking context for borders and Halo Focus Ring layering
     "[&>*]:hover:z-10",
     "[&>*]:focus-visible:z-20",

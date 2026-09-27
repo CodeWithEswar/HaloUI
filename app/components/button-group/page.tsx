@@ -20,7 +20,7 @@ import {
 } from "./button-group-demonstrations";
 import { InstallCommand } from "@/components/mdx/install-command";
 import { Anatomy, type AnatomyPart } from "@/components/mdx/anatomy";
-import { PropsTable } from "@/components/mdx/props-table";
+import { PropsExplorer, type SubcomponentApi } from "@/components/docs/props-explorer";
 import { FileTree, type FileNode } from "@/components/mdx/file-tree";
 import { Callout } from "@/components/mdx/callout";
 import { CodeBlock } from "@/components/mdx/code-block";
@@ -32,34 +32,50 @@ export const metadata: Metadata = {
     "Visually connects related independent actions while preserving the semantics, focus behavior, and activation model of each control.",
 };
 
-const PROPS_DATA = [
+const BUTTON_GROUP_SUBCOMPONENTS: SubcomponentApi[] = [
   {
-    name: "orientation",
-    type: '"horizontal" | "vertical"',
-    default: '"horizontal"',
-    required: false,
-    description: "Defines the connected layout axis and corner-collapse geometry.",
-  },
-  {
-    name: "asChild",
-    type: "boolean",
-    default: "false",
-    required: false,
-    description: "Transfers button group layout styling and geometry behavior directly onto a composed container using Radix Slot.",
-  },
-  {
-    name: "role",
-    type: "string",
-    default: "undefined",
-    required: false,
-    description: "Optional ARIA role. Set to 'group' when paired with aria-label to create a semantically announced group for screen readers.",
-  },
-  {
-    name: "className",
-    type: "string",
-    default: "undefined",
-    required: false,
-    description: "Additional Tailwind CSS classes merged via cn() utility.",
+    name: "ButtonGroup",
+    kind: "Component",
+    maturity: "stable",
+    description:
+      "A layout container that visually connects related independent buttons into a unified control cluster with collapsed adjoining geometry and unclipped focus ring layering.",
+    inheritedProps: {
+      element: "React.HTMLAttributes<HTMLDivElement>",
+      description:
+        "Inherits all native HTML <div> attributes, ARIA attributes, and ref forwarding.",
+    },
+    props: [
+      {
+        name: "orientation",
+        type: "'horizontal' | 'vertical'",
+        default: "'horizontal'",
+        required: false,
+        description:
+          "Defines the connected layout axis and corner-collapse geometry: 'horizontal' collapses start/end radii horizontally with -ms-px border overlap; 'vertical' stacks controls vertically with -mt-px border overlap.",
+      },
+      {
+        name: "asChild",
+        type: "boolean",
+        default: "false",
+        required: false,
+        description:
+          "Transfers button group layout styling and geometry behavior directly onto a composed container using Radix Slot.",
+      },
+      {
+        name: "role",
+        type: "string",
+        required: false,
+        description:
+          "Optional ARIA role. Set to 'group' when paired with aria-label to create a semantically announced group for screen readers.",
+      },
+      {
+        name: "className",
+        type: "string",
+        required: false,
+        description:
+          "Additional Tailwind CSS classes merged with the button group base and orientation styles.",
+      },
+    ],
   },
 ];
 
@@ -432,7 +448,7 @@ export function CustomContainerDemo() {
           </p>
         </div>
 
-        <PropsTable rows={PROPS_DATA} />
+        <PropsExplorer subcomponents={BUTTON_GROUP_SUBCOMPONENTS} />
       </section>
 
       {/* 14. Anatomy */}
@@ -480,16 +496,46 @@ export function CustomContainerDemo() {
       <section className="space-y-4">
         <div className="space-y-1">
           <h2 className="text-xl font-semibold tracking-tight text-foreground">
-            Responsive behavior
+            Automatic Container-Aware Responsiveness
           </h2>
           <p className="text-sm text-muted-foreground">
-            ButtonGroup is intrinsically flexible and does not force artificial stacking on mobile viewports.
+            ButtonGroup is intrinsically flexible and scales cleanly inside responsive layout containers without JavaScript viewport measurement.
           </p>
         </div>
 
-        <div className="space-y-2 text-sm text-muted-foreground">
+        <div className="space-y-3 text-sm text-muted-foreground">
           <p>
-            Connected button clusters are designed to prevent accidental mid-cluster wrapping. In constrained mobile viewports, prefer short labels, icon buttons, or vertical orientation where semantically appropriate.
+            <strong>Intrinsic Wrapping Protection:</strong> ButtonGroup uses <code>inline-flex min-w-0 max-w-full</code> to allow child buttons to reflow naturally without causing parent container blowout. When labels wrap inside buttons, connected corners and border seams remain geometrically locked.
+          </p>
+          <p>
+            <strong>Narrow Container Adaptability (240px QA):</strong> In compact widths (such as 240px and 280px containers), multi-action button groups can either adopt <code>orientation="vertical"</code> or wrap via parent flex layouts. Because middle borders share overlapping coordinates (<code>-ms-px</code> / <code>-mt-px</code>), child geometry never desynchronizes.
+          </p>
+          <p>
+            <strong>200% Zoom Compatibility:</strong> Scales gracefully under high text-scaling modes, expanding vertical padding while containing foreground typography within parent boundaries without horizontal overflow.
+          </p>
+        </div>
+      </section>
+
+      {/* 17. Liquid Glass */}
+      <section className="space-y-4">
+        <div className="space-y-1">
+          <h2 className="text-xl font-semibold tracking-tight text-foreground">
+            Coherent Liquid Glass Architecture
+          </h2>
+          <p className="text-sm text-muted-foreground">
+            ButtonGroup coordinates visual containment to present one unified optical surface rather than isolated floating bubbles.
+          </p>
+        </div>
+
+        <div className="space-y-3 text-sm text-muted-foreground">
+          <p>
+            <strong>Single Shared Horizon:</strong> Adjoining inner buttons collapse their outer radii (<code>rounded-none</code>, <code>rounded-e-none</code>, <code>rounded-s-none</code>) while maintaining a single cohesive 11px outer perimeter, presenting a continuous liquid glass silhouette under 135° virtual directional lighting.
+          </p>
+          <p>
+            <strong>Seam Overlap Elimination:</strong> Negative margins (<code>-ms-px</code> horizontally, <code>-mt-px</code> vertically) overlap adjacent hairline borders, preventing distracting 2px double seams or dark refraction halos between connected actions.
+          </p>
+          <p>
+            <strong>Light and Dark Adaptation:</strong> In Light mode, collapsed borders use 1px solid subtle border values that prevent optical bleed. In Dark mode, transmission attenuation maintains crisp tactile separation without muddy shadows.
           </p>
         </div>
       </section>
