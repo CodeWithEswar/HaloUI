@@ -1648,6 +1648,35 @@
       "registryDependencies": []
     },
     {
+      "name": "list",
+      "type": "registry:ui",
+      "title": "List",
+      "description": "Structured collection primitive organizing repeated related items with automatic container-aware responsiveness, semantic HTML, and restrained HaloUI Liquid Glass materials.",
+      "dependencies": [
+        "@radix-ui/react-slot",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "components/ui/list.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/list.tsx"
+        },
+        {
+          "path": "styles/halo-tokens.css",
+          "type": "registry:ui",
+          "target": "styles/halo-tokens.css"
+        },
+        {
+          "path": "styles/halo-material.css",
+          "type": "registry:ui",
+          "target": "styles/halo-material.css"
+        }
+      ]
+    },
+    {
       "name": "menubar",
       "type": "registry:ui",
       "title": "Menubar",

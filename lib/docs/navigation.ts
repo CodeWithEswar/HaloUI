@@ -1384,6 +1384,23 @@ export const docsNavigation: DocsNavSection[] = [
           "data display"
         ],
       },
+      {
+        title: "List",
+        href: "/components/list",
+        description: "Structured collection primitive organizing repeated related items with automatic container-aware responsiveness, semantic HTML, and restrained HaloUI Liquid Glass materials.",
+        status: "stable",
+        keywords: [
+          "list",
+          "collection",
+          "unordered list",
+          "ordered list",
+          "ul",
+          "ol",
+          "rows",
+          "divided",
+          "data display"
+        ],
+      },
     ],
   },
   {
