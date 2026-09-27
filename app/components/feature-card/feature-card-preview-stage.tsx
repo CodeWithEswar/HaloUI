@@ -288,7 +288,7 @@ export function EdgeComputeFeature() {
 
           {showAction && (
             <FeatureCardAction>
-              <Button size="sm" variant="outline" className="gap-1.5">
+              <Button size="sm" variant="outline" className="gap-1.5 w-full justify-between sm:w-auto sm:justify-start group-data-[orientation=vertical]/feature-card:w-full group-data-[orientation=vertical]/feature-card:justify-between">
                 <span>Explore architecture</span>
                 <HaloIcon icon={ArrowRight01Icon} size={14} />
               </Button>

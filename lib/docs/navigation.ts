@@ -1367,6 +1367,23 @@ export const docsNavigation: DocsNavSection[] = [
           "data display"
         ],
       },
+      {
+        title: "Item",
+        href: "/components/item",
+        description: "Reusable list-row and content-item primitive organizing visual, textual, metadata, and action elements into a responsive, repeatable row.",
+        status: "stable",
+        keywords: [
+          "item",
+          "row",
+          "list item",
+          "settings row",
+          "member row",
+          "activity feed",
+          "resource",
+          "content",
+          "data display"
+        ],
+      },
     ],
   },
   {

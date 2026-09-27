@@ -79,19 +79,19 @@ export function Card({
         // Variant: Default (Liquid Glass surface with optical depth and backdrop refraction)
         variant === "default" && [
           intensity === "subtle" && [
-            "border border-border/70 dark:border-white/12",
-            "bg-card/75 dark:bg-card/50 backdrop-blur-md backdrop-saturate-150 halo-intensity-subtle",
-            "shadow-[0_4px_24px_-2px_rgba(0,0,0,0.06),inset_0_1px_0_rgba(255,255,255,0.6)] dark:shadow-[0_10px_32px_-4px_rgba(0,0,0,0.45),inset_0_1px_0_rgba(255,255,255,0.12)]",
+            "border border-border/70 dark:border-white/16",
+            "bg-card/75 dark:bg-card/30 backdrop-blur-md backdrop-saturate-150 halo-intensity-subtle",
+            "shadow-[0_4px_24px_-2px_rgba(0,0,0,0.06),inset_0_1px_0_rgba(255,255,255,0.7)] dark:shadow-[0_12px_36px_-4px_rgba(0,0,0,0.5),inset_0_1px_0_rgba(255,255,255,0.22),inset_0_0_16px_rgba(255,255,255,0.015)]",
           ],
           intensity === "balanced" && [
-            "border border-white/60 dark:border-white/18",
-            "bg-card/65 dark:bg-card/40 backdrop-blur-xl backdrop-saturate-180 halo-intensity-balanced",
-            "shadow-[0_8px_32px_-4px_rgba(0,0,0,0.1),0_2px_4px_rgba(0,0,0,0.04),inset_0_1px_0_rgba(255,255,255,0.85)] dark:shadow-[0_14px_40px_-4px_rgba(0,0,0,0.6),0_2px_4px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.16)]",
+            "border border-white/60 dark:border-white/20",
+            "bg-card/60 dark:bg-card/20 backdrop-blur-xl backdrop-saturate-180 halo-intensity-balanced",
+            "shadow-[0_8px_32px_-4px_rgba(0,0,0,0.1),0_2px_4px_rgba(0,0,0,0.04),inset_0_1px_0_rgba(255,255,255,0.85)] dark:shadow-[0_16px_48px_-4px_rgba(0,0,0,0.65),0_2px_4px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.32),inset_0_0_24px_rgba(255,255,255,0.025)]",
           ],
           intensity === "rich" && [
-            "border border-white/80 dark:border-white/24",
-            "bg-card/50 dark:bg-card/25 backdrop-blur-2xl backdrop-saturate-200 halo-intensity-rich",
-            "shadow-[0_16px_48px_-6px_rgba(0,0,0,0.15),0_2px_6px_rgba(0,0,0,0.06),inset_0_1px_0_rgba(255,255,255,0.95)] dark:shadow-[0_20px_56px_-6px_rgba(0,0,0,0.7),0_2px_6px_rgba(0,0,0,0.5),inset_0_1px_0_rgba(255,255,255,0.22)]",
+            "border border-white/80 dark:border-white/28",
+            "bg-card/45 dark:bg-card/15 backdrop-blur-2xl backdrop-saturate-200 halo-intensity-rich",
+            "shadow-[0_16px_48px_-6px_rgba(0,0,0,0.15),0_2px_6px_rgba(0,0,0,0.06),inset_0_1px_0_rgba(255,255,255,0.95)] dark:shadow-[0_24px_64px_-6px_rgba(0,0,0,0.75),0_2px_6px_rgba(0,0,0,0.5),inset_0_1px_0_rgba(255,255,255,0.45),inset_0_0_32px_rgba(255,255,255,0.04)]",
           ],
         ],
 

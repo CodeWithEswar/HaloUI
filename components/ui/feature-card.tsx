@@ -100,22 +100,24 @@ export function FeatureCardVisual({
         // Icon / Glyphic container variants
         variant === "default" && [
           "flex size-10 sm:size-11 items-center justify-center rounded-xl",
-          "bg-muted/30 dark:bg-white/[0.06] border border-border/50 dark:border-white/12 backdrop-blur-xs text-foreground",
-          "shadow-[inset_0_1px_0_rgba(255,255,255,0.3)] dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]",
-          "group-hover/feature-card:bg-muted/50 dark:group-hover/feature-card:bg-white/[0.1]",
+          "bg-card/60 dark:bg-white/[0.08] border border-border/60 dark:border-white/15 backdrop-blur-md backdrop-saturate-150 text-foreground",
+          "shadow-[0_2px_8px_rgba(0,0,0,0.04),inset_0_1px_0_rgba(255,255,255,0.6)] dark:shadow-[0_4px_12px_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.15)]",
+          "group-hover/feature-card:bg-card/80 dark:group-hover/feature-card:bg-white/[0.12] group-hover/feature-card:border-border/80 dark:group-hover/feature-card:border-white/25 transition-all duration-200",
           "group-data-[size=sm]/card:size-8 sm:group-data-[size=sm]/card:size-9 group-data-[size=sm]/card:rounded-lg",
           "group-data-[size=lg]/card:size-12 sm:group-data-[size=lg]/card:size-14 group-data-[size=lg]/card:rounded-2xl",
         ],
         variant === "muted" && [
           "flex size-10 sm:size-11 items-center justify-center rounded-xl",
-          "bg-background/40 dark:bg-white/[0.03] border border-border/40 dark:border-white/8 backdrop-blur-xs text-muted-foreground",
-          "group-hover/feature-card:text-foreground",
+          "bg-background/50 dark:bg-white/[0.04] border border-border/40 dark:border-white/10 backdrop-blur-sm text-muted-foreground",
+          "shadow-[inset_0_1px_0_rgba(255,255,255,0.3)] dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]",
+          "group-hover/feature-card:text-foreground group-hover/feature-card:border-border/60 transition-colors",
           "group-data-[size=sm]/card:size-8 sm:group-data-[size=sm]/card:size-9 group-data-[size=sm]/card:rounded-lg",
           "group-data-[size=lg]/card:size-12 sm:group-data-[size=lg]/card:size-14 group-data-[size=lg]/card:rounded-2xl",
         ],
         // Media / Screenshot / Mini UI preview slot
         variant === "media" && [
-          "relative w-full overflow-hidden rounded-xl border border-border/50 dark:border-white/12 bg-muted/20 dark:bg-black/30 backdrop-blur-xs isolate",
+          "relative w-full overflow-hidden rounded-xl border border-border/60 dark:border-white/15 bg-card/40 dark:bg-black/40 backdrop-blur-md backdrop-saturate-150 isolate",
+          "shadow-[0_4px_20px_rgba(0,0,0,0.06),inset_0_1px_0_rgba(255,255,255,0.3)] dark:shadow-[0_8px_24px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.08)]",
           "group-data-[size=sm]/card:rounded-lg",
           "group-data-[size=lg]/card:rounded-2xl",
         ],
@@ -148,7 +150,7 @@ export function FeatureCardTitle({
     <Comp
       data-slot="feature-card-title"
       className={cn(
-        "font-heading text-base font-semibold tracking-tight text-foreground leading-snug",
+        "font-heading text-base font-semibold tracking-tight text-foreground leading-snug break-words",
         "group-data-[size=sm]/card:text-sm group-data-[size=sm]/card:font-medium",
         "group-data-[size=lg]/card:text-lg sm:group-data-[size=lg]/card:text-xl",
         className
@@ -178,7 +180,7 @@ export function FeatureCardDescription({
     <Comp
       data-slot="feature-card-description"
       className={cn(
-        "text-xs sm:text-sm text-muted-foreground leading-relaxed",
+        "text-xs sm:text-sm text-muted-foreground leading-relaxed break-words",
         "group-data-[size=sm]/card:text-xs",
         className
       )}
@@ -237,7 +239,7 @@ export function FeatureCardAction({
       data-slot="feature-card-action"
       className={cn(
         "flex items-center gap-2 pt-1 min-w-0 text-xs sm:text-sm font-medium text-foreground",
-        "group-data-[orientation=horizontal]/feature-card:pt-0 shrink-0",
+        "group-data-[orientation=horizontal]/feature-card:pt-0 shrink-0 w-full sm:w-auto",
         className
       )}
       {...props}

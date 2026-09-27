@@ -149,10 +149,10 @@ export function AvatarGroupCount({
       data-size={size}
       aria-hidden="true"
       className={cn(
-        "relative flex shrink-0 items-center justify-center rounded-full font-medium select-none tracking-normal z-0",
-        // Frosted liquid glass count surface
-        "bg-muted/80 dark:bg-white/[0.08] text-muted-foreground border border-border/60 dark:border-white/10 backdrop-blur-xs",
-        "shadow-2xs",
+        "relative flex shrink-0 items-center justify-center rounded-full font-semibold select-none tracking-normal z-0 transition-transform duration-150 hover:scale-105",
+        // Luminous Liquid Glass count surface
+        "bg-card/80 dark:bg-white/[0.08] text-foreground border border-border/70 dark:border-white/15 backdrop-blur-md backdrop-saturate-150",
+        "shadow-[0_2px_8px_rgba(0,0,0,0.06),inset_0_1px_0_rgba(255,255,255,0.4)] dark:shadow-[0_4px_12px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.12)]",
         // Sizing matching Avatar dimensions
         size === "sm" && "size-6 text-[10px]",
         size === "default" && "size-8 text-xs",
