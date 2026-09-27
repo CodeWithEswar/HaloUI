@@ -12,7 +12,7 @@ import {
 } from "./segmented-control-demonstrations";
 import { InstallCommand } from "@/components/mdx/install-command";
 import { Anatomy, type AnatomyPart } from "@/components/mdx/anatomy";
-import { PropsTable } from "@/components/mdx/props-table";
+import { PropsExplorer, type SubcomponentApi } from "@/components/docs/props-explorer";
 import { FileTree, type FileNode } from "@/components/mdx/file-tree";
 import { Callout } from "@/components/mdx/callout";
 import { CodeBlock } from "@/components/mdx/code-block";
@@ -24,97 +24,88 @@ export const metadata: Metadata = {
     "A compact control for switching between a small set of mutually exclusive modes or values.",
 };
 
-const PROPS_DATA = [
+const SEGMENTED_CONTROL_SUBCOMPONENTS: SubcomponentApi[] = [
   {
-    name: "value",
-    type: "string",
-    default: "undefined",
-    required: false,
+    name: "SegmentedControl",
     description:
-      "Controlled value of the currently selected segment. Component operates in controlled mode when supplied.",
+      "Root container for mutually exclusive option switching with roving keyboard navigation and shared recessed optical track.",
+    props: [
+      {
+        name: "value",
+        type: "string",
+        description:
+          "Controlled value of the currently selected segment. Component operates in controlled mode when supplied.",
+      },
+      {
+        name: "defaultValue",
+        type: "string",
+        description: "Initial selected segment value for uncontrolled mode.",
+      },
+      {
+        name: "onValueChange",
+        type: "(value: string) => void",
+        description: "Event handler fired whenever the user selects a different segment.",
+      },
+      {
+        name: "size",
+        type: '"sm" | "default" | "lg"',
+        defaultValue: '"default"',
+        description:
+          "Shared ergonomic target size applied to all child segments: 'sm' (28px), 'default' (34px), or 'lg' (40px).",
+      },
+      {
+        name: "fullWidth",
+        type: "boolean",
+        defaultValue: "false",
+        description:
+          "When true, stretches the segmented control to fill the container and distributes segments equally with flex-1 min-w-0.",
+      },
+      {
+        name: "orientation",
+        type: '"horizontal" | "vertical"',
+        defaultValue: '"horizontal"',
+        description:
+          "Spatial layout axis for the control items. Horizontal is the canonical presentation.",
+      },
+      {
+        name: "disabled",
+        type: "boolean",
+        defaultValue: "false",
+        description:
+          "Disables pointer and keyboard interactions across all child segments while preserving current selection visibility.",
+      },
+    ],
   },
   {
-    name: "defaultValue",
-    type: "string",
-    default: "undefined",
-    required: false,
+    name: "SegmentedControlItem",
     description:
-      "Initial selected segment value for uncontrolled usage.",
-  },
-  {
-    name: "onValueChange",
-    type: "(value: string) => void",
-    default: "undefined",
-    required: false,
-    description:
-      "Event handler invoked whenever the user selects a different segment.",
-  },
-  {
-    name: "size",
-    type: '"sm" | "default" | "lg"',
-    default: '"default"',
-    required: false,
-    description:
-      "Shared segment geometry: 'sm' (28px item), 'default' (34px item), or 'lg' (40px item).",
-  },
-  {
-    name: "fullWidth",
-    type: "boolean",
-    default: "false",
-    required: false,
-    description:
-      "When true, stretches the segmented control to fill the container and distributes segments equally.",
-  },
-  {
-    name: "orientation",
-    type: '"horizontal" | "vertical"',
-    default: '"horizontal"',
-    required: false,
-    description:
-      "Spatial orientation of the segmented control. Horizontal is the canonical presentation.",
-  },
-  {
-    name: "disabled",
-    type: "boolean",
-    default: "false",
-    required: false,
-    description:
-      "Disables all segments within the control while preserving current selection visibility.",
-  },
-];
-
-const ITEM_PROPS_DATA = [
-  {
-    name: "value",
-    type: "string",
-    default: "—",
-    required: true,
-    description:
-      "Stable semantic value identifying the segment (e.g. 'list', 'grid', 'compact').",
-  },
-  {
-    name: "aria-label",
-    type: "string",
-    default: "undefined",
-    required: false,
-    description:
-      "Mandatory accessible label when the segment contains only an icon glyph without visible text.",
-  },
-  {
-    name: "disabled",
-    type: "boolean",
-    default: "false",
-    required: false,
-    description:
-      "Disables this individual segment from pointer and keyboard interaction.",
-  },
-  {
-    name: "size",
-    type: '"sm" | "default" | "lg"',
-    default: "inherited",
-    required: false,
-    description:
-      "Optional override for individual item size geometry.",
+      "An individual selectable option button within a SegmentedControl, implementing accessible radio semantics with roving focus.",
+    props: [
+      {
+        name: "value",
+        type: "string",
+        required: true,
+        description:
+          "Stable semantic identifier for the segment (e.g. 'list', 'grid', 'compact').",
+      },
+      {
+        name: "aria-label",
+        type: "string",
+        description:
+          "Mandatory accessible name when rendering icon-only presentations without visible text.",
+      },
+      {
+        name: "size",
+        type: '"sm" | "default" | "lg"',
+        description: "Optional explicit size override for this specific segment item.",
+      },
+      {
+        name: "disabled",
+        type: "boolean",
+        defaultValue: "false",
+        description: "Disables this individual segment item from selection.",
+      },
+    ],
   },
 ];
 
@@ -470,19 +461,61 @@ export function ViewSelector() {
         </ul>
       </div>
 
-      {/* Props */}
-      <div className="space-y-6">
+      {/* Component API */}
+      <div className="space-y-4">
         <h2 id="props" className="text-xl font-semibold tracking-tight text-foreground">
-          Props Reference
+          Component API
         </h2>
-        <div className="space-y-4">
-          <h3 className="text-base font-semibold text-foreground">SegmentedControl</h3>
-          <PropsTable rows={PROPS_DATA} />
+        <p className="text-sm text-muted-foreground leading-relaxed">
+          Explore interactive subcomponent specifications, size tiers, and accessible single-selection properties for SegmentedControl.
+        </p>
+        <PropsExplorer subcomponents={SEGMENTED_CONTROL_SUBCOMPONENTS} />
+      </div>
+
+      {/* Liquid Glass Optical Substrate Architecture */}
+      <div className="space-y-4">
+        <h2 id="optical-engine" className="text-xl font-semibold tracking-tight text-foreground">
+          Liquid Glass Optical Substrate Architecture
+        </h2>
+        <p className="text-sm text-muted-foreground leading-relaxed">
+          SegmentedControl implements a dual-layer optical hierarchy: a restrained recessed trench track (<code className="text-foreground font-mono text-xs">bg-black/[0.04]</code> / <code className="text-foreground font-mono text-xs">bg-white/[0.05]</code>) providing depth anchoring, coupled with an elevated frosted glass segment indicator (<code className="text-foreground font-mono text-xs">bg-white</code> / <code className="text-foreground font-mono text-xs">bg-white/15</code>) that physically distinguishes the active selection without relying on color alone.
+        </p>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
+          <div className="p-4 rounded-xl border border-border/50 bg-muted/20 space-y-2">
+            <h4 className="text-xs font-semibold uppercase tracking-wider text-foreground">
+              Recessed Optical Trench
+            </h4>
+            <p className="text-xs text-muted-foreground leading-relaxed">
+              The continuous shared container uses an inset shadow and subtle perimeter border to provide clear spatial grounding across any light or dark canvas.
+            </p>
+          </div>
+          <div className="p-4 rounded-xl border border-border/50 bg-muted/20 space-y-2">
+            <h4 className="text-xs font-semibold uppercase tracking-wider text-foreground">
+              Frosted Liquid Active Pill
+            </h4>
+            <p className="text-xs text-muted-foreground leading-relaxed">
+              The selected segment resolves into an unmistakable physical lens with micro-hairline border and contact shadow, satisfying WCAG 1.4.1 non-color state differentiation.
+            </p>
+          </div>
+          <div className="p-4 rounded-xl border border-border/50 bg-muted/20 space-y-2">
+            <h4 className="text-xs font-semibold uppercase tracking-wider text-foreground">
+              Separated Focus vs Active
+            </h4>
+            <p className="text-xs text-muted-foreground leading-relaxed">
+              Keyboard roving focus ring projects strictly outside the focused item at <code className="text-foreground font-mono text-[10px]">z-20</code>, completely independent from which segment is currently checked.
+            </p>
+          </div>
         </div>
-        <div className="space-y-4">
-          <h3 className="text-base font-semibold text-foreground">SegmentedControlItem</h3>
-          <PropsTable rows={ITEM_PROPS_DATA} />
-        </div>
+      </div>
+
+      {/* Automatic Container-Aware Responsiveness */}
+      <div className="space-y-4">
+        <h2 id="responsive-behavior" className="text-xl font-semibold tracking-tight text-foreground">
+          Automatic container-aware responsiveness
+        </h2>
+        <p className="text-sm text-muted-foreground leading-relaxed">
+          SegmentedControl automatically adapts down to the strict 240px QA minimum container width. In default mode, items maintain natural intrinsic width without clipping. In <code className="text-foreground font-mono text-xs">fullWidth</code> mode, items distribute equally via <code className="text-foreground font-mono text-xs">flex-1 min-w-0</code> while labels gracefully truncate rather than distorting track geometry.
+        </p>
       </div>
 
       {/* Dependencies */}

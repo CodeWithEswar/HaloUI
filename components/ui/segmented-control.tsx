@@ -15,7 +15,7 @@ import { cn } from "@/lib/utils";
  */
 export const segmentedControlVariants = cva(
   [
-    "inline-flex items-center isolate select-none overflow-hidden",
+    "inline-flex items-center isolate select-none overflow-hidden max-w-full min-w-0",
     "p-1 rounded-xl transition-all duration-150 ease-out",
     // Shared Liquid Glass track
     "bg-black/[0.04] dark:bg-white/[0.05]",
@@ -44,7 +44,7 @@ export const segmentedControlVariants = cva(
 export const segmentedControlItemVariants = cva(
   [
     "group/segment relative inline-flex items-center justify-center font-medium select-none cursor-pointer",
-    "transition-all duration-100 ease-out outline-none whitespace-nowrap shrink-0",
+    "transition-all duration-100 ease-out outline-none whitespace-nowrap shrink-0 min-w-0",
     // Base unselected styling (quiet, flat)
     "text-muted-foreground hover:text-foreground bg-transparent border border-transparent",
     "hover:bg-black/[0.04] dark:hover:bg-white/[0.06]",
@@ -70,7 +70,7 @@ export const segmentedControlItemVariants = cva(
         lg: "h-10 px-4.5 text-sm sm:text-base rounded-xl gap-2.5 [&_svg:not([class*='size-'])]:size-4.5",
       },
       fullWidth: {
-        true: "flex-1",
+        true: "flex-1 min-w-0",
         false: "",
       },
     },
@@ -237,7 +237,7 @@ export const SegmentedControlItem = React.forwardRef<HTMLButtonElement, Segmente
         )}
         {...props}
       >
-        <span className="relative z-10 flex items-center justify-center gap-[inherit] w-full h-full">
+        <span className="relative z-10 flex items-center justify-center gap-[inherit] w-full h-full min-w-0 truncate">
           {children}
         </span>
       </RadioPrimitive.Root>
