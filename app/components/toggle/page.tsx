@@ -16,7 +16,7 @@ import {
 } from "./toggle-demonstrations";
 import { InstallCommand } from "@/components/mdx/install-command";
 import { Anatomy, type AnatomyPart } from "@/components/mdx/anatomy";
-import { PropsTable } from "@/components/mdx/props-table";
+import { PropsExplorer, type SubcomponentApi } from "@/components/docs/props-explorer";
 import { FileTree, type FileNode } from "@/components/mdx/file-tree";
 import { Callout } from "@/components/mdx/callout";
 import { CodeBlock } from "@/components/mdx/code-block";
@@ -28,55 +28,80 @@ export const metadata: Metadata = {
     "A two-state action control that communicates and changes a persistent pressed or unpressed state.",
 };
 
-const PROPS_DATA = [
+const TOGGLE_SUBCOMPONENTS: SubcomponentApi[] = [
   {
-    name: "pressed",
-    type: "boolean",
-    default: "undefined",
-    required: false,
-    description: "Controlled pressed state. When provided, component behaves as a controlled input.",
-  },
-  {
-    name: "defaultPressed",
-    type: "boolean",
-    default: "false",
-    required: false,
-    description: "Initial pressed state for uncontrolled usage.",
-  },
-  {
-    name: "onPressedChange",
-    type: "(pressed: boolean, eventDetails?: any) => void",
-    default: "undefined",
-    required: false,
-    description: "Callback fired when the pressed state changes.",
-  },
-  {
-    name: "variant",
-    type: '"default" | "outline"',
-    default: '"default"',
-    required: false,
-    description: "Semantic visual material family. 'default' uses HaloUI 10-layer physical liquid glass.",
-  },
-  {
-    name: "size",
-    type: '"sm" | "default" | "lg"',
-    default: '"default"',
-    required: false,
-    description: "Calibrated action dimensions (sm: 32px, default: 40px, lg: 48px).",
-  },
-  {
-    name: "disabled",
-    type: "boolean",
-    default: "false",
-    required: false,
-    description: "Prevents interaction while strictly preserving the current pressed or unpressed state.",
-  },
-  {
-    name: "aria-label",
-    type: "string",
-    default: "undefined",
-    required: false,
-    description: "Mandatory accessible name for icon-only toggles (e.g. aria-label='Pin document'). Warns in development if omitted.",
+    name: "Toggle",
+    kind: "Component",
+    maturity: "stable",
+    description:
+      "A persistent two-state action control sharing HaloUI's 10-layer physical liquid optical engine, accessible aria-pressed semantics, and tactile press response.",
+    inheritedProps: {
+      element: "React.ComponentPropsWithoutRef<typeof TogglePrimitive>",
+      description:
+        "Inherits all Base UI Toggle primitive attributes, ARIA attributes, event handlers (onPressedChange), and ref forwarding.",
+    },
+    props: [
+      {
+        name: "pressed",
+        type: "boolean",
+        required: false,
+        description:
+          "Controlled pressed state. When provided, the toggle behaves as a controlled input.",
+      },
+      {
+        name: "defaultPressed",
+        type: "boolean",
+        default: "false",
+        required: false,
+        description:
+          "Initial pressed state for uncontrolled usage.",
+      },
+      {
+        name: "onPressedChange",
+        type: "(pressed: boolean, eventDetails?: any) => void",
+        required: false,
+        description:
+          "Callback fired when the pressed state changes.",
+      },
+      {
+        name: "variant",
+        type: "'default' | 'outline'",
+        default: "'default'",
+        required: false,
+        description:
+          "Semantic visual material profile: 'default' (10-layer physical liquid glass with specular catch and pressed optical displacement) or 'outline' (hairline border with backdrop blur).",
+      },
+      {
+        name: "size",
+        type: "'default' | 'sm' | 'lg'",
+        default: "'default'",
+        required: false,
+        description:
+          "Calibrated action dimensions: 'default' (40px height, ≥40px compliant touch target), 'sm' (32px compact), 'lg' (48px).",
+      },
+      {
+        name: "disabled",
+        type: "boolean",
+        default: "false",
+        required: false,
+        description:
+          "Prevents pointer and keyboard interaction while strictly preserving the current pressed or unpressed state visually.",
+      },
+      {
+        name: "aria-label",
+        type: "string",
+        required: false,
+        description:
+          "Mandatory accessible name for icon-only toggles (e.g. aria-label='Pin document'). Warns in development if omitted.",
+      },
+      {
+        name: "className",
+        type: "string",
+        required: false,
+        description:
+          "Additional Tailwind CSS classes merged with the toggle base and variant styles.",
+      },
+    ],
   },
 ];
 
@@ -329,9 +354,12 @@ export function ToggleDemo() {
       {/* Props */}
       <div className="space-y-4">
         <h2 id="props" className="text-xl font-semibold tracking-tight text-foreground">
-          Props
+          Props & Subcomponent API
         </h2>
-        <PropsTable rows={PROPS_DATA} />
+        <p className="text-sm text-muted-foreground">
+          Interactive API specification for the Toggle primitive.
+        </p>
+        <PropsExplorer subcomponents={TOGGLE_SUBCOMPONENTS} />
       </div>
 
       {/* Anatomy */}
@@ -342,43 +370,40 @@ export function ToggleDemo() {
         <Anatomy parts={ANATOMY_PARTS} />
       </div>
 
-      {/* Accessibility */}
-      <div className="space-y-4">
-        <h2 id="accessibility" className="text-xl font-semibold tracking-tight text-foreground">
-          Accessibility
-        </h2>
-        <div className="space-y-3 text-sm text-muted-foreground leading-relaxed">
-          <p>
-            Toggle satisfies WCAG 2.1 AA requirements across all interactive criteria:
-          </p>
-          <ul className="list-disc pl-5 space-y-2">
-            <li>
-              <strong>State Exposure:</strong> Uses native button-style <code className="text-foreground font-mono text-xs">aria-pressed="true|false"</code> to communicate persistent activation to screen readers.
-            </li>
-            <li>
-              <strong>Non-Color Differentiation:</strong> Pressed state employs optical inset displacement shadow and border definition in addition to surface tint, ensuring legibility under grayscale or high-contrast modes.
-            </li>
-            <li>
-              <strong>Unclipped Focus Ring:</strong> Halo Focus Ring floats at <code className="text-foreground font-mono text-xs">z-20</code> outside the physical boundary, allowing Pressed and Focused states to coexist without conflict.
-            </li>
-            <li>
-              <strong>Preserved Disabled State:</strong> When disabled, Toggle mutes optical transmission (<code className="text-foreground font-mono text-xs">disabled:opacity-40</code>) while retaining its current pressed or unpressed appearance.
-            </li>
-            <li>
-              <strong>Mandatory Accessible Naming:</strong> Icon-only toggles enforce <code className="text-foreground font-mono text-xs">aria-label</code> or <code className="text-foreground font-mono text-xs">aria-labelledby</code>, logging development warnings if omitted.
-            </li>
-          </ul>
-        </div>
-      </div>
-
       {/* Responsive Behavior */}
       <div className="space-y-4">
         <h2 id="responsive-behavior" className="text-xl font-semibold tracking-tight text-foreground">
-          Responsive behavior
+          Automatic Container-Aware Responsiveness
         </h2>
-        <p className="text-sm text-muted-foreground leading-relaxed">
-          Toggle maintains practical touch targets of 32px (<code className="text-foreground font-mono text-xs">sm</code>), 40px (<code className="text-foreground font-mono text-xs">default</code>), and 48px (<code className="text-foreground font-mono text-xs">lg</code>). It flexes naturally with long internationalized labels without arbitrary clipping.
-        </p>
+        <div className="space-y-3 text-sm text-muted-foreground leading-relaxed">
+          <p>
+            <strong>Intrinsic Multi-Line Wrapping:</strong> Text-supported toggles enforce <code>min-w-0 max-w-full leading-snug break-words</code> paired with <code>min-h-10 h-auto</code> height scaling. Under wide viewports or short labels, Toggle retains its canonical 40px/32px/48px height. In constrained mobile viewports or sidebars (240px and 280px QA), long text labels wrap gracefully across multiple lines without horizontal overflow or clipped text.
+          </p>
+          <p>
+            <strong>Glyph Protection:</strong> Embedded leading icons enforce <code>shrink-0</code> to guarantee that icons never compress when text labels wrap.
+          </p>
+          <p>
+            <strong>200% Zoom Compatibility:</strong> Scales gracefully under high text-scaling modes, expanding vertical height and preserving optical state boundaries without page blowout.
+          </p>
+        </div>
+      </div>
+
+      {/* Liquid Glass */}
+      <div className="space-y-4">
+        <h2 id="liquid-glass" className="text-xl font-semibold tracking-tight text-foreground">
+          Liquid Glass Optical Architecture
+        </h2>
+        <div className="space-y-3 text-sm text-muted-foreground leading-relaxed">
+          <p>
+            <strong>Persistent State Optical Distinction:</strong> Toggle avoids relying on color tint alone to communicate state. In the unpressed state, it exhibits a subtle transmission profile with 135° overhead specular catch. In the pressed state, it resolves to a physical recessed displacement with optical inset shadow (<code>inset 0 2px 4px rgba(0,0,0,0.18)</code>) and condensed boundary contrast.
+          </p>
+          <p>
+            <strong>Light and Dark Adaptation:</strong> In Light mode, pressed state condenses to <code>bg-neutral-900/[0.12]</code> with dark hairline perimeter. In Dark mode, transmission shifts to <code>bg-white/[0.22]</code> with a 0.5 opacity interior shadow, avoiding muddy halo artifacts.
+          </p>
+          <p>
+            <strong>Restrained Intensity:</strong> Employs HaloUI's <code>Subtle</code> material recipe to prevent visual fatigue when multiple toggles populate toolbars or text editors.
+          </p>
+        </div>
       </div>
 
       {/* Motion */}

@@ -15,8 +15,8 @@ import { cn } from "@/lib/utils";
  */
 export const toggleVariants = cva(
   [
-    "group/toggle relative inline-flex items-center justify-center font-medium select-none isolate overflow-hidden cursor-pointer",
-    "whitespace-nowrap transition-all duration-200 ease-out outline-none shrink-0",
+    "group/toggle relative inline-flex items-center justify-center font-medium select-none isolate overflow-hidden cursor-pointer text-center",
+    "min-w-0 max-w-full leading-snug break-words transition-all duration-200 ease-out outline-none shrink-0",
     // Halo Focus Ring: double-contrast perimeter operating independently outside material boundary
     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--halo-focus-color)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--halo-focus-offset-color)] focus-visible:z-20 halo-focus-ring",
     // Tactile press response during pointer/keyboard down
@@ -70,9 +70,9 @@ export const toggleVariants = cva(
         ],
       },
       size: {
-        default: "h-10 min-w-10 px-4 text-sm gap-2 rounded-full [&_svg:not([class*='size-'])]:size-4",
-        sm: "h-8 min-w-8 px-2.5 text-xs gap-1.5 rounded-full [&_svg:not([class*='size-'])]:size-3.5",
-        lg: "h-12 min-w-12 px-5 text-base gap-2.5 rounded-full [&_svg:not([class*='size-'])]:size-4.5",
+        default: "min-h-10 h-auto min-w-10 px-4 py-2 text-sm gap-2 rounded-full [&_svg:not([class*='size-'])]:size-4",
+        sm: "min-h-8 h-auto min-w-8 px-2.5 py-1.5 text-xs gap-1.5 rounded-full [&_svg:not([class*='size-'])]:size-3.5",
+        lg: "min-h-12 h-auto min-w-12 px-5 py-2.5 text-base gap-2.5 rounded-full [&_svg:not([class*='size-'])]:size-4.5",
       },
     },
     defaultVariants: {
