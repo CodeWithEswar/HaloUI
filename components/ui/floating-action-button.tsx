@@ -70,7 +70,7 @@ export const floatingActionButtonVariants = cva(
         lg: "size-16 min-w-16 min-h-16 p-0 [&_svg:not([class*='size-'])]:size-7",
       },
       extended: {
-        true: "w-auto whitespace-nowrap",
+        true: "w-auto max-w-full min-w-0 [&>span]:truncate [&>span]:min-w-0",
         false: "",
       },
     },

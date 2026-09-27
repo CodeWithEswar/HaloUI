@@ -12,7 +12,7 @@ import {
 } from "./floating-action-button-demonstrations";
 import { InstallCommand } from "@/components/mdx/install-command";
 import { Anatomy, type AnatomyPart } from "@/components/mdx/anatomy";
-import { PropsTable } from "@/components/mdx/props-table";
+import { PropsExplorer, type SubcomponentApi } from "@/components/docs/props-explorer";
 import { FileTree, type FileNode } from "@/components/mdx/file-tree";
 import { Callout } from "@/components/mdx/callout";
 import { CodeBlock } from "@/components/mdx/code-block";
@@ -24,73 +24,68 @@ export const metadata: Metadata = {
     "A prominent floating control for exposing a high-priority contextual action above surrounding content.",
 };
 
-const PROPS_DATA = [
+const FAB_SUBCOMPONENTS: SubcomponentApi[] = [
   {
-    name: "variant",
-    type: '"default" | "secondary"',
-    default: '"default"',
-    required: false,
+    name: "FloatingActionButton",
+    kind: "Component",
+    maturity: "stable",
     description:
-      "Semantic visual hierarchy. 'default' renders high-contrast liquid optical glass; 'secondary' provides a softer frosted crystal boundary.",
-  },
-  {
-    name: "size",
-    type: '"default" | "lg"',
-    default: '"default"',
-    required: false,
-    description:
-      "Physical dimensions. 'default' provides a 56px touch target (24px icon); 'lg' provides a 64px touch target (28px icon).",
-  },
-  {
-    name: "extended",
-    type: "boolean",
-    default: "false",
-    required: false,
-    description:
-      "Switches geometry from circular icon-only to a capsule shape supporting both an icon and a visible text label.",
-  },
-  {
-    name: "asChild",
-    type: "boolean",
-    default: "false",
-    required: false,
-    description:
-      "Delegates rendering to a Radix Slot child element for semantic composition (e.g. Next.js Link or anchor tags).",
-  },
-  {
-    name: "disabled",
-    type: "boolean",
-    default: "false",
-    required: false,
-    description:
-      "Prevents user interaction while preserving spatial presence and reducing opacity cleanly.",
-  },
-];
-
-const NATIVE_PROPS_DATA = [
-  {
-    name: "aria-label",
-    type: "string",
-    default: "undefined",
-    required: false,
-    description:
-      "Mandatory accessible name for icon-only usage. Describes the intended user action rather than the icon glyph.",
-  },
-  {
-    name: "type",
-    type: '"button" | "submit" | "reset"',
-    default: '"button"',
-    required: false,
-    description:
-      "Standard HTML button type. Defaults safely to 'button' to avoid accidental form submissions.",
-  },
-  {
-    name: "className",
-    type: "string",
-    default: "undefined",
-    required: false,
-    description:
-      "Additional Tailwind CSS classes merged onto the root button element (commonly used for absolute/fixed container offsets).",
+      "A prominent floating control for exposing a high-priority contextual action elevated above surrounding interface content. Powered by HaloUI's 10-layer physical liquid optical engine and tactile compression physics.",
+    inheritedProps: {
+      element: "React.ButtonHTMLAttributes<HTMLButtonElement>",
+      description:
+        "Inherits all standard HTML button attributes, event handlers (onClick, onKeyDown), focus management, and ref forwarding.",
+    },
+    props: [
+      {
+        name: "variant",
+        type: '"default" | "secondary"',
+        default: '"default"',
+        required: false,
+        description:
+          "Semantic visual hierarchy. 'default' renders signature high-contrast liquid optical glass; 'secondary' provides a softer frosted crystal boundary.",
+      },
+      {
+        name: "size",
+        type: '"default" | "lg"',
+        default: '"default"',
+        required: false,
+        description:
+          "Physical dimensions. 'default' provides a 56px touch target (24px icon); 'lg' provides a 64px touch target (28px icon).",
+      },
+      {
+        name: "extended",
+        type: "boolean",
+        default: "false",
+        required: false,
+        description:
+          "Switches geometry from circular icon-only to a capsule shape supporting both an icon and a visible text label.",
+      },
+      {
+        name: "asChild",
+        type: "boolean",
+        default: "false",
+        required: false,
+        description:
+          "Delegates rendering to a Radix Slot child element for semantic composition (e.g. Next.js Link or anchor tags).",
+      },
+      {
+        name: "disabled",
+        type: "boolean",
+        default: "false",
+        required: false,
+        description:
+          "Prevents user interaction while preserving spatial presence and reducing opacity cleanly.",
+      },
+      {
+        name: "aria-label",
+        type: "string",
+        default: "undefined",
+        required: false,
+        description:
+          "Mandatory accessible name for icon-only usage. Describes the intended user action rather than the icon glyph.",
+      },
+    ],
   },
 ];
 
@@ -380,21 +375,61 @@ export function FloatingActionButtonDemo() {
         <FloatingActionButtonKeyboardPreview />
       </div>
 
-      {/* Props Reference */}
-      <div className="space-y-6">
-        <div className="space-y-3">
-          <h2 id="props" className="text-xl font-semibold tracking-tight text-foreground">
-            FloatingActionButton Props
-          </h2>
-          <PropsTable rows={PROPS_DATA} />
-        </div>
+      {/* Component API */}
+      <div className="space-y-4">
+        <h2 id="props" className="text-xl font-semibold tracking-tight text-foreground">
+          Component API
+        </h2>
+        <p className="text-sm text-muted-foreground leading-relaxed">
+          Explore interactive API specifications, sizing modes, and polymorphic Radix Slot composition options for FloatingActionButton.
+        </p>
+        <PropsExplorer subcomponents={FAB_SUBCOMPONENTS} />
+      </div>
 
-        <div className="space-y-3">
-          <h3 className="text-lg font-medium tracking-tight text-foreground">
-            Inherited Native Attributes
-          </h3>
-          <PropsTable rows={NATIVE_PROPS_DATA} />
+      {/* Liquid Glass & Optical Elevation Architecture */}
+      <div className="space-y-4">
+        <h2 id="optical-engine" className="text-xl font-semibold tracking-tight text-foreground">
+          Liquid Glass & Optical Elevation Architecture
+        </h2>
+        <p className="text-sm text-muted-foreground leading-relaxed">
+          The Floating Action Button implements HaloUI's 10-layer physical optical engine calibrated for high spatial separation. Unlike resting controls, the FAB floats on Level 3 spatial elevation with deep multi-tier drop shadows that maintain contrast over diverse backgrounds.
+        </p>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
+          <div className="p-4 rounded-xl border border-border/50 bg-muted/20 space-y-2">
+            <h4 className="text-xs font-semibold uppercase tracking-wider text-foreground">
+              Level 3 Spatial Shadow
+            </h4>
+            <p className="text-xs text-muted-foreground leading-relaxed">
+              Multi-tiered ambient and contact shadows combine to lift the circular lens off the page without requiring continuous, distracting float animations.
+            </p>
+          </div>
+          <div className="p-4 rounded-xl border border-border/50 bg-muted/20 space-y-2">
+            <h4 className="text-xs font-semibold uppercase tracking-wider text-foreground">
+              Tactile Settle (No Bobbing)
+            </h4>
+            <p className="text-xs text-muted-foreground leading-relaxed">
+              Active press compresses the button by 4% (<code className="text-foreground font-mono text-[10px]">scale-[0.96]</code>) with tactile shadow flattening, returning immediately on pointer release.
+            </p>
+          </div>
+          <div className="p-4 rounded-xl border border-border/50 bg-muted/20 space-y-2">
+            <h4 className="text-xs font-semibold uppercase tracking-wider text-foreground">
+              Unclipped z-20 Focus Ring
+            </h4>
+            <p className="text-xs text-muted-foreground leading-relaxed">
+              Focus-visible elevates the double-contrast Halo Focus Ring to <code className="text-foreground font-mono text-[10px]">z-20</code>, projecting cleanly outside deep drop shadow radii and dark imagery.
+            </p>
+          </div>
         </div>
+      </div>
+
+      {/* Automatic Container-Aware Responsiveness */}
+      <div className="space-y-4">
+        <h2 id="responsive-behavior" className="text-xl font-semibold tracking-tight text-foreground">
+          Automatic container-aware responsiveness
+        </h2>
+        <p className="text-sm text-muted-foreground leading-relaxed">
+          Placement is layout-neutral: HaloUI never bakes <code className="text-foreground font-mono text-xs">fixed</code> or viewport-locked coordinates into the component itself. In narrow containers (down to the 240px QA minimum width), circular FABs preserve their 56px/64px geometry with <code className="text-foreground font-mono text-xs">shrink-0</code>, while extended capsule forms gracefully truncate long text labels (<code className="text-foreground font-mono text-xs">[&gt;span]:truncate max-w-full</code>) without breaking container layout bounds.
+        </p>
       </div>
 
       {/* Anatomy */}
