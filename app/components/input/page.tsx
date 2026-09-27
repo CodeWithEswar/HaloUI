@@ -9,7 +9,7 @@ import {
 } from "./input-demonstrations";
 import { InstallCommand } from "@/components/mdx/install-command";
 import { Anatomy, type AnatomyPart } from "@/components/mdx/anatomy";
-import { PropsTable, type PropRow } from "@/components/mdx/props-table";
+import { PropsExplorer, type SubcomponentApi } from "@/components/docs/props-explorer";
 import { FileTree, type FileNode } from "@/components/mdx/file-tree";
 import { Callout } from "@/components/mdx/callout";
 import { CodeBlock } from "@/components/mdx/code-block";
@@ -21,56 +21,62 @@ export const metadata: Metadata = {
     "A single-line native text-entry control with HaloUI material states, accessible focus treatment, validation support, and consistent form behavior.",
 };
 
-const INPUT_PROPS: PropRow[] = [
+const INPUT_SUBCOMPONENTS: SubcomponentApi[] = [
   {
-    name: "type",
-    type: "string",
-    default: '"text"',
-    required: false,
+    name: "Input",
     description:
-      "Native HTML input type: 'text', 'email', 'password', 'search', 'tel', 'url', 'number', etc.",
-  },
-  {
-    name: "className",
-    type: "string",
-    default: "undefined",
-    required: false,
-    description: "Additional CSS classes to append to the input element.",
-  },
-  {
-    name: "disabled",
-    type: "boolean",
-    default: "false",
-    required: false,
-    description: "Native disabled attribute. Prevents editing and interaction.",
-  },
-  {
-    name: "readOnly",
-    type: "boolean",
-    default: "false",
-    required: false,
-    description: "Native readOnly attribute. Prevents editing while preserving keyboard focus and text selection.",
-  },
-  {
-    name: "required",
-    type: "boolean",
-    default: "false",
-    required: false,
-    description: "Native required constraint for form validation.",
-  },
-  {
-    name: "aria-invalid",
-    type: 'boolean | "true" | "false"',
-    default: "undefined",
-    required: false,
-    description: "Communicates invalid error state to assistive technologies and activates the dual-indicator error styling.",
-  },
-  {
-    name: "...props",
-    type: 'React.ComponentProps<"input">',
-    default: "—",
-    required: false,
-    description: "All standard HTML <input> attributes (placeholder, value, defaultValue, onChange, autoComplete, etc.).",
+      "A single-line native text input control with 10-layer physical liquid glass material, accessible focus ring, and validation styling.",
+    props: [
+      {
+        name: "type",
+        type: "string",
+        default: '"text"',
+        description:
+          "Native HTML input type: 'text', 'email', 'password', 'search', 'tel', 'url', 'number', etc.",
+      },
+      {
+        name: "variant",
+        type: '"default" | "unstyled"',
+        default: '"default"',
+        description:
+          "'default' applies the 10-layer physical optical glass field. 'unstyled' removes background, borders, and rings for custom wrapper compositions.",
+      },
+      {
+        name: "disabled",
+        type: "boolean",
+        default: "false",
+        description: "Native disabled attribute. Prevents editing and dims surface opacity to 40%.",
+      },
+      {
+        name: "readOnly",
+        type: "boolean",
+        default: "false",
+        description:
+          "Native readOnly attribute. Prevents editing while preserving keyboard focusability and text selection.",
+      },
+      {
+        name: "required",
+        type: "boolean",
+        default: "false",
+        description: "Native required constraint for form validation.",
+      },
+      {
+        name: "aria-invalid",
+        type: 'boolean | "true" | "false"',
+        description:
+          "Communicates invalid error state to assistive technologies and activates the dual-indicator error styling.",
+      },
+      {
+        name: "className",
+        type: "string",
+        description: "Additional CSS classes to append to the input element.",
+      },
+      {
+        name: "...props",
+        type: 'React.ComponentProps<"input">',
+        description: "All native HTML input attributes (name, value, defaultValue, placeholder, maxLength, onChange, onFocus, onBlur, etc.).",
+      },
+    ],
   },
 ];
 
@@ -252,12 +258,63 @@ export function UserEmailField() {
         <ControlledVsUncontrolledDemo />
       </section>
 
-      {/* Props */}
+      {/* Component API */}
       <section className="space-y-4">
-        <h2 className="text-2xl font-bold tracking-tight text-foreground font-heading">
-          Props
+        <div className="space-y-2">
+          <h2 id="props" className="text-xl font-semibold tracking-tight text-foreground">
+            Component API
+          </h2>
+          <p className="text-sm text-muted-foreground">
+            Interactive properties and configuration options for Input.
+          </p>
+        </div>
+        <PropsExplorer subcomponents={INPUT_SUBCOMPONENTS} />
+      </section>
+
+      {/* Liquid Glass & Optical Elevation Architecture */}
+      <section className="space-y-4">
+        <h2 id="optical-engine" className="text-xl font-semibold tracking-tight text-foreground">
+          Liquid Glass &amp; Optical Elevation Architecture
         </h2>
-        <PropsTable rows={INPUT_PROPS} />
+        <p className="text-sm text-muted-foreground leading-relaxed">
+          HaloUI&apos;s Input is crafted with a physical optical engine that preserves the tactile presence of etched glass while remaining responsive to focus and validation states.
+        </p>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
+          <div className="p-4 rounded-xl border border-border/50 bg-muted/20 space-y-2">
+            <h4 className="text-xs font-semibold uppercase tracking-wider text-foreground">
+              Restrained Liquid Optical Substrate
+            </h4>
+            <p className="text-xs text-muted-foreground leading-relaxed">
+              Subtle base tint (<code className="text-foreground font-mono text-[10px]">bg-black/[0.02]</code> / <code className="text-foreground font-mono text-[10px]">dark:bg-white/[0.035]</code>) with micro-diffusion blur (<code className="text-foreground font-mono text-[10px]">backdrop-blur-xs</code>) and dual-layer inset shadow for tactile depth.
+            </p>
+          </div>
+          <div className="p-4 rounded-xl border border-border/50 bg-muted/20 space-y-2">
+            <h4 className="text-xs font-semibold uppercase tracking-wider text-foreground">
+              Halo Focus Ring Integration
+            </h4>
+            <p className="text-xs text-muted-foreground leading-relaxed">
+              Independent double-contrast focus outline with 2px offset ensures high visibility across all light, dark, spectral, and complex photographic backdrops without clipping.
+            </p>
+          </div>
+          <div className="p-4 rounded-xl border border-border/50 bg-muted/20 space-y-2">
+            <h4 className="text-xs font-semibold uppercase tracking-wider text-foreground">
+              Dual-Indicator Validation
+            </h4>
+            <p className="text-xs text-muted-foreground leading-relaxed">
+              When invalid, the input pairs high-contrast crimson borders and inner warning glows with programmatic accessibility attributes (<code className="text-foreground font-mono text-[10px]">aria-invalid</code> + <code className="text-foreground font-mono text-[10px]">aria-describedby</code>).
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Automatic Container-Aware Responsiveness */}
+      <section className="space-y-4">
+        <h2 id="responsive-behavior" className="text-xl font-semibold tracking-tight text-foreground">
+          Automatic container-aware responsiveness
+        </h2>
+        <p className="text-sm text-muted-foreground leading-relaxed">
+          Input features <code className="text-foreground font-mono text-xs">w-full min-w-0 max-w-full</code> to seamlessly conform to parent columns and form grids across viewports from 240px strict QA min to 1024px desktop and fluid widths.
+        </p>
       </section>
 
       {/* Anatomy */}

@@ -14,6 +14,17 @@ import {
   FieldError,
 } from "@/components/ui/field";
 
+const CONTAINER_WIDTH_OPTIONS = [
+  { label: "240px (Strict Min)", value: "240px" },
+  { label: "320px (Mobile S)", value: "320px" },
+  { label: "375px (Mobile M)", value: "375px" },
+  { label: "480px (Phablet)", value: "480px" },
+  { label: "640px (Tablet)", value: "640px" },
+  { label: "768px (Laptop)", value: "768px" },
+  { label: "1024px (Desktop)", value: "1024px" },
+  { label: "100% Fluid", value: "100%" },
+];
+
 export function InputPreviewStage() {
   const [activeTab, setActiveTab] = React.useState<"preview" | "code">("preview");
   const [backdrop, setBackdrop] = React.useState<string>("neutral");
@@ -23,6 +34,7 @@ export function InputPreviewStage() {
   const [inputType, setInputType] = React.useState<"text" | "email" | "password" | "search">("email");
   const [stateMode, setStateMode] = React.useState<"idle" | "invalid" | "disabled" | "readonly">("idle");
   const [composition, setComposition] = React.useState<"with-field" | "standalone">("with-field");
+  const [containerWidth, setContainerWidth] = React.useState("100%");
 
   // Input value
   const [value, setValue] = React.useState("alex.morgan@company.com");
@@ -89,6 +101,7 @@ export function ContactField() {
     setInputType("email");
     setStateMode("idle");
     setComposition("with-field");
+    setContainerWidth("100%");
     setValue("alex.morgan@company.com");
   };
 
@@ -113,6 +126,10 @@ export function ContactField() {
           variant: "success",
         },
         {
+          label: "Container",
+          value: containerWidth === "100%" ? "Fluid (100%)" : containerWidth,
+        },
+        {
           label: "Surface",
           value: "Subtle Liquid Glass",
           variant: "success",
@@ -123,12 +140,23 @@ export function ContactField() {
           variant: "success",
         },
         {
+          label: "State",
+          value: isInvalid
+            ? "aria-invalid:border-destructive"
+            : isDisabled
+            ? "disabled:opacity-40"
+            : isReadOnly
+            ? "read-only:opacity-75"
+            : "idle:rest",
+          variant: isInvalid ? "error" : isDisabled ? "warning" : "success",
+        },
+        {
           label: "Runtime",
           value: "0ms (Server Component)",
         },
       ]}
       controls={
-        <div className="w-full grid grid-cols-1 min-[420px]:grid-cols-3 gap-2 sm:gap-2.5">
+        <div className="w-full grid grid-cols-1 min-[420px]:grid-cols-2 md:grid-cols-4 gap-2 sm:gap-2.5">
           <StageControlSelect
             label="Input Type"
             value={inputType}
@@ -162,52 +190,76 @@ export function ContactField() {
               { label: "Standalone", value: "standalone" },
             ]}
           />
+
+          <StageControlSelect
+            label="Container Simulation"
+            value={containerWidth}
+            onValueChange={setContainerWidth}
+            options={CONTAINER_WIDTH_OPTIONS}
+          />
         </div>
       }
     >
-      <div className="w-full max-w-md mx-auto p-4 sm:p-6">
-        <div className="p-5 sm:p-7 rounded-2xl border border-white/60 dark:border-white/15 bg-white/55 dark:bg-neutral-950/55 backdrop-blur-2xl backdrop-saturate-180 shadow-[0_12px_36px_-4px_rgba(0,0,0,0.12),inset_0_1px_1px_0_rgba(255,255,255,0.85)] dark:shadow-[0_18px_50px_-8px_rgba(0,0,0,0.7),inset_0_1px_1px_0_rgba(255,255,255,0.14)] relative isolate before:content-[''] before:absolute before:inset-0 before:pointer-events-none before:rounded-[inherit] before:bg-gradient-to-br before:from-white/25 before:via-white/5 before:to-transparent dark:before:from-white/10 dark:before:via-transparent transition-all">
-          {composition === "standalone" ? (
-            <Input
-              type={inputType}
-              disabled={isDisabled}
-              readOnly={isReadOnly}
-              aria-invalid={isInvalid ? "true" : undefined}
-              value={isInvalid ? "invalid-format" : value}
-              onChange={(e) => setValue(e.target.value)}
-              placeholder={inputType === "email" ? "name@company.com" : "Enter text..."}
-            />
-          ) : (
-            <Field id="stage-input-field" invalid={isInvalid} disabled={isDisabled}>
-              <FieldLabel htmlFor="stage-input-field" required={isInvalid}>
-                {inputType === "email"
-                  ? "Email address"
-                  : inputType === "password"
-                  ? "Account password"
-                  : "User identifier"}
-              </FieldLabel>
+      <div className="w-full flex flex-col items-center justify-center py-6 px-2 sm:px-4">
+        {/* Real Container Width Simulation Wrapper */}
+        <div
+          style={{ width: containerWidth }}
+          className="max-w-full transition-all duration-200 ease-out flex flex-col items-center justify-center gap-4"
+        >
+          <div className="w-full p-5 sm:p-7 rounded-2xl border border-white/60 dark:border-white/15 bg-white/55 dark:bg-neutral-950/55 backdrop-blur-2xl backdrop-saturate-180 shadow-[0_12px_36px_-4px_rgba(0,0,0,0.12),inset_0_1px_1px_0_rgba(255,255,255,0.85)] dark:shadow-[0_18px_50px_-8px_rgba(0,0,0,0.7),inset_0_1px_1px_0_rgba(255,255,255,0.14)] relative isolate before:content-[''] before:absolute before:inset-0 before:pointer-events-none before:rounded-[inherit] before:bg-gradient-to-br before:from-white/25 before:via-white/5 before:to-transparent dark:before:from-white/10 dark:before:via-transparent transition-all">
+            {composition === "standalone" ? (
               <Input
-                id="stage-input-field"
                 type={inputType}
                 disabled={isDisabled}
                 readOnly={isReadOnly}
                 aria-invalid={isInvalid ? "true" : undefined}
-                value={isInvalid ? "alex.invalid-domain" : value}
+                value={isInvalid ? "invalid-format" : value}
                 onChange={(e) => setValue(e.target.value)}
                 placeholder={inputType === "email" ? "name@company.com" : "Enter text..."}
-                aria-describedby={isInvalid ? "stage-input-err" : "stage-input-desc"}
               />
-              {isInvalid ? (
-                <FieldError id="stage-input-err">
-                  Please provide a valid {inputType} format.
-                </FieldError>
-              ) : (
-                <FieldDescription id="stage-input-desc">
-                  Primary communication contact for workspace alerts.
-                </FieldDescription>
-              )}
-            </Field>
-          )}
+            ) : (
+              <Field id="stage-input-field" invalid={isInvalid} disabled={isDisabled}>
+                <FieldLabel htmlFor="stage-input-field" required={isInvalid}>
+                  {inputType === "email"
+                    ? "Email address"
+                    : inputType === "password"
+                    ? "Account password"
+                    : "User identifier"}
+                </FieldLabel>
+                <Input
+                  id="stage-input-field"
+                  type={inputType}
+                  disabled={isDisabled}
+                  readOnly={isReadOnly}
+                  aria-invalid={isInvalid ? "true" : undefined}
+                  value={isInvalid ? "alex.invalid-domain" : value}
+                  onChange={(e) => setValue(e.target.value)}
+                  placeholder={inputType === "email" ? "name@company.com" : "Enter text..."}
+                  aria-describedby={isInvalid ? "stage-input-err" : "stage-input-desc"}
+                />
+                {isInvalid ? (
+                  <FieldError id="stage-input-err">
+                    Please provide a valid {inputType} format.
+                  </FieldError>
+                ) : (
+                  <FieldDescription id="stage-input-desc">
+                    Primary communication contact for workspace alerts.
+                  </FieldDescription>
+                )}
+              </Field>
+            )}
+          </div>
+
+          {/* State metadata readout */}
+          <div className="flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-[11px] font-mono text-muted-foreground/80 text-center max-w-full px-2">
+            <span>type="{inputType}"</span>
+            <span>·</span>
+            <span>state="{stateMode}"</span>
+            <span>·</span>
+            <span>container="{containerWidth}"</span>
+            <span>·</span>
+            <span>composition="{composition}"</span>
+          </div>
         </div>
       </div>
     </PreviewStageShell>
