@@ -15,7 +15,7 @@ export function BadgePreviewStage() {
   const [viewport, setViewport] = React.useState<StageViewport>("desktop");
 
   const [variant, setVariant] = React.useState<
-    "default" | "secondary" | "destructive" | "outline" | "ghost"
+    "default" | "secondary" | "destructive" | "outline" | "glass" | "ghost"
   >("default");
   const [label, setLabel] = React.useState("Beta");
 
@@ -66,13 +66,14 @@ export function Example() {
             value={variant}
             onChange={(val) =>
               setVariant(
-                val as "default" | "secondary" | "destructive" | "outline" | "ghost"
+                val as "default" | "secondary" | "destructive" | "outline" | "glass" | "ghost"
               )
             }
             options={[
-              { value: "default", label: "Default (Primary)" },
-              { value: "secondary", label: "Secondary (Muted)" },
-              { value: "outline", label: "Outline (Border)" },
+              { value: "default", label: "Default (Liquid Primary)" },
+              { value: "glass", label: "Glass (Frosted Liquid)" },
+              { value: "secondary", label: "Secondary (Translucent)" },
+              { value: "outline", label: "Outline (Optical Rim)" },
               { value: "destructive", label: "Destructive" },
               { value: "ghost", label: "Ghost" },
             ]}

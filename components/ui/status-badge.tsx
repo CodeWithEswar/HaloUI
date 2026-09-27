@@ -68,8 +68,9 @@ export function StatusBadge({
       data-tone={tone}
       data-size={size}
       className={cn(
-        // Base reset & inline geometry
+        // Base reset & inline geometry with physical liquid glass optical engine
         "inline-flex items-center shrink-0 font-medium select-none tracking-normal border",
+        "backdrop-blur-sm backdrop-saturate-150",
         // Sizing scale
         size === "sm" && "h-4.5 px-1.5 text-[11px] gap-1 rounded-full",
         size === "default" && "h-5 px-2 text-xs gap-1.5 rounded-full",
@@ -77,32 +78,32 @@ export function StatusBadge({
 
         // Semantic Tone: Neutral
         tone === "neutral" && [
-          "border-border/60 bg-muted/40 text-muted-foreground",
-          "dark:border-border/50 dark:bg-muted/20",
+          "border-border/70 bg-muted/40 text-muted-foreground shadow-[inset_0_1px_0_rgba(255,255,255,0.3),0_1px_2px_rgba(0,0,0,0.02)]",
+          "dark:border-white/12 dark:bg-white/[0.06] dark:text-neutral-300 dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.08),0_1px_2px_rgba(0,0,0,0.25)]",
         ],
 
         // Semantic Tone: Positive (Operational, Healthy, Active)
         tone === "positive" && [
-          "border-emerald-500/25 bg-emerald-500/10 text-emerald-700",
-          "dark:border-emerald-500/30 dark:bg-emerald-500/15 dark:text-emerald-400",
+          "border-emerald-500/30 bg-emerald-500/12 text-emerald-800 shadow-[inset_0_1px_0_rgba(255,255,255,0.35),0_1px_2px_rgba(16,185,129,0.08)]",
+          "dark:border-emerald-400/25 dark:bg-emerald-500/15 dark:text-emerald-300 dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.12),0_1px_2px_rgba(0,0,0,0.25)]",
         ],
 
         // Semantic Tone: Warning (Degraded, Pending, Paused)
         tone === "warning" && [
-          "border-amber-500/25 bg-amber-500/10 text-amber-800",
-          "dark:border-amber-500/30 dark:bg-amber-500/15 dark:text-amber-400",
+          "border-amber-500/30 bg-amber-500/12 text-amber-800 shadow-[inset_0_1px_0_rgba(255,255,255,0.35),0_1px_2px_rgba(245,158,11,0.08)]",
+          "dark:border-amber-400/25 dark:bg-amber-500/15 dark:text-amber-300 dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.12),0_1px_2px_rgba(0,0,0,0.25)]",
         ],
 
         // Semantic Tone: Critical (Failed, Outage, Error)
         tone === "critical" && [
-          "border-rose-500/25 bg-rose-500/10 text-rose-700",
-          "dark:border-rose-500/30 dark:bg-rose-500/15 dark:text-rose-400",
+          "border-rose-500/30 bg-rose-500/12 text-rose-800 shadow-[inset_0_1px_0_rgba(255,255,255,0.35),0_1px_2px_rgba(244,63,94,0.08)]",
+          "dark:border-rose-400/25 dark:bg-rose-500/15 dark:text-rose-300 dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.12),0_1px_2px_rgba(0,0,0,0.25)]",
         ],
 
         // Semantic Tone: Info (Processing, Staging, Informational)
         tone === "info" && [
-          "border-sky-500/25 bg-sky-500/10 text-sky-700",
-          "dark:border-sky-500/30 dark:bg-sky-500/15 dark:text-sky-400",
+          "border-sky-500/30 bg-sky-500/12 text-sky-800 shadow-[inset_0_1px_0_rgba(255,255,255,0.35),0_1px_2px_rgba(14,165,233,0.08)]",
+          "dark:border-sky-400/25 dark:bg-sky-500/15 dark:text-sky-300 dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.12),0_1px_2px_rgba(0,0,0,0.25)]",
         ],
 
         className
@@ -124,10 +125,10 @@ export function StatusBadge({
             "rounded-full shrink-0",
             size === "sm" ? "size-1.25" : "size-1.5",
             tone === "neutral" && "bg-muted-foreground/70",
-            tone === "positive" && "bg-emerald-500",
-            tone === "warning" && "bg-amber-500",
-            tone === "critical" && "bg-rose-500",
-            tone === "info" && "bg-sky-500"
+            tone === "positive" && "bg-emerald-500 shadow-[0_0_6px_rgba(16,185,129,0.7)]",
+            tone === "warning" && "bg-amber-500 shadow-[0_0_6px_rgba(245,158,11,0.65)]",
+            tone === "critical" && "bg-rose-500 shadow-[0_0_6px_rgba(244,63,94,0.7)]",
+            tone === "info" && "bg-sky-500 shadow-[0_0_6px_rgba(14,165,233,0.65)]"
           )}
         />
       ) : null}

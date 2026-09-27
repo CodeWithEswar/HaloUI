@@ -52,9 +52,9 @@ export const buttonVariants = cva(
           "active:scale-[0.95]",
         ],
         outline: [
-          "bg-background text-foreground",
-          "border border-border",
-          "hover:bg-muted hover:text-foreground",
+          "bg-background/80 dark:bg-white/[0.06] backdrop-blur-sm text-foreground",
+          "border border-border/80 dark:border-white/15",
+          "shadow-xs hover:bg-muted/80 dark:hover:bg-white/10 hover:text-foreground",
           "active:scale-[0.96]",
         ],
         ghost: [

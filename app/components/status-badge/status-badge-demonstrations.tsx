@@ -11,7 +11,7 @@ import {
   HourglassIcon,
   HelpCircleIcon,
   Shield01Icon,
-  Server01Icon,
+  ServerIcon,
   Clock01Icon,
 } from "@hugeicons/core-free-icons";
 

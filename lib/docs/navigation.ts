@@ -1331,6 +1331,24 @@ export const docsNavigation: DocsNavSection[] = [
           "data display"
         ],
       },
+      {
+        title: "Avatar",
+        href: "/components/avatar",
+        description: "Small identity primitive presenting an entity image with graceful initials or glyph fallback, accessible badge indicators, and overlapping group stacks.",
+        status: "stable",
+        keywords: [
+          "avatar",
+          "user",
+          "identity",
+          "image",
+          "profile",
+          "initials",
+          "avatar group",
+          "fallback",
+          "presence",
+          "data display"
+        ],
+      },
     ],
   },
   {

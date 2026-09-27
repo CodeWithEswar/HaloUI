@@ -22,6 +22,7 @@ export function BadgeDemonstrations() {
 
         <div className="flex flex-wrap items-center gap-3 p-6 rounded-2xl border border-border/70 bg-card/60">
           <Badge variant="default">Default</Badge>
+          <Badge variant="glass">Liquid Glass</Badge>
           <Badge variant="secondary">Secondary</Badge>
           <Badge variant="outline">Outline</Badge>
           <Badge variant="destructive">Destructive</Badge>

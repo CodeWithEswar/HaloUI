@@ -100,21 +100,22 @@ export function FeatureCardVisual({
         // Icon / Glyphic container variants
         variant === "default" && [
           "flex size-10 sm:size-11 items-center justify-center rounded-xl",
-          "bg-muted/40 border border-border/50 text-foreground",
-          "group-hover/feature-card:bg-muted/60",
+          "bg-muted/30 dark:bg-white/[0.06] border border-border/50 dark:border-white/12 backdrop-blur-xs text-foreground",
+          "shadow-[inset_0_1px_0_rgba(255,255,255,0.3)] dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]",
+          "group-hover/feature-card:bg-muted/50 dark:group-hover/feature-card:bg-white/[0.1]",
           "group-data-[size=sm]/card:size-8 sm:group-data-[size=sm]/card:size-9 group-data-[size=sm]/card:rounded-lg",
           "group-data-[size=lg]/card:size-12 sm:group-data-[size=lg]/card:size-14 group-data-[size=lg]/card:rounded-2xl",
         ],
         variant === "muted" && [
           "flex size-10 sm:size-11 items-center justify-center rounded-xl",
-          "bg-background/60 border border-border/40 text-muted-foreground",
+          "bg-background/40 dark:bg-white/[0.03] border border-border/40 dark:border-white/8 backdrop-blur-xs text-muted-foreground",
           "group-hover/feature-card:text-foreground",
           "group-data-[size=sm]/card:size-8 sm:group-data-[size=sm]/card:size-9 group-data-[size=sm]/card:rounded-lg",
           "group-data-[size=lg]/card:size-12 sm:group-data-[size=lg]/card:size-14 group-data-[size=lg]/card:rounded-2xl",
         ],
         // Media / Screenshot / Mini UI preview slot
         variant === "media" && [
-          "relative w-full overflow-hidden rounded-xl border border-border/50 bg-muted/20 isolate",
+          "relative w-full overflow-hidden rounded-xl border border-border/50 dark:border-white/12 bg-muted/20 dark:bg-black/30 backdrop-blur-xs isolate",
           "group-data-[size=sm]/card:rounded-lg",
           "group-data-[size=lg]/card:rounded-2xl",
         ],

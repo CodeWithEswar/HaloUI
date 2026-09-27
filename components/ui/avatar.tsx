@@ -1,28 +1,70 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import { Avatar as AvatarPrimitive } from "@base-ui/react/avatar"
-import { cn } from "@/lib/utils"
+import * as React from "react";
+import { Avatar as AvatarPrimitive } from "@base-ui/react/avatar";
+import { cn } from "@/lib/utils";
+
+/* -------------------------------------------------------------------------
+ * TYPES & MODELS
+ * ----------------------------------------------------------------------- */
+
+export type AvatarSize = "sm" | "default" | "lg" | "xl";
+export type AvatarStatus = "online" | "away" | "busy" | "offline";
+
+export interface AvatarProps extends AvatarPrimitive.Root.Props {
+  /**
+   * Sizing scale controlling outer dimensions and font scale.
+   * - "sm": 24px (compact list rows, inline references)
+   * - "default": 32px (standard cards, comment headers)
+   * - "lg": 40px (hero items, prominent identity cards)
+   * - "xl": 48px (profile headers, author spotlights)
+   * @default "default"
+   */
+  size?: AvatarSize;
+}
+
+export interface AvatarBadgeProps extends React.ComponentProps<"span"> {
+  /**
+   * Semantic presence status communicating connectivity state.
+   */
+  status?: AvatarStatus;
+}
+
+/* -------------------------------------------------------------------------
+ * 1. ROOT AVATAR
+ * Foundational visual identity primitive. Preserves media fidelity without
+ * applying distorting optical parent filters or blur over entity photos.
+ * ----------------------------------------------------------------------- */
 
 function Avatar({
   className,
   size = "default",
   ...props
-}: AvatarPrimitive.Root.Props & {
-  size?: "default" | "sm" | "lg"
-}) {
+}: AvatarProps) {
   return (
     <AvatarPrimitive.Root
       data-slot="avatar"
       data-size={size}
       className={cn(
-        "group/avatar relative flex size-8 shrink-0 rounded-full select-none after:absolute after:inset-0 after:rounded-full after:border after:border-border after:mix-blend-darken data-[size=lg]:size-10 data-[size=sm]:size-6 dark:after:mix-blend-lighten",
+        "group/avatar relative flex shrink-0 rounded-full select-none isolate overflow-visible",
+        // Hairline optical refraction boundary
+        "ring-1 ring-black/10 dark:ring-white/15 shadow-2xs",
+        // Sizing scales
+        size === "sm" && "size-6",
+        size === "default" && "size-8",
+        size === "lg" && "size-10",
+        size === "xl" && "size-12",
         className
       )}
       {...props}
     />
-  )
+  );
 }
+
+/* -------------------------------------------------------------------------
+ * 2. AVATAR IMAGE
+ * High-fidelity identity photo presentation.
+ * ----------------------------------------------------------------------- */
 
 function AvatarImage({ className, ...props }: AvatarPrimitive.Image.Props) {
   return (
@@ -34,8 +76,13 @@ function AvatarImage({ className, ...props }: AvatarPrimitive.Image.Props) {
       )}
       {...props}
     />
-  )
+  );
 }
+
+/* -------------------------------------------------------------------------
+ * 3. AVATAR FALLBACK
+ * Graceful fallback presenting uppercase entity initials or glyphic icon.
+ * ----------------------------------------------------------------------- */
 
 function AvatarFallback({
   className,
@@ -45,42 +92,74 @@ function AvatarFallback({
     <AvatarPrimitive.Fallback
       data-slot="avatar-fallback"
       className={cn(
-        "flex size-full items-center justify-center rounded-full bg-muted text-sm text-muted-foreground group-data-[size=sm]/avatar:text-xs",
+        "flex size-full items-center justify-center rounded-full bg-muted/80 dark:bg-white/[0.08] font-medium text-foreground uppercase tracking-normal select-none",
+        "text-xs group-data-[size=sm]/avatar:text-[10px] group-data-[size=lg]/avatar:text-sm group-data-[size=xl]/avatar:text-base",
         className
       )}
       {...props}
     />
-  )
+  );
 }
 
-function AvatarBadge({ className, ...props }: React.ComponentProps<"span">) {
+/* -------------------------------------------------------------------------
+ * 4. AVATAR BADGE
+ * Presence status or count indicator anchored to the bottom-right perimeter.
+ * ----------------------------------------------------------------------- */
+
+function AvatarBadge({
+  className,
+  status,
+  children,
+  ...props
+}: AvatarBadgeProps) {
   return (
     <span
       data-slot="avatar-badge"
+      data-status={status}
       className={cn(
-        "absolute right-0 bottom-0 z-10 inline-flex items-center justify-center rounded-full bg-primary text-primary-foreground bg-blend-color ring-2 ring-background select-none",
+        "absolute right-0 bottom-0 z-10 inline-flex items-center justify-center rounded-full ring-2 ring-background select-none",
+        // Size-responsive indicator positioning & sizing
         "group-data-[size=sm]/avatar:size-2 group-data-[size=sm]/avatar:[&>svg]:hidden",
         "group-data-[size=default]/avatar:size-2.5 group-data-[size=default]/avatar:[&>svg]:size-2",
-        "group-data-[size=lg]/avatar:size-3 group-data-[size=lg]/avatar:[&>svg]:size-2",
+        "group-data-[size=lg]/avatar:size-3 group-data-[size=lg]/avatar:[&>svg]:size-2.5",
+        "group-data-[size=xl]/avatar:size-3.5 group-data-[size=xl]/avatar:[&>svg]:size-2.5",
+        // Semantic presence presets
+        status === "online" && "bg-emerald-500 shadow-[0_0_6px_rgba(16,185,129,0.7)]",
+        status === "away" && "bg-amber-500 shadow-[0_0_6px_rgba(245,158,11,0.65)]",
+        status === "busy" && "bg-rose-500 shadow-[0_0_6px_rgba(244,63,94,0.7)]",
+        status === "offline" && "bg-neutral-400 dark:bg-neutral-600",
+        !status && "bg-primary text-primary-foreground",
         className
       )}
       {...props}
-    />
-  )
+    >
+      {children}
+    </span>
+  );
 }
+
+/* -------------------------------------------------------------------------
+ * 5. AVATAR GROUP
+ * Overlapping horizontal stack with hover elevation.
+ * ----------------------------------------------------------------------- */
 
 function AvatarGroup({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="avatar-group"
       className={cn(
-        "group/avatar-group flex -space-x-2 *:data-[slot=avatar]:ring-2 *:data-[slot=avatar]:ring-background",
+        "group/avatar-group flex -space-x-2 *:data-[slot=avatar]:ring-2 *:data-[slot=avatar]:ring-background *:data-[slot=avatar]:transition-transform *:data-[slot=avatar]:hover:z-10 *:data-[slot=avatar]:hover:scale-105",
         className
       )}
       {...props}
     />
-  )
+  );
 }
+
+/* -------------------------------------------------------------------------
+ * 6. AVATAR GROUP COUNT
+ * Remaining entity count indicator (e.g. +4) preserving stack rhythm.
+ * ----------------------------------------------------------------------- */
 
 function AvatarGroupCount({
   className,
@@ -90,12 +169,15 @@ function AvatarGroupCount({
     <div
       data-slot="avatar-group-count"
       className={cn(
-        "relative flex size-8 shrink-0 items-center justify-center rounded-full bg-muted text-sm text-muted-foreground ring-2 ring-background group-has-data-[size=lg]/avatar-group:size-10 group-has-data-[size=sm]/avatar-group:size-6 [&>svg]:size-4 group-has-data-[size=lg]/avatar-group:[&>svg]:size-5 group-has-data-[size=sm]/avatar-group:[&>svg]:size-3",
+        "relative flex size-8 shrink-0 items-center justify-center rounded-full bg-muted/80 dark:bg-white/[0.08] font-medium text-xs text-muted-foreground ring-2 ring-background select-none",
+        "group-has-data-[size=sm]/avatar-group:size-6 group-has-data-[size=sm]/avatar-group:text-[10px]",
+        "group-has-data-[size=lg]/avatar-group:size-10 group-has-data-[size=lg]/avatar-group:text-sm",
+        "group-has-data-[size=xl]/avatar-group:size-12 group-has-data-[size=xl]/avatar-group:text-base",
         className
       )}
       {...props}
     />
-  )
+  );
 }
 
 export {
@@ -105,4 +187,4 @@ export {
   AvatarGroup,
   AvatarGroupCount,
   AvatarBadge,
-}
+};

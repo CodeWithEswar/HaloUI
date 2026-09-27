@@ -76,30 +76,40 @@ export function Card({
         "has-[>img:first-child]:pt-0",
         "*:[img:first-child]:rounded-t-2xl *:[img:last-child]:rounded-b-2xl",
 
-        // Variant: Default / Subtle (Calm, highly scannable, minimal blur for 24+ cards per dashboard)
+        // Variant: Default (Liquid Glass surface with optical depth and backdrop refraction)
         variant === "default" && [
-          "border border-border/70 bg-card/90 dark:border-border/60 dark:bg-card/80",
-          "shadow-[0_1px_2px_rgba(0,0,0,0.03),inset_0_1px_0_rgba(255,255,255,0.7)] dark:shadow-[0_1px_2px_rgba(0,0,0,0.35),inset_0_1px_0_rgba(255,255,255,0.06)]",
-          intensity === "subtle" && "backdrop-blur-[2px] halo-intensity-subtle",
-          intensity === "balanced" && "backdrop-blur-md backdrop-saturate-150 halo-intensity-balanced shadow-[0_4px_16px_-2px_rgba(0,0,0,0.05),0_1px_2px_rgba(0,0,0,0.04),inset_0_1px_0_rgba(255,255,255,0.85)] dark:shadow-[0_6px_20px_-2px_rgba(0,0,0,0.5),0_1px_2px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.12)]",
-          intensity === "rich" && "backdrop-blur-xl backdrop-saturate-180 halo-intensity-rich shadow-[0_12px_32px_-4px_rgba(0,0,0,0.08),0_2px_4px_rgba(0,0,0,0.04),inset_0_1px_0_rgba(255,255,255,0.95)] dark:shadow-[0_16px_40px_-4px_rgba(0,0,0,0.65),0_2px_4px_rgba(0,0,0,0.5),inset_0_1px_0_rgba(255,255,255,0.18)]",
+          intensity === "subtle" && [
+            "border border-border/70 dark:border-white/12",
+            "bg-card/75 dark:bg-card/50 backdrop-blur-md backdrop-saturate-150 halo-intensity-subtle",
+            "shadow-[0_4px_24px_-2px_rgba(0,0,0,0.06),inset_0_1px_0_rgba(255,255,255,0.6)] dark:shadow-[0_10px_32px_-4px_rgba(0,0,0,0.45),inset_0_1px_0_rgba(255,255,255,0.12)]",
+          ],
+          intensity === "balanced" && [
+            "border border-white/60 dark:border-white/18",
+            "bg-card/65 dark:bg-card/40 backdrop-blur-xl backdrop-saturate-180 halo-intensity-balanced",
+            "shadow-[0_8px_32px_-4px_rgba(0,0,0,0.1),0_2px_4px_rgba(0,0,0,0.04),inset_0_1px_0_rgba(255,255,255,0.85)] dark:shadow-[0_14px_40px_-4px_rgba(0,0,0,0.6),0_2px_4px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.16)]",
+          ],
+          intensity === "rich" && [
+            "border border-white/80 dark:border-white/24",
+            "bg-card/50 dark:bg-card/25 backdrop-blur-2xl backdrop-saturate-200 halo-intensity-rich",
+            "shadow-[0_16px_48px_-6px_rgba(0,0,0,0.15),0_2px_6px_rgba(0,0,0,0.06),inset_0_1px_0_rgba(255,255,255,0.95)] dark:shadow-[0_20px_56px_-6px_rgba(0,0,0,0.7),0_2px_6px_rgba(0,0,0,0.5),inset_0_1px_0_rgba(255,255,255,0.22)]",
+          ],
         ],
 
-        // Variant: Subtle
+        // Variant: Subtle (Low contrast, lightweight frosted boundary)
         variant === "subtle" && [
-          "border border-border/50 bg-muted/30 dark:bg-muted/15",
-          "shadow-[0_1px_1px_rgba(0,0,0,0.02)]",
+          "border border-border/50 dark:border-white/10 bg-muted/30 dark:bg-white/[0.04] backdrop-blur-sm",
+          "shadow-[0_1px_2px_rgba(0,0,0,0.02),inset_0_1px_0_rgba(255,255,255,0.08)]",
         ],
 
-        // Variant: Outline (Pure structural boundary, zero blur)
+        // Variant: Outline (Pure structural boundary with hairline reflection)
         variant === "outline" && [
-          "border border-border/80 bg-transparent",
+          "border border-border/80 dark:border-white/15 bg-transparent",
         ],
 
-        // Variant: Elevated (Lightweight physical elevation with soft ambient depth)
+        // Variant: Elevated (Lightweight physical elevation with soft ambient depth and backdrop refraction)
         variant === "elevated" && [
-          "border border-border/60 bg-card/95 dark:bg-card/90",
-          "shadow-lg shadow-black/5 dark:shadow-black/40",
+          "border border-border/60 dark:border-white/15 bg-card/85 dark:bg-card/65 backdrop-blur-xl",
+          "shadow-[0_12px_40px_-4px_rgba(0,0,0,0.12),inset_0_1px_0_rgba(255,255,255,0.7)] dark:shadow-[0_16px_48px_-4px_rgba(0,0,0,0.6),inset_0_1px_0_rgba(255,255,255,0.14)]",
         ],
 
         // Variant: Ghost (Unframed content group)
@@ -110,7 +120,7 @@ export function Card({
         // Interactive states: Only active when intentionally marked interactive
         interactive && [
           "cursor-pointer transition-all duration-150 ease-out",
-          "hover:border-border/90 hover:-translate-y-0.5 hover:shadow-md dark:hover:border-border/80 dark:hover:shadow-black/40",
+          "hover:border-border/90 dark:hover:border-white/25 hover:-translate-y-0.5 hover:shadow-lg dark:hover:shadow-[0_16px_44px_-4px_rgba(0,0,0,0.6),inset_0_1px_0_rgba(255,255,255,0.2)]",
           "active:translate-y-0 active:scale-[0.99]",
           "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--halo-focus-color,#0284c7)] focus-visible:ring-offset-2 focus-visible:ring-offset-background",
         ],
