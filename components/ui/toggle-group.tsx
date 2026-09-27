@@ -21,7 +21,7 @@ import {
  */
 export const toggleGroupVariants = cva(
   [
-    "inline-flex isolate items-stretch",
+    "inline-flex isolate items-stretch min-w-0 max-w-full",
     // Child stacking context for borders and Halo Focus Ring layering
     "[&>[data-slot=toggle]]:hover:z-10",
     "[&>[data-slot=toggle]]:focus-visible:z-20",

@@ -18,7 +18,7 @@ import {
 } from "./toggle-group-demonstrations";
 import { InstallCommand } from "@/components/mdx/install-command";
 import { Anatomy, type AnatomyPart } from "@/components/mdx/anatomy";
-import { PropsTable } from "@/components/mdx/props-table";
+import { PropsExplorer, type SubcomponentApi } from "@/components/docs/props-explorer";
 import { FileTree, type FileNode } from "@/components/mdx/file-tree";
 import { Callout } from "@/components/mdx/callout";
 import { CodeBlock } from "@/components/mdx/code-block";
@@ -29,107 +29,146 @@ export const metadata: Metadata = {
   description: "A coordinated set of toggle controls for selecting one or multiple related options.",
 };
 
-const PROPS_DATA = [
+const TOGGLE_GROUP_SUBCOMPONENTS: SubcomponentApi[] = [
   {
-    name: "type",
-    type: '"single" | "multiple"',
-    default: '"single"',
-    required: false,
-    description: "Determines selection mode: 'single' coordinates one-of-many selection; 'multiple' permits independent combinations.",
+    name: "ToggleGroup",
+    kind: "Component",
+    maturity: "stable",
+    description:
+      "A coordinated set of toggle controls for selecting one or multiple related options with Base UI roving tabindex and HaloUI liquid optical physics.",
+    inheritedProps: {
+      element: "React.ComponentPropsWithoutRef<typeof ToggleGroupPrimitive>",
+      description:
+        "Inherits all Base UI ToggleGroup primitive attributes, ARIA semantics, roving tabindex state management, and ref forwarding.",
+    },
+    props: [
+      {
+        name: "type",
+        type: '"single" | "multiple"',
+        default: '"single"',
+        required: false,
+        description:
+          "Determines selection mode: 'single' coordinates one-of-many selection; 'multiple' permits independent combinations.",
+      },
+      {
+        name: "value",
+        type: "string | string[]",
+        default: "undefined",
+        required: false,
+        description:
+          "Controlled selection value. String for single mode, array of strings for multiple mode.",
+      },
+      {
+        name: "defaultValue",
+        type: "string | string[]",
+        default: "undefined",
+        required: false,
+        description:
+          "Initial selection value for uncontrolled usage.",
+      },
+      {
+        name: "onValueChange",
+        type: "(value: any) => void",
+        default: "undefined",
+        required: false,
+        description:
+          "Event callback fired when selection changes. Passes string in single mode, array of strings in multiple mode.",
+      },
+      {
+        name: "spacing",
+        type: '"connected" | "separated"',
+        default: '"connected"',
+        required: false,
+        description:
+          "Geometry style: 'connected' collapses inner radii and overlaps 1px seams (-ms-px); 'separated' introduces discrete gaps.",
+      },
+      {
+        name: "orientation",
+        type: '"horizontal" | "vertical"',
+        default: '"horizontal"',
+        required: false,
+        description:
+          "Spatial direction. Automatically aligns roving arrow keys and collapse vectors.",
+      },
+      {
+        name: "variant",
+        type: '"default" | "outline"',
+        default: '"default"',
+        required: false,
+        description:
+          "Material visual style propagated to all child items unless overridden individually.",
+      },
+      {
+        name: "size",
+        type: '"sm" | "default" | "lg"',
+        default: '"default"',
+        required: false,
+        description:
+          "Dimension tier propagated to all child items (sm: 32px, default: 40px, lg: 48px).",
+      },
+      {
+        name: "disabled",
+        type: "boolean",
+        default: "false",
+        required: false,
+        description:
+          "Disables interaction across the entire group while preserving active state visibility.",
+      },
+    ],
   },
   {
-    name: "value",
-    type: "string | string[]",
-    default: "undefined",
-    required: false,
-    description: "Controlled selection value. String for single mode, array of strings for multiple mode.",
-  },
-  {
-    name: "defaultValue",
-    type: "string | string[]",
-    default: "undefined",
-    required: false,
-    description: "Initial selection value for uncontrolled usage.",
-  },
-  {
-    name: "onValueChange",
-    type: "(value: any) => void",
-    default: "undefined",
-    required: false,
-    description: "Event callback fired when selection changes. Passes string in single mode, array of strings in multiple mode.",
-  },
-  {
-    name: "spacing",
-    type: '"connected" | "separated"',
-    default: '"connected"',
-    required: false,
-    description: "Geometry style: 'connected' collapses inner radii and overlaps 1px seams; 'separated' introduces discrete gaps.",
-  },
-  {
-    name: "orientation",
-    type: '"horizontal" | "vertical"',
-    default: '"horizontal"',
-    required: false,
-    description: "Spatial direction. Automatically aligns arrow keys and collapse vectors.",
-  },
-  {
-    name: "variant",
-    type: '"default" | "outline"',
-    default: '"default"',
-    required: false,
-    description: "Material visual style propagated to all child items unless overridden individually.",
-  },
-  {
-    name: "size",
-    type: '"sm" | "default" | "lg"',
-    default: '"default"',
-    required: false,
-    description: "Dimension tier propagated to all child items (sm: 32px, default: 40px, lg: 48px).",
-  },
-  {
-    name: "disabled",
-    type: "boolean",
-    default: "false",
-    required: false,
-    description: "Disables interaction across the entire group while preserving active state visibility.",
-  },
-];
-
-const ITEM_PROPS_DATA = [
-  {
-    name: "value",
-    type: "string",
-    default: "—",
-    required: true,
-    description: "Stable semantic string value identifying this item within the group. Mandatory.",
-  },
-  {
-    name: "disabled",
-    type: "boolean",
-    default: "false",
-    required: false,
-    description: "Prevents user interaction on this specific item.",
-  },
-  {
-    name: "aria-label",
-    type: "string",
-    default: "undefined",
-    required: false,
-    description: "Mandatory accessible name when rendering icon-only toggles without visible text.",
-  },
-  {
-    name: "variant",
-    type: '"default" | "outline"',
-    default: "inherited",
-    required: false,
-    description: "Overrides parent group's visual variant for this item.",
-  },
-  {
-    name: "size",
-    type: '"sm" | "default" | "lg"',
-    default: "inherited",
-    required: false,
-    description: "Overrides parent group's dimension tier for this item.",
+    name: "ToggleGroupItem",
+    kind: "Component",
+    maturity: "stable",
+    description:
+      "An individual toggle button within a ToggleGroup, inheriting variant, size, and disabled state with full local override support.",
+    inheritedProps: {
+      element: "Omit<ToggleProps, 'value'>",
+      description:
+        "Inherits all HaloUI Toggle props (excluding value), tactile press physics, Halo focus ring, and ARIA attributes.",
+    },
+    props: [
+      {
+        name: "value",
+        type: "string",
+        default: "—",
+        required: true,
+        description:
+          "Stable semantic string value identifying this item within the group. Mandatory.",
+      },
+      {
+        name: "disabled",
+        type: "boolean",
+        default: "false",
+        required: false,
+        description:
+          "Prevents user interaction on this specific item.",
+      },
+      {
+        name: "aria-label",
+        type: "string",
+        default: "undefined",
+        required: false,
+        description:
+          "Mandatory accessible name when rendering icon-only toggles without visible text.",
+      },
+      {
+        name: "variant",
+        type: '"default" | "outline"',
+        default: "inherited",
+        required: false,
+        description:
+          "Overrides parent group's visual variant for this item.",
+      },
+      {
+        name: "size",
+        type: '"sm" | "default" | "lg"',
+        default: "inherited",
+        required: false,
+        description:
+          "Overrides parent group's dimension tier for this item.",
+      },
+    ],
   },
 ];
 
@@ -428,20 +467,50 @@ export function ToggleGroupDemo() {
         <ToggleGroupKeyboardPreview />
       </div>
 
-      {/* Props */}
-      <div className="space-y-6">
-        <div className="space-y-3">
-          <h2 id="props" className="text-xl font-semibold tracking-tight text-foreground">
-            ToggleGroup Props
-          </h2>
-          <PropsTable rows={PROPS_DATA} />
-        </div>
+      {/* Component API */}
+      <div className="space-y-4">
+        <h2 id="props" className="text-xl font-semibold tracking-tight text-foreground">
+          Component API
+        </h2>
+        <p className="text-sm text-muted-foreground leading-relaxed">
+          Explore interactive API specifications, inherited Base UI primitives, and layout properties for ToggleGroup and ToggleGroupItem.
+        </p>
+        <PropsExplorer subcomponents={TOGGLE_GROUP_SUBCOMPONENTS} />
+      </div>
 
-        <div className="space-y-3">
-          <h3 className="text-lg font-medium tracking-tight text-foreground">
-            ToggleGroupItem Props
-          </h3>
-          <PropsTable rows={ITEM_PROPS_DATA} />
+      {/* Liquid Glass & Optical Layering Architecture */}
+      <div className="space-y-4">
+        <h2 id="optical-engine" className="text-xl font-semibold tracking-tight text-foreground">
+          Liquid Glass & Optical Layering Architecture
+        </h2>
+        <p className="text-sm text-muted-foreground leading-relaxed">
+          HaloUI Toggle Group coordinates multiple liquid optical surfaces into a cohesive unit. Rather than rendering separate disconnected glass buttons, connected groups collapse adjacent radii and merge border seams with <code className="text-foreground font-mono text-xs">-ms-px</code> (horizontal) and <code className="text-foreground font-mono text-xs">-mt-px</code> (vertical).
+        </p>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
+          <div className="p-4 rounded-xl border border-border/50 bg-muted/20 space-y-2">
+            <h4 className="text-xs font-semibold uppercase tracking-wider text-foreground">
+              Connected 1px Seams
+            </h4>
+            <p className="text-xs text-muted-foreground leading-relaxed">
+              Negative margins overlap adjacent 1px borders precisely, ensuring connected boundaries never suffer from doubled 2px seams or visual misalignments.
+            </p>
+          </div>
+          <div className="p-4 rounded-xl border border-border/50 bg-muted/20 space-y-2">
+            <h4 className="text-xs font-semibold uppercase tracking-wider text-foreground">
+              Stacking Context Hierarchy
+            </h4>
+            <p className="text-xs text-muted-foreground leading-relaxed">
+              Resting items render at <code className="text-foreground font-mono text-[10px]">z-0</code>, active/pressed items elevate to <code className="text-foreground font-mono text-[10px]">z-[5]</code>, hover elevates to <code className="text-foreground font-mono text-[10px]">z-10</code>, and focus elevates to <code className="text-foreground font-mono text-[10px]">z-20</code>.
+            </p>
+          </div>
+          <div className="p-4 rounded-xl border border-border/50 bg-muted/20 space-y-2">
+            <h4 className="text-xs font-semibold uppercase tracking-wider text-foreground">
+              Unclipped Halo Focus Ring
+            </h4>
+            <p className="text-xs text-muted-foreground leading-relaxed">
+              Because middle items elevate to <code className="text-foreground font-mono text-[10px]">z-20</code> when focused, the dual-contrast 2px focus ring projects cleanly outside the physical geometry without being clipped by sibling borders.
+            </p>
+          </div>
         </div>
       </div>
 
@@ -477,13 +546,13 @@ export function ToggleGroupDemo() {
         </div>
       </div>
 
-      {/* Responsive Behavior */}
+      {/* Automatic Container-Aware Responsiveness */}
       <div className="space-y-4">
         <h2 id="responsive-behavior" className="text-xl font-semibold tracking-tight text-foreground">
-          Responsive behavior
+          Automatic container-aware responsiveness
         </h2>
         <p className="text-sm text-muted-foreground leading-relaxed">
-          Toggle Group preserves its orientation and connected geometry without unexpected wrapping breaks. On mobile viewports, touch targets remain generous (min 32px height) and state matrices stack cleanly into mobile cards.
+          Toggle Group utilizes intrinsic flexbox constraints (<code className="text-foreground font-mono text-xs">min-w-0 max-w-full</code>) to adapt smoothly to narrow containers down to the strict 240px QA minimum width. In tight mobile rails or narrow dialog sidebars, icon-only configurations remain compact without distorting, while text items wrap with clean typographic hyphenation and preserve 32px/40px touch targets.
         </p>
       </div>
 
