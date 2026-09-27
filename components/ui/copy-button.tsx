@@ -286,10 +286,10 @@ export const CopyButton = React.forwardRef<HTMLButtonElement, CopyButtonProps>(
     // Labeled presentation sizing classes (stable width preventing layout shift)
     const labeledSizeClasses = isLabeled
       ? size === "sm"
-        ? "h-8 px-2.5 text-xs gap-1.5 w-auto min-w-[5.25rem]"
+        ? "h-8 px-2.5 text-xs gap-1.5 w-auto min-w-[5.25rem] max-w-full"
         : size === "lg"
-          ? "h-10 px-3.5 text-sm gap-2 w-auto min-w-[6.25rem]"
-          : "h-9 px-3 text-sm gap-2 w-auto min-w-[5.75rem]"
+          ? "h-10 px-3.5 text-sm gap-2 w-auto min-w-[6.25rem] max-w-full"
+          : "h-9 px-3 text-sm gap-2 w-auto min-w-[5.75rem] max-w-full"
       : "";
 
     // Render children content based on status

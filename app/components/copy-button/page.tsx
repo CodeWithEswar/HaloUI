@@ -15,7 +15,7 @@ import {
 } from "./copy-button-demonstrations";
 import { InstallCommand } from "@/components/mdx/install-command";
 import { Anatomy, type AnatomyPart } from "@/components/mdx/anatomy";
-import { PropsTable } from "@/components/mdx/props-table";
+import { PropsExplorer, type SubcomponentApi } from "@/components/docs/props-explorer";
 import { FileTree, type FileNode } from "@/components/mdx/file-tree";
 import { Callout } from "@/components/mdx/callout";
 import { CodeBlock } from "@/components/mdx/code-block";
@@ -27,102 +27,116 @@ export const metadata: Metadata = {
     "Copies text to the clipboard and provides short-lived accessible feedback when the operation succeeds or fails.",
 };
 
-const PROPS_DATA = [
+const COPY_BUTTON_SUBCOMPONENTS: SubcomponentApi[] = [
   {
-    name: "value",
-    type: "string",
-    default: "undefined",
-    required: false,
+    name: "CopyButton",
+    kind: "Component",
+    maturity: "stable",
     description:
-      "The explicit string written to the browser clipboard upon activation. No DOM scraping is ever performed.",
-  },
-  {
-    name: "onCopy",
-    type: "() => void | Promise<void>",
-    default: "undefined",
-    required: false,
-    description:
-      "Optional custom copy operation. Supports asynchronous workflows and rejection handling for testing or custom clipboard operations.",
-  },
-  {
-    name: "variant",
-    type: '"default" | "secondary" | "outline" | "ghost"',
-    default: '"default"',
-    required: false,
-    description:
-      "Visual treatment honoring HaloUI's 10-layer physical liquid optical material engine. 'ghost' is recommended for code blocks and compact toolbars.",
-  },
-  {
-    name: "size",
-    type: '"sm" | "default" | "lg"',
-    default: '"default"',
-    required: false,
-    description:
-      "Size geometry for the button: 'sm' (32px), 'default' (36px), or 'lg' (40px).",
-  },
-  {
-    name: "feedbackDuration",
-    type: "number",
-    default: "2000",
-    required: false,
-    description:
-      "Duration in milliseconds that success or error feedback remains visible before automatically resetting to idle.",
-  },
-  {
-    name: "successMessage",
-    type: "string",
-    default: '"Copied to clipboard"',
-    required: false,
-    description:
-      "Polite screen reader live region announcement broadcast upon successful clipboard write.",
-  },
-  {
-    name: "errorMessage",
-    type: "string",
-    default: '"Failed to copy to clipboard"',
-    required: false,
-    description:
-      "Polite screen reader live region announcement broadcast upon clipboard write rejection.",
-  },
-  {
-    name: "copiedLabel",
-    type: "string",
-    default: '"Copied"',
-    required: false,
-    description:
-      "Text label rendered during copied state in labeled presentations.",
-  },
-  {
-    name: "errorLabel",
-    type: "string",
-    default: '"Failed"',
-    required: false,
-    description:
-      "Text label rendered during error state in labeled presentations.",
-  },
-  {
-    name: "onCopySuccess",
-    type: "() => void",
-    default: "undefined",
-    required: false,
-    description:
-      "Callback fired immediately when clipboard write completes successfully.",
-  },
-  {
-    name: "onCopyError",
-    type: "(error: unknown) => void",
-    default: "undefined",
-    required: false,
-    description:
-      "Callback fired when clipboard write rejects or throws an exception.",
-  },
-  {
-    name: "children",
-    type: "ReactNode | ((state: { status: CopyStatus, copied: boolean, error: boolean }) => ReactNode)",
-    default: "undefined",
-    required: false,
-    description:
-      "Optional children for labeled presentations or dynamic status render prop.",
+      "A specialized action control that copies text to the clipboard and provides short-lived accessible feedback. Powered by HaloUI's 10-layer physical liquid optical material engine.",
+    inheritedProps: {
+      element: "React.ButtonHTMLAttributes<HTMLButtonElement>",
+      description:
+        "Inherits standard HTML button attributes, event handlers, and ref forwarding. Excludes children when using function-as-children render prop.",
+    },
+    props: [
+      {
+        name: "value",
+        type: "string",
+        default: "undefined",
+        required: false,
+        description:
+          "The explicit string written to the browser clipboard upon activation. No DOM scraping is ever performed.",
+      },
+      {
+        name: "onCopy",
+        type: "() => void | Promise<void>",
+        default: "undefined",
+        required: false,
+        description:
+          "Optional custom copy operation. Supports asynchronous workflows and rejection handling for testing or custom clipboard operations.",
+      },
+      {
+        name: "variant",
+        type: '"default" | "secondary" | "outline" | "ghost"',
+        default: '"default"',
+        required: false,
+        description:
+          "Visual treatment honoring HaloUI's 10-layer physical liquid optical material engine. 'ghost' is recommended for code blocks and compact toolbars.",
+      },
+      {
+        name: "size",
+        type: '"sm" | "default" | "lg"',
+        default: '"default"',
+        required: false,
+        description:
+          "Size geometry for the button: 'sm' (32px), 'default' (36px), or 'lg' (40px).",
+      },
+      {
+        name: "feedbackDuration",
+        type: "number",
+        default: "2000",
+        required: false,
+        description:
+          "Duration in milliseconds that success or error feedback remains visible before automatically resetting to idle.",
+      },
+      {
+        name: "successMessage",
+        type: "string",
+        default: '"Copied to clipboard"',
+        required: false,
+        description:
+          "Polite screen reader live region announcement broadcast upon successful clipboard write.",
+      },
+      {
+        name: "errorMessage",
+        type: "string",
+        default: '"Failed to copy to clipboard"',
+        required: false,
+        description:
+          "Polite screen reader live region announcement broadcast upon clipboard write rejection.",
+      },
+      {
+        name: "copiedLabel",
+        type: "string",
+        default: '"Copied"',
+        required: false,
+        description:
+          "Text label rendered during copied state in labeled presentations.",
+      },
+      {
+        name: "errorLabel",
+        type: "string",
+        default: '"Failed"',
+        required: false,
+        description:
+          "Text label rendered during error state in labeled presentations.",
+      },
+      {
+        name: "onCopySuccess",
+        type: "() => void",
+        default: "undefined",
+        required: false,
+        description:
+          "Callback fired immediately when clipboard write completes successfully.",
+      },
+      {
+        name: "onCopyError",
+        type: "(error: unknown) => void",
+        default: "undefined",
+        required: false,
+        description:
+          "Callback fired when clipboard write rejects or throws an exception.",
+      },
+      {
+        name: "children",
+        type: "ReactNode | ((state: { status: CopyStatus, copied: boolean, error: boolean }) => ReactNode)",
+        default: "undefined",
+        required: false,
+        description:
+          "Optional children for labeled presentations or dynamic status render prop.",
+      },
+    ],
   },
 ];
 
@@ -458,12 +472,61 @@ export function CopySnippet() {
         <Anatomy parts={ANATOMY_PARTS} />
       </div>
 
-      {/* Props */}
+      {/* Component API */}
       <div className="space-y-4">
         <h2 id="props" className="text-xl font-semibold tracking-tight text-foreground">
-          Props Reference
+          Component API
         </h2>
-        <PropsTable rows={PROPS_DATA} />
+        <p className="text-sm text-muted-foreground leading-relaxed">
+          Explore interactive API specifications, feedback options, and accessible live region properties for CopyButton.
+        </p>
+        <PropsExplorer subcomponents={COPY_BUTTON_SUBCOMPONENTS} />
+      </div>
+
+      {/* Liquid Glass Optical Architecture */}
+      <div className="space-y-4">
+        <h2 id="optical-engine" className="text-xl font-semibold tracking-tight text-foreground">
+          Liquid Glass Optical Architecture
+        </h2>
+        <p className="text-sm text-muted-foreground leading-relaxed">
+          CopyButton honors HaloUI&apos;s 10-layer physical liquid optical material engine scaled to compact utility dimensions. During state transitions, color shifts apply subtly through border and icon tokens (<code className="text-foreground font-mono text-xs">data-[status=copied]</code> and <code className="text-foreground font-mono text-xs">data-[status=error]</code>) rather than vulgar full-surface neon fills.
+        </p>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
+          <div className="p-4 rounded-xl border border-border/50 bg-muted/20 space-y-2">
+            <h4 className="text-xs font-semibold uppercase tracking-wider text-foreground">
+              Ghost Surface Clarity
+            </h4>
+            <p className="text-xs text-muted-foreground leading-relaxed">
+              In code blocks, the ghost variant rests completely clear without visual clutter, resolving frosted glass and soft specular highlights only on pointer hover.
+            </p>
+          </div>
+          <div className="p-4 rounded-xl border border-border/50 bg-muted/20 space-y-2">
+            <h4 className="text-xs font-semibold uppercase tracking-wider text-foreground">
+              Anchored Halo Focus Ring
+            </h4>
+            <p className="text-xs text-muted-foreground leading-relaxed">
+              Because the native button remains mounted during feedback transitions, the dual-contrast focus ring stays firmly anchored to the control without blinking or resetting.
+            </p>
+          </div>
+          <div className="p-4 rounded-xl border border-border/50 bg-muted/20 space-y-2">
+            <h4 className="text-xs font-semibold uppercase tracking-wider text-foreground">
+              Polite Live Region Feedback
+            </h4>
+            <p className="text-xs text-muted-foreground leading-relaxed">
+              Assistive technologies receive prompt notifications via a dedicated <code className="text-foreground font-mono text-[10px]">role=&quot;status&quot; aria-live=&quot;polite&quot;</code> channel without intrusive focus interruption.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* Automatic Container-Aware Responsiveness */}
+      <div className="space-y-4">
+        <h2 id="responsive-behavior" className="text-xl font-semibold tracking-tight text-foreground">
+          Automatic container-aware responsiveness
+        </h2>
+        <p className="text-sm text-muted-foreground leading-relaxed">
+          CopyButton is engineered with a strict <code className="text-foreground font-mono text-xs">shrink-0</code> constraint. In dense code blocks, credential lists, and narrow containers down to 240px QA minimum width, long text snippets or tokens truncate gracefully with ellipsis, while the CopyButton preserves its calibrated touch target and optical boundaries without being squashed. In labeled mode, <code className="text-foreground font-mono text-xs">max-w-full</code> prevents container overflow.
+        </p>
       </div>
 
       {/* Accessibility */}
