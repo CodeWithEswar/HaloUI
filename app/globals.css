@@ -1,11 +1,50 @@
-@import url("https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap");
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 @import "../styles/halo-tokens.css";
 @import "../styles/halo-material.css";
 
+@font-face {
+  font-family: "Geist";
+  src: url("/fonts/Geist-Variable.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Geist Mono";
+  src: url("/fonts/GeistMono-Variable.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@theme {
+  --font-sans: var(--font-sans), "Geist", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: var(--font-mono), "Geist Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
 @custom-variant dark (&:is(.dark *):not(:is([data-stage-theme="light"], [data-stage-theme="light"] *)));
+
+/* Force monospace typography for all code surfaces */
+code,
+kbd,
+samp,
+pre,
+.font-mono,
+.code-highlight,
+.code-highlight pre,
+.code-highlight code,
+.code-highlight .shiki,
+.stage-shiki,
+.stage-shiki pre,
+.stage-shiki code,
+.code-block,
+.code-block pre,
+.code-block code {
+  font-family: var(--font-mono), "Geist Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !important;
+}
 
 /* Documentation UI Controls: Neutral, filter-free standard interface (AGENTS.md mandate) */
 .halo-docs-control {
@@ -408,6 +447,7 @@ body:has([data-docs-shell]) [data-docs-skip] {
   padding-block: 1rem;
   font-size: 0.8125rem;
   line-height: 1.5rem;
+  font-family: var(--font-mono), "Geist Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !important;
 }
 
 .code-highlight .shiki span {
