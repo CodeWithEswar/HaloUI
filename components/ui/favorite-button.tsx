@@ -215,10 +215,10 @@ export const FavoriteButton = React.forwardRef<HTMLButtonElement, FavoriteButton
     // Labeled presentation sizing classes
     const labeledSizeClasses = isLabeled
       ? size === "sm"
-        ? "h-8 w-auto px-2.5 text-xs gap-1.5 rounded-full"
+        ? "h-8 w-auto min-w-0 max-w-full px-2.5 text-xs gap-1.5 rounded-full"
         : size === "lg"
-          ? "h-12 w-auto px-5 text-base gap-2.5 rounded-full"
-          : "h-10 w-auto px-4 text-sm gap-2 rounded-full"
+          ? "h-12 w-auto min-w-0 max-w-full px-5 text-base gap-2.5 rounded-full"
+          : "h-10 w-auto min-w-0 max-w-full px-4 text-sm gap-2 rounded-full"
       : "";
 
     const renderContent = () => {

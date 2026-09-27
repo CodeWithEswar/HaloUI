@@ -11,7 +11,7 @@ import {
 } from "./favorite-button-demonstrations";
 import { InstallCommand } from "@/components/mdx/install-command";
 import { Anatomy, type AnatomyPart } from "@/components/mdx/anatomy";
-import { PropsTable } from "@/components/mdx/props-table";
+import { PropsExplorer, type SubcomponentApi } from "@/components/docs/props-explorer";
 import { FileTree, type FileNode } from "@/components/mdx/file-tree";
 import { Callout } from "@/components/mdx/callout";
 import { CodeBlock } from "@/components/mdx/code-block";
@@ -23,94 +23,108 @@ export const metadata: Metadata = {
     "A specialized persistent toggle action for saving, bookmarking, or favoriting items across sessions.",
 };
 
-const PROPS_DATA = [
+const FAVORITE_BUTTON_SUBCOMPONENTS: SubcomponentApi[] = [
   {
-    name: "pressed",
-    type: "boolean",
-    default: "undefined",
-    required: false,
+    name: "FavoriteButton",
+    kind: "Component",
+    maturity: "stable",
     description:
-      "Controlled pressed state (canonical TogglePrimitive contract). When provided, component behaves as a controlled input.",
-  },
-  {
-    name: "defaultPressed",
-    type: "boolean",
-    default: "false",
-    required: false,
-    description:
-      "Initial pressed state for uncontrolled usage.",
-  },
-  {
-    name: "onPressedChange",
-    type: "(pressed: boolean, eventDetails?: any) => void",
-    default: "undefined",
-    required: false,
-    description:
-      "Callback fired when the pressed state changes.",
-  },
-  {
-    name: "favorited",
-    type: "boolean",
-    default: "undefined",
-    required: false,
-    description:
-      "Convenience alias for `pressed` matching domain vocabulary. Shares identical state binding.",
-  },
-  {
-    name: "onFavoritedChange",
-    type: "(favorited: boolean) => void",
-    default: "undefined",
-    required: false,
-    description:
-      "Convenience alias for `onPressedChange` matching domain vocabulary.",
-  },
-  {
-    name: "variant",
-    type: '"default" | "secondary" | "outline" | "ghost"',
-    default: '"default"',
-    required: false,
-    description:
-      "Visual treatment honoring HaloUI's 10-layer physical liquid optical material engine. 'ghost' is recommended for media card overlays and image hero headers.",
-  },
-  {
-    name: "size",
-    type: '"sm" | "default" | "lg"',
-    default: '"default"',
-    required: false,
-    description:
-      "Size geometry for the button: 'sm' (32px), 'default' (40px), or 'lg' (48px).",
-  },
-  {
-    name: "icon",
-    type: "React.ComponentType",
-    default: "FavouriteIcon",
-    required: false,
-    description:
-      "Custom Hugeicon component rendered when unfavorited (e.g. HeartIcon, StarIcon, Bookmark02Icon).",
-  },
-  {
-    name: "activeIcon",
-    type: "React.ComponentType",
-    default: "FavouriteIcon",
-    required: false,
-    description:
-      "Optional alternate Hugeicon rendered specifically when favorited.",
-  },
-  {
-    name: "aria-label",
-    type: "string",
-    default: 'computed ("Remove from favorites" | "Add to favorites")',
-    required: false,
-    description:
-      "Accessible label announced by assistive technologies. Automatically computes state-aware verbs if not explicitly overridden.",
-  },
-  {
-    name: "children",
-    type: "React.ReactNode | ((state: { pressed: boolean; favorited: boolean }) => React.ReactNode)",
-    default: "undefined",
-    required: false,
-    description:
-      "Optional text label for labeled presentations, or a dynamic render prop receiving current toggle state.",
+      "A specialized persistent toggle action for saving, bookmarking, or favoriting items across sessions. Powered by Base UI Toggle primitive and HaloUI liquid optical physics.",
+    inheritedProps: {
+      element: "React.ComponentPropsWithoutRef<typeof TogglePrimitive>",
+      description:
+        "Inherits all Base UI Toggle primitive attributes, ARIA pressed state management, and keyboard actuation. Excludes children when using function-as-children render prop.",
+    },
+    props: [
+      {
+        name: "pressed",
+        type: "boolean",
+        default: "undefined",
+        required: false,
+        description:
+          "Controlled pressed state (canonical TogglePrimitive contract). When provided, component behaves as a controlled input.",
+      },
+      {
+        name: "defaultPressed",
+        type: "boolean",
+        default: "false",
+        required: false,
+        description:
+          "Initial pressed state for uncontrolled usage.",
+      },
+      {
+        name: "onPressedChange",
+        type: "(pressed: boolean, eventDetails?: any) => void",
+        default: "undefined",
+        required: false,
+        description:
+          "Callback fired when the pressed state changes.",
+      },
+      {
+        name: "favorited",
+        type: "boolean",
+        default: "undefined",
+        required: false,
+        description:
+          "Convenience alias for `pressed` matching domain vocabulary. Shares identical state binding.",
+      },
+      {
+        name: "onFavoritedChange",
+        type: "(favorited: boolean) => void",
+        default: "undefined",
+        required: false,
+        description:
+          "Convenience alias for `onPressedChange` matching domain vocabulary.",
+      },
+      {
+        name: "variant",
+        type: '"default" | "secondary" | "outline" | "ghost"',
+        default: '"default"',
+        required: false,
+        description:
+          "Visual treatment honoring HaloUI's 10-layer physical liquid optical material engine. 'ghost' is recommended for media card overlays and image hero headers.",
+      },
+      {
+        name: "size",
+        type: '"sm" | "default" | "lg"',
+        default: '"default"',
+        required: false,
+        description:
+          "Size geometry for the button: 'sm' (32px), 'default' (40px), or 'lg' (48px).",
+      },
+      {
+        name: "icon",
+        type: "React.ComponentType",
+        default: "FavouriteIcon",
+        required: false,
+        description:
+          "Custom Hugeicon component rendered when unfavorited (e.g. HeartIcon, StarIcon, Bookmark02Icon).",
+      },
+      {
+        name: "activeIcon",
+        type: "React.ComponentType",
+        default: "FavouriteIcon",
+        required: false,
+        description:
+          "Optional alternate Hugeicon rendered specifically when favorited.",
+      },
+      {
+        name: "aria-label",
+        type: "string",
+        default: 'computed ("Remove from favorites" | "Add to favorites")',
+        required: false,
+        description:
+          "Accessible label announced by assistive technologies. Automatically computes state-aware verbs if not explicitly overridden.",
+      },
+      {
+        name: "children",
+        type: "React.ReactNode | ((state: { pressed: boolean; favorited: boolean }) => React.ReactNode)",
+        default: "undefined",
+        required: false,
+        description:
+          "Optional text label for labeled presentations, or a dynamic render prop receiving current toggle state.",
+      },
+    ],
   },
 ];
 
@@ -409,12 +423,61 @@ export function ArticleBookmark() {
         </ul>
       </div>
 
-      {/* Props */}
+      {/* Component API */}
       <div className="space-y-4">
         <h2 id="props" className="text-xl font-semibold tracking-tight text-foreground">
-          Props Reference
+          Component API
         </h2>
-        <PropsTable rows={PROPS_DATA} />
+        <p className="text-sm text-muted-foreground leading-relaxed">
+          Explore interactive API specifications, state-binding aliases, and accessible Hugeicon options for FavoriteButton.
+        </p>
+        <PropsExplorer subcomponents={FAVORITE_BUTTON_SUBCOMPONENTS} />
+      </div>
+
+      {/* Liquid Glass Optical Architecture */}
+      <div className="space-y-4">
+        <h2 id="optical-engine" className="text-xl font-semibold tracking-tight text-foreground">
+          Liquid Glass Optical Architecture
+        </h2>
+        <p className="text-sm text-muted-foreground leading-relaxed">
+          FavoriteButton applies HaloUI&apos;s 10-layer physical liquid optical material engine to circular lens and capsule forms. When pressed (<code className="text-foreground font-mono text-xs">aria-pressed=&quot;true&quot;</code>), the surface tint transitions into a warm rose hue (<code className="text-foreground font-mono text-xs">bg-rose-500/[0.08]</code>) and the icon glyph scales with a solid fill-current transition.
+        </p>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
+          <div className="p-4 rounded-xl border border-border/50 bg-muted/20 space-y-2">
+            <h4 className="text-xs font-semibold uppercase tracking-wider text-foreground">
+              Semantic Rose Tint
+            </h4>
+            <p className="text-xs text-muted-foreground leading-relaxed">
+              Active state uses an authentic optical rose border and inner shadow highlight without garish neon glowing gradients.
+            </p>
+          </div>
+          <div className="p-4 rounded-xl border border-border/50 bg-muted/20 space-y-2">
+            <h4 className="text-xs font-semibold uppercase tracking-wider text-foreground">
+              Unclipped Focus Ring
+            </h4>
+            <p className="text-xs text-muted-foreground leading-relaxed">
+              The double-contrast 2px perimeter projects independently outside the circular boundary at <code className="text-foreground font-mono text-[10px]">z-20</code>, guaranteeing visibility across card imagery.
+            </p>
+          </div>
+          <div className="p-4 rounded-xl border border-border/50 bg-muted/20 space-y-2">
+            <h4 className="text-xs font-semibold uppercase tracking-wider text-foreground">
+              Persistent Toggle Memory
+            </h4>
+            <p className="text-xs text-muted-foreground leading-relaxed">
+              Unlike transient feedback controls, FavoriteButton maintains state until explicitly toggled again, coordinating with both <code className="text-foreground font-mono text-[10px]">pressed</code> and domain <code className="text-foreground font-mono text-[10px]">favorited</code> props.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* Automatic Container-Aware Responsiveness */}
+      <div className="space-y-4">
+        <h2 id="responsive-behavior" className="text-xl font-semibold tracking-tight text-foreground">
+          Automatic container-aware responsiveness
+        </h2>
+        <p className="text-sm text-muted-foreground leading-relaxed">
+          FavoriteButton enforces a strict <code className="text-foreground font-mono text-xs">shrink-0</code> constraint on circular modes to prevent oval deformation in tight flex rows or floating card corners down to the 240px QA minimum width. In labeled presentations, <code className="text-foreground font-mono text-xs">min-w-0 max-w-full</code> and text truncation preserve container layout bounds.
+        </p>
       </div>
 
       {/* Dependencies */}
