@@ -10,7 +10,7 @@ import {
 } from "./textarea-demonstrations";
 import { InstallCommand } from "@/components/mdx/install-command";
 import { Anatomy, type AnatomyPart } from "@/components/mdx/anatomy";
-import { PropsTable, type PropRow } from "@/components/mdx/props-table";
+import { PropsExplorer, type SubcomponentApi } from "@/components/docs/props-explorer";
 import { FileTree, type FileNode } from "@/components/mdx/file-tree";
 import { Callout } from "@/components/mdx/callout";
 import { CodeBlock } from "@/components/mdx/code-block";
@@ -22,62 +22,76 @@ export const metadata: Metadata = {
     "A native multiline text-entry control with HaloUI form states, accessible focus treatment, and configurable resizing.",
 };
 
-const TEXTAREA_PROPS: PropRow[] = [
+const TEXTAREA_SUBCOMPONENTS: SubcomponentApi[] = [
   {
-    name: "resize",
-    type: '"none" | "vertical" | "horizontal" | "both"',
-    default: '"vertical"',
-    required: false,
-    description: "Controls the CSS resize policy. Vertical resizing is the accessible default to avoid breaking layout width.",
-  },
-  {
-    name: "rows",
-    type: "number",
-    default: "undefined",
-    required: false,
-    description: "Native HTML rows attribute controlling the initial visible line count without hardcoded pixel heights.",
-  },
-  {
-    name: "className",
-    type: "string",
-    default: "undefined",
-    required: false,
-    description: "Additional CSS classes to append to the textarea element.",
-  },
-  {
-    name: "disabled",
-    type: "boolean",
-    default: "false",
-    required: false,
-    description: "Native disabled attribute. Prevents editing, interaction, and participation in form submission.",
-  },
-  {
-    name: "readOnly",
-    type: "boolean",
-    default: "false",
-    required: false,
-    description: "Native readOnly attribute. Prevents editing while preserving keyboard focus, scrolling, and text selection.",
-  },
-  {
-    name: "required",
-    type: "boolean",
-    default: "false",
-    required: false,
-    description: "Native HTML validation constraint for mandatory multiline entries.",
-  },
-  {
-    name: "aria-invalid",
-    type: 'boolean | "true" | "false"',
-    default: "undefined",
-    required: false,
-    description: "Communicates validation errors to assistive technology and activates dual-indicator styling.",
-  },
-  {
-    name: "...props",
-    type: 'React.ComponentProps<"textarea">',
-    default: "—",
-    required: false,
-    description: "All standard HTML <textarea> attributes (value, defaultValue, onChange, placeholder, maxLength, spellCheck, etc.).",
+    name: "Textarea",
+    description:
+      "Native multiline text-entry control primitive with 10-layer physical optical liquid glass engine and double-contrast focus outline.",
+    props: [
+      {
+        name: "variant",
+        type: '"default" | "unstyled"',
+        default: '"default"',
+        description:
+          "Surface presentation mode. 'default' renders restrained liquid glass with optical diffusion; 'unstyled' removes all chrome for compound wrappers.",
+      },
+      {
+        name: "resize",
+        type: '"none" | "vertical" | "horizontal" | "both"',
+        default: '"vertical"',
+        description:
+          "Controls the CSS resize policy. Vertical resizing is the accessible default to avoid breaking container width boundaries.",
+      },
+      {
+        name: "rows",
+        type: "number",
+        default: "undefined",
+        description:
+          "Native HTML rows attribute controlling the initial visible line count without hardcoded pixel heights.",
+      },
+      {
+        name: "disabled",
+        type: "boolean",
+        default: "false",
+        description:
+          "Native disabled attribute. Prevents editing, interaction, and participation in form submission.",
+      },
+      {
+        name: "readOnly",
+        type: "boolean",
+        default: "false",
+        description:
+          "Native readOnly attribute. Prevents editing while preserving keyboard focus, scrolling, and text selection.",
+      },
+      {
+        name: "required",
+        type: "boolean",
+        default: "false",
+        description:
+          "Native HTML validation constraint for mandatory multiline entries.",
+      },
+      {
+        name: "aria-invalid",
+        type: 'boolean | "true" | "false"',
+        default: "undefined",
+        description:
+          "Communicates validation errors to assistive technology and activates dual-indicator styling.",
+      },
+      {
+        name: "className",
+        type: "string",
+        default: "undefined",
+        description:
+          "Additional CSS classes to append to the textarea element.",
+      },
+      {
+        name: "...props",
+        type: 'React.ComponentProps<"textarea">',
+        default: "—",
+        description:
+          "All standard HTML <textarea> attributes (value, defaultValue, onChange, placeholder, maxLength, spellCheck, etc.).",
+      },
+    ],
   },
 ];
 
@@ -167,6 +181,59 @@ export default function TextareaDocsPage() {
         mentions, slash commands, or embedded media. Textarea focuses purely on accessible, lightweight,
         plain-text form inputs.
       </Callout>
+
+      {/* Liquid Glass Multiline Substrate Architecture */}
+      <section className="space-y-4">
+        <h2 className="text-2xl font-bold tracking-tight text-foreground font-heading">
+          Liquid Glass Multiline Substrate Architecture
+        </h2>
+        <p className="text-sm text-muted-foreground leading-relaxed">
+          Multiline textareas occupy significant screen area in modern enterprise dashboards and forms. Standard high-gloss glassmorphism creates overwhelming reflections and distracting high-frequency noise that impedes legibility during sustained composition. HaloUI addresses this with a restrained, calibrated optical substrate:
+        </p>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="p-4 rounded-xl border border-border bg-muted/20 space-y-2">
+            <h3 className="text-sm font-semibold text-foreground">1. Restrained Base Tint &amp; Diffusion</h3>
+            <p className="text-xs text-muted-foreground leading-relaxed">
+              Employs an ultra-subtle tint (<code className="text-foreground">bg-black/[0.02]</code> in light, <code className="text-foreground">bg-white/[0.035]</code> in dark) with low-radius backdrop blur to ensure high contrast for typography while retaining atmospheric depth.
+            </p>
+          </div>
+          <div className="p-4 rounded-xl border border-border bg-muted/20 space-y-2">
+            <h3 className="text-sm font-semibold text-foreground">2. Inner Inset Cavity Shadow</h3>
+            <p className="text-xs text-muted-foreground leading-relaxed">
+              Physical optics dictate that editable entry surfaces recede inward rather than floating outward. A dual inset cavity shadow creates a recessed physical well that signals typing readiness.
+            </p>
+          </div>
+          <div className="p-4 rounded-xl border border-border bg-muted/20 space-y-2">
+            <h3 className="text-sm font-semibold text-foreground">3. Dual-Indicator Halo Focus Ring</h3>
+            <p className="text-xs text-muted-foreground leading-relaxed">
+              When focused while invalid, the component maintains both the high-contrast destructive boundary and the 2px double-contrast Halo Focus Ring simultaneously, avoiding focus ambiguity.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Automatic container-aware responsiveness */}
+      <section className="space-y-4">
+        <h2 className="text-2xl font-bold tracking-tight text-foreground font-heading">
+          Automatic Container-Aware Responsiveness
+        </h2>
+        <p className="text-sm text-muted-foreground leading-relaxed">
+          Multiline controls are prone to horizontal blowout when users paste long unformatted strings, code snippets, or URLs. HaloUI enforces strict container-aware bounding:
+        </p>
+        <div className="p-4 rounded-xl border border-border bg-muted/10 space-y-3">
+          <ul className="list-disc list-inside space-y-1.5 text-xs text-muted-foreground leading-relaxed">
+            <li>
+              <strong className="text-foreground">Zero Layout Blowout:</strong> Textarea applies <code className="text-foreground">w-full min-w-0 max-w-full</code>, ensuring it reliably wraps text and fits flex or CSS grid columns down to strict 240px quality audit boundaries.
+            </li>
+            <li>
+              <strong className="text-foreground">Vertical-Only Default Resizing:</strong> By configuring <code className="text-foreground">resize=&quot;vertical&quot;</code> by default, users can freely expand vertical reading space without destroying parent grid column proportions or creating horizontal window overflow.
+            </li>
+            <li>
+              <strong className="text-foreground">Native Corner Radius Containment:</strong> Scroll tracks and resize thumbs are constrained by the 12px rounded corner boundary, preventing scrollbar clipping on high-DPI displays.
+            </li>
+          </ul>
+        </div>
+      </section>
 
       {/* Usage / With Field */}
       <section className="space-y-4">
@@ -261,12 +328,12 @@ export function FeedbackForm() {
         <TextareaLongContentDemo />
       </section>
 
-      {/* Props */}
+      {/* Props Reference via PropsExplorer */}
       <section className="space-y-4">
         <h2 className="text-2xl font-bold tracking-tight text-foreground font-heading">
           Props Reference
         </h2>
-        <PropsTable rows={TEXTAREA_PROPS} />
+        <PropsExplorer subcomponents={TEXTAREA_SUBCOMPONENTS} />
       </section>
 
       {/* Anatomy */}
