@@ -12,7 +12,7 @@ import {
 } from "./field-demonstrations";
 import { InstallCommand } from "@/components/mdx/install-command";
 import { Anatomy, type AnatomyPart } from "@/components/mdx/anatomy";
-import { PropsTable } from "@/components/mdx/props-table";
+import { PropsExplorer, type SubcomponentApi } from "@/components/docs/props-explorer";
 import { FileTree, type FileNode } from "@/components/mdx/file-tree";
 import { Callout } from "@/components/mdx/callout";
 import { CodeBlock } from "@/components/mdx/code-block";
@@ -24,92 +24,154 @@ export const metadata: Metadata = {
     "A semantic composition primitive connecting a form control with its label, description, validation message, and related field context.",
 };
 
-const FIELD_PROPS = [
+const FIELD_SUBCOMPONENTS: SubcomponentApi[] = [
   {
-    name: "id",
-    type: "string",
-    default: "React.useId()",
-    required: false,
+    name: "Field",
     description:
-      "Explicit control ID. When provided, automatically coordinates htmlFor on FieldLabel, and derived IDs on FieldDescription and FieldError.",
+      "Context provider and structural container coordinating layout orientation, invalid state, and accessibility identifiers across form controls.",
+    props: [
+      {
+        name: "id",
+        type: "string",
+        defaultValue: "React.useId()",
+        description:
+          "Explicit control ID. When provided, automatically coordinates htmlFor on FieldLabel, and derived IDs on FieldDescription and FieldError.",
+      },
+      {
+        name: "orientation",
+        type: '"vertical" | "horizontal" | "responsive"',
+        defaultValue: '"vertical"',
+        description:
+          "Layout arrangement: 'vertical' stacks label over control; 'horizontal' places label and control side-by-side; 'responsive' stacks on mobile viewports.",
+      },
+      {
+        name: "variant",
+        type: '"default" | "glass"',
+        defaultValue: '"default"',
+        description:
+          "Visual substrate style. 'glass' applies the 10-layer physical optical liquid glass engine with 24px backdrop blur.",
+      },
+      {
+        name: "invalid",
+        type: "boolean",
+        defaultValue: "false",
+        description:
+          "Whether the field is in an invalid state. Sets data-invalid on the container and propagates through FieldContext to control and error primitives.",
+      },
+      {
+        name: "disabled",
+        type: "boolean",
+        defaultValue: "false",
+        description:
+          "Visually marks the field group as disabled and propagates disabled opacity to child label and description.",
+      },
+      {
+        name: "required",
+        type: "boolean",
+        defaultValue: "false",
+        description:
+          "Coordinates required state across the context, automatically rendering a supplemental visual asterisk indicator on child FieldLabel.",
+      },
+    ],
   },
   {
-    name: "orientation",
-    type: '"vertical" | "horizontal" | "responsive"',
-    default: '"vertical"',
-    required: false,
+    name: "FieldLabel",
     description:
-      "Layout arrangement: 'vertical' stacks label over control; 'horizontal' places label and control side-by-side; 'responsive' stacks on mobile viewports.",
+      "Persistent visible label automatically bound to the control via htmlFor. Renders optional or required indicators.",
+    props: [
+      {
+        name: "htmlFor",
+        type: "string",
+        defaultValue: "context.id",
+        description:
+          "Targets the ID of the form control. Defaults automatically to the coordinated Field context ID.",
+      },
+      {
+        name: "required",
+        type: "boolean",
+        defaultValue: "context.required",
+        description:
+          "Renders a supplemental red asterisk indicator marked with aria-hidden='true' so screen readers do not announce duplicate characters.",
+      },
+      {
+        name: "optional",
+        type: "boolean",
+        defaultValue: "false",
+        description:
+          "Renders a supplemental '(Optional)' badge styled with muted text.",
+      },
+    ],
   },
   {
-    name: "invalid",
-    type: "boolean",
-    default: "false",
-    required: false,
+    name: "FieldDescription",
     description:
-      "Whether the field is in an invalid state. Sets data-invalid on the container and propagates through FieldContext to control and error primitives.",
+      "Supporting guidance text connected to the control via aria-describedby for assistive technology with automatic break-words.",
+    props: [
+      {
+        name: "id",
+        type: "string",
+        defaultValue: "context.descriptionId",
+        description:
+          "Unique HTML ID referenced by the input control's aria-describedby attribute.",
+      },
+    ],
   },
   {
-    name: "disabled",
-    type: "boolean",
-    default: "false",
-    required: false,
+    name: "FieldError",
     description:
-      "Visually marks the field group as disabled. The underlying form control must still carry native disabled semantics.",
+      "Validation feedback element connected to the control via aria-describedby and announced with role='alert'.",
+    props: [
+      {
+        name: "errors",
+        type: "Array<{ message?: string } | string>",
+        description:
+          "Optional array of validation error messages or schema issue objects. Renders unique messages in an accessible bulleted list if multiple.",
+      },
+      {
+        name: "role",
+        type: "string",
+        defaultValue: '"alert"',
+        description:
+          "Assistive technology announcement role. Defaults to 'alert' with aria-live='polite' for immediate non-intrusive error announcement.",
+      },
+    ],
   },
   {
-    name: "required",
-    type: "boolean",
-    default: "false",
-    required: false,
+    name: "FieldContent",
     description:
-      "Coordinates required state across the context, automatically rendering a supplemental visual asterisk indicator on child FieldLabel.",
-  },
-];
-
-const LABEL_PROPS = [
-  {
-    name: "htmlFor",
-    type: "string",
-    default: "context.id",
-    required: false,
-    description:
-      "Targets the ID of the form control. Defaults automatically to the coordinated Field context ID.",
+      "Grouping container for label and description in horizontal and responsive setting row layouts with min-w-0 safety.",
+    props: [
+      {
+        name: "className",
+        type: "string",
+        description: "Additional CSS classes applied to the content container.",
+      },
+    ],
   },
   {
-    name: "required",
-    type: "boolean",
-    default: "context.required",
-    required: false,
+    name: "FieldSet",
     description:
-      "Renders a supplemental red asterisk indicator marked with aria-hidden='true' so screen readers do not announce duplicate characters.",
+      "Semantic grouping container (<fieldset>) for sets of related controls such as radio groups or checkbox clusters.",
+    props: [
+      {
+        name: "disabled",
+        type: "boolean",
+        description: "Disables all child interactive controls within the fieldset.",
+      },
+    ],
   },
   {
-    name: "optional",
-    type: "boolean",
-    default: "false",
-    required: false,
+    name: "FieldLegend",
     description:
-      "Renders a supplemental '(Optional)' badge styled with muted text.",
-  },
-];
-
-const ERROR_PROPS = [
-  {
-    name: "errors",
-    type: "Array<{ message?: string } | string>",
-    default: "undefined",
-    required: false,
-    description:
-      "Optional array of validation error messages or schema issue objects. Renders unique messages in an accessible bulleted list if multiple.",
-  },
-  {
-    name: "role",
-    type: "string",
-    default: '"alert"',
-    required: false,
-    description:
-      "Assistive technology announcement role. Defaults to 'alert' with aria-live='polite' for immediate non-intrusive error announcement.",
+      "Accessible legend (<legend>) providing the group title for a FieldSet.",
+    props: [
+      {
+        name: "variant",
+        type: '"legend" | "label"',
+        defaultValue: '"legend"',
+        description: "Visual typographic styling: 'legend' (text-base font-semibold) or 'label' (text-sm font-medium).",
+      },
+    ],
   },
 ];
 
@@ -421,36 +483,63 @@ export function Example() {
       </section>
 
       {/* 9. Props Reference */}
-      <section className="space-y-6">
+      {/* 9. Component API */}
+      <section className="space-y-4">
         <div className="space-y-2">
-          <h2 className="text-xl font-semibold tracking-tight text-foreground">
-            Props Reference
+          <h2 id="props" className="text-xl font-semibold tracking-tight text-foreground">
+            Component API
           </h2>
           <p className="text-sm text-muted-foreground">
-            Component attributes and API contract across the Field primitive set.
+            Interactive subcomponent specifications, layout orientations, and accessibility properties for Field.
           </p>
         </div>
+        <PropsExplorer subcomponents={FIELD_SUBCOMPONENTS} />
+      </section>
 
-        <div className="space-y-3">
-          <h3 className="text-sm font-semibold font-mono text-foreground">
-            &lt;Field /&gt;
-          </h3>
-          <PropsTable rows={FIELD_PROPS} />
+      {/* Liquid Glass Form Substrate Architecture */}
+      <section className="space-y-4">
+        <h2 id="optical-engine" className="text-xl font-semibold tracking-tight text-foreground">
+          Liquid Glass Form Substrate Architecture
+        </h2>
+        <p className="text-sm text-muted-foreground leading-relaxed">
+          When composed with <code className="text-foreground font-mono text-xs">variant="glass"</code>, Field forms an optical containment substrate (<code className="text-foreground font-mono text-xs">bg-white/60</code> / <code className="text-foreground font-mono text-xs">dark:bg-neutral-950/60</code> with 24px backdrop blur). It leverages a 135° directional specular reflection rim and dual contact shadows to guarantee elevated contrast across diverse data-dense backdrops without muddying child inputs.
+        </p>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
+          <div className="p-4 rounded-xl border border-border/50 bg-muted/20 space-y-2">
+            <h4 className="text-xs font-semibold uppercase tracking-wider text-foreground">
+              Independent Focus Ring Isolation
+            </h4>
+            <p className="text-xs text-muted-foreground leading-relaxed">
+              Invalid error states tint the input perimeter with high-visibility destructive red without ever clipping or suppressing the double-contrast <code className="text-foreground font-mono text-[10px]">halo-focus-ring</code> outline.
+            </p>
+          </div>
+          <div className="p-4 rounded-xl border border-border/50 bg-muted/20 space-y-2">
+            <h4 className="text-xs font-semibold uppercase tracking-wider text-foreground">
+              Coordinated A11y ID Matrix
+            </h4>
+            <p className="text-xs text-muted-foreground leading-relaxed">
+              Automatic <code className="text-foreground font-mono text-[10px]">React.useId()</code> binding unifies <code className="text-foreground font-mono text-[10px]">htmlFor ↔ id</code>, <code className="text-foreground font-mono text-[10px]">aria-describedby</code>, and live <code className="text-foreground font-mono text-[10px]">aria-invalid</code> without manual ID choreography.
+            </p>
+          </div>
+          <div className="p-4 rounded-xl border border-border/50 bg-muted/20 space-y-2">
+            <h4 className="text-xs font-semibold uppercase tracking-wider text-foreground">
+              Zero Occlusion of Live Errors
+            </h4>
+            <p className="text-xs text-muted-foreground leading-relaxed">
+              Validation errors render with <code className="text-foreground font-mono text-[10px]">role="alert"</code> and <code className="text-foreground font-mono text-[10px]">aria-live="polite"</code>, ensuring high-contrast legibility against both light and dark translucent glass substrates.
+            </p>
+          </div>
         </div>
+      </section>
 
-        <div className="space-y-3">
-          <h3 className="text-sm font-semibold font-mono text-foreground">
-            &lt;FieldLabel /&gt;
-          </h3>
-          <PropsTable rows={LABEL_PROPS} />
-        </div>
-
-        <div className="space-y-3">
-          <h3 className="text-sm font-semibold font-mono text-foreground">
-            &lt;FieldError /&gt;
-          </h3>
-          <PropsTable rows={ERROR_PROPS} />
-        </div>
+      {/* Automatic Container-Aware Responsiveness */}
+      <section className="space-y-4">
+        <h2 id="responsive-behavior" className="text-xl font-semibold tracking-tight text-foreground">
+          Automatic container-aware responsiveness
+        </h2>
+        <p className="text-sm text-muted-foreground leading-relaxed">
+          Field smoothly reflows across simulated containers from the strict 240px QA minimum to 1024px desktop and fluid. In horizontal or responsive modes, long label copy and descriptions wrap safely with <code className="text-foreground font-mono text-xs">min-w-0</code> and <code className="text-foreground font-mono text-xs">break-words</code>, preventing container blowout on ultra-compact mobile screens.
+        </p>
       </section>
 
       {/* 10. Accessibility */}

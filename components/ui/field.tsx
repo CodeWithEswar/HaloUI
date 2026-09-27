@@ -81,7 +81,7 @@ export function useFieldControlProps(props?: {
 /* -------------------------------------------------------------------------- */
 
 const fieldVariants = cva(
-  "group/field flex w-full transition-all duration-200",
+  "group/field flex w-full max-w-full min-w-0 transition-all duration-200",
   {
     variants: {
       orientation: {
@@ -253,7 +253,7 @@ export function FieldDescription({
       id={descriptionId}
       data-slot="field-description"
       className={cn(
-        "text-xs sm:text-sm text-muted-foreground leading-normal font-normal text-left",
+        "text-xs sm:text-sm text-muted-foreground leading-normal font-normal text-left break-words min-w-0",
         "[&>a]:underline [&>a]:underline-offset-4 [&>a:hover]:text-primary",
         className
       )}
@@ -314,7 +314,7 @@ export function FieldError({
       aria-live="polite"
       data-slot="field-error"
       className={cn(
-        "text-xs sm:text-sm font-medium text-destructive text-left leading-normal animate-in fade-in-0 duration-150",
+        "text-xs sm:text-sm font-medium text-destructive text-left leading-normal animate-in fade-in-0 duration-150 break-words min-w-0",
         className
       )}
       {...props}
@@ -335,7 +335,7 @@ export function FieldContent({ className, ...props }: FieldContentProps) {
   return (
     <div
       data-slot="field-content"
-      className={cn("flex flex-1 flex-col gap-1 leading-snug", className)}
+      className={cn("flex flex-1 flex-col gap-1 leading-snug min-w-0", className)}
       {...props}
     />
   );
