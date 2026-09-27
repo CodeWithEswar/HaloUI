@@ -26,7 +26,7 @@ export function FieldGroup({
       data-slot="field-group"
       data-orientation={orientation}
       className={cn(
-        "w-full",
+        "w-full min-w-0 max-w-full",
         orientation === "vertical" && "flex flex-col gap-4 sm:gap-5",
         orientation === "horizontal" && "grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5",
         className

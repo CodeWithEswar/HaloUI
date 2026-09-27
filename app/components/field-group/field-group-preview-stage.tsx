@@ -15,6 +15,17 @@ import {
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 
+const CONTAINER_WIDTH_OPTIONS = [
+  { label: "240px (Strict Min)", value: "240px" },
+  { label: "320px (Mobile S)", value: "320px" },
+  { label: "375px (Mobile M)", value: "375px" },
+  { label: "480px (Phablet)", value: "480px" },
+  { label: "640px (Tablet)", value: "640px" },
+  { label: "768px (Laptop)", value: "768px" },
+  { label: "1024px (Desktop)", value: "1024px" },
+  { label: "100% Fluid", value: "100%" },
+];
+
 export function FieldGroupPreviewStage() {
   const [activeTab, setActiveTab] = React.useState<"preview" | "code">("preview");
   const [backdrop, setBackdrop] = React.useState<string>("neutral");
@@ -24,6 +35,7 @@ export function FieldGroupPreviewStage() {
   const [orientation, setOrientation] = React.useState<"vertical" | "horizontal">("vertical");
   const [fieldCount, setFieldCount] = React.useState<"2" | "3" | "4">("3");
   const [validationState, setValidationState] = React.useState<"none" | "middle-invalid">("none");
+  const [containerWidth, setContainerWidth] = React.useState("100%");
 
   // Form states
   const [firstName, setFirstName] = React.useState("Alex");
@@ -86,6 +98,7 @@ export function ContactFormGroup() {
     setOrientation("vertical");
     setFieldCount("3");
     setValidationState("none");
+    setContainerWidth("100%");
     setFirstName("Alex");
     setLastName("Morgan");
     setEmail("alex.morgan@company.com");
@@ -113,6 +126,10 @@ export function ContactFormGroup() {
           variant: "success",
         },
         {
+          label: "Container",
+          value: containerWidth === "100%" ? "Fluid (100%)" : containerWidth,
+        },
+        {
           label: "HTML Tag",
           value: "<div> (Neutral)",
           variant: "success",
@@ -126,9 +143,14 @@ export function ContactFormGroup() {
           label: "Surface",
           value: "Transparent Layout",
         },
+        {
+          label: "Focus Ring",
+          value: "Unclipped child boundaries",
+          variant: "success",
+        },
       ]}
       controls={
-        <div className="w-full grid grid-cols-1 min-[420px]:grid-cols-3 gap-2 sm:gap-2.5">
+        <div className="w-full grid grid-cols-1 min-[420px]:grid-cols-2 md:grid-cols-4 gap-2 sm:gap-2.5">
           <StageControlSelect
             label="Orientation"
             value={orientation}
@@ -159,100 +181,128 @@ export function ContactFormGroup() {
               { label: "Middle Invalid", value: "middle-invalid" },
             ]}
           />
+
+          <StageControlSelect
+            label="Container Simulation"
+            value={containerWidth}
+            onValueChange={setContainerWidth}
+            options={CONTAINER_WIDTH_OPTIONS}
+          />
         </div>
       }
     >
-      <div className="w-full max-w-lg mx-auto p-4 sm:p-6">
-        <div className="p-5 sm:p-7 rounded-2xl border border-white/60 dark:border-white/15 bg-white/55 dark:bg-neutral-950/55 backdrop-blur-2xl backdrop-saturate-180 shadow-[0_12px_36px_-4px_rgba(0,0,0,0.12),inset_0_1px_1px_0_rgba(255,255,255,0.85)] dark:shadow-[0_18px_50px_-8px_rgba(0,0,0,0.7),inset_0_1px_1px_0_rgba(255,255,255,0.14)] relative isolate before:content-[''] before:absolute before:inset-0 before:pointer-events-none before:rounded-[inherit] before:bg-gradient-to-br before:from-white/25 before:via-white/5 before:to-transparent dark:before:from-white/10 dark:before:via-transparent transition-all">
-          <FieldGroup orientation={orientation}>
-            {/* Field 1 */}
-            <Field id="stage-first-name">
-              <FieldLabel htmlFor="stage-first-name">First name</FieldLabel>
-              <Input
-                id="stage-first-name"
-                value={firstName}
-                onChange={(e) => setFirstName(e.target.value)}
-                placeholder="First name"
-              />
-            </Field>
+      <div className="w-full flex flex-col items-center justify-center py-6 px-2 sm:px-4">
+        {/* Real Container Width Simulation Wrapper */}
+        <div
+          style={{ width: containerWidth }}
+          className="max-w-full transition-all duration-200 ease-out flex flex-col items-center justify-center gap-4"
+        >
+          <div className="w-full p-5 sm:p-7 rounded-2xl border border-white/60 dark:border-white/15 bg-white/55 dark:bg-neutral-950/55 backdrop-blur-2xl backdrop-saturate-180 shadow-[0_12px_36px_-4px_rgba(0,0,0,0.12),inset_0_1px_1px_0_rgba(255,255,255,0.85)] dark:shadow-[0_18px_50px_-8px_rgba(0,0,0,0.7),inset_0_1px_1px_0_rgba(255,255,255,0.14)] relative isolate before:content-[''] before:absolute before:inset-0 before:pointer-events-none before:rounded-[inherit] before:bg-gradient-to-br before:from-white/25 before:via-white/5 before:to-transparent dark:before:from-white/10 dark:before:via-transparent transition-all">
+            <FieldGroup orientation={orientation}>
+              {/* Field 1 */}
+              <Field id="stage-first-name">
+                <FieldLabel htmlFor="stage-first-name">First name</FieldLabel>
+                <Input
+                  id="stage-first-name"
+                  value={firstName}
+                  onChange={(e) => setFirstName(e.target.value)}
+                  placeholder="First name"
+                />
+              </Field>
 
-            {/* Field 2 */}
-            <Field
-              id="stage-second-field"
-              invalid={isMiddleInvalid && fieldCount !== "2"}
-            >
-              <FieldLabel
-                htmlFor="stage-second-field"
-                required={isMiddleInvalid && fieldCount !== "2"}
-              >
-                {fieldCount === "2" ? "Last name" : "Work email"}
-              </FieldLabel>
-              <Input
+              {/* Field 2 */}
+              <Field
                 id="stage-second-field"
-                type={fieldCount === "2" ? "text" : "email"}
-                value={
-                  fieldCount === "2"
-                    ? lastName
-                    : isMiddleInvalid
-                    ? "alex.invalid-domain"
-                    : email
-                }
-                onChange={(e) => {
-                  if (fieldCount === "2") setLastName(e.target.value);
-                  else setEmail(e.target.value);
-                }}
-                aria-invalid={
-                  isMiddleInvalid && fieldCount !== "2" ? "true" : undefined
-                }
-                aria-describedby={
-                  isMiddleInvalid && fieldCount !== "2"
-                    ? "stage-second-error"
-                    : "stage-second-desc"
-                }
-              />
-              {isMiddleInvalid && fieldCount !== "2" ? (
-                <FieldError id="stage-second-error">
-                  Please enter a valid work email address.
-                </FieldError>
-              ) : (
-                <FieldDescription id="stage-second-desc">
-                  {fieldCount === "2"
-                    ? "Your family or legal surname."
-                    : "Primary communication and sign-in email."}
-                </FieldDescription>
-              )}
-            </Field>
-
-            {/* Field 3 */}
-            {(fieldCount === "3" || fieldCount === "4") && (
-              <Field id="stage-third-field">
-                <FieldLabel htmlFor="stage-third-field">
-                  {fieldCount === "3" ? "Last name" : "Phone number"}
+                invalid={isMiddleInvalid && fieldCount !== "2"}
+              >
+                <FieldLabel
+                  htmlFor="stage-second-field"
+                  required={isMiddleInvalid && fieldCount !== "2"}
+                >
+                  {fieldCount === "2" ? "Last name" : "Work email"}
                 </FieldLabel>
                 <Input
-                  id="stage-third-field"
-                  value={fieldCount === "3" ? lastName : phone}
+                  id="stage-second-field"
+                  type={fieldCount === "2" ? "text" : "email"}
+                  value={
+                    fieldCount === "2"
+                      ? lastName
+                      : isMiddleInvalid
+                      ? "alex.invalid-domain"
+                      : email
+                  }
                   onChange={(e) => {
-                    if (fieldCount === "3") setLastName(e.target.value);
-                    else setPhone(e.target.value);
+                    if (fieldCount === "2") setLastName(e.target.value);
+                    else setEmail(e.target.value);
                   }}
-                  placeholder={fieldCount === "3" ? "Last name" : "+1 (555) 000-0000"}
+                  aria-invalid={
+                    isMiddleInvalid && fieldCount !== "2" ? "true" : undefined
+                  }
+                  aria-describedby={
+                    isMiddleInvalid && fieldCount !== "2"
+                      ? "stage-second-error"
+                      : "stage-second-desc"
+                  }
                 />
+                {isMiddleInvalid && fieldCount !== "2" ? (
+                  <FieldError id="stage-second-error">
+                    Please enter a valid work email address.
+                  </FieldError>
+                ) : (
+                  <FieldDescription id="stage-second-desc">
+                    {fieldCount === "2"
+                      ? "Your family or legal surname."
+                      : "Primary communication and sign-in email."}
+                  </FieldDescription>
+                )}
               </Field>
-            )}
 
-            {/* Field 4 */}
-            {fieldCount === "4" && (
-              <Field id="stage-fourth-field">
-                <FieldLabel htmlFor="stage-fourth-field">Organization</FieldLabel>
-                <Input
-                  id="stage-fourth-field"
-                  defaultValue="Acme Systems Corp."
-                  placeholder="Company name"
-                />
-              </Field>
+              {/* Field 3 */}
+              {(fieldCount === "3" || fieldCount === "4") && (
+                <Field id="stage-third-field">
+                  <FieldLabel htmlFor="stage-third-field">
+                    {fieldCount === "3" ? "Last name" : "Phone number"}
+                  </FieldLabel>
+                  <Input
+                    id="stage-third-field"
+                    value={fieldCount === "3" ? lastName : phone}
+                    onChange={(e) => {
+                      if (fieldCount === "3") setLastName(e.target.value);
+                      else setPhone(e.target.value);
+                    }}
+                    placeholder={fieldCount === "3" ? "Last name" : "+1 (555) 000-0000"}
+                  />
+                </Field>
+              )}
+
+              {/* Field 4 */}
+              {fieldCount === "4" && (
+                <Field id="stage-fourth-field">
+                  <FieldLabel htmlFor="stage-fourth-field">Organization</FieldLabel>
+                  <Input
+                    id="stage-fourth-field"
+                    defaultValue="Acme Systems Corp."
+                    placeholder="Company name"
+                  />
+                </Field>
+              )}
+            </FieldGroup>
+          </div>
+
+          {/* State metadata readout */}
+          <div className="flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-[11px] font-mono text-muted-foreground/80 text-center max-w-full px-2">
+            <span>orientation="{orientation}"</span>
+            <span>·</span>
+            <span>fields={fieldCount}</span>
+            <span>·</span>
+            <span>container="{containerWidth}"</span>
+            {isMiddleInvalid && (
+              <>
+                <span>·</span>
+                <span className="text-amber-500 font-medium">middle-child-invalid</span>
+              </>
             )}
-          </FieldGroup>
+          </div>
         </div>
       </div>
     </PreviewStageShell>

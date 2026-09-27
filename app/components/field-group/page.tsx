@@ -9,7 +9,7 @@ import {
 } from "./field-group-demonstrations";
 import { InstallCommand } from "@/components/mdx/install-command";
 import { Anatomy, type AnatomyPart } from "@/components/mdx/anatomy";
-import { PropsTable, type PropRow } from "@/components/mdx/props-table";
+import { PropsExplorer, type SubcomponentApi } from "@/components/docs/props-explorer";
 import { FileTree, type FileNode } from "@/components/mdx/file-tree";
 import { Callout } from "@/components/mdx/callout";
 import { CodeBlock } from "@/components/mdx/code-block";
@@ -21,28 +21,30 @@ export const metadata: Metadata = {
     "Organizes multiple related fields into a consistent structural group while preserving each field's individual semantics.",
 };
 
-const FIELD_GROUP_PROPS: PropRow[] = [
+const FIELD_GROUP_SUBCOMPONENTS: SubcomponentApi[] = [
   {
-    name: "orientation",
-    type: '"vertical" | "horizontal"',
-    default: '"vertical"',
-    required: false,
+    name: "FieldGroup",
     description:
-      "Controls layout flow. 'vertical' stacks fields with consistent inter-field spacing rhythm. 'horizontal' forms a 2-column grid on wider screens, stacking automatically on mobile viewports.",
-  },
-  {
-    name: "className",
-    type: "string",
-    default: "undefined",
-    required: false,
-    description: "Additional CSS classes to append to the container.",
-  },
-  {
-    name: "...props",
-    type: 'React.ComponentProps<"div">',
-    default: "—",
-    required: false,
-    description: "Standard HTML <div> attributes supported without restriction.",
+      "Structural layout wrapper that organizes multiple related Field compositions into vertical or multi-column responsive arrangements.",
+    props: [
+      {
+        name: "orientation",
+        type: '"vertical" | "horizontal"',
+        defaultValue: '"vertical"',
+        description:
+          "Controls layout flow. 'vertical' stacks fields with consistent inter-field spacing rhythm. 'horizontal' forms a 2-column grid on wider screens, stacking automatically on mobile viewports.",
+      },
+      {
+        name: "className",
+        type: "string",
+        description: "Additional CSS classes to append to the container.",
+      },
+      {
+        name: "...props",
+        type: 'React.ComponentProps<"div">',
+        description: "Standard HTML <div> attributes supported without restriction.",
+      },
+    ],
   },
 ];
 
@@ -280,12 +282,63 @@ export function ProfileForm() {
         />
       </section>
 
-      {/* Props */}
+      {/* Component API */}
       <section className="space-y-4">
-        <h2 className="text-2xl font-bold tracking-tight text-foreground font-heading">
-          Props
+        <div className="space-y-2">
+          <h2 id="props" className="text-xl font-semibold tracking-tight text-foreground">
+            Component API
+          </h2>
+          <p className="text-sm text-muted-foreground">
+            Interactive properties and layout flow configuration for FieldGroup.
+          </p>
+        </div>
+        <PropsExplorer subcomponents={FIELD_GROUP_SUBCOMPONENTS} />
+      </section>
+
+      {/* Liquid Glass Structural Isolation Architecture */}
+      <section className="space-y-4">
+        <h2 id="optical-engine" className="text-xl font-semibold tracking-tight text-foreground">
+          Liquid Glass Structural Isolation Architecture
         </h2>
-        <PropsTable rows={FIELD_GROUP_PROPS} />
+        <p className="text-sm text-muted-foreground leading-relaxed">
+          FieldGroup functions as a neutral structural layout harness. When nested within liquid glass panels or dialogs, it provides calibrated spatial isolation so child inputs never interfere with one another's optical edges, specular highlights, or accessibility focus rings.
+        </p>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
+          <div className="p-4 rounded-xl border border-border/50 bg-muted/20 space-y-2">
+            <h4 className="text-xs font-semibold uppercase tracking-wider text-foreground">
+              Unclipped Child Focus Rings
+            </h4>
+            <p className="text-xs text-muted-foreground leading-relaxed">
+              Inter-field spacing rhythm (16px to 20px) guarantees that adjacent input <code className="text-foreground font-mono text-[10px]">halo-focus-ring</code> outlines never collide or clip against parent bounds.
+            </p>
+          </div>
+          <div className="p-4 rounded-xl border border-border/50 bg-muted/20 space-y-2">
+            <h4 className="text-xs font-semibold uppercase tracking-wider text-foreground">
+              Flagship Error Decoupling
+            </h4>
+            <p className="text-xs text-muted-foreground leading-relaxed">
+              Validation errors in one field (e.g. invalid middle field) remain strictly scoped to that child. Sibling fields retain pure rest states and default optical framing.
+            </p>
+          </div>
+          <div className="p-4 rounded-xl border border-border/50 bg-muted/20 space-y-2">
+            <h4 className="text-xs font-semibold uppercase tracking-wider text-foreground">
+              Zero Hydration Cost
+            </h4>
+            <p className="text-xs text-muted-foreground leading-relaxed">
+              Pure React Server Component compatibility without <code className="text-foreground font-mono text-[10px]">&quot;use client&quot;</code>, 0 state hooks, and 0 DOM observers for maximum rendering performance.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Automatic Container-Aware Responsiveness */}
+      <section className="space-y-4">
+        <h2 id="responsive-behavior" className="text-xl font-semibold tracking-tight text-foreground">
+          Automatic container-aware responsiveness
+        </h2>
+        <p className="text-sm text-muted-foreground leading-relaxed">
+          FieldGroup includes <code className="text-foreground font-mono text-xs">min-w-0 max-w-full</code> to seamlessly reflow across container widths from the strict 240px QA minimum to 1024px desktop. In <code className="text-foreground font-mono text-xs">orientation="horizontal"</code>, fields arrange in an equal 2-column grid on desktop and automatically collapse into a single stacked column on compact viewports.
+        </p>
       </section>
 
       {/* Anatomy */}
