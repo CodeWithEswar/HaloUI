@@ -28,10 +28,20 @@ import {
 } from "@hugeicons/core-free-icons";
 import { HaloIcon } from "@/components/icons/halo-icon";
 
+const CONTAINER_WIDTH_OPTIONS = [
+  { label: "100% (Fluid)", value: "100%" },
+  { label: "640px (Default)", value: "640px" },
+  { label: "480px (Narrow)", value: "480px" },
+  { label: "360px (Mobile)", value: "360px" },
+  { label: "280px (Compact)", value: "280px" },
+  { label: "240px (Strict Min)", value: "240px" },
+];
+
 export function InputGroupPreviewStage() {
   const [activeTab, setActiveTab] = React.useState<"preview" | "code">("preview");
   const [backdrop, setBackdrop] = React.useState<string>("neutral");
   const [viewport, setViewport] = React.useState<StageViewport>("desktop");
+  const [containerWidth, setContainerWidth] = React.useState<string>("100%");
 
   // Stage controls
   const [addonConfig, setAddonConfig] = React.useState<
@@ -246,6 +256,11 @@ export function SecretTokenField() {
           variant: "success",
         },
         {
+          label: "Container",
+          value: containerWidth === "100%" ? "Fluid (100%)" : containerWidth,
+          variant: containerWidth === "240px" ? "warning" : "default",
+        },
+        {
           label: "Group Focus",
           value: "has-[control:focus-visible]",
           variant: "success",
@@ -256,12 +271,17 @@ export function SecretTokenField() {
           variant: "success",
         },
         {
+          label: "State",
+          value: isInvalid ? "aria-invalid: true" : isDisabled ? "disabled: true" : "rest / valid",
+          variant: isInvalid ? "danger" : isDisabled ? "warning" : "default",
+        },
+        {
           label: "Runtime",
           value: "0ms (Server Component)",
         },
       ]}
       controls={
-        <div className="w-full grid grid-cols-1 min-[420px]:grid-cols-2 gap-2 sm:gap-2.5">
+        <div className="w-full grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-2.5">
           <StageControlSelect
             label="Composition Pattern"
             value={addonConfig}
@@ -292,120 +312,132 @@ export function SecretTokenField() {
               { label: "Disabled", value: "disabled" },
             ]}
           />
+
+          <StageControlSelect
+            label="Container Width"
+            value={containerWidth}
+            onValueChange={setContainerWidth}
+            options={CONTAINER_WIDTH_OPTIONS}
+          />
         </div>
       }
     >
-      <div className="w-full max-w-md mx-auto p-4 sm:p-6">
-        <div className="p-5 sm:p-7 rounded-2xl border border-white/60 dark:border-white/15 bg-white/55 dark:bg-neutral-950/55 backdrop-blur-2xl backdrop-saturate-180 shadow-[0_12px_36px_-4px_rgba(0,0,0,0.12),inset_0_1px_1px_0_rgba(255,255,255,0.85)] dark:shadow-[0_18px_50px_-8px_rgba(0,0,0,0.7),inset_0_1px_1px_0_rgba(255,255,255,0.14)] relative isolate before:content-[''] before:absolute before:inset-0 before:pointer-events-none before:rounded-[inherit] before:bg-gradient-to-br before:from-white/25 before:via-white/5 before:to-transparent dark:before:from-white/10 dark:before:via-transparent transition-all">
-          <Field id="stage-input-group" invalid={isInvalid} disabled={isDisabled}>
-            <FieldLabel htmlFor="stage-input-group-control" required={isInvalid}>
-              {addonConfig === "prefix"
-                ? "Company website"
-                : addonConfig === "suffix"
-                ? "Workspace subdomain"
-                : addonConfig === "both"
-                ? "Allocated budget"
-                : addonConfig === "icon-search"
-                ? "Search directory"
-                : "Live API secret"}
-            </FieldLabel>
-
-            <InputGroup>
-              {addonConfig === "prefix" && (
-                <InputGroupAddon align="inline-start">
-                  <InputGroupText className="font-mono text-xs">https://</InputGroupText>
-                </InputGroupAddon>
-              )}
-
-              {addonConfig === "both" && (
-                <InputGroupAddon align="inline-start">
-                  <InputGroupText className="font-semibold">$</InputGroupText>
-                </InputGroupAddon>
-              )}
-
-              {addonConfig === "icon-search" && (
-                <InputGroupAddon align="inline-start">
-                  <HaloIcon icon={Search01Icon} size={16} className="text-muted-foreground" />
-                </InputGroupAddon>
-              )}
-
-              <InputGroupInput
-                id="stage-input-group-control"
-                disabled={isDisabled}
-                aria-invalid={isInvalid ? "true" : undefined}
-                value={isInvalid ? "invalid-token-signature" : inputValue}
-                onChange={(e) => setInputValue(e.target.value)}
-                readOnly={addonConfig === "action-button"}
-                placeholder={
-                  addonConfig === "prefix"
-                    ? "company.design"
-                    : addonConfig === "icon-search"
-                    ? "Search docs..."
-                    : "Enter value..."
-                }
-                aria-describedby={isInvalid ? "stage-ig-err" : "stage-ig-desc"}
-                className={addonConfig === "action-button" ? "font-mono text-xs" : undefined}
-              />
-
-              {addonConfig === "suffix" && (
-                <InputGroupAddon align="inline-end">
-                  <InputGroupText className="font-mono text-xs">.haloui.dev</InputGroupText>
-                </InputGroupAddon>
-              )}
-
-              {addonConfig === "both" && (
-                <InputGroupAddon align="inline-end">
-                  <InputGroupText className="font-mono text-xs">USD</InputGroupText>
-                </InputGroupAddon>
-              )}
-
-              {addonConfig === "icon-search" && inputValue.length > 0 && (
-                <InputGroupAddon align="inline-end">
-                  <InputGroupButton
-                    type="button"
-                    variant="ghost"
-                    size="icon-xs"
-                    onClick={() => setInputValue("")}
-                    aria-label="Clear search input"
-                  >
-                    <HaloIcon icon={Cancel01Icon} size={14} />
-                  </InputGroupButton>
-                </InputGroupAddon>
-              )}
-
-              {addonConfig === "action-button" && (
-                <InputGroupAddon align="inline-end">
-                  <InputGroupButton
-                    type="button"
-                    variant="outline"
-                    size="xs"
-                    onClick={handleCopyAction}
-                    aria-label={copiedAction ? "Copied" : "Copy token"}
-                    className="gap-1.5"
-                  >
-                    <HaloIcon
-                      icon={copiedAction ? Tick02Icon : Copy01Icon}
-                      size={13}
-                      className={copiedAction ? "text-emerald-500" : ""}
-                    />
-                    <span>{copiedAction ? "Copied" : "Copy"}</span>
-                  </InputGroupButton>
-                </InputGroupAddon>
-              )}
-            </InputGroup>
-
-            {isInvalid ? (
-              <FieldError id="stage-ig-err">
-                The input format does not satisfy security protocol standards.
-              </FieldError>
-            ) : (
-              <FieldDescription id="stage-ig-desc">
+      <div className="w-full flex flex-col items-center justify-center py-6 px-2 sm:px-4">
+        <div
+          style={{ width: containerWidth }}
+          className="max-w-full transition-all duration-200 ease-out flex flex-col items-center justify-center"
+        >
+          <div className="w-full p-5 sm:p-7 rounded-2xl border border-white/60 dark:border-white/15 bg-white/55 dark:bg-neutral-950/55 backdrop-blur-2xl backdrop-saturate-180 shadow-[0_12px_36px_-4px_rgba(0,0,0,0.12),inset_0_1px_1px_0_rgba(255,255,255,0.85)] dark:shadow-[0_18px_50px_-8px_rgba(0,0,0,0.7),inset_0_1px_1px_0_rgba(255,255,255,0.14)] relative isolate before:content-[''] before:absolute before:inset-0 before:pointer-events-none before:rounded-[inherit] before:bg-gradient-to-br before:from-white/25 before:via-white/5 before:to-transparent dark:before:from-white/10 dark:before:via-transparent transition-all">
+            <Field id="stage-input-group" invalid={isInvalid} disabled={isDisabled}>
+              <FieldLabel htmlFor="stage-input-group-control" required={isInvalid}>
                 {addonConfig === "prefix"
-                  ? "The prefix is purely visual decoration; submitted value contains the domain only."
-                  : "Decorations and interactive actions share the optical boundary without altering form data."}
-              </FieldDescription>
-            )}
-          </Field>
+                  ? "Company website"
+                  : addonConfig === "suffix"
+                  ? "Workspace subdomain"
+                  : addonConfig === "both"
+                  ? "Allocated budget"
+                  : addonConfig === "icon-search"
+                  ? "Search directory"
+                  : "Live API secret"}
+              </FieldLabel>
+
+              <InputGroup>
+                {addonConfig === "prefix" && (
+                  <InputGroupAddon align="inline-start">
+                    <InputGroupText className="font-mono text-xs">https://</InputGroupText>
+                  </InputGroupAddon>
+                )}
+
+                {addonConfig === "both" && (
+                  <InputGroupAddon align="inline-start">
+                    <InputGroupText className="font-semibold">$</InputGroupText>
+                  </InputGroupAddon>
+                )}
+
+                {addonConfig === "icon-search" && (
+                  <InputGroupAddon align="inline-start">
+                    <HaloIcon icon={Search01Icon} size={16} className="text-muted-foreground" />
+                  </InputGroupAddon>
+                )}
+
+                <InputGroupInput
+                  id="stage-input-group-control"
+                  disabled={isDisabled}
+                  aria-invalid={isInvalid ? "true" : undefined}
+                  value={isInvalid ? "invalid-token-signature" : inputValue}
+                  onChange={(e) => setInputValue(e.target.value)}
+                  readOnly={addonConfig === "action-button"}
+                  placeholder={
+                    addonConfig === "prefix"
+                      ? "company.design"
+                      : addonConfig === "icon-search"
+                      ? "Search docs..."
+                      : "Enter value..."
+                  }
+                  aria-describedby={isInvalid ? "stage-ig-err" : "stage-ig-desc"}
+                  className={addonConfig === "action-button" ? "font-mono text-xs" : undefined}
+                />
+
+                {addonConfig === "suffix" && (
+                  <InputGroupAddon align="inline-end">
+                    <InputGroupText className="font-mono text-xs">.haloui.dev</InputGroupText>
+                  </InputGroupAddon>
+                )}
+
+                {addonConfig === "both" && (
+                  <InputGroupAddon align="inline-end">
+                    <InputGroupText className="font-mono text-xs">USD</InputGroupText>
+                  </InputGroupAddon>
+                )}
+
+                {addonConfig === "icon-search" && inputValue.length > 0 && (
+                  <InputGroupAddon align="inline-end">
+                    <InputGroupButton
+                      type="button"
+                      variant="ghost"
+                      size="icon-xs"
+                      onClick={() => setInputValue("")}
+                      aria-label="Clear search input"
+                    >
+                      <HaloIcon icon={Cancel01Icon} size={14} />
+                    </InputGroupButton>
+                  </InputGroupAddon>
+                )}
+
+                {addonConfig === "action-button" && (
+                  <InputGroupAddon align="inline-end">
+                    <InputGroupButton
+                      type="button"
+                      variant="outline"
+                      size="xs"
+                      onClick={handleCopyAction}
+                      aria-label={copiedAction ? "Copied" : "Copy token"}
+                      className="gap-1.5"
+                    >
+                      <HaloIcon
+                        icon={copiedAction ? Tick02Icon : Copy01Icon}
+                        size={13}
+                        className={copiedAction ? "text-emerald-500" : ""}
+                      />
+                      <span>{copiedAction ? "Copied" : "Copy"}</span>
+                    </InputGroupButton>
+                  </InputGroupAddon>
+                )}
+              </InputGroup>
+
+              {isInvalid ? (
+                <FieldError id="stage-ig-err">
+                  The input format does not satisfy security protocol standards.
+                </FieldError>
+              ) : (
+                <FieldDescription id="stage-ig-desc">
+                  {addonConfig === "prefix"
+                    ? "The prefix is purely visual decoration; submitted value contains the domain only."
+                    : "Decorations and interactive actions share the optical boundary without altering form data."}
+                </FieldDescription>
+              )}
+            </Field>
+          </div>
         </div>
       </div>
     </PreviewStageShell>

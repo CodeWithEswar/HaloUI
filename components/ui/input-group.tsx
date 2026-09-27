@@ -19,7 +19,7 @@ export function InputGroup({ className, ...props }: InputGroupProps) {
       data-slot="input-group"
       role="group"
       className={cn(
-        "group/input-group relative flex h-10 w-full min-w-0 items-center rounded-xl px-2 transition-all duration-150 outline-none isolate",
+        "group/input-group relative flex h-10 w-full min-w-0 max-w-full items-center rounded-xl px-2 transition-all duration-150 outline-none isolate",
         "bg-black/[0.02] dark:bg-white/[0.035]",
         "backdrop-blur-xs",
         "border border-[var(--halo-glass-border)]",

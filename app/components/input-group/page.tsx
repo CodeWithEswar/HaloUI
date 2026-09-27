@@ -10,7 +10,7 @@ import {
 } from "./input-group-demonstrations";
 import { InstallCommand } from "@/components/mdx/install-command";
 import { Anatomy, type AnatomyPart } from "@/components/mdx/anatomy";
-import { PropsTable, type PropRow } from "@/components/mdx/props-table";
+import { PropsExplorer, type SubcomponentApi } from "@/components/docs/props-explorer";
 import { FileTree, type FileNode } from "@/components/mdx/file-tree";
 import { Callout } from "@/components/mdx/callout";
 import { CodeBlock } from "@/components/mdx/code-block";
@@ -22,96 +22,202 @@ export const metadata: Metadata = {
     "Composes a canonical Input with prefixes, suffixes, icons, text addons, and actions inside a shared optical liquid glass boundary without duplicating input styles or state.",
 };
 
-const INPUT_GROUP_PROPS: PropRow[] = [
+const INPUT_GROUP_SUBCOMPONENTS: SubcomponentApi[] = [
   {
-    name: "children",
-    type: "React.ReactNode",
-    default: "—",
-    required: true,
-    description: "The composition of addons, controls, text, or buttons.",
+    name: "InputGroup",
+    description:
+      "The primary 10-layer liquid glass composite container coordinating shared optics and focus management across addons and inputs.",
+    props: [
+      {
+        name: "role",
+        type: "string",
+        default: '"group"',
+        required: false,
+        description: "Accessible ARIA role identifying the composite control boundary to assistive technologies.",
+      },
+      {
+        name: "children",
+        type: "React.ReactNode",
+        default: "—",
+        required: true,
+        description: "The composition of addons, controls, text, or buttons.",
+      },
+      {
+        name: "className",
+        type: "string",
+        default: "undefined",
+        required: false,
+        description: "Additional CSS classes to append to the input group boundary.",
+      },
+      {
+        name: "...props",
+        type: 'React.ComponentProps<"div">',
+        default: "—",
+        required: false,
+        description: "Standard HTML <div> attributes applied to the group container.",
+      },
+    ],
   },
   {
-    name: "className",
-    type: "string",
-    default: "undefined",
-    required: false,
-    description: "Additional CSS classes to append to the input group boundary.",
+    name: "InputGroupAddon",
+    description:
+      "Container for prefix, suffix, decorative icons, and interactive action buttons with built-in click-to-focus forwarding.",
+    props: [
+      {
+        name: "align",
+        type: '"inline-start" | "inline-end" | "block-start" | "block-end"',
+        default: '"inline-start"',
+        required: false,
+        description: "Positional alignment for prefixes, suffixes, icons, and action triggers.",
+      },
+      {
+        name: "children",
+        type: "React.ReactNode",
+        default: "—",
+        required: true,
+        description: "The content of the addon (text, icon, or button).",
+      },
+      {
+        name: "className",
+        type: "string",
+        default: "undefined",
+        required: false,
+        description: "Additional CSS classes for the addon container.",
+      },
+      {
+        name: "onClick",
+        type: "(e: React.MouseEvent) => void",
+        default: "focus() forwarder",
+        required: false,
+        description: "Automatic focus forwarder that transfers click focus to the inner control.",
+      },
+      {
+        name: "...props",
+        type: 'React.ComponentProps<"div">',
+        default: "—",
+        required: false,
+        description: "Standard HTML div attributes applied to the addon wrapper.",
+      },
+    ],
   },
   {
-    name: "role",
-    type: "string",
-    default: '"group"',
-    required: false,
-    description: "Accessible ARIA role identifying the composite control boundary.",
+    name: "InputGroupInput",
+    description:
+      "Canonical single-line text input stripped of native borders and backgrounds to merge seamlessly into the InputGroup optical shell.",
+    props: [
+      {
+        name: "id",
+        type: "string",
+        default: "—",
+        required: false,
+        description: "Identifier linking the control with parent FieldLabel and accessibility descriptors.",
+      },
+      {
+        name: "placeholder",
+        type: "string",
+        default: "—",
+        required: false,
+        description: "Short hint displayed inside the input before user enters a value.",
+      },
+      {
+        name: "disabled",
+        type: "boolean",
+        default: "false",
+        required: false,
+        description: "Disables user interaction and cascades dimmed optical states across the group.",
+      },
+      {
+        name: "readOnly",
+        type: "boolean",
+        default: "false",
+        required: false,
+        description: "Prevents editing while preserving keyboard focus, text selection, and screen reader announcements.",
+      },
+      {
+        name: "aria-invalid",
+        type: 'boolean | "true" | "false"',
+        default: "false",
+        required: false,
+        description: "Signals validation failure, triggering red error ring persistence on the parent group.",
+      },
+      {
+        name: "...props",
+        type: 'React.ComponentProps<typeof Input>',
+        default: "—",
+        required: false,
+        description: "All standard Input props forwarded to the canonical text field.",
+      },
+    ],
   },
   {
-    name: "...props",
-    type: 'React.ComponentProps<"div">',
-    default: "—",
-    required: false,
-    description: "Standard HTML <div> attributes applied to the group container.",
-  },
-];
-
-const INPUT_GROUP_ADDON_PROPS: PropRow[] = [
-  {
-    name: "align",
-    type: '"inline-start" | "inline-end" | "block-start" | "block-end"',
-    default: '"inline-start"',
-    required: false,
-    description: "Positional alignment for prefixes, suffixes, icons, and action triggers.",
-  },
-  {
-    name: "children",
-    type: "React.ReactNode",
-    default: "—",
-    required: true,
-    description: "The content of the addon (text, icon, or button).",
-  },
-  {
-    name: "className",
-    type: "string",
-    default: "undefined",
-    required: false,
-    description: "Additional CSS classes for the addon container.",
-  },
-  {
-    name: "onClick",
-    type: "(e: React.MouseEvent) => void",
-    default: "focus() forwarder",
-    required: false,
-    description: "Automatic focus forwarder that transfers click focus to the inner control.",
-  },
-];
-
-const INPUT_GROUP_BUTTON_PROPS: PropRow[] = [
-  {
-    name: "size",
-    type: '"xs" | "sm" | "icon-xs" | "icon-sm"',
-    default: '"icon-xs"',
-    required: false,
-    description: "Scaled button size optimized to fit inside the 40px input group boundary.",
+    name: "InputGroupButton",
+    description:
+      "Independent interactive action button (clear, copy, password toggle) embedded inside an addon without clipping focus rings.",
+    props: [
+      {
+        name: "size",
+        type: '"xs" | "sm" | "icon-xs" | "icon-sm"',
+        default: '"icon-xs"',
+        required: false,
+        description: "Scaled button size optimized to fit inside the 40px input group boundary.",
+      },
+      {
+        name: "variant",
+        type: '"default" | "secondary" | "outline" | "ghost" | "destructive"',
+        default: '"ghost"',
+        required: false,
+        description: "Visual style variant from the canonical HaloUI Button primitive.",
+      },
+      {
+        name: "type",
+        type: '"button" | "submit" | "reset"',
+        default: '"button"',
+        required: false,
+        description: "Explicit button type to prevent unintended form submissions.",
+      },
+      {
+        name: "...props",
+        type: 'React.ComponentProps<typeof Button>',
+        default: "—",
+        required: false,
+        description: "All standard Button props, including aria-label, onClick, and disabled.",
+      },
+    ],
   },
   {
-    name: "variant",
-    type: '"default" | "secondary" | "outline" | "ghost" | "destructive"',
-    default: '"ghost"',
-    required: false,
-    description: "Visual style variant from the canonical HaloUI Button primitive.",
+    name: "InputGroupText",
+    description:
+      "Static typographic hint or unit label (e.g., https://, USD, kg) styled with muted text colors and tabular numerals.",
+    props: [
+      {
+        name: "children",
+        type: "React.ReactNode",
+        default: "—",
+        required: true,
+        description: "Textual label or currency notation.",
+      },
+      {
+        name: "className",
+        type: "string",
+        default: "undefined",
+        required: false,
+        description: "Additional CSS typography or spacing classes.",
+      },
+    ],
   },
   {
-    name: "type",
-    type: '"button" | "submit" | "reset"',
-    default: '"button"',
-    required: false,
-    description: "Explicit button type to prevent unintended form submissions.",
-  },
-  {
-    name: "...props",
-    type: 'React.ComponentProps<typeof Button>',
-    default: "—",
-    required: false,
-    description: "All standard Button props, including aria-label, onClick, and disabled.",
+    name: "InputGroupSeparator",
+    description:
+      "Subtle optical hairline divider separating consecutive addons or actions inside the shared boundary.",
+    props: [
+      {
+        name: "className",
+        type: "string",
+        default: "undefined",
+        required: false,
+        description: "Additional CSS classes for custom divider heights or alignments.",
+      },
+    ],
   },
 ];
 
@@ -324,26 +430,61 @@ export default function InputGroupPage() {
         <PrefixAndSuffixDemo />
       </section>
 
+      {/* Liquid Glass Architecture */}
+      <section className="space-y-4">
+        <h2 className="text-2xl font-bold tracking-tight text-foreground font-heading">
+          Liquid Glass &amp; Optical Layering Architecture
+        </h2>
+        <p className="text-sm text-muted-foreground leading-relaxed">
+          The <code className="text-foreground">InputGroup</code> boundary functions as an advanced composite optical aperture. Rather than wrapping separate inputs and icons with redundant borders and background fills, the container establishes a unified liquid glass surface across all subcomponents:
+        </p>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="rounded-xl border border-border p-4 space-y-2 bg-muted/20">
+            <h3 className="font-semibold text-foreground text-sm">1. Focus Ring Delegator (<code className="text-xs">has-[control:focus-visible]</code>)</h3>
+            <p className="text-xs text-muted-foreground leading-relaxed">
+              Native outline styles on the child input are disabled. The outer boundary listens to focus events from controls using CSS pseudo-class <code className="text-foreground">has-[:focus-visible]</code>, illuminating a unified liquid highlight rim and specular flare.
+            </p>
+          </div>
+          <div className="rounded-xl border border-border p-4 space-y-2 bg-muted/20">
+            <h3 className="font-semibold text-foreground text-sm">2. Non-Clipping Overflow Architecture</h3>
+            <p className="text-xs text-muted-foreground leading-relaxed">
+              Standard inputs often apply <code className="text-foreground">overflow: hidden</code> to round child elements. HaloUI removes this restriction, ensuring interactive action buttons receive unclipped 2px focus rings and dropdown menus can anchor directly to addons.
+            </p>
+          </div>
+          <div className="rounded-xl border border-border p-4 space-y-2 bg-muted/20">
+            <h3 className="font-semibold text-foreground text-sm">3. Persistent Error Boundary</h3>
+            <p className="text-xs text-muted-foreground leading-relaxed">
+              When invalid state is asserted, the red destructive optical ring locks onto the group. Tabbing to secondary action buttons maintains the error boundary so visual form integrity is never compromised.
+            </p>
+          </div>
+          <div className="rounded-xl border border-border p-4 space-y-2 bg-muted/20">
+            <h3 className="font-semibold text-foreground text-sm">4. Automatic Click-to-Focus Forwarding</h3>
+            <p className="text-xs text-muted-foreground leading-relaxed">
+              Clicking non-interactive decorative elements (prefixes, currency units, search icons) queries the sibling text input and shifts keyboard focus immediately, providing a tactile native control feel.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Container Responsiveness */}
+      <section className="space-y-4">
+        <h2 className="text-2xl font-bold tracking-tight text-foreground font-heading">
+          Automatic container-aware responsiveness
+        </h2>
+        <p className="text-sm text-muted-foreground leading-relaxed">
+          Input Group adjusts fluidly across constrained screen widths from 240px ultra-compact mobile views up to 1024px full desktop layouts. The text input features <code className="text-foreground">min-w-0 max-w-full</code> flex shrinking, preventing addon collisions and horizontal overflow.
+        </p>
+      </section>
+
       {/* Props */}
       <section className="space-y-6">
         <h2 className="text-2xl font-bold tracking-tight text-foreground font-heading">
           Props Reference
         </h2>
-
-        <div className="space-y-4">
-          <h3 className="text-lg font-semibold text-foreground">InputGroup</h3>
-          <PropsTable rows={INPUT_GROUP_PROPS} />
-        </div>
-
-        <div className="space-y-4">
-          <h3 className="text-lg font-semibold text-foreground">InputGroupAddon</h3>
-          <PropsTable rows={INPUT_GROUP_ADDON_PROPS} />
-        </div>
-
-        <div className="space-y-4">
-          <h3 className="text-lg font-semibold text-foreground">InputGroupButton</h3>
-          <PropsTable rows={INPUT_GROUP_BUTTON_PROPS} />
-        </div>
+        <p className="text-sm text-muted-foreground">
+          Comprehensive API specification for all Input Group subcomponents and composite elements.
+        </p>
+        <PropsExplorer subcomponents={INPUT_GROUP_SUBCOMPONENTS} />
       </section>
 
       {/* Anatomy */}
