@@ -1420,6 +1420,44 @@ export const docsNavigation: DocsNavSection[] = [
           "data display"
         ],
       },
+      {
+        title: "Table",
+        href: "/components/table",
+        description: "Semantic tabular data presentation primitive with container-aware horizontal scroll containment, density scales, and restrained HaloUI Liquid Glass outer boundary.",
+        status: "stable",
+        keywords: [
+          "table",
+          "tabular",
+          "thead",
+          "tbody",
+          "table-row",
+          "table-cell",
+          "grid",
+          "records",
+          "rows",
+          "columns",
+          "data display"
+        ],
+      },
+      {
+        title: "Data Table",
+        href: "/components/data-table",
+        description: "Interactive data-management composition built on Table and TanStack Table with sorting, filtering, selection, pagination, and restrained HaloUI Liquid Glass materials.",
+        status: "stable",
+        keywords: [
+          "data-table",
+          "data table",
+          "datatable",
+          "tanstack",
+          "sorting",
+          "filtering",
+          "pagination",
+          "selection",
+          "columns",
+          "bulk actions",
+          "data display"
+        ],
+      },
     ],
   },
   {

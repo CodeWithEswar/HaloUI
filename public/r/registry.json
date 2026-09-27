@@ -456,6 +456,32 @@
       ]
     },
     {
+      "name": "data-table",
+      "type": "registry:ui",
+      "title": "Data Table",
+      "description": "Interactive data-management composition built on Table and TanStack Table with sorting, filtering, selection, pagination, and restrained HaloUI Liquid Glass materials.",
+      "dependencies": [
+        "@tanstack/react-table",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [
+        "table",
+        "button",
+        "input",
+        "dropdown-menu",
+        "select",
+        "checkbox",
+        "badge"
+      ],
+      "files": [
+        {
+          "path": "components/ui/data-table.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
       "name": "date-picker",
       "type": "registry:ui",
       "title": "Date Picker",
@@ -2487,6 +2513,23 @@
         "accessibility": "WCAG 2.1 AA",
         "lastUpdated": "2026-09-25"
       }
+    },
+    {
+      "name": "table",
+      "type": "registry:ui",
+      "title": "Table",
+      "description": "Semantic tabular data presentation primitive with container-aware horizontal scroll containment, density scales, and restrained HaloUI Liquid Glass outer boundary.",
+      "dependencies": [
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "components/ui/table.tsx",
+          "type": "registry:ui"
+        }
+      ]
     },
     {
       "name": "tabs",
