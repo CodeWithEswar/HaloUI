@@ -21,7 +21,7 @@ import {
 } from "./button-demonstrations";
 import { InstallCommand } from "@/components/mdx/install-command";
 import { Anatomy, type AnatomyPart } from "@/components/mdx/anatomy";
-import { PropsTable } from "@/components/mdx/props-table";
+import { PropsExplorer, type SubcomponentApi } from "@/components/docs/props-explorer";
 import { FileTree, type FileNode } from "@/components/mdx/file-tree";
 import { Callout } from "@/components/mdx/callout";
 import { CodeBlock } from "@/components/mdx/code-block";
@@ -33,48 +33,67 @@ export const metadata: Metadata = {
     "A text or icon-supported action control with HaloUI material, semantic variants, accessible interaction states, and consistent keyboard behavior.",
 };
 
-const PROPS_DATA = [
+const BUTTON_SUBCOMPONENTS: SubcomponentApi[] = [
   {
-    name: "variant",
-    type: '"default" | "secondary" | "outline" | "ghost" | "destructive" | "link"',
-    default: '"default"',
-    required: false,
-    description: "Defines the semantic visual hierarchy and optical material profile of the action control.",
-  },
-  {
-    name: "size",
-    type: '"sm" | "default" | "lg" | "icon"',
-    default: '"default"',
-    required: false,
-    description: "Controls component geometry, touch targets, and internal padding.",
-  },
-  {
-    name: "asChild",
-    type: "boolean",
-    default: "false",
-    required: false,
-    description: "Applies button styling and interaction behavior directly onto a composed child (such as Next.js Link) using Radix Slot.",
-  },
-  {
-    name: "type",
-    type: '"button" | "submit" | "reset"',
-    default: '"button"',
-    required: false,
-    description: "Native HTML button type attribute. Defaults to 'button' to prevent accidental form submission.",
-  },
-  {
-    name: "disabled",
-    type: "boolean",
-    default: "false",
-    required: false,
-    description: "Prevents activation, mutes optical transmission, and disallows pointer/focus interaction via native disabled semantics.",
-  },
-  {
-    name: "className",
-    type: "string",
-    default: "undefined",
-    required: false,
-    description: "Additional Tailwind CSS classes merged via cn() utility.",
+    name: "Button",
+    kind: "Component",
+    maturity: "stable",
+    description:
+      "A text or icon-supported action control with HaloUI liquid material, semantic variants, accessible interaction states, and consistent keyboard behavior.",
+    inheritedProps: {
+      element: "React.ButtonHTMLAttributes<HTMLButtonElement>",
+      description:
+        "Inherits all native HTML <button> attributes, ARIA attributes, event handlers (onClick, onFocus), and ref forwarding.",
+    },
+    props: [
+      {
+        name: "variant",
+        type: "'default' | 'primary' | 'secondary' | 'outline' | 'ghost' | 'destructive' | 'link'",
+        default: "'default'",
+        required: false,
+        description:
+          "Defines the semantic action hierarchy and optical material profile: 'default' (restrained liquid glass with specular catch), 'primary' (solid high-contrast monochrome), 'secondary' (tinted glass), 'outline' (hairline border), 'ghost' (flat minimal), 'destructive' (crimson glass), or 'link' (accessible text action).",
+      },
+      {
+        name: "size",
+        type: "'default' | 'sm' | 'lg' | 'icon' | 'xs' | 'icon-sm' | 'icon-lg'",
+        default: "'default'",
+        required: false,
+        description:
+          "Controls component geometry and padding scale: 'default' (40px height), 'sm' (32px), 'lg' (48px), 'icon' (40px square), or 'xs' (24px compact).",
+      },
+      {
+        name: "asChild",
+        type: "boolean",
+        default: "false",
+        required: false,
+        description:
+          "Delegates button styling and interaction behavior directly onto a composed child (such as Next.js Link) using Radix Slot.",
+      },
+      {
+        name: "disabled",
+        type: "boolean",
+        default: "false",
+        required: false,
+        description:
+          "Disables pointer and keyboard interactions, mutes optical transmission, and applies native disabled button semantics.",
+      },
+      {
+        name: "type",
+        type: "'button' | 'submit' | 'reset'",
+        default: "'button'",
+        required: false,
+        description:
+          "Native HTML button type attribute. Defaults to 'button' to prevent accidental form submission.",
+      },
+      {
+        name: "className",
+        type: "string",
+        required: false,
+        description:
+          "Additional Tailwind CSS classes merged with the button's base and variant styles.",
+      },
+    ],
   },
 ];
 
@@ -390,7 +409,7 @@ export function NavAction() {
           </p>
         </div>
 
-        <PropsTable rows={PROPS_DATA} />
+        <PropsExplorer subcomponents={BUTTON_SUBCOMPONENTS} />
       </section>
 
       {/* 11. Anatomy */}
@@ -441,19 +460,22 @@ export function NavAction() {
       <section className="space-y-4">
         <div className="space-y-1">
           <h2 className="text-xl font-semibold tracking-tight text-foreground">
-            Responsive behavior
+            Automatic Container-Aware Responsiveness
           </h2>
           <p className="text-sm text-muted-foreground">
-            Buttons are intrinsically flexible and scale cleanly inside responsive layout containers.
+            Buttons are intrinsically flexible and scale cleanly inside any parent container without JavaScript viewport measurement.
           </p>
         </div>
 
-        <div className="space-y-2 text-sm text-muted-foreground">
+        <div className="space-y-3 text-sm text-muted-foreground">
           <p>
-            Button dimensions are driven by internal text metrics and padding rather than fixed pixel widths. To span the full width of mobile containers, supply layout utility classes such as <code>w-full</code> on the button instance rather than hardcoding full-width styles into the component core.
+            <strong>Intrinsic Wrapping:</strong> Button utilizes <code>min-w-0 max-w-full leading-snug break-words</code> paired with <code>min-h</code> height scaling. In wide viewports or short-text configurations, the button maintains canonical 40px/32px/48px geometry. When constrained inside narrow parents (such as 240px columns, sidebars, or mobile cards), long text wraps naturally without horizontal overflow.
           </p>
           <p>
-            Button labels are set with <code>whitespace-nowrap</code> to prevent ungraceful mid-label line breaks during flex wrapping.
+            <strong>Icon Protection:</strong> Leading and trailing SVG icons enforce <code>shrink-0</code>, guaranteeing that icons never compress or distort when labels wrap across multiple lines.
+          </p>
+          <p>
+            <strong>200% Zoom Compatibility:</strong> Scales gracefully under high text-scaling modes, expanding vertical padding while containing foreground typography within parent boundaries.
           </p>
         </div>
       </section>
