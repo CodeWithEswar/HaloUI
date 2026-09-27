@@ -10,7 +10,7 @@ import {
 } from "./action-bar-demonstrations";
 import { InstallCommand } from "@/components/mdx/install-command";
 import { Anatomy, type AnatomyPart } from "@/components/mdx/anatomy";
-import { PropsTable } from "@/components/mdx/props-table";
+import { PropsExplorer, type SubcomponentApi } from "@/components/docs/props-explorer";
 import { FileTree, type FileNode } from "@/components/mdx/file-tree";
 import { Callout } from "@/components/mdx/callout";
 import { CodeBlock } from "@/components/mdx/code-block";
@@ -22,71 +22,81 @@ export const metadata: Metadata = {
     "A contextual container for organizing actions related to the user's current selection or task.",
 };
 
-const PROPS_DATA = [
+const ACTION_BAR_SUBCOMPONENTS: SubcomponentApi[] = [
   {
-    name: "density",
-    type: '"compact" | "default" | "spacious"',
-    default: '"default"',
-    required: false,
+    name: "ActionBar",
     description:
-      "Padding and gap density: 'compact' (p-1.5, gap-1.5), 'default' (p-2.5, gap-2.5), or 'spacious' (p-3.5, gap-3.5).",
+      "Contextual liquid glass container providing unified optical boundary, backdrop diffusion, and unclipped focus overflow context for interactive toolbars.",
+    props: [
+      {
+        name: "density",
+        type: '"compact" | "default" | "spacious"',
+        defaultValue: '"default"',
+        description:
+          "Ergonomic padding and gap scaling: 'compact' (p-1.5, gap-1.5), 'default' (p-2.5, gap-2.5), or 'spacious' (p-3.5, gap-3.5).",
+      },
+      {
+        name: "fullWidth",
+        type: "boolean",
+        defaultValue: "false",
+        description:
+          "When true, expands the action bar to 100% of the parent container width with justify-between min-w-0.",
+      },
+      {
+        name: "role",
+        type: "string",
+        defaultValue: '"toolbar"',
+        description:
+          "Accessible ARIA role assigned to the container (defaults to 'toolbar' for accessible batch controls).",
+      },
+      {
+        name: "aria-label",
+        type: "string",
+        description:
+          "Accessible description identifying the purpose and scope of the action bar.",
+      },
+    ],
   },
   {
-    name: "fullWidth",
-    type: "boolean",
-    default: "false",
-    required: false,
+    name: "ActionBarGroup",
     description:
-      "When true, expands the action bar to 100% of the parent width and spaces internal groups.",
+      "Semantic grouping wrapper orchestrating Button, Icon Button, and Button Group controls with alignment flex.",
+    props: [
+      {
+        name: "align",
+        type: '"start" | "center" | "end"',
+        defaultValue: '"start"',
+        description:
+          "Alignment orientation of child action controls within this specific group cluster.",
+      },
+    ],
   },
   {
-    name: "role",
-    type: "string",
-    default: '"toolbar"',
-    required: false,
+    name: "ActionBarLabel",
     description:
-      "ARIA role assigned to the container (defaults to 'toolbar' for accessible batch controls).",
+      "Selection context readout (e.g. '3 selected') informing the user of the active scope with optional numeric badge count.",
+    props: [
+      {
+        name: "count",
+        type: "number | string",
+        description:
+          "Optional numeric selection count rendered inside a high-contrast optical badge.",
+      },
+    ],
   },
   {
-    name: "aria-label",
-    type: "string",
-    default: "undefined",
-    required: false,
+    name: "ActionBarSeparator",
     description:
-      "Mandatory accessible description identifying the purpose of the action bar.",
-  },
-];
-
-const GROUP_PROPS_DATA = [
-  {
-    name: "align",
-    type: '"start" | "center" | "end"',
-    default: '"start"',
-    required: false,
-    description:
-      "Alignment orientation of child action controls within this specific group cluster.",
-  },
-];
-
-const LABEL_PROPS_DATA = [
-  {
-    name: "count",
-    type: "number | string",
-    default: "undefined",
-    required: false,
-    description:
-      "Optional numeric selection count rendered inside a high-contrast badge.",
-  },
-];
-
-const SEPARATOR_PROPS_DATA = [
-  {
-    name: "orientation",
-    type: '"horizontal" | "vertical"',
-    default: '"vertical"',
-    required: false,
-    description:
-      "Spatial orientation of the optical divider line.",
+      "Subtle 1px hairline optical divider organizing independent action clusters with dual shadow highlights.",
+    props: [
+      {
+        name: "orientation",
+        type: '"horizontal" | "vertical"',
+        defaultValue: '"vertical"',
+        description:
+          "Spatial orientation of the optical divider line.",
+      },
+    ],
   },
 ];
 
@@ -393,27 +403,61 @@ export function BatchToolbar() {
         </div>
       </div>
 
-      {/* Props */}
-      <div className="space-y-6">
+      {/* Component API */}
+      <div className="space-y-4">
         <h2 id="props" className="text-xl font-semibold tracking-tight text-foreground">
-          Props Reference
+          Component API
         </h2>
-        <div className="space-y-4">
-          <h3 className="text-base font-semibold text-foreground">ActionBar</h3>
-          <PropsTable rows={PROPS_DATA} />
+        <p className="text-sm text-muted-foreground leading-relaxed">
+          Interactive subcomponent specifications, density modes, and accessibility properties for ActionBar.
+        </p>
+        <PropsExplorer subcomponents={ACTION_BAR_SUBCOMPONENTS} />
+      </div>
+
+      {/* Liquid Glass Structural Elevation Architecture */}
+      <div className="space-y-4">
+        <h2 id="optical-engine" className="text-xl font-semibold tracking-tight text-foreground">
+          Liquid Glass Structural Elevation Architecture
+        </h2>
+        <p className="text-sm text-muted-foreground leading-relaxed">
+          ActionBar functions as a high-tier floating contextual substrate (<code className="text-foreground font-mono text-xs">bg-white/65</code> / <code className="text-foreground font-mono text-xs">dark:bg-neutral-950/65</code> with 24px backdrop blur). It leverages a 135° directional specular reflection rim and dual contact shadows to guarantee elevated contrast across diverse data-dense backdrops without muddying child controls.
+        </p>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
+          <div className="p-4 rounded-xl border border-border/50 bg-muted/20 space-y-2">
+            <h4 className="text-xs font-semibold uppercase tracking-wider text-foreground">
+              Layered Optical Backing
+            </h4>
+            <p className="text-xs text-muted-foreground leading-relaxed">
+              Provides unified optical boundary and backdrop diffusion so complex actions (ButtonGroups, icons, inputs) visually resolve as a coherent contextual tool.
+            </p>
+          </div>
+          <div className="p-4 rounded-xl border border-border/50 bg-muted/20 space-y-2">
+            <h4 className="text-xs font-semibold uppercase tracking-wider text-foreground">
+              Unclipped Focus Perimeter
+            </h4>
+            <p className="text-xs text-muted-foreground leading-relaxed">
+              Maintains strict <code className="text-foreground font-mono text-[10px]">overflow-visible</code> architecture so child <code className="text-foreground font-mono text-[10px]">halo-focus-ring</code> perimeters on edge items are never clipped.
+            </p>
+          </div>
+          <div className="p-4 rounded-xl border border-border/50 bg-muted/20 space-y-2">
+            <h4 className="text-xs font-semibold uppercase tracking-wider text-foreground">
+              Semantic Context Separation
+            </h4>
+            <p className="text-xs text-muted-foreground leading-relaxed">
+              Integrates optical hairpins (<code className="text-foreground font-mono text-[10px]">ActionBarSeparator</code>) and grouped clusters to maintain clear information hierarchy between selection readouts, primary batch actions, and destructive operations.
+            </p>
+          </div>
         </div>
-        <div className="space-y-4">
-          <h3 className="text-base font-semibold text-foreground">ActionBarGroup</h3>
-          <PropsTable rows={GROUP_PROPS_DATA} />
-        </div>
-        <div className="space-y-4">
-          <h3 className="text-base font-semibold text-foreground">ActionBarLabel</h3>
-          <PropsTable rows={LABEL_PROPS_DATA} />
-        </div>
-        <div className="space-y-4">
-          <h3 className="text-base font-semibold text-foreground">ActionBarSeparator</h3>
-          <PropsTable rows={SEPARATOR_PROPS_DATA} />
-        </div>
+      </div>
+
+      {/* Automatic Container-Aware Responsiveness */}
+      <div className="space-y-4">
+        <h2 id="responsive-behavior" className="text-xl font-semibold tracking-tight text-foreground">
+          Automatic container-aware responsiveness
+        </h2>
+        <p className="text-sm text-muted-foreground leading-relaxed">
+          ActionBar automatically scales down to the strict 240px QA minimum container width. Progressive disclosure patterns allow text labels to collapse to icon-only presentations on constrained viewports, while <code className="text-foreground font-mono text-xs">min-w-0</code> and label truncation prevent container overflow in compact layouts.
+        </p>
       </div>
 
       {/* Dependencies */}

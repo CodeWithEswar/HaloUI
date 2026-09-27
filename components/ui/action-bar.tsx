@@ -14,7 +14,7 @@ import { cn } from "@/lib/utils";
 export const actionBarVariants = cva(
   [
     // Base layout: flexible contextual container
-    "relative inline-flex items-center isolate select-none",
+    "relative inline-flex items-center isolate select-none max-w-full min-w-0",
     "transition-all duration-200 ease-out",
     // 10-Layer Physical Optical Liquid Glass Engine
     "bg-white/65 dark:bg-neutral-950/65 backdrop-blur-2xl backdrop-saturate-180",
@@ -40,7 +40,7 @@ export const actionBarVariants = cva(
         spacious: "p-2.5 sm:p-3.5 gap-2 sm:gap-3.5 rounded-xl sm:rounded-2xl",
       },
       fullWidth: {
-        true: "w-full flex justify-between",
+        true: "w-full flex justify-between min-w-0",
         false: "w-fit max-w-full",
       },
     },
@@ -88,7 +88,7 @@ export const ActionBar = React.forwardRef<HTMLDivElement, ActionBarProps>(
       >
         <div
           className={cn(
-            "relative z-10 inline-flex items-center gap-[inherit] w-full overflow-visible",
+            "relative z-10 inline-flex items-center gap-[inherit] w-full max-w-full min-w-0 overflow-visible",
             fullWidth && "justify-between"
           )}
         >
@@ -120,7 +120,7 @@ export const ActionBarGroup = React.forwardRef<HTMLDivElement, ActionBarGroupPro
         ref={ref}
         data-slot="action-bar-group"
         className={cn(
-          "inline-flex items-center gap-1 sm:gap-2 shrink-0 overflow-visible",
+          "inline-flex items-center gap-1 sm:gap-2 shrink-0 min-w-0 overflow-visible",
           align === "center" && "justify-center",
           align === "end" && "justify-end ml-auto",
           className
@@ -154,7 +154,7 @@ export const ActionBarLabel = React.forwardRef<HTMLSpanElement, ActionBarLabelPr
         ref={ref}
         data-slot="action-bar-label"
         className={cn(
-          "inline-flex items-center gap-1.5 sm:gap-2 px-1.5 sm:px-2 text-xs sm:text-sm font-medium text-foreground select-none shrink-0",
+          "inline-flex items-center gap-1.5 sm:gap-2 px-1.5 sm:px-2 text-xs sm:text-sm font-medium text-foreground select-none shrink-0 min-w-0",
           className
         )}
         {...props}
@@ -164,7 +164,7 @@ export const ActionBarLabel = React.forwardRef<HTMLSpanElement, ActionBarLabelPr
             {count}
           </span>
         )}
-        {children && <span className="truncate">{children}</span>}
+        {children && <span className="truncate min-w-0">{children}</span>}
       </span>
     );
   }
