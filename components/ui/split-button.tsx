@@ -14,7 +14,7 @@ import { cn } from "@/lib/utils";
  */
 export const splitButtonVariants = cva(
   [
-    "inline-flex isolate items-stretch",
+    "inline-flex isolate items-stretch min-w-0 max-w-full",
     // Child stacking context: hover/focus/active controls float above adjacent borders
     "[&>*]:hover:z-10",
     "[&>*]:focus-visible:z-20",
@@ -45,8 +45,8 @@ export const splitButtonVariants = cva(
  */
 export const splitButtonActionVariants = cva(
   [
-    "group/split-action relative inline-flex items-center justify-center font-medium select-none isolate overflow-hidden cursor-pointer",
-    "whitespace-nowrap transition-all duration-200 ease-out outline-none",
+    "group/split-action relative inline-flex items-center justify-center font-medium select-none isolate overflow-hidden cursor-pointer text-center",
+    "min-w-0 max-w-full leading-snug break-words transition-all duration-200 ease-out outline-none",
     // Focus Ring: double-contrast perimeter operating independently outside material boundary
     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--halo-focus-color)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--halo-focus-offset-color)] focus-visible:z-20 halo-focus-ring",
     // Tactile press response
@@ -85,9 +85,9 @@ export const splitButtonActionVariants = cva(
         ],
       },
       size: {
-        default: "h-10 px-5 text-sm gap-2 rounded-full [&_svg:not([class*='size-'])]:size-4",
-        sm: "h-8 px-3.5 text-xs gap-1.5 rounded-full [&_svg:not([class*='size-'])]:size-3.5",
-        lg: "h-12 px-6 text-base gap-2.5 rounded-full [&_svg:not([class*='size-'])]:size-4.5",
+        default: "min-h-10 h-auto py-2 px-5 text-sm gap-2 rounded-full [&_svg:not([class*='size-'])]:size-4",
+        sm: "min-h-8 h-auto py-1.5 px-3.5 text-xs gap-1.5 rounded-full [&_svg:not([class*='size-'])]:size-3.5",
+        lg: "min-h-12 h-auto py-2.5 px-6 text-base gap-2.5 rounded-full [&_svg:not([class*='size-'])]:size-4.5",
       },
     },
     defaultVariants: {

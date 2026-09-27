@@ -15,7 +15,7 @@ import {
 } from "./split-button-demonstrations";
 import { InstallCommand } from "@/components/mdx/install-command";
 import { Anatomy, type AnatomyPart } from "@/components/mdx/anatomy";
-import { PropsTable } from "@/components/mdx/props-table";
+import { PropsExplorer, type SubcomponentApi } from "@/components/docs/props-explorer";
 import { FileTree, type FileNode } from "@/components/mdx/file-tree";
 import { Callout } from "@/components/mdx/callout";
 import { CodeBlock } from "@/components/mdx/code-block";
@@ -27,110 +27,213 @@ export const metadata: Metadata = {
     "Combines a primary immediate action with a secondary menu of closely related alternative actions.",
 };
 
-const PROPS_DATA = [
+const SPLIT_BUTTON_SUBCOMPONENTS: SubcomponentApi[] = [
   {
-    name: "variant",
-    type: '"default" | "secondary" | "outline" | "ghost" | "destructive"',
-    default: '"default"',
-    required: false,
-    description: "Semantic visual material family applied uniformly across primary action and secondary trigger.",
+    name: "SplitButton",
+    kind: "Component",
+    maturity: "stable",
+    description:
+      "Root layout container that visually connects the primary action and secondary dropdown menu trigger into one cohesive pill geometry with overlapping 1px border seam.",
+    inheritedProps: {
+      element: "React.HTMLAttributes<HTMLDivElement>",
+      description:
+        "Inherits all native HTML <div> attributes, ARIA attributes, and ref forwarding.",
+    },
+    props: [
+      {
+        name: "variant",
+        type: "'default' | 'secondary' | 'outline' | 'ghost' | 'destructive'",
+        default: "'default'",
+        required: false,
+        description:
+          "Semantic visual material family applied uniformly across primary action, secondary trigger, and menu container.",
+      },
+      {
+        name: "size",
+        type: "'default' | 'sm' | 'lg'",
+        default: "'default'",
+        required: false,
+        description:
+          "Coordinates height and trigger dimensions: 'default' (40px height), 'sm' (32px), 'lg' (48px).",
+      },
+      {
+        name: "disabled",
+        type: "boolean",
+        default: "false",
+        required: false,
+        description:
+          "When set on SplitButton, disables both the primary action and secondary menu trigger.",
+      },
+      {
+        name: "open",
+        type: "boolean",
+        required: false,
+        description:
+          "Controlled open state for the secondary actions dropdown menu.",
+      },
+      {
+        name: "defaultOpen",
+        type: "boolean",
+        required: false,
+        description:
+          "Uncontrolled initial open state for the secondary actions dropdown menu.",
+      },
+      {
+        name: "onOpenChange",
+        type: "(open: boolean, eventDetails: any) => void",
+        required: false,
+        description:
+          "Event callback invoked when the secondary menu opens or closes.",
+      },
+      {
+        name: "modal",
+        type: "boolean",
+        default: "false",
+        required: false,
+        description:
+          "Whether the portalled dropdown menu operates modally with background scrim absorption.",
+      },
+      {
+        name: "root",
+        type: "boolean",
+        default: "true",
+        required: false,
+        description:
+          "When true, automatically provides the accessible Base UI MenuPrimitive.Root provider.",
+      },
+      {
+        name: "className",
+        type: "string",
+        required: false,
+        description:
+          "Additional Tailwind CSS classes merged with the split button root container.",
+      },
+    ],
   },
   {
-    name: "size",
-    type: '"sm" | "default" | "lg"',
-    default: '"default"',
-    required: false,
-    description: "Coordinates height, padding, and square trigger geometry (sm: 32px, default: 40px, lg: 48px).",
+    name: "SplitButtonAction",
+    kind: "Component",
+    maturity: "stable",
+    description:
+      "The primary interactive segment that executes the default action immediately without disclosing the alternatives menu.",
+    inheritedProps: {
+      element: "React.ButtonHTMLAttributes<HTMLButtonElement>",
+      description:
+        "Inherits all native HTML <button> attributes, event handlers (onClick, onFocus), and ref forwarding.",
+    },
+    props: [
+      {
+        name: "onClick",
+        type: "(event: React.MouseEvent<HTMLButtonElement>) => void",
+        required: false,
+        description:
+          "Handler for immediate execution of the primary action. Does not toggle or open the secondary menu.",
+      },
+      {
+        name: "disabled",
+        type: "boolean",
+        default: "false",
+        required: false,
+        description:
+          "Disables only the primary action button while leaving the secondary menu trigger interactive.",
+      },
+      {
+        name: "asChild",
+        type: "boolean",
+        default: "false",
+        required: false,
+        description:
+          "Renders as Radix Slot child component for polymorphic composition.",
+      },
+      {
+        name: "className",
+        type: "string",
+        required: false,
+        description:
+          "Additional Tailwind CSS classes merged with the action button.",
+      },
+    ],
   },
   {
-    name: "disabled",
-    type: "boolean",
-    default: "false",
-    required: false,
-    description: "When set on SplitButton, disables both the primary action and the secondary trigger. Can also be set individually on either segment.",
+    name: "SplitButtonTrigger",
+    kind: "Component",
+    maturity: "stable",
+    description:
+      "Square disclosure trigger that opens the alternative actions dropdown menu without executing the primary action.",
+    inheritedProps: {
+      element: "React.ButtonHTMLAttributes<HTMLButtonElement>",
+      description:
+        "Inherits Base UI MenuPrimitive.Trigger attributes, ARIA attributes, and ref forwarding.",
+    },
+    props: [
+      {
+        name: "aria-label",
+        type: "string",
+        required: true,
+        description:
+          "Mandatory accessible name identifying alternative actions (e.g. 'More export options'). Warns in development if omitted.",
+      },
+      {
+        name: "disabled",
+        type: "boolean",
+        default: "false",
+        required: false,
+        description:
+          "Disables only the secondary menu trigger while leaving the primary action active.",
+      },
+      {
+        name: "children",
+        type: "React.ReactNode",
+        default: "<HaloIcon icon={ArrowDown01Icon} />",
+        required: false,
+        description:
+          "Custom disclosure trigger icon or label. Defaults to Hugeicons ArrowDown01Icon with automatic open rotation.",
+      },
+      {
+        name: "className",
+        type: "string",
+        required: false,
+        description:
+          "Additional Tailwind CSS classes merged with the menu trigger.",
+      },
+    ],
   },
   {
-    name: "open",
-    type: "boolean",
-    default: "undefined",
-    required: false,
-    description: "Controlled open state for the secondary actions dropdown menu.",
-  },
-  {
-    name: "defaultOpen",
-    type: "boolean",
-    default: "undefined",
-    required: false,
-    description: "Uncontrolled initial open state for the secondary actions dropdown menu.",
-  },
-  {
-    name: "onOpenChange",
-    type: "(open: boolean, eventDetails: any) => void",
-    default: "undefined",
-    required: false,
-    description: "Event handler invoked when the secondary menu opens or closes.",
-  },
-  {
-    name: "modal",
-    type: "boolean",
-    default: "false",
-    required: false,
-    description: "Whether the portalled dropdown menu operates modally.",
-  },
-  {
-    name: "root",
-    type: "boolean",
-    default: "true",
-    required: false,
-    description: "When true, automatically provides the accessible MenuPrimitive.Root. Set to false when nesting inside an external DropdownMenu provider.",
-  },
-];
-
-const ACTION_PROPS = [
-  {
-    name: "onClick",
-    type: "(event: React.MouseEvent<HTMLButtonElement>) => void",
-    default: "undefined",
-    required: false,
-    description: "Handler for immediate execution of the primary default action. Does not open the menu.",
-  },
-  {
-    name: "disabled",
-    type: "boolean",
-    default: "false",
-    required: false,
-    description: "Disables only the primary action button while leaving the secondary menu trigger interactive.",
-  },
-  {
-    name: "asChild",
-    type: "boolean",
-    default: "false",
-    required: false,
-    description: "Renders as Radix Slot child component for polymorphic composition.",
-  },
-];
-
-const TRIGGER_PROPS = [
-  {
-    name: "aria-label",
-    type: "string",
-    default: "undefined",
-    required: true,
-    description: "Mandatory accessible name identifying alternative actions (e.g. 'More export options'). Warns in development if omitted.",
-  },
-  {
-    name: "disabled",
-    type: "boolean",
-    default: "false",
-    required: false,
-    description: "Disables only the secondary menu trigger while leaving the primary action active.",
-  },
-  {
-    name: "children",
-    type: "React.ReactNode",
-    default: "<HaloIcon icon={ArrowDown01Icon} />",
-    required: false,
-    description: "Custom disclosure trigger icon or label. Defaults to Hugeicons ArrowDown01Icon with automatic open rotation.",
+    name: "SplitButtonContent",
+    kind: "Component",
+    maturity: "stable",
+    description:
+      "Portalled dropdown menu container rendering alternative action items with HaloUI balanced optical glass.",
+    inheritedProps: {
+      element: "React.HTMLAttributes<HTMLDivElement>",
+      description:
+        "Inherits Base UI MenuPrimitive.Popup attributes, positioning props, and ref forwarding.",
+    },
+    props: [
+      {
+        name: "align",
+        type: "'start' | 'center' | 'end'",
+        default: "'end'",
+        required: false,
+        description:
+          "Alignment of the portalled dropdown menu relative to the split button cluster.",
+      },
+      {
+        name: "sideOffset",
+        type: "number",
+        default: "6",
+        required: false,
+        description:
+          "Distance in pixels between the trigger boundary and the opened menu popup.",
+      },
+      {
+        name: "className",
+        type: "string",
+        required: false,
+        description:
+          "Additional Tailwind CSS classes merged with the menu content panel.",
+      },
+    ],
   },
 ];
 
@@ -398,25 +501,14 @@ export function ExportSplitButton() {
       </div>
 
       {/* Props */}
-      <div className="space-y-6">
+      <div className="space-y-4">
         <h2 id="props" className="text-xl font-semibold tracking-tight text-foreground">
-          Props
+          Props & Subcomponent API
         </h2>
-
-        <div className="space-y-3">
-          <h3 className="text-sm font-medium text-foreground">SplitButton (Root Container)</h3>
-          <PropsTable rows={PROPS_DATA} />
-        </div>
-
-        <div className="space-y-3">
-          <h3 className="text-sm font-medium text-foreground">SplitButtonAction (Primary Action)</h3>
-          <PropsTable rows={ACTION_PROPS} />
-        </div>
-
-        <div className="space-y-3">
-          <h3 className="text-sm font-medium text-foreground">SplitButtonTrigger (Menu Disclosure)</h3>
-          <PropsTable rows={TRIGGER_PROPS} />
-        </div>
+        <p className="text-sm text-muted-foreground">
+          Interactive API specification for SplitButton root and composed subcomponents.
+        </p>
+        <PropsExplorer subcomponents={SPLIT_BUTTON_SUBCOMPONENTS} />
       </div>
 
       {/* Anatomy */}
@@ -428,6 +520,42 @@ export function ExportSplitButton() {
           Actual DOM structure rendered by the Split Button compound subcomponents:
         </p>
         <Anatomy parts={ANATOMY_PARTS} />
+      </div>
+
+      {/* Responsive behavior */}
+      <div className="space-y-4">
+        <h2 id="responsive-behavior" className="text-xl font-semibold tracking-tight text-foreground">
+          Automatic Container-Aware Responsiveness
+        </h2>
+        <div className="space-y-3 text-sm text-muted-foreground leading-relaxed">
+          <p>
+            <strong>Trigger Protection:</strong> The secondary menu trigger enforces <code>shrink-0</code> to guarantee that long primary labels or constrained containers never crush the chevron disclosure trigger.
+          </p>
+          <p>
+            <strong>Intrinsic Wrapping (240px QA):</strong> The primary action button uses <code>min-w-0 max-w-full leading-snug break-words</code> and dynamic height scaling (<code>min-h-10 h-auto</code>). In narrow viewports (such as 240px and 280px containers), multi-word labels wrap cleanly across lines without overflowing the parent container.
+          </p>
+          <p>
+            <strong>200% Zoom Compatibility:</strong> Scales gracefully under high text-scaling modes, expanding vertical padding while containing foreground typography within parent boundaries without horizontal overflow.
+          </p>
+        </div>
+      </div>
+
+      {/* Liquid Glass */}
+      <div className="space-y-4">
+        <h2 id="liquid-glass" className="text-xl font-semibold tracking-tight text-foreground">
+          Coherent Liquid Glass Architecture
+        </h2>
+        <div className="space-y-3 text-sm text-muted-foreground leading-relaxed">
+          <p>
+            <strong>Shared Optical Boundary:</strong> Split Button unites the primary action and secondary trigger under a continuous pill silhouette. A single 1px overlapping border seam (<code>-ms-px</code>) prevents double-border thickness or dark refraction halos between connected segments.
+          </p>
+          <p>
+            <strong>Virtual Directional Lighting:</strong> Both segments share a 135° top-left specular highlight and bottom contact shadow, ensuring physical coherence across light and dark themes.
+          </p>
+          <p>
+            <strong>Balanced Menu Surface:</strong> The portalled secondary dropdown menu (<code>SplitButtonContent</code>) utilizes HaloUI's <code>Balanced</code> glass material with high-legibility backdrop diffusion (<code>var(--halo-glass-pop-background)</code>), preventing visual noise against busy page content.
+          </p>
+        </div>
       </div>
 
       {/* Accessibility */}
