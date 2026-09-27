@@ -1299,6 +1299,38 @@ export const docsNavigation: DocsNavSection[] = [
           "data display"
         ],
       },
+      {
+        title: "Badge",
+        href: "/components/badge",
+        description: "Foundational compact inline label primitive communicating category, count, or classification.",
+        status: "stable",
+        keywords: [
+          "badge",
+          "tag",
+          "label",
+          "count",
+          "pill",
+          "inline",
+          "data display"
+        ],
+      },
+      {
+        title: "Status Badge",
+        href: "/components/status-badge",
+        description: "Compact semantic state indicator communicating operational health, workflow phase, or system status with decoupled tone intent.",
+        status: "stable",
+        keywords: [
+          "status badge",
+          "status-badge",
+          "status",
+          "semantic",
+          "health",
+          "indicator",
+          "tone",
+          "operational",
+          "data display"
+        ],
+      },
     ],
   },
   {
