@@ -10,7 +10,7 @@ import {
 } from "./label-demonstrations";
 import { InstallCommand } from "@/components/mdx/install-command";
 import { Anatomy, type AnatomyPart } from "@/components/mdx/anatomy";
-import { PropsTable, type PropRow } from "@/components/mdx/props-table";
+import { PropsExplorer, type SubcomponentApi } from "@/components/docs/props-explorer";
 import { FileTree, type FileNode } from "@/components/mdx/file-tree";
 import { Callout } from "@/components/mdx/callout";
 import { CodeBlock } from "@/components/mdx/code-block";
@@ -22,28 +22,29 @@ export const metadata: Metadata = {
     "An accessible text label for associating a visible name with a form control.",
 };
 
-const LABEL_PROPS: PropRow[] = [
+const LABEL_SUBCOMPONENTS: SubcomponentApi[] = [
   {
-    name: "htmlFor",
-    type: "string",
-    default: "undefined",
-    required: false,
+    name: "Label",
     description:
-      "The ID of the form control this label names. Clicking the label shifts focus to the corresponding control according to native HTML behavior.",
-  },
-  {
-    name: "className",
-    type: "string",
-    default: "undefined",
-    required: false,
-    description: "Additional CSS classes to append to the label element.",
-  },
-  {
-    name: "...props",
-    type: 'React.ComponentProps<"label">',
-    default: "—",
-    required: false,
-    description: "Standard HTML <label> attributes supported without restriction.",
+      "An accessible HTML <label> component connecting visible names with input, checkbox, or switch controls via htmlFor association.",
+    props: [
+      {
+        name: "htmlFor",
+        type: "string",
+        description:
+          "The ID of the form control this label names. Clicking the label shifts focus to the corresponding control according to native HTML behavior.",
+      },
+      {
+        name: "className",
+        type: "string",
+        description: "Additional CSS classes to append to the label element.",
+      },
+      {
+        name: "...props",
+        type: 'React.ComponentProps<"label">',
+        description: "Standard HTML <label> attributes supported without restriction.",
+      },
+    ],
   },
 ];
 
@@ -230,12 +231,63 @@ export function EmailField() {
         <LabelVsFieldLabelVsLegendDemo />
       </section>
 
-      {/* Props */}
+      {/* Component API */}
       <section className="space-y-4">
-        <h2 className="text-2xl font-bold tracking-tight text-foreground font-heading">
-          Props
+        <div className="space-y-2">
+          <h2 id="props" className="text-xl font-semibold tracking-tight text-foreground">
+            Component API
+          </h2>
+          <p className="text-sm text-muted-foreground">
+            Interactive properties and native HTML configuration for Label.
+          </p>
+        </div>
+        <PropsExplorer subcomponents={LABEL_SUBCOMPONENTS} />
+      </section>
+
+      {/* Liquid Glass Form Typography & Peer Contrast Architecture */}
+      <section className="space-y-4">
+        <h2 id="optical-engine" className="text-xl font-semibold tracking-tight text-foreground">
+          Liquid Glass Form Typography &amp; Peer Contrast Architecture
         </h2>
-        <PropsTable rows={LABEL_PROPS} />
+        <p className="text-sm text-muted-foreground leading-relaxed">
+          In liquid glass interfaces, typography on floating surfaces must preserve strict WCAG AA contrast against translucent backgrounds while responding dynamically to form control state changes.
+        </p>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
+          <div className="p-4 rounded-xl border border-border/50 bg-muted/20 space-y-2">
+            <h4 className="text-xs font-semibold uppercase tracking-wider text-foreground">
+              Peer-Disabled Dimming
+            </h4>
+            <p className="text-xs text-muted-foreground leading-relaxed">
+              When paired with disabled sibling inputs or switches, <code className="text-foreground font-mono text-[10px]">peer-disabled:opacity-50</code> reduces contrast proportionally without requiring client state synchronization.
+            </p>
+          </div>
+          <div className="p-4 rounded-xl border border-border/50 bg-muted/20 space-y-2">
+            <h4 className="text-xs font-semibold uppercase tracking-wider text-foreground">
+              Native Event Forwarding
+            </h4>
+            <p className="text-xs text-muted-foreground leading-relaxed">
+              Native <code className="text-foreground font-mono text-[10px]">&lt;label htmlFor&gt;</code> dispatches clicks directly into the target control, activating checkboxes or focusing text inputs with zero JavaScript latency.
+            </p>
+          </div>
+          <div className="p-4 rounded-xl border border-border/50 bg-muted/20 space-y-2">
+            <h4 className="text-xs font-semibold uppercase tracking-wider text-foreground">
+              Zero-Jank Selection Safety
+            </h4>
+            <p className="text-xs text-muted-foreground leading-relaxed">
+              Integrated <code className="text-foreground font-mono text-[10px]">select-none</code> prevents accidental highlight rectangles when users double-click checkboxes or toggle switches quickly.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Automatic Container-Aware Responsiveness */}
+      <section className="space-y-4">
+        <h2 id="responsive-behavior" className="text-xl font-semibold tracking-tight text-foreground">
+          Automatic container-aware responsiveness
+        </h2>
+        <p className="text-sm text-muted-foreground leading-relaxed">
+          Label includes <code className="text-foreground font-mono text-xs">min-w-0 max-w-full</code> to gracefully reflow long descriptions and legal disclosures across container widths from 240px strict QA min to 1024px desktop without text clipping or layout blowout.
+        </p>
       </section>
 
       {/* Anatomy */}

@@ -11,6 +11,17 @@ import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Switch } from "@/components/ui/switch";
 
+const CONTAINER_WIDTH_OPTIONS = [
+  { label: "240px (Strict Min)", value: "240px" },
+  { label: "320px (Mobile S)", value: "320px" },
+  { label: "375px (Mobile M)", value: "375px" },
+  { label: "480px (Phablet)", value: "480px" },
+  { label: "640px (Tablet)", value: "640px" },
+  { label: "768px (Laptop)", value: "768px" },
+  { label: "1024px (Desktop)", value: "1024px" },
+  { label: "100% Fluid", value: "100%" },
+];
+
 export function LabelPreviewStage() {
   const [activeTab, setActiveTab] = React.useState<"preview" | "code">("preview");
   const [backdrop, setBackdrop] = React.useState<string>("neutral");
@@ -20,6 +31,7 @@ export function LabelPreviewStage() {
   const [controlType, setControlType] = React.useState<"input" | "checkbox" | "switch">("input");
   const [isDisabled, setIsDisabled] = React.useState(false);
   const [isLongText, setIsLongText] = React.useState(false);
+  const [containerWidth, setContainerWidth] = React.useState("100%");
 
   // Values
   const [inputValue, setInputValue] = React.useState("alex.morgan@company.com");
@@ -98,6 +110,7 @@ export function ContactEmail() {
     setControlType("input");
     setIsDisabled(false);
     setIsLongText(false);
+    setContainerWidth("100%");
     setInputValue("alex.morgan@company.com");
     setCheckboxChecked(true);
     setSwitchChecked(false);
@@ -124,6 +137,10 @@ export function ContactEmail() {
           variant: "success",
         },
         {
+          label: "Container",
+          value: containerWidth === "100%" ? "Fluid (100%)" : containerWidth,
+        },
+        {
           label: "Association",
           value: "htmlFor ↔ id",
           variant: "success",
@@ -134,12 +151,17 @@ export function ContactEmail() {
           variant: "success",
         },
         {
+          label: "State",
+          value: isDisabled ? "peer-disabled:opacity-50" : "Normal active",
+          variant: isDisabled ? "warning" : "success",
+        },
+        {
           label: "Runtime",
           value: "0ms (Server Component)",
         },
       ]}
       controls={
-        <div className="w-full grid grid-cols-1 min-[420px]:grid-cols-3 gap-2 sm:gap-2.5">
+        <div className="w-full grid grid-cols-1 min-[420px]:grid-cols-2 md:grid-cols-4 gap-2 sm:gap-2.5">
           <StageControlSelect
             label="Associated Control"
             value={controlType}
@@ -170,64 +192,92 @@ export function ContactEmail() {
               { label: "Long (Wrapping)", value: "long" },
             ]}
           />
+
+          <StageControlSelect
+            label="Container Simulation"
+            value={containerWidth}
+            onValueChange={setContainerWidth}
+            options={CONTAINER_WIDTH_OPTIONS}
+          />
         </div>
       }
     >
-      <div className="w-full max-w-md mx-auto p-4 sm:p-6">
-        <div className="p-5 sm:p-7 rounded-2xl border border-white/60 dark:border-white/15 bg-white/55 dark:bg-neutral-950/55 backdrop-blur-2xl backdrop-saturate-180 shadow-[0_12px_36px_-4px_rgba(0,0,0,0.12),inset_0_1px_1px_0_rgba(255,255,255,0.85)] dark:shadow-[0_18px_50px_-8px_rgba(0,0,0,0.7),inset_0_1px_1px_0_rgba(255,255,255,0.14)] relative isolate before:content-[''] before:absolute before:inset-0 before:pointer-events-none before:rounded-[inherit] before:bg-gradient-to-br before:from-white/25 before:via-white/5 before:to-transparent dark:before:from-white/10 dark:before:via-transparent transition-all">
-          {controlType === "input" && (
-            <div className="flex flex-col gap-2">
-              <Label
-                htmlFor="stage-input-control"
-                className="cursor-pointer text-sm font-medium leading-none"
-              >
-                {labelText}
-              </Label>
-              <Input
-                id="stage-input-control"
-                type="email"
-                disabled={isDisabled}
-                value={inputValue}
-                onChange={(e) => setInputValue(e.target.value)}
-                placeholder="name@company.com"
-              />
-            </div>
-          )}
+      <div className="w-full flex flex-col items-center justify-center py-6 px-2 sm:px-4">
+        {/* Real Container Width Simulation Wrapper */}
+        <div
+          style={{ width: containerWidth }}
+          className="max-w-full transition-all duration-200 ease-out flex flex-col items-center justify-center gap-4"
+        >
+          <div className="w-full p-5 sm:p-7 rounded-2xl border border-white/60 dark:border-white/15 bg-white/55 dark:bg-neutral-950/55 backdrop-blur-2xl backdrop-saturate-180 shadow-[0_12px_36px_-4px_rgba(0,0,0,0.12),inset_0_1px_1px_0_rgba(255,255,255,0.85)] dark:shadow-[0_18px_50px_-8px_rgba(0,0,0,0.7),inset_0_1px_1px_0_rgba(255,255,255,0.14)] relative isolate before:content-[''] before:absolute before:inset-0 before:pointer-events-none before:rounded-[inherit] before:bg-gradient-to-br before:from-white/25 before:via-white/5 before:to-transparent dark:before:from-white/10 dark:before:via-transparent transition-all">
+            {controlType === "input" && (
+              <div className="flex flex-col gap-2">
+                <Label
+                  htmlFor="stage-input-control"
+                  className="cursor-pointer text-sm font-medium leading-none"
+                >
+                  {labelText}
+                </Label>
+                <Input
+                  id="stage-input-control"
+                  type="email"
+                  disabled={isDisabled}
+                  value={inputValue}
+                  onChange={(e) => setInputValue(e.target.value)}
+                  placeholder="name@company.com"
+                />
+              </div>
+            )}
 
-          {controlType === "checkbox" && (
-            <div className="flex items-start gap-3">
-              <Checkbox
-                id="stage-checkbox-control"
-                disabled={isDisabled}
-                checked={checkboxChecked}
-                onCheckedChange={(checked) => setCheckboxChecked(!!checked)}
-                className="mt-0.5"
-              />
-              <Label
-                htmlFor="stage-checkbox-control"
-                className="cursor-pointer text-sm font-medium leading-snug"
-              >
-                {labelText}
-              </Label>
-            </div>
-          )}
+            {controlType === "checkbox" && (
+              <div className="flex items-start gap-3">
+                <Checkbox
+                  id="stage-checkbox-control"
+                  disabled={isDisabled}
+                  checked={checkboxChecked}
+                  onCheckedChange={(checked) => setCheckboxChecked(!!checked)}
+                  className="mt-0.5"
+                />
+                <Label
+                  htmlFor="stage-checkbox-control"
+                  className="cursor-pointer text-sm font-medium leading-snug"
+                >
+                  {labelText}
+                </Label>
+              </div>
+            )}
 
-          {controlType === "switch" && (
-            <div className="flex items-center justify-between gap-4">
-              <Label
-                htmlFor="stage-switch-control"
-                className="cursor-pointer text-sm font-medium leading-snug"
-              >
-                {labelText}
-              </Label>
-              <Switch
-                id="stage-switch-control"
-                disabled={isDisabled}
-                checked={switchChecked}
-                onCheckedChange={setSwitchChecked}
-              />
-            </div>
-          )}
+            {controlType === "switch" && (
+              <div className="flex items-center justify-between gap-4">
+                <Label
+                  htmlFor="stage-switch-control"
+                  className="cursor-pointer text-sm font-medium leading-snug"
+                >
+                  {labelText}
+                </Label>
+                <Switch
+                  id="stage-switch-control"
+                  disabled={isDisabled}
+                  checked={switchChecked}
+                  onCheckedChange={setSwitchChecked}
+                />
+              </div>
+            )}
+          </div>
+
+          {/* State metadata readout */}
+          <div className="flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-[11px] font-mono text-muted-foreground/80 text-center max-w-full px-2">
+            <span>control="{controlType}"</span>
+            <span>·</span>
+            <span>state="{isDisabled ? "disabled" : "enabled"}"</span>
+            <span>·</span>
+            <span>container="{containerWidth}"</span>
+            {isLongText && (
+              <>
+                <span>·</span>
+                <span className="text-primary font-medium">multi-line-reflow</span>
+              </>
+            )}
+          </div>
         </div>
       </div>
     </PreviewStageShell>
