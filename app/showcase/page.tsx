@@ -32,19 +32,19 @@ export default function ShowcasePage() {
   });
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-12">
+    <div className="w-full space-y-10">
       {/* Header */}
-      <div className="space-y-3 border-b border-black/[0.06] dark:border-white/[0.06] pb-8">
+      <div className="space-y-3 border-b border-border pb-6">
         <div className="flex items-center gap-2">
           <Badge variant="outline" className="font-mono text-xs uppercase tracking-widest">
             Mini Product Experience
           </Badge>
-          <span className="text-stone-400 font-mono text-xs">/ Real Production Components</span>
+          <span className="text-muted-foreground font-mono text-xs">/ Real Production Components</span>
         </div>
-        <h1 className="text-3xl sm:text-5xl font-bold tracking-tight text-stone-950 dark:text-white">
+        <h1 className="text-3xl sm:text-4xl font-bold tracking-tight text-foreground">
           Halo Control Room
         </h1>
-        <p className="text-base text-stone-600 dark:text-stone-400 max-w-2xl font-normal leading-relaxed">
+        <p className="text-base text-muted-foreground max-w-2xl font-normal leading-relaxed">
           An authentic editorial workspace experience built exclusively with the public HaloUI liquid component library. Every surface shares the same optical lighting engine.
         </p>
       </div>

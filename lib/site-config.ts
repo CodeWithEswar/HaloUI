@@ -12,14 +12,14 @@ export const siteConfig = {
     { title: "Docs", href: "/docs" },
     { title: "Components", href: "/components" },
     { title: "Showcase", href: "/showcase" },
-    { title: "Themes", href: "/themes" },
+    { title: "Themes", href: "/docs/theming" },
   ],
   footerNav: {
     product: [
       { title: "Components", href: "/components" },
       { title: "Button Spec", href: "/components/button" },
       { title: "Showcase", href: "/showcase" },
-      { title: "Themes", href: "/themes" },
+      { title: "Themes", href: "/docs/theming" },
     ],
     resources: [
       { title: "Documentation", href: "/docs" },

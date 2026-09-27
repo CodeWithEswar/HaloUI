@@ -9,10 +9,10 @@ import { ThemeToggle } from "@/components/theme-toggle";
 import { cn } from "@/lib/utils";
 
 const NAV_ITEMS = [
+  { href: "/docs", label: "Docs" },
   { href: "/components", label: "Components" },
-  { href: "/components/button", label: "Button Spec" },
-  { href: "/docs", label: "Documentation" },
   { href: "/showcase", label: "Showcase" },
+  { href: "/docs/theming", label: "Themes" },
 ];
 
 export function SiteHeader() {
@@ -41,7 +41,16 @@ export function SiteHeader() {
           {/* Navigation Links */}
           <nav className="hidden md:flex items-center gap-1">
             {NAV_ITEMS.map((item) => {
-              const isActive = pathname === item.href || (item.href !== "/" && pathname.startsWith(item.href) && item.href !== "/components");
+              const isExact = pathname === item.href;
+              const hasMoreSpecificMatch = NAV_ITEMS.some(
+                (other) =>
+                  other.href !== item.href &&
+                  other.href.startsWith(item.href) &&
+                  pathname.startsWith(other.href)
+              );
+              const isActive =
+                isExact ||
+                (item.href !== "/" && pathname.startsWith(item.href) && !hasMoreSpecificMatch);
               return (
                 <Link
                   key={item.href}

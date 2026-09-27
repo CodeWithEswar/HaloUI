@@ -39,7 +39,16 @@ export function MobileNav() {
         </SheetHeader>
         <div className="flex flex-col space-y-3 px-5 py-6 text-sm">
           {siteConfig.mainNav.map((item) => {
-            const isActive = pathname === item.href || (item.href !== "/" && pathname.startsWith(item.href));
+            const isExact = pathname === item.href;
+            const hasMoreSpecificMatch = siteConfig.mainNav.some(
+              (other) =>
+                other.href !== item.href &&
+                other.href.startsWith(item.href) &&
+                pathname.startsWith(other.href)
+            );
+            const isActive =
+              isExact ||
+              (item.href !== "/" && pathname.startsWith(item.href) && !hasMoreSpecificMatch);
             return (
               <Link
                 key={item.href}

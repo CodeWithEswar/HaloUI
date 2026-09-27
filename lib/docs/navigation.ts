@@ -18,6 +18,7 @@ export const docsNavigation: DocsNavSection[] = [
       { title: "Introduction", href: "/docs", description: "The HaloUI documentation system and product principles." },
       { title: "Installation", href: "/docs/installation", description: "Configure the registry and install your first component." },
       { title: "Quick start", href: "/docs/quick-start", description: "Add, import, and customize a HaloUI component." },
+      { title: "All Components", href: "/components", description: "Browse the complete 75-component interactive registry catalog." },
     ],
   },
   {

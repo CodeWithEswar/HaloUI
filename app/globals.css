@@ -1,9 +1,9 @@
+@import url("https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap");
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 @import "../styles/halo-tokens.css";
 @import "../styles/halo-material.css";
-/* Cache-bust: updated reduced transparency rules */
 
 @custom-variant dark (&:is(.dark *):not(:is([data-stage-theme="light"], [data-stage-theme="light"] *)));
 
