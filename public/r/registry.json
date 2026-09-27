@@ -4,6 +4,27 @@
   "homepage": "https://haloui.dev",
   "items": [
     {
+      "name": "accordion",
+      "type": "registry:ui",
+      "title": "Accordion",
+      "description": "Stacked expandable disclosure sections with coordinated single/multiple item models, container-aware responsive reflow, and restrained HaloUI Liquid Glass outer boundaries.",
+      "dependencies": [
+        "@base-ui/react@^1.8.0",
+        "@hugeicons/react",
+        "@hugeicons/core-free-icons",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "components/ui/accordion.tsx",
+          "target": "components/ui/accordion.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
       "name": "action-bar",
       "type": "registry:ui",
       "title": "Action Bar",

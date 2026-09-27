@@ -1458,6 +1458,23 @@ export const docsNavigation: DocsNavSection[] = [
           "data display"
         ],
       },
+      {
+        title: "Accordion",
+        href: "/components/accordion",
+        description: "Stacked expandable disclosure sections with coordinated single/multiple item models, container-aware responsive reflow, and restrained HaloUI Liquid Glass outer boundaries.",
+        status: "stable",
+        keywords: [
+          "accordion",
+          "disclosure",
+          "collapse",
+          "expand",
+          "faq",
+          "sections",
+          "panels",
+          "roving focus",
+          "data display"
+        ],
+      },
     ],
   },
   {
