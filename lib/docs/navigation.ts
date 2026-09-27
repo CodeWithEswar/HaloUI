@@ -1349,6 +1349,24 @@ export const docsNavigation: DocsNavSection[] = [
           "data display"
         ],
       },
+      {
+        title: "Avatar Group",
+        href: "/components/avatar-group",
+        description: "Composition primitive arranging multiple Avatar components into a compact, overlapping identity cluster with automatic overflow truncation.",
+        status: "preview",
+        keywords: [
+          "avatar group",
+          "avatar-group",
+          "avatars",
+          "collaborators",
+          "members",
+          "team",
+          "stack",
+          "overlap",
+          "overflow",
+          "data display"
+        ],
+      },
     ],
   },
   {

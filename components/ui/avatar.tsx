@@ -138,53 +138,17 @@ function AvatarBadge({
   );
 }
 
-/* -------------------------------------------------------------------------
- * 5. AVATAR GROUP
- * Overlapping horizontal stack with hover elevation.
- * ----------------------------------------------------------------------- */
-
-function AvatarGroup({ className, ...props }: React.ComponentProps<"div">) {
-  return (
-    <div
-      data-slot="avatar-group"
-      className={cn(
-        "group/avatar-group flex -space-x-2 *:data-[slot=avatar]:ring-2 *:data-[slot=avatar]:ring-background *:data-[slot=avatar]:transition-transform *:data-[slot=avatar]:hover:z-10 *:data-[slot=avatar]:hover:scale-105",
-        className
-      )}
-      {...props}
-    />
-  );
-}
-
-/* -------------------------------------------------------------------------
- * 6. AVATAR GROUP COUNT
- * Remaining entity count indicator (e.g. +4) preserving stack rhythm.
- * ----------------------------------------------------------------------- */
-
-function AvatarGroupCount({
-  className,
-  ...props
-}: React.ComponentProps<"div">) {
-  return (
-    <div
-      data-slot="avatar-group-count"
-      className={cn(
-        "relative flex size-8 shrink-0 items-center justify-center rounded-full bg-muted/80 dark:bg-white/[0.08] font-medium text-xs text-muted-foreground ring-2 ring-background select-none",
-        "group-has-data-[size=sm]/avatar-group:size-6 group-has-data-[size=sm]/avatar-group:text-[10px]",
-        "group-has-data-[size=lg]/avatar-group:size-10 group-has-data-[size=lg]/avatar-group:text-sm",
-        "group-has-data-[size=xl]/avatar-group:size-12 group-has-data-[size=xl]/avatar-group:text-base",
-        className
-      )}
-      {...props}
-    />
-  );
-}
-
 export {
   Avatar,
   AvatarImage,
   AvatarFallback,
-  AvatarGroup,
-  AvatarGroupCount,
   AvatarBadge,
 };
+
+export {
+  AvatarGroup,
+  AvatarGroupCount,
+  type AvatarGroupProps,
+  type AvatarGroupCountProps,
+  type AvatarGroupStacking,
+} from "@/components/ui/avatar-group";
