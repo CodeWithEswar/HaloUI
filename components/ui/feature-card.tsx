@@ -53,7 +53,7 @@ export function FeatureCard({
       interactive={interactive}
       asChild={asChild}
       className={cn(
-        "group/feature-card min-w-0 transition-colors",
+        "group/feature-card min-w-0 transition-colors p-6 sm:p-7 data-[size=sm]:p-4.5 sm:data-[size=sm]:p-5 data-[size=lg]:p-7.5 sm:data-[size=lg]:p-8.5",
         orientation === "horizontal" &&
           "flex-col sm:flex-row sm:items-center justify-between gap-4",
         className

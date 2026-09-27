@@ -128,61 +128,63 @@ ${actionType === "switch" ? `  <ItemActions>
       onViewportChange={setViewport}
       onReset={handleReset}
       controls={
-        <div className="flex flex-col gap-4">
-          <StageControlSelect
-            label="Variant"
-            value={variant}
-            onChange={(val) => setVariant(val as ItemVariant)}
-            options={[
-              { value: "glass", label: "Liquid Glass" },
-              { value: "default", label: "Default (Flat)" },
-              { value: "outline", label: "Outline" },
-              { value: "muted", label: "Muted" },
-            ]}
-          />
+        <div className="space-y-3 w-full">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3 w-full">
+            <StageControlSelect
+              label="Variant"
+              value={variant}
+              onChange={(val) => setVariant(val as ItemVariant)}
+              options={[
+                { value: "glass", label: "Liquid Glass" },
+                { value: "default", label: "Default (Flat)" },
+                { value: "outline", label: "Outline" },
+                { value: "muted", label: "Muted" },
+              ]}
+            />
 
-          <StageControlSelect
-            label="Density / Size"
-            value={size}
-            onChange={(val) => setSize(val as ItemSize)}
-            options={[
-              { value: "default", label: "Default" },
-              { value: "compact", label: "Compact" },
-            ]}
-          />
+            <StageControlSelect
+              label="Density / Size"
+              value={size}
+              onChange={(val) => setSize(val as ItemSize)}
+              options={[
+                { value: "default", label: "Default" },
+                { value: "compact", label: "Compact" },
+              ]}
+            />
 
-          <StageControlSelect
-            label="Leading Media"
-            value={mediaType}
-            onChange={(val) => setMediaType(val as any)}
-            options={[
-              { value: "icon", label: "Icon" },
-              { value: "avatar", label: "Avatar" },
-              { value: "image", label: "Image Thumbnail" },
-              { value: "none", label: "None" },
-            ]}
-          />
+            <StageControlSelect
+              label="Leading Media"
+              value={mediaType}
+              onChange={(val) => setMediaType(val as any)}
+              options={[
+                { value: "icon", label: "Icon" },
+                { value: "avatar", label: "Avatar" },
+                { value: "image", label: "Image Thumbnail" },
+                { value: "none", label: "None" },
+              ]}
+            />
 
-          <StageControlSelect
-            label="Trailing Action"
-            value={actionType}
-            onChange={(val) => setActionType(val as any)}
-            options={[
-              { value: "switch", label: "Switch" },
-              { value: "button", label: "Button" },
-              { value: "status", label: "Status Badge" },
-              { value: "badge", label: "Badge" },
-              { value: "none", label: "None" },
-            ]}
-          />
+            <StageControlSelect
+              label="Trailing Action"
+              value={actionType}
+              onChange={(val) => setActionType(val as any)}
+              options={[
+                { value: "switch", label: "Switch" },
+                { value: "button", label: "Button" },
+                { value: "status", label: "Status Badge" },
+                { value: "badge", label: "Badge" },
+                { value: "none", label: "None" },
+              ]}
+            />
+          </div>
 
-          <div className="flex items-center gap-2 pt-2">
+          <div className="flex items-center gap-2.5 p-2 px-3 rounded-xl border border-border/80 bg-card/75 shadow-2xs w-fit">
             <Checkbox
               id="interactive-mode"
               checked={isInteractive}
               onCheckedChange={(checked) => setIsInteractive(Boolean(checked))}
             />
-            <Label htmlFor="interactive-mode" className="text-xs text-muted-foreground cursor-pointer">
+            <Label htmlFor="interactive-mode" className="text-xs text-muted-foreground hover:text-foreground cursor-pointer font-medium select-none">
               Interactive Row Affordance
             </Label>
           </div>

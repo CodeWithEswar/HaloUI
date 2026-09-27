@@ -161,7 +161,7 @@ export function ListPreviewStage() {
       onViewportChange={setViewport}
       onReset={handleReset}
       controls={
-        <div className="flex flex-col gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-3 w-full">
           <StageControlSelect
             label="Surface Variant"
             value={variant}
@@ -196,15 +196,23 @@ export function ListPreviewStage() {
             ]}
           />
 
-          <div className="flex items-center gap-2 pt-2">
-            <Checkbox
-              id="list-divided"
-              checked={divided}
-              onCheckedChange={(checked) => setDivided(Boolean(checked))}
-            />
-            <Label htmlFor="list-divided" className="text-xs text-muted-foreground cursor-pointer font-medium">
-              Divided Rows (divide-y)
-            </Label>
+          <div className="flex flex-col justify-between gap-1.5 p-2 sm:p-2.5 rounded-xl border border-border/80 bg-card/75 shadow-2xs w-full min-w-0 transition-colors">
+            <span className="text-[11px] sm:text-xs text-muted-foreground font-medium select-none truncate block">
+              Row Dividers
+            </span>
+            <div className="flex items-center gap-2 h-8 sm:h-8.5 px-1 sm:px-2">
+              <Checkbox
+                id="list-divided"
+                checked={divided}
+                onCheckedChange={(checked) => setDivided(Boolean(checked))}
+              />
+              <Label
+                htmlFor="list-divided"
+                className="text-xs sm:text-[13px] text-foreground hover:text-foreground cursor-pointer font-medium select-none"
+              >
+                Divided (divide-y)
+              </Label>
+            </div>
           </div>
         </div>
       }

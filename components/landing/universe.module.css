@@ -1,0 +1,491 @@
+.page {
+  --space-bg: #f5f5f2;
+  --space-ink: #191919;
+  --space-muted: #73736f;
+  --space-line: #22222225;
+  isolation: isolate;
+  position: relative;
+  color: var(--space-ink);
+  background: var(--space-bg);
+}
+:global(.dark) .page {
+  --space-bg: #050506;
+  --space-ink: #eeeee9;
+  --space-muted: #90908c;
+  --space-line: #ffffff26;
+}
+.page::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.2;
+  background-image:
+    radial-gradient(circle at 24% 31%, var(--space-ink) 0.6px, transparent 1px),
+    radial-gradient(circle at 61% 77%, var(--space-ink) 0.5px, transparent 1px);
+  background-size:
+    173px 181px,
+    257px 239px;
+}
+.hero {
+  position: relative;
+  isolation: isolate;
+  height: calc(100svh - var(--site-header-height, 48px));
+  min-height: 560px;
+  overflow: hidden;
+}
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(ellipse at 50% 44%, #7777770d, transparent 65%);
+}
+.eyebrow {
+  position: absolute;
+  z-index: 3;
+  top: 28px;
+  left: 20px;
+  right: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  color: var(--space-muted);
+}
+.eyebrow > span {
+  height: 1px;
+  width: 28px;
+  background: var(--space-line);
+}
+.universe,
+.canvas,
+.canvas canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.planetTitle {
+  position: absolute;
+  z-index: 2;
+  top: 46%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  pointer-events: none;
+  color: #f5f5f0;
+  text-shadow: 0 2px 22px #000;
+  white-space: nowrap;
+}
+.planetTitle strong {
+  display: block;
+  font-size: clamp(40px, 5.8vw, 86px);
+  letter-spacing: -0.075em;
+  font-weight: 450;
+  line-height: 1.1;
+}
+.planetTitle > span {
+  display: block;
+  font-size: clamp(6px, 0.6vw, 9px);
+  letter-spacing: 0.22em;
+  color: #c8c8c6;
+  margin-top: 20px;
+}
+.planetTitle > .titleOverline {
+  font-size: 7px;
+  letter-spacing: 0.2em;
+  margin: 0 0 17px;
+  opacity: 0.65;
+}
+.orbits {
+  position: absolute;
+  z-index: 3;
+  inset: 0;
+  pointer-events: none;
+}
+.node {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: var(--diameter, 76px);
+  height: var(--diameter, 76px);
+  border-radius: 50%;
+  pointer-events: auto;
+  color: var(--space-ink);
+  text-decoration: none;
+  outline: none;
+  transform: translate(-50%, -50%);
+  -webkit-tap-highlight-color: transparent;
+}
+.node0 {
+  left: 30%;
+  top: 23%;
+}
+.node1 {
+  left: 71%;
+  top: 24%;
+}
+.node2 {
+  left: 81%;
+  top: 49%;
+}
+.node3 {
+  left: 67%;
+  top: 72%;
+}
+.node4 {
+  left: 31%;
+  top: 73%;
+}
+.node5 {
+  left: 18%;
+  top: 47%;
+}
+.planetLabel {
+  position: absolute;
+  top: calc(100% + 13px);
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  white-space: nowrap;
+  font-size: 12px;
+  letter-spacing: 0.035em;
+}
+.planetLabel > span {
+  display: block;
+}
+.planetLabel small {
+  display: block;
+  font-size: 8px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--space-muted);
+  margin-top: 5px;
+}
+.targetRing {
+  position: absolute;
+  inset: -8px;
+  border-radius: 50%;
+  border: 1px solid var(--space-line);
+  opacity: 0;
+  transform: scale(0.88);
+  transition:
+    opacity 250ms,
+    transform 350ms;
+}
+.node:hover .targetRing,
+.node:focus-visible .targetRing {
+  opacity: 1;
+  transform: scale(1);
+}
+.node:focus-visible {
+  outline: 2px solid var(--space-ink);
+  outline-offset: 5px;
+}
+.node:hover .planetLabel,
+.node:focus-visible .planetLabel {
+  color: var(--space-ink);
+}
+.planetFallback {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 28% 20%,
+    #aaa,
+    #303030 48%,
+    #090909 80%
+  );
+  box-shadow: inset 1px 1px 2px #ddd;
+}
+.universe:has(.canvas[data-ready="true"]) .planetFallback {
+  opacity: 0;
+}
+.actions {
+  position: absolute;
+  z-index: 4;
+  bottom: 44px;
+  left: 20px;
+  right: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+.actions a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 22px;
+  padding: 12px 24px;
+  border-radius: 30px;
+  font-size: 11px;
+  font-weight: 550;
+}
+.actions a:focus-visible {
+  outline: 2px solid var(--space-ink);
+  outline-offset: 5px;
+}
+.primary {
+  background: var(--space-ink);
+  color: var(--space-bg);
+}
+.secondary {
+  border: 1px solid var(--space-line);
+  color: var(--space-ink);
+}
+.caption {
+  position: absolute;
+  bottom: 17px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  color: var(--space-muted);
+  font-size: 7px;
+  letter-spacing: 0.24em;
+}
+.coordinates {
+  position: absolute;
+  bottom: 45px;
+  left: 34px;
+  color: var(--space-muted);
+  font-size: 9px;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.12em;
+}
+.coordinates span {
+  display: block;
+  font-size: 6px;
+  letter-spacing: 0.16em;
+  margin-top: 9px;
+}
+.fallback {
+  position: absolute;
+  width: min(32vw, 40vh);
+  aspect-ratio: 1;
+  left: 50%;
+  top: 46%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 20% 15%,
+    #666,
+    #161616 42%,
+    #030303 80%
+  );
+  box-shadow:
+    inset 2px 2px 5px #ccc,
+    0 0 35px #7773;
+}
+.fallback > div {
+  position: absolute;
+  inset: 16% -42%;
+  border: 2px solid #888;
+  border-radius: 50%;
+  transform: rotate(-25deg);
+  box-shadow: 0 0 12px #aaa5;
+}
+.canvas[data-ready="true"] .fallback {
+  display: none;
+}
+@media (max-width: 760px) {
+  .hero {
+    min-height: 620px;
+  }
+  .eyebrow {
+    font-size: 7px;
+    top: 25px;
+    letter-spacing: 0.2em;
+  }
+  .planetTitle strong {
+    font-size: 39px;
+  }
+  .planetTitle > span {
+    font-size: 5px;
+    letter-spacing: 0.1em;
+    margin-top: 11px;
+  }
+  .planetTitle > .titleOverline {
+    display: none;
+  }
+  .node {
+    --diameter: 52px;
+  }
+  .planetLabel {
+    font-size: 10px;
+    top: calc(100% + 9px);
+  }
+  .planetLabel small {
+    font-size: 6px;
+    margin-top: 3px;
+  }
+  .node0 {
+    left: 25%;
+    top: 21%;
+  }
+  .node1 {
+    left: 74%;
+    top: 24%;
+  }
+  .node2 {
+    left: 84%;
+    top: 47%;
+  }
+  .node3 {
+    left: 72%;
+    top: 70%;
+  }
+  .node4 {
+    left: 27%;
+    top: 71%;
+  }
+  .node5 {
+    left: 15%;
+    top: 44%;
+  }
+  .actions a {
+    padding: 12px 17px;
+    font-size: 10px;
+    gap: 12px;
+  }
+  .coordinates {
+    display: none;
+  }
+  .fallback {
+    width: 40vw;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .targetRing {
+    transition: none;
+  }
+}
+/* Cinematic composition: the system is the focal object, with navigation at its perimeter. */
+.planetTitle {
+  top: 47%;
+}
+.planetTitle strong {
+  font-size: clamp(60px, 8.4vw, 140px);
+  font-weight: 450;
+  letter-spacing: -0.065em;
+}
+.planetTitle > .titleOverline {
+  font-size: clamp(8px, 0.8vw, 13px);
+  letter-spacing: 0.38em;
+  margin-bottom: 24px;
+  opacity: 0.85;
+}
+.planetTitle > span {
+  font-size: clamp(7px, 0.8vw, 12px);
+  letter-spacing: 0.32em;
+  margin-top: 18px;
+}
+.coordinates {
+  display: none;
+}
+.node0 {
+  left: 28%;
+  top: 18%;
+}
+.node1 {
+  left: 76%;
+  top: 19%;
+}
+.node2 {
+  left: 88%;
+  top: 47%;
+}
+.node3 {
+  left: 76%;
+  top: 73%;
+}
+.node4 {
+  left: 26%;
+  top: 74%;
+}
+.node5 {
+  left: 11%;
+  top: 46%;
+}
+.planetLabel {
+  font-size: 13px;
+  text-shadow: 0 1px 12px var(--space-bg);
+}
+.planetLabel small {
+  font-size: 8px;
+  letter-spacing: 0.2em;
+}
+.actions {
+  bottom: 46px;
+}
+.actions a {
+  padding: 14px 27px;
+  font-size: 12px;
+}
+.primary {
+  box-shadow: 0 0 24px #ffffff0c;
+}
+.secondary {
+  background: var(--space-bg);
+}
+.fallback {
+  width: min(51vw, 67vh);
+  top: 47%;
+}
+@media (max-width: 760px) {
+  .planetTitle strong {
+    font-size: clamp(38px, 11vw, 70px);
+  }
+  .planetTitle > .titleOverline {
+    display: block;
+    font-size: 5px;
+    letter-spacing: 0.2em;
+    margin-bottom: 11px;
+  }
+  .planetTitle > span {
+    font-size: 5px;
+    letter-spacing: 0.12em;
+    margin-top: 10px;
+  }
+  .node0 {
+    left: 25%;
+    top: 21%;
+  }
+  .node1 {
+    left: 74%;
+    top: 24%;
+  }
+  .node2 {
+    left: 84%;
+    top: 47%;
+  }
+  .node3 {
+    left: 72%;
+    top: 70%;
+  }
+  .node4 {
+    left: 27%;
+    top: 71%;
+  }
+  .node5 {
+    left: 15%;
+    top: 44%;
+  }
+  .planetLabel {
+    font-size: 10px;
+  }
+  .planetLabel small {
+    font-size: 6px;
+  }
+  .actions a {
+    padding: 12px 17px;
+    font-size: 10px;
+  }
+  .fallback {
+    width: 49vw;
+  }
+}
+

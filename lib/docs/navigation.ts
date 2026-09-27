@@ -1401,6 +1401,25 @@ export const docsNavigation: DocsNavSection[] = [
           "data display"
         ],
       },
+      {
+        title: "Description List",
+        href: "/components/description-list",
+        description: "Label/value metadata display primitive built on semantic HTML dl/dt/dd elements with automatic container-aware reflow, density scales, and restrained HaloUI Liquid Glass materials.",
+        status: "stable",
+        keywords: [
+          "description list",
+          "description-list",
+          "dl",
+          "dt",
+          "dd",
+          "metadata",
+          "term",
+          "value",
+          "key-value",
+          "properties",
+          "data display"
+        ],
+      },
     ],
   },
   {

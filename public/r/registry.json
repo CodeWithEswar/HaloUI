@@ -524,6 +524,25 @@
       ]
     },
     {
+      "name": "description-list",
+      "type": "registry:ui",
+      "title": "Description List",
+      "description": "Label/value metadata display primitive with automatic container-aware reflow, native semantic dl/dt/dd elements, and restrained HaloUI Liquid Glass materials.",
+      "dependencies": [
+        "@radix-ui/react-slot",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "components/ui/description-list.tsx",
+          "target": "components/ui/description-list.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
       "$schema": "https://ui.shadcn.com/schema/registry-item.json",
       "name": "dialog",
       "type": "registry:ui",
