@@ -47,7 +47,8 @@ export interface SubcomponentApi {
 export interface PropsExplorerProps {
   title?: string;
   description?: string;
-  subcomponents: SubcomponentApi[];
+  subcomponents?: SubcomponentApi[];
+  components?: SubcomponentApi[];
   className?: string;
 }
 
@@ -61,9 +62,11 @@ export interface PropsExplorerProps {
 export function PropsExplorer({
   title = "Props & API Reference",
   description = "Explore public component interfaces, prop contracts, density modifiers, and inherited HTML attributes.",
-  subcomponents,
+  subcomponents: propSubcomponents,
+  components: propComponents,
   className,
 }: PropsExplorerProps) {
+  const subcomponents = propSubcomponents ?? propComponents ?? [];
   const [activeTab, setActiveTab] = React.useState<string>(
     subcomponents[0]?.name ?? ""
   );

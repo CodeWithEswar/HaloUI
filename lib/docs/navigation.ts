@@ -1591,6 +1591,24 @@ export const docsNavigation: DocsNavSection[] = [
           "developer"
         ],
       },
+      {
+        title: "Tree View",
+        href: "/components/tree-view",
+        description: "Hierarchical data display primitive with WAI-ARIA Tree View semantics, roving tabindex keyboard navigation, container-aware deep nesting reflow, and restrained HaloUI Liquid Glass framing.",
+        status: "stable",
+        keywords: [
+          "tree view",
+          "tree-view",
+          "tree",
+          "hierarchy",
+          "file tree",
+          "nodes",
+          "branches",
+          "leaves",
+          "data display",
+          "folder"
+        ],
+      },
     ],
   },
   {

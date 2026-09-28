@@ -2935,6 +2935,27 @@
         "field",
         "halo-icon"
       ]
+    },
+    {
+      "name": "tree-view",
+      "type": "registry:ui",
+      "title": "Tree View",
+      "description": "Hierarchical data display primitive with WAI-ARIA Tree View semantics, roving tabindex keyboard navigation, container-aware deep nesting reflow, and restrained HaloUI Liquid Glass framing.",
+      "dependencies": [
+        "@hugeicons/core-free-icons",
+        "@hugeicons/react",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [
+        "checkbox"
+      ],
+      "files": [
+        {
+          "path": "components/ui/tree-view.tsx",
+          "type": "registry:ui"
+        }
+      ]
     }
   ]
 }
