@@ -336,6 +336,29 @@
       ]
     },
     {
+      "name": "carousel",
+      "type": "registry:ui",
+      "title": "Carousel",
+      "description": "Sequential content presentation primitive engineered with proven Embla carousel physics, container-aware responsiveness, liquid glass navigation controls, and accessible pagination.",
+      "dependencies": [
+        "@hugeicons/core-free-icons",
+        "@hugeicons/react",
+        "embla-carousel-react",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [
+        "button"
+      ],
+      "files": [
+        {
+          "path": "components/ui/carousel.tsx",
+          "target": "components/ui/carousel.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
       "name": "checkbox",
       "type": "registry:ui",
       "title": "Checkbox",

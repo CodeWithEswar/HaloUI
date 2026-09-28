@@ -1,48 +1,61 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import { cn } from "cn"
+import * as React from "react";
 import useEmblaCarousel, {
   type UseEmblaCarouselType,
-} from "embla-carousel-react"
+} from "embla-carousel-react";
+import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
+import { HaloIcon } from "@/components/icons/halo-icon";
+import {
+  ArrowLeft01Icon,
+  ArrowRight01Icon,
+} from "@hugeicons/core-free-icons";
 
-import { Button } from "@/components/ui/button"
-import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react"
+/* -------------------------------------------------------------------------
+ * TYPES & CONTEXT
+ * ----------------------------------------------------------------------- */
 
-type CarouselApi = UseEmblaCarouselType[1]
-type UseCarouselParameters = Parameters<typeof useEmblaCarousel>
-type CarouselOptions = UseCarouselParameters[0]
-type CarouselPlugin = UseCarouselParameters[1]
+export type CarouselApi = UseEmblaCarouselType[1];
+type UseCarouselParameters = Parameters<typeof useEmblaCarousel>;
+export type CarouselOptions = UseCarouselParameters[0];
+export type CarouselPlugin = UseCarouselParameters[1];
 
-type CarouselProps = {
-  opts?: CarouselOptions
-  plugins?: CarouselPlugin
-  orientation?: "horizontal" | "vertical"
-  setApi?: (api: CarouselApi) => void
+export interface CarouselProps {
+  opts?: CarouselOptions;
+  plugins?: CarouselPlugin;
+  orientation?: "horizontal" | "vertical";
+  setApi?: (api: CarouselApi) => void;
 }
 
-type CarouselContextProps = {
-  carouselRef: ReturnType<typeof useEmblaCarousel>[0]
-  api: ReturnType<typeof useEmblaCarousel>[1]
-  scrollPrev: () => void
-  scrollNext: () => void
-  canScrollPrev: boolean
-  canScrollNext: boolean
-} & CarouselProps
+interface CarouselContextProps extends CarouselProps {
+  carouselRef: ReturnType<typeof useEmblaCarousel>[0];
+  api: ReturnType<typeof useEmblaCarousel>[1];
+  scrollPrev: () => void;
+  scrollNext: () => void;
+  scrollTo: (index: number) => void;
+  canScrollPrev: boolean;
+  canScrollNext: boolean;
+  selectedIndex: number;
+  scrollSnaps: number[];
+}
 
-const CarouselContext = React.createContext<CarouselContextProps | null>(null)
+const CarouselContext = React.createContext<CarouselContextProps | null>(null);
 
-function useCarousel() {
-  const context = React.useContext(CarouselContext)
-
+export function useCarousel() {
+  const context = React.useContext(CarouselContext);
   if (!context) {
-    throw new Error("useCarousel must be used within a <Carousel />")
+    throw new Error("useCarousel must be used within a <Carousel />");
   }
-
-  return context
+  return context;
 }
 
-function Carousel({
+/* -------------------------------------------------------------------------
+ * ROOT CAROUSEL COMPONENT
+ * Container-aware (@container/carousel), accessible WAI-ARIA carousel shell.
+ * ----------------------------------------------------------------------- */
+
+export function Carousel({
   orientation = "horizontal",
   opts,
   setApi,
@@ -57,70 +70,103 @@ function Carousel({
       axis: orientation === "horizontal" ? "x" : "y",
     },
     plugins
-  )
-  const [canScrollPrev, setCanScrollPrev] = React.useState(false)
-  const [canScrollNext, setCanScrollNext] = React.useState(false)
+  );
 
-  const onSelect = React.useCallback((api: CarouselApi) => {
-    if (!api) return
-    setCanScrollPrev(api.canScrollPrev())
-    setCanScrollNext(api.canScrollNext())
-  }, [])
+  const [canScrollPrev, setCanScrollPrev] = React.useState(false);
+  const [canScrollNext, setCanScrollNext] = React.useState(false);
+  const [selectedIndex, setSelectedIndex] = React.useState(0);
+  const [scrollSnaps, setScrollSnaps] = React.useState<number[]>([]);
+
+  const onSelect = React.useCallback((emblaApi: CarouselApi) => {
+    if (!emblaApi) return;
+    setCanScrollPrev(emblaApi.canScrollPrev());
+    setCanScrollNext(emblaApi.canScrollNext());
+    setSelectedIndex(emblaApi.selectedScrollSnap());
+  }, []);
 
   const scrollPrev = React.useCallback(() => {
-    api?.scrollPrev()
-  }, [api])
+    api?.scrollPrev();
+  }, [api]);
 
   const scrollNext = React.useCallback(() => {
-    api?.scrollNext()
-  }, [api])
+    api?.scrollNext();
+  }, [api]);
+
+  const scrollTo = React.useCallback(
+    (index: number) => {
+      api?.scrollTo(index);
+    },
+    [api]
+  );
 
   const handleKeyDown = React.useCallback(
     (event: React.KeyboardEvent<HTMLDivElement>) => {
-      if (event.key === "ArrowLeft") {
-        event.preventDefault()
-        scrollPrev()
-      } else if (event.key === "ArrowRight") {
-        event.preventDefault()
-        scrollNext()
+      if (orientation === "horizontal") {
+        if (event.key === "ArrowLeft") {
+          event.preventDefault();
+          scrollPrev();
+        } else if (event.key === "ArrowRight") {
+          event.preventDefault();
+          scrollNext();
+        }
+      } else {
+        if (event.key === "ArrowUp") {
+          event.preventDefault();
+          scrollPrev();
+        } else if (event.key === "ArrowDown") {
+          event.preventDefault();
+          scrollNext();
+        }
       }
     },
-    [scrollPrev, scrollNext]
-  )
+    [orientation, scrollPrev, scrollNext]
+  );
 
   React.useEffect(() => {
-    if (!api || !setApi) return
-    setApi(api)
-  }, [api, setApi])
+    if (!api || !setApi) return;
+    setApi(api);
+  }, [api, setApi]);
 
   React.useEffect(() => {
-    if (!api) return
-    onSelect(api)
-    api.on("reInit", onSelect)
-    api.on("select", onSelect)
+    if (!api) return;
+
+    setScrollSnaps(api.scrollSnapList());
+    onSelect(api);
+
+    api.on("reInit", () => {
+      setScrollSnaps(api.scrollSnapList());
+      onSelect(api);
+    });
+    api.on("select", onSelect);
 
     return () => {
-      api?.off("select", onSelect)
-    }
-  }, [api, onSelect])
+      api?.off("select", onSelect);
+    };
+  }, [api, onSelect]);
 
   return (
     <CarouselContext.Provider
       value={{
         carouselRef,
-        api: api,
+        api,
         opts,
         orientation:
           orientation || (opts?.axis === "y" ? "vertical" : "horizontal"),
         scrollPrev,
         scrollNext,
+        scrollTo,
         canScrollPrev,
         canScrollNext,
+        selectedIndex,
+        scrollSnaps,
       }}
     >
       <div
         onKeyDownCapture={handleKeyDown}
-        className={cn("relative", className)}
+        className={cn(
+          "@container/carousel group/carousel relative w-full min-w-0 select-none",
+          className
+        )}
         role="region"
         aria-roledescription="carousel"
         data-slot="carousel"
@@ -129,16 +175,23 @@ function Carousel({
         {children}
       </div>
     </CarouselContext.Provider>
-  )
+  );
 }
 
-function CarouselContent({ className, ...props }: React.ComponentProps<"div">) {
-  const { carouselRef, orientation } = useCarousel()
+/* -------------------------------------------------------------------------
+ * CAROUSEL CONTENT (TRACK)
+ * ----------------------------------------------------------------------- */
+
+export function CarouselContent({
+  className,
+  ...props
+}: React.ComponentProps<"div">) {
+  const { carouselRef, orientation } = useCarousel();
 
   return (
     <div
       ref={carouselRef}
-      className="overflow-hidden"
+      className="overflow-hidden w-full min-w-0"
       data-slot="carousel-content"
     >
       <div
@@ -150,11 +203,18 @@ function CarouselContent({ className, ...props }: React.ComponentProps<"div">) {
         {...props}
       />
     </div>
-  )
+  );
 }
 
-function CarouselItem({ className, ...props }: React.ComponentProps<"div">) {
-  const { orientation } = useCarousel()
+/* -------------------------------------------------------------------------
+ * CAROUSEL ITEM (SLIDE)
+ * ----------------------------------------------------------------------- */
+
+export function CarouselItem({
+  className,
+  ...props
+}: React.ComponentProps<"div">) {
+  const { orientation } = useCarousel();
 
   return (
     <div
@@ -168,16 +228,33 @@ function CarouselItem({ className, ...props }: React.ComponentProps<"div">) {
       )}
       {...props}
     />
-  )
+  );
 }
 
-function CarouselPrevious({
+/* -------------------------------------------------------------------------
+ * NAVIGATION CONTROLS: PREVIOUS & NEXT BUTTONS
+ * Supports "edge" (outside) and "inset" (floating inside with liquid glass)
+ * ----------------------------------------------------------------------- */
+
+export interface CarouselControlProps
+  extends React.ComponentProps<typeof Button> {
+  /**
+   * Placement strategy:
+   * - "inset": Floats gracefully inside the carousel bounds with liquid glass.
+   * - "edge": Extends outside the carousel on desktop, automatically tucks in on mobile.
+   * @default "inset"
+   */
+  position?: "inset" | "edge";
+}
+
+export function CarouselPrevious({
   className,
-  variant = "outline",
+  variant = "glass",
   size = "icon-sm",
+  position = "inset",
   ...props
-}: React.ComponentProps<typeof Button>) {
-  const { orientation, scrollPrev, canScrollPrev } = useCarousel()
+}: CarouselControlProps) {
+  const { orientation, scrollPrev, canScrollPrev } = useCarousel();
 
   return (
     <Button
@@ -185,29 +262,44 @@ function CarouselPrevious({
       variant={variant}
       size={size}
       className={cn(
-        "absolute touch-manipulation rounded-full",
-        orientation === "horizontal"
-          ? "inset-y-0 -left-12 my-auto"
-          : "-top-12 left-1/2 -translate-x-1/2 rotate-90",
+        "absolute z-10 touch-manipulation rounded-full shadow-sm transition-all duration-200 cursor-pointer",
+        // Liquid glass backdrop styling
+        variant === "glass" && [
+          "bg-card/75 dark:bg-card/50 backdrop-blur-md border border-border/70 dark:border-white/15",
+          "hover:bg-card/90 dark:hover:bg-card/70 hover:scale-105 active:scale-95",
+        ],
+        // Positioning
+        orientation === "horizontal" && [
+          "top-1/2 -translate-y-1/2",
+          position === "inset" && "left-3",
+          position === "edge" && "-left-4 @[640px]/carousel:-left-12",
+        ],
+        orientation === "vertical" && [
+          "left-1/2 -translate-x-1/2",
+          position === "inset" && "top-3 rotate-90",
+          position === "edge" && "-top-4 @[640px]/carousel:-top-12 rotate-90",
+        ],
         className
       )}
       disabled={!canScrollPrev}
       onClick={scrollPrev}
+      aria-label="Previous slide"
       {...props}
     >
-      <ChevronLeftIcon />
+      <HaloIcon icon={ArrowLeft01Icon} size={16} />
       <span className="sr-only">Previous slide</span>
     </Button>
-  )
+  );
 }
 
-function CarouselNext({
+export function CarouselNext({
   className,
-  variant = "outline",
+  variant = "glass",
   size = "icon-sm",
+  position = "inset",
   ...props
-}: React.ComponentProps<typeof Button>) {
-  const { orientation, scrollNext, canScrollNext } = useCarousel()
+}: CarouselControlProps) {
+  const { orientation, scrollNext, canScrollNext } = useCarousel();
 
   return (
     <Button
@@ -215,28 +307,94 @@ function CarouselNext({
       variant={variant}
       size={size}
       className={cn(
-        "absolute touch-manipulation rounded-full",
-        orientation === "horizontal"
-          ? "inset-y-0 -right-12 my-auto"
-          : "-bottom-12 left-1/2 -translate-x-1/2 rotate-90",
+        "absolute z-10 touch-manipulation rounded-full shadow-sm transition-all duration-200 cursor-pointer",
+        // Liquid glass backdrop styling
+        variant === "glass" && [
+          "bg-card/75 dark:bg-card/50 backdrop-blur-md border border-border/70 dark:border-white/15",
+          "hover:bg-card/90 dark:hover:bg-card/70 hover:scale-105 active:scale-95",
+        ],
+        // Positioning
+        orientation === "horizontal" && [
+          "top-1/2 -translate-y-1/2",
+          position === "inset" && "right-3",
+          position === "edge" && "-right-4 @[640px]/carousel:-right-12",
+        ],
+        orientation === "vertical" && [
+          "left-1/2 -translate-x-1/2",
+          position === "inset" && "bottom-3 rotate-90",
+          position === "edge" && "-bottom-4 @[640px]/carousel:-bottom-12 rotate-90",
+        ],
         className
       )}
       disabled={!canScrollNext}
       onClick={scrollNext}
+      aria-label="Next slide"
       {...props}
     >
-      <ChevronRightIcon />
+      <HaloIcon icon={ArrowRight01Icon} size={16} />
       <span className="sr-only">Next slide</span>
     </Button>
-  )
+  );
 }
 
-export {
-  type CarouselApi,
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselPrevious,
-  CarouselNext,
-  useCarousel,
+/* -------------------------------------------------------------------------
+ * PAGINATION INDICATORS (DOTS)
+ * Accessible pill indicators supporting click-to-scroll.
+ * ----------------------------------------------------------------------- */
+
+export interface CarouselDotsProps extends React.ComponentProps<"div"> {
+  /**
+   * Optional custom styling for the active dot.
+   */
+  activeClassName?: string;
+  /**
+   * Optional custom styling for inactive dots.
+   */
+  inactiveClassName?: string;
+}
+
+export function CarouselDots({
+  className,
+  activeClassName,
+  inactiveClassName,
+  ...props
+}: CarouselDotsProps) {
+  const { scrollSnaps, selectedIndex, scrollTo } = useCarousel();
+
+  if (scrollSnaps.length <= 1) return null;
+
+  return (
+    <div
+      role="tablist"
+      aria-label="Carousel slide pagination"
+      className={cn(
+        "flex items-center justify-center gap-1.5 py-2",
+        className
+      )}
+      {...props}
+    >
+      {scrollSnaps.map((_, index) => {
+        const isSelected = index === selectedIndex;
+        return (
+          <button
+            key={index}
+            type="button"
+            role="tab"
+            aria-selected={isSelected}
+            aria-label={`Go to slide ${index + 1}`}
+            onClick={() => scrollTo(index)}
+            className={cn(
+              "h-1.5 rounded-full transition-all duration-300 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50",
+              isSelected
+                ? cn("w-6 bg-primary shadow-xs", activeClassName)
+                : cn(
+                    "w-1.5 bg-muted-foreground/30 hover:bg-muted-foreground/50",
+                    inactiveClassName
+                  )
+            )}
+          />
+        );
+      })}
+    </div>
+  );
 }

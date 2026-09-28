@@ -1645,6 +1645,23 @@ export const docsNavigation: DocsNavSection[] = [
           "folder"
         ],
       },
+      {
+        title: "Carousel",
+        href: "/components/carousel",
+        description: "Sequential content presentation primitive engineered with proven Embla carousel physics, container-aware responsiveness, liquid glass navigation controls, and accessible pagination.",
+        status: "stable",
+        keywords: [
+          "carousel",
+          "slider",
+          "slides",
+          "embla",
+          "swiper",
+          "gallery",
+          "media",
+          "testimonials",
+          "data display"
+        ],
+      },
     ],
   },
   {
