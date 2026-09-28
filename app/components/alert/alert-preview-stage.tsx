@@ -118,16 +118,16 @@ export function AlertPreviewStage() {
     <PreviewStageShell
       title="Alert"
       description="Contextual inline semantic feedback surface engineered with Subtle Liquid Glass, automatic container-aware reflow, Hugeicons iconography, and accessible WAI-ARIA role semantics."
-      badgeText="Feedback & Status 01"
+      badge="Feedback & Status 01"
       activeTab={activeTab}
       onTabChange={setActiveTab}
-      telemetryItems={telemetryItems}
+      telemetry={telemetryItems}
       viewport={viewport}
       onViewportChange={setViewport}
       backdrop={backdrop}
       onBackdropChange={setBackdrop}
       onReset={handleReset}
-      codeSnippet={codeSnippet}
+      code={codeSnippet}
     >
       <div className="w-full space-y-4">
         {/* Controls Bar: Aligned in responsive grid row */}

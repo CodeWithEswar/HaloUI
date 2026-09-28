@@ -34,6 +34,7 @@ const managerCommandGenerators = {
 
 export type InstallCommandProps = {
   registry?: string;
+  command?: string;
   action?: "add" | "init" | "create-next" | "create-vite" | "dev";
   commands?: Partial<Record<PackageManager, string>>;
   className?: string;
@@ -41,11 +42,13 @@ export type InstallCommandProps = {
 
 export async function InstallCommand({
   registry = "button",
+  command,
   action = "add",
   commands: customCommands,
   className,
 }: InstallCommandProps) {
   const getCommand = (manager: PackageManager) => {
+    if (command) return command;
     if (customCommands && customCommands[manager]) {
       return customCommands[manager]!;
     }

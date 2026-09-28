@@ -145,8 +145,8 @@ export function CarouselPreviewStage() {
     },
     {
       label: "Optics",
-      value: buttonVariant === "glass" ? "LIQUID GLASS" : "SOLID BASE",
-      variant: buttonVariant === "glass" ? "success" : "default",
+      value: buttonVariant === "default" ? "LIQUID GLASS" : "SOLID BASE",
+      variant: buttonVariant === "default" ? "success" : "default",
     },
     {
       label: "Pagination",
@@ -218,7 +218,7 @@ export function CarouselPreviewStage() {
                 { value: "outline", label: "Bordered Outline" },
                 { value: "secondary", label: "Secondary Solid" },
               ]}
-              onChange={(val) => setButtonVariant(val as "glass" | "outline" | "secondary")}
+              onChange={(val) => setButtonVariant(val as "default" | "outline" | "secondary")}
             />
 
             <StageControlSelect
