@@ -1490,6 +1490,23 @@ export const docsNavigation: DocsNavSection[] = [
           "data display"
         ],
       },
+      {
+        title: "Timeline",
+        href: "/components/timeline",
+        description: "Chronological event sequence primitive with container-aware responsive reflow, aligned optical connectors, and restrained HaloUI Liquid Glass outer boundaries.",
+        status: "stable",
+        keywords: [
+          "timeline",
+          "chronological",
+          "events",
+          "history",
+          "activity",
+          "audit",
+          "milestones",
+          "pipeline",
+          "data display"
+        ],
+      },
     ],
   },
   {

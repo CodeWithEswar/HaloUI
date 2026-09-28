@@ -2681,6 +2681,24 @@
       ]
     },
     {
+      "name": "timeline",
+      "type": "registry:ui",
+      "title": "Timeline",
+      "description": "Chronological event sequence primitive with container-aware responsive reflow, aligned optical connectors, and restrained HaloUI Liquid Glass outer boundaries.",
+      "dependencies": [
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "components/ui/timeline.tsx",
+          "target": "components/ui/timeline.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
       "name": "toggle",
       "type": "registry:ui",
       "title": "Toggle",
