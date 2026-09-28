@@ -14,7 +14,59 @@ import {
   Loading03Icon,
 } from "@hugeicons/core-free-icons";
 
-const toast = ToastPrimitive.createToastManager();
+const toastManager = ToastPrimitive.createToastManager();
+
+export interface ToastOptions {
+  id?: string;
+  title?: React.ReactNode;
+  description?: React.ReactNode;
+  type?: "info" | "success" | "warning" | "error" | "loading";
+  duration?: number;
+  action?: React.ReactNode;
+  [key: string]: any;
+}
+
+const toast = Object.assign(
+  (options: ToastOptions | string) => {
+    if (typeof options === "string") {
+      return toastManager.add({ title: options });
+    }
+    return toastManager.add(options);
+  },
+  toastManager,
+  {
+    create: (options: ToastOptions | string) => {
+      if (typeof options === "string") {
+        return toastManager.add({ title: options });
+      }
+      return toastManager.add(options);
+    },
+    dismiss: (id?: string) => {
+      if (id) {
+        toastManager.close(id);
+      } else {
+        toastManager.close();
+      }
+    },
+    close: (id?: string) => {
+      if (id) {
+        toastManager.close(id);
+      } else {
+        toastManager.close();
+      }
+    },
+    success: (title: string, options?: Partial<ToastOptions>) =>
+      toastManager.add({ title, type: "success", ...options }),
+    error: (title: string, options?: Partial<ToastOptions>) =>
+      toastManager.add({ title, type: "error", ...options }),
+    warning: (title: string, options?: Partial<ToastOptions>) =>
+      toastManager.add({ title, type: "warning", ...options }),
+    info: (title: string, options?: Partial<ToastOptions>) =>
+      toastManager.add({ title, type: "info", ...options }),
+    loading: (title: string, options?: Partial<ToastOptions>) =>
+      toastManager.add({ title, type: "loading", ...options }),
+  }
+);
 
 function ToastProvider({ ...props }: ToastPrimitive.Provider.Props) {
   return <ToastPrimitive.Provider {...props} />;

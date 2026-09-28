@@ -3043,29 +3043,6 @@
       ]
     },
     {
-      "name": "toast",
-      "type": "registry:ui",
-      "title": "Toast",
-      "description": "Ephemeral application feedback surface engineered with Balanced Liquid Glass, stacked swipe physics, non-intrusive portal rendering, and mobile-safe viewport margins.",
-      "dependencies": [
-        "@base-ui/react",
-        "clsx",
-        "tailwind-merge",
-        "@hugeicons/react",
-        "@hugeicons/core-free-icons"
-      ],
-      "registryDependencies": [
-        "button",
-        "halo-icon"
-      ],
-      "files": [
-        {
-          "path": "components/ui/toast.tsx",
-          "type": "registry:ui"
-        }
-      ]
-    },
-    {
       "name": "callout",
       "type": "registry:ui",
       "title": "Callout",
@@ -3127,6 +3104,29 @@
       "files": [
         {
           "path": "components/ui/alert.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "toast",
+      "type": "registry:ui",
+      "title": "Toast",
+      "description": "Ephemeral application feedback surface engineered with Balanced Liquid Glass, stacked swipe physics, non-intrusive portal rendering, and mobile-safe viewport margins.",
+      "dependencies": [
+        "@base-ui/react",
+        "clsx",
+        "tailwind-merge",
+        "@hugeicons/react",
+        "@hugeicons/core-free-icons"
+      ],
+      "registryDependencies": [
+        "button",
+        "halo-icon"
+      ],
+      "files": [
+        {
+          "path": "components/ui/toast.tsx",
           "type": "registry:ui"
         }
       ]
