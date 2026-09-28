@@ -16,6 +16,13 @@
   display: block;
   width: 100%;
   height: 100%;
+  mask-image: linear-gradient(
+    to bottom,
+    transparent,
+    #000 8%,
+    #000 90%,
+    transparent
+  );
 }
 .content {
   position: relative;
@@ -33,6 +40,8 @@
 }
 .intro {
   max-width: min(47vw, 680px);
+  transform: translate3d(0, var(--journey-shift, 0px), 0);
+  will-change: transform;
 }
 .kicker,
 .sectionEnd,
@@ -44,9 +53,9 @@
 }
 .intro h2,
 .finale h2 {
-  font-size: clamp(48px, 6.4vw, 108px);
-  line-height: 1.04;
-  letter-spacing: -0.065em;
+  font-size: clamp(48px, 5.5vw, 92px);
+  line-height: 1.08;
+  letter-spacing: -0.055em;
   font-weight: 470;
   margin: 32px 0 28px;
 }
@@ -59,7 +68,7 @@
 .finaleContent > p:not(.kicker) {
   max-width: 500px;
   color: var(--space-muted);
-  font-size: clamp(15px, 1.22vw, 19px);
+  font-size: clamp(15px, 1.1vw, 18px);
   line-height: 1.7;
 }
 .textLink {
@@ -85,6 +94,7 @@
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: clamp(16px, 2.7vw, 46px);
+  transform: translate3d(0, var(--journey-near-shift, 0px), 0);
 }
 .principle {
   border-top: 1px solid var(--space-line);
@@ -124,10 +134,12 @@
   position: relative;
 }
 .finaleContent {
-  width: min(52%, 720px);
+  width: min(48%, 620px);
+  transform: translate3d(0, var(--journey-near-shift, 0px), 0);
 }
 .finale h2 {
-  font-size: clamp(52px, 7.6vw, 122px);
+  font-size: clamp(48px, 5.8vw, 88px);
+  text-wrap: balance;
   margin: 27px 0 30px;
 }
 .finaleContent > p:not(.kicker) {
@@ -234,7 +246,7 @@
     width: 100%;
   }
   .finale h2 {
-    font-size: clamp(54px, 14vw, 84px);
+    font-size: clamp(44px, 11vw, 64px);
   }
   .finaleMark {
     right: 24px;
@@ -243,6 +255,11 @@
   }
 }
 @media (prefers-reduced-motion: reduce) {
+  .intro,
+  .principleList,
+  .finaleContent {
+    transform: none;
+  }
   .journey *,
   .journey *::before,
   .journey *::after {

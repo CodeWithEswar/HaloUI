@@ -70,7 +70,7 @@ export function LoadingOverlayDemonstrations() {
           {/* Circular Progress Composition */}
           <LoadingOverlay
             visible={true}
-            spinner={<CircularProgress value={progressVal} size="md" variant="primary" />}
+            spinner={<CircularProgress value={progressVal} size="md" variant="default" />}
             message={`Uploading bundle (${progressVal}%)...`}
             className="rounded-2xl border border-border/60 bg-background/50 p-6 h-48 flex items-center justify-center"
           >

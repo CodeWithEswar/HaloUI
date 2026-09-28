@@ -43,13 +43,16 @@ export function createUniverseEnvironment(
   galaxies[0].rotation.z = -0.3
   galaxies[1].rotation.z = -0.48
 
-  const rockGeometry = new THREE.IcosahedronGeometry(1, 1)
+  const rockGeometry = new THREE.SphereGeometry(1, 20, 14)
   const positions = rockGeometry.getAttribute("position")
   for (let i = 0; i < positions.count; i++) {
     const x = positions.getX(i),
       y = positions.getY(i),
       z = positions.getZ(i)
-    const roughness = 0.85 + 0.2 * Math.sin(x * 12 + y * 6 + z * 19)
+    const roughness =
+      0.9 +
+      0.12 * Math.sin(x * 4 + y * 3 + z * 7) +
+      0.045 * Math.sin(x * 19 + y * 13 + z * 23)
     positions.setXYZ(i, x * roughness, y * roughness, z * roughness)
   }
   rockGeometry.computeVertexNormals()
@@ -57,7 +60,7 @@ export function createUniverseEnvironment(
     color: 0x383838,
     roughness: 0.98,
     metalness: 0.05,
-    flatShading: true,
+    flatShading: false,
   })
   const rocks = new THREE.InstancedMesh(rockGeometry, rockMaterial, 240)
   const dummy = new THREE.Object3D()
@@ -111,7 +114,7 @@ export function createUniverseEnvironment(
     color: 0xffffff,
     transparent: true,
     depthWrite: false,
-    blending: THREE.AdditiveBlending,
+    blending: THREE.NormalBlending,
     opacity: 0.9,
   })
   const sun = new THREE.Sprite(glintMaterial)
@@ -158,6 +161,7 @@ export function createUniverseEnvironment(
       galaxyMaterial.uniforms.ink.value = dark ? 0.88 : 0.12
       galaxyMaterial.uniforms.strength.value = dark ? 0.92 : 0.36
       glintMaterial.opacity = dark ? 0.9 : 0.36
+      glintMaterial.color.set(dark ? 0xffffff : 0x555555)
       rockMaterial.color.set(dark ? 0x383838 : 0x626262)
     },
     update(time: number, px: number, py: number) {

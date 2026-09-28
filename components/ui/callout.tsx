@@ -215,7 +215,7 @@ const DEFAULT_CALLOUT_ICONS: Record<CalloutTone, typeof InformationCircleIcon> =
  * ----------------------------------------------------------------------- */
 
 export interface CalloutProps
-  extends React.ComponentProps<"aside">,
+  extends Omit<React.ComponentProps<"aside">, "title">,
     VariantProps<typeof calloutVariants> {
   /**
    * Optional custom leading icon.

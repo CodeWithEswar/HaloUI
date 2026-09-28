@@ -43,7 +43,7 @@ const TOAST_SUBCOMPONENTS: SubcomponentApi[] = [
   },
   {
     name: "toast",
-    kind: "Utility",
+    kind: "Subcomponent",
     maturity: "stable",
     description:
       "Imperative toast manager singleton used to dispatch, update, or dismiss notifications from event handlers or asynchronous promises.",

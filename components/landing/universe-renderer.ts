@@ -142,7 +142,7 @@ export function mountUniverse(host: HTMLDivElement): () => void {
     fragmentShader: `varying vec2 p; uniform float strength;
       void main(){float r=length(p);float edge=exp(-max(r-0.98,0.0)*19.0);
       float key=0.2+0.8*max(dot(normalize(p),normalize(vec2(0.7,0.8))),0.0);
-      gl_FragColor=vec4(vec3(1.0),edge*key*strength*smoothstep(0.88,1.0,r));}`,
+      gl_FragColor=vec4(vec3(1.0),edge*key*strength*smoothstep(0.88,1.0,r)*(1.0-smoothstep(1.4,1.7,r)));}`,
     transparent: true,
     depthWrite: false,
   })
@@ -177,7 +177,7 @@ export function mountUniverse(host: HTMLDivElement): () => void {
       float bloom=exp(-pow((r-1.38)/0.045,2.0));
       float breaks=0.55+0.45*sin(a*37.0+r*130.0)*sin(a*19.0-r*90.0);
       float alpha=band*(0.09+light*0.18)+threads*breaks*0.6+inner*(0.6+light*0.4)+bloom*(0.12+light*0.35)+outer*0.18;
-      gl_FragColor=vec4(vec3(ink),alpha);
+      gl_FragColor=vec4(vec3(ink),alpha*(1.0-smoothstep(1.8,1.98,r)));
     }`,
     transparent: true,
     side: THREE.DoubleSide,
@@ -523,4 +523,3 @@ export function mountUniverse(host: HTMLDivElement): () => void {
     })
   }
 }
-

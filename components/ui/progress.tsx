@@ -147,7 +147,7 @@ export function Progress({
   const safeValue =
     typeof value === "number" && !Number.isNaN(value)
       ? Math.min(Math.max(0, value), safeMax)
-      : undefined;
+      : null;
 
   const contextValue = React.useMemo(
     () => ({

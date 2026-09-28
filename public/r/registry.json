@@ -3043,28 +3043,6 @@
       ]
     },
     {
-      "name": "callout",
-      "type": "registry:ui",
-      "title": "Callout",
-      "description": "Contextual documentation and technical guidance callout primitive engineered with Subtle/Balanced Liquid Glass, automatic container-aware reflow, and 5 semantic tones.",
-      "dependencies": [
-        "class-variance-authority",
-        "clsx",
-        "tailwind-merge",
-        "@hugeicons/react",
-        "@hugeicons/core-free-icons"
-      ],
-      "registryDependencies": [
-        "halo-icon"
-      ],
-      "files": [
-        {
-          "path": "components/ui/callout.tsx",
-          "type": "registry:ui"
-        }
-      ]
-    },
-    {
       "name": "banner",
       "type": "registry:ui",
       "title": "Banner",
@@ -3104,48 +3082,6 @@
       "files": [
         {
           "path": "components/ui/alert.tsx",
-          "type": "registry:ui"
-        }
-      ]
-    },
-    {
-      "name": "toast",
-      "type": "registry:ui",
-      "title": "Toast",
-      "description": "Ephemeral application feedback surface engineered with Balanced Liquid Glass, stacked swipe physics, non-intrusive portal rendering, and mobile-safe viewport margins.",
-      "dependencies": [
-        "@base-ui/react",
-        "clsx",
-        "tailwind-merge",
-        "@hugeicons/react",
-        "@hugeicons/core-free-icons"
-      ],
-      "registryDependencies": [
-        "button",
-        "halo-icon"
-      ],
-      "files": [
-        {
-          "path": "components/ui/toast.tsx",
-          "type": "registry:ui"
-        }
-      ]
-    },
-    {
-      "name": "progress",
-      "type": "registry:ui",
-      "title": "Progress",
-      "description": "Linear task completion indicator engineered with Subtle Liquid Glass channels, accessible WAI-ARIA progressbar semantics, and automatic container-aware reflow down to 240px.",
-      "dependencies": [
-        "@base-ui/react",
-        "class-variance-authority",
-        "clsx",
-        "tailwind-merge"
-      ],
-      "registryDependencies": [],
-      "files": [
-        {
-          "path": "components/ui/progress.tsx",
           "type": "registry:ui"
         }
       ]
@@ -3205,6 +3141,65 @@
       ]
     },
     {
+      "name": "status-indicator",
+      "type": "registry:ui",
+      "title": "Status Indicator",
+      "description": "Dot/icon + text state representation engineered for high-density tables, lists, and cards with minimal near-flat Liquid Glass optics and zero layout overhead.",
+      "dependencies": [
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "components/ui/status-indicator.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "callout",
+      "type": "registry:ui",
+      "title": "Callout",
+      "description": "Contextual documentation and technical guidance callout primitive engineered with Subtle/Balanced Liquid Glass, automatic container-aware reflow, and 5 semantic tones.",
+      "dependencies": [
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge",
+        "@hugeicons/react",
+        "@hugeicons/core-free-icons"
+      ],
+      "registryDependencies": [
+        "halo-icon"
+      ],
+      "files": [
+        {
+          "path": "components/ui/callout.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "progress",
+      "type": "registry:ui",
+      "title": "Progress",
+      "description": "Linear task completion indicator engineered with Subtle Liquid Glass channels, accessible WAI-ARIA progressbar semantics, and automatic container-aware reflow down to 240px.",
+      "dependencies": [
+        "@base-ui/react",
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "components/ui/progress.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
       "name": "loading-overlay",
       "type": "registry:ui",
       "title": "Loading Overlay",
@@ -3225,19 +3220,24 @@
       ]
     },
     {
-      "name": "status-indicator",
+      "name": "toast",
       "type": "registry:ui",
-      "title": "Status Indicator",
-      "description": "Dot/icon + text state representation engineered for high-density tables, lists, and cards with minimal near-flat Liquid Glass optics and zero layout overhead.",
+      "title": "Toast",
+      "description": "Ephemeral application feedback surface engineered with Balanced Liquid Glass, stacked swipe physics, non-intrusive portal rendering, and mobile-safe viewport margins.",
       "dependencies": [
-        "class-variance-authority",
+        "@base-ui/react",
         "clsx",
-        "tailwind-merge"
+        "tailwind-merge",
+        "@hugeicons/react",
+        "@hugeicons/core-free-icons"
       ],
-      "registryDependencies": [],
+      "registryDependencies": [
+        "button",
+        "halo-icon"
+      ],
       "files": [
         {
-          "path": "components/ui/status-indicator.tsx",
+          "path": "components/ui/toast.tsx",
           "type": "registry:ui"
         }
       ]

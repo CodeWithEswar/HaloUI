@@ -1,6 +1,7 @@
 import Link from "next/link"
 import { ArrowRight01Icon } from "@hugeicons/core-free-icons"
 import { HaloIcon } from "@/components/icons/halo-icon"
+import { HaloSurface } from "@/components/haloui/foundations/halo-surface"
 import styles from "./journey.module.css"
 
 export function FinalCtaSection() {
@@ -22,12 +23,16 @@ export function FinalCtaSection() {
           source you need. Your next interface starts here.
         </p>
         <div className={styles.actions}>
-          <Link href="/docs" className={styles.primary}>
-            Get Started <HaloIcon icon={ArrowRight01Icon} size={18} />
-          </Link>
-          <Link href="/components" className={styles.secondary}>
-            Explore Components
-          </Link>
+          <HaloSurface asChild intensity="balanced" elevation="raised" specular>
+            <Link href="/docs" className={styles.primary}>
+              Get Started <HaloIcon icon={ArrowRight01Icon} size={18} />
+            </Link>
+          </HaloSurface>
+          <HaloSurface asChild intensity="subtle" elevation="base" specular>
+            <Link href="/components" className={styles.secondary}>
+              Explore Components
+            </Link>
+          </HaloSurface>
         </div>
       </div>
       <div className={styles.finaleMark} aria-hidden="true">
