@@ -674,6 +674,28 @@
       }
     },
     {
+      "name": "diff-viewer",
+      "type": "registry:ui",
+      "title": "Diff Viewer",
+      "description": "Accessible code and text comparison primitive engineered with Unified and Split view modes, zero-dependency line diff computation, and restrained HaloUI Liquid Glass optics.",
+      "dependencies": [
+        "@hugeicons/core-free-icons",
+        "@hugeicons/react",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [
+        "copy-button"
+      ],
+      "files": [
+        {
+          "path": "components/ui/diff-viewer.tsx",
+          "target": "components/ui/diff-viewer.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
       "name": "dock",
       "type": "registry:ui",
       "title": "Dock",

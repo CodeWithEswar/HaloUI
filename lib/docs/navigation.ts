@@ -1609,6 +1609,25 @@ export const docsNavigation: DocsNavSection[] = [
         ],
       },
       {
+        title: "Diff Viewer",
+        href: "/components/diff-viewer",
+        description: "Accessible code and text comparison primitive engineered with Unified and Split view modes, zero-dependency line diff computation, and restrained HaloUI Liquid Glass optics.",
+        status: "stable",
+        keywords: [
+          "diff viewer",
+          "diff-viewer",
+          "diff",
+          "compare",
+          "comparison",
+          "split view",
+          "unified diff",
+          "changes",
+          "patch",
+          "developer",
+          "data display"
+        ],
+      },
+      {
         title: "Tree View",
         href: "/components/tree-view",
         description: "Hierarchical data display primitive with WAI-ARIA Tree View semantics, roving tabindex keyboard navigation, container-aware deep nesting reflow, and restrained HaloUI Liquid Glass framing.",
