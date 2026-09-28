@@ -3149,6 +3149,24 @@
           "type": "registry:ui"
         }
       ]
+    },
+    {
+      "name": "circular-progress",
+      "type": "registry:ui",
+      "title": "Circular Progress",
+      "description": "Compact radial completion indicator engineered with scalable SVG coordinate geometry, Subtle Liquid Glass track channels, and WAI-ARIA progressbar semantics.",
+      "dependencies": [
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "components/ui/circular-progress.tsx",
+          "type": "registry:ui"
+        }
+      ]
     }
   ]
 }

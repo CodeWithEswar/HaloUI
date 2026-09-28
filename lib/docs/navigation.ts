@@ -1775,6 +1775,25 @@ export const docsNavigation: DocsNavSection[] = [
           "feedback"
         ],
       },
+      {
+        title: "Circular Progress",
+        href: "/components/circular-progress",
+        description: "Compact radial completion indicator engineered with scalable SVG coordinate geometry, Subtle Liquid Glass track channels, and WAI-ARIA progressbar semantics.",
+        status: "stable",
+        keywords: [
+          "circular-progress",
+          "circular progress",
+          "radial",
+          "ring",
+          "meter",
+          "gauge",
+          "completion",
+          "percentage",
+          "determinate",
+          "indeterminate",
+          "feedback"
+        ],
+      },
     ],
   },
   {
