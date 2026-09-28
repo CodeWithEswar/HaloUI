@@ -15,16 +15,20 @@ import {
 import { Button } from "@/components/ui/button";
 import { docsNavItems } from "@/lib/docs/navigation";
 
-const SEARCH_ITEMS = [
+const RAW_SEARCH_ITEMS = [
   ...docsNavItems.map((item) => ({
     group: item.href.startsWith("/components") ? "Components" : "Documentation",
     title: item.title,
     href: item.href,
   })),
-  { group: "Components", title: "All Components", href: "/components" },
   { group: "Showcase", title: "Halo Control Room", href: "/showcase" },
   { group: "Registry", title: "Raw Button JSON", href: "/r/button.json" },
 ];
+
+// Deduplicate items by href to ensure unique keys in CommandItem groups
+const SEARCH_ITEMS = Array.from(
+  new Map(RAW_SEARCH_ITEMS.map((item) => [item.href, item])).values()
+);
 
 export function SiteSearch() {
   const [open, setOpen] = React.useState(false);
@@ -72,7 +76,7 @@ export function SiteSearch() {
           <CommandGroup heading="Components">
             {SEARCH_ITEMS.filter((i) => i.group === "Components").map((item) => (
               <CommandItem
-                key={item.href}
+                key={`components-${item.href}`}
                 value={item.title}
                 onSelect={() => runCommand(() => router.push(item.href))}
               >
@@ -83,7 +87,7 @@ export function SiteSearch() {
           <CommandGroup heading="Documentation">
             {SEARCH_ITEMS.filter((i) => i.group === "Documentation").map((item) => (
               <CommandItem
-                key={item.href}
+                key={`docs-${item.href}`}
                 value={item.title}
                 onSelect={() => runCommand(() => router.push(item.href))}
               >
@@ -94,7 +98,7 @@ export function SiteSearch() {
           <CommandGroup heading="Showcase">
             {SEARCH_ITEMS.filter((i) => i.group === "Showcase").map((item) => (
               <CommandItem
-                key={item.href}
+                key={`showcase-${item.href}`}
                 value={item.title}
                 onSelect={() => runCommand(() => router.push(item.href))}
               >
