@@ -1702,6 +1702,24 @@ export const docsNavigation: DocsNavSection[] = [
           "feedback"
         ],
       },
+      {
+        title: "Banner",
+        href: "/components/banner",
+        description: "Persistent page and section announcement primitive engineered with Subtle/Balanced Liquid Glass, automatic container-aware reflow, and full-width or contained layout modes.",
+        status: "stable",
+        keywords: [
+          "banner",
+          "announcement",
+          "notification",
+          "ribbon",
+          "notice",
+          "broadcast",
+          "maintenance",
+          "system update",
+          "feedback",
+          "status"
+        ],
+      },
     ],
   },
   {
