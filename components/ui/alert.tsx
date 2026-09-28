@@ -267,7 +267,13 @@ export function Alert({
       )}
 
       {/* Main Content Area: expands intrinsically */}
-      <div data-slot="alert-content" className="flex-1 min-w-0 space-y-1">
+      <div
+        data-slot="alert-content"
+        className={cn(
+          "flex-1 min-w-0 space-y-1",
+          (dismissible || onDismiss) && "pr-8 @[480px]/alert:pr-0"
+        )}
+      >
         {children}
       </div>
 

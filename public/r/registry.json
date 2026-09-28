@@ -3043,50 +3043,6 @@
       ]
     },
     {
-      "name": "alert",
-      "type": "registry:ui",
-      "title": "Alert",
-      "description": "Contextual inline semantic feedback surface engineered with Subtle Liquid Glass, automatic container-aware reflow, Hugeicons iconography, and accessible WAI-ARIA role semantics.",
-      "dependencies": [
-        "class-variance-authority",
-        "clsx",
-        "tailwind-merge",
-        "@hugeicons/react",
-        "@hugeicons/core-free-icons"
-      ],
-      "registryDependencies": [
-        "halo-icon"
-      ],
-      "files": [
-        {
-          "path": "components/ui/alert.tsx",
-          "type": "registry:ui"
-        }
-      ]
-    },
-    {
-      "name": "banner",
-      "type": "registry:ui",
-      "title": "Banner",
-      "description": "Persistent page and section announcement primitive engineered with Subtle/Balanced Liquid Glass, automatic container-aware reflow, and full-width or contained layout modes.",
-      "dependencies": [
-        "class-variance-authority",
-        "clsx",
-        "tailwind-merge",
-        "@hugeicons/react",
-        "@hugeicons/core-free-icons"
-      ],
-      "registryDependencies": [
-        "halo-icon"
-      ],
-      "files": [
-        {
-          "path": "components/ui/banner.tsx",
-          "type": "registry:ui"
-        }
-      ]
-    },
-    {
       "name": "toast",
       "type": "registry:ui",
       "title": "Toast",
@@ -3127,6 +3083,50 @@
       "files": [
         {
           "path": "components/ui/callout.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "banner",
+      "type": "registry:ui",
+      "title": "Banner",
+      "description": "Persistent page and section announcement primitive engineered with Subtle/Balanced Liquid Glass, automatic container-aware reflow, and full-width or contained layout modes.",
+      "dependencies": [
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge",
+        "@hugeicons/react",
+        "@hugeicons/core-free-icons"
+      ],
+      "registryDependencies": [
+        "halo-icon"
+      ],
+      "files": [
+        {
+          "path": "components/ui/banner.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
+      "name": "alert",
+      "type": "registry:ui",
+      "title": "Alert",
+      "description": "Contextual inline semantic feedback surface engineered with Subtle Liquid Glass, automatic container-aware reflow, Hugeicons iconography, and accessible WAI-ARIA role semantics.",
+      "dependencies": [
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge",
+        "@hugeicons/react",
+        "@hugeicons/core-free-icons"
+      ],
+      "registryDependencies": [
+        "halo-icon"
+      ],
+      "files": [
+        {
+          "path": "components/ui/alert.tsx",
           "type": "registry:ui"
         }
       ]

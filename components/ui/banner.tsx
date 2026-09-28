@@ -24,7 +24,7 @@ export const bannerVariants = cva(
     "@container/banner relative w-full isolate overflow-hidden transition-all duration-150",
     "text-sm text-foreground",
     // Base layout: responsive flex reflow across container widths down to 240px
-    "px-4 py-3 sm:px-6 sm:py-3.5 flex flex-col @[560px]/banner:flex-row @[560px]/banner:items-center justify-between gap-3",
+    "px-3.5 py-3 @[560px]/banner:px-6 @[560px]/banner:py-3.5 flex flex-col @[560px]/banner:flex-row @[560px]/banner:items-center justify-between gap-3",
   ],
   {
     variants: {
@@ -270,18 +270,26 @@ export function Banner({
       {...props}
     >
       {/* Primary Row / Leading Content */}
-      <div className="flex items-start sm:items-center gap-3 min-w-0 flex-1">
+      <div
+        className={cn(
+          "flex items-start @[680px]/banner:items-center gap-3 min-w-0 flex-1",
+          (dismissible || onDismiss) && "pr-8 @[560px]/banner:pr-0"
+        )}
+      >
         {showIcon && (
           <div
             data-slot="banner-icon"
             aria-hidden="true"
-            className="shrink-0 flex items-center justify-center pt-0.5 sm:pt-0"
+            className="shrink-0 flex items-center justify-center pt-0.5 @[680px]/banner:pt-0"
           >
             {icon ? icon : <HaloIcon icon={DefaultIcon} size="md" strokeWidth={1.75} />}
           </div>
         )}
 
-        <div data-slot="banner-body" className="flex-1 min-w-0">
+        <div
+          data-slot="banner-body"
+          className="flex-1 min-w-0 flex flex-col @[680px]/banner:flex-row @[680px]/banner:items-center @[680px]/banner:justify-between gap-2 @[680px]/banner:gap-4"
+        >
           {children}
         </div>
       </div>
@@ -340,7 +348,7 @@ export function BannerDescription({
     <div
       data-slot="banner-description"
       className={cn(
-        "text-xs sm:text-sm text-muted-foreground leading-relaxed break-words min-w-0",
+        "text-xs @[560px]/banner:text-sm text-muted-foreground leading-relaxed break-words min-w-0",
         "[&_a]:underline [&_a]:underline-offset-2 [&_a]:font-medium hover:[&_a]:text-foreground",
         className
       )}
@@ -362,7 +370,7 @@ export function BannerContent({
     <div
       data-slot="banner-content"
       className={cn(
-        "flex flex-col @[680px]/banner:flex-row @[680px]/banner:items-center gap-1 @[680px]/banner:gap-2.5",
+        "flex flex-col @[680px]/banner:flex-row @[680px]/banner:items-center gap-1 @[680px]/banner:gap-2.5 min-w-0",
         className
       )}
       {...props}
@@ -380,7 +388,7 @@ export function BannerAction({ className, ...props }: React.ComponentProps<"div"
     <div
       data-slot="banner-action"
       className={cn(
-        "shrink-0 flex items-center flex-wrap gap-2 pt-2 @[560px]/banner:pt-0 @[560px]/banner:self-center",
+        "shrink-0 flex items-center flex-wrap gap-2 pt-1.5 @[680px]/banner:pt-0 self-start @[680px]/banner:self-center max-w-full",
         className
       )}
       {...props}
