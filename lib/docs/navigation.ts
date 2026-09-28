@@ -1846,6 +1846,24 @@ export const docsNavigation: DocsNavSection[] = [
           "status"
         ],
       },
+      {
+        title: "Status Indicator",
+        href: "/components/status-indicator",
+        description: "Dot/icon + text state representation engineered for high-density tables, lists, and cards with minimal near-flat Liquid Glass optics and zero layout overhead.",
+        status: "stable",
+        keywords: [
+          "status indicator",
+          "status-indicator",
+          "indicator",
+          "dot",
+          "state",
+          "presence",
+          "online",
+          "offline",
+          "feedback",
+          "status"
+        ],
+      },
     ],
   },
   {

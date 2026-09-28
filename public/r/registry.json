@@ -3223,6 +3223,24 @@
           "type": "registry:ui"
         }
       ]
+    },
+    {
+      "name": "status-indicator",
+      "type": "registry:ui",
+      "title": "Status Indicator",
+      "description": "Dot/icon + text state representation engineered for high-density tables, lists, and cards with minimal near-flat Liquid Glass optics and zero layout overhead.",
+      "dependencies": [
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "components/ui/status-indicator.tsx",
+          "type": "registry:ui"
+        }
+      ]
     }
   ]
 }
