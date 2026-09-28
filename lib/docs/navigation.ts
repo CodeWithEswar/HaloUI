@@ -1681,6 +1681,30 @@ export const docsNavigation: DocsNavSection[] = [
     ],
   },
   {
+    title: "Feedback & Status",
+    items: [
+      {
+        title: "Alert",
+        href: "/components/alert",
+        description: "Contextual inline semantic feedback surface engineered with Subtle Liquid Glass, automatic container-aware reflow, Hugeicons iconography, and accessible WAI-ARIA role semantics.",
+        status: "stable",
+        keywords: [
+          "alert",
+          "notification",
+          "banner",
+          "inline feedback",
+          "callout",
+          "warning",
+          "info",
+          "error",
+          "destructive",
+          "success",
+          "feedback"
+        ],
+      },
+    ],
+  },
+  {
     title: "Developers",
     items: [
       { title: "Registry", href: "/docs/registry", description: "Source-owned distribution through the shadcn registry." },
