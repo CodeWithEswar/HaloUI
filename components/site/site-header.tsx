@@ -33,8 +33,8 @@ export function SiteHeader() {
             <Button
               asChild
               variant="ghost"
-              size="icon"
-              className="hidden h-8 w-8 text-muted-foreground hover:text-foreground sm:inline-flex"
+              size="icon-sm"
+              className="hidden size-8 text-muted-foreground hover:text-foreground sm:inline-flex"
             >
               <a
                 href={siteConfig.links.github}

@@ -70,6 +70,7 @@ export interface DialogContentProps extends DialogPrimitive.Popup.Props {
   intensity?: DialogIntensity
   scrimBlur?: DialogScrimBlur
   scrimTint?: DialogScrimTint
+  viewportClassName?: string
 }
 
 function DialogContent({
@@ -80,12 +81,18 @@ function DialogContent({
   intensity = "balanced",
   scrimBlur = "balanced",
   scrimTint = "neutral",
+  viewportClassName,
   ...props
 }: DialogContentProps) {
   return (
     <DialogPortal>
       <DialogOverlay blur={scrimBlur} tint={scrimTint} />
-      <DialogPrimitive.Viewport className="fixed inset-0 isolate z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
+      <DialogPrimitive.Viewport
+        className={cn(
+          "fixed inset-0 isolate z-50 flex items-center justify-center p-4 sm:p-6 overflow-y-auto",
+          viewportClassName
+        )}
+      >
         <DialogPrimitive.Popup
           data-slot="dialog-content"
           data-size={size}

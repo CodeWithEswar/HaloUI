@@ -22,12 +22,12 @@ export function SiteThemeToggle() {
     return (
       <Button
         variant="ghost"
-        size="icon"
-        className="h-8 w-8 text-muted-foreground opacity-60"
+        size="icon-sm"
+        className="size-8 text-muted-foreground opacity-60"
         aria-label="Toggle theme"
         disabled
       >
-        <span className="h-4 w-4" />
+        <span className="size-4" />
       </Button>
     );
   }
@@ -35,9 +35,9 @@ export function SiteThemeToggle() {
   return (
     <Button
       variant="ghost"
-      size="icon"
+      size="icon-sm"
       onClick={toggleTheme}
-      className="h-8 w-8 text-muted-foreground hover:text-foreground cursor-pointer transition-colors"
+      className="size-8 text-muted-foreground hover:text-foreground cursor-pointer transition-colors"
       aria-label={`Switch to ${resolvedTheme === "dark" ? "light" : "dark"} theme`}
     >
       <span className="dark:hidden flex items-center justify-center">

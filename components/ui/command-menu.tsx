@@ -456,8 +456,9 @@ export function CommandMenuDialog({
         <DialogDescription>{description}</DialogDescription>
       </DialogHeader>
       <DialogContent
+        viewportClassName="items-start pt-[12vh] sm:pt-[16vh]"
         className={cn(
-          "top-1/3 translate-y-0 overflow-hidden rounded-2xl! p-0 max-w-xl",
+          "my-0 overflow-hidden rounded-2xl! p-0 max-w-xl shadow-2xl",
           className
         )}
         showCloseButton={showCloseButton}

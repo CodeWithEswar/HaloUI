@@ -57,14 +57,15 @@ export function SiteSearch() {
     <>
       <Button
         variant="outline"
+        size="sm"
         onClick={() => setOpen(true)}
         aria-label="Search documentation"
-        className="relative h-8 w-8 justify-center rounded-md bg-muted/40 p-0 text-xs font-normal text-muted-foreground shadow-none sm:w-40 sm:justify-start sm:px-3 sm:pr-12 md:w-48 lg:w-64"
+        className="relative h-8 min-h-0 w-8 justify-center rounded-md border-border/60 bg-muted/40 p-0 text-xs font-normal text-muted-foreground shadow-none hover:bg-muted/70 hover:text-foreground sm:w-44 sm:justify-start sm:px-2.5 sm:pr-12 md:w-52 lg:w-64"
       >
-        <HaloIcon icon={Search01Icon} size={15} className="sm:hidden" />
-        <span className="hidden lg:inline-flex">Search documentation...</span>
-        <span className="hidden sm:inline-flex lg:hidden">Search...</span>
-        <kbd className="pointer-events-none absolute right-1.5 top-1.5 hidden h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium opacity-100 sm:flex">
+        <HaloIcon icon={Search01Icon} size={14} className="shrink-0 text-muted-foreground/70 sm:mr-2" />
+        <span className="hidden lg:inline-flex truncate">Search documentation...</span>
+        <span className="hidden sm:inline-flex lg:hidden truncate">Search...</span>
+        <kbd className="pointer-events-none absolute right-1.5 top-1/2 -translate-y-1/2 hidden h-5 select-none items-center gap-0.5 rounded border border-border/60 bg-muted/80 px-1.5 font-mono text-[10px] font-medium text-muted-foreground opacity-100 sm:flex">
           <span className="text-xs">⌘</span>K
         </kbd>
       </Button>
