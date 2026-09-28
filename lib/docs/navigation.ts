@@ -1703,6 +1703,23 @@ export const docsNavigation: DocsNavSection[] = [
         ],
       },
       {
+        title: "Toast",
+        href: "/components/toast",
+        description: "Ephemeral application feedback surface engineered with Balanced Liquid Glass, stacked swipe physics, non-intrusive portal rendering, and mobile-safe viewport margins.",
+        status: "stable",
+        keywords: [
+          "toast",
+          "toaster",
+          "notification",
+          "snackbar",
+          "popup",
+          "alert",
+          "feedback",
+          "status",
+          "stack"
+        ],
+      },
+      {
         title: "Banner",
         href: "/components/banner",
         description: "Persistent page and section announcement primitive engineered with Subtle/Balanced Liquid Glass, automatic container-aware reflow, and full-width or contained layout modes.",
