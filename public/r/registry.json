@@ -1837,6 +1837,26 @@
       ]
     },
     {
+      "name": "metric",
+      "type": "registry:ui",
+      "title": "Metric",
+      "description": "Standalone quantitative metric presentation primitive with tabular numeric typography, container-aware responsive reflow, and restrained HaloUI Liquid Glass materials.",
+      "dependencies": [
+        "@hugeicons/core-free-icons",
+        "@hugeicons/react",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "components/ui/metric.tsx",
+          "target": "components/ui/metric.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
       "name": "motion-presets",
       "type": "registry:ui",
       "title": "Halo Motion Presets (Alias)",

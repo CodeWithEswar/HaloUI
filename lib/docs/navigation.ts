@@ -1556,6 +1556,24 @@ export const docsNavigation: DocsNavSection[] = [
           "data display"
         ],
       },
+      {
+        title: "Metric",
+        href: "/components/metric",
+        description: "Standalone quantitative metric presentation primitive with tabular numeric typography, container-aware responsive reflow, and restrained HaloUI Liquid Glass materials.",
+        status: "stable",
+        keywords: [
+          "metric",
+          "quantitative",
+          "numeric",
+          "stat",
+          "value",
+          "tabular numbers",
+          "single metric",
+          "kpi",
+          "data display",
+          "dashboard"
+        ],
+      },
     ],
   },
   {
