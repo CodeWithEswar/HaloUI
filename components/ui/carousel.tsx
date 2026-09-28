@@ -308,7 +308,7 @@ export interface CarouselControlProps
 
 export function CarouselPrevious({
   className,
-  variant = "glass",
+  variant = "default",
   size = "icon-sm",
   position = "inset",
   ...props
@@ -323,7 +323,7 @@ export function CarouselPrevious({
       className={cn(
         "absolute z-10 touch-manipulation rounded-full shadow-sm transition-all duration-200 cursor-pointer",
         // Liquid glass backdrop styling
-        variant === "glass" && [
+        variant === "default" && [
           "bg-card/75 dark:bg-card/50 backdrop-blur-md border border-border/70 dark:border-white/15",
           "hover:bg-card/90 dark:hover:bg-card/70 hover:scale-105 active:scale-95",
         ],
@@ -353,7 +353,7 @@ export function CarouselPrevious({
 
 export function CarouselNext({
   className,
-  variant = "glass",
+  variant = "default",
   size = "icon-sm",
   position = "inset",
   ...props
@@ -368,7 +368,7 @@ export function CarouselNext({
       className={cn(
         "absolute z-10 touch-manipulation rounded-full shadow-sm transition-all duration-200 cursor-pointer",
         // Liquid glass backdrop styling
-        variant === "glass" && [
+        variant === "default" && [
           "bg-card/75 dark:bg-card/50 backdrop-blur-md border border-border/70 dark:border-white/15",
           "hover:bg-card/90 dark:hover:bg-card/70 hover:scale-105 active:scale-95",
         ],

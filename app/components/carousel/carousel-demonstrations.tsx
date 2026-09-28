@@ -61,8 +61,8 @@ export function CarouselDemonstrations() {
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <CarouselPrevious position="inset" variant="glass" />
-            <CarouselNext position="inset" variant="glass" />
+            <CarouselPrevious position="inset" variant="default" />
+            <CarouselNext position="inset" variant="default" />
             <CarouselDots className="mt-3" />
           </Carousel>
         </div>

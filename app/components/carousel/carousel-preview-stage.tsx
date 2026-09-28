@@ -88,7 +88,7 @@ const FEATURE_SLIDES = [
 export function CarouselPreviewStage() {
   const [scenario, setScenario] = React.useState("features");
   const [buttonPosition, setButtonPosition] = React.useState<"inset" | "edge">("inset");
-  const [buttonVariant, setButtonVariant] = React.useState<"glass" | "outline" | "secondary">("glass");
+  const [buttonVariant, setButtonVariant] = React.useState<"default" | "outline" | "secondary">("default");
   const [containerWidth, setContainerWidth] = React.useState("full");
   const [showArrows, setShowArrows] = React.useState(true);
   const [showDots, setShowDots] = React.useState(true);
@@ -100,7 +100,7 @@ export function CarouselPreviewStage() {
   const handleReset = () => {
     setScenario("features");
     setButtonPosition("inset");
-    setButtonVariant("glass");
+    setButtonVariant("default");
     setContainerWidth("full");
     setShowArrows(true);
     setShowDots(true);
@@ -214,7 +214,7 @@ export function CarouselPreviewStage() {
               label="Arrow Variant"
               value={buttonVariant}
               options={[
-                { value: "glass", label: "Liquid Glass" },
+                { value: "default", label: "Liquid Glass (Default)" },
                 { value: "outline", label: "Bordered Outline" },
                 { value: "secondary", label: "Secondary Solid" },
               ]}

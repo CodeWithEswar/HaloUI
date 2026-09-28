@@ -6,13 +6,25 @@ import { HaloIcon } from "@/components/icons/halo-icon";
 
 export type FileNode = {
   name: string;
-  type?: "file" | "folder";
+  type?: "file" | "folder" | "directory";
   description?: string;
   children?: FileNode[];
+  highlight?: boolean;
+  comment?: string;
 };
 
-export function FileTree({ items, data }: { items?: FileNode[]; data?: FileNode[] }) {
-  const nodes = items ?? data ?? [];
+export function FileTree({
+  items,
+  data,
+  nodes: propNodes,
+  files,
+}: {
+  items?: FileNode[];
+  data?: FileNode[];
+  nodes?: FileNode[];
+  files?: FileNode[];
+}) {
+  const nodes = items ?? data ?? propNodes ?? files ?? [];
 
   return (
     <div className="my-5 overflow-hidden rounded-xl border border-border bg-muted/15 font-mono text-xs">
