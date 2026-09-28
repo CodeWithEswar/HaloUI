@@ -352,6 +352,27 @@
       ]
     },
     {
+      "name": "collapsible",
+      "type": "registry:ui",
+      "title": "Collapsible",
+      "description": "Independent expandable disclosure panel with controlled/uncontrolled state, container-aware responsive reflow, and restrained HaloUI Liquid Glass outer boundaries.",
+      "dependencies": [
+        "@base-ui/react@^1.8.0",
+        "@hugeicons/react",
+        "@hugeicons/core-free-icons",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "components/ui/collapsible.tsx",
+          "target": "components/ui/collapsible.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
       "name": "color-picker",
       "type": "registry:ui",
       "title": "Color Picker",

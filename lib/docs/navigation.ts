@@ -1475,6 +1475,21 @@ export const docsNavigation: DocsNavSection[] = [
           "data display"
         ],
       },
+      {
+        title: "Collapsible",
+        href: "/components/collapsible",
+        description: "Independent expandable disclosure panel with controlled/uncontrolled state, container-aware responsive reflow, and restrained HaloUI Liquid Glass outer boundaries.",
+        status: "stable",
+        keywords: [
+          "collapsible",
+          "disclosure",
+          "collapse",
+          "expand",
+          "panel",
+          "toggle",
+          "data display"
+        ],
+      },
     ],
   },
   {

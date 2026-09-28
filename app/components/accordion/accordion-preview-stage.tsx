@@ -12,6 +12,8 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { StatusBadge } from "@/components/ui/status-badge";
 import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Label } from "@/components/ui/label";
 import {
   PreviewStageShell,
   StageControlSelect,
@@ -232,33 +234,34 @@ export function AccordionDemo() {
           </div>
 
           {/* Test Toggles */}
-          <div className="flex flex-wrap items-center gap-2 pt-2 border-t border-border/40">
-            <span className="text-xs font-medium text-muted-foreground mr-1">QA Toggles:</span>
-            <button
-              type="button"
-              onClick={() => setHasLongText(!hasLongText)}
-              className={cn(
-                "h-7 px-2.5 rounded-md text-xs font-medium border transition-colors cursor-pointer select-none",
-                hasLongText
-                  ? "border-primary bg-primary/10 text-primary"
-                  : "border-border/60 bg-muted/30 text-muted-foreground hover:bg-muted/60"
-              )}
-            >
-              {hasLongText ? "✓ Long Trigger" : "Long Trigger"}
-            </button>
+          <div className="w-full grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-2.5 pt-2 border-t border-border/40">
+            <div className="flex items-center gap-2.5 p-2 px-3 rounded-xl border border-border/80 bg-card/75 shadow-2xs min-h-[42px]">
+              <Checkbox
+                id="accordion-toggle-long"
+                checked={hasLongText}
+                onCheckedChange={(checked) => setHasLongText(Boolean(checked))}
+              />
+              <Label
+                htmlFor="accordion-toggle-long"
+                className="text-xs sm:text-[13px] text-muted-foreground hover:text-foreground cursor-pointer font-medium select-none"
+              >
+                Simulate Long Trigger &amp; Text
+              </Label>
+            </div>
 
-            <button
-              type="button"
-              onClick={() => setHasDisabledItem(!hasDisabledItem)}
-              className={cn(
-                "h-7 px-2.5 rounded-md text-xs font-medium border transition-colors cursor-pointer select-none",
-                hasDisabledItem
-                  ? "border-primary bg-primary/10 text-primary"
-                  : "border-border/60 bg-muted/30 text-muted-foreground hover:bg-muted/60"
-              )}
-            >
-              {hasDisabledItem ? "✓ Disabled Item" : "Disabled Item"}
-            </button>
+            <div className="flex items-center gap-2.5 p-2 px-3 rounded-xl border border-border/80 bg-card/75 shadow-2xs min-h-[42px]">
+              <Checkbox
+                id="accordion-toggle-disabled"
+                checked={hasDisabledItem}
+                onCheckedChange={(checked) => setHasDisabledItem(Boolean(checked))}
+              />
+              <Label
+                htmlFor="accordion-toggle-disabled"
+                className="text-xs sm:text-[13px] text-muted-foreground hover:text-foreground cursor-pointer font-medium select-none"
+              >
+                Disabled Item State
+              </Label>
+            </div>
           </div>
         </div>
       }

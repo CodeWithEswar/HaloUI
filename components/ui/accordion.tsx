@@ -208,10 +208,12 @@ export function AccordionTrigger({
               {icon}
             </span>
           )}
-          <span className="min-w-0 flex-1 break-words font-medium leading-normal text-foreground">
-            {children}
-          </span>
-          {badge && <span className="shrink-0">{badge}</span>}
+          <div className="flex flex-wrap items-center gap-x-2.5 gap-y-1 min-w-0 flex-1">
+            <span className="min-w-0 break-words font-medium leading-normal text-foreground">
+              {children}
+            </span>
+            {badge && <span className="shrink-0">{badge}</span>}
+          </div>
         </div>
 
         {!hideIndicator && (
