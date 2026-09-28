@@ -1540,6 +1540,22 @@ export const docsNavigation: DocsNavSection[] = [
           "data display"
         ],
       },
+      {
+        title: "Key Value",
+        href: "/components/key-value",
+        description: "Compact label and value metadata display primitive with container-aware responsive reflow, zero glass-on-glass noise, and restrained HaloUI Liquid Glass outer boundaries.",
+        status: "stable",
+        keywords: [
+          "key value",
+          "key-value",
+          "metadata",
+          "label value",
+          "properties",
+          "inspector",
+          "detail",
+          "data display"
+        ],
+      },
     ],
   },
   {

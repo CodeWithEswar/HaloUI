@@ -1684,6 +1684,24 @@
       "registryDependencies": []
     },
     {
+      "name": "key-value",
+      "type": "registry:ui",
+      "title": "Key Value",
+      "description": "Compact label and value metadata display primitive with container-aware responsive reflow, zero glass-on-glass noise, and restrained HaloUI Liquid Glass outer boundaries.",
+      "dependencies": [
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "components/ui/key-value.tsx",
+          "target": "components/ui/key-value.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
       "name": "kpi-card",
       "type": "registry:ui",
       "title": "KPI Card",
