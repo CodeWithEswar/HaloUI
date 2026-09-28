@@ -1574,6 +1574,23 @@ export const docsNavigation: DocsNavSection[] = [
           "dashboard"
         ],
       },
+      {
+        title: "JSON Viewer",
+        href: "/components/json-viewer",
+        description: "Structured hierarchical JSON inspection primitive with accessible disclosure controls, tokenized container-aware indentation, and restrained HaloUI Liquid Glass optics.",
+        status: "stable",
+        keywords: [
+          "json viewer",
+          "json-viewer",
+          "json",
+          "tree",
+          "hierarchy",
+          "inspector",
+          "payload",
+          "data display",
+          "developer"
+        ],
+      },
     ],
   },
   {
