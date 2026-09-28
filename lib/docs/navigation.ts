@@ -1737,6 +1737,26 @@ export const docsNavigation: DocsNavSection[] = [
           "status"
         ],
       },
+      {
+        title: "Callout",
+        href: "/components/callout",
+        description: "Contextual documentation and technical guidance callout primitive engineered with Subtle/Balanced Liquid Glass, automatic container-aware reflow, and 5 semantic tones.",
+        status: "stable",
+        keywords: [
+          "callout",
+          "note",
+          "tip",
+          "warning",
+          "caution",
+          "important",
+          "admonition",
+          "guidance",
+          "documentation",
+          "aside",
+          "feedback",
+          "status"
+        ],
+      },
     ],
   },
   {

@@ -3108,6 +3108,28 @@
           "type": "registry:ui"
         }
       ]
+    },
+    {
+      "name": "callout",
+      "type": "registry:ui",
+      "title": "Callout",
+      "description": "Contextual documentation and technical guidance callout primitive engineered with Subtle/Balanced Liquid Glass, automatic container-aware reflow, and 5 semantic tones.",
+      "dependencies": [
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge",
+        "@hugeicons/react",
+        "@hugeicons/core-free-icons"
+      ],
+      "registryDependencies": [
+        "halo-icon"
+      ],
+      "files": [
+        {
+          "path": "components/ui/callout.tsx",
+          "type": "registry:ui"
+        }
+      ]
     }
   ]
 }
