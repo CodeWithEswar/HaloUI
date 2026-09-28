@@ -739,6 +739,24 @@
       }
     },
     {
+      "name": "empty-state",
+      "type": "registry:ui",
+      "title": "Empty State",
+      "description": "No-data and no-result guidance surface primitive with container-aware responsive reflow, clear action hierarchy, and restrained HaloUI Liquid Glass outer boundaries.",
+      "dependencies": [
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "components/ui/empty-state.tsx",
+          "target": "components/ui/empty-state.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
       "name": "favorite-button",
       "type": "registry:ui",
       "title": "Favorite Button",

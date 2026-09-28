@@ -1524,6 +1524,22 @@ export const docsNavigation: DocsNavSection[] = [
           "data display"
         ],
       },
+      {
+        title: "Empty State",
+        href: "/components/empty-state",
+        description: "No-data and no-result guidance surface primitive with container-aware responsive reflow, clear action hierarchy, and restrained HaloUI Liquid Glass outer boundaries.",
+        status: "stable",
+        keywords: [
+          "empty state",
+          "empty-state",
+          "empty",
+          "no data",
+          "no results",
+          "placeholder",
+          "guidance",
+          "data display"
+        ],
+      },
     ],
   },
   {
