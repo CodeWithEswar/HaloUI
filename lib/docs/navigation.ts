@@ -1829,6 +1829,23 @@ export const docsNavigation: DocsNavSection[] = [
           "status"
         ],
       },
+      {
+        title: "Loading Overlay",
+        href: "/components/loading-overlay",
+        description: "Scoped blocking/loading surface engineered with Balanced Liquid Glass optics, pointer and keyboard interaction blocking, and automatic container reflow.",
+        status: "stable",
+        keywords: [
+          "loading overlay",
+          "loading-overlay",
+          "overlay",
+          "blocking",
+          "scoped",
+          "inert",
+          "spinner",
+          "feedback",
+          "status"
+        ],
+      },
     ],
   },
   {

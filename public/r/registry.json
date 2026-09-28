@@ -3203,6 +3203,26 @@
           "type": "registry:ui"
         }
       ]
+    },
+    {
+      "name": "loading-overlay",
+      "type": "registry:ui",
+      "title": "Loading Overlay",
+      "description": "Scoped blocking/loading surface engineered with Balanced Liquid Glass optics, pointer and keyboard interaction blocking, and automatic container reflow.",
+      "dependencies": [
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [
+        "spinner"
+      ],
+      "files": [
+        {
+          "path": "components/ui/loading-overlay.tsx",
+          "type": "registry:ui"
+        }
+      ]
     }
   ]
 }
