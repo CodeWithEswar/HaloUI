@@ -1907,6 +1907,24 @@
       ]
     },
     {
+      "name": "marquee",
+      "type": "registry:ui",
+      "title": "Marquee",
+      "description": "Continuous content presentation strip primitive engineered with pure CSS transforms, reduced-motion-first fallback, accessible clone isolation, and restrained HaloUI Liquid Glass optics.",
+      "dependencies": [
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "components/ui/marquee.tsx",
+          "target": "components/ui/marquee.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
       "name": "menubar",
       "type": "registry:ui",
       "title": "Menubar",

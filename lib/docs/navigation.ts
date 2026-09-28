@@ -1662,6 +1662,22 @@ export const docsNavigation: DocsNavSection[] = [
           "data display"
         ],
       },
+      {
+        title: "Marquee",
+        href: "/components/marquee",
+        description: "Continuous content presentation strip primitive engineered with pure CSS transforms, reduced-motion-first fallback, accessible clone isolation, and restrained HaloUI Liquid Glass optics.",
+        status: "stable",
+        keywords: [
+          "marquee",
+          "infinite scroll",
+          "ticker",
+          "logo strip",
+          "continuous",
+          "loop",
+          "slider",
+          "data display"
+        ],
+      },
     ],
   },
   {
