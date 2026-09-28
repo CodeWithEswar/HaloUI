@@ -243,99 +243,103 @@ export function MetricPreviewStage() {
       telemetry={telemetry}
       code={codeSnippet}
       controls={
-        <div className="flex flex-wrap items-center gap-2.5">
-          <StageControlSelect
-            label="Variant"
-            value={variant}
-            options={[
-              { value: "glass", label: "Glass (Standalone)" },
-              { value: "default", label: "Default (Flat / Nested)" },
-              { value: "muted", label: "Muted Surface" },
-            ]}
-            onChange={(val) => setVariant(val as MetricVariant)}
-          />
+        <div className="w-full flex flex-col gap-2.5">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2 sm:gap-2.5">
+            <StageControlSelect
+              label="Variant"
+              value={variant}
+              options={[
+                { value: "glass", label: "Glass (Standalone)" },
+                { value: "default", label: "Default (Flat / Nested)" },
+                { value: "muted", label: "Muted Surface" },
+              ]}
+              onChange={(val) => setVariant(val as MetricVariant)}
+            />
 
-          <StageControlSelect
-            label="Size"
-            value={size}
-            options={[
-              { value: "sm", label: "Small (SM)" },
-              { value: "default", label: "Default (MD)" },
-              { value: "lg", label: "Large (LG)" },
-              { value: "xl", label: "Hero (XL)" },
-              { value: "2xl", label: "Showcase (2XL)" },
-            ]}
-            onChange={(val) => setSize(val as MetricSize)}
-          />
+            <StageControlSelect
+              label="Size"
+              value={size}
+              options={[
+                { value: "sm", label: "Small (SM)" },
+                { value: "default", label: "Default (MD)" },
+                { value: "lg", label: "Large (LG)" },
+                { value: "xl", label: "Hero (XL)" },
+                { value: "2xl", label: "Showcase (2XL)" },
+              ]}
+              onChange={(val) => setSize(val as MetricSize)}
+            />
 
-          <StageControlSelect
-            label="Layout"
-            value={layout}
-            options={[
-              { value: "stacked", label: "Stacked" },
-              { value: "inline", label: "Inline" },
-              { value: "auto", label: "Auto (Reflow)" },
-            ]}
-            onChange={(val) => setLayout(val as MetricLayout)}
-          />
+            <StageControlSelect
+              label="Layout"
+              value={layout}
+              options={[
+                { value: "stacked", label: "Stacked" },
+                { value: "inline", label: "Inline" },
+                { value: "auto", label: "Auto (Reflow)" },
+              ]}
+              onChange={(val) => setLayout(val as MetricLayout)}
+            />
 
-          <StageControlSelect
-            label="Align"
-            value={alignment}
-            options={[
-              { value: "left", label: "Left" },
-              { value: "center", label: "Center" },
-              { value: "right", label: "Right" },
-            ]}
-            onChange={(val) => setAlignment(val as MetricAlignment)}
-          />
+            <StageControlSelect
+              label="Align"
+              value={alignment}
+              options={[
+                { value: "left", label: "Left" },
+                { value: "center", label: "Center" },
+                { value: "right", label: "Right" },
+              ]}
+              onChange={(val) => setAlignment(val as MetricAlignment)}
+            />
 
-          <StageControlSelect
-            label="Scenario"
-            value={scenario}
-            options={SCENARIO_OPTIONS}
-            onChange={setScenario}
-          />
+            <StageControlSelect
+              label="Scenario"
+              value={scenario}
+              options={SCENARIO_OPTIONS}
+              onChange={setScenario}
+            />
 
-          <StageControlSelect
-            label="Width"
-            value={containerWidth}
-            options={CONTAINER_WIDTH_OPTIONS}
-            onChange={setContainerWidth}
-          />
+            <StageControlSelect
+              label="Width"
+              value={containerWidth}
+              options={CONTAINER_WIDTH_OPTIONS}
+              onChange={setContainerWidth}
+            />
+          </div>
 
-          <div className="flex items-center gap-3 border-l border-border/60 pl-3">
-            <div className="flex items-center gap-1.5">
-              <Checkbox
-                id="metric-unit-toggle"
-                checked={showUnit}
-                onCheckedChange={(checked) => setShowUnit(Boolean(checked))}
-              />
-              <Label htmlFor="metric-unit-toggle" className="text-xs cursor-pointer">
-                Unit
-              </Label>
-            </div>
+          <div className="flex flex-wrap items-center justify-between gap-3 pt-2 border-t border-border/40">
+            <div className="flex items-center gap-4">
+              <div className="flex items-center gap-1.5">
+                <Checkbox
+                  id="metric-unit-toggle"
+                  checked={showUnit}
+                  onCheckedChange={(checked) => setShowUnit(Boolean(checked))}
+                />
+                <Label htmlFor="metric-unit-toggle" className="text-xs cursor-pointer select-none">
+                  Unit
+                </Label>
+              </div>
 
-            <div className="flex items-center gap-1.5">
-              <Checkbox
-                id="metric-delta-toggle"
-                checked={showDelta}
-                onCheckedChange={(checked) => setShowDelta(Boolean(checked))}
-              />
-              <Label htmlFor="metric-delta-toggle" className="text-xs cursor-pointer">
-                Delta
-              </Label>
-            </div>
+              <div className="flex items-center gap-1.5">
+                <Checkbox
+                  id="metric-delta-toggle"
+                  checked={showDelta}
+                  onCheckedChange={(checked) => setShowDelta(Boolean(checked))}
+                />
+                <Label htmlFor="metric-delta-toggle" className="text-xs cursor-pointer select-none">
+                  Delta
+                </Label>
+              </div>
 
-            <div className="flex items-center gap-1.5">
-              <Checkbox
-                id="metric-desc-toggle"
-                checked={showDescription}
-                onCheckedChange={(checked) => setShowDescription(Boolean(checked))}
-              />
-              <Label htmlFor="metric-desc-toggle" className="text-xs cursor-pointer">
-                Desc
-              </Label>
+              <div className="flex items-center gap-1.5">
+                <Checkbox
+                  id="metric-desc-toggle"
+                  checked={showDescription}
+                  onCheckedChange={(checked) => setShowDescription(Boolean(checked))}
+                />
+                <Label htmlFor="metric-desc-toggle" className="text-xs cursor-pointer select-none">
+                  Desc
+                </Label>
+              </div>
             </div>
           </div>
         </div>

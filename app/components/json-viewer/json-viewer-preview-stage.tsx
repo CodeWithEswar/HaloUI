@@ -254,87 +254,91 @@ export function JsonViewerPreviewStage() {
       telemetry={telemetry}
       code={codeSnippet}
       controls={
-        <div className="flex flex-wrap items-center gap-2.5">
-          <StageControlSelect
-            label="Variant"
-            value={variant}
-            options={[
-              { value: "glass", label: "Glass (Standalone)" },
-              { value: "default", label: "Default (Card Frame)" },
-              { value: "plain", label: "Plain (Borderless)" },
-            ]}
-            onChange={(val) => setVariant(val as JsonViewerVariant)}
-          />
+        <div className="w-full flex flex-col gap-2.5">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2 sm:gap-2.5">
+            <StageControlSelect
+              label="Variant"
+              value={variant}
+              options={[
+                { value: "glass", label: "Glass (Standalone)" },
+                { value: "default", label: "Default (Card Frame)" },
+                { value: "plain", label: "Plain (Borderless)" },
+              ]}
+              onChange={(val) => setVariant(val as JsonViewerVariant)}
+            />
 
-          <StageControlSelect
-            label="Size"
-            value={size}
-            options={[
-              { value: "sm", label: "Small (SM)" },
-              { value: "default", label: "Default (MD)" },
-              { value: "lg", label: "Large (LG)" },
-            ]}
-            onChange={(val) => setSize(val as JsonViewerSize)}
-          />
+            <StageControlSelect
+              label="Size"
+              value={size}
+              options={[
+                { value: "sm", label: "Small (SM)" },
+                { value: "default", label: "Default (MD)" },
+                { value: "lg", label: "Large (LG)" },
+              ]}
+              onChange={(val) => setSize(val as JsonViewerSize)}
+            />
 
-          <StageControlSelect
-            label="Depth"
-            value={depth}
-            options={[
-              { value: "1", label: "1 (Root Only)" },
-              { value: "2", label: "2 (Default)" },
-              { value: "3", label: "3 (Deep)" },
-              { value: "99", label: "Expand All" },
-            ]}
-            onChange={setDepth}
-          />
+            <StageControlSelect
+              label="Depth"
+              value={depth}
+              options={[
+                { value: "1", label: "1 (Root Only)" },
+                { value: "2", label: "2 (Default)" },
+                { value: "3", label: "3 (Deep)" },
+                { value: "99", label: "Expand All" },
+              ]}
+              onChange={setDepth}
+            />
 
-          <StageControlSelect
-            label="Scenario"
-            value={scenario}
-            options={SCENARIO_OPTIONS}
-            onChange={setScenario}
-          />
+            <StageControlSelect
+              label="Scenario"
+              value={scenario}
+              options={SCENARIO_OPTIONS}
+              onChange={setScenario}
+            />
 
-          <StageControlSelect
-            label="Width"
-            value={containerWidth}
-            options={CONTAINER_WIDTH_OPTIONS}
-            onChange={setContainerWidth}
-          />
+            <StageControlSelect
+              label="Width"
+              value={containerWidth}
+              options={CONTAINER_WIDTH_OPTIONS}
+              onChange={setContainerWidth}
+            />
+          </div>
 
-          <div className="flex items-center gap-3 border-l border-border/60 pl-3">
-            <div className="flex items-center gap-1.5">
-              <Checkbox
-                id="json-count-toggle"
-                checked={showItemCount}
-                onCheckedChange={(checked) => setShowItemCount(Boolean(checked))}
-              />
-              <Label htmlFor="json-count-toggle" className="text-xs cursor-pointer">
-                Counts
-              </Label>
-            </div>
+          <div className="flex flex-wrap items-center justify-between gap-3 pt-2 border-t border-border/40">
+            <div className="flex items-center gap-4">
+              <div className="flex items-center gap-1.5">
+                <Checkbox
+                  id="json-count-toggle"
+                  checked={showItemCount}
+                  onCheckedChange={(checked) => setShowItemCount(Boolean(checked))}
+                />
+                <Label htmlFor="json-count-toggle" className="text-xs cursor-pointer select-none">
+                  Counts
+                </Label>
+              </div>
 
-            <div className="flex items-center gap-1.5">
-              <Checkbox
-                id="json-toolbar-toggle"
-                checked={showToolbar}
-                onCheckedChange={(checked) => setShowToolbar(Boolean(checked))}
-              />
-              <Label htmlFor="json-toolbar-toggle" className="text-xs cursor-pointer">
-                Toolbar
-              </Label>
-            </div>
+              <div className="flex items-center gap-1.5">
+                <Checkbox
+                  id="json-toolbar-toggle"
+                  checked={showToolbar}
+                  onCheckedChange={(checked) => setShowToolbar(Boolean(checked))}
+                />
+                <Label htmlFor="json-toolbar-toggle" className="text-xs cursor-pointer select-none">
+                  Toolbar
+                </Label>
+              </div>
 
-            <div className="flex items-center gap-1.5">
-              <Checkbox
-                id="json-copy-toggle"
-                checked={showCopy}
-                onCheckedChange={(checked) => setShowCopy(Boolean(checked))}
-              />
-              <Label htmlFor="json-copy-toggle" className="text-xs cursor-pointer">
-                Copy
-              </Label>
+              <div className="flex items-center gap-1.5">
+                <Checkbox
+                  id="json-copy-toggle"
+                  checked={showCopy}
+                  onCheckedChange={(checked) => setShowCopy(Boolean(checked))}
+                />
+                <Label htmlFor="json-copy-toggle" className="text-xs cursor-pointer select-none">
+                  Copy
+                </Label>
+              </div>
             </div>
           </div>
         </div>
