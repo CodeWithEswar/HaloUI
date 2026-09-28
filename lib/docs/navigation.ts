@@ -1575,6 +1575,23 @@ export const docsNavigation: DocsNavSection[] = [
         ],
       },
       {
+        title: "Code Block",
+        href: "/components/code-block",
+        description: "Source-accurate code presentation primitive engineered with container-aware layout, unselectable tabular line numbers, line highlighting, and restrained HaloUI Liquid Glass optics.",
+        status: "stable",
+        keywords: [
+          "code block",
+          "code-block",
+          "code",
+          "syntax",
+          "highlighting",
+          "snippet",
+          "pre",
+          "developer",
+          "data display"
+        ],
+      },
+      {
         title: "JSON Viewer",
         href: "/components/json-viewer",
         description: "Structured hierarchical JSON inspection primitive with accessible disclosure controls, tokenized container-aware indentation, and restrained HaloUI Liquid Glass optics.",

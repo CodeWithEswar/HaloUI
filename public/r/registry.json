@@ -370,6 +370,28 @@
       ]
     },
     {
+      "name": "code-block",
+      "type": "registry:ui",
+      "title": "Code Block",
+      "description": "Source-accurate code presentation primitive engineered with container-aware layout, unselectable tabular line numbers, line highlighting, and restrained HaloUI Liquid Glass optics.",
+      "dependencies": [
+        "@hugeicons/core-free-icons",
+        "@hugeicons/react",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [
+        "copy-button"
+      ],
+      "files": [
+        {
+          "path": "components/ui/code-block.tsx",
+          "target": "components/ui/code-block.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
       "name": "collapsible",
       "type": "registry:ui",
       "title": "Collapsible",
@@ -2918,25 +2940,6 @@
       "registryDependencies": []
     },
     {
-      "name": "url-field",
-      "type": "registry:ui",
-      "title": "URL Field",
-      "description": "A URL-oriented text-entry control with browser-friendly input semantics, optional normalization, and clear validation affordances.",
-      "categories": [
-        "forms-and-fields"
-      ],
-      "dependencies": [
-        "@hugeicons/core-free-icons",
-        "@hugeicons/react",
-        "clsx",
-        "tailwind-merge"
-      ],
-      "registryDependencies": [
-        "field",
-        "halo-icon"
-      ]
-    },
-    {
       "name": "tree-view",
       "type": "registry:ui",
       "title": "Tree View",
@@ -2955,6 +2958,25 @@
           "path": "components/ui/tree-view.tsx",
           "type": "registry:ui"
         }
+      ]
+    },
+    {
+      "name": "url-field",
+      "type": "registry:ui",
+      "title": "URL Field",
+      "description": "A URL-oriented text-entry control with browser-friendly input semantics, optional normalization, and clear validation affordances.",
+      "categories": [
+        "forms-and-fields"
+      ],
+      "dependencies": [
+        "@hugeicons/core-free-icons",
+        "@hugeicons/react",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [
+        "field",
+        "halo-icon"
       ]
     }
   ]
