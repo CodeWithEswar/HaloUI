@@ -1811,6 +1811,24 @@ export const docsNavigation: DocsNavSection[] = [
           "status"
         ],
       },
+      {
+        title: "Skeleton",
+        href: "/components/skeleton",
+        description: "Content loading placeholder engineered with Subtle Liquid Glass channels, zero per-fragment backdrop filters, and vestibular reduced-motion safety.",
+        status: "stable",
+        keywords: [
+          "skeleton",
+          "placeholder",
+          "loading",
+          "shimmer",
+          "pulse",
+          "ghost",
+          "feed",
+          "suspense",
+          "feedback",
+          "status"
+        ],
+      },
     ],
   },
   {
