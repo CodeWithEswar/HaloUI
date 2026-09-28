@@ -1794,6 +1794,23 @@ export const docsNavigation: DocsNavSection[] = [
           "feedback"
         ],
       },
+      {
+        title: "Spinner",
+        href: "/components/spinner",
+        description: "Indeterminate activity indicator engineered with pure SVG stroke geometry, currentColor inheritance, zero-cost CSS rotation, and reduced-motion fallbacks.",
+        status: "stable",
+        keywords: [
+          "spinner",
+          "loader",
+          "loading",
+          "activity",
+          "busy",
+          "waiting",
+          "indeterminate",
+          "feedback",
+          "status"
+        ],
+      },
     ],
   },
   {
