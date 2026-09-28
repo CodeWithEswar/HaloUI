@@ -1507,6 +1507,23 @@ export const docsNavigation: DocsNavSection[] = [
           "data display"
         ],
       },
+      {
+        title: "Activity Feed",
+        href: "/components/activity-feed",
+        description: "Scannable recent activity stream primitive with actor identity preservation, container-aware responsive reflow, and restrained HaloUI Liquid Glass outer boundaries.",
+        status: "stable",
+        keywords: [
+          "activity feed",
+          "activity-feed",
+          "activity",
+          "feed",
+          "stream",
+          "events",
+          "notifications",
+          "recent actions",
+          "data display"
+        ],
+      },
     ],
   },
   {

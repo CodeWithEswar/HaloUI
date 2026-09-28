@@ -63,6 +63,24 @@
       }
     },
     {
+      "name": "activity-feed",
+      "type": "registry:ui",
+      "title": "Activity Feed",
+      "description": "Scannable recent activity stream primitive with actor identity preservation, container-aware responsive reflow, and restrained HaloUI Liquid Glass outer boundaries.",
+      "dependencies": [
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "components/ui/activity-feed.tsx",
+          "target": "components/ui/activity-feed.tsx",
+          "type": "registry:ui"
+        }
+      ]
+    },
+    {
       "$schema": "https://ui.shadcn.com/schema/registry-item.json",
       "name": "alert-dialog",
       "type": "registry:ui",
