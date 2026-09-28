@@ -222,12 +222,12 @@ export function CarouselDemonstrations() {
                   { region: "ap-northeast-1 (Tokyo)", latency: "82ms", status: "Degraded" },
                 ].map((r, idx) => (
                   <CarouselItem key={idx}>
-                    <div className="p-4 rounded-lg bg-muted/40 flex items-center justify-between">
+                    <div className="px-11 py-3.5 rounded-lg bg-muted/40 flex items-center justify-between">
                       <div>
                         <div className="text-sm font-medium text-foreground">{r.region}</div>
                         <div className="text-xs text-muted-foreground">Average RTT: {r.latency}</div>
                       </div>
-                      <span className="text-xs px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 font-medium">
+                      <span className="text-xs px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 font-medium">
                         {r.status}
                       </span>
                     </div>
@@ -262,7 +262,7 @@ export function CarouselDemonstrations() {
               <CarouselContent>
                 {[1, 2].map((i) => (
                   <CarouselItem key={i}>
-                    <div className="p-4 rounded-lg border border-border bg-card text-center text-xs">
+                    <div className="px-9 py-3.5 rounded-lg border border-border bg-card text-center text-xs font-medium">
                       Mini Slide {i}
                     </div>
                   </CarouselItem>
@@ -282,7 +282,7 @@ export function CarouselDemonstrations() {
               <CarouselContent>
                 {[1, 2].map((i) => (
                   <CarouselItem key={i}>
-                    <div className="p-4 rounded-lg border border-border bg-card text-center text-xs">
+                    <div className="px-9 py-3.5 rounded-lg border border-border bg-card text-center text-xs font-medium">
                       Micro Tile {i}
                     </div>
                   </CarouselItem>

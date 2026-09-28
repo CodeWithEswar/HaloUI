@@ -53,6 +53,7 @@ export function useCarousel() {
 /* -------------------------------------------------------------------------
  * ROOT CAROUSEL COMPONENT
  * Container-aware (@container/carousel), accessible WAI-ARIA carousel shell.
+ * Automatically aligns navigation arrows to the slide track without skew from dots.
  * ----------------------------------------------------------------------- */
 
 export function Carousel({
@@ -144,6 +145,35 @@ export function Carousel({
     };
   }, [api, onSelect]);
 
+  // Separate track children from bottom dots so arrows are always vertically centered on the slide track
+  const trackChildren: React.ReactNode[] = [];
+  const footerChildren: React.ReactNode[] = [];
+  let hasExplicitTrack = false;
+
+  React.Children.forEach(children, (child) => {
+    if (!React.isValidElement(child)) {
+      trackChildren.push(child);
+      return;
+    }
+
+    const slot = (child.props as Record<string, unknown> | undefined)?.["data-slot"];
+    if (
+      slot === "carousel-track" ||
+      (child.type as { displayName?: string })?.displayName === "CarouselTrack"
+    ) {
+      hasExplicitTrack = true;
+    }
+
+    if (
+      slot === "carousel-dots" ||
+      (child.type as { displayName?: string })?.displayName === "CarouselDots"
+    ) {
+      footerChildren.push(child);
+    } else {
+      trackChildren.push(child);
+    }
+  });
+
   return (
     <CarouselContext.Provider
       value={{
@@ -164,7 +194,8 @@ export function Carousel({
       <div
         onKeyDownCapture={handleKeyDown}
         className={cn(
-          "@container/carousel group/carousel relative w-full min-w-0 select-none",
+          "@container/carousel group/carousel w-full min-w-0 select-none",
+          !hasExplicitTrack && footerChildren.length === 0 && "relative",
           className
         )}
         role="region"
@@ -172,14 +203,42 @@ export function Carousel({
         data-slot="carousel"
         {...props}
       >
-        {children}
+        {hasExplicitTrack || footerChildren.length === 0 ? (
+          children
+        ) : (
+          <>
+            <div className="relative w-full min-w-0" data-slot="carousel-track">
+              {trackChildren}
+            </div>
+            {footerChildren}
+          </>
+        )}
       </div>
     </CarouselContext.Provider>
   );
 }
 
 /* -------------------------------------------------------------------------
- * CAROUSEL CONTENT (TRACK)
+ * CAROUSEL TRACK (EXPLICIT WRAPPER FOR SLIDES & ARROWS)
+ * Encloses the slide viewport and arrows to ensure perfect vertical centering.
+ * ----------------------------------------------------------------------- */
+
+export function CarouselTrack({
+  className,
+  ...props
+}: React.ComponentProps<"div">) {
+  return (
+    <div
+      data-slot="carousel-track"
+      className={cn("relative w-full min-w-0", className)}
+      {...props}
+    />
+  );
+}
+CarouselTrack.displayName = "CarouselTrack";
+
+/* -------------------------------------------------------------------------
+ * CAROUSEL CONTENT (TRACK VIEWPORT)
  * ----------------------------------------------------------------------- */
 
 export function CarouselContent({
@@ -271,12 +330,12 @@ export function CarouselPrevious({
         // Positioning
         orientation === "horizontal" && [
           "top-1/2 -translate-y-1/2",
-          position === "inset" && "left-3",
+          position === "inset" && "left-2 sm:left-3",
           position === "edge" && "-left-4 @[640px]/carousel:-left-12",
         ],
         orientation === "vertical" && [
           "left-1/2 -translate-x-1/2",
-          position === "inset" && "top-3 rotate-90",
+          position === "inset" && "top-2 sm:top-3 rotate-90",
           position === "edge" && "-top-4 @[640px]/carousel:-top-12 rotate-90",
         ],
         className
@@ -316,12 +375,12 @@ export function CarouselNext({
         // Positioning
         orientation === "horizontal" && [
           "top-1/2 -translate-y-1/2",
-          position === "inset" && "right-3",
+          position === "inset" && "right-2 sm:right-3",
           position === "edge" && "-right-4 @[640px]/carousel:-right-12",
         ],
         orientation === "vertical" && [
           "left-1/2 -translate-x-1/2",
-          position === "inset" && "bottom-3 rotate-90",
+          position === "inset" && "bottom-2 sm:bottom-3 rotate-90",
           position === "edge" && "-bottom-4 @[640px]/carousel:-bottom-12 rotate-90",
         ],
         className
@@ -367,6 +426,7 @@ export function CarouselDots({
     <div
       role="tablist"
       aria-label="Carousel slide pagination"
+      data-slot="carousel-dots"
       className={cn(
         "flex items-center justify-center gap-1.5 py-2",
         className
@@ -398,3 +458,4 @@ export function CarouselDots({
     </div>
   );
 }
+CarouselDots.displayName = "CarouselDots";
