@@ -51,7 +51,7 @@ export type StageBackdrop =
 export interface TelemetryItem {
   label: string;
   value: string;
-  variant?: "default" | "success" | "warning";
+  variant?: "default" | "success" | "warning" | "danger" | "error";
 }
 
 const BACKDROP_PRESETS: Record<string, { light: string; dark: string; overlay?: React.ReactNode }> = {
@@ -534,7 +534,8 @@ export function PreviewStageShell({
                             "font-medium truncate ml-1",
                             t.variant === "success" && "text-emerald-500",
                             t.variant === "warning" && "text-amber-500",
-                            !t.variant && "text-foreground"
+                            (t.variant === "danger" || t.variant === "error") && "text-rose-500",
+                            (!t.variant || t.variant === "default") && "text-foreground"
                           )}
                         >
                           {t.value}
