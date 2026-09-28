@@ -128,11 +128,10 @@ export function AlertPreviewStage() {
       onBackdropChange={setBackdrop}
       onReset={handleReset}
       code={codeSnippet}
-    >
-      <div className="w-full space-y-4">
-        {/* Controls Bar: Aligned in responsive grid row */}
-        <div className="rounded-xl border border-border/60 bg-background/70 backdrop-blur-md p-3.5 space-y-3">
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+      controls={
+        <div className="w-full flex flex-col gap-2.5">
+          {/* Main Controls Row: Responsive Grid */}
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-2.5">
             <StageControlSelect
               label="Semantic Tone"
               value={variant}
@@ -213,81 +212,81 @@ export function AlertPreviewStage() {
             )}
           </div>
         </div>
+      }
+    >
+      {/* Live Presentation Stage */}
+      <div className="w-full flex items-center justify-center p-2 sm:p-6 transition-all duration-300">
+        <div
+          className={cn(
+            "w-full transition-all duration-300 mx-auto",
+            containerWidth !== "full" && "border border-dashed border-sky-500/30 rounded-2xl p-2 sm:p-4 bg-black/[0.02] dark:bg-white/[0.02]"
+          )}
+          style={{
+            maxWidth: containerWidth === "full" ? "100%" : `${containerWidth}px`,
+          }}
+        >
+          {containerWidth !== "full" && (
+            <div className="mb-2 text-[10px] uppercase font-mono tracking-wider text-muted-foreground/80 flex items-center justify-between">
+              <span>Boundary: {containerWidth}px Container Simulation</span>
+              <span>Reflow Active</span>
+            </div>
+          )}
 
-        {/* Live Presentation Stage */}
-        <div className="w-full flex items-center justify-center p-2 sm:p-6 transition-all duration-300">
-          <div
-            className={cn(
-              "w-full transition-all duration-300 mx-auto",
-              containerWidth !== "full" && "border border-dashed border-sky-500/30 rounded-2xl p-2 sm:p-4 bg-black/[0.02] dark:bg-white/[0.02]"
-            )}
-            style={{
-              maxWidth: containerWidth === "full" ? "100%" : `${containerWidth}px`,
-            }}
-          >
-            {containerWidth !== "full" && (
-              <div className="mb-2 text-[10px] uppercase font-mono tracking-wider text-muted-foreground/80 flex items-center justify-between">
-                <span>Boundary: {containerWidth}px Container Simulation</span>
-                <span>Reflow Active</span>
-              </div>
-            )}
+          {isDismissed ? (
+            <div className="p-8 text-center rounded-xl border border-dashed border-border/60 bg-muted/20 text-muted-foreground text-xs">
+              Alert dismissed by user. Click &ldquo;Restore Dismissed Alert&rdquo; in the controls below to re-render.
+            </div>
+          ) : (
+            <Alert
+              variant={variant}
+              intensity={intensity}
+              dismissible={dismissible}
+              onDismiss={() => setIsDismissed(true)}
+            >
+              <AlertTitle>
+                {scenario === "title-only"
+                  ? "Security posture synchronized across all nodes."
+                  : variant === "destructive"
+                  ? "System Outage Detected on Cluster Core"
+                  : variant === "warning"
+                  ? "Storage Quota Exceeds 85% Capacity"
+                  : variant === "success"
+                  ? "Cryptographic Verification Succeeded"
+                  : "Universal Optical Foundation Loaded"}
+              </AlertTitle>
 
-            {isDismissed ? (
-              <div className="p-8 text-center rounded-xl border border-dashed border-border/60 bg-muted/20 text-muted-foreground text-xs">
-                Alert dismissed by user. Click &ldquo;Restore Dismissed Alert&rdquo; above to re-render.
-              </div>
-            ) : (
-              <Alert
-                variant={variant}
-                intensity={intensity}
-                dismissible={dismissible}
-                onDismiss={() => setIsDismissed(true)}
-              >
-                <AlertTitle>
-                  {scenario === "title-only"
-                    ? "Security posture synchronized across all nodes."
-                    : variant === "destructive"
-                    ? "System Outage Detected on Cluster Core"
-                    : variant === "warning"
-                    ? "Storage Quota Exceeds 85% Capacity"
-                    : variant === "success"
-                    ? "Cryptographic Verification Succeeded"
-                    : "Universal Optical Foundation Loaded"}
-                </AlertTitle>
+              {scenario !== "title-only" && (
+                <AlertDescription>
+                  {scenario === "long-content" ? (
+                    <>
+                      Automated diagnostics completed across 14 edge microservices. Memory consumption is stable at 42.1%, but cache invalidation latencies have increased by 18ms. Review the complete deployment telemetry report or verify your DNS ingress records at{" "}
+                      <a href="#docs" onClick={(e) => e.preventDefault()}>
+                        https://status.haloui.dev/diagnostics/node-88
+                      </a>
+                      .
+                    </>
+                  ) : (
+                    <>
+                      Subtle Liquid Glass combines 10 physical optical layers including directional highlights along 135° and adaptive environmental diffusion.
+                    </>
+                  )}
+                </AlertDescription>
+              )}
 
-                {scenario !== "title-only" && (
-                  <AlertDescription>
-                    {scenario === "long-content" ? (
-                      <>
-                        Automated diagnostics completed across 14 edge microservices. Memory consumption is stable at 42.1%, but cache invalidation latencies have increased by 18ms. Review the complete deployment telemetry report or verify your DNS ingress records at{" "}
-                        <a href="#docs" onClick={(e) => e.preventDefault()}>
-                          https://status.haloui.dev/diagnostics/node-88
-                        </a>
-                        .
-                      </>
-                    ) : (
-                      <>
-                        Subtle Liquid Glass combines 10 physical optical layers including directional highlights along 135° and adaptive environmental diffusion.
-                      </>
-                    )}
-                  </AlertDescription>
-                )}
-
-                {(withAction || scenario === "with-action") && (
-                  <AlertAction>
-                    <Button
-                      size="sm"
-                      variant="outline"
-                      className="text-xs h-7.5 px-3 bg-background/80 hover:bg-background"
-                    >
-                      <span>Take Action</span>
-                      <HaloIcon icon={ArrowRight01Icon} size={13} className="ml-1" />
-                    </Button>
-                  </AlertAction>
-                )}
-              </Alert>
-            )}
-          </div>
+              {(withAction || scenario === "with-action") && (
+                <AlertAction>
+                  <Button
+                    size="sm"
+                    variant="outline"
+                    className="text-xs h-7.5 px-3 bg-background/80 hover:bg-background"
+                  >
+                    <span>Take Action</span>
+                    <HaloIcon icon={ArrowRight01Icon} size={13} className="ml-1" />
+                  </Button>
+                </AlertAction>
+              )}
+            </Alert>
+          )}
         </div>
       </div>
     </PreviewStageShell>
