@@ -3130,6 +3130,25 @@
           "type": "registry:ui"
         }
       ]
+    },
+    {
+      "name": "progress",
+      "type": "registry:ui",
+      "title": "Progress",
+      "description": "Linear task completion indicator engineered with Subtle Liquid Glass channels, accessible WAI-ARIA progressbar semantics, and automatic container-aware reflow down to 240px.",
+      "dependencies": [
+        "@base-ui/react",
+        "class-variance-authority",
+        "clsx",
+        "tailwind-merge"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "components/ui/progress.tsx",
+          "type": "registry:ui"
+        }
+      ]
     }
   ]
 }

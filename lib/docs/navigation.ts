@@ -1757,6 +1757,24 @@ export const docsNavigation: DocsNavSection[] = [
           "status"
         ],
       },
+      {
+        title: "Progress",
+        href: "/components/progress",
+        description: "Linear task completion indicator engineered with Subtle Liquid Glass channels, accessible WAI-ARIA progressbar semantics, and automatic container-aware reflow down to 240px.",
+        status: "stable",
+        keywords: [
+          "progress",
+          "progressbar",
+          "completion",
+          "loading",
+          "status",
+          "percentage",
+          "bar",
+          "determinate",
+          "indeterminate",
+          "feedback"
+        ],
+      },
     ],
   },
   {
